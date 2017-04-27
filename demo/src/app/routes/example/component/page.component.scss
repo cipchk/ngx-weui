@@ -1,0 +1,152 @@
+
+html, body {
+    height: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body{
+    font-family: -apple-system-font, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+ul{
+    list-style: none;
+}
+
+body, .page {
+    background-color: #F8F8F8;
+}
+
+.container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+
+.page {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    z-index: 1; // fix 滑动几次后可滚动区域会卡住的问题
+}
+
+.page__hd {
+    padding: 40px;
+}
+
+.page__bd {}
+
+.page__bd_spacing {
+    padding: 0 15px;
+}
+
+.page__ft{
+    padding-top: 40px;
+    padding-bottom: 10px;
+    text-align: center;
+    img{
+        height: 19px;
+    }
+    &.j_bottom{
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+}
+
+.page__title {
+    text-align: left;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.page__desc {
+    margin-top: 5px;
+    color: #888888;
+    text-align: left;
+    font-size: 14px;
+}
+
+.page-enter {
+    z-index: 1024;
+    opacity: 0.01;
+    transform: translate3d(100%, 0, 0);
+    transition: all .2s ease;
+    &.page-enter-active {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.page-leave {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    transition: all .2s ease;
+    &.page-leave-active {
+        opacity: 0.01;
+        transform: translate3d(100%, 0, 0);
+    }
+}
+
+
+.page.article, .page.loadmore, .page.actionsheet, .page.dialog,
+.page.msg_warn, .page.msg_success, .page.msg, .page.toast, .page.toptips,
+.page.popup, {
+    background-color: #fff;
+}
+
+.page.infinite {
+    position: relative;
+}
+.page.flex{
+    .placeholder{
+            background-color: #EBEBEB;
+            height:2.3em;
+            line-height:2.3em;
+            text-align: center;
+            margin: 5px;
+            color:#CFCFCF;
+        }
+}
+
+.page.icons {
+    text-align: center;
+    .page__bd {
+        padding: 0 40px;
+        text-align: left;
+    }
+    .icon-box{
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        i{
+            margin-right: 18px;
+        }
+    }
+    .icon-box__ctn{
+        flex-shrink: 100;
+    }
+    .icon-box__title{
+        font-weight: normal;
+    }
+    .icon-box__desc{
+        margin-top: 6px;
+        font-size: 12px;
+        color: #888888;
+    }
+    .icon_sp_area {
+        margin-top: 10px;
+        text-align: left;
+        i:before{
+            margin-bottom: 5px;
+        }
+    }
+}

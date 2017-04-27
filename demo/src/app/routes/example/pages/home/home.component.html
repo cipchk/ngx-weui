@@ -1,0 +1,24 @@
+<Page [ngClass]="'home'"
+      [title]="title"
+      [subTitle]="'A UI library by WeChat official design team, includes the most useful widgets/modules in mobile web applications.'">
+    
+    <ul>
+        <li *ngFor="let i of menus">
+            <Accordion>
+                <div Flex header>
+                    <p FlexItem>{{i.name}}</p>
+                    <img src="./assets/images/{{i.icon}}.png" alt/>
+                </div>
+                <div Cells>
+                    <div Cell *ngFor="let si of i.items" [access]="true" routerLink="/example{{si.to}}">
+                        <CellBody>
+                            {{si.label}}
+                        </CellBody>
+                        <CellFooter></CellFooter>
+                    </div>
+                </div>
+            </Accordion>
+        </li>
+    </ul>
+
+</Page>

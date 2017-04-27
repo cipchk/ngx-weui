@@ -1,0 +1,20 @@
+<Page [ngClass]="'input'"
+      [title]="'Input'"
+      [subTitle]="'表单输入'"
+      [spacing]="false">
+      
+    <CellsTitle>单选列表项（{{items2_res}}）</CellsTitle>
+    <form #f="ngForm">
+        <Form [radio]="true">
+            <FormCell [radio]="true" *ngFor="let i of items2">
+                <CellBody>{{i}}</CellBody>
+                <CellFooter>
+                    <Radio [(ngModel)]="items2_res" name="items2_res" [ngValue]="i"></Radio>
+                </CellFooter>
+            </FormCell>
+            <Cell link>
+                <CellBody>More</CellBody>
+            </Cell>
+        </Form>
+    </form>
+</Page>

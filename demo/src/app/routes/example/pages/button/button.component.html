@@ -1,0 +1,29 @@
+<Page [ngClass]="'button'"
+      [title]="'Button'"
+      [subTitle]="'按钮'">
+    
+    <Button>页面主操作 Normal</Button>
+    <Button [loading]="loading" (click)="loading=!loading">页面主操作 Loading</Button>
+    <Button [disabled]="disabled" (click)="disabled=!disabled">页面主操作 Disabled</Button>
+    <Button [type]="'default'">页面次操作 Normal</Button>
+    <Button [type]="'default'" [loading]="loading" (click)="loading=!loading">页面次操作 Loading</Button>
+    <Button [type]="'default'" [disabled]="disabled" (click)="disabled=!disabled">页面次操作 Disabled</Button>
+    <Button [type]="'warn'">页面次操作 Normal</Button>
+    <Button [type]="'warn'" [loading]="loading" (click)="loading=!loading">页面次操作 Loading</Button>
+    <Button [type]="'warn'" [disabled]="disabled" (click)="disabled=!disabled">页面次操作 Disabled</Button>
+
+    <div class="button-sp-area">
+        
+        <Button [plain]="true" [type]="'default'">按钮</Button>
+        <Button [plain]="true" [type]="'default'" [disabled]="disabled" (click)="disabled=!disabled">按钮</Button>
+        <Button [plain]="true">按钮</Button>
+        <Button [plain]="true" [disabled]="disabled" (click)="disabled=!disabled">按钮</Button>
+
+        <Button [mini]="mini" (click)="mini=!mini">按钮</Button>
+        <Button [mini]="mini" (click)="mini=!mini" [type]="'default'">按钮</Button>
+        <Button [mini]="mini" (click)="mini=!mini" [type]="'warn'">按钮</Button>
+        <Button [mini]="mini" (click)="mini=!mini" [type]="'warn'" [loading]="loading">按钮</Button>
+
+    </div>
+
+</Page>

@@ -1,0 +1,9 @@
+{
+  "name": "ngx-weui",
+  "dependencies": {
+  },
+  "peerDependencies": {
+    "@angular/common": "*",
+    "@angular/core": "*"
+  }
+}

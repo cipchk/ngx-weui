@@ -1,0 +1,73 @@
+<Page [ngClass]="'list'"
+      [title]="'List'"
+      [subTitle]="'列表'"
+      [spacing]="false">
+      
+    <CellsTitle>带说明的列表项</CellsTitle>
+    <Cells>
+        <Cell>
+            <CellBody>标题文字</CellBody>
+            <CellFooter>说明文字</CellFooter>
+        </Cell>
+    </Cells>
+
+    <CellsTitle>带图标、说明的列表项</CellsTitle>
+    <Cells>
+        <Cell>
+            <CellHeader>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width:20px;margin-right:5px;display:block">
+            </CellHeader>
+            <CellBody>标题文字</CellBody>
+            <CellFooter>说明文字</CellFooter>
+        </Cell>
+        <Cell>
+            <CellHeader>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width:20px;margin-right:5px;display:block">
+            </CellHeader>
+            <CellBody>标题文字</CellBody>
+            <CellFooter>说明文字</CellFooter>
+        </Cell>
+    </Cells>
+
+    <CellsTitle>带跳转的列表项</CellsTitle>
+    <Cells>
+        <Cell [access]="true">
+            <CellBody>cell standard</CellBody>
+            <CellFooter></CellFooter>
+        </Cell>
+        <Cell [access]="true">
+            <CellBody>cell standard</CellBody>
+            <CellFooter></CellFooter>
+        </Cell>
+    </Cells>
+
+    <CellsTitle>带说明、跳转的列表项</CellsTitle>
+    <Cells>
+        <Cell [access]="true">
+            <CellBody>cell standard</CellBody>
+            <CellFooter>说明文字</CellFooter>
+        </Cell>
+        <Cell [access]="true">
+            <CellBody>cell standard</CellBody>
+            <CellFooter>说明文字</CellFooter>
+        </Cell>
+    </Cells>
+
+    <CellsTitle>带图标、说明、跳转的列表项</CellsTitle>
+    <Cells>
+        <Cell [access]="true">
+            <CellHeader>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width:20px;margin-right:5px;display:block">
+            </CellHeader>
+            <CellBody>cell standard</CellBody>
+            <CellFooter>说明文字</CellFooter>
+        </Cell>
+        <Cell [access]="true">
+            <CellHeader>
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width:20px;margin-right:5px;display:block">
+            </CellHeader>
+            <CellBody>cell standard</CellBody>
+            <CellFooter>说明文字</CellFooter>
+        </Cell>
+    </Cells>
+</Page>
