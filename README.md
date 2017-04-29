@@ -9,25 +9,22 @@ weui for angular
 
 [Live Demo](https://cipchk.github.io/ngx-weui/)
 
+## 写在前面
+
+[这些话，会让你更容弄懂为什么我要这么做！](https://github.com/cipchk/ngx-weui/issues/1)
+
 ## Components
 
 斜体表示正在开发中……
 
 + Button
-+ Cell
-+ Flex
-+ _Form_
-    + _Input_
-    + _Radio_
-    + _Checkbox_
-    + _Select_
++ Form
+    + Input
+    + Textarea
+    + VCode
     + _Slider_
     + _Switch_
-    + _Textarea_
-    + _VCode_
     + _Uploader_
-    + _Agreement_
-    + _Preview_
 + _ActionSheet_
 + _Article_
 + _Badge_

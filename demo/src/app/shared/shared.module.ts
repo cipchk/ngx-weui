@@ -6,6 +6,8 @@ import { HttpModule, Http } from '@angular/http';
 
 import { WeUiModule } from 'ngx-weui';
 
+import { ChecklistDirective } from "./directives/checklist";
+
 @NgModule({
     imports: [
         CommonModule,
@@ -17,6 +19,7 @@ import { WeUiModule } from 'ngx-weui';
     providers: [
     ],
     declarations: [
+        ChecklistDirective
     ],
     exports: [
         CommonModule,
@@ -25,6 +28,7 @@ import { WeUiModule } from 'ngx-weui';
         HttpModule,
         RouterModule,
         
+        ChecklistDirective,
         WeUiModule
     ],
     entryComponents: [

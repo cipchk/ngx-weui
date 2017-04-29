@@ -2,21 +2,19 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { FormComponent } from './form.component';
-import { FormCellComponent } from './form-cell.component';
-import { RadioComponent } from './radio.component';
+import { InputDirective, VCodeDirective, TextareaDirective } from "./index";
 
 @NgModule({
     imports: [ CommonModule, FormsModule ],
     declarations: [
-        FormComponent,
-        FormCellComponent,
-        RadioComponent
+        InputDirective,
+        VCodeDirective,
+        TextareaDirective
     ],
     exports: [
-        FormComponent,
-        FormCellComponent,
-        RadioComponent
+        InputDirective,
+        VCodeDirective,
+        TextareaDirective
     ]
 })
 export class FormModule {

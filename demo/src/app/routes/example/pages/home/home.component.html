@@ -2,23 +2,21 @@
       [title]="title"
       [subTitle]="'A UI library by WeChat official design team, includes the most useful widgets/modules in mobile web applications.'">
     
-    <ul>
-        <li *ngFor="let i of menus">
-            <Accordion>
-                <div Flex header>
-                    <p FlexItem>{{i.name}}</p>
-                    <img src="./assets/images/{{i.icon}}.png" alt/>
-                </div>
-                <div Cells>
-                    <div Cell *ngFor="let si of i.items" [access]="true" routerLink="/example{{si.to}}">
-                        <CellBody>
-                            {{si.label}}
-                        </CellBody>
-                        <CellFooter></CellFooter>
+    <Accordion *ngFor="let i of menus">
+        <div class="weui-flex js_category" header>
+            <p class="weui-flex__item">{{i.name}}</p>
+            <img src="./assets/images/{{i.icon}}.png" alt/>
+        </div>
+        <div class="page__category js_categoryInner">
+            <div class="weui-cells page__category-content">
+                <a class="weui-cell weui-cell_access js_item" routerLink="/example{{si.to}}" *ngFor="let si of i.items">
+                    <div class="weui-cell__bd">
+                        <p>{{si.label}}</p>
                     </div>
-                </div>
-            </Accordion>
-        </li>
-    </ul>
+                    <div class="weui-cell__ft"></div>
+                </a>
+            </div>
+        </div>
+    </Accordion>
 
 </Page>

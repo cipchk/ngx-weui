@@ -1,24 +1,18 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { ButtonModule } from "./button/button.module";
-import { FlexModule } from "./flex/flex.module";
-import { CellModule } from "./cell/cell.module";
 import { FormModule } from "./form/form.module";
 
 export { ButtonComponent, ButtonAreaComponent, ButtonPreviewComponent, ButtonConfig, ButtonModule } from './button';
-export { FlexItemComponent, FlexComponent, FlexModule } from './flex';
-export { CellsComponent, CellsTipsComponent, CellsTitleComponent, 
-         CellComponent, CellHeaderComponent, CellBodyComponent, CellFooterComponent,
-         CellModule } from './cell';
-export { FormComponent, FormCellComponent, RadioComponent, 
-         FormModule} from './form';
+export { InputDirective, VCodeDirective, TextareaDirective, 
+         FormModule } from './form';
 
 const MODULES = [
-    ButtonModule, FlexModule, CellModule, FormModule
+    ButtonModule, FormModule
 ];
 
 @NgModule({
     imports: [
-        ButtonModule.forRoot(), FlexModule.forRoot(), CellModule.forRoot(),
+        ButtonModule.forRoot(), 
         FormModule.forRoot()
     ],
     exports: MODULES

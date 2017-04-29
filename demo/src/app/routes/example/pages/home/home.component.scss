@@ -30,13 +30,14 @@
             width: 30px;
             height: 30px;
         }
-        li{
+        .accordion {
+            display: block;
             margin: 10px 0;
             background-color: #FFFFFF;
             overflow: hidden;
             border-radius: 2px;
             cursor: pointer;
-            &.js_show{
+            .js_show{
                 .weui-flex{
                     opacity: .4;
                 }
@@ -54,11 +55,11 @@
         }
     }
     .page__category{
-        //height: 0;
+        height: 0;
         overflow: hidden;
     }
     .page__category-content{
-        //opacity: 0;
+        opacity: 0;
         transform: translateY(-50%);
         transition: .3s;
     }

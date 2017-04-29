@@ -1,4 +1,4 @@
-export { FormComponent } from './form.component';
-export { FormCellComponent } from './form-cell.component';
-export { RadioComponent } from './radio.component';
+export { InputDirective } from './input';
+export { VCodeDirective } from './vcode';
+export { TextareaDirective } from './textarea';
 export { FormModule } from './form.module';
