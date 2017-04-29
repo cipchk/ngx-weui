@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { ButtonModule } from "./button/button.module";
 import { FormModule } from "./form/form.module";
 
-export { ButtonComponent, ButtonAreaComponent, ButtonPreviewComponent, ButtonConfig, ButtonModule } from './button';
+export { ButtonDirective, ButtonConfig, ButtonModule } from './button';
 export { InputDirective, VCodeDirective, TextareaDirective, 
          FormModule } from './form';
 

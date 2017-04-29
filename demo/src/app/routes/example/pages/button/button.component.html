@@ -1,28 +1,28 @@
-<Page [ngClass]="'button'"
-      [title]="'Button'"
+<Page [ngClass]="'button weui-button'"
+      [title]="'button weui-button'"
       [subTitle]="'按钮'">
     
-    <Button>页面主操作 Normal</Button>
-    <Button [loading]="loading" (click)="loading=!loading">页面主操作 Loading</Button>
-    <Button [disabled]="disabled" (click)="disabled=!disabled">页面主操作 Disabled</Button>
-    <Button [type]="'default'">页面次操作 Normal</Button>
-    <Button [type]="'default'" [loading]="loading" (click)="loading=!loading">页面次操作 Loading</Button>
-    <Button [type]="'default'" [disabled]="disabled" (click)="disabled=!disabled">页面次操作 Disabled</Button>
-    <Button [type]="'warn'">页面次操作 Normal</Button>
-    <Button [type]="'warn'" [loading]="loading" (click)="loading=!loading">页面次操作 Loading</Button>
-    <Button [type]="'warn'" [disabled]="disabled" (click)="disabled=!disabled">页面次操作 Disabled</Button>
+    <button weui-button>页面主操作 Normal</button>
+    <button weui-button [weui-loading]="loading" (click)="loading=!loading">页面主操作 Loading</button>
+    <button weui-button [weui-disabled]="disabled" (click)="disabled=!disabled">页面主操作 Disabled</button>
+    <button weui-button [weui-type]="'default'">页面次操作 Normal</button>
+    <button weui-button [weui-type]="'default'" [weui-loading]="loading" (click)="loading=!loading">页面次操作 Loading</button>
+    <button weui-button [weui-type]="'default'" [weui-disabled]="disabled" (click)="disabled=!disabled">页面次操作 Disabled</button>
+    <button weui-button [weui-type]="'warn'">页面次操作 Normal</button>
+    <button weui-button [weui-type]="'warn'" [weui-loading]="loading" (click)="loading=!loading">页面次操作 Loading</button>
+    <button weui-button [weui-type]="'warn'" [weui-disabled]="disabled" (click)="disabled=!disabled">页面次操作 Disabled</button>
 
     <div class="button-sp-area">
         
-        <Button [plain]="true" [type]="'default'">按钮</Button>
-        <Button [plain]="true" [type]="'default'" [disabled]="disabled" (click)="disabled=!disabled">按钮</Button>
-        <Button [plain]="true">按钮</Button>
-        <Button [plain]="true" [disabled]="disabled" (click)="disabled=!disabled">按钮</Button>
+        <button weui-button [weui-plain]="true" [weui-type]="'default'">按钮</button>
+        <button weui-button [weui-plain]="true" [weui-type]="'default'" [weui-disabled]="disabled" (click)="disabled=!disabled">按钮</button>
+        <button weui-button [weui-plain]="true">按钮</button>
+        <button weui-button [weui-plain]="true" [weui-disabled]="disabled" (click)="disabled=!disabled">按钮</button>
 
-        <Button [mini]="mini" (click)="mini=!mini">按钮</Button>
-        <Button [mini]="mini" (click)="mini=!mini" [type]="'default'">按钮</Button>
-        <Button [mini]="mini" (click)="mini=!mini" [type]="'warn'">按钮</Button>
-        <Button [mini]="mini" (click)="mini=!mini" [type]="'warn'" [loading]="loading">按钮</Button>
+        <button weui-button [weui-mini]="mini" (click)="mini=!mini">按钮</button>
+        <button weui-button [weui-mini]="mini" (click)="mini=!mini" [weui-type]="'default'">按钮</button>
+        <button weui-button [weui-mini]="mini" (click)="mini=!mini" [weui-type]="'warn'">按钮</button>
+        <button weui-button [weui-mini]="mini" (click)="mini=!mini" [weui-type]="'warn'" [weui-loading]="loading">按钮</button>
 
     </div>
 

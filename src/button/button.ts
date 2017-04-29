@@ -1,11 +1,8 @@
-import { Component, EventEmitter, Input, OnInit, Output, HostBinding } from '@angular/core';
+import { Component, Directive, EventEmitter, Input, OnInit, Output, HostBinding } from '@angular/core';
 import { ButtonConfig } from './button.config';
 
-@Component({
-    selector: 'Button,[Button]',
-    template: `
-        <i class="weui-loading" *ngIf="loading"></i><ng-content></ng-content>
-    `,
+@Directive({
+    selector: '[weui-button]',
     host: {
         'class': 'weui-btn',
         '[class.weui-btn_primary]': '!plain && type==="primary"',
@@ -18,7 +15,7 @@ import { ButtonConfig } from './button.config';
         '[class.weui-btn_plain-disabled]': 'plain && disabled'
     }
 })
-export class ButtonComponent {
+export class ButtonDirective {
     
     /**
      * 置灰态
@@ -26,7 +23,7 @@ export class ButtonComponent {
      * @type {boolean}
      * @default false
      */
-    @Input() disabled: boolean = false;
+    @Input('weui-disabled') disabled: boolean = false;
 
     /**
      * 加载状态
@@ -34,7 +31,8 @@ export class ButtonComponent {
      * @type {boolean}
      * @default false
      */
-    @HostBinding('class.weui-btn_loading') @Input() loading: boolean = false;
+    @HostBinding('class.weui-btn_loading') 
+    @Input('weui-loading') loading: boolean = false;
 
     /**
      * 是否小号
@@ -42,7 +40,8 @@ export class ButtonComponent {
      * @type {boolean}
      * @default false
      */
-    @HostBinding('class.weui-btn_mini') @Input() mini: boolean = false;
+    @HostBinding('class.weui-btn_mini') 
+    @Input('weui-mini') mini: boolean = false;
 
     /**
      * 镂空按钮
@@ -50,7 +49,7 @@ export class ButtonComponent {
      * @type {boolean}
      * @default false
      */
-    @Input() plain: boolean = false;
+    @Input('weui-plain') plain: boolean = false;
 
     /**
      * 操作场景：确定、取消、警示
@@ -58,7 +57,7 @@ export class ButtonComponent {
      * @type {('default' | 'primary' | 'warn')}
      * @default primary
      */
-    @Input() type: 'default' | 'primary' | 'warn' = 'primary';
+    @Input('weui-type') type: 'default' | 'primary' | 'warn' = 'primary';
 
     constructor(_config: ButtonConfig) {
         Object.assign(this, _config);
