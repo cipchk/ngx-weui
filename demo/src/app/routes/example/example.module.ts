@@ -11,6 +11,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ButtonComponent } from './pages/button/button.component';
 import { ListComponent } from './pages/list/list.component';
 import { InputComponent } from './pages/input/input.component';
+import { SliderComponent } from './pages/slider/slider.component';
 
 export const routes = [
     {
@@ -20,7 +21,8 @@ export const routes = [
             { path: '', component: HomeComponent, data: { title: 'ngx-weui' } },
             { path: 'button', component: ButtonComponent, data: { title: 'button' } },
             { path: 'input', component: InputComponent, data: { title: 'input' } },
-            { path: 'list', component: ListComponent, data: { title: 'list' } }
+            { path: 'list', component: ListComponent, data: { title: 'list' } },
+            { path: 'slider', component: SliderComponent, data: { title: 'slider' } }
         ]
     }
 ]
@@ -38,7 +40,8 @@ export const routes = [
         HomeComponent,
         ButtonComponent,
         InputComponent,
-        ListComponent
+        ListComponent,
+        SliderComponent
     ],
     entryComponents: [
         PageComponent,

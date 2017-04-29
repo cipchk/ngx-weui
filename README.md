@@ -24,9 +24,8 @@ weui for angular
     + Input
     + Textarea
     + VCode
-    + _Slider_
-    + _Switch_
     + _Uploader_
++ Slider
 + _ActionSheet_
 + _Article_
 + _Badge_
