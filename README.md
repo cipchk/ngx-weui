@@ -17,7 +17,9 @@ weui for angular
 
 斜体表示正在开发中……
 
-+ _Button_
++ Button
++ Cell
+    + Swipe
 + Form
     + Input
     + Textarea
