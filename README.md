@@ -37,7 +37,7 @@ weui for angular
     + Grid
     + Icons
     + _Gallery_
-    + _Loadmore_
+    + Loadmore
     + Panel
     + Preview
     + _Progress_

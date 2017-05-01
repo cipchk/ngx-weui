@@ -23,6 +23,7 @@ import { GridComponent } from './pages/grid/grid.component';
 import { IconsComponent } from './pages/icons/icons.component';
 import { PanelComponent } from './pages/panel/panel.component';
 import { PreviewComponent } from './pages/preview/preview.component';
+import { DemoLoadmoreComponent } from './pages/loadmore/loadmore.component';
 
 export const routes = [
     {
@@ -44,7 +45,8 @@ export const routes = [
             { path: 'grid', component: GridComponent },
             { path: 'icons', component: IconsComponent },
             { path: 'panel', component: PanelComponent },
-            { path: 'preview', component: PreviewComponent }
+            { path: 'preview', component: PreviewComponent },
+            { path: 'loadmore', component: DemoLoadmoreComponent }
         ]
     }
 ]
@@ -74,7 +76,8 @@ export const routes = [
         GridComponent,
         IconsComponent,
         PanelComponent,
-        PreviewComponent
+        PreviewComponent,
+        DemoLoadmoreComponent
     ],
     entryComponents: [
         PageComponent,
