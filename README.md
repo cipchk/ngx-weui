@@ -26,7 +26,7 @@ weui for angular
     + VCode
     + Uploader
 + Slider
-+ _ActionSheet_
++ ActionSheet
 + _Article_
 + _Badge_
 + _Dialog_

@@ -13,18 +13,20 @@ import { ListComponent } from './pages/list/list.component';
 import { InputComponent } from './pages/input/input.component';
 import { SliderComponent } from './pages/slider/slider.component';
 import { DemoUploaderComponent } from './pages/uploader/uploader.component';
+import { DemoActionSheetComponent } from './pages/actionsheet/actionsheet.component';
 
 export const routes = [
     {
         path: '',
         component: LayoutComponent,
         children: [
-            { path: '', component: HomeComponent, data: { title: 'ngx-weui' } },
-            { path: 'button', component: ButtonComponent, data: { title: 'button' } },
-            { path: 'input', component: InputComponent, data: { title: 'input' } },
-            { path: 'list', component: ListComponent, data: { title: 'list' } },
-            { path: 'slider', component: SliderComponent, data: { title: 'slider' } },
-            { path: 'uploader', component: DemoUploaderComponent, data: { title: 'uploader' } }
+            { path: '', component: HomeComponent },
+            { path: 'button', component: ButtonComponent },
+            { path: 'input', component: InputComponent },
+            { path: 'list', component: ListComponent},
+            { path: 'slider', component: SliderComponent },
+            { path: 'uploader', component: DemoUploaderComponent },
+            { path: 'actionsheet', component: DemoActionSheetComponent }
         ]
     }
 ]
@@ -44,7 +46,8 @@ export const routes = [
         InputComponent,
         ListComponent,
         SliderComponent,
-        DemoUploaderComponent
+        DemoUploaderComponent,
+        DemoActionSheetComponent
     ],
     entryComponents: [
         PageComponent,

@@ -1,0 +1,13 @@
+<Page [ngClass]="'actionsheet'" [title]="'ActionSheet'" [subTitle]="'弹出式菜单'">
+
+
+    <weui-actionsheet #ios [weui-data]="data"></weui-actionsheet>
+    <weui-actionsheet #android [weui-data]="data"></weui-actionsheet>
+    <div class="weui-cells__title">使用组件形式</div>
+    <button weui-button weui-type="default" (click)="onShow('ios')">iOS ActionSheet</button>
+    <button weui-button weui-type="default" (click)="onShow('android')">Android ActionSheet</button>
+    <div class="weui-cells__title">使用Service形式</div>
+    <button weui-button weui-type="default" (click)="onShowBySrv('ios')">iOS ActionSheet</button>
+    <button weui-button weui-type="default" (click)="onShowBySrv('android')">Android ActionSheet</button>
+
+</Page>
