@@ -25,11 +25,13 @@ export function findParent(el: any, selector: string): any {
  * @param {string} [tagName='div'] 
  * @param {string} [className='weui-cell__ft'] 
  */
-export function add(el: any, selector: string = '.weui-cell__ft', tagName: string = 'div', className: string = 'weui-cell__ft') {
+export function add(el: any, selector: string = '.weui-cell__ft', tagName: string = 'div', className: string = 'weui-cell__ft', cssText: string = '') {
     let ret = el.querySelector(selector);
     if (!ret) {
         ret = document.createElement(tagName);
         ret.className = className;
+        if (cssText)
+            ret.style.cssText = cssText;
         el.appendChild(ret);
     }
     return ret;
