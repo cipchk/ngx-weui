@@ -40,7 +40,7 @@ export class ActionSheetComponent implements OnDestroy {
 
     private observer: Observer<any>;
 
-    private get visibility(): string {
+    get visibility(): string {
         return this._shownAnt ? 'show' : 'hide';
     }
 

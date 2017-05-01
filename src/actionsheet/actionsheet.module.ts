@@ -7,16 +7,10 @@ import { ActionSheetService, ActionSheetConfig, ActionSheetComponent } from "./i
     imports: [ CommonModule ],
     declarations: [ ActionSheetComponent ],
     exports: [ ActionSheetComponent ],
-    providers: [ ActionSheetService ],
     entryComponents: [ ActionSheetComponent ]
 })
 export class ActionSheetModule {
-    public static forRoot(config?: ActionSheetConfig): ModuleWithProviders {
-        return {
-            ngModule: ActionSheetModule,
-            providers: [
-                { provide: ActionSheetConfig, useValue: config || new ActionSheetConfig() }
-            ]
-        };
+    public static forRoot(): ModuleWithProviders {
+        return { ngModule: ActionSheetModule, providers: [ ActionSheetConfig ] };
     }
 }

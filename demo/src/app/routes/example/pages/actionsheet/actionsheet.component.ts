@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
-import { ActionSheetService, ActionSheetData, ActionSheetComponent } from "ngx-weui";
+import { ActionSheetService, ActionSheetData, ActionSheetComponent } from "ngx-weui/actionsheet";
 import { Observable } from 'rxjs/Rx';
 
 @Component({
@@ -23,9 +23,7 @@ export class DemoActionSheetComponent {
         ]
     };
 
-    constructor(private asSrv: ActionSheetService) {
-
-    }
+    constructor(private asSrv: ActionSheetService) { }
 
     onShow(type: 'ios' | 'android') {
         this.data.skin = type;
