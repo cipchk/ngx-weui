@@ -35,7 +35,7 @@ weui for angular
     + Flex
     + Footer
     + _Gallery_
-    + _Grid_
+    + Grid
     + _Icons_
     + _Loadmore_
     + _Panel_
