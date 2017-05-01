@@ -1,6 +1,6 @@
 {
   "name": "ngx-weui",
-  "version": "1.0.0",
+  "version": "1.0.0-rc.0",
   "main": "index.js",
   "typings": "index.d.ts",
   "description": "weui for angular",
