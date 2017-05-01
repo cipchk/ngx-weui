@@ -5,6 +5,7 @@ import { SharedModule } from '../../shared/shared.module';
 
 import { PageComponent } from './component/page.component';
 import { AccordionComponent } from "./component/accordion.component";
+import { MenuService } from "./pages/home/menu.service";
 
 import { LayoutComponent } from './pages/layout/layout.component';
 import { HomeComponent } from './pages/home/home.component';
@@ -86,6 +87,7 @@ export const routes = [
         PageComponent,
         AccordionComponent
     ],
+    providers: [ MenuService ],
     exports: [
     ]
 })

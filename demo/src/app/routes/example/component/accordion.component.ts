@@ -1,10 +1,10 @@
-import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Output, ViewEncapsulation, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 
 @Component({
     selector: 'Accordion',
     template: `
         <div [ngClass]="{'js_show': isShow}">
-            <div (click)="isShow=!isShow"><ng-content select="[header]"></ng-content></div>
+            <div (click)="onChangeStatus()"><ng-content select="[header]"></ng-content></div>
             <ng-content></ng-content>
         </div>
     `,
@@ -16,8 +16,11 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
 })
 export class AccordionComponent {
 
-    @Input() isShow: boolean = false;
+    @Input() isShow: boolean;
+    @Output() isShowChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
-
-
+    onChangeStatus() {
+        this.isShow = !this.isShow;
+        this.isShowChange.emit(this.isShow);
+    }
 }

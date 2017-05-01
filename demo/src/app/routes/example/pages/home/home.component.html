@@ -2,7 +2,7 @@
       [title]="title"
       [subTitle]="'A UI library by WeChat official design team, includes the most useful widgets/modules in mobile web applications.'">
     
-    <Accordion *ngFor="let i of menus">
+    <Accordion *ngFor="let i of menuService.menus" [(isShow)]="i.isShow">
         <div class="weui-flex js_category" header>
             <p class="weui-flex__item">{{i.name}}</p>
             <img src="./assets/images/{{i.icon}}.png" alt/>
