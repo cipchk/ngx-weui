@@ -9,8 +9,8 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
     </div>
     <div class="page__bd" [ngClass]="{'page__bd_spacing': spacing}"><ng-content></ng-content></div>
     <div class="page__ft" [ngClass]="{'j_bottom': ftBottom}">
-        <ng-content select="[footer]"></ng-content>
         <a href="#" routerLink="/"><img src="./assets/images/icon_footer.png"></a>
+        <ng-content select="[footer]"></ng-content>
     </div>
     `,
     host: {

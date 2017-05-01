@@ -33,7 +33,7 @@ weui for angular
     + Article
     + Badge
     + Flex
-    + _Footer_
+    + Footer
     + _Gallery_
     + _Grid_
     + _Icons_

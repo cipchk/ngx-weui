@@ -18,6 +18,7 @@ import { DemoDialogComponent } from './pages/dialog/dialog.component';
 import { ArticleComponent } from './pages/article/article.component';
 import { FlexComponent } from './pages/flex/flex.component';
 import { BadgeComponent } from './pages/badge/badge.component';
+import { FooterComponent } from './pages/footer/footer.component';
 
 export const routes = [
     {
@@ -34,7 +35,8 @@ export const routes = [
             { path: 'dialog', component: DemoDialogComponent },
             { path: 'article', component: ArticleComponent },
             { path: 'flex', component: FlexComponent },
-            { path: 'badge', component: BadgeComponent }
+            { path: 'badge', component: BadgeComponent },
+            { path: 'footer', component: FooterComponent }
         ]
     }
 ]
@@ -59,7 +61,8 @@ export const routes = [
         DemoDialogComponent,
         ArticleComponent,
         FlexComponent,
-        BadgeComponent
+        BadgeComponent,
+        FooterComponent
     ],
     entryComponents: [
         PageComponent,
