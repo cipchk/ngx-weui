@@ -38,8 +38,8 @@ weui for angular
     + Icons
     + _Gallery_
     + _Loadmore_
-    + _Panel_
-    + _Preview_
+    + Panel
+    + Preview
     + _Progress_
     + _Mask_
 + _Feedbacks_

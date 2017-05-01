@@ -21,6 +21,8 @@ import { BadgeComponent } from './pages/badge/badge.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { GridComponent } from './pages/grid/grid.component';
 import { IconsComponent } from './pages/icons/icons.component';
+import { PanelComponent } from './pages/panel/panel.component';
+import { PreviewComponent } from './pages/preview/preview.component';
 
 export const routes = [
     {
@@ -40,7 +42,9 @@ export const routes = [
             { path: 'badge', component: BadgeComponent },
             { path: 'footer', component: FooterComponent },
             { path: 'grid', component: GridComponent },
-            { path: 'icons', component: IconsComponent }
+            { path: 'icons', component: IconsComponent },
+            { path: 'panel', component: PanelComponent },
+            { path: 'preview', component: PreviewComponent }
         ]
     }
 ]
@@ -68,7 +72,9 @@ export const routes = [
         BadgeComponent,
         FooterComponent,
         GridComponent,
-        IconsComponent
+        IconsComponent,
+        PanelComponent,
+        PreviewComponent
     ],
     entryComponents: [
         PageComponent,
