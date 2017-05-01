@@ -29,6 +29,7 @@ weui for angular
         + _PullToRefresh_
     + Slider
     + Uploader
+    + _Picker_
 + _Basic Components_
     + Article
     + Badge
@@ -41,12 +42,10 @@ weui for angular
     + Panel
     + Preview
     + Progress
-    + _Mask_
 + _Feedbacks_
     + ActionSheet
     + Dialog
     + _Msg_
-    + _Picker_
     + _Toast_
     + _Toptips_
     + _Popup_
