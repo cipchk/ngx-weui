@@ -1,5 +1,6 @@
 import { Component, Directive, EventEmitter, Input, OnInit, Output, HostBinding } from '@angular/core';
 import { ButtonConfig } from './button.config';
+import { ButtonType } from "../utils/types";
 
 @Directive({
     selector: '[weui-button]',
@@ -54,10 +55,10 @@ export class ButtonDirective {
     /**
      * 操作场景：确定、取消、警示
      * 
-     * @type {('default' | 'primary' | 'warn')}
+     * @type {ButtonType}
      * @default primary
      */
-    @Input('weui-type') type: 'default' | 'primary' | 'warn' = 'primary';
+    @Input('weui-type') type: ButtonType = 'primary';
 
     constructor(_config: ButtonConfig) {
         Object.assign(this, _config);

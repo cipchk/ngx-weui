@@ -1,13 +1,13 @@
-import { ActionSheetConfig } from './actionsheet.config';
+import { SkinType } from "../utils/types";
 
 export interface ActionSheetData {
     /**
      * 样式
      * 
-     * @type {('ios' | 'android')}
+     * @type {SkinType}
      * @default ios
      */
-    skin?: 'ios' | 'android';
+    skin?: SkinType;
 
     /**
      * 标题
@@ -23,6 +23,14 @@ export interface ActionSheetData {
      * @default 取消
      */
     cancel?: string;
+
+    /**
+     * 允许点击背景关闭
+     * 
+     * @type {boolean}
+     * @default true
+     */
+    backdrop?: boolean;
 
     /**
      * 菜单列表

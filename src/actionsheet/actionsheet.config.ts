@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
+import { SkinType } from "../utils/types";
 
 @Injectable()
 export class ActionSheetConfig {
     /**
      * 样式
      * 
-     * @type {('ios' | 'android')}
+     * @type {SkinType}
      */
-    skin?: 'ios' | 'android' = 'ios';
+    skin?: SkinType = 'ios';
 
     /**
      * 标题
@@ -22,4 +23,12 @@ export class ActionSheetConfig {
      * @type {string}
      */
     cancel?: string = '取消';
+
+    /**
+     * 允许点击背景关闭
+     * 
+     * @type {boolean}
+     * @default true
+     */
+    backdrop?: boolean = true;
 }

@@ -7,6 +7,7 @@ import { ActionSheetService, ActionSheetConfig, ActionSheetComponent } from "./i
     imports: [ CommonModule ],
     declarations: [ ActionSheetComponent ],
     exports: [ ActionSheetComponent ],
+    providers: [ ActionSheetService ],
     entryComponents: [ ActionSheetComponent ]
 })
 export class ActionSheetModule {

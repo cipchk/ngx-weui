@@ -14,6 +14,7 @@ import { InputComponent } from './pages/input/input.component';
 import { SliderComponent } from './pages/slider/slider.component';
 import { DemoUploaderComponent } from './pages/uploader/uploader.component';
 import { DemoActionSheetComponent } from './pages/actionsheet/actionsheet.component';
+import { DemoDialogComponent } from './pages/dialog/dialog.component';
 
 export const routes = [
     {
@@ -26,7 +27,8 @@ export const routes = [
             { path: 'list', component: ListComponent},
             { path: 'slider', component: SliderComponent },
             { path: 'uploader', component: DemoUploaderComponent },
-            { path: 'actionsheet', component: DemoActionSheetComponent }
+            { path: 'actionsheet', component: DemoActionSheetComponent },
+            { path: 'dialog', component: DemoDialogComponent }
         ]
     }
 ]
@@ -47,7 +49,8 @@ export const routes = [
         ListComponent,
         SliderComponent,
         DemoUploaderComponent,
-        DemoActionSheetComponent
+        DemoActionSheetComponent,
+        DemoDialogComponent
     ],
     entryComponents: [
         PageComponent,

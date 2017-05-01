@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { ButtonType } from '../utils/types'
 
 @Injectable()
 export class ButtonConfig {
@@ -29,10 +30,10 @@ export class ButtonConfig {
     /**
      * 操作场景：确定、取消、警示
      * 
-     * @type {('default' | 'primary' | 'warn')}
+     * @type {ButtonType}
      * @default primary
      */
-    type: 'default' | 'primary' | 'warn' = 'primary';
+    type: ButtonType = 'primary';
 
     /**
      * 是否小号
