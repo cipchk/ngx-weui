@@ -15,6 +15,7 @@ import { SliderComponent } from './pages/slider/slider.component';
 import { DemoUploaderComponent } from './pages/uploader/uploader.component';
 import { DemoActionSheetComponent } from './pages/actionsheet/actionsheet.component';
 import { DemoDialogComponent } from './pages/dialog/dialog.component';
+import { ArticleComponent } from './pages/article/article.component';
 
 export const routes = [
     {
@@ -28,7 +29,8 @@ export const routes = [
             { path: 'slider', component: SliderComponent },
             { path: 'uploader', component: DemoUploaderComponent },
             { path: 'actionsheet', component: DemoActionSheetComponent },
-            { path: 'dialog', component: DemoDialogComponent }
+            { path: 'dialog', component: DemoDialogComponent },
+            { path: 'article', component: ArticleComponent }
         ]
     }
 ]
@@ -50,7 +52,8 @@ export const routes = [
         SliderComponent,
         DemoUploaderComponent,
         DemoActionSheetComponent,
-        DemoDialogComponent
+        DemoDialogComponent,
+        ArticleComponent
     ],
     entryComponents: [
         PageComponent,
