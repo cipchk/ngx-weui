@@ -40,7 +40,7 @@ weui for angular
     + Loadmore
     + Panel
     + Preview
-    + _Progress_
+    + Progress
     + _Mask_
 + _Feedbacks_
     + ActionSheet

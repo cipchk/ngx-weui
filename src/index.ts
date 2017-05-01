@@ -8,6 +8,7 @@ import { UploaderModule } from "./uploader/uploader.module";
 import { ActionSheetModule } from "./actionsheet/actionsheet.module";
 import { DialogModule } from "./dialog/dialog.module";
 import { LoadmoreModule } from "./loadmore/loadmore.module";
+import { ProgressModule } from "./progress/progress.module";
 
 export * from './utils/types';
 
@@ -20,17 +21,18 @@ export * from './uploader';
 export * from './actionsheet';
 export * from './dialog';
 export * from './loadmore';
+export * from './progress';
 
 const MODULES = [
     CellModule, ButtonModule, FormModule, SliderModule, UploaderModule, ActionSheetModule, 
-    DialogModule, LoadmoreModule
+    DialogModule, LoadmoreModule, ProgressModule
 ];
 
 @NgModule({
     imports: [
         CellModule.forRoot(), ButtonModule.forRoot(),  FormModule.forRoot(), 
         SliderModule.forRoot(), UploaderModule.forRoot(), ActionSheetModule.forRoot(),
-        DialogModule.forRoot(), LoadmoreModule.forRoot()
+        DialogModule.forRoot(), LoadmoreModule.forRoot(), ProgressModule.forRoot()
     ],
     exports: MODULES
 })

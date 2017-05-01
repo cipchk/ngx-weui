@@ -24,6 +24,7 @@ import { IconsComponent } from './pages/icons/icons.component';
 import { PanelComponent } from './pages/panel/panel.component';
 import { PreviewComponent } from './pages/preview/preview.component';
 import { DemoLoadmoreComponent } from './pages/loadmore/loadmore.component';
+import { DemoProgressComponent } from './pages/progress/progress.component';
 
 export const routes = [
     {
@@ -46,7 +47,8 @@ export const routes = [
             { path: 'icons', component: IconsComponent },
             { path: 'panel', component: PanelComponent },
             { path: 'preview', component: PreviewComponent },
-            { path: 'loadmore', component: DemoLoadmoreComponent }
+            { path: 'loadmore', component: DemoLoadmoreComponent },
+            { path: 'progress', component: DemoProgressComponent }
         ]
     }
 ]
@@ -77,7 +79,8 @@ export const routes = [
         IconsComponent,
         PanelComponent,
         PreviewComponent,
-        DemoLoadmoreComponent
+        DemoLoadmoreComponent,
+        DemoProgressComponent
     ],
     entryComponents: [
         PageComponent,
