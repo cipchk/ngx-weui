@@ -17,38 +17,44 @@ weui for angular
 
 斜体表示正在开发中……
 
-+ Button
-+ Cell
-    + Swipe
 + Form
+    + Button
     + Input
     + Textarea
     + VCode
+    + List
+        + Cell
+            + Swipe
+        + _InfiniteLoader_
+        + _PullToRefresh_
+    + Slider
     + Uploader
-+ Slider
-+ ActionSheet
-+ _Article_
-+ _Badge_
-+ _Dialog_
-+ _Footer_
-+ _Gallery_
-+ _Grid_
-+ _Icon_
-+ _InfiniteLoader_
-+ _PullToRefresh_
-+ _Label_
-+ _Loadmore_
-+ _Mask_
-+ _Mediabox_
-+ _Msg_
-+ _Panel_
-+ _Picker_
-+ _Popup_
-+ _Progress_
-+ _SearchBox_
-+ _Tab_
-+ _Toast_
-+ _Toptips_
++ _Basic Components_
+    + _Article_
+    + _Badge_
+    + _Flex_
+    + _Footer_
+    + _Gallery_
+    + _Grid_
+    + _Icons_
+    + _Loadmore_
+    + _Panel_
+    + _Preview_
+    + _Progress_
+    + _Mask_
++ _Feedbacks_
+    + ActionSheet
+    + Dialog
+    + _Msg_
+    + _Picker_
+    + _Toast_
+    + _Toptips_
+    + _Popup_
++ _Navigations_
+    + _Navbar_
+    + _Tabbar_
++ _Search_
+    + _SearchBox_
 
 ## Troubleshooting
 
