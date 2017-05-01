@@ -16,6 +16,8 @@ import { DemoUploaderComponent } from './pages/uploader/uploader.component';
 import { DemoActionSheetComponent } from './pages/actionsheet/actionsheet.component';
 import { DemoDialogComponent } from './pages/dialog/dialog.component';
 import { ArticleComponent } from './pages/article/article.component';
+import { FlexComponent } from './pages/flex/flex.component';
+import { BadgeComponent } from './pages/badge/badge.component';
 
 export const routes = [
     {
@@ -30,7 +32,9 @@ export const routes = [
             { path: 'uploader', component: DemoUploaderComponent },
             { path: 'actionsheet', component: DemoActionSheetComponent },
             { path: 'dialog', component: DemoDialogComponent },
-            { path: 'article', component: ArticleComponent }
+            { path: 'article', component: ArticleComponent },
+            { path: 'flex', component: FlexComponent },
+            { path: 'badge', component: BadgeComponent }
         ]
     }
 ]
@@ -53,7 +57,9 @@ export const routes = [
         DemoUploaderComponent,
         DemoActionSheetComponent,
         DemoDialogComponent,
-        ArticleComponent
+        ArticleComponent,
+        FlexComponent,
+        BadgeComponent
     ],
     entryComponents: [
         PageComponent,

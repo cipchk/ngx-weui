@@ -30,9 +30,9 @@ weui for angular
     + Slider
     + Uploader
 + _Basic Components_
-    + _Article_
-    + _Badge_
-    + _Flex_
+    + Article
+    + Badge
+    + Flex
     + _Footer_
     + _Gallery_
     + _Grid_
