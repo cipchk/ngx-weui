@@ -20,6 +20,7 @@ import { FlexComponent } from './pages/flex/flex.component';
 import { BadgeComponent } from './pages/badge/badge.component';
 import { FooterComponent } from './pages/footer/footer.component';
 import { GridComponent } from './pages/grid/grid.component';
+import { IconsComponent } from './pages/icons/icons.component';
 
 export const routes = [
     {
@@ -38,7 +39,8 @@ export const routes = [
             { path: 'flex', component: FlexComponent },
             { path: 'badge', component: BadgeComponent },
             { path: 'footer', component: FooterComponent },
-            { path: 'grid', component: GridComponent }
+            { path: 'grid', component: GridComponent },
+            { path: 'icons', component: IconsComponent }
         ]
     }
 ]
@@ -65,7 +67,8 @@ export const routes = [
         FlexComponent,
         BadgeComponent,
         FooterComponent,
-        GridComponent
+        GridComponent,
+        IconsComponent
     ],
     entryComponents: [
         PageComponent,

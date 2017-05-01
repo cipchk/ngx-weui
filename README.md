@@ -34,9 +34,9 @@ weui for angular
     + Badge
     + Flex
     + Footer
-    + _Gallery_
     + Grid
-    + _Icons_
+    + Icons
+    + _Gallery_
     + _Loadmore_
     + _Panel_
     + _Preview_
