@@ -7,7 +7,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
             <div class="weui-progress__bar">
                 <div class="weui-progress__inner-bar" [style.width]="value + '%'"></div>
             </div>
-            <a href="#" class="weui-progress__opr" *ngIf="allowCancel" (click)="onCancel()">
+            <a href="#" class="weui-progress__opr" *ngIf="canCancel" (click)="onCancel()">
                 <i class="weui-icon-cancel"></i>
             </a>
         </div>
@@ -17,12 +17,12 @@ export class ProgressComponent {
 
     @Input('weui-value') value: number = 0;
 
-    @Input('weui-allow-cancel') allowCancel: boolean = true;
+    @Input('weui-can-cancel') canCancel: boolean = true;
 
     @Output('weui-cancel') cancel = new EventEmitter();
 
     onCancel() {
-        this.cancel.emit();
+        if (this.canCancel) this.cancel.emit();
         return false;
     }
 }

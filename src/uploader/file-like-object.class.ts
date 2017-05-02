@@ -8,7 +8,6 @@ export class FileLikeObject {
     size: any;
     type: string;
     name: string;
-    url: string;
 
     constructor(fileOrInput: any) {
         let isInput = isElement(fileOrInput);

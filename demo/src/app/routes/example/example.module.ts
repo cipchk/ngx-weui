@@ -26,6 +26,7 @@ import { PanelComponent } from './pages/panel/panel.component';
 import { PreviewComponent } from './pages/preview/preview.component';
 import { DemoLoadmoreComponent } from './pages/loadmore/loadmore.component';
 import { DemoProgressComponent } from './pages/progress/progress.component';
+import { DemoGalleryComponent } from './pages/gallery/gallery.component';
 
 export const routes = [
     {
@@ -49,7 +50,8 @@ export const routes = [
             { path: 'panel', component: PanelComponent },
             { path: 'preview', component: PreviewComponent },
             { path: 'loadmore', component: DemoLoadmoreComponent },
-            { path: 'progress', component: DemoProgressComponent }
+            { path: 'progress', component: DemoProgressComponent },
+            { path: 'gallery', component: DemoGalleryComponent }
         ]
     }
 ]
@@ -63,25 +65,10 @@ export const routes = [
         PageComponent,
         AccordionComponent,
 
-        LayoutComponent,
-        HomeComponent,
-        ButtonComponent,
-        InputComponent,
-        ListComponent,
-        SliderComponent,
-        DemoUploaderComponent,
-        DemoActionSheetComponent,
-        DemoDialogComponent,
-        ArticleComponent,
-        FlexComponent,
-        BadgeComponent,
-        FooterComponent,
-        GridComponent,
-        IconsComponent,
-        PanelComponent,
-        PreviewComponent,
-        DemoLoadmoreComponent,
-        DemoProgressComponent
+        LayoutComponent, HomeComponent, ButtonComponent, InputComponent, ListComponent, SliderComponent,
+        DemoUploaderComponent, DemoActionSheetComponent, DemoDialogComponent, ArticleComponent, FlexComponent,
+        BadgeComponent, FooterComponent, GridComponent, IconsComponent, PanelComponent, PreviewComponent,
+        DemoLoadmoreComponent, DemoProgressComponent, DemoGalleryComponent
     ],
     entryComponents: [
         PageComponent,

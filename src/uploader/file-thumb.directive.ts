@@ -1,6 +1,5 @@
 import { Directive, Input, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
-
-declare const window: any;
+import { isImage, genImageUrl } from '../utils/browser';
 
 @Directive({ selector: '[weui-thumb]' })
 export class FileThumbDirective implements OnChanges {
@@ -8,18 +7,11 @@ export class FileThumbDirective implements OnChanges {
 
     constructor(private el: ElementRef) { }
 
-    private isImage() {
-        if (!this.file) return false;
-        let type = '|' + this.file.type.slice(this.file.type.lastIndexOf('/') + 1) + '|';
-        return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-    }
-
     private render() {
-        if (!(this.file instanceof window.File) || !this.isImage())
-            return;
+        const url = genImageUrl(this.file);
+        if (!url) return;
 
-        const url = `url(${window.URL.createObjectURL(this.file)})`;
-        this.el.nativeElement.style.backgroundImage = url;
+        this.el.nativeElement.style.backgroundImage = `url(${url})`;
     }
 
     ngOnChanges(changes: SimpleChanges): void {

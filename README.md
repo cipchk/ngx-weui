@@ -37,7 +37,7 @@ weui for angular
     + Footer
     + Grid
     + Icons
-    + _Gallery_
+    + Gallery
     + Loadmore
     + Panel
     + Preview

@@ -69,4 +69,16 @@ export class DemoUploaderComponent {
             console.log('onError', arguments);
         }
     });
+
+    img: any;
+    imgShow: boolean = false;
+    onGallery(item: any) {
+        this.img = [{ file: item._file, item: item }];
+        this.imgShow = true;
+    }
+
+    onDel(item: any) {
+        console.log(item);
+        this.uploader.removeFromQueue(item.item);
+    }
 }
