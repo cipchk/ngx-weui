@@ -30,7 +30,7 @@ weui for angular
     + Slider
     + Uploader
     + _Picker_
-+ _Basic Components_
++ Basic Components
     + Article
     + Badge
     + Flex

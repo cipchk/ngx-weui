@@ -1,0 +1,43 @@
+<Page [ngClass]="'picker'" [title]="'Picker'" [subTitle]="'多列选择器'" [spacing]="false" [ftBottom]="true">
+
+    <p>Result: {{ res | json }}</p>
+    <form #f="ngForm" (ngSubmit)="onSave()">
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">* City</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <weui-city-picker required placeholder="Pick a City" 
+                        [data]="cityData" [(ngModel)]="res.city" name="city"></weui-city-picker>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">*Direct Picker</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <weui-picker placeholder="Pick a item" required [(ngModel)]="res.item" name="item"
+                        [items]="itemData"></weui-picker>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
+                    <label class="weui-label">Direct Picker</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <weui-picker placeholder="Pick a item" [(ngModel)]="res.mitem" name="mitem"
+                        [items]="mData" [options]="{cancel:'Cancel', confirm:'Confirm', backdrop: false}" [values]="['G', 10]"></weui-picker>
+                </div>
+            </div>
+        </div>
+        <div class="weui-btn-area">
+            <button weui-button [weui-disabled]="!f.form.valid || !f.form.dirty">保存</button>
+        </div>
+    </form>
+
+</Page>

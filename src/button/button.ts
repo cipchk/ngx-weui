@@ -13,7 +13,8 @@ import { ButtonType } from "../utils/types";
         '[class.weui-btn_plain-default]': 'plain && type==="default"',
         '[class.weui-btn_plain-warn]': 'plain && type==="warn"',
         '[class.weui-btn_disabled]': '!plain && disabled',
-        '[class.weui-btn_plain-disabled]': 'plain && disabled'
+        '[class.weui-btn_plain-disabled]': 'plain && disabled',
+        '[disabled]': 'disabled'
     }
 })
 export class ButtonDirective {
