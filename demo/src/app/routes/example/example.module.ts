@@ -31,6 +31,7 @@ import { DemoPickerComponent } from './pages/picker/picker.component';
 import { DemoSearchBarComponent } from './pages/searchbar/searchbar.component';
 import { DemoNavbarComponent } from './pages/navbar/navbar.component';
 import { DemoTabbarComponent } from './pages/tabbar/tabbar.component';
+import { DemoToastComponent } from './pages/toast/toast.component';
 
 export const routes = [
     {
@@ -59,7 +60,8 @@ export const routes = [
             { path: 'picker', component: DemoPickerComponent },
             { path: 'searchbar', component: DemoSearchBarComponent },
             { path: 'navbar', component: DemoNavbarComponent },
-            { path: 'tabbar', component: DemoTabbarComponent }
+            { path: 'tabbar', component: DemoTabbarComponent },
+            { path: 'toast', component: DemoToastComponent }
         ]
     }
 ]
@@ -77,7 +79,7 @@ export const routes = [
         DemoUploaderComponent, DemoActionSheetComponent, DemoDialogComponent, ArticleComponent, FlexComponent,
         BadgeComponent, FooterComponent, GridComponent, IconsComponent, PanelComponent, PreviewComponent,
         DemoLoadmoreComponent, DemoProgressComponent, DemoGalleryComponent, DemoPickerComponent,
-        DemoSearchBarComponent, DemoNavbarComponent, DemoTabbarComponent
+        DemoSearchBarComponent, DemoNavbarComponent, DemoTabbarComponent, DemoToastComponent
     ],
     entryComponents: [
         PageComponent,

@@ -13,14 +13,14 @@ import { GalleryModule } from "./gallery/gallery.module";
 import { PickerModule } from "./picker/picker.module";
 import { SearchBarModule } from "./searchbar/searchbar.module";
 import { TabModule } from "./tab/tab.module";
+import { ToastModule } from "./toast/toast.module";
 
 export * from './utils/types';
 
-export { SwipeDirective, CellModule } from './cell';
-export { ButtonDirective, ButtonConfig, ButtonModule } from './button';
-export { InputDirective, VCodeDirective, TextareaDirective, 
-         FormModule } from './form';
-export { SliderDirective, SliderModule } from './slider';
+export * from './cell';
+export * from './button';
+export * from './form';
+export * from './slider';
 export * from './uploader';
 export * from './actionsheet';
 export * from './dialog';
@@ -30,11 +30,12 @@ export * from './gallery';
 export * from './picker';
 export * from './searchbar';
 export * from './tab';
+export * from './toast';
 
 const MODULES = [
     CellModule, ButtonModule, FormModule, SliderModule, UploaderModule, ActionSheetModule, 
     DialogModule, LoadmoreModule, ProgressModule, GalleryModule, PickerModule, SearchBarModule,
-    TabModule
+    TabModule, ToastModule
 ];
 
 @NgModule({
@@ -43,7 +44,7 @@ const MODULES = [
         SliderModule.forRoot(), UploaderModule.forRoot(), ActionSheetModule.forRoot(),
         DialogModule.forRoot(), LoadmoreModule.forRoot(), ProgressModule.forRoot(),
         GalleryModule.forRoot(), PickerModule.forRoot(), SearchBarModule.forRoot(),
-        TabModule.forRoot()
+        TabModule.forRoot(), ToastModule.forRoot()
     ],
     exports: MODULES
 })

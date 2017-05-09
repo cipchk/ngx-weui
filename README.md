@@ -50,7 +50,7 @@ weui for angular
     + ActionSheet
     + Dialog
     + _Msg_
-    + _Toast_
+    + Toast
     + _Toptips_
     + _Popup_
 + Navigations
