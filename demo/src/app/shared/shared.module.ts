@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpModule, Http } from '@angular/http';
+import { HttpModule, Http, JsonpModule } from '@angular/http';
 
 import { WeUiModule } from 'ngx-weui';
 
@@ -13,6 +13,7 @@ import { ChecklistDirective } from "./directives/checklist";
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
+        HttpModule, JsonpModule,
 
         WeUiModule.forRoot()
     ],
@@ -25,7 +26,7 @@ import { ChecklistDirective } from "./directives/checklist";
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpModule,
+        HttpModule, JsonpModule,
         RouterModule,
         
         ChecklistDirective,

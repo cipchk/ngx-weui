@@ -28,6 +28,7 @@ import { DemoLoadmoreComponent } from './pages/loadmore/loadmore.component';
 import { DemoProgressComponent } from './pages/progress/progress.component';
 import { DemoGalleryComponent } from './pages/gallery/gallery.component';
 import { DemoPickerComponent } from './pages/picker/picker.component';
+import { DemoSearchBarComponent } from './pages/searchbar/searchbar.component';
 
 export const routes = [
     {
@@ -53,7 +54,8 @@ export const routes = [
             { path: 'loadmore', component: DemoLoadmoreComponent },
             { path: 'progress', component: DemoProgressComponent },
             { path: 'gallery', component: DemoGalleryComponent },
-            { path: 'picker', component: DemoPickerComponent }
+            { path: 'picker', component: DemoPickerComponent },
+            { path: 'searchbar', component: DemoSearchBarComponent }
         ]
     }
 ]
@@ -70,7 +72,8 @@ export const routes = [
         LayoutComponent, HomeComponent, ButtonComponent, InputComponent, ListComponent, SliderComponent,
         DemoUploaderComponent, DemoActionSheetComponent, DemoDialogComponent, ArticleComponent, FlexComponent,
         BadgeComponent, FooterComponent, GridComponent, IconsComponent, PanelComponent, PreviewComponent,
-        DemoLoadmoreComponent, DemoProgressComponent, DemoGalleryComponent, DemoPickerComponent
+        DemoLoadmoreComponent, DemoProgressComponent, DemoGalleryComponent, DemoPickerComponent,
+        DemoSearchBarComponent
     ],
     entryComponents: [
         PageComponent,

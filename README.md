@@ -56,8 +56,8 @@ weui for angular
 + _Navigations_
     + _Navbar_
     + _Tabbar_
-+ _Search_
-    + _SearchBox_
++ Search
+    + SearchBox
 
 ## Troubleshooting
 

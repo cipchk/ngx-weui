@@ -11,6 +11,7 @@ import { LoadmoreModule } from "./loadmore/loadmore.module";
 import { ProgressModule } from "./progress/progress.module";
 import { GalleryModule } from "./gallery/gallery.module";
 import { PickerModule } from "./picker/picker.module";
+import { SearchBarModule } from "./searchbar/searchbar.module";
 
 export * from './utils/types';
 
@@ -26,10 +27,11 @@ export * from './loadmore';
 export * from './progress';
 export * from './gallery';
 export * from './picker';
+export * from './searchbar';
 
 const MODULES = [
     CellModule, ButtonModule, FormModule, SliderModule, UploaderModule, ActionSheetModule, 
-    DialogModule, LoadmoreModule, ProgressModule, GalleryModule, PickerModule
+    DialogModule, LoadmoreModule, ProgressModule, GalleryModule, PickerModule, SearchBarModule
 ];
 
 @NgModule({
@@ -37,7 +39,7 @@ const MODULES = [
         CellModule.forRoot(), ButtonModule.forRoot(),  FormModule.forRoot(), 
         SliderModule.forRoot(), UploaderModule.forRoot(), ActionSheetModule.forRoot(),
         DialogModule.forRoot(), LoadmoreModule.forRoot(), ProgressModule.forRoot(),
-        GalleryModule.forRoot(), PickerModule.forRoot()
+        GalleryModule.forRoot(), PickerModule.forRoot(), SearchBarModule.forRoot()
     ],
     exports: MODULES
 })
