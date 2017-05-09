@@ -1,0 +1,23 @@
+<weui-tabbar>
+    <weui-tab heading="微信" [badge]="8" [icon]="'<img src=./assets/images/icon_tabbar.png>'">
+        <article class="weui-article">
+            <h1>微信</h1>
+        </article>
+    </weui-tab>
+    <weui-tab heading="通讯录" [icon]="'<img src=./assets/images/icon_tabbar.png>'" (select)="onSelect()">
+        <article class="weui-article">
+            <h1>通讯录</h1>
+            <p>Select Time: {{time}}</p>
+        </article>
+    </weui-tab>
+    <weui-tab heading="发现" [badge]="'dot'" [icon]="'<img src=./assets/images/icon_tabbar.png>'">
+        <article class="weui-article">
+            <h1>发现</h1>
+        </article>
+    </weui-tab>
+    <weui-tab heading="我" [icon]="'<img src=./assets/images/icon_tabbar.png>'">
+        <article class="weui-article">
+            <h1>我</h1>
+        </article>
+    </weui-tab>
+</weui-tabbar>

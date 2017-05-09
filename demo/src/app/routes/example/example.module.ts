@@ -29,6 +29,8 @@ import { DemoProgressComponent } from './pages/progress/progress.component';
 import { DemoGalleryComponent } from './pages/gallery/gallery.component';
 import { DemoPickerComponent } from './pages/picker/picker.component';
 import { DemoSearchBarComponent } from './pages/searchbar/searchbar.component';
+import { DemoNavbarComponent } from './pages/navbar/navbar.component';
+import { DemoTabbarComponent } from './pages/tabbar/tabbar.component';
 
 export const routes = [
     {
@@ -55,7 +57,9 @@ export const routes = [
             { path: 'progress', component: DemoProgressComponent },
             { path: 'gallery', component: DemoGalleryComponent },
             { path: 'picker', component: DemoPickerComponent },
-            { path: 'searchbar', component: DemoSearchBarComponent }
+            { path: 'searchbar', component: DemoSearchBarComponent },
+            { path: 'navbar', component: DemoNavbarComponent },
+            { path: 'tabbar', component: DemoTabbarComponent }
         ]
     }
 ]
@@ -73,7 +77,7 @@ export const routes = [
         DemoUploaderComponent, DemoActionSheetComponent, DemoDialogComponent, ArticleComponent, FlexComponent,
         BadgeComponent, FooterComponent, GridComponent, IconsComponent, PanelComponent, PreviewComponent,
         DemoLoadmoreComponent, DemoProgressComponent, DemoGalleryComponent, DemoPickerComponent,
-        DemoSearchBarComponent
+        DemoSearchBarComponent, DemoNavbarComponent, DemoTabbarComponent
     ],
     entryComponents: [
         PageComponent,

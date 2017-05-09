@@ -8,7 +8,7 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
         <p class="page__desc" [innerHTML]="subTitle"></p>
     </div>
     <div class="page__bd" [ngClass]="{'page__bd_spacing': spacing}"><ng-content></ng-content></div>
-    <div class="page__ft" [ngClass]="{'j_bottom': ftBottom}">
+    <div class="page__ft" [ngClass]="{'j_bottom': ftBottom}" *ngIf="!noBottom">
         <a href="#" routerLink="/"><img src="./assets/images/icon_footer.png"></a>
         <ng-content select="[footer]"></ng-content>
     </div>
@@ -24,4 +24,5 @@ export class PageComponent {
     @Input() subTitle: string;
     @Input() spacing: boolean = true;
     @Input() ftBottom: boolean = false;
+    @Input() noBottom: boolean = false;
 }

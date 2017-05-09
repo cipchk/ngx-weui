@@ -53,9 +53,9 @@ weui for angular
     + _Toast_
     + _Toptips_
     + _Popup_
-+ _Navigations_
-    + _Navbar_
-    + _Tabbar_
++ Navigations
+    + Navbar
+    + Tabbar
 + Search
     + SearchBox
 
