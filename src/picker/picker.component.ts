@@ -9,21 +9,21 @@ import { PickerConfig } from './picker.config';
     selector: 'weui-picker, [weui-picker]',
     template: `
         <input type="text" class="weui-input" value="{{text}}" placeholder="{{placeholder}}" 
-            readonly (click)="onShow()">
-        <div [hidden]="!showd">
+            readonly (click)="onShow()" [disabled]="disabled" *ngIf="options.type==='form'">
+        <div [hidden]="!showP">
             <div class="weui-mask" (click)="onHide(false)"
-                [ngClass]="{'weui-animate-fade-in': show, 'weui-animate-fade-out': !show}"></div>
+                [ngClass]="{'weui-animate-fade-in': shown, 'weui-animate-fade-out': !shown}"></div>
             <div class="weui-picker"
-                [ngClass]="{'weui-animate-slide-up': show, 'weui-animate-slide-down': !show}">
+                [ngClass]="{'weui-animate-slide-up': shown, 'weui-animate-slide-down': !shown}">
                 <div class="weui-picker__hd">
                     <a href="#" class="weui-picker__action" (click)="onCancel()">{{options.cancel}}</a>
                     <a href="#" class="weui-picker__action" (click)="onConfirm()">{{options.confirm}}</a>
                 </div>
                 <div class="weui-picker__bd">
                     <weui-picker-group tappable
-                        *ngFor="let item of _itemsValues; let i = index;"
-                        [items]="item"
-                        [value]="values[i]"
+                        *ngFor="let items of _groups; let i = index;"
+                        [items]="items"
+                        [defaultIndex]="_selected[i]"
                         groupIndex="{{i}}" (change)="onGroupChange($event, i)"></weui-picker-group>
                 </div>
             </div>
@@ -37,34 +37,37 @@ import { PickerConfig } from './picker.config';
 })
 export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChanges {
 
-    text: string = '';
-    _itemsValues: PickerData[][] = [];
-    @Input('options') options: PickerOptions;
+    @Input() options: PickerOptions;
 
-    private isAsync: boolean = false;
-    @Input('items') set items(d: PickerData[] | PickerData[][] | 'async') {
-        if (!d) return;
-        if (d === 'async') {
-            // todo
-            // if (!this.options.gruopCount) throw new Error('当使用异常加载数据时，必须指定gruopCount');
-            // this._itemsValues = Array(this.options.gruopCount).fill([]);
-            // this.isAsync = true;
-        } else {
-            if (d.length > 0 && Array.isArray(d[0]))
-                this._itemsValues = this.parseItem(<PickerData[][]>d);
-            else
-                this._itemsValues = this.parseItem([d]);
-        }
+    _value: any;
+    _selected: any[];
+    _groups: PickerData[][];
+    @Input() set defaultSelect(d: number[]) {
+        if (d) this._selected = d;
     }
-    @Input('values') values: any[] = [];
+    @Input() set groups(d: PickerData[][] | String[]) {
+        if (!d) throw new Error('无效数据源')
+        if (d.length > 0) {
+            if (typeof d[0] === 'string') {
+                d = [
+                    (<string[]>d).map<PickerData>((v: string) => {
+                        return { label: v, value: v}
+                    })
+                ];
+            }
+        }
+        this._groups = <PickerData[][]>d;
+        this._selected = this._selected ? this._selected : Array(d.length).fill(0);
+    }
 
-    @Input('placeholder') placeholder: string;
-
-    showd: boolean = false;
-    @Input() show: boolean = false;
-    @Output('change') change = new EventEmitter<any>();
-    @Output('groupChange') groupChange = new EventEmitter<any>();
-    @Output('cancel') cancel = new EventEmitter<any>();
+    text: string = '';
+    @Input() placeholder: string;
+    @Input() disabled: boolean = false;
+    @Output() change = new EventEmitter<any>();
+    @Output() groupChange = new EventEmitter<any>();
+    @Output() cancel = new EventEmitter<any>();
+    @Output() show = new EventEmitter<any>();
+    @Output() hide = new EventEmitter<any>();
 
     constructor(private DEF: PickerConfig) { }
 
@@ -72,17 +75,24 @@ export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChang
         if (!this.options) this.parseOptions();
     }
 
+    showP: boolean = false;
+    shown: boolean = false;
     onHide(fh: boolean) {
         if (!fh && !this.options.backdrop) return false;
-        this.show = false;
+        this.shown = false;
         setTimeout(() => {
-            this.showd = false;
+            this.showP = false;
+            this.hide.emit();
         }, 300);
+        return this;
     }
 
     onShow() {
-        this.showd = true;
-        this.show = true;
+        if (this.disabled) return false;
+        this.showP = true;
+        this.shown = true;
+        this.show.emit();
+        return this;
     }
 
     private parseOptions() {
@@ -91,29 +101,42 @@ export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChang
             cancel: '取消',
             confirm: '确定',
             backdrop: true,
-            gruopCount: null
+            gruopCount: null,
+            separator: ' '
         }, this.DEF, this.options);
     }
 
-    private parseItem(arr: any[][]): PickerData[][] {
-        return arr.map<PickerData[]>((val: any[]) => {
-            if (val && val.length) {
-                if (typeof val[0] !== 'object')
-                    return val.map<PickerData>((v: string) => {
-                        return <PickerData>{ label: v, value: v };
-                    });
-                else {
-                    return <PickerData[]>val;
-                }
-            }
-            return <PickerData[]>[];
+    private getSelecteItem() {
+        let res: any[] = [];
+        this._groups.forEach((items: PickerData[], idx: number) => {
+            const item = items[this._selected[idx]];
+            res.push(item);
         });
+        return res;
     }
 
-    private _choValues: any[] = [];
+    setText(res: any[] = null) {
+        if (res === null) res = this.getSelecteItem();
+        if (res.length > 0)
+            this.text = res.map((i: any) => i.label || i.value).join(this.options.separator);
+
+        return this;
+    }
+
+    // 根据_value解析成相应值位置
+    setDefault() {
+        this._selected = [];
+        this._groups.forEach((items: PickerData[]) => {
+            let idx = items.findIndex((i: PickerData) => i.value === this._value );
+            if (idx <= -1) idx = 0;
+            this._selected.push(idx);
+        });
+        return this;
+    }
+
     onGroupChange(data: any, groupIndex: number) {
-        this._choValues[groupIndex] = data;
-        this.groupChange.emit({ data, groupIndex });
+        this._selected[groupIndex] = data.index;
+        this.groupChange.emit({ item: data.item, index: data.index, groupIndex });
     }
 
     onCancel() {
@@ -122,21 +145,17 @@ export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChang
         return false;
     }
 
-    private setText() {
-        let text:string[] = [];
-        this._choValues.map((v: any) => {
-            text.push(v.item.label || v.item.value);
-        });
-        if (text.length > 0)
-            this.text = text.join(' ');
-    }
-
     onConfirm() {
-        this.setText();
-        const lastItem = this._choValues[this._choValues.length - 1].item || {};
-        this.onChange(lastItem.value || lastItem.label);
+        const res = this.getSelecteItem();
+        this.setText(res);
+
+        const lastItem = res[res.length - 1] || {};
+        const val = lastItem.value || lastItem.label;
+        this.onChange(val);
         this.onTouched();
-        this.change.emit(this._choValues);
+
+        this.change.emit({ value: val, items: res });
+
         this.onHide(true);
         return false;
     }
@@ -151,8 +170,10 @@ export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChang
     }
 
     writeValue(value: any): void {
-        if (value) {
-            this.setText();
+        if (value && value !== this._value) {
+            this._value = value;
+            // todo：当ngModel传递一个未列表中的值的情况 & 多列时数据对应问题
+            this.setDefault().setText();
         }
     }
 

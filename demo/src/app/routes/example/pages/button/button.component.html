@@ -19,10 +19,10 @@
         <button weui-button [weui-plain]="true">按钮</button>
         <button weui-button [weui-plain]="true" [weui-disabled]="disabled" (click)="disabled=!disabled">按钮</button>
 
-        <button weui-button [weui-mini]="mini" (click)="mini=!mini">按钮</button>
-        <button weui-button [weui-mini]="mini" (click)="mini=!mini" [weui-type]="'default'">按钮</button>
-        <button weui-button [weui-mini]="mini" (click)="mini=!mini" [weui-type]="'warn'">按钮</button>
-        <button weui-button [weui-mini]="mini" (click)="mini=!mini" [weui-type]="'warn'" [weui-loading]="loading">按钮</button>
+        <button weui-button [weui-mini]="'mini'" (click)="mini=!mini">按钮</button>
+        <button weui-button [weui-mini]="'mini'" (click)="mini=!mini" [weui-type]="'default'">按钮</button>
+        <button weui-button [weui-mini]="'mini'" (click)="mini=!mini" [weui-type]="'warn'">按钮</button>
+        <button weui-button weui-mini="mini" (click)="mini=!mini" [weui-type]="'warn'" [weui-loading]="loading">按钮</button>
 
     </div>
 

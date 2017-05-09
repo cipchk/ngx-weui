@@ -1,7 +1,7 @@
 import { Observable, Subscriber } from 'rxjs/Rx';
 import { Component, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { PickerData, PickerOptions } from 'ngx-weui/picker'
-import { CN } from './cn'
+import { PickerData, PickerOptions, PickerService } from 'ngx-weui/picker'
+import { DATA } from './cn'
 
 @Component({
     selector: 'example-picker',
@@ -10,25 +10,15 @@ import { CN } from './cn'
     encapsulation: ViewEncapsulation.None
 })
 export class DemoPickerComponent {
+    DT: any = {
+        min: new Date(2015, 1, 5),
+        max: new Date()
+    };
     res: any = {
-        city: 'Item1',
-        mitem: 10
+        city: '310105'
     };
 
-    ngOnInit() {
-        const charCode = 'A'.charCodeAt(0);
-        const options1: any[] = [];
-        for (let i = 0; i < 26; i++) {
-            const c = String.fromCharCode(charCode + i);
-            options1[i] = { label: '字母' + c, value: c };
-        }
-
-        const options2: any[] = [];
-        for (let i = 0; i < 100; i++) {
-            options2[i] = { label: '数字' + (i + 1), value: i + 1 };
-        }
-        this.mData = [options1, options2];
-    }
+    constructor(private srv: PickerService) {}
 
     onSave() {
         alert('请求数据：' + JSON.stringify(this.res));
@@ -37,10 +27,10 @@ export class DemoPickerComponent {
 
     cityStatus: boolean = false;
     cityOptions: any = {
-        
+
     };
-    cityData: any = CN;
-    
+    cityData: any = DATA;
+
     onCityChange(data: any) {
         console.log('onCityChange', data);
     }
@@ -51,23 +41,31 @@ export class DemoPickerComponent {
         console.log('onCityCancel');
     }
 
-    itemData: any = [
-        {
-            label: 'Item1'
-        },
-        {
-            label: 'Item2 (Disabled)',
-            disabled: true
-        },
-        {
-            label: 'Item3'
-        },
-        {
-            label: 'Item4'
-        },
-        {
-            label: 'Item5'
-        }
+    items: string[] = Array(6).fill('').map((v: string, idx: number) => `Item${idx}`);
+    itemGroup: any = [
+        [
+            {
+                label: 'Item1',
+                value: 1
+            },
+            {
+                label: 'Item2 (Disabled)',
+                disabled: true,
+                value: 2
+            },
+            {
+                label: 'Item3',
+                value: 3
+            },
+            {
+                label: 'Item4',
+                value: 4
+            },
+            {
+                label: 'Item5',
+                value: 5
+            }
+        ]
     ];
     onItemChange(data: any) {
         console.log('onItemChange', data);
@@ -89,5 +87,36 @@ export class DemoPickerComponent {
     }
     onMItemCancel() {
         console.log('onMItemCancel');
+    }
+
+    srvRes: any = '';
+    onShowBySrv(type: string) {
+        switch (type) {
+            case 'city':
+                this.srv.showCity(this.cityData).subscribe((res:any) => {
+                    this.srvRes = res.value;
+                });
+                break;
+            case 'date':
+                this.srv.showDateTime(type).subscribe((res:any) => {
+                    this.srvRes = res.value;
+                });
+                break;
+            case 'datetime':
+                this.srv.showDateTime(type).subscribe((res:any) => {
+                    this.srvRes = res.value;
+                });
+                break;
+            case 'time':
+                this.srv.showDateTime(type).subscribe((res:any) => {
+                    this.srvRes = res.value;
+                });
+                break;
+            case 'data':
+                this.srv.show(this.items, 'Item3').subscribe((res:any) => {
+                    this.srvRes = res.value;
+                });
+                break;
+        }
     }
 } 

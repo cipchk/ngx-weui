@@ -29,7 +29,11 @@ weui for angular
         + _PullToRefresh_
     + Slider
     + Uploader
-    + _Picker_
+    + Picker
+        + City Picker
+        + Date Picker
+        + DateTime Picker
+        + Time Picker
 + Basic Components
     + Article
     + Badge

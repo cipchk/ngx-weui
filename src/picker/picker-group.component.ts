@@ -27,8 +27,8 @@ const getWindowHeight = (): number => {
 })
 export class PickerGroupComponent implements OnDestroy, OnChanges {
 
-    @Input() value: any;
     @Input() items: PickerData[];
+    @Input() defaultIndex: number = -1;
     @Input() groupIndex: number;
     @Output() change = new EventEmitter<any>();
 
@@ -44,17 +44,14 @@ export class PickerGroupComponent implements OnDestroy, OnChanges {
     private startY: number;    // 保存开始按下的位置 (touchstart)
     private endY: number;      // 保存结束时的位置 (touchend)
     private speed: number;     // 手滑动的速度 (用途：速度乘以惯性滑动的时间, 例如 300ms, 计算出应该滑动的距离)
-    private animating: boolean = false;
-    private distance = 0;
-
-    ngOnInit() {
-        //this.init();
-    }
+    animating: boolean = false;
+    distance = 0;
 
     ngOnChanges(changes: SimpleChanges): void {
-        //  && !changes.value.firstChange
-        if ('value' in changes) {
-            this.setDefault();
+        if ('defaultIndex' in changes) {
+            if (this.defaultIndex < 0 || (this.items && this.defaultIndex >= this.items.length))
+                this.defaultIndex = 0;
+            this.distance = (this.defaults.offset - this.defaultIndex) * this.defaults.rowHeight;
         }
     }
 
@@ -110,27 +107,6 @@ export class PickerGroupComponent implements OnDestroy, OnChanges {
         this.startY = null;
     }
 
-    private setDefault(): void {
-        let index = 0;
-        if (this.value) { // 有传入value，则按value找可匹配的选项
-            const len = this.items && this.items.length || 0;
-            for (; index < len; index++) {
-                const item = this.items[index];
-                if (this.value === item.value) {
-                    this.onChange(item, index);
-                    this.distance = (this.defaults.offset - index) * this.defaults.rowHeight;
-                    return; // 已找到匹配选项，直接返回
-                }
-            }
-            console.warn('Picker has not match defaultValue:', this.value);
-        }
-
-        // 没有传入value，或者 有value但是没有匹配的选项
-        index = this._getDefaultIndex();
-        this.onChange(this.items[index], index);
-        this.distance = this._getDefaultTranslate(this.defaults.offset, this.defaults.rowHeight);
-    }
-
     private stop(diff: number): void {
         let dist = this.distance + diff;
 
@@ -166,26 +142,6 @@ export class PickerGroupComponent implements OnDestroy, OnChanges {
 
     private _getMin(offset: number, rowHeight: number, length: number): number {
         return -(rowHeight * (length - offset - 1));
-    }
-
-    private _getDefaultIndex(): number {
-        let current = Math.floor(this.items.length / 2);
-        let count = 0;
-        while (!!this.items[current] && this.items[current].disabled) {
-            current = ++current % this.items.length;
-            count++;
-
-            if (count > this.items.length) {
-                throw new Error('No selectable item.');
-            }
-        }
-
-        return current;
-    }
-
-    private _getDefaultTranslate(offset: number, rowHeight: number): number {
-        const currentIndex = this._getDefaultIndex();
-        return (offset - currentIndex) * rowHeight;
     }
 
     ngOnDestroy(): void {

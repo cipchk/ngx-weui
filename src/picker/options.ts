@@ -12,20 +12,11 @@ export interface PickerOptions {
     type?: 'default' | 'form';
 
     /**
-     * 当使用异常加载数据时，必须指定
+     * 提示分隔符信息，当type==='form'时有效
      * 
-     * @type {number}
+     * @type {string}
      */
-    gruopCount?: number;
-
-    /**
-     * 异常数据源
-     * 
-     * @param {number} groupIndex
-     * @param {PickerData[]} values 
-     * @returns {Observable<PickerData[]>} 
-     */
-    data?(groupIndex: number, values: PickerData[]): Observable<any>;
+    separator?: string;
 
     /**
      * 取消按钮文本

@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 import { SharedModule } from './shared/shared.module';
 import { RoutesModule } from './routes/routes.module';
 
@@ -15,7 +15,7 @@ import { AppComponent } from './app.component';
     declarations: [
         AppComponent
     ],
-    providers: [],
+    // providers: [{ provide: LOCALE_ID, useValue: 'zh-cn' }],
     bootstrap: [AppComponent]
 })
 
