@@ -1,6 +1,6 @@
 import { Observable, Subscriber } from 'rxjs/Rx';
 import { PickerData } from './data';
-import { Component, forwardRef, OnDestroy, OnChanges, SimpleChanges, Input, EventEmitter, Output } from '@angular/core';
+import { Component, forwardRef, OnDestroy, OnChanges, SimpleChanges, Input, EventEmitter, Output, ElementRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PickerOptions } from './options';
 import { PickerConfig } from './picker.config';
@@ -9,7 +9,8 @@ import { PickerConfig } from './picker.config';
     selector: 'weui-picker, [weui-picker]',
     template: `
         <input type="text" class="weui-input" value="{{text}}" placeholder="{{placeholder}}" 
-            readonly (click)="onShow()" [disabled]="disabled" *ngIf="options.type==='form'">
+            readonly="readonly" (focus)="onFocus($event)" 
+            (click)="onShow()" [disabled]="disabled" *ngIf="options.type==='form'">
         <div [hidden]="!showP">
             <div class="weui-mask" (click)="onHide(false)"
                 [ngClass]="{'weui-animate-fade-in': shown, 'weui-animate-fade-out': !shown}"></div>
@@ -69,7 +70,7 @@ export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChang
     @Output() show = new EventEmitter<any>();
     @Output() hide = new EventEmitter<any>();
 
-    constructor(private DEF: PickerConfig) { }
+    constructor(private el: ElementRef, private DEF: PickerConfig) { }
 
     ngOnInit() {
         if (!this.options) this.parseOptions();
@@ -184,5 +185,9 @@ export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChang
     public registerOnTouched(fn: () => {}): void { this.onTouched = fn; }
 
     setDisabledState(isDisabled: boolean): void {
+    }
+
+    onFocus($event: FocusEvent) {
+        arguments[0].target.blur();
     }
 }
