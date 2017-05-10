@@ -46,13 +46,13 @@ weui for angular
     + Panel
     + Preview
     + Progress
-+ _Feedbacks_
++ Feedbacks
     + ActionSheet
     + Dialog
     + Msg
     + Toast
     + Toptips
-    + _Popup_
+    + Popup
 + Navigations
     + Navbar
     + Tabbar

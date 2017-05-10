@@ -36,6 +36,7 @@ import { DemoToptipsComponent } from './pages/toptips/toptips.component';
 import { DemoMsgComponent } from './pages/msg/msg.component';
 import { DemoMsgFailComponent } from './pages/msg/fail.component';
 import { DemoMsgSuccessComponent } from './pages/msg/success.component';
+import { DemoPopupComponent } from './pages/popup/popup.component';
 
 export const routes = [
     {
@@ -69,7 +70,8 @@ export const routes = [
             { path: 'toptips', component: DemoToptipsComponent },
             { path: 'msg', component: DemoMsgComponent },
             { path: 'msg/fail', component: DemoMsgFailComponent },
-            { path: 'msg/success', component: DemoMsgSuccessComponent }
+            { path: 'msg/success', component: DemoMsgSuccessComponent },
+            { path: 'popup', component: DemoPopupComponent }
         ]
     }
 ]
@@ -88,7 +90,8 @@ export const routes = [
         BadgeComponent, FooterComponent, GridComponent, IconsComponent, PanelComponent, PreviewComponent,
         DemoLoadmoreComponent, DemoProgressComponent, DemoGalleryComponent, DemoPickerComponent,
         DemoSearchBarComponent, DemoNavbarComponent, DemoTabbarComponent, DemoToastComponent,
-        DemoToptipsComponent, DemoMsgComponent, DemoMsgFailComponent, DemoMsgSuccessComponent
+        DemoToptipsComponent, DemoMsgComponent, DemoMsgFailComponent, DemoMsgSuccessComponent,
+        DemoPopupComponent
     ],
     entryComponents: [
         PageComponent,

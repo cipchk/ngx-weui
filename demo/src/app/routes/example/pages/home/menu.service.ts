@@ -114,6 +114,10 @@ export class MenuService {
                 {
                     label: 'Toptips',
                     to: '/toptips'
+                },
+                {
+                    label: 'Popup',
+                    to: '/popup'
                 }
             ]
         },

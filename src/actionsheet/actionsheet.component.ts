@@ -73,8 +73,10 @@ export class ActionSheetComponent implements OnDestroy {
     }
 
     onSelect(menu: { text?: string, [key: string]: any }) {
-        this.observer.next(menu);
-        this.observer.complete();
+        if (this.observer) {
+            this.observer.next(menu);
+            this.observer.complete();
+        }
         this.hide();
     }
 
