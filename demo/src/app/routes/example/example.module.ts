@@ -32,6 +32,7 @@ import { DemoSearchBarComponent } from './pages/searchbar/searchbar.component';
 import { DemoNavbarComponent } from './pages/navbar/navbar.component';
 import { DemoTabbarComponent } from './pages/tabbar/tabbar.component';
 import { DemoToastComponent } from './pages/toast/toast.component';
+import { DemoToptipsComponent } from './pages/toptips/toptips.component';
 
 export const routes = [
     {
@@ -61,7 +62,8 @@ export const routes = [
             { path: 'searchbar', component: DemoSearchBarComponent },
             { path: 'navbar', component: DemoNavbarComponent },
             { path: 'tabbar', component: DemoTabbarComponent },
-            { path: 'toast', component: DemoToastComponent }
+            { path: 'toast', component: DemoToastComponent },
+            { path: 'toptips', component: DemoToptipsComponent }
         ]
     }
 ]
@@ -79,7 +81,8 @@ export const routes = [
         DemoUploaderComponent, DemoActionSheetComponent, DemoDialogComponent, ArticleComponent, FlexComponent,
         BadgeComponent, FooterComponent, GridComponent, IconsComponent, PanelComponent, PreviewComponent,
         DemoLoadmoreComponent, DemoProgressComponent, DemoGalleryComponent, DemoPickerComponent,
-        DemoSearchBarComponent, DemoNavbarComponent, DemoTabbarComponent, DemoToastComponent
+        DemoSearchBarComponent, DemoNavbarComponent, DemoTabbarComponent, DemoToastComponent,
+        DemoToptipsComponent
     ],
     entryComponents: [
         PageComponent,

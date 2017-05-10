@@ -51,7 +51,7 @@ weui for angular
     + Dialog
     + _Msg_
     + Toast
-    + _Toptips_
+    + Toptips
     + _Popup_
 + Navigations
     + Navbar

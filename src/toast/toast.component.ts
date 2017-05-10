@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, HostBinding, Input, Output, EventEmitter, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ToastConfig } from './toast.config';
 
@@ -13,7 +13,8 @@ import { ToastConfig } from './toast.config';
     `,
     host: {
         '[hidden]': '!showd'
-    }
+    },
+    encapsulation: ViewEncapsulation.None
 })
 export class ToastComponent implements OnDestroy {
 
@@ -26,12 +27,11 @@ export class ToastComponent implements OnDestroy {
     @Input() time: number = 2000;
     @Output() hide = new EventEmitter();
 
-    showd: boolean = false;
-
     constructor(private DEF: ToastConfig) {
         this.type = 'success';
     }
-
+    
+    showd: boolean = false;
     private timer: any;
     onShow() {
         this.showd = true;

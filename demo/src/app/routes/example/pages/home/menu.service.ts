@@ -26,6 +26,10 @@ export class MenuService {
                     to: '/slider'
                 },
                 {
+                    label: 'Picker',
+                    to: '/picker'
+                },
+                {
                     label: 'Uploader',
                     to: '/uploader'
                 }
@@ -100,12 +104,16 @@ export class MenuService {
                     to: '/msg'
                 },
                 {
-                    label: 'Picker',
-                    to: '/picker'
+                    label: 'Toast',
+                    to: '/toast'
                 },
                 {
                     label: 'Toast',
                     to: '/toast'
+                },
+                {
+                    label: 'Toptips',
+                    to: '/toptips'
                 }
             ]
         },

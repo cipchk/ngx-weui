@@ -14,6 +14,7 @@ import { PickerModule } from "./picker/picker.module";
 import { SearchBarModule } from "./searchbar/searchbar.module";
 import { TabModule } from "./tab/tab.module";
 import { ToastModule } from "./toast/toast.module";
+import { ToptipsModule } from "./toptips/toptips.module";
 
 export * from './utils/types';
 
@@ -31,11 +32,12 @@ export * from './picker';
 export * from './searchbar';
 export * from './tab';
 export * from './toast';
+export * from './toptips';
 
 const MODULES = [
     CellModule, ButtonModule, FormModule, SliderModule, UploaderModule, ActionSheetModule, 
     DialogModule, LoadmoreModule, ProgressModule, GalleryModule, PickerModule, SearchBarModule,
-    TabModule, ToastModule
+    TabModule, ToastModule, ToptipsModule
 ];
 
 @NgModule({
@@ -44,7 +46,7 @@ const MODULES = [
         SliderModule.forRoot(), UploaderModule.forRoot(), ActionSheetModule.forRoot(),
         DialogModule.forRoot(), LoadmoreModule.forRoot(), ProgressModule.forRoot(),
         GalleryModule.forRoot(), PickerModule.forRoot(), SearchBarModule.forRoot(),
-        TabModule.forRoot(), ToastModule.forRoot()
+        TabModule.forRoot(), ToastModule.forRoot(), ToptipsModule.forRoot()
     ],
     exports: MODULES
 })
