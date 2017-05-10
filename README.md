@@ -49,7 +49,7 @@ weui for angular
 + _Feedbacks_
     + ActionSheet
     + Dialog
-    + _Msg_
+    + Msg
     + Toast
     + Toptips
     + _Popup_
