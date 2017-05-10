@@ -26,7 +26,7 @@ weui for angular
         + Cell
             + Swipe
         + _InfiniteLoader_
-        + _PullToRefresh_
+        + PullToRefresh
     + Slider
     + Uploader
     + Picker

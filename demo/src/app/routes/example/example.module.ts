@@ -37,6 +37,7 @@ import { DemoMsgComponent } from './pages/msg/msg.component';
 import { DemoMsgFailComponent } from './pages/msg/fail.component';
 import { DemoMsgSuccessComponent } from './pages/msg/success.component';
 import { DemoPopupComponent } from './pages/popup/popup.component';
+import { DemoPTRComponent } from './pages/ptr/ptr.component';
 
 export const routes = [
     {
@@ -71,7 +72,8 @@ export const routes = [
             { path: 'msg', component: DemoMsgComponent },
             { path: 'msg/fail', component: DemoMsgFailComponent },
             { path: 'msg/success', component: DemoMsgSuccessComponent },
-            { path: 'popup', component: DemoPopupComponent }
+            { path: 'popup', component: DemoPopupComponent },
+            { path: 'ptr', component: DemoPTRComponent }
         ]
     }
 ]
@@ -91,7 +93,7 @@ export const routes = [
         DemoLoadmoreComponent, DemoProgressComponent, DemoGalleryComponent, DemoPickerComponent,
         DemoSearchBarComponent, DemoNavbarComponent, DemoTabbarComponent, DemoToastComponent,
         DemoToptipsComponent, DemoMsgComponent, DemoMsgFailComponent, DemoMsgSuccessComponent,
-        DemoPopupComponent
+        DemoPopupComponent, DemoPTRComponent
     ],
     entryComponents: [
         PageComponent,

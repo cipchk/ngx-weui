@@ -118,6 +118,10 @@ export class MenuService {
                 {
                     label: 'Popup',
                     to: '/popup'
+                },
+                {
+                    label: 'Pull To Refresh',
+                    to: '/ptr'
                 }
             ]
         },

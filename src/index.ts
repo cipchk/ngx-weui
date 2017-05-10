@@ -16,6 +16,7 @@ import { TabModule } from "./tab/tab.module";
 import { ToastModule } from "./toast/toast.module";
 import { ToptipsModule } from "./toptips/toptips.module";
 import { PopupModule } from "./popup/popup.module";
+import { PTRModule } from "./ptr/ptr.module";
 
 export * from './utils/types';
 
@@ -35,11 +36,12 @@ export * from './tab';
 export * from './toast';
 export * from './toptips';
 export * from './popup';
+export * from './ptr';
 
 const MODULES = [
     CellModule, ButtonModule, FormModule, SliderModule, UploaderModule, ActionSheetModule, 
     DialogModule, LoadmoreModule, ProgressModule, GalleryModule, PickerModule, SearchBarModule,
-    TabModule, ToastModule, ToptipsModule, PopupModule
+    TabModule, ToastModule, ToptipsModule, PopupModule, PTRModule
 ];
 
 @NgModule({
@@ -49,7 +51,7 @@ const MODULES = [
         DialogModule.forRoot(), LoadmoreModule.forRoot(), ProgressModule.forRoot(),
         GalleryModule.forRoot(), PickerModule.forRoot(), SearchBarModule.forRoot(),
         TabModule.forRoot(), ToastModule.forRoot(), ToptipsModule.forRoot(),
-        PopupModule.forRoot()
+        PopupModule.forRoot(), PTRModule.forRoot()
     ],
     exports: MODULES
 })
