@@ -1,63 +1,37 @@
 # ngx-weui
-weui for angular
+
+[WeUI](https://github.com/weui/weui) Components build with [Angular](https://angular.io/).
 
 [![NPM version](https://img.shields.io/npm/v/ngx-weui.svg)](https://www.npmjs.com/package/ngx-weui)
 [![Build Status](https://travis-ci.org/cipchk/ngx-weui.svg?branch=master)](https://travis-ci.org/cipchk/ngx-weui)
 
+## Table of Contents
 
-## Demo
+1. [Installation instructions](#installation-instructions)
+2. [Usage & Demo](#usage--demo)
+3. [API Docs](https://cipchk.github.io/ngx-weui/docs/)
+4. [Global Config](https://github.com/cipchk/ngx-weui/blob/master/docs/config.md)
+5. [Troubleshooting](#troubleshooting)
+4. [License](#license)
+
+## Installation instructions
+
+Install `ngx-weui` from `npm`
+
+```bash
+npm install ngx-weui --save
+```
+
+You will need weui styles
+
+```html
+<!-- index.html -->
+<link href="//res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css" rel="stylesheet">
+```
+
+## Usage & Demo
 
 [Live Demo](https://cipchk.github.io/ngx-weui/)
-
-## 写在前面
-
-[这些话，会让你更容弄懂为什么我要这么做！](https://github.com/cipchk/ngx-weui/issues/1)
-
-## Components
-
-斜体表示正在开发中……
-
-+ Form
-    + Button
-    + Input
-    + Textarea
-    + VCode
-    + List
-        + Cell
-            + Swipe
-        + InfiniteLoader
-        + PullToRefresh
-    + Slider
-    + Uploader
-    + Picker
-        + City Picker
-        + Date Picker
-        + DateTime Picker
-        + Time Picker
-+ Basic Components
-    + Article
-    + Badge
-    + Flex
-    + Footer
-    + Grid
-    + Icons
-    + Gallery
-    + Loadmore
-    + Panel
-    + Preview
-    + Progress
-+ Feedbacks
-    + ActionSheet
-    + Dialog
-    + Msg
-    + Toast
-    + Toptips
-    + Popup
-+ Navigations
-    + Navbar
-    + Tabbar
-+ Search
-    + SearchBox
 
 ## Troubleshooting
 
