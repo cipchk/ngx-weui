@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule, Http, JsonpModule } from '@angular/http';
 
-import { WeUiModule } from 'ngx-weui';
+import { WeUiModule, ButtonConfig } from 'ngx-weui';
 
 import { ChecklistDirective } from "./directives/checklist";
 
@@ -18,6 +18,7 @@ import { ChecklistDirective } from "./directives/checklist";
         WeUiModule.forRoot()
     ],
     providers: [
+        // { provide: ButtonConfig, useFactory: ()=> { return Object.assign(new ButtonConfig(), { type: 'warn' }); } }
     ],
     declarations: [
         ChecklistDirective

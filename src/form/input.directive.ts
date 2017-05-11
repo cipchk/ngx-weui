@@ -2,6 +2,15 @@ import { Directive, Input, Renderer, ElementRef, OnChanges, SimpleChanges, forwa
 import { Validator, AbstractControl, Validators, NG_VALIDATORS, ValidatorFn, ValidationErrors } from "@angular/forms";
 import { findParent, add, remove } from './../utils/dom';
 
+/**
+ * 文本框，指令是对文本框格式校验（邮箱、手机、身份证等）、视觉效果的增强而已
+ * 
+ * @example
+ * 1、必填手机号，同时带有视觉效果
+ * <input type="tel" weui-input="mobile" weui-required>
+ * 2、自定义银行卡号
+ * <input type="tel" weui-input="number" weui-requied weui-regex="[0-9]*" [(ngModel)]="res.no" name="no">
+ */
 @Directive({
     selector: '[weui-input]',
     providers: [{
@@ -18,10 +27,35 @@ export class InputDirective implements OnChanges, Validator {
     private _validator: ValidatorFn;
     private _onChange: () => void;
 
+    /**
+     * 文本框类型，**不等同于** <intpu type="text"> 的值
+     * 因为 weui-input 属性只是内置格式校验的简洁写法而已。
+     * 内置包括：number/digit(允许小数点)/qq/email/tel/mobile/idcard，如需要更为复杂的校验可以使用 weui-regex
+     * 
+     * @type {string}
+     */
     @Input('weui-input') inputType: string;
+    /**
+     * 格式校验正则表达式，优先级高于 [weui-input]。
+     * 
+     * @type {(RegExp | string)}
+     */
     @Input('weui-regex') inputRegex: RegExp | string;
-    @Input('weui-required') required: 'info' | 'warn' | 'waiting';
-    @Input('weui-cleaner') cleaner: boolean;
+
+    /**
+     * 是否必填项，**等同于** <intpu required> 的值，当值必填时会有视觉效果
+     * 
+     * @type {('info' | 'warn' | 'waiting')}
+     * @memberof InputDirective
+     */
+    @Input('weui-required') required: 'info' | 'warn' | 'waiting' = 'warn';
+    
+    /**
+     * 是否自动清除内容中的空格
+     * 
+     * @type {boolean}
+     */
+    @Input('weui-cleaner') cleaner: boolean = false;
 
     constructor(private el: ElementRef) { }
 

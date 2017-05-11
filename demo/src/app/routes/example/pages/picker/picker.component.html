@@ -73,17 +73,17 @@
             </div>
         </div>
         <div class="weui-btn-area">
-            <button weui-button [weui-disabled]="!f.form.valid || !f.form.dirty">保存</button>
+            <button weui-button [disabled]="!f.form.valid || !f.form.dirty">保存</button>
         </div>
     </form>
     <div class="weui-cells__title">使用Service形式</div>
     <p style="margin-bottom: 8px;">Service Result: {{srvRes | json}}</p>
     <div class="weui-btn-area">
-        <button weui-button weui-type="default" weui-mini="mini" (click)="onShowBySrv('city')">CityPicker</button>
-        <button weui-button weui-type="default" weui-mini="mini" (click)="onShowBySrv('date')">DatePicker</button>
-        <button weui-button weui-type="default" weui-mini="mini" (click)="onShowBySrv('datetime')">DateTimePicker</button>
-        <button weui-button weui-type="default" weui-mini="mini" (click)="onShowBySrv('time')">TimePicker</button>
-        <button weui-button weui-type="default" weui-mini="mini" (click)="onShowBySrv('data')">Data Picker</button>
+        <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('city')">CityPicker</button>
+        <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('date')">DatePicker</button>
+        <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('datetime')">DateTimePicker</button>
+        <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('time')">TimePicker</button>
+        <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('data')">Data Picker</button>
     </div>
 
 </Page>

@@ -21,10 +21,11 @@
         "node_modules", "bundles", "dist"
     ],
     "files": [
-        "./src/actionsheet/actionsheet.component.ts",
-        "./src/actionsheet/actionsheet.service.ts",
-        "./src/actionsheet/actionsheet.config.ts",
-        "./src/button/button.ts",
-        "./src/button/button.config.ts"
+        "./src/button/button.component.ts",
+        "./src/button/button.config.ts",
+        "./src/cell/swipe.directive.ts",
+        "./src/form/input.directive.ts",
+        "./src/form/textarea.directive.ts",
+        "./src/form/vcode.directive.ts"
     ]
 }

@@ -1,4 +1,4 @@
-export { InputDirective } from './input';
-export { VCodeDirective } from './vcode';
-export { TextareaDirective } from './textarea';
+export { InputDirective } from './input.directive';
+export { VCodeDirective } from './vcode.directive';
+export { TextareaDirective } from './textarea.directive';
 export { FormModule } from './form.module';

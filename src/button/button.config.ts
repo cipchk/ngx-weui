@@ -1,10 +1,22 @@
 import { Injectable } from '@angular/core';
 import { ButtonType } from '../utils/types'
 
+/**
+ * 按钮全局配置项 {@link https://github.com/cipchk/ngx-weui/blob/master/docs/config.md|使用方式}
+ */
 @Injectable()
 export class ButtonConfig {
+
     /**
-     * 置灰态
+     * 操作场景：primary、default、warn
+     * 
+     * @type {ButtonType}
+     * @default primary
+     */
+    type: ButtonType = 'primary';
+
+    /**
+     * disabled状态
      * 
      * @type {boolean}
      * @default false
@@ -12,7 +24,7 @@ export class ButtonConfig {
     disabled: boolean = false;
 
     /**
-     * 加载状态
+     * 是否加载状态
      * 
      * @type {boolean}
      * @default false
@@ -26,14 +38,6 @@ export class ButtonConfig {
      * @default false
      */
     plain: boolean = false;
-
-    /**
-     * 操作场景：确定、取消、警示
-     * 
-     * @type {ButtonType}
-     * @default primary
-     */
-    type: ButtonType = 'primary';
 
     /**
      * 是否小号

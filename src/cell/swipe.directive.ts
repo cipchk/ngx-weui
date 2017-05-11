@@ -1,5 +1,21 @@
 import { Directive, HostListener, ElementRef, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
 
+/**
+ * 单元格滑块
+ * 
+ * @example
+ * <div class="weui-cell weui-cell_swiped" weui-swipe>
+ *      <div class="weui-cell__bd">
+ *      <div class="weui-cell">
+ *          <div class="weui-cell__bd"><p>标题文字</p></div>
+ *          <div class="weui-cell__ft">向左滑动试试</div>
+ *      </div>
+ *  </div>
+ *  <div class="weui-cell__ft">
+ *      <a class="weui-swiped-btn weui-swiped-btn_warn" href="javascript:">删除</a>
+ *  </div>
+ * </div>
+ */
 @Directive({
     selector: '[weui-swipe]'
 })
@@ -9,6 +25,12 @@ export class SwipeDirective {
     private opend: boolean = false;
     private swipeEl: any;
     
+    /**
+     * 右边滑动宽度（单位：px）
+     * 
+     * @type {number}
+     * @default 68
+     */
     @Input('weui-width') width: number = 68;
 
     constructor(private el: ElementRef) {}

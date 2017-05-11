@@ -2,6 +2,12 @@ import { Directive, Input, ElementRef, OnDestroy } from '@angular/core';
 import { Observable, Subscriber } from 'rxjs/Rx';
 import { findParent, add, remove } from './../utils/dom';
 
+/**
+ * 获取验证码
+ * 
+ * @example
+ * <button [weui-vcode]="onSendCode" weui-seconds="10" weui-tpl="${num}s" weui-error="重新发送">获取验证码</button>
+ */
 @Directive({
     selector: '[weui-vcode]',
     host: {
@@ -11,9 +17,33 @@ import { findParent, add, remove } from './../utils/dom';
 })
 export class VCodeDirective implements OnDestroy {
 
+    /**
+     * 发送事件
+     * 
+     * @type {Function}
+     */
     @Input('weui-vcode') onSend: Function;
+    
+    /**
+     * 时长（单位：秒）
+     * 
+     * @type {number}
+     * @default 60
+     */
     @Input('weui-seconds') seconds: number = 60;
+
+    /**
+     * 倒计时模板，使用 `${num}` 表示当前秒数
+     * 
+     * @type {string}
+     */
     @Input('weui-tpl') tpl: string = '${num} 秒';
+    
+    /**
+     * 重新发送提醒文本
+     * 
+     * @type {string}
+     */
     @Input('weui-error') error: string = '重新发送';
 
     disabled: boolean = false;
