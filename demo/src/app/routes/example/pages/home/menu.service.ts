@@ -122,6 +122,10 @@ export class MenuService {
                 {
                     label: 'Pull To Refresh',
                     to: '/ptr'
+                },
+                {
+                    label: 'Infinite Loader',
+                    to: '/infiniteloader'
                 }
             ]
         },
