@@ -37,6 +37,10 @@ export class ActionSheetComponent implements OnDestroy {
     @Output('weui-close') close = new EventEmitter();
 
     private shown: boolean = false;
+    /**
+     * (private) 动画状态码
+     * @private
+     */
     _shownAnt = false;
 
     private observer: Observer<any>;

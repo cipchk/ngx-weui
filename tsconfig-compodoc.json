@@ -1,0 +1,30 @@
+{
+    "compileOnSave": false,
+    "compilerOptions": {
+        "baseUrl": "src",
+        "sourceMap": false,
+        "declaration": false,
+        "moduleResolution": "node",
+        "emitDecoratorMetadata": false,
+        "experimentalDecorators": true,
+        "allowSyntheticDefaultImports": true,
+        "target": "es5",
+        "typeRoots": [
+            "node_modules/@types"
+        ],
+        "lib": [
+            "es2016",
+            "dom"
+        ]
+    },
+    "exclude": [
+        "node_modules", "bundles", "dist"
+    ],
+    "files": [
+        "./src/actionsheet/actionsheet.component.ts",
+        "./src/actionsheet/actionsheet.service.ts",
+        "./src/actionsheet/actionsheet.config.ts",
+        "./src/button/button.ts",
+        "./src/button/button.config.ts"
+    ]
+}

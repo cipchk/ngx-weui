@@ -24,7 +24,7 @@
   "scripts": {
     "lite-server": "lite-server -c demo/bs-config.json",
     "demo.serve": "run-s build link demo.build lite-server",
-    "demo.gh-pages": "run-s build demo.build demo.deploy",
+    "demo.gh-pages": "run-s build demo.build compodoc demo.deploy",
     "demo.build": "ng build -prod",
     "demo.deploy": "gh-pages -d demo/dist",
     "link": "ngm link -p src --here",
@@ -38,7 +38,9 @@
     "pretest": "run-s lint build link",
     "test": "ng test -sr",
     "test-coverage": "ng test -sr -cc",
-    "version": "npm run flow.changelog && git add -A"
+    "version": "npm run flow.changelog && git add -A",
+    "compodoc": "compodoc -p tsconfig-compodoc.json -d ./demo/dist/docs/ --disableGraph --disableCoverage --disablePrivateOrInternalSupport",
+    "compodoc.serve": "compodoc -p tsconfig-compodoc.json -d ./demo/dist/docs/ -s -o -w --disableGraph --disableCoverage --disablePrivateOrInternalSupport"
   },
   "dependencies": {},
   "peerDependencies": {},
@@ -56,6 +58,7 @@
     "@angular/platform-browser-dynamic": "4.0.1",
     "@angular/router": "4.0.1",
     "@angular/tsc-wrapped": "4.0.1",
+    "@compodoc/compodoc": "^1.0.0-beta.8",
     "@types/jasmine": "2.5.47",
     "@types/node": "~6.0.60",
     "classlist-polyfill": "^1.0.3",
