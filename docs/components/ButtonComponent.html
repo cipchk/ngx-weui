@@ -1,0 +1,635 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ngx-weui documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	    <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ngx-weui documentation</a>
+            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+            <div id="book-search-input" role="search">
+                <input type="text" placeholder="Type to search">
+            </div>
+            <nav>
+            
+                <ul class="list">
+            
+                    <li class="title">
+                        <a href="../index.html">ngx-weui documentation</a>
+                    </li>
+            
+                    <li class="divider"></li>
+            
+            
+                    <li class="chapter">
+                        <a data-type="chapter-link" href="../index.html"><span class="fa fa-home"></span>Getting started</a>
+                        <ul class="links">
+                                <li class="link">
+                                    <a href="../index.html" ><span class="fa fa-file-text-o"></span>README</a>
+                                </li>
+                                <li class="link">
+                                    <a 
+                                        
+                                         href="../overview.html" 
+                                         href="../overview.html" 
+                                        >
+                                        <span class="fa fa-th"></span>Overview
+                                    </a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-cogs"></span>
+                            <span>Components</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-components-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-components-links"
+                            >
+                                <li class="link">
+                                    <a href="../components/ButtonComponent.html"  data-type="entity-link" class="active" >ButtonComponent</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-code"></span>
+                            <span>Directives</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-directives-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-directives-links"
+                            >
+                                <li class="link">
+                                    <a href="../directives/SwipeDirective.html" >SwipeDirective</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+                    <li class="chapter">
+                        <div class="simple">
+                            <span class="fa fa-long-arrow-down"></span>
+                            <span>Injectables</span>
+                            <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                    data-target="#xs-injectables-links"
+                                ></span>
+                        </div>
+                        <ul class="links collapse in"
+                                id="xs-injectables-links"
+                            >
+                                <li class="link">
+                                    <a href="../injectables/ButtonConfig.html" >ButtonConfig</a>
+                                </li>
+                        </ul>
+                    </li>
+            
+            
+            
+            
+            
+            
+                    <li class="divider"></li>
+                    <li class="copyright">
+                            Documentation generated using <a href="https://compodoc.github.io/website/" target="_blank">
+                                        <img src="..//images/compodoc-vectorise.svg" class="img-responsive">
+                            </a>
+                    </li>
+            
+                </ul>
+            
+            </nav>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <nav>
+                   
+                       <ul class="list">
+                   
+                           <li class="title">
+                               <a href="../index.html">ngx-weui documentation</a>
+                           </li>
+                   
+                           <li class="divider"></li>
+                   
+                               <div id="book-search-input" role="search">
+                                   <input type="text" placeholder="Type to search">
+                               </div>
+                   
+                           <li class="chapter">
+                               <a data-type="chapter-link" href="../index.html"><span class="fa fa-home"></span>Getting started</a>
+                               <ul class="links">
+                                       <li class="link">
+                                           <a href="../index.html" ><span class="fa fa-file-text-o"></span>README</a>
+                                       </li>
+                                       <li class="link">
+                                           <a 
+                                               
+                                                href="../overview.html" 
+                                                href="../overview.html" 
+                                               >
+                                               <span class="fa fa-th"></span>Overview
+                                           </a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-cogs"></span>
+                                   <span>Components</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#components-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="components-links"
+                   >
+                                       <li class="link">
+                                           <a href="../components/ButtonComponent.html"  data-type="entity-link" class="active" >ButtonComponent</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-code"></span>
+                                   <span>Directives</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#directives-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="directives-links"
+                   >
+                                       <li class="link">
+                                           <a href="../directives/SwipeDirective.html" >SwipeDirective</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                           <li class="chapter">
+                               <div class="simple">
+                                   <span class="fa fa-long-arrow-down"></span>
+                                   <span>Injectables</span>
+                                   <span class="menu-toggler fa fa-angle-up" data-toggle="collapse"
+                                           data-target="#injectables-links"
+                   ></span>
+                               </div>
+                               <ul class="links collapse in"
+                                       id="injectables-links"
+                   >
+                                       <li class="link">
+                                           <a href="../injectables/ButtonConfig.html" >ButtonConfig</a>
+                                       </li>
+                               </ul>
+                           </li>
+                   
+                   
+                   
+                   
+                   
+                   
+                           <li class="divider"></li>
+                           <li class="copyright">
+                                   Documentation generated using <a href="https://compodoc.github.io/website/" target="_blank">
+                                               <img src="..//images/compodoc-vectorise.svg" class="img-responsive">
+                                   </a>
+                           </li>
+                   
+                       </ul>
+                   
+                   </nav>
+               </div>
+               <div class="content component">
+                   <div class="content-data">
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>ButtonComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+    <li class="active">
+        <a href="#infos" id="infos-tab" role="tab" data-toggle="tab" data-link="infos">Infos</a>
+    </li>
+
+    <li>
+        <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+    </li>
+
+    <li>
+        <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+    </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="infos"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/button/button.component.ts</code>
+</p>
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>按钮</p>
+
+    </p>
+
+
+
+    <p class="comment">
+        <h3>Example</h3>
+    </p>
+    <div class="io-description">
+                <div>
+                    <pre class="line-numbers"><code class="language-html">&lt;weui-button&gt;Button&lt;/weui-button&gt;&lt;button weui-button&gt;Button&lt;/button&gt;&lt;a href=&quot;#&quot; weui-button&gt;Button&lt;/a&gt;&lt;button weui-button [weui-type]=&quot;'warn'&quot; disabled weui-loading&gt;&lt;/button&gt;</code></pre>
+                </div>
+    </div>
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+            <tr>
+                <td class="col-md-3">encapsulation</td>
+                <td class="col-md-9"><code>ViewEncapsulation.None</code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">exportAs</td>
+                <td class="col-md-9"><code>weuiButton</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">host</td>
+                <td class="col-md-9"><code>{<br>&nbsp;&nbsp;&nbsp;&nbsp;"class":"weui-btn",<br>&nbsp;&nbsp;&nbsp;&nbsp;"[class.weui-btn_primary]":"!plain && type===\"primary\"","[class.weui-btn_default]":"!plain && type===\"default\"","[class.weui-btn_warn]":"!plain && type===\"warn\"","[class.weui-btn_plain-primary]":"plain && type===\"primary\"","[class.weui-btn_plain-default]":"plain && type===\"default\"","[class.weui-btn_plain-warn]":"plain && type===\"warn\"","[class.weui-btn_disabled]":"!plain && disabled","[class.weui-btn_plain-disabled]":"plain && disabled","[attr.disabled]":"disabled ? \"disabled\" : null"<br>}</code></td>
+            </tr>
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>weui-button, button[weui-button], a[weui-button]</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">template</td>
+                <td class="col-md-9"><pre class="line-numbers"><code class="language-html">&lt;i class&#x3D;&quot;weui-loading&quot; *ngIf&#x3D;&quot;loading&quot;&gt;&lt;/i&gt;&lt;ng-content&gt;&lt;/ng-content&gt;</code></pre></td>
+            </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+        <h3 id="inputs">Inputs</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <code>disabled</code>
+                        </td>
+                        <td class="col-md-10">
+                            <div><p>disabled状态</p>
+</div>
+                              <p>
+                                <em>Type:</em>    <code>boolean</code>
+
+                              </p>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/button/button.component.ts:84</a></div>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <code>weui-loading</code>
+                        </td>
+                        <td class="col-md-10">
+                            <div><p>是否加载状态</p>
+</div>
+                              <p>
+                                <em>Type:</em>    <code>boolean</code>
+
+                              </p>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/button/button.component.ts:50</a></div>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <code>weui-mini</code>
+                        </td>
+                        <td class="col-md-10">
+                            <div><p>是否小号</p>
+</div>
+                              <p>
+                                <em>Type:</em>    <code>boolean</code>
+
+                              </p>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/button/button.component.ts:62</a></div>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <code>weui-plain</code>
+                        </td>
+                        <td class="col-md-10">
+                            <div><p>镂空按钮</p>
+</div>
+                              <p>
+                                <em>Type:</em>    <code>boolean</code>
+
+                              </p>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/button/button.component.ts:73</a></div>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <code>weui-type</code>
+                        </td>
+                        <td class="col-md-10">
+                            <div><p>操作场景：primary、default、warn</p>
+</div>
+                              <p>
+                                <em>Type:</em>    <code>ButtonType</code>
+
+                              </p>
+                            <p>
+                              <em>Default value: </em><code>primary</code>
+                            </p>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/button/button.component.ts:40</a></div>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+    </section>
+
+
+    <section>
+        <h3 id="constructor">Constructor</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <code>constructor(_config: <a href="../injectables/ButtonConfig.html">ButtonConfig</a>)</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/button/button.component.ts:86</a></div>
+                            </td>
+                        </tr>
+    
+                </tbody>
+            </table>
+    </section>
+
+
+</div>
+
+
+    <div class="tab-pane fade tab-source-code" id="source">
+        <pre class="line-numbers"><code class="language-typescript">import { Component, Directive, EventEmitter, Input, OnInit, Output, HostBinding, ViewEncapsulation } from &#x27;@angular/core&#x27;;
+import { ButtonConfig } from &#x27;./button.config&#x27;;
+import { ButtonType } from &quot;../utils/types&quot;;
+import { toBoolean } from &#x27;../utils/boolean-property&#x27;;
+
+/**
+ * 按钮
+ * @example
+ * &lt;weui-button&gt;Button&lt;/weui-button&gt;
+ * &lt;button weui-button&gt;Button&lt;/button&gt;
+ * &lt;a href&#x3D;&quot;#&quot; weui-button&gt;Button&lt;/a&gt;
+ * &lt;button weui-button [weui-type]&#x3D;&quot;&#x27;warn&#x27;&quot; disabled weui-loading&gt;&lt;/button&gt;
+ */
+@Component({
+    selector: &#x27;weui-button, button[weui-button], a[weui-button]&#x27;,
+    host: {
+        &#x27;class&#x27;: &#x27;weui-btn&#x27;,
+        &#x27;[class.weui-btn_primary]&#x27;: &#x27;!plain &amp;&amp; type&#x3D;&#x3D;&#x3D;&quot;primary&quot;&#x27;,
+        &#x27;[class.weui-btn_default]&#x27;: &#x27;!plain &amp;&amp; type&#x3D;&#x3D;&#x3D;&quot;default&quot;&#x27;,
+        &#x27;[class.weui-btn_warn]&#x27;: &#x27;!plain &amp;&amp; type&#x3D;&#x3D;&#x3D;&quot;warn&quot;&#x27;,
+        &#x27;[class.weui-btn_plain-primary]&#x27;: &#x27;plain &amp;&amp; type&#x3D;&#x3D;&#x3D;&quot;primary&quot;&#x27;,
+        &#x27;[class.weui-btn_plain-default]&#x27;: &#x27;plain &amp;&amp; type&#x3D;&#x3D;&#x3D;&quot;default&quot;&#x27;,
+        &#x27;[class.weui-btn_plain-warn]&#x27;: &#x27;plain &amp;&amp; type&#x3D;&#x3D;&#x3D;&quot;warn&quot;&#x27;,
+        &#x27;[class.weui-btn_disabled]&#x27;: &#x27;!plain &amp;&amp; disabled&#x27;,
+        &#x27;[class.weui-btn_plain-disabled]&#x27;: &#x27;plain &amp;&amp; disabled&#x27;,
+        &#x27;[attr.disabled]&#x27;: &#x27;disabled ? &quot;disabled&quot; : null&#x27;
+    },
+    exportAs: &#x27;weuiButton&#x27;,
+    template: &#x27;&lt;i class&#x3D;&quot;weui-loading&quot; *ngIf&#x3D;&quot;loading&quot;&gt;&lt;/i&gt;&lt;ng-content&gt;&lt;/ng-content&gt;&#x27;,
+    encapsulation: ViewEncapsulation.None
+})
+export class ButtonComponent {
+
+    /**
+     * 操作场景：primary、default、warn
+     * 
+     * @type {ButtonType}
+     * @default primary
+     */
+    @Input(&#x27;weui-type&#x27;) type: ButtonType &#x3D; &#x27;primary&#x27;;
+
+    /**
+     * 是否加载状态
+     * 
+     * @type {boolean}
+     * @default false
+     */
+    @HostBinding(&#x27;class.weui-btn_loading&#x27;) 
+    @Input(&#x27;weui-loading&#x27;)
+    get loading(): boolean { return this._loading; }
+    set loading(value) { this._loading &#x3D; toBoolean(value); }
+    private _loading: boolean &#x3D; false;
+
+    /**
+     * 是否小号
+     * 
+     * @type {boolean}
+     * @default false
+     */
+    @HostBinding(&#x27;class.weui-btn_mini&#x27;) 
+    @Input(&#x27;weui-mini&#x27;)
+    get mini(): boolean { return this._mini; }
+    set mini(value) { this._mini &#x3D; toBoolean(value); }
+    private _mini: boolean &#x3D; false;
+
+    /**
+     * 镂空按钮
+     * 
+     * @type {boolean}
+     * @default false
+     */
+    @Input(&#x27;weui-plain&#x27;)
+    get plain(): boolean { return this._plain; }
+    set plain(value) { this._plain &#x3D; toBoolean(value); }
+    private _plain: boolean &#x3D; false;
+    
+    /**
+     * disabled状态
+     * 
+     * @type {boolean}
+     * @default false
+     */
+    @Input()
+    get disabled(): boolean { return this._disabled; }
+    set disabled(value) { this._disabled &#x3D; toBoolean(value); }
+    private _disabled: boolean &#x3D; false;
+
+    constructor(_config: ButtonConfig) {
+        Object.assign(this, _config);
+    }
+}
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade" id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><i class="weui-loading" *ngIf="loading"></i><ng-content></ng-content></div>'
+    var COMPONENTS = [{'name': 'ButtonComponent', 'selector': 'weui-button, button[weui-button], a[weui-button]'}];
+    var DIRECTIVES = [{'name': 'SwipeDirective', 'selector': '[weui-swipe]'}];
+    var ACTUAL_COMPONENT = {'name': 'ButtonComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+           </div>
+       </div>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script>var COMPODOC_CURRENT_PAGE_DEPTH = 1;</script>
+
+       <script src="../js/search/search.js"></script>
+       <script src="../js/search/lunr.min.js"></script>
+       <script src="../js/search/search-lunr.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+       <script src="../js/search/search_index.js"></script>
+
+    </body>
+</html>
