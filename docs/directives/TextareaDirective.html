@@ -84,10 +84,10 @@
                                     <a href="../directives/InputDirective.html" >InputDirective</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../directives/SwipeDirective.html"  data-type="entity-link" class="active" >SwipeDirective</a>
+                                    <a href="../directives/SwipeDirective.html" >SwipeDirective</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../directives/TextareaDirective.html" >TextareaDirective</a>
+                                    <a href="../directives/TextareaDirective.html"  data-type="entity-link" class="active" >TextareaDirective</a>
                                 </li>
                                 <li class="link">
                                     <a href="../directives/VCodeDirective.html" >VCodeDirective</a>
@@ -199,10 +199,10 @@
                                            <a href="../directives/InputDirective.html" >InputDirective</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../directives/SwipeDirective.html"  data-type="entity-link" class="active" >SwipeDirective</a>
+                                           <a href="../directives/SwipeDirective.html" >SwipeDirective</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../directives/TextareaDirective.html" >TextareaDirective</a>
+                                           <a href="../directives/TextareaDirective.html"  data-type="entity-link" class="active" >TextareaDirective</a>
                                        </li>
                                        <li class="link">
                                            <a href="../directives/VCodeDirective.html" >VCodeDirective</a>
@@ -251,7 +251,7 @@
 
 <ol class="breadcrumb">
   <li>Directives</li>
-  <li>SwipeDirective</li>
+  <li>TextareaDirective</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -269,24 +269,30 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/cell/swipe.directive.ts</code>
+            <code>src/form/textarea.directive.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>单元格滑块</p>
+                <p>文本域字数统计</p>
 
             </p>
 
+            <p class="comment">
+                <h3>Implements</h3>
+            </p>
+            <p class="comment">
+                        <code><a href="https://angular.io/docs/ts/latest/api/core/index/OnChanges-interface.html" target="_blank" >OnChanges</a></code>
+            </p>
 
             <p class="comment">
                 <h3>Example</h3>
             </p>
             <div class="io-description">
                         <div>
-                            <pre class="line-numbers"><code class="language-html">&lt;div class=&quot;weui-cell weui-cell_swiped&quot; weui-swipe&gt;&lt;div class=&quot;weui-cell__bd&quot;&gt;&lt;div class=&quot;weui-cell&quot;&gt;&lt;div class=&quot;weui-cell__bd&quot;&gt;&lt;p&gt;标题文字&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;weui-cell__ft&quot;&gt;向左滑动试试&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;weui-cell__ft&quot;&gt;&lt;a class=&quot;weui-swiped-btn weui-swiped-btn_warn&quot; href=&quot;javascript:&quot;&gt;删除&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;</code></pre>
+                            <pre class="line-numbers"><code class="language-html"> &lt;textarea weui-textarea weui-cn=&quot;2&quot; maxlength=&quot;20&quot;&gt;&lt;/textarea&gt;</code></pre>
                         </div>
             </div>
 
@@ -297,7 +303,7 @@
 
                     <tr>
                         <td class="col-md-3">selector</td>
-                        <td class="col-md-9"><code>[weui-swipe]</code></td>
+                        <td class="col-md-9"><code>[weui-textarea]</code></td>
                     </tr>
 
                 </tbody>
@@ -310,23 +316,48 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-2">
-                                    <code>weui-width</code>
+                                    <code>maxlength</code>
                                 </td>
                                 <td class="col-md-10">
-                                    <div><p>右边滑动宽度（单位：px）</p>
+                                    <div><p>最大长度</p>
 </div>
                                       <p>
                                         <em>Type:</em>    <code>number</code>
 
                                       </p>
                                     <p>
-                                      <em>Default value: </em><code>68</code>
+                                      <em>Default value: </em><code>0</code>
                                     </p>
                                 </td>
                             </tr>
                                 <tr>
                                     <td class="col-md-2" colspan="2">
-                                        <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/cell/swipe.directive.ts:34</a></div>
+                                        <div class="io-line">Defined in <a href="" data-line="22" class="link-to-prism">src/form/textarea.directive.ts:22</a></div>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-2">
+                                    <code>weui-cn</code>
+                                </td>
+                                <td class="col-md-10">
+                                    <div><p>中文部分应该算多少个字符，使用【/[^\x00-\xff]/g】正则表达式统计中文部分（默认：1个字符）</p>
+</div>
+                                      <p>
+                                        <em>Type:</em>    <code>number</code>
+
+                                      </p>
+                                    <p>
+                                      <em>Default value: </em><code>1</code>
+                                    </p>
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td class="col-md-2" colspan="2">
+                                        <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/form/textarea.directive.ts:30</a></div>
                                     </td>
                                 </tr>
                         </tbody>
@@ -345,7 +376,7 @@
                             </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/cell/swipe.directive.ts:34</a></div>
+                                        <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/form/textarea.directive.ts:33</a></div>
                                     </td>
                                 </tr>
             
@@ -373,7 +404,7 @@
             
                                 <tr>
                                     <td class="col-md-4">
-                                        <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/cell/swipe.directive.ts:38</a></div>
+                                        <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/form/textarea.directive.ts:37</a></div>
                                     </td>
                                 </tr>
             
@@ -392,18 +423,18 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
-                                    <b> onTouchStart</b>
+                                    <b> ngOnChanges</b>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">
-            <code>onTouchStart($event: any)</code>
+            <code>ngOnChanges(changes: <a href="https://angular.io/docs/ts/latest/api/core/index/SimpleChanges-interface.html" target="_blank">SimpleChanges</a>)</code>
                                 </td>
                             </tr>
             
                                 <tr>
                                     <td class="col-md-4">
-                                        <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/cell/swipe.directive.ts:54</a></div>
+                                        <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/form/textarea.directive.ts:42</a></div>
                                     </td>
                                 </tr>
             
@@ -422,48 +453,18 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
-                                    <b> onTouchMove</b>
+                                    <b> onChange</b>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">
-            <code>onTouchMove($event: any)</code>
+            <code>onChange(value: any)</code>
                                 </td>
                             </tr>
             
                                 <tr>
                                     <td class="col-md-4">
-                                        <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/cell/swipe.directive.ts:59</a></div>
-                                    </td>
-                                </tr>
-            
-                            <tr>
-                                <td class="col-md-4">
-            
-                                        <div class="io-description">
-                                            <b>Returns: </b>    <code>void</code>
-            
-                                        </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                            <tr>
-                                <td class="col-md-4">
-                                    <b> onTouchEnd</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="col-md-4">
-            <code>onTouchEnd($event: any)</code>
-                                </td>
-                            </tr>
-            
-                                <tr>
-                                    <td class="col-md-4">
-                                        <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/cell/swipe.directive.ts:73</a></div>
+                                        <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/form/textarea.directive.ts:60</a></div>
                                     </td>
                                 </tr>
             
@@ -483,91 +484,74 @@
 
     </div>
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre class="line-numbers"><code class="language-typescript">import { Directive, HostListener, ElementRef, HostBinding, Input, OnChanges, SimpleChanges } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers"><code class="language-typescript">import { Directive, Input, OnChanges, SimpleChanges, ElementRef } from &#x27;@angular/core&#x27;;
+import { add, remove } from &#x27;./../utils/dom&#x27;;
 
 /**
- * 单元格滑块
- * 
- * @example
- * &lt;div class&#x3D;&quot;weui-cell weui-cell_swiped&quot; weui-swipe&gt;
- *      &lt;div class&#x3D;&quot;weui-cell__bd&quot;&gt;
- *      &lt;div class&#x3D;&quot;weui-cell&quot;&gt;
- *          &lt;div class&#x3D;&quot;weui-cell__bd&quot;&gt;&lt;p&gt;标题文字&lt;/p&gt;&lt;/div&gt;
- *          &lt;div class&#x3D;&quot;weui-cell__ft&quot;&gt;向左滑动试试&lt;/div&gt;
- *      &lt;/div&gt;
- *  &lt;/div&gt;
- *  &lt;div class&#x3D;&quot;weui-cell__ft&quot;&gt;
- *      &lt;a class&#x3D;&quot;weui-swiped-btn weui-swiped-btn_warn&quot; href&#x3D;&quot;javascript:&quot;&gt;删除&lt;/a&gt;
- *  &lt;/div&gt;
- * &lt;/div&gt;
+ * 文本域字数统计
+ * @example 
+ *  &lt;textarea weui-textarea weui-cn&#x3D;&quot;2&quot; maxlength&#x3D;&quot;20&quot;&gt;&lt;/textarea&gt;
  */
 @Directive({
-    selector: &#x27;[weui-swipe]&#x27;
+    selector: &#x27;[weui-textarea]&#x27;,
+    host: {
+        &#x27;(ngModelChange)&#x27;: &#x27;onChange($event)&#x27;
+    }
 })
-export class SwipeDirective {
+export class TextareaDirective implements OnChanges {
 
-    private curX: number &#x3D; 0;
-    private opend: boolean &#x3D; false;
-    private swipeEl: any;
-    
     /**
-     * 右边滑动宽度（单位：px）
+     * 最大长度
      * 
      * @type {number}
-     * @default 68
      */
-    @Input(&#x27;weui-width&#x27;) width: number &#x3D; 68;
+    @Input() maxlength: number &#x3D; 0;
+
+    /**
+     * 中文部分应该算多少个字符，使用【/[^\x00-\xff]/g】正则表达式统计中文部分（默认：1个字符）
+     * 
+     * @type {number}
+     * @default 1
+     */
+    @Input(&#x27;weui-cn&#x27;) cn: number &#x3D; 1;
+
+    private _value: string;
+    private _count: any;
 
     constructor(private el: ElementRef) {}
 
     ngOnInit() {
-        const el &#x3D; this.el.nativeElement;
-        this.swipeEl &#x3D; el.querySelector(&#x27;.weui-cell__bd&#x27;);
-        if (!this.swipeEl) 
-            this.width &#x3D; 0;
-        else {
-            this.setPos(0);
-            this.swipeEl.style.transition &#x3D; &#x27;transform .3s&#x27;;
+        if (this.maxlength !&#x3D;&#x3D; undefined)
+            this.init();
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (&#x27;maxlength&#x27; in changes) {
+            this.init().onChange(this._value);
         }
     }
 
-    private setPos(x: number) {
-        this.swipeEl.style.transform &#x3D; &#x60;translateX(-${x}px)&#x60;;
-    }
-
-    @HostListener(&#x27;touchstart&#x27;, [&#x27;$event&#x27;])
-    onTouchStart($event: any) {
-        this.curX &#x3D; ($event.touches[0] || $event.changedTouches[0]).pageX;
-    }
-
-    @HostListener(&#x27;touchmove&#x27;, [&#x27;$event&#x27;])
-    onTouchMove($event: any) {
-        const touch &#x3D; $event.touches[0] || $event.changedTouches[0];
-        let newX &#x3D; this.curX - touch.pageX;
-        if (this.opend) {
-            newX &#x3D; newX &gt; 0 ? this.width : this.width - Math.abs(newX);
+    private init() {
+        let clsName &#x3D; &#x60;weui-textarea-counter&#x60;;
+        let pel &#x3D; this.el.nativeElement.parentElement;
+        if (this.maxlength &lt;&#x3D; 0) {
+            remove(pel, &#x27;.&#x27; + clsName);
+            this._count &#x3D; null;
         } else {
-            newX &#x3D; newX &gt; this.width ? this.width : newX;
+            this._count &#x3D; add(pel, &#x27;.&#x27; + clsName, &#x27;div&#x27;, clsName);
         }
-
-        this.setPos(newX &lt;&#x3D; 0 ? 0 : newX);
+        return this;
     }
 
-    @HostListener(&#x27;touchend&#x27;, [&#x27;$event&#x27;])
-    @HostListener(&#x27;touchcancel&#x27;, [&#x27;$event&#x27;])
-    onTouchEnd($event: any) {
-        const touch &#x3D; $event.touches[0] || $event.changedTouches[0];
-        let newX &#x3D; Math.abs(this.curX - touch.pageX);
-        if (newX &#x3D;&#x3D;&#x3D; 0) return;
-        if (this.opend) newX &#x3D; this.width - newX;
-        // 当移动超过一半都视为打开
-        if (newX &gt; 0 &amp;&amp; newX &gt; (+this.width / 2)) {
-            this.opend &#x3D; true;
-            this.setPos(this.width);
-        } else {
-            this.opend &#x3D; false;
-            this.setPos(0);
+    onChange(value: any) {
+        if (!this._count) return;
+        
+        value &#x3D; value || &#x27;&#x27;;
+        if (this.cn &gt; 1) {
+            value &#x3D; value.replace(/[^\x00-\xff]/g, &#x27;**&#x27;);
         }
+        this._value &#x3D; value;
+        this._count.innerHTML &#x3D; &#x60;${value.length} / ${this.maxlength}&#x60;;
     }
 }
 </code></pre>

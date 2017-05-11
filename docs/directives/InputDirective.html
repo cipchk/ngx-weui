@@ -81,10 +81,10 @@
                                 id="xs-directives-links"
                             >
                                 <li class="link">
-                                    <a href="../directives/InputDirective.html" >InputDirective</a>
+                                    <a href="../directives/InputDirective.html"  data-type="entity-link" class="active" >InputDirective</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../directives/SwipeDirective.html"  data-type="entity-link" class="active" >SwipeDirective</a>
+                                    <a href="../directives/SwipeDirective.html" >SwipeDirective</a>
                                 </li>
                                 <li class="link">
                                     <a href="../directives/TextareaDirective.html" >TextareaDirective</a>
@@ -196,10 +196,10 @@
                                        id="directives-links"
                    >
                                        <li class="link">
-                                           <a href="../directives/InputDirective.html" >InputDirective</a>
+                                           <a href="../directives/InputDirective.html"  data-type="entity-link" class="active" >InputDirective</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../directives/SwipeDirective.html"  data-type="entity-link" class="active" >SwipeDirective</a>
+                                           <a href="../directives/SwipeDirective.html" >SwipeDirective</a>
                                        </li>
                                        <li class="link">
                                            <a href="../directives/TextareaDirective.html" >TextareaDirective</a>
@@ -251,7 +251,7 @@
 
 <ol class="breadcrumb">
   <li>Directives</li>
-  <li>SwipeDirective</li>
+  <li>InputDirective</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -269,24 +269,31 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/cell/swipe.directive.ts</code>
+            <code>src/form/input.directive.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>单元格滑块</p>
+                <p>文本框，指令是对文本框格式校验（邮箱、手机、身份证等）、视觉效果的增强而已</p>
 
             </p>
 
+            <p class="comment">
+                <h3>Implements</h3>
+            </p>
+            <p class="comment">
+                        <code><a href="https://angular.io/docs/ts/latest/api/core/index/OnChanges-interface.html" target="_blank" >OnChanges</a></code>
+                        <code><a href="https://angular.io/docs/ts/latest/api/forms/index/Validator-interface.html" target="_blank" >Validator</a></code>
+            </p>
 
             <p class="comment">
                 <h3>Example</h3>
             </p>
             <div class="io-description">
                         <div>
-                            <pre class="line-numbers"><code class="language-html">&lt;div class=&quot;weui-cell weui-cell_swiped&quot; weui-swipe&gt;&lt;div class=&quot;weui-cell__bd&quot;&gt;&lt;div class=&quot;weui-cell&quot;&gt;&lt;div class=&quot;weui-cell__bd&quot;&gt;&lt;p&gt;标题文字&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;weui-cell__ft&quot;&gt;向左滑动试试&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;weui-cell__ft&quot;&gt;&lt;a class=&quot;weui-swiped-btn weui-swiped-btn_warn&quot; href=&quot;javascript:&quot;&gt;删除&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;</code></pre>
+                            <pre class="line-numbers"><code class="language-html">1、必填手机号，同时带有视觉效果&lt;input type=&quot;tel&quot; weui-input=&quot;mobile&quot; weui-required&gt;2、自定义银行卡号&lt;input type=&quot;tel&quot; weui-input=&quot;number&quot; weui-requied weui-regex=&quot;[0-9]*&quot; [(ngModel)]=&quot;res.no&quot; name=&quot;no&quot;&gt;</code></pre>
                         </div>
             </div>
 
@@ -294,10 +301,18 @@
             <h3>Metadata</h3>
             <table class="table table-sm table-hover">
                 <tbody>
+                    <tr>
+                        <td class="col-md-3">providers</td>
+                        <td class="col-md-9">
+                            <code>
+                                { provide: NG_VALIDATORS, useExisting: , multi:  }
+                            </code>
+                        </td>
+                    </tr>
 
                     <tr>
                         <td class="col-md-3">selector</td>
-                        <td class="col-md-9"><code>[weui-swipe]</code></td>
+                        <td class="col-md-9"><code>[weui-input]</code></td>
                     </tr>
 
                 </tbody>
@@ -310,23 +325,92 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-2">
-                                    <code>weui-width</code>
+                                    <code>weui-cleaner</code>
                                 </td>
                                 <td class="col-md-10">
-                                    <div><p>右边滑动宽度（单位：px）</p>
+                                    <div><p>是否自动清除内容中的空格</p>
 </div>
                                       <p>
-                                        <em>Type:</em>    <code>number</code>
+                                        <em>Type:</em>    <code>boolean</code>
 
                                       </p>
                                     <p>
-                                      <em>Default value: </em><code>68</code>
+                                      <em>Default value: </em><code>false</code>
                                     </p>
                                 </td>
                             </tr>
                                 <tr>
                                     <td class="col-md-2" colspan="2">
-                                        <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/cell/swipe.directive.ts:34</a></div>
+                                        <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/form/input.directive.ts:58</a></div>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-2">
+                                    <code>weui-input</code>
+                                </td>
+                                <td class="col-md-10">
+                                    <div><p>文本框类型，<strong>不等同于</strong> <intpu type="text"> 的值<br>因为 weui-input 属性只是内置格式校验的简洁写法而已。<br>内置包括：number/digit(允许小数点)/qq/email/tel/mobile/idcard，如需要更为复杂的校验可以使用 weui-regex</p>
+</div>
+                                      <p>
+                                        <em>Type:</em>    <code>string</code>
+
+                                      </p>
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td class="col-md-2" colspan="2">
+                                        <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/form/input.directive.ts:37</a></div>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-2">
+                                    <code>weui-regex</code>
+                                </td>
+                                <td class="col-md-10">
+                                    <div><p>格式校验正则表达式，优先级高于 [weui-input]。</p>
+</div>
+                                      <p>
+                                        <em>Type:</em>    <code>string | RegExp</code>
+
+                                      </p>
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td class="col-md-2" colspan="2">
+                                        <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/form/input.directive.ts:43</a></div>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-2">
+                                    <code>weui-required</code>
+                                </td>
+                                <td class="col-md-10">
+                                    <div><p>是否必填项，<strong>等同于</strong> <intpu required> 的值，当值必填时会有视觉效果</p>
+</div>
+                                      <p>
+                                        <em>Type:</em>    <code>&quot;info&quot; | &quot;warn&quot; | &quot;waiting&quot;</code>
+
+                                      </p>
+                                    <p>
+                                      <em>Default value: </em><code>warn</code>
+                                    </p>
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td class="col-md-2" colspan="2">
+                                        <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/form/input.directive.ts:51</a></div>
                                     </td>
                                 </tr>
                         </tbody>
@@ -345,7 +429,7 @@
                             </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/cell/swipe.directive.ts:34</a></div>
+                                        <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/form/input.directive.ts:58</a></div>
                                     </td>
                                 </tr>
             
@@ -373,7 +457,7 @@
             
                                 <tr>
                                     <td class="col-md-4">
-                                        <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/cell/swipe.directive.ts:38</a></div>
+                                        <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/form/input.directive.ts:62</a></div>
                                     </td>
                                 </tr>
             
@@ -392,18 +476,18 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
-                                    <b> onTouchStart</b>
+                                    <b> ngOnChanges</b>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">
-            <code>onTouchStart($event: any)</code>
+            <code>ngOnChanges(changes: <a href="https://angular.io/docs/ts/latest/api/core/index/SimpleChanges-interface.html" target="_blank">SimpleChanges</a>)</code>
                                 </td>
                             </tr>
             
                                 <tr>
                                     <td class="col-md-4">
-                                        <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/cell/swipe.directive.ts:54</a></div>
+                                        <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/form/input.directive.ts:68</a></div>
                                     </td>
                                 </tr>
             
@@ -422,18 +506,18 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
-                                    <b> onTouchMove</b>
+                                    <b> registerOnValidatorChange</b>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">
-            <code>onTouchMove($event: any)</code>
+            <code>registerOnValidatorChange(fn: () => void)</code>
                                 </td>
                             </tr>
             
                                 <tr>
                                     <td class="col-md-4">
-                                        <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/cell/swipe.directive.ts:59</a></div>
+                                        <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/form/input.directive.ts:131</a></div>
                                     </td>
                                 </tr>
             
@@ -452,18 +536,18 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
-                                    <b> onTouchEnd</b>
+                                    <b> validate</b>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">
-            <code>onTouchEnd($event: any)</code>
+            <code>validate(c: <a href="https://angular.io/docs/ts/latest/api/forms/index/AbstractControl-class.html" target="_blank">AbstractControl</a>)</code>
                                 </td>
                             </tr>
             
                                 <tr>
                                     <td class="col-md-4">
-                                        <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/cell/swipe.directive.ts:73</a></div>
+                                        <div class="io-line">Defined in <a href="" data-line="132" class="link-to-prism">src/form/input.directive.ts:132</a></div>
                                     </td>
                                 </tr>
             
@@ -471,7 +555,7 @@
                                 <td class="col-md-4">
             
                                         <div class="io-description">
-                                            <b>Returns: </b>    <code>void</code>
+                                            <b>Returns: </b>    <code><a href="https://angular.io/docs/ts/latest/api/forms/index/ValidationErrors-type-alias.html" target="_blank" >ValidationErrors</a></code>
             
                                         </div>
                                 </td>
@@ -483,91 +567,149 @@
 
     </div>
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre class="line-numbers"><code class="language-typescript">import { Directive, HostListener, ElementRef, HostBinding, Input, OnChanges, SimpleChanges } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers"><code class="language-typescript">import { Directive, Input, Renderer, ElementRef, OnChanges, SimpleChanges, forwardRef } from &#x27;@angular/core&#x27;;
+import { Validator, AbstractControl, Validators, NG_VALIDATORS, ValidatorFn, ValidationErrors } from &quot;@angular/forms&quot;;
+import { findParent, add, remove } from &#x27;./../utils/dom&#x27;;
 
 /**
- * 单元格滑块
+ * 文本框，指令是对文本框格式校验（邮箱、手机、身份证等）、视觉效果的增强而已
  * 
  * @example
- * &lt;div class&#x3D;&quot;weui-cell weui-cell_swiped&quot; weui-swipe&gt;
- *      &lt;div class&#x3D;&quot;weui-cell__bd&quot;&gt;
- *      &lt;div class&#x3D;&quot;weui-cell&quot;&gt;
- *          &lt;div class&#x3D;&quot;weui-cell__bd&quot;&gt;&lt;p&gt;标题文字&lt;/p&gt;&lt;/div&gt;
- *          &lt;div class&#x3D;&quot;weui-cell__ft&quot;&gt;向左滑动试试&lt;/div&gt;
- *      &lt;/div&gt;
- *  &lt;/div&gt;
- *  &lt;div class&#x3D;&quot;weui-cell__ft&quot;&gt;
- *      &lt;a class&#x3D;&quot;weui-swiped-btn weui-swiped-btn_warn&quot; href&#x3D;&quot;javascript:&quot;&gt;删除&lt;/a&gt;
- *  &lt;/div&gt;
- * &lt;/div&gt;
+ * 1、必填手机号，同时带有视觉效果
+ * &lt;input type&#x3D;&quot;tel&quot; weui-input&#x3D;&quot;mobile&quot; weui-required&gt;
+ * 2、自定义银行卡号
+ * &lt;input type&#x3D;&quot;tel&quot; weui-input&#x3D;&quot;number&quot; weui-requied weui-regex&#x3D;&quot;[0-9]*&quot; [(ngModel)]&#x3D;&quot;res.no&quot; name&#x3D;&quot;no&quot;&gt;
  */
 @Directive({
-    selector: &#x27;[weui-swipe]&#x27;
+    selector: &#x27;[weui-input]&#x27;,
+    providers: [{
+        provide: NG_VALIDATORS,
+        useExisting: forwardRef(() &#x3D;&gt; InputDirective),
+        multi: true
+    }]
 })
-export class SwipeDirective {
+export class InputDirective implements OnChanges, Validator {
 
-    private curX: number &#x3D; 0;
-    private opend: boolean &#x3D; false;
-    private swipeEl: any;
+    private parentEl: any;
+    private ftEl: any;
+    private pattern: RegExp;
+    private _validator: ValidatorFn;
+    private _onChange: () &#x3D;&gt; void;
+
+    /**
+     * 文本框类型，**不等同于** &lt;intpu type&#x3D;&quot;text&quot;&gt; 的值
+     * 因为 weui-input 属性只是内置格式校验的简洁写法而已。
+     * 内置包括：number/digit(允许小数点)/qq/email/tel/mobile/idcard，如需要更为复杂的校验可以使用 weui-regex
+     * 
+     * @type {string}
+     */
+    @Input(&#x27;weui-input&#x27;) inputType: string;
+    /**
+     * 格式校验正则表达式，优先级高于 [weui-input]。
+     * 
+     * @type {(RegExp | string)}
+     */
+    @Input(&#x27;weui-regex&#x27;) inputRegex: RegExp | string;
+
+    /**
+     * 是否必填项，**等同于** &lt;intpu required&gt; 的值，当值必填时会有视觉效果
+     * 
+     * @type {(&#x27;info&#x27; | &#x27;warn&#x27; | &#x27;waiting&#x27;)}
+     * @memberof InputDirective
+     */
+    @Input(&#x27;weui-required&#x27;) required: &#x27;info&#x27; | &#x27;warn&#x27; | &#x27;waiting&#x27; &#x3D; &#x27;warn&#x27;;
     
     /**
-     * 右边滑动宽度（单位：px）
+     * 是否自动清除内容中的空格
      * 
-     * @type {number}
-     * @default 68
+     * @type {boolean}
      */
-    @Input(&#x27;weui-width&#x27;) width: number &#x3D; 68;
+    @Input(&#x27;weui-cleaner&#x27;) cleaner: boolean &#x3D; false;
 
-    constructor(private el: ElementRef) {}
+    constructor(private el: ElementRef) { }
 
     ngOnInit() {
-        const el &#x3D; this.el.nativeElement;
-        this.swipeEl &#x3D; el.querySelector(&#x27;.weui-cell__bd&#x27;);
-        if (!this.swipeEl) 
-            this.width &#x3D; 0;
-        else {
-            this.setPos(0);
-            this.swipeEl.style.transition &#x3D; &#x27;transform .3s&#x27;;
-        }
+        this.parentEl &#x3D; findParent(this.el.nativeElement, &#x27;.weui-cell&#x27;);
+        // 检查是否有 weui-cell__ft
+        this.ftEl &#x3D; add(this.parentEl);
     }
 
-    private setPos(x: number) {
-        this.swipeEl.style.transform &#x3D; &#x60;translateX(-${x}px)&#x60;;
+    ngOnChanges(changes: SimpleChanges): void {
+        this._createValidator();
+        if (this._onChange) this._onChange();
     }
 
-    @HostListener(&#x27;touchstart&#x27;, [&#x27;$event&#x27;])
-    onTouchStart($event: any) {
-        this.curX &#x3D; ($event.touches[0] || $event.changedTouches[0]).pageX;
+    private _genIcon(type: string &#x3D; &#x27;warn&#x27;) {
+
     }
 
-    @HostListener(&#x27;touchmove&#x27;, [&#x27;$event&#x27;])
-    onTouchMove($event: any) {
-        const touch &#x3D; $event.touches[0] || $event.changedTouches[0];
-        let newX &#x3D; this.curX - touch.pageX;
-        if (this.opend) {
-            newX &#x3D; newX &gt; 0 ? this.width : this.width - Math.abs(newX);
+    private _createValidator(): void {
+        let regex: RegExp &#x3D; null;
+        if (this.inputRegex) {
+            if (typeof this.inputRegex &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+                regex &#x3D; new RegExp(&#x60;^${this.inputRegex}$&#x60;);
+            } else {
+                regex &#x3D; this.inputRegex;
+            }
         } else {
-            newX &#x3D; newX &gt; this.width ? this.width : newX;
+            // 默认行为
+            if (this.inputType) {
+                switch (this.inputType) {
+                    case &#x27;qq&#x27;:
+                    case &#x27;number&#x27;:
+                        regex &#x3D; /^[0-9]+$/;
+                        break;
+                    case &#x27;digit&#x27;:
+                        regex &#x3D; /^[.0-9]+$/;
+                        break;
+                    case &#x27;tel&#x27;:
+                        regex &#x3D; /^[-.0-9]+$/;
+                        break;
+                    case &#x27;email&#x27;:
+                        regex &#x3D; /^(([^&lt;&gt;()\[\]\\.,;:\s@&quot;]+(\.[^&lt;&gt;()\[\]\\.,;:\s@&quot;]+)*)|(&quot;.+&quot;))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                        this.cleaner &#x3D; true;
+                        break;
+                    case &#x27;mobile&#x27;:
+                        regex &#x3D; /^1[0-9]{10}$/;
+                        this.cleaner &#x3D; true;
+                        break;
+                    case &#x27;idcard&#x27;: // 身份证
+                        regex &#x3D; /^[0-9]{15,18}$/;
+                        this.cleaner &#x3D; true;
+                        break;
+                }
+            }
         }
 
-        this.setPos(newX &lt;&#x3D; 0 ? 0 : newX);
+        this._validator &#x3D; (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+            let value: string &#x3D; control.value;
+            if (value &#x3D;&#x3D; null || value.length &#x3D;&#x3D;&#x3D; 0) {
+                if (this.required !&#x3D;&#x3D; undefined)
+                    return { &#x27;icon&#x27;: this.required || &#x27;warn&#x27;, &#x27;type&#x27;: &#x27;required&#x27;, &#x27;actualValue&#x27;: value };
+
+                return null;
+            }
+            if (this.cleaner &amp;&amp; value.includes(&#x27; &#x27;)) {
+                value &#x3D; value.replace(/ /g, &#x27;&#x27;);
+                control.setValue(value);
+            }
+            return regex &#x3D;&#x3D;&#x3D; null || regex.test(value) ? null : { &#x27;icon&#x27;: &#x27;warn&#x27;, &#x27;type&#x27;: &#x27;regex&#x27;, &#x27;actualValue&#x27;: value };
+        };
     }
 
-    @HostListener(&#x27;touchend&#x27;, [&#x27;$event&#x27;])
-    @HostListener(&#x27;touchcancel&#x27;, [&#x27;$event&#x27;])
-    onTouchEnd($event: any) {
-        const touch &#x3D; $event.touches[0] || $event.changedTouches[0];
-        let newX &#x3D; Math.abs(this.curX - touch.pageX);
-        if (newX &#x3D;&#x3D;&#x3D; 0) return;
-        if (this.opend) newX &#x3D; this.width - newX;
-        // 当移动超过一半都视为打开
-        if (newX &gt; 0 &amp;&amp; newX &gt; (+this.width / 2)) {
-            this.opend &#x3D; true;
-            this.setPos(this.width);
+    registerOnValidatorChange(fn: () &#x3D;&gt; void): void { this._onChange &#x3D; fn; }
+    validate(c: AbstractControl): ValidationErrors | null {
+        let ret &#x3D; this._validator(c);
+        if (ret &#x3D;&#x3D;&#x3D; null) {
+            this.parentEl.classList.remove(&#x27;weui-cell_warn&#x27;);
+            remove(this.ftEl, &#x27;i&#x27;);
         } else {
-            this.opend &#x3D; false;
-            this.setPos(0);
+            remove(this.ftEl, &#x27;i&#x27;);
+            this.parentEl.classList.add(&#x27;weui-cell_warn&#x27;);
+            let icon &#x3D; &#x60;weui-icon-${ret.icon}&#x60;;
+            add(this.ftEl, &#x27;.&#x27; + icon, &#x27;i&#x27;, icon);
         }
+        return ret;
     }
 }
 </code></pre>

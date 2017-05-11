@@ -84,13 +84,13 @@
                                     <a href="../directives/InputDirective.html" >InputDirective</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../directives/SwipeDirective.html"  data-type="entity-link" class="active" >SwipeDirective</a>
+                                    <a href="../directives/SwipeDirective.html" >SwipeDirective</a>
                                 </li>
                                 <li class="link">
                                     <a href="../directives/TextareaDirective.html" >TextareaDirective</a>
                                 </li>
                                 <li class="link">
-                                    <a href="../directives/VCodeDirective.html" >VCodeDirective</a>
+                                    <a href="../directives/VCodeDirective.html"  data-type="entity-link" class="active" >VCodeDirective</a>
                                 </li>
                         </ul>
                     </li>
@@ -199,13 +199,13 @@
                                            <a href="../directives/InputDirective.html" >InputDirective</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../directives/SwipeDirective.html"  data-type="entity-link" class="active" >SwipeDirective</a>
+                                           <a href="../directives/SwipeDirective.html" >SwipeDirective</a>
                                        </li>
                                        <li class="link">
                                            <a href="../directives/TextareaDirective.html" >TextareaDirective</a>
                                        </li>
                                        <li class="link">
-                                           <a href="../directives/VCodeDirective.html" >VCodeDirective</a>
+                                           <a href="../directives/VCodeDirective.html"  data-type="entity-link" class="active" >VCodeDirective</a>
                                        </li>
                                </ul>
                            </li>
@@ -251,7 +251,7 @@
 
 <ol class="breadcrumb">
   <li>Directives</li>
-  <li>SwipeDirective</li>
+  <li>VCodeDirective</li>
 </ol>
 
 <ul class="nav nav-tabs" role="tablist">
@@ -269,24 +269,30 @@
             <h3>File</h3>
         </p>
         <p class="comment">
-            <code>src/cell/swipe.directive.ts</code>
+            <code>src/form/vcode.directive.ts</code>
         </p>
 
             <p class="comment">
                 <h3>Description</h3>
             </p>
             <p class="comment">
-                <p>单元格滑块</p>
+                <p>获取验证码</p>
 
             </p>
 
+            <p class="comment">
+                <h3>Implements</h3>
+            </p>
+            <p class="comment">
+                        <code><a href="https://angular.io/docs/ts/latest/api/core/index/OnDestroy-interface.html" target="_blank" >OnDestroy</a></code>
+            </p>
 
             <p class="comment">
                 <h3>Example</h3>
             </p>
             <div class="io-description">
                         <div>
-                            <pre class="line-numbers"><code class="language-html">&lt;div class=&quot;weui-cell weui-cell_swiped&quot; weui-swipe&gt;&lt;div class=&quot;weui-cell__bd&quot;&gt;&lt;div class=&quot;weui-cell&quot;&gt;&lt;div class=&quot;weui-cell__bd&quot;&gt;&lt;p&gt;标题文字&lt;/p&gt;&lt;/div&gt;&lt;div class=&quot;weui-cell__ft&quot;&gt;向左滑动试试&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;weui-cell__ft&quot;&gt;&lt;a class=&quot;weui-swiped-btn weui-swiped-btn_warn&quot; href=&quot;javascript:&quot;&gt;删除&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;</code></pre>
+                            <pre class="line-numbers"><code class="language-html">&lt;button [weui-vcode]=&quot;onSendCode&quot; weui-seconds=&quot;10&quot; weui-tpl=&quot;${num}s&quot; weui-error=&quot;重新发送&quot;&gt;获取验证码&lt;/button&gt;</code></pre>
                         </div>
             </div>
 
@@ -297,7 +303,7 @@
 
                     <tr>
                         <td class="col-md-3">selector</td>
-                        <td class="col-md-9"><code>[weui-swipe]</code></td>
+                        <td class="col-md-9"><code>[weui-vcode]</code></td>
                     </tr>
 
                 </tbody>
@@ -310,23 +316,95 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-2">
-                                    <code>weui-width</code>
+                                    <code>weui-error</code>
                                 </td>
                                 <td class="col-md-10">
-                                    <div><p>右边滑动宽度（单位：px）</p>
+                                    <div><p>重新发送提醒文本</p>
+</div>
+                                      <p>
+                                        <em>Type:</em>    <code>string</code>
+
+                                      </p>
+                                    <p>
+                                      <em>Default value: </em><code>重新发送</code>
+                                    </p>
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td class="col-md-2" colspan="2">
+                                        <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/form/vcode.directive.ts:47</a></div>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-2">
+                                    <code>weui-seconds</code>
+                                </td>
+                                <td class="col-md-10">
+                                    <div><p>时长（单位：秒）</p>
 </div>
                                       <p>
                                         <em>Type:</em>    <code>number</code>
 
                                       </p>
                                     <p>
-                                      <em>Default value: </em><code>68</code>
+                                      <em>Default value: </em><code>60</code>
                                     </p>
                                 </td>
                             </tr>
                                 <tr>
                                     <td class="col-md-2" colspan="2">
-                                        <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/cell/swipe.directive.ts:34</a></div>
+                                        <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/form/vcode.directive.ts:33</a></div>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-2">
+                                    <code>weui-tpl</code>
+                                </td>
+                                <td class="col-md-10">
+                                    <div><p>倒计时模板，使用 <code>${num}</code> 表示当前秒数</p>
+</div>
+                                      <p>
+                                        <em>Type:</em>    <code>string</code>
+
+                                      </p>
+                                    <p>
+                                      <em>Default value: </em><code>${num} 秒</code>
+                                    </p>
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td class="col-md-2" colspan="2">
+                                        <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/form/vcode.directive.ts:40</a></div>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-2">
+                                    <code>weui-vcode</code>
+                                </td>
+                                <td class="col-md-10">
+                                    <div><p>发送事件</p>
+</div>
+                                      <p>
+                                        <em>Type:</em>    <code>Function</code>
+
+                                      </p>
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td class="col-md-2" colspan="2">
+                                        <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/form/vcode.directive.ts:25</a></div>
                                     </td>
                                 </tr>
                         </tbody>
@@ -345,7 +423,7 @@
                             </tr>
                                 <tr>
                                     <td class="col-md-4">
-                                        <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/cell/swipe.directive.ts:34</a></div>
+                                        <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/form/vcode.directive.ts:51</a></div>
                                     </td>
                                 </tr>
             
@@ -373,7 +451,7 @@
             
                                 <tr>
                                     <td class="col-md-4">
-                                        <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/cell/swipe.directive.ts:38</a></div>
+                                        <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/form/vcode.directive.ts:55</a></div>
                                     </td>
                                 </tr>
             
@@ -392,18 +470,18 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
-                                    <b> onTouchStart</b>
+                                    <b> onClick</b>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">
-            <code>onTouchStart($event: any)</code>
+            <code>onClick()</code>
                                 </td>
                             </tr>
             
                                 <tr>
                                     <td class="col-md-4">
-                                        <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/cell/swipe.directive.ts:54</a></div>
+                                        <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/form/vcode.directive.ts:60</a></div>
                                     </td>
                                 </tr>
             
@@ -422,48 +500,18 @@
                         <tbody>
                             <tr>
                                 <td class="col-md-4">
-                                    <b> onTouchMove</b>
+                                    <b> ngOnDestroy</b>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="col-md-4">
-            <code>onTouchMove($event: any)</code>
+            <code>ngOnDestroy()</code>
                                 </td>
                             </tr>
             
                                 <tr>
                                     <td class="col-md-4">
-                                        <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/cell/swipe.directive.ts:59</a></div>
-                                    </td>
-                                </tr>
-            
-                            <tr>
-                                <td class="col-md-4">
-            
-                                        <div class="io-description">
-                                            <b>Returns: </b>    <code>void</code>
-            
-                                        </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <table class="table table-sm table-bordered">
-                        <tbody>
-                            <tr>
-                                <td class="col-md-4">
-                                    <b> onTouchEnd</b>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="col-md-4">
-            <code>onTouchEnd($event: any)</code>
-                                </td>
-                            </tr>
-            
-                                <tr>
-                                    <td class="col-md-4">
-                                        <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/cell/swipe.directive.ts:73</a></div>
+                                        <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/form/vcode.directive.ts:96</a></div>
                                     </td>
                                 </tr>
             
@@ -480,94 +528,137 @@
                     </table>
             </section>
 
+            <section>
+                
+                    <h3 id="inputs">
+                        Properties
+                    </h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <b> disabled</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <code>disabled:     <code>boolean</code>
+            </bcode>
+                                </td>
+                            </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <i>Default value: </i><code>false</code>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/form/vcode.directive.ts:49</a></div>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
+            </section>
 
     </div>
     <div class="tab-pane fade tab-source-code" id="source">
-        <pre class="line-numbers"><code class="language-typescript">import { Directive, HostListener, ElementRef, HostBinding, Input, OnChanges, SimpleChanges } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers"><code class="language-typescript">import { Directive, Input, ElementRef, OnDestroy } from &#x27;@angular/core&#x27;;
+import { Observable, Subscriber } from &#x27;rxjs/Rx&#x27;;
+import { findParent, add, remove } from &#x27;./../utils/dom&#x27;;
 
 /**
- * 单元格滑块
+ * 获取验证码
  * 
  * @example
- * &lt;div class&#x3D;&quot;weui-cell weui-cell_swiped&quot; weui-swipe&gt;
- *      &lt;div class&#x3D;&quot;weui-cell__bd&quot;&gt;
- *      &lt;div class&#x3D;&quot;weui-cell&quot;&gt;
- *          &lt;div class&#x3D;&quot;weui-cell__bd&quot;&gt;&lt;p&gt;标题文字&lt;/p&gt;&lt;/div&gt;
- *          &lt;div class&#x3D;&quot;weui-cell__ft&quot;&gt;向左滑动试试&lt;/div&gt;
- *      &lt;/div&gt;
- *  &lt;/div&gt;
- *  &lt;div class&#x3D;&quot;weui-cell__ft&quot;&gt;
- *      &lt;a class&#x3D;&quot;weui-swiped-btn weui-swiped-btn_warn&quot; href&#x3D;&quot;javascript:&quot;&gt;删除&lt;/a&gt;
- *  &lt;/div&gt;
- * &lt;/div&gt;
+ * &lt;button [weui-vcode]&#x3D;&quot;onSendCode&quot; weui-seconds&#x3D;&quot;10&quot; weui-tpl&#x3D;&quot;${num}s&quot; weui-error&#x3D;&quot;重新发送&quot;&gt;获取验证码&lt;/button&gt;
  */
 @Directive({
-    selector: &#x27;[weui-swipe]&#x27;
+    selector: &#x27;[weui-vcode]&#x27;,
+    host: {
+        &#x27;(click)&#x27;: &#x27;onClick()&#x27;,
+        &#x27;[disabled]&#x27;: &#x27;disabled&#x27;
+    }
 })
-export class SwipeDirective {
+export class VCodeDirective implements OnDestroy {
 
-    private curX: number &#x3D; 0;
-    private opend: boolean &#x3D; false;
-    private swipeEl: any;
+    /**
+     * 发送事件
+     * 
+     * @type {Function}
+     */
+    @Input(&#x27;weui-vcode&#x27;) onSend: Function;
     
     /**
-     * 右边滑动宽度（单位：px）
+     * 时长（单位：秒）
      * 
      * @type {number}
-     * @default 68
+     * @default 60
      */
-    @Input(&#x27;weui-width&#x27;) width: number &#x3D; 68;
+    @Input(&#x27;weui-seconds&#x27;) seconds: number &#x3D; 60;
 
-    constructor(private el: ElementRef) {}
+    /**
+     * 倒计时模板，使用 &#x60;${num}&#x60; 表示当前秒数
+     * 
+     * @type {string}
+     */
+    @Input(&#x27;weui-tpl&#x27;) tpl: string &#x3D; &#x27;${num} 秒&#x27;;
+    
+    /**
+     * 重新发送提醒文本
+     * 
+     * @type {string}
+     */
+    @Input(&#x27;weui-error&#x27;) error: string &#x3D; &#x27;重新发送&#x27;;
+
+    disabled: boolean &#x3D; false;
+    private _cur: string;
+    private _t: any;
+
+    constructor(private el: ElementRef) { }
 
     ngOnInit() {
-        const el &#x3D; this.el.nativeElement;
-        this.swipeEl &#x3D; el.querySelector(&#x27;.weui-cell__bd&#x27;);
-        if (!this.swipeEl) 
-            this.width &#x3D; 0;
-        else {
-            this.setPos(0);
-            this.swipeEl.style.transition &#x3D; &#x27;transform .3s&#x27;;
+        if (!this.onSend) throw new Error(&#x27;weui-vcode必须传递一个返回值为 &#x60;Observable&lt;any&gt;&#x60; 函数&#x27;);
+        this._cur &#x3D; this.el.nativeElement.innerHTML;
+    }
+
+    onClick() {
+        this.disabled &#x3D; true;
+        (&lt;Observable&lt;boolean&gt;&gt;this.onSend()).subscribe((res) &#x3D;&gt; {
+            res ? this.tick() : this.err();
+        })
+    }
+
+    private err(): void {
+        this.disabled &#x3D; false;
+        this.el.nativeElement.innerHTML &#x3D; this.error;
+    }
+
+    private tick(): void {
+        let count &#x3D; this.seconds &lt; 1 ? 1 : this.seconds;
+        this.setText(count);
+        this._t &#x3D; setInterval(() &#x3D;&gt; {
+            if (--count &lt;&#x3D; 0) {
+                this.disabled &#x3D; false;
+                this.el.nativeElement.innerHTML &#x3D; this._cur;
+                this.destroy();
+            } else
+                this.setText(count);
+        }, 1000);
+    }
+
+    private setText(num: number): void {
+        this.el.nativeElement.innerHTML &#x3D; this.tpl.replace(/\${num}/, num.toString());
+    }
+
+    private destroy() {
+        if (this._t) {
+            clearInterval(this._t);
+            this._t &#x3D; null;
         }
     }
 
-    private setPos(x: number) {
-        this.swipeEl.style.transform &#x3D; &#x60;translateX(-${x}px)&#x60;;
-    }
-
-    @HostListener(&#x27;touchstart&#x27;, [&#x27;$event&#x27;])
-    onTouchStart($event: any) {
-        this.curX &#x3D; ($event.touches[0] || $event.changedTouches[0]).pageX;
-    }
-
-    @HostListener(&#x27;touchmove&#x27;, [&#x27;$event&#x27;])
-    onTouchMove($event: any) {
-        const touch &#x3D; $event.touches[0] || $event.changedTouches[0];
-        let newX &#x3D; this.curX - touch.pageX;
-        if (this.opend) {
-            newX &#x3D; newX &gt; 0 ? this.width : this.width - Math.abs(newX);
-        } else {
-            newX &#x3D; newX &gt; this.width ? this.width : newX;
-        }
-
-        this.setPos(newX &lt;&#x3D; 0 ? 0 : newX);
-    }
-
-    @HostListener(&#x27;touchend&#x27;, [&#x27;$event&#x27;])
-    @HostListener(&#x27;touchcancel&#x27;, [&#x27;$event&#x27;])
-    onTouchEnd($event: any) {
-        const touch &#x3D; $event.touches[0] || $event.changedTouches[0];
-        let newX &#x3D; Math.abs(this.curX - touch.pageX);
-        if (newX &#x3D;&#x3D;&#x3D; 0) return;
-        if (this.opend) newX &#x3D; this.width - newX;
-        // 当移动超过一半都视为打开
-        if (newX &gt; 0 &amp;&amp; newX &gt; (+this.width / 2)) {
-            this.opend &#x3D; true;
-            this.setPos(this.width);
-        } else {
-            this.opend &#x3D; false;
-            this.setPos(0);
-        }
+    ngOnDestroy(): void {
+        this.destroy();
     }
 }
 </code></pre>
