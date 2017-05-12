@@ -7,15 +7,19 @@ const getWindowHeight = (): number => {
     return window.innerHeight;
 };
 
+/**
+ * 多列选择器组
+ * @docs-private
+ */
 @Component({
-    selector: 'weui-picker-group, [weui-picker-group]',
+    selector: 'weui-picker-group',
     template: `
         <ng-content></ng-content>
         <div class="weui-picker__mask"></div>
         <div class="weui-picker__indicator"></div>
         <div class="weui-picker__content" [ngStyle]="{
-            'transform': 'translate(0,' + distance + 'px)',
-            'transition': animating ? 'transform .3s' : 'none'
+            'transform': 'translate(0,' + _distance + 'px)',
+            'transition': _animating ? 'transform .3s' : 'none'
         }">
             <div class="weui-picker__item" *ngFor="let item of items"
                 [ngClass]="{'weui-picker__item_disabled': item.disabled}">{{item.label || item.value}}</div>
@@ -27,9 +31,16 @@ const getWindowHeight = (): number => {
 })
 export class PickerGroupComponent implements OnDestroy, OnChanges {
 
+    /** 数据列表 */
     @Input() items: PickerData[];
+
+    /** 当前默认位置 */
     @Input() defaultIndex: number = -1;
+
+    /** 多列中的位置 */
     @Input() groupIndex: number;
+
+    /** 变更回调 */
     @Output() change = new EventEmitter<any>();
 
     private defaults: any = {
@@ -44,19 +55,19 @@ export class PickerGroupComponent implements OnDestroy, OnChanges {
     private startY: number;    // 保存开始按下的位置 (touchstart)
     private endY: number;      // 保存结束时的位置 (touchend)
     private speed: number;     // 手滑动的速度 (用途：速度乘以惯性滑动的时间, 例如 300ms, 计算出应该滑动的距离)
-    animating: boolean = false;
-    distance = 0;
+    _animating: boolean = false;
+    _distance = 0;
 
     ngOnChanges(changes: SimpleChanges): void {
         if ('defaultIndex' in changes) {
             if (this.defaultIndex < 0 || (this.items && this.defaultIndex >= this.items.length))
                 this.defaultIndex = 0;
-            this.distance = (this.defaults.offset - this.defaultIndex) * this.defaults.rowHeight;
+            this._distance = (this.defaults.offset - this.defaultIndex) * this.defaults.rowHeight;
         }
     }
 
     @HostListener('touchstart', ['$event'])
-    handleTouchStart(e: TouchEvent): void {
+    onTouchStart(e: TouchEvent): void {
         if (this.items.length <= 1) return;
 
         this.startY = e.changedTouches[0].pageY;
@@ -64,7 +75,7 @@ export class PickerGroupComponent implements OnDestroy, OnChanges {
     }
 
     @HostListener('touchmove', ['$event'])
-    handleTouchMove(e: TouchEvent): void {
+    onTouchMove(e: TouchEvent): void {
         if (this.items.length <= 1) return;
 
         const endTime = +new Date();
@@ -77,14 +88,14 @@ export class PickerGroupComponent implements OnDestroy, OnChanges {
         // 重新设置开始时间、开始位置
         this.startTime = endTime;
         this.startY = this.endY;
-        this.animating = false;          // ms
-        this.distance += _distance; // 内容移动的距离
+        this._animating = false;          // ms
+        this._distance += _distance; // 内容移动的距离
 
         e.preventDefault();
     }
 
     @HostListener('touchend', ['$event'])
-    handleTouchEnd(event: TouchEvent): void {
+    onTouchEnd(event: TouchEvent): void {
         if (!this.startY) return;
         this.endY = event.changedTouches[0].pageY;
 
@@ -108,7 +119,7 @@ export class PickerGroupComponent implements OnDestroy, OnChanges {
     }
 
     private stop(diff: number): void {
-        let dist = this.distance + diff;
+        let dist = this._distance + diff;
 
         // 移动到最接近的那一行
         dist = Math.round(dist / this.defaults.rowHeight) * this.defaults.rowHeight;
@@ -125,8 +136,8 @@ export class PickerGroupComponent implements OnDestroy, OnChanges {
         }
         dist = (this.defaults.offset - index) * this.defaults.rowHeight;
 
-        this.animating = true;
-        this.distance = dist; // px
+        this._animating = true;
+        this._distance = dist; // px
 
         // 触发选择事件
         this.onChange(this.items[index], index);

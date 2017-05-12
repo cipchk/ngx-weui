@@ -4,15 +4,12 @@ import { findParent, add, remove } from './../utils/dom';
 
 /**
  * 获取验证码
- * 
- * @example
- * <button [weui-vcode]="onSendCode" weui-seconds="10" weui-tpl="${num}s" weui-error="重新发送">获取验证码</button>
  */
 @Directive({
     selector: '[weui-vcode]',
     host: {
-        '(click)': 'onClick()',
-        '[disabled]': 'disabled'
+        '(click)': '_onClick()',
+        '[disabled]': '_disabled'
     }
 })
 export class VCodeDirective implements OnDestroy {
@@ -46,7 +43,7 @@ export class VCodeDirective implements OnDestroy {
      */
     @Input('weui-error') error: string = '重新发送';
 
-    disabled: boolean = false;
+    _disabled: boolean = false;
     private _cur: string;
     private _t: any;
 
@@ -57,15 +54,15 @@ export class VCodeDirective implements OnDestroy {
         this._cur = this.el.nativeElement.innerHTML;
     }
 
-    onClick() {
-        this.disabled = true;
+    _onClick() {
+        this._disabled = true;
         (<Observable<boolean>>this.onSend()).subscribe((res) => {
             res ? this.tick() : this.err();
         })
     }
 
     private err(): void {
-        this.disabled = false;
+        this._disabled = false;
         this.el.nativeElement.innerHTML = this.error;
     }
 
@@ -74,7 +71,7 @@ export class VCodeDirective implements OnDestroy {
         this.setText(count);
         this._t = setInterval(() => {
             if (--count <= 0) {
-                this.disabled = false;
+                this._disabled = false;
                 this.el.nativeElement.innerHTML = this._cur;
                 this.destroy();
             } else

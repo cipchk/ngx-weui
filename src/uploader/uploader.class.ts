@@ -3,6 +3,9 @@ import { UploaderConfig, UploaderOptions, FileItem, FileType, FileLikeObject, Fi
 
 export type ParsedResponseHeaders = { [headerFieldName: string]: string };
 
+/**
+ * 内置HTML5上传组件
+ */
 export class Uploader {
     private _options: UploaderOptions;
     private _queue: Array<FileItem> = [];
@@ -11,34 +14,63 @@ export class Uploader {
     private _nextIndex: number = 0;
     private _failFilterIndex: number;
 
+    /**
+     * 获取当前上传组件配置项
+     */
     get options(): UploaderOptions {
         return this._options;
     }
 
+    /**
+     * 获取队列中所有文件对象
+     */
     get queue(): Array<FileItem> {
         return this._queue;
     }
 
+    /**
+     * 获取当前总进度
+     */
     get progress(): number {
         return this._progress;
     }
 
+    /**
+     * 是否上传中
+     */
     get isUploading(): boolean {
         return this._isUploading;
     }
 
+    /**
+     * 获取未上传数量
+     * 
+     * @readonly
+     * @type {number}
+     */
     get notUploadedCount(): number {
         return this.getNotUploadedItems().length;
     }
 
+    /**
+     * 获取已上传数量
+     * 
+     * @readonly
+     * @type {number}
+     */
     get uploadedCount(): number {
         return this._queue.filter((item: FileItem) => item.isUploaded).length;
     }
 
-    getNextIndex(): number {
+    _getNextIndex(): number {
         return ++this._nextIndex;
     }
 
+    /**
+     * Creates an instance of Uploader.
+     * @param {UploaderOptions} [options] 
+     * @param {UploaderConfig} [globalConfig] 
+     */
     constructor(options?: UploaderOptions,
         @Inject(UploaderConfig) @Optional() private globalConfig?: UploaderConfig) {
 
@@ -133,7 +165,7 @@ export class Uploader {
     /**
      * 获取待上传文件
      */
-    getReadyItems(): Array<any> {
+    get getReadyItems(): Array<any> {
         return this._queue
             .filter((item: FileItem) => (item.isReady && !item.isUploading))
             .sort((item1: any, item2: any) => item1.index - item2.index);
@@ -185,6 +217,9 @@ export class Uploader {
         if (this._options.onFileDequeued) this._options.onFileDequeued(item);
     }
 
+    /**
+     * 清空队列
+     */
     clearQueue(): void {
         while (this._queue.length) {
             this._queue[0].remove();
@@ -193,6 +228,11 @@ export class Uploader {
         if (this._options.onFileDequeued) this._options.onFileDequeued();
     }
 
+    /**
+     * 上传某个文件
+     * 
+     * @param {FileItem} value 
+     */
     uploadItem(value: FileItem): void {
         let index = this._getIndexOfItem(value);
         let item = this._queue[index];
@@ -204,6 +244,11 @@ export class Uploader {
         this._xhrTransport(item);
     }
 
+    /**
+     * 取消某个文件
+     * 
+     * @param {FileItem} value 
+     */
     cancelItem(value: FileItem): void {
         let index = this._getIndexOfItem(value);
         let item = this._queue[index];
@@ -212,6 +257,9 @@ export class Uploader {
         }
     }
 
+    /**
+     * 上传队列中所有未上传的文件
+     */
     uploadAll(): void {
         let items = this.getNotUploadedItems().filter((item: FileItem) => !item.isUploading);
         if (!items.length) {
@@ -223,6 +271,9 @@ export class Uploader {
         items[0].upload();
     }
 
+    /**
+     * 取消所有上传中文件
+     */
     cancelAll(): void {
         let items = this.getNotUploadedItems();
         items.map((item: FileItem) => item.cancel());
@@ -230,12 +281,12 @@ export class Uploader {
         if (this._options.onCancel) this._options.onCancel();
     }
 
-    destroy(): void {
+    _destroy(): void {
         return void 0;
     }
 
     private _xhrTransport(item: FileItem): any {
-        item.onBeforeUpload();
+        item._onBeforeUpload();
 
         // 自实现
         if (item.options.uploadTransport) {
@@ -341,24 +392,24 @@ export class Uploader {
     private _onProgressItem(item: FileItem, progress: any): void {
         let total = this._getTotalProgress(progress);
         this._progress = total;
-        item.onProgress(progress);
+        item._onProgress(progress);
     }
 
     _onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): void {
-        item.onError(response, status, headers);
+        item._onError(response, status, headers);
     }
 
     private _onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): void {
-        item.onSuccess(response, status, headers);
+        item._onSuccess(response, status, headers);
     }
 
     private _onCancelItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): void {
-        item.onCancel(response, status, headers);
+        item._onCancel(response, status, headers);
     }
 
     _onCompleteItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): void {
-        item.onComplete(response, status, headers);
-        let nextItem = this.getReadyItems()[0];
+        item._onComplete(response, status, headers);
+        let nextItem = this.getReadyItems[0];
         this._isUploading = false;
         if (nextItem) {
             nextItem.upload();

@@ -1,0 +1,46 @@
+<tr>
+  <td>
+    {%- if property.isDirectiveInput and not property.isTwoWays -%}
+      <div class="input">
+          [{$ property.directiveInputAlias or property.name $}]
+      </div>
+    {%- endif -%}
+    {%- if property.isDirectiveOutput and not property.isTwoWays -%}
+      <div class="output">
+          ({$ property.directiveOutputAlias or property.name $})
+      </div>
+    {%- endif -%}
+    {%- if property.isTwoWays -%}
+      <div class="two-ways">
+          [({$ property.directiveInputAlias or property.name $})]
+      </div>
+    {%- endif -%}
+    {%- if not property.isDirectiveInput and not property.isDirectiveOutput and not property.isTwoWays -%}
+        {$ property.name $}
+    {%- endif -%}
+    {%- if property.isDeprecated -%}
+      <div class="deprecated">Deprecated</div>
+    {%- endif -%} 
+  </td>
+  <td>
+    {%- if property.isReturnConfig -%}
+      <code><a href="#{$ property.returnType $}">{$ property.returnType $}</a></code>
+    {%- endif -%}
+    {%- if property.userDef -%}
+      <code>{$ property.returnType $}[{$ property.userDef $}]</code>
+    {%- endif -%}
+    {%- if not property.isReturnConfig and not property.userDef -%}
+      <code>{$ property.returnType $}</code>
+    {%- endif -%}
+  </td>
+  <td>{$ property.default $}</td>
+  <td>
+      {$ property.description | marked $}
+    {%- if property.todo -%}
+        <div class="todo">
+            <strong>TODO:</strong>
+            {$ property.todo | marked $}
+        </div>
+    {%- endif -%}
+  </td>
+</tr>

@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, Input, OnChanges, SimpleChanges, EventEmi
 import { PTRConfig } from "./ptr.config";
 
 @Component({
-    selector: 'weui-ptr, [weui-ptr]',
+    selector: 'weui-ptr',
     template: `
         <div class="weui-ptr__loader" 
             [ngStyle]="{
@@ -12,7 +12,7 @@ import { PTRConfig } from "./ptr.config";
             <div style="flex: 1 1 0%; padding: 5px;" *ngIf="config.icon">
                 <span [innerHTML]="config.icon" class="weui-ptr__icon" style="display:inline-block"></span>
                 {{loading ? config.loading : config.pull}}
-                <p *ngIf="lastLabel">{{lastLabel}}</p>
+                <p *ngIf="_lastLabel">{{_lastLabel}}</p>
             </div>
             <ng-content select="[loader]"></ng-content>
         </div>
@@ -34,18 +34,29 @@ export class PTRComponent implements OnChanges {
     private loading: boolean = false;
     private moving: boolean = false;
 
-    lastLabel: string;
+    _lastLabel: string;
+    /** 配置项 */
     @Input() config: PTRConfig;
+    /** 刷新回调 */
     @Output() refresh = new EventEmitter();
 
     constructor(private el: ElementRef, private DEF: PTRConfig) {}
 
-    /** 设置最后更新标签（支持HTML） */
+    /**
+     * 设置最后更新标签
+     * 
+     * @param {string} label 标签内容（支持HTML）
+     */
     setLastUpdatedLabel(label: string) {
-        this.lastLabel = label;
+        this._lastLabel = label;
     }
 
-    /** 设置刷新成功 */
+    
+    /**
+     * 设置刷新成功
+     * 
+     * @param {string} [lastUpdatedLabel] label 标签内容（支持HTML）
+     */
     setFinished(lastUpdatedLabel?: string) {
         if (!this.moving) {
             this.loaderEl.style.transition = `margin-top .3s ease`;

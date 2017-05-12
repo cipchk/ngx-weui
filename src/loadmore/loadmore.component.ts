@@ -2,7 +2,7 @@ import { Component, HostListener, ElementRef, HostBinding, Input, OnChanges, Sim
 import { LoadmoreConfig } from "./loadmore.config";
 
 @Component({
-    selector: '[weui-loadmore],weui-loadmore',
+    selector: 'weui-loadmore',
     template: `
         <div class="weui-loadmore" [ngClass]="{
             'weui-loadmore_line': type!=='loading',
@@ -15,9 +15,26 @@ import { LoadmoreConfig } from "./loadmore.config";
 })
 export class LoadmoreComponent {
 
-    @Input('weui-type') type: 'loading' | 'line' | 'dot' = 'loading';
-    @Input('weui-loading-text') loadingText: string = '正在加载';
-    @Input('weui-line-text') lineText: string = '暂无数据';
+    /**
+     * 类型
+     * 
+     * @type {('loading' | 'line' | 'dot')}
+     */
+    @Input() type: 'loading' | 'line' | 'dot' = 'loading';
+
+    /**
+     * 当type=='loading'时显示的文本
+     * 
+     * @type {string}
+     */
+    @Input() loadingText: string = '正在加载';
+
+    /**
+     * 当type=='line'时显示的文本
+     * 
+     * @type {string}
+     */
+    @Input() lineText: string = '暂无数据';
 
     constructor(DEF: LoadmoreConfig) {
         Object.assign(this, DEF);

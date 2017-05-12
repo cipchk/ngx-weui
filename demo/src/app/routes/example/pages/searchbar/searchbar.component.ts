@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { WikipediaService } from "./wikipedia.service";
+import { TaobaoService } from "./tb.service";
 import { Observable } from 'rxjs/Rx';
 
 @Component({
@@ -7,17 +7,17 @@ import { Observable } from 'rxjs/Rx';
     templateUrl: './searchbar.component.html',
     styleUrls: ['./searchbar.component.scss'],
     encapsulation: ViewEncapsulation.None,
-    providers: [ WikipediaService ]
+    providers: [ TaobaoService ]
 })
 export class DemoSearchBarComponent {
 
     items: Observable<string[]>;
     value: string;
-    constructor (private wikipediaService: WikipediaService) { }
+    constructor (private tbService: TaobaoService) { }
 
     onSearch(term: string) {
         this.value = term;
-        if (term) this.items = this.wikipediaService.search(term);
+        if (term) this.items = this.tbService.search(term);
     }
 
     onCancel() {

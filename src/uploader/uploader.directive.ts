@@ -5,23 +5,28 @@ import { Uploader, UploaderOptions } from "./index";
     selector: '[weui-uploader-file]'
 })
 export class UploaderFileDirective {
-    @Input('weui-uploader') uploader: Uploader;
+    /**
+     * Uploader对象，必填项
+     * 
+     * @type {Uploader}
+     */
+    @Input('weui-uploader-file') uploader: Uploader;
 
     constructor(protected element: ElementRef) { }
 
-    get options(): UploaderOptions {
+    get _options(): UploaderOptions {
         return this.uploader.options;
     }
 
-    get isEmptyAfterSelection(): boolean {
+    get _isEmptyAfterSelection(): boolean {
         return !!this.element.nativeElement.attributes.multiple;
     }
 
     @HostListener('change')
-    onChange(): any {
+    _onChange(): any {
         const files = this.element.nativeElement.files;
-        this.uploader.addToQueue(files, this.options);
-        if (this.isEmptyAfterSelection) {
+        this.uploader.addToQueue(files, this._options);
+        if (this._isEmptyAfterSelection) {
             this.element.nativeElement.value = '';
         }
     }

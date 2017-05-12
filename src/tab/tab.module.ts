@@ -2,7 +2,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { TabDirective, NavbarComponent, TabbarComponent, TabConfig, BarComponent } from "./index";
+import { TabDirective, NavbarComponent, TabbarComponent, BarComponent } from "./index";
 
 @NgModule({
     imports: [ CommonModule, FormsModule ],
@@ -11,6 +11,6 @@ import { TabDirective, NavbarComponent, TabbarComponent, TabConfig, BarComponent
 })
 export class TabModule  {
     public static forRoot(): ModuleWithProviders {
-        return { ngModule: TabModule, providers: [ TabConfig ] };
+        return { ngModule: TabModule, providers: [  ] };
     }
 }

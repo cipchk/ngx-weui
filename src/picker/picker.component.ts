@@ -6,26 +6,26 @@ import { PickerOptions } from './options';
 import { PickerConfig } from './picker.config';
 
 @Component({
-    selector: 'weui-picker, [weui-picker]',
+    selector: 'weui-picker',
     template: `
-        <input type="text" class="weui-input" value="{{text}}" placeholder="{{placeholder}}" 
-            readonly="readonly" (focus)="onFocus($event)" 
-            (click)="onShow()" [disabled]="disabled" *ngIf="options.type==='form'">
-        <div [hidden]="!showP">
-            <div class="weui-mask" (click)="onHide(false)"
-                [ngClass]="{'weui-animate-fade-in': shown, 'weui-animate-fade-out': !shown}"></div>
+        <input type="text" class="weui-input" value="{{_text}}" placeholder="{{placeholder}}" 
+            readonly="readonly" (focus)="_onFocus($event)" 
+            (click)="_onShow()" [disabled]="disabled" *ngIf="options.type==='form'">
+        <div [hidden]="!_showP">
+            <div class="weui-mask" (click)="_onHide(false)"
+                [ngClass]="{'weui-animate-fade-in': _shown, 'weui-animate-fade-out': !_shown}"></div>
             <div class="weui-picker"
-                [ngClass]="{'weui-animate-slide-up': shown, 'weui-animate-slide-down': !shown}">
+                [ngClass]="{'weui-animate-slide-up': _shown, 'weui-animate-slide-down': !_shown}">
                 <div class="weui-picker__hd">
-                    <a href="#" class="weui-picker__action" (click)="onCancel()">{{options.cancel}}</a>
-                    <a href="#" class="weui-picker__action" (click)="onConfirm()">{{options.confirm}}</a>
+                    <a href="#" class="weui-picker__action" (click)="_onCancel()">{{options.cancel}}</a>
+                    <a href="#" class="weui-picker__action" (click)="_onConfirm()">{{options.confirm}}</a>
                 </div>
                 <div class="weui-picker__bd">
                     <weui-picker-group tappable
                         *ngFor="let items of _groups; let i = index;"
                         [items]="items"
                         [defaultIndex]="_selected[i]"
-                        groupIndex="{{i}}" (change)="onGroupChange($event, i)"></weui-picker-group>
+                        groupIndex="{{i}}" (change)="_onGroupChange($event, i)"></weui-picker-group>
                 </div>
             </div>
         </div>
@@ -38,14 +38,25 @@ import { PickerConfig } from './picker.config';
 })
 export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChanges {
 
+    /** 配置项 */
     @Input() options: PickerOptions;
 
     _value: any;
     _selected: any[];
     _groups: PickerData[][];
+
+    /**
+     * 当前默认位置，数组的长度必须等同于 groups 长度
+     * @type {number[]}
+     */
     @Input() set defaultSelect(d: number[]) {
         if (d) this._selected = d;
     }
+
+    /**
+     * 多列数据，以数组的长度来决定几列数据
+     * 支持string[]单列数组，单纯只是为了方便
+     */
     @Input() set groups(d: PickerData[][] | String[]) {
         if (!d) throw new Error('无效数据源')
         if (d.length > 0) {
@@ -61,13 +72,20 @@ export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChang
         this._selected = this._selected ? this._selected : Array(d.length).fill(0);
     }
 
-    text: string = '';
+    _text: string = '';
+
+    /** 当options.type=='form'时，占位符文本 */
     @Input() placeholder: string;
     @Input() disabled: boolean = false;
+    /** 确认后回调 */
     @Output() change = new EventEmitter<any>();
+    /** 列变更时回调 */
     @Output() groupChange = new EventEmitter<any>();
+    /** 取消后回调 */
     @Output() cancel = new EventEmitter<any>();
+    /** 显示时回调 */
     @Output() show = new EventEmitter<any>();
+    /** 隐藏后回调 */
     @Output() hide = new EventEmitter<any>();
 
     constructor(private el: ElementRef, private DEF: PickerConfig) { }
@@ -76,22 +94,22 @@ export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChang
         if (!this.options) this.parseOptions();
     }
 
-    showP: boolean = false;
-    shown: boolean = false;
-    onHide(fh: boolean) {
+    _showP: boolean = false;
+    _shown: boolean = false;
+    _onHide(fh: boolean) {
         if (!fh && !this.options.backdrop) return false;
-        this.shown = false;
+        this._shown = false;
         setTimeout(() => {
-            this.showP = false;
+            this._showP = false;
             this.hide.emit();
         }, 300);
         return this;
     }
 
-    onShow() {
+    _onShow() {
         if (this.disabled) return false;
-        this.showP = true;
-        this.shown = true;
+        this._showP = true;
+        this._shown = true;
         this.show.emit();
         return this;
     }
@@ -116,16 +134,16 @@ export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChang
         return res;
     }
 
-    setText(res: any[] = null) {
+    _setText(res: any[] = null) {
         if (res === null) res = this.getSelecteItem();
         if (res.length > 0)
-            this.text = res.map((i: any) => i.label || i.value).join(this.options.separator);
+            this._text = res.map((i: any) => i.label || i.value).join(this.options.separator);
 
         return this;
     }
 
     // 根据_value解析成相应值位置
-    setDefault() {
+    _setDefault() {
         this._selected = [];
         this._groups.forEach((items: PickerData[]) => {
             let idx = items.findIndex((i: PickerData) => i.value === this._value );
@@ -135,20 +153,20 @@ export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChang
         return this;
     }
 
-    onGroupChange(data: any, groupIndex: number) {
+    _onGroupChange(data: any, groupIndex: number) {
         this._selected[groupIndex] = data.index;
         this.groupChange.emit({ item: data.item, index: data.index, groupIndex });
     }
 
-    onCancel() {
+    _onCancel() {
         this.cancel.emit();
-        this.onHide(true);
+        this._onHide(true);
         return false;
     }
 
-    onConfirm() {
+    _onConfirm() {
         const res = this.getSelecteItem();
-        this.setText(res);
+        this._setText(res);
 
         const lastItem = res[res.length - 1] || {};
         const val = lastItem.value || lastItem.label;
@@ -157,7 +175,7 @@ export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChang
 
         this.change.emit({ value: val, items: res });
 
-        this.onHide(true);
+        this._onHide(true);
         return false;
     }
 
@@ -174,12 +192,12 @@ export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChang
         if (value && value !== this._value) {
             this._value = value;
             // todo：当ngModel传递一个未列表中的值的情况 & 多列时数据对应问题
-            this.setDefault().setText();
+            this._setDefault()._setText();
         }
     }
 
-    protected onChange: any = Function.prototype;
-    protected onTouched: any = Function.prototype;
+    private onChange: any = Function.prototype;
+    private onTouched: any = Function.prototype;
 
     public registerOnChange(fn: (_: any) => {}): void { this.onChange = fn; }
     public registerOnTouched(fn: () => {}): void { this.onTouched = fn; }
@@ -187,7 +205,7 @@ export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChang
     setDisabledState(isDisabled: boolean): void {
     }
 
-    onFocus($event: FocusEvent) {
+    _onFocus($event: FocusEvent) {
         arguments[0].target.blur();
     }
 }

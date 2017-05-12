@@ -19,9 +19,10 @@ export class SearchBarConfig {
     cancelText?: string = '取消';
 
     /**
-     * 去抖时长
+     * 去抖时长（单位：ms）
      * 
      * @type {number}
+     * @default 300
      */
     debounceTime?: number = 300;
 }

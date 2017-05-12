@@ -6,13 +6,13 @@ import { Subscription } from 'rxjs/Subscription';
 import { InfiniteLoaderConfig } from "./infiniteloader.config";
 
 @Component({
-    selector: 'weui-infiniteloader, [weui-infiniteloader]',
+    selector: 'weui-infiniteloader',
     template: `
         <div class="weui-infiniteloader__content">
             <ng-content></ng-content>
-            <div *ngIf="loading || finished">
-                <div *ngIf="loading" [innerHTML]="config.loading"></div>
-                <div *ngIf="finished" [innerHTML]="config.finished"></div>
+            <div *ngIf="_loading || _finished">
+                <div *ngIf="_loading" [innerHTML]="config.loading"></div>
+                <div *ngIf="_finished" [innerHTML]="config.finished"></div>
             </div>
         </div>
     `,
@@ -26,11 +26,19 @@ import { InfiniteLoaderConfig } from "./infiniteloader.config";
     encapsulation: ViewEncapsulation.None
 })
 export class InfiniteLoaderComponent implements OnChanges, OnDestroy {
-    loading: boolean = false;
-    finished: boolean = false;
+    _loading: boolean = false;
+    _finished: boolean = false;
 
-    lastLabel: string;
+    /**
+     * 配置项
+     * 
+     * @type {InfiniteLoaderConfig}
+     */
     @Input() config: InfiniteLoaderConfig;
+
+    /**
+     * 加载更多回调
+     */
     @Output() loadmore = new EventEmitter();
 
     constructor(private el: ElementRef,
@@ -39,23 +47,23 @@ export class InfiniteLoaderComponent implements OnChanges, OnDestroy {
 
     /** 设置本次加载完成 */
     resolveLoading() {
-        this.loading = false;
-        this.finished = false;
+        this._loading = false;
+        this._finished = false;
     }
 
     /** 设置结束 */
     setFinished() {
-        this.loading = false;
-        this.finished = true;
+        this._loading = false;
+        this._finished = true;
     }
 
-    onScroll($event: any) {
-        if (this.loading || this.finished) return;
+    _onScroll($event: any) {
+        if (this._loading || this._finished) return;
         const target = $event.target;
         const scrollPercent = Math.floor(((target.scrollTop + target.clientHeight) / target.scrollHeight) * 100);
 
         if (scrollPercent > this.config.percent) {
-            this.loading = true;
+            this._loading = true;
             this.loadmore.emit(this);
         }
     }
@@ -67,7 +75,7 @@ export class InfiniteLoaderComponent implements OnChanges, OnDestroy {
                             .fromEvent(this.el.nativeElement.querySelector('.weui-infiniteloader__content'), 'scroll')
                             .throttleTime(this.config.throttle)
                             .subscribe(($event: any) => {
-                                this.onScroll($event);
+                                this._onScroll($event);
                             });
     }
 

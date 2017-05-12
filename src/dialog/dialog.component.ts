@@ -2,20 +2,19 @@ import { Component, OnDestroy, Input, OnChanges, SimpleChanges, Output, EventEmi
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Observable, Observer, Subscription } from 'rxjs/Rx';
 import { isAndroid } from '../utils/browser';
-import { DialogData } from './data';
 import { DialogConfig } from './dialog.config';
 
 @Component({
-    selector: 'weui-dialog, [weui-dialog]',
+    selector: 'weui-dialog',
     template: `
         <div class="weui-mask" (click)="hide(true)"></div>
-        <div class="weui-dialog" [ngClass]="{'weui-skin_android': data.skin === 'android'}">
-            <div class="weui-dialog__hd" *ngIf="data.title"><strong class="weui-dialog__title">{{data.title}}</strong></div>
-            <div class="weui-dialog__bd" *ngIf="data.content">{{data.content}}</div>
+        <div class="weui-dialog" [ngClass]="{'weui-skin_android': config.skin === 'android'}">
+            <div class="weui-dialog__hd" *ngIf="config.title"><strong class="weui-dialog__title">{{config.title}}</strong></div>
+            <div class="weui-dialog__bd" *ngIf="config.content">{{config.content}}</div>
             <div class="weui-dialog__ft">
-                <a href="#" *ngFor="let item of data.btns" 
+                <a href="#" *ngFor="let item of config.btns" 
                     class="weui-dialog__btn weui-dialog__btn_{{item.type}}"
-                    (click)="onSelect(item)">{{item.text}}</a>
+                    (click)="_onSelect(item)">{{item.text}}</a>
             </div>
         </div>
     `,
@@ -27,34 +26,48 @@ import { DialogConfig } from './dialog.config';
 })
 export class DialogComponent implements OnDestroy {
 
-    @Input('weui-data') data: DialogData;
-    @Output('weui-close') close = new EventEmitter();
+    /**
+     * 对话框配置项
+     * 
+     * @type {DialogConfig}
+     */
+    @Input() config: DialogConfig;
+
+    /**
+     * 关闭回调
+     */
+    @Output() close = new EventEmitter();
 
     private observer: Observer<any>;
 
     private shown: boolean = false;
 
-    @HostBinding('@visibility') get visibility(): string {
+    @HostBinding('@visibility') get _visibility(): string {
         return this.shown ? 'show' : 'hide';
     }
 
     constructor(private DEF: DialogConfig) { }
 
+    /**
+     * 显示，组件载入页面后并不会显示，显示调用 `show()` 并订阅结果。
+     * 
+     * @returns {Observable<any>}
+     */
     show(): Observable<any> {
-        this.data = Object.assign({
+        this.config = Object.assign({
             backdrop: false
-        }, this.DEF, this.data);
-        if (this.data.skin === 'auto') {
-            this.data.skin = isAndroid() ? 'android' : 'ios';
+        }, this.DEF, this.config);
+        if (this.config.skin === 'auto') {
+            this.config.skin = isAndroid() ? 'android' : 'ios';
         }
         // 重组btns
-        if (!this.data.btns) {
-            this.data.btns = [];
-            if (this.data.cancel) {
-                this.data.btns.push({ text: this.data.cancel, type: this.data.cancelType, value: false });
+        if (!this.config.btns) {
+            this.config.btns = [];
+            if (this.config.cancel) {
+                this.config.btns.push({ text: this.config.cancel, type: this.config.cancelType, value: false });
             }
-            if (this.data.confirm) {
-                this.data.btns.push({ text: this.data.confirm, type: this.data.confirmType, value: true });
+            if (this.config.confirm) {
+                this.config.btns.push({ text: this.config.confirm, type: this.config.confirmType, value: true });
             }
         }
 
@@ -64,14 +77,19 @@ export class DialogComponent implements OnDestroy {
         });
     }
 
+    /**
+     * 隐藏
+     * 
+     * @param {boolean} [is_backdrop] 是否从背景上点击
+     */
     hide(is_backdrop?: boolean) {
-        if (is_backdrop === true && this.data.backdrop === false) return false;
+        if (is_backdrop === true && this.config.backdrop === false) return false;
 
         this.shown = false;
         this.close.emit();
     }
 
-    onSelect(menu: any) {
+    _onSelect(menu: any) {
         this.observer.next(menu);
         this.observer.complete();
         this.hide();

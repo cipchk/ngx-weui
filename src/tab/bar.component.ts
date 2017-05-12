@@ -1,7 +1,9 @@
 import { Component, Injectable, OnDestroy } from '@angular/core';
-import { TabConfig } from './tab.config';
 import { TabDirective } from './tab.directive';
 
+/**
+ * @docs-private
+ */
 @Component({
     selector: 'weui-bar-component',
     template: ``
@@ -9,10 +11,6 @@ import { TabDirective } from './tab.directive';
 export class BarComponent implements OnDestroy {
     tabs: TabDirective[] = [];
     protected isDestroyed: boolean;
-
-    constructor(config: TabConfig) {
-        Object.assign(this, config);
-    }
 
     add(tab: TabDirective) {
         this.tabs.push(tab);

@@ -11,7 +11,7 @@
                     <div class="weui-uploader__bd">
                         <ul class="weui-uploader__files">
                             <li class="weui-uploader__file" *ngFor="let item of uploader.queue"
-                                weui-thumb [weui-file]="item._file"
+                                [weui-thumb]="item._file"
                                 (click)="onGallery(item)"
                                 [ngClass]="{'weui-uploader__file_status': item.isError}">
                                 <div class="weui-uploader__file-content" *ngIf="item.isUploading">{{item.progress}}%</div>
@@ -22,11 +22,11 @@
                         </ul>
                         <div class="weui-uploader__input-box">
                             <input class="weui-uploader__input" type="file" accept="image/*" multiple
-                                weui-uploader-file [weui-uploader]="uploader">
+                                [weui-uploader-file]="uploader">
                         </div>
                     </div>
                 </div>
-                <div weui-gallery [weui-imgs]="img" [(show)]="imgShow" (weui-delete)="onDel($event)"></div>
+                <weui-gallery [imgs]="img" [(show)]="imgShow" (delete)="onDel($event)"></weui-gallery>
             </div>
         </div>
     </div>

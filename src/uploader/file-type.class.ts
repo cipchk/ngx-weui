@@ -1,3 +1,6 @@
+/**
+ * @docs-private
+ */
 export class FileType {
     /*  MS office  */
     public static mime_doc: string[] = [

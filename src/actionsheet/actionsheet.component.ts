@@ -2,22 +2,21 @@ import { Component, OnDestroy, Input, OnChanges, SimpleChanges, Output, EventEmi
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Observable, Observer, Subscription } from 'rxjs/Rx';
 import { isAndroid } from '../utils/browser';
-import { ActionSheetData } from './data';
 import { ActionSheetConfig } from './actionsheet.config';
 
 @Component({
-    selector: 'weui-actionsheet, [weui-actionsheet]',
+    selector: 'weui-actionsheet',
     template: `
-        <div class="weui-mask" [@visibility]="visibility" (click)="hide(true)"></div>
-        <div class="weui-actionsheet" [ngClass]="{'weui-actionsheet_toggle': _shownAnt && data.skin === 'ios'}">
-            <div class="weui-actionsheet__title" *ngIf="data.skin === 'ios' && data.title">
-                <p class="weui-actionsheet__title-text">{{data.title}}</p>
+        <div class="weui-mask" [@visibility]="_visibility" (click)="hide(true)"></div>
+        <div class="weui-actionsheet" [ngClass]="{'weui-actionsheet_toggle': _shownAnt && config.skin === 'ios'}">
+            <div class="weui-actionsheet__title" *ngIf="config.skin === 'ios' && config.title">
+                <p class="weui-actionsheet__title-text">{{config.title}}</p>
             </div>
             <div class="weui-actionsheet__menu">
-                <div class="weui-actionsheet__cell" *ngFor="let item of data.menu" (click)="onSelect(item)">{{item.text}}</div>
+                <div class="weui-actionsheet__cell" *ngFor="let item of menus" (click)="_onSelect(item)">{{item.text}}</div>
             </div>
-            <div class="weui-actionsheet__action" *ngIf="data.skin === 'ios' && data.cancel">
-                <div class="weui-actionsheet__cell" (click)="hide()">{{data.cancel}}</div>
+            <div class="weui-actionsheet__action" *ngIf="config.skin === 'ios' && config.cancel">
+                <div class="weui-actionsheet__cell" (click)="hide()">{{config.cancel}}</div>
             </div>
         </div>
     `,
@@ -28,36 +27,56 @@ import { ActionSheetConfig } from './actionsheet.config';
     ])],
     host: {
         '[hidden]': '!shown',
-        '[class.weui-skin_android]': 'data.skin === "android"'
+        '[class.weui-skin_android]': 'config.skin === "android"'
     }
 })
 export class ActionSheetComponent implements OnDestroy {
 
-    @Input('weui-data') data: ActionSheetData;
-    @Output('weui-close') close = new EventEmitter();
+    /**
+     * 配置项
+     * 
+     * @type {ActionSheetConfig}
+     */
+    @Input() config: ActionSheetConfig;
+
+    /**
+     * 菜单内容
+     * 
+     * @type {Array}
+     */
+    @Input() menus: { text?: string, [key: string]: any }[];
+
+    /**
+     * 关闭回调
+     */
+    @Output() close = new EventEmitter();
 
     private shown: boolean = false;
     /**
-     * (private) 动画状态码
-     * @private
+     * 动画状态码
      */
     _shownAnt = false;
 
     private observer: Observer<any>;
 
-    get visibility(): string {
+    get _visibility(): string {
         return this._shownAnt ? 'show' : 'hide';
     }
 
     constructor(private DEF: ActionSheetConfig) { }
 
+    /**
+     * 显示，组件载入页面后并不会显示，显示调用 `show()` 并订阅结果。
+     * 
+     * @returns {Observable<any>}
+     */
     show(): Observable<any> {
-        this.data = Object.assign({
+        this.config = Object.assign({
             backdrop: true,
             skin: 'auto'
-        }, this.DEF, this.data);
-        if (this.data.skin === 'auto') {
-            this.data.skin = isAndroid() ? 'android' : 'ios';
+        }, this.DEF, this.config);
+        if (this.config.skin === 'auto') {
+            this.config.skin = isAndroid() ? 'android' : 'ios';
         }
         this.shown = true;
         setTimeout(() => { this._shownAnt = true; }, 10);
@@ -66,17 +85,25 @@ export class ActionSheetComponent implements OnDestroy {
         });
     }
 
+    /**
+     * 隐藏
+     * 
+     * @param {boolean} [is_backdrop] 是否从背景上点击
+     */
     hide(is_backdrop?: boolean) {
-        if (is_backdrop === true && this.data.backdrop === false) return false;
+        if (is_backdrop === true && this.config.backdrop === false) return false;
         
         this._shownAnt = false;
         setTimeout(() => { 
             this.shown = false; 
             this.close.emit();
-        }, this.data.skin === 'android' ? 200 : 300);
+        }, this.config.skin === 'android' ? 200 : 300);
     }
 
-    onSelect(menu: { text?: string, [key: string]: any }) {
+    /**
+     * 选择动作
+     */
+    _onSelect(menu: { text?: string, [key: string]: any }) {
         if (this.observer) {
             this.observer.next(menu);
             this.observer.complete();

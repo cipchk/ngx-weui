@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { SkinType } from 'ngx-weui';
-import { DialogService, DialogData, DialogComponent } from "ngx-weui/dialog";
+import { DialogService, DialogConfig, DialogComponent } from "ngx-weui/dialog";
 
 @Component({
     selector: 'example-dialog',
@@ -16,7 +16,7 @@ export class DemoDialogComponent {
     @ViewChild('android') androidAS: DialogComponent;
     @ViewChild('auto') autoAS: DialogComponent;
 
-    data: DialogData = <DialogData>{
+    config: DialogConfig = <DialogConfig>{
         title: '弹窗标题',
         content: '弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内',
         cancel: '辅助操作',
@@ -26,27 +26,27 @@ export class DemoDialogComponent {
     constructor(private asSrv: DialogService) { }
 
     onShow(type: SkinType, style: 1 | 2 | 3) {
-        this.data.skin = type;
-        this.data.cancel = null;
-        this.data.confirm = null;
-        this.data.btns = null;
+        this.config.skin = type;
+        this.config.cancel = null;
+        this.config.confirm = null;
+        this.config.btns = null;
         switch (style) {
             case 1:
-                this.data.cancel = '辅助操作';
-                this.data.confirm = '主操作';
+                this.config.cancel = '辅助操作';
+                this.config.confirm = '主操作';
                 break;
             case 2:
-                this.data.confirm = '主操作';
+                this.config.confirm = '主操作';
                 break;
             case 3:
-                this.data.btns = [
+                this.config.btns = [
                     { text: '否', type: 'default', value: 1 },
                     { text: '不确定', type: 'default', value: 2 },
                     { text: '是', type: 'primary', value: 3 }
                 ];
                 break;
         }
-        this.data = Object.assign({}, this.data);
+        this.config = Object.assign({}, this.config);
         setTimeout(() => {
             (<DialogComponent>this[`${type}AS`]).show().subscribe((res: any) => {
                 console.log('type', res);
@@ -55,9 +55,9 @@ export class DemoDialogComponent {
     }
 
     onShowBySrv(type: SkinType, backdrop: boolean = true) {
-        this.data.skin = type;
-        this.data.backdrop = backdrop;
-        this.asSrv.show(this.data).subscribe((res: any) => {
+        this.config.skin = type;
+        this.config.backdrop = backdrop;
+        this.asSrv.show(this.config).subscribe((res: any) => {
             console.log(res);
         });
     }

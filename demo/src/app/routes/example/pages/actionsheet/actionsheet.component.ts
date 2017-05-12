@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { SkinType } from 'ngx-weui';
-import { ActionSheetService, ActionSheetData, ActionSheetComponent } from "ngx-weui/actionsheet";
+import { ActionSheetService, ActionSheetConfig, ActionSheetComponent } from "ngx-weui/actionsheet";
 
 @Component({
     selector: 'example-actionsheet',
@@ -16,20 +16,19 @@ export class DemoActionSheetComponent {
     @ViewChild('android') androidAS: ActionSheetComponent;
     @ViewChild('auto') autoAS: ActionSheetComponent;
 
-    data: ActionSheetData = <ActionSheetData>{
-        title: '这是一段标题',
-        // cancel: null, // 默认：取消，如果为null&undefined表示不显示
-        menu: [
+    menus: any[] = [
             { text: '菜单一', value: 'test', other: 1 },
             { text: '菜单三', value: 'test' }
-        ]
+        ];
+    config: ActionSheetConfig = <ActionSheetConfig>{
+        title: '这是一段标题'
     };
 
     constructor(private asSrv: ActionSheetService) { }
 
     onShow(type: SkinType) {
-        this.data.skin = type;
-        this.data = Object.assign({}, this.data);
+        this.config.skin = type;
+        this.config = Object.assign({}, this.config);
         setTimeout(() => {
             (<ActionSheetComponent>this[`${type}AS`]).show().subscribe((res: any) => {
                 console.log('type', res);
@@ -38,9 +37,9 @@ export class DemoActionSheetComponent {
     }
 
     onShowBySrv(type: SkinType, backdrop: boolean = true) {
-        this.data.skin = type;
-        this.data.backdrop = backdrop;
-        this.asSrv.show(this.data).subscribe((res: any) => {
+        this.config.skin = type;
+        this.config.backdrop = backdrop;
+        this.asSrv.show(this.menus, this.config).subscribe((res: any) => {
             console.log(res);
         });
     }

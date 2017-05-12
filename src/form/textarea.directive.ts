@@ -3,13 +3,11 @@ import { add, remove } from './../utils/dom';
 
 /**
  * 文本域字数统计
- * @example 
- *  <textarea weui-textarea weui-cn="2" maxlength="20"></textarea>
  */
 @Directive({
     selector: '[weui-textarea]',
     host: {
-        '(ngModelChange)': 'onChange($event)'
+        '(ngModelChange)': '_onChange($event)'
     }
 })
 export class TextareaDirective implements OnChanges {
@@ -41,7 +39,7 @@ export class TextareaDirective implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         if ('maxlength' in changes) {
-            this.init().onChange(this._value);
+            this.init()._onChange(this._value);
         }
     }
 
@@ -57,7 +55,7 @@ export class TextareaDirective implements OnChanges {
         return this;
     }
 
-    onChange(value: any) {
+    _onChange(value: any) {
         if (!this._count) return;
         
         value = value || '';

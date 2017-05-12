@@ -2,6 +2,9 @@ import { FileLikeObject, UploaderOptions, Uploader, ParsedResponseHeaders } from
 
 declare const window: any;
 
+/**
+ * 文件对象
+ */
 export class FileItem {
 
     /**
@@ -81,8 +84,16 @@ export class FileItem {
      */
     _xhr: XMLHttpRequest;
 
+    /**
+     * 上传配置信息
+     * 
+     * @type {UploaderOptions}
+     */
     options: UploaderOptions;
 
+    /**
+     * @docs-private
+     */
     protected uploader: Uploader;
 
     constructor(uploader: Uploader, file: File, options: UploaderOptions) {
@@ -93,10 +104,16 @@ export class FileItem {
         this._file = file;
     }
 
+    /**
+     * @docs-private
+     */
     setOptions(options: UploaderOptions) {
         this.options = Object.assign({}, this.uploader.options, options);
     }
 
+    /**
+     * 上传
+     */
     upload(): void {
         try {
             this.uploader.uploadItem(this);
@@ -106,20 +123,26 @@ export class FileItem {
         }
     }
 
+    /**
+     * 取消上传
+     */
     cancel(): void {
         this.uploader.cancelItem(this);
     }
 
+    /**
+     * 从队列中移除，当文件正在上传中时会先取消
+     */
     remove(): void {
         this.uploader.removeFromQueue(this);
     }
 
     _prepareToUploading(): void {
-        this.index = this.index || this.uploader.getNextIndex();
+        this.index = this.index || this.uploader._getNextIndex();
         this.isReady = true;
     }
 
-    onBeforeUpload(): void {
+    _onBeforeUpload(): void {
         this.isReady = true;
         this.isUploading = true;
         this.isUploaded = false;
@@ -131,12 +154,12 @@ export class FileItem {
         if (this.options.onUploadStart) this.options.onUploadStart(this);
     }
 
-    onProgress(progress: number): any {
+    _onProgress(progress: number): any {
         this.progress = progress;
         if (this.options.onUploadProgress) this.options.onUploadProgress(progress, this.uploader.progress);
     }
 
-    onSuccess(response: string, status: number, headers: ParsedResponseHeaders) {
+    _onSuccess(response: string, status: number, headers: ParsedResponseHeaders) {
         this.isReady = false;
         this.isUploading = false;
         this.isUploaded = true;
@@ -149,7 +172,7 @@ export class FileItem {
         if (this.options.onUploadSuccess) this.options.onUploadSuccess(this, response, status, headers);
     }
 
-    onError(response: string, status: number, headers: ParsedResponseHeaders) {
+    _onError(response: string, status: number, headers: ParsedResponseHeaders) {
         this.isReady = false;
         this.isUploading = false;
         this.isUploaded = true;
@@ -162,7 +185,7 @@ export class FileItem {
         if (this.options.onUploadError) this.options.onUploadError(this, response, status, headers);
     }
 
-    onComplete(response: string, status: number, headers: ParsedResponseHeaders): void {
+    _onComplete(response: string, status: number, headers: ParsedResponseHeaders): void {
         if (this.uploader.options.removeAfterUpload) {
             this.remove();
         }
@@ -170,7 +193,7 @@ export class FileItem {
         if (this.options.onUploadComplete) this.options.onUploadComplete(this, response, status, headers);
     }
 
-    onCancel(response: string, status: number, headers: ParsedResponseHeaders): any {
+    _onCancel(response: string, status: number, headers: ParsedResponseHeaders): any {
         this.isReady = false;
         this.isUploading = false;
         this.isUploaded = false;

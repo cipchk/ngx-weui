@@ -2,6 +2,9 @@ function isElement(node: any): boolean {
     return !!(node && (node.nodeName || node.prop && node.attr && node.find));
 }
 
+/**
+ * @docs-private
+ */
 export class FileLikeObject {
     id: string;
     lastModifiedDate: any;

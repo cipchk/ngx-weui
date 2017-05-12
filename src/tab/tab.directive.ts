@@ -19,12 +19,15 @@ export class TabDirective {
     /** 当tab移除时触发 */
     @Output() removed: EventEmitter<TabDirective> = new EventEmitter();
 
+    /**
+     * 激活
+     * @type {boolean}
+     */
     @HostBinding('class.active')
     @Input()
     get active(): boolean {
         return this._active;
     }
-
     set active(active: boolean) {
         if (this.disabled && active || !active) {
             if (!active) {
@@ -37,19 +40,18 @@ export class TabDirective {
 
         this._active = active;
         this.select.emit(this);
-        this.tabComp.tabs.forEach((tab: TabDirective) => {
+        this._tabComp.tabs.forEach((tab: TabDirective) => {
             if (tab !== this) {
                 tab.active = false;
             }
         });
     }
 
-
     protected _active: boolean;
-    tabComp: BarComponent;
+    protected _tabComp: BarComponent;
 
     constructor(tab: BarComponent) {
-        this.tabComp = tab;
-        this.tabComp.add(this);
+        this._tabComp = tab;
+        this._tabComp.add(this);
     }
 }

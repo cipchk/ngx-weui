@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class LoadmoreConfig {
     /**
-     * 样式
+     * 类型
      * 
      * @type {('loading' | 'line' | 'dot')}
      * @default loading
@@ -11,7 +11,7 @@ export class LoadmoreConfig {
     type?: 'loading' | 'line' | 'dot' = 'loading';
 
     /**
-     * loading文本
+     * 当type=='loading'时显示的文本
      * 
      * @type {string}
      * @default 正在加载
@@ -19,7 +19,7 @@ export class LoadmoreConfig {
     loadingText?: string = '正在加载';
 
     /**
-     * line文本
+     * 当type=='line'时显示的文本
      * 
      * @type {string}
      * @default 暂无数据

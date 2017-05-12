@@ -4,12 +4,6 @@ import { findParent, add, remove } from './../utils/dom';
 
 /**
  * 文本框，指令是对文本框格式校验（邮箱、手机、身份证等）、视觉效果的增强而已
- * 
- * @example
- * 1、必填手机号，同时带有视觉效果
- * <input type="tel" weui-input="mobile" weui-required>
- * 2、自定义银行卡号
- * <input type="tel" weui-input="number" weui-requied weui-regex="[0-9]*" [(ngModel)]="res.no" name="no">
  */
 @Directive({
     selector: '[weui-input]',
@@ -46,7 +40,6 @@ export class InputDirective implements OnChanges, Validator {
      * 是否必填项，**等同于** <intpu required> 的值，当值必填时会有视觉效果
      * 
      * @type {('info' | 'warn' | 'waiting')}
-     * @memberof InputDirective
      */
     @Input('weui-required') required: 'info' | 'warn' | 'waiting' = 'warn';
     

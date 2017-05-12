@@ -2,28 +2,52 @@ import { Component, HostListener, ElementRef, HostBinding, Input, OnChanges, Sim
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { isImage, genImageUrl } from '../utils/browser';
 
+/**
+ * 数据对象
+ */
 export interface GalleryItem {
+    /**
+     * 远程网址
+     * 
+     * @type {string}
+     */
     url?: string;
+    /**
+     * JavaScript File 对象
+     * 
+     * @type {File}
+     */
     file?: File;
+    /**
+     * 文件标题
+     * 
+     * @type {string}
+     */
     title?: string;
+    /**
+     * 是否允许删除
+     * 
+     * @type {boolean}
+     * @default true
+     */
     canDelete?: boolean;
 }
 
 @Component({
-    selector: '[weui-gallery],weui-gallery',
+    selector: 'weui-gallery',
     template: `
         <div *ngIf="_imgs" class="weui-galleries">
             <ng-template ngFor let-item [ngForOf]="_imgs">
                 <div class="weui-gallery" 
-                    [ngStyle]="{'display': showd ? 'block' : 'none'}"
-                    [@visibility]="visibility"
-                    (@visibility.start)="antStart($event)"
-                    (@visibility.done)="antDone($event)"
-                    (click)="onHide()"> 
+                    [ngStyle]="{'display': _showd ? 'block' : 'none'}"
+                    [@visibility]="_visibility"
+                    (@visibility.start)="_antStart($event)"
+                    (@visibility.done)="_antDone($event)"
+                    (click)="_onHide()"> 
                     <span class="weui-gallery__img"
                         [ngStyle]="{ 'background-image': 'url(' + item?.url + ')'}"></span>
                     <div class="weui-gallery__opr" *ngIf="canDelete">
-                        <a href="#" class="weui-gallery__del" (click)="onDel(item)">
+                        <a href="#" class="weui-gallery__del" (click)="_onDel(item)">
                             <i class="weui-icon-delete weui-icon_gallery-delete"></i>
                         </a>
                     </div>
@@ -41,31 +65,56 @@ export class GalleryComponent implements OnChanges {
 
     _imgs: any[];
 
-    @Input('weui-imgs') imgs: string | File | string[] | GalleryItem[];
-    @Input('weui-can-delete') canDelete: boolean = true;
-    @Output('weui-delete') delete = new EventEmitter<any>();
-    @Output('weui-hide') hide = new EventEmitter<any>();
+    /**
+     * 图片数据
+     * 
+     * @type {(string | File | string[] | GalleryItem[])}
+     * @todo 虽然支持传递数组，但并不支持在打开后切换图片。
+     */
+    @Input() imgs: string | File | string[] | GalleryItem[];
 
+    /**
+     * 是否允许删除
+     * 
+     * @type {boolean}
+     */
+    @Input() canDelete: boolean = true;
+
+    /**
+     * 删除回调
+     */
+    @Output() delete = new EventEmitter<any>();
+
+    /**
+     * 隐藏回调
+     */
+    @Output() hide = new EventEmitter<any>();
+
+    /**
+     * 标记是否显示
+     * 
+     * @type {boolean}
+     */
     @Input() show: boolean = false;
     @Output() showChange = new EventEmitter<boolean>();
-    showd: boolean = false;
-    get visibility(): string {
+    _showd: boolean = false;
+    get _visibility(): string {
         return this.show ? 'show' : 'hide';
     }
 
-    antStart() { if (this.show) this.showd = this.show; }
+    _antStart() { if (this.show) this._showd = this.show; }
 
-    antDone() { this.showd = this.show; }
+    _antDone() { this._showd = this.show; }
 
-    onDel(item: any) {
+    _onDel(item: any) {
         if (this.canDelete) {
             this.delete.emit(item);
-            this.onHide();
+            this._onHide();
         }
         return false;
     }
 
-    onHide() {
+    _onHide() {
         this.show = false;
         this.showChange.emit(this.show);
         this.hide.emit();

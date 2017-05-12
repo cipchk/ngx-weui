@@ -2,19 +2,6 @@ import { Directive, HostListener, ElementRef, HostBinding, Input, OnChanges, Sim
 
 /**
  * 单元格滑块
- * 
- * @example
- * <div class="weui-cell weui-cell_swiped" weui-swipe>
- *      <div class="weui-cell__bd">
- *      <div class="weui-cell">
- *          <div class="weui-cell__bd"><p>标题文字</p></div>
- *          <div class="weui-cell__ft">向左滑动试试</div>
- *      </div>
- *  </div>
- *  <div class="weui-cell__ft">
- *      <a class="weui-swiped-btn weui-swiped-btn_warn" href="javascript:">删除</a>
- *  </div>
- * </div>
  */
 @Directive({
     selector: '[weui-swipe]'

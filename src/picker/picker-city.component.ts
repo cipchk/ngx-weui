@@ -3,16 +3,19 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PickerOptions } from './options';
 import { PickerComponent } from "./picker.component";
 
+/**
+ * 城市选择器（并不包含城市数据，可以参考示例中的数据格式）
+ */
 @Component({
     selector: 'weui-city-picker',
     template: `
     <weui-picker [placeholder]="placeholder"
-        [groups]="groups" [defaultSelect]="selected" [disabled]="disabled" [options]="options"
-        (show)="onShow()" 
-        (hide)="onHide()" 
-        (change)="onCityChange($event)" 
-        (groupChange)="onCityGroupChange($event)" 
-        (cancel)="onCityCancelChange()"></weui-picker>
+        [groups]="_groups" [defaultSelect]="_selected" [disabled]="disabled" [options]="options"
+        (show)="_onShow()" 
+        (hide)="_onHide()" 
+        (change)="_onCityChange($event)" 
+        (groupChange)="_onCityGroupChange($event)" 
+        (cancel)="_onCityCancelChange()"></weui-picker>
     `,
     providers: [{
         provide: NG_VALUE_ACCESSOR,
@@ -22,30 +25,38 @@ import { PickerComponent } from "./picker.component";
 })
 export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
 
-    @ViewChild(PickerComponent) pickerInstance: PickerComponent;
+    @ViewChild(PickerComponent) _pickerInstance: PickerComponent;
 
-    value: string;
-    groups: any[] = [];
-    selected: number[] = [];
+    _value: string;
+    _groups: any[] = [];
+    _selected: number[] = [];
     private _tmpData: any;
 
     @Input() dataMap: { label: string, value: string, items: string } = { label: 'name', value: 'code', items: 'sub' };
+    /** 城市数据，可以参考示例中的数据格式 */
     @Input() set data(d: any) {
         this._tmpData = d;
-        this.parseData(this._tmpData, this.dataMap.items, this.selected);
+        this.parseData(this._tmpData, this.dataMap.items, this._selected);
     }
+    /** 配置项 */
     @Input() options: PickerOptions;
+    /** 当options.type=='form'时，占位符文本 */
     @Input() placeholder: string;
     @Input() disabled: boolean;
+    /** 确认后回调 */
     @Output() change = new EventEmitter<any>();
+    /** 列变更时回调 */
     @Output() groupChange = new EventEmitter<any>();
+    /** 取消后回调 */
     @Output() cancel = new EventEmitter<any>();
+    /** 显示时回调 */
     @Output() show = new EventEmitter<any>();
+    /** 隐藏后回调 */
     @Output() hide = new EventEmitter<any>();
 
     ngOnDestroy(): void {
         this._tmpData = null;
-        this.groups = null;
+        this._groups = null;
     }
 
     private parseData(data: any, subKey: any, selected: any[] = [], group: any[] = [], newselected: any[] = []): any {
@@ -76,8 +87,8 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
         if (typeof item[subKey] !== 'undefined' && Array.isArray(item[subKey])) {
             return this.parseData(item[subKey], subKey, selected, group, newselected);
         } else {
-            this.groups = group;
-            this.selected = newselected;
+            this._groups = group;
+            this._selected = newselected;
             return { groups: group, newselected };
         }
     }
@@ -85,69 +96,70 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
     /**
      * 将值转换成位置
      */
-    valueToSelect(data: any, subKey: any, dept: number = 1, newSelected: any[] = []): any {
-        const code = (this.value.substr(0, dept * 2) + '0000').substr(0, 6);
-        let _selected = data.findIndex((w:any) => w[this.dataMap.value] === code);
+    private valueToSelect(data: any, subKey: any, dept: number = 1, newSelected: any[] = []): any {
+        const code = (this._value.substr(0, dept * 2) + '0000').substr(0, 6);
+        let _selected = data.findIndex((w: any) => w[this.dataMap.value] === code);
         if (_selected <= -1) {
             _selected = 0;
         }
         newSelected.push(_selected);
-        
+
         let item = data[_selected];
         if (typeof item[subKey] !== 'undefined' && Array.isArray(item[subKey])) {
             return this.valueToSelect(item[subKey], subKey, ++dept, newSelected);
         } else {
-            this.selected = newSelected;
+            this._selected = newSelected;
             setTimeout(() => {
-                this.pickerInstance.setText(); 
+                this._pickerInstance._setText();
             }, 100);
             return newSelected;
         }
     }
 
-    onCityChange(data: any) {
+    _onCityChange(data: any) {
         this.onChange(data.value);
         this.onTouched();
 
         this.change.emit(data);
     }
 
-    onCityGroupChange(res: any) {
-        this.selected[res.groupIndex] = res.index;
+    _onCityGroupChange(res: any) {
+        this._selected[res.groupIndex] = res.index;
         if (res.groupIndex !== 2)
-            this.parseData(this._tmpData, this.dataMap.items, this.selected);
+            this.parseData(this._tmpData, this.dataMap.items, this._selected);
 
         this.groupChange.emit(res);
     }
 
-    onCityCancelChange() {
+    _onCityCancelChange() {
         this.cancel.emit();
     }
 
-    triggerShow() {
-        this.pickerInstance.onShow();
+    /** 服务于Service，并无实际意义 */
+    _triggerShow() {
+        this._pickerInstance._onShow();
     }
 
-    onShow() {
+    _onShow() {
         this.show.emit();
     }
 
-    onHide() {
+    _onHide() {
         this.hide.emit();
     }
 
     writeValue(value: any): void {
         if (value) {
-            this.value = value;
-            if (this.value && this.value.length === 6) {
+            this._value = value;
+            if (this._value && this._value.length === 6) {
                 this.valueToSelect(this._tmpData, this.dataMap.items, 1);
-                this.parseData(this._tmpData, this.dataMap.items, this.selected);
+                this.parseData(this._tmpData, this.dataMap.items, this._selected);
             }
         }
     }
 
-    protected onChange: any = Function.prototype;
-    protected onTouched: any = Function.prototype;
+    private onChange: any = Function.prototype;
+    private onTouched: any = Function.prototype;
 
     public registerOnChange(fn: (_: any) => {}): void { this.onChange = fn; }
     public registerOnTouched(fn: () => {}): void { this.onTouched = fn; }

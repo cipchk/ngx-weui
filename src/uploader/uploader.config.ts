@@ -25,12 +25,18 @@ export class UploaderConfig {
      */
     alias?: string;
 
+    /**
+     * 发送凭据
+     * 
+     * @type {boolean}
+     * @default true
+     */
     withCredentials?: boolean = true;
 
     /**
      * headers 信息
      * 
-     * @type {{[key: string]: any}}
+     * @type {Object}
      */
     headers?: { [key: string]: any };
 
@@ -47,7 +53,6 @@ export class UploaderConfig {
      * 限定文件mime类型，例如：[ '' ]
      * 
      * @type {string[]}
-     * @memberof UploaderConfig
      */
     mimes?: string[];
 
@@ -63,6 +68,7 @@ export class UploaderConfig {
      * -1 表示不受限
      * 
      * @type {number}
+     * @default -1
      */
     limit?: number = -1;
 

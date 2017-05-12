@@ -4,13 +4,13 @@ import { Observable, Observer, Subscription } from 'rxjs/Rx';
 import { PopupConfig } from './popup.config';
 
 @Component({
-    selector: 'weui-popup, [weui-popup]',
+    selector: 'weui-popup',
     template: `
-        <div class="weui-mask" [@visibility]="visibility" (click)="hide(true)"></div>
+        <div class="weui-mask" [@visibility]="_visibility" (click)="hide(true)"></div>
         <div class="weui-popup" [ngClass]="{'weui-popup_toggle': _shownAnt}">
             <div class="weui-popup__hd" *ngIf="!config.is_full">
-                <a href="#" class="weui-popup__action" (click)="onCancel()">{{config.cancel}}</a>
-                <a href="#" class="weui-popup__action" (click)="onConfirm()">{{config.confirm}}</a>
+                <a href="#" class="weui-popup__action" (click)="_onCancel()">{{config.cancel}}</a>
+                <a href="#" class="weui-popup__action" (click)="_onConfirm()">{{config.confirm}}</a>
             </div>
             <div [ngClass]="{'weui-popup_full': config.is_full }">
                 <ng-content></ng-content>
@@ -31,8 +31,15 @@ import { PopupConfig } from './popup.config';
     encapsulation: ViewEncapsulation.None
 })
 export class PopupComponent implements OnDestroy, OnChanges {
+    /**
+     * 配置项
+     * 
+     * @type {PopupConfig}
+     */
     @Input() config: PopupConfig;
+    /** 取消回调 */
     @Output() cancel = new EventEmitter();
+    /** 确认回调 */
     @Output() confirm = new EventEmitter();
 
     private shown: boolean = false;
@@ -40,7 +47,7 @@ export class PopupComponent implements OnDestroy, OnChanges {
 
     private observer: Observer<boolean>;
 
-    get visibility(): string {
+    get _visibility(): string {
         return this._shownAnt ? 'show' : 'hide';
     }
     
@@ -59,6 +66,11 @@ export class PopupComponent implements OnDestroy, OnChanges {
             this.parseConfig();
     }
 
+    /**
+     * 显示，并支持订阅结果，如果点击取消值为false，反之 true
+     * 
+     * @returns {Observable<boolean>} 
+     */
     show(): Observable<boolean> {
         this.shown = true;
         setTimeout(() => { this._shownAnt = true; }, 10);
@@ -67,6 +79,11 @@ export class PopupComponent implements OnDestroy, OnChanges {
         });
     }
 
+    /**
+     * 隐藏
+     * 
+     * @param {boolean} [is_backdrop] 是否从背景上点击(可选)
+     */
     hide(is_backdrop?: boolean) {
         if (is_backdrop === true && this.config.backdrop === false) return false;
         
@@ -76,17 +93,22 @@ export class PopupComponent implements OnDestroy, OnChanges {
         }, 300);
     }
 
+    /** 关闭，等同 hide() 效果 */
     close() {
         this.hide(false);
     }
 
-    onCancel() {
+    _onCancel() {
         this.cancel.emit();
         this.hide(false);
+        if (this.observer) {
+            this.observer.next(false);
+            this.observer.complete();
+        }
         return false;
     }
 
-    onConfirm() {
+    _onConfirm() {
         this.confirm.emit();
         this.hide(false);
         if (this.observer) {

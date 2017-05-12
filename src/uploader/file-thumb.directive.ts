@@ -1,9 +1,17 @@
 import { Directive, Input, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { isImage, genImageUrl } from '../utils/browser';
 
+/**
+ * 创建缩略图
+ */
 @Directive({ selector: '[weui-thumb]' })
 export class FileThumbDirective implements OnChanges {
-    @Input('weui-file') file: File;
+    /**
+     * 文件对象，必填项
+     * 
+     * @type {File}
+     */
+    @Input('weui-thumb') file: File;
 
     constructor(private el: ElementRef) { }
 

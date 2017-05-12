@@ -3,24 +3,42 @@ import { Component, Input, EventEmitter, Output, ViewEncapsulation } from '@angu
 export type ToptipsType = 'default' | 'warn' | 'info' | 'primary' | 'success';
 
 @Component({
-    selector: 'weui-toptips,[toptips]',
+    selector: 'weui-toptips',
     template: `
-    <div class="weui-toptips" style="display:block" [ngClass]="classMap">{{text}}<ng-content></ng-content></div>`,
+    <div class="weui-toptips" style="display:block" [ngClass]="_classMap">{{text}}<ng-content></ng-content></div>`,
     styles: [
         `.weui-toptips_default{ background-color: #B2B2B2; } .weui-toptips_info{ background-color: #586C94; } .weui-toptips_primary{ background-color: #1AAD19; }`
     ],
     host: {
-        '[hidden]': '!showd'
+        '[hidden]': '!_showd'
     },
     encapsulation: ViewEncapsulation.None
 })
 export class ToptipsComponent {
 
+    /**
+     * 文本
+     * 
+     * @type {string}
+     */
     @Input() text: string;
+    /**
+     * 显示时长后自动关闭（单位：ms）
+     * 
+     * @type {number}
+     * @default 2000
+     */
     @Input() time: number = 2000;
+    /**
+     * 隐藏后回调
+     */
     @Output() hide = new EventEmitter();
 
     _type: ToptipsType;
+    /**
+     * 类型
+     * @type { ToptipsType }
+     */
     @Input() set type(_type: ToptipsType) {
         this._type = _type;
         this.setClassMap();
@@ -30,27 +48,33 @@ export class ToptipsComponent {
         this.setClassMap();
     }
 
-    classMap: any = {};
+    _classMap: any = {};
     private setClassMap(): void {
-        this.classMap = {
+        this._classMap = {
             [`weui-toptips_${this._type}`]: true
         };
     }
     
-    showd: boolean = false;
+    _showd: boolean = false;
     private timer: any;
+    /**
+     * @docs-private
+     */
     onShow() {
         this.destroy();
         
-        this.showd = true;
+        this._showd = true;
         this.timer = setTimeout(() => {
             this.onHide();
         }, this.time);
         return this;
     }
 
+    /**
+     * @docs-private
+     */
     onHide() {
-        this.showd = false;
+        this._showd = false;
         this.hide.emit();
     }
 

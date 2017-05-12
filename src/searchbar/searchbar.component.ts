@@ -3,41 +3,62 @@ import { SearchBarConfig } from "./searchbar.config";
 import { Subject, Subscription } from "rxjs/Rx";
 
 @Component({
-    selector: '[weui-searchbar],weui-searchbar',
+    selector: 'weui-searchbar',
     template: `
-        <div class="weui-search-bar" [ngClass]="{'weui-search-bar_focusing': focus}">
-            <form class="weui-search-bar__form" (ngSubmit)="onSubmit($event)">
+        <div class="weui-search-bar" [ngClass]="{'weui-search-bar_focusing': _focus}">
+            <form class="weui-search-bar__form" (ngSubmit)="_onSubmit($event)">
                 <div class="weui-search-bar__box">
                     <i class="weui-icon-search"></i>
                     <input #term type="search" autocomplete="off" name="q" class="weui-search-bar__input"
-                        [placeholder]="placeholder" [(ngModel)]="q" (ngModelChange)="onSearch()"
-                        (focus)="focus=true" (blur)="onBlur()" />
-                    <a href="javascript:" class="weui-icon-clear" (click)="onClear()"></a>
+                        [placeholder]="placeholder" [(ngModel)]="_q" (ngModelChange)="_onSearch()"
+                        (focus)="_focus=true" (blur)="_onBlur()" />
+                    <a href="javascript:" class="weui-icon-clear" (click)="_onClear()"></a>
                 </div>
-                <label class="weui-search-bar__label" (click)="doFocus()">
+                <label class="weui-search-bar__label" (click)="_doFocus()">
                     <i class="weui-icon-search"></i>
                     <span>{{placeholder}}</span>
                 </label>
             </form>
-            <a href="javascript:" class="weui-search-bar__cancel-btn" (click)="onCancel()">{{cancelText}}</a>
+            <a href="javascript:" class="weui-search-bar__cancel-btn" (click)="_onCancel()">{{cancelText}}</a>
         </div>
     `
 })
 export class SearchBarComponent implements OnDestroy {
-    q: string = '';
+    _q: string = '';
     @Input() set value(_value: string) {
-        this.q = _value;
+        this._q = _value;
     }
+    /**
+     * placeholder
+     * 
+     * @type {string}
+     * @default 搜索
+     */
     @Input() placeholder: string;
+
+    /**
+     * 取消按键文字
+     * 
+     * @type {string}
+     * @default 取消
+     */
     @Input() cancelText: string;
+    /**
+     * 去抖时长（单位：ms）
+     * @default 300
+     */
     @Input() debounceTime: number;
-    @Output() searchTerm = new EventEmitter<string>();
+    /** 搜索回调 */
+    @Output() search = new EventEmitter<string>();
+    /** 取消回调 */
     @Output() cancel = new EventEmitter();
+    /** 清空回调 */
     @Output() clear = new EventEmitter();
+    /** 提交回调（指的是键盘回车后） */
     @Output() submit = new EventEmitter<string>();
 
-    focus: boolean = false;
-    @ViewChild('term') term: ElementRef;
+    _focus: boolean = false;
+    @ViewChild('term') _term: ElementRef;
 
     private _sub: Subscription;
     private _subject = new Subject<string>();
@@ -51,42 +72,42 @@ export class SearchBarComponent implements OnDestroy {
             .debounceTime(this.debounceTime)
             .distinctUntilChanged()
             .subscribe((q: string) => {
-                this.searchTerm.emit(q);
+                this.search.emit(q);
             });
     }
 
-    doFocus() {
-        this.term.nativeElement.focus();
+    _doFocus() {
+        this._term.nativeElement.focus();
     }
 
-    onBlur() {
-        if (this.q === '') this.focus = false;
+    _onBlur() {
+        if (this._q === '') this._focus = false;
     }
 
-    onSearch() {
-        this._subject.next(this.q);
+    _onSearch() {
+        this._subject.next(this._q);
     }
 
-    onCancel() {
-        this.q = '';
-        this.onBlur();
+    _onCancel() {
+        this._q = '';
+        this._onBlur();
         this._subject.next('');
         this.cancel.emit();
     }
 
-    onClear() {
-        this.q = '';
-        this.doFocus();
+    _onClear() {
+        this._q = '';
+        this._doFocus();
         this._subject.next('');
         this.clear.emit();
     }
 
-    onSubmit(e: any) {
+    _onSubmit(e: any) {
         e.preventDefault();
         e.stopPropagation();
 
-        this._subject.next(this.q);
-        this.submit.emit(this.q);
+        this._subject.next(this._q);
+        this.submit.emit(this._q);
         return false;
     }
 

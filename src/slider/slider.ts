@@ -1,6 +1,9 @@
 import { Directive, forwardRef, ElementRef, OnDestroy, HostListener, ContentChild, Input, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
+/**
+ * 滑块指令，支持[(ngModel)]
+ */
 @Directive({
     selector: '[weui-slider]',
     providers: [{
@@ -21,10 +24,40 @@ export class SliderDirective implements ControlValueAccessor, OnDestroy, OnChang
     private onStart: any;
     private onMove: any;
 
+    /**
+     * 允许的最小值
+     * 
+     * @type {number}
+     * @default 0
+     */
     @Input('weui-min') min: number = 0;
+
+    /**
+     * 允许的最大值
+     * 
+     * @type {number}
+     * @default 100
+     */
     @Input('weui-max') max: number = 100;
+
+    /**
+     * 步长
+     * 
+     * @type {number}
+     * @default 1
+     */
     @Input('weui-step') step: number = 1;
+
+    /**
+     * 是否可用
+     * 
+     * @type {number}
+     * @default true
+     */
     @Input('weui-enabled') enabled: boolean = true;
+    /**
+     * 值改变时触发
+     */
     @Output('weui-change') change = new EventEmitter();
 
     constructor(private el: ElementRef) { }
@@ -131,8 +164,8 @@ export class SliderDirective implements ControlValueAccessor, OnDestroy, OnChang
         }
     }
 
-    protected onChange: any = Function.prototype;
-    protected onTouched: any = Function.prototype;
+    private onChange: any = Function.prototype;
+    private onTouched: any = Function.prototype;
 
     public registerOnChange(fn: (_: any) => {}): void { this.onChange = fn; }
     public registerOnTouched(fn: () => {}): void { this.onTouched = fn; }

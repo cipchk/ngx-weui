@@ -5,11 +5,17 @@ import { FileItem, FileLikeObject } from "./index";
 
 export type FilterFunction = { name: string, fn: (item?: FileLikeObject, options?: UploaderOptions) => boolean };
 
+/**
+ * 组件Header对象接口
+ */
 export interface UploaderHeaders {
     name: string;
     value: string;
 }
 
+/**
+ * 组件配置项对象接口
+ */
 export interface UploaderOptions {
 
     /**
@@ -53,7 +59,7 @@ export interface UploaderOptions {
     /**
      * HTTP提交其他参数
      * 
-     * @type {({[key: string]: any})}
+     * @type {Object}
      */
     params?: { [key: string]: any };
 
@@ -222,8 +228,12 @@ export interface UploaderOptions {
     onError?: Function;
 
     /**
-     * 上传接口（Observable<any> 中的 any 指的是事件当中的response）
+     * 内置的上传组件是基于HTML5
+     * 如有特殊需求可以自定义上传接口（Observable<any> 中的 any 指的是事件当中的response）
      * 不管成功与否都会触发 onUploadComplete & onUploadSuccess
+     * 
+     * @param {FileItem} item 
+     * @returns {Observable<any>} 
      * @this Uploader 对象
      */
     uploadTransport?(item: FileItem): Observable<any>;

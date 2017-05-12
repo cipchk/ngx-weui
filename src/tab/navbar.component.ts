@@ -1,9 +1,11 @@
 import { Component, ViewEncapsulation, forwardRef } from '@angular/core';
 import { BarComponent } from './bar.component';
-import { TabConfig } from './tab.config';
 
+/**
+ * 顶部选项卡
+ */
 @Component({
-    selector: 'weui-navbar,[weui-navbar]',
+    selector: 'weui-navbar',
     template: `
     <div class="weui-navbar">
         <div class="weui-navbar__item" [ngClass]="{'weui-bar__item_on': item.active}"
@@ -21,7 +23,7 @@ import { TabConfig } from './tab.config';
     encapsulation: ViewEncapsulation.None
 })
 export class NavbarComponent extends BarComponent {
-    constructor(config: TabConfig) {
-        super(config);
+    constructor() {
+        super();
     }
 }
