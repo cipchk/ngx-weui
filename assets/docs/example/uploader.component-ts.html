@@ -1,4 +1,4 @@
-<span class="hljs-keyword">import</span> { Component, ViewEncapsulation, ViewChild } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> { Component, ViewEncapsulation, ViewChild, Input } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
 <span class="hljs-keyword">import</span> { UploaderOptions, FileItem, Uploader, UploaderHeaders } <span class="hljs-keyword">from</span> <span class="hljs-string">"ngx-weui"</span>;
 <span class="hljs-keyword">import</span> { Observable } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/Rx'</span>;
 
@@ -12,6 +12,8 @@
     subTitle: <span class="hljs-built_in">string</span> = <span class="hljs-string">`
     上传组件，一般配合&lt;a class="link" href="#/example/gallery"&gt;组件Gallery&lt;/a&gt;来使用。`</span>;
 
+    <span class="hljs-meta">@Input</span>() url: <span class="hljs-built_in">string</span> = <span class="hljs-string">'example'</span>;
+    
     uploader:Uploader = <span class="hljs-keyword">new</span> Uploader(&lt;UploaderOptions&gt;{
         url: <span class="hljs-string">'./upload.php'</span>,
         headers: [
