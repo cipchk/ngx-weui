@@ -1,0 +1,35 @@
+<split direction="horizontal" *ngIf="menu">
+    <split-area [size]="40" style="overflow: hidden;">
+        <div class="App__preview background--canvas flex-center">
+            <div class="App__mobileview">
+                <component-container *ngIf="id" [menu]="{id: menu.example || id}" [url]="'docs/components'"></component-container>
+            </div>
+        </div>
+    </split-area>
+    <split-area [size]="60">
+        <div class="App__detail">
+            <weui-navbar>
+                <!--<weui-tab heading="OVERVIEW">
+                    <div class="weui-article">
+                        <doc-viewer url="/assets/docs/markdown/{{id}}/{{id}}.html"></doc-viewer>
+                    </div>
+                </weui-tab>-->
+                <weui-tab heading="API">
+                    <div class="weui-article">
+                        <doc-viewer *ngIf="menu.api !== false" [url]="apiUrl()"></doc-viewer>
+                        <p *ngIf="menu.api === false">组件无须任何Angular支持！</p>
+                    </div>
+                </weui-tab>
+                <weui-tab heading="Sample Code">
+                    <div class="weui-article">
+                        <weui-navbar>
+                            <weui-tab [heading]="ext" *ngFor="let ext of ['HTML', 'TS', 'SCSS']">
+                                <pre class="docs-example-source" style="height:600px;"><doc-viewer [url]="extFileUrl(ext)"></doc-viewer></pre>
+                            </weui-tab>
+                        </weui-navbar>
+                    </div>
+                </weui-tab>
+            </weui-navbar>
+        </div>
+    </split-area>
+</split>

@@ -7,12 +7,16 @@
 
 ## Table of Contents
 
-1. [Installation instructions](#installation-instructions)
-2. [Usage & Demo](#usage--demo)
+1. [Usage & Demo](#usage--demo)
+2. [Installation instructions](#installation-instructions)
 3. [API Docs](https://cipchk.github.io/ngx-weui/docs/)
 4. [Global Config](https://github.com/cipchk/ngx-weui/blob/master/docs/config.md)
 5. [Troubleshooting](#troubleshooting)
 4. [License](#license)
+
+## Usage & Demo
+
+[Documentation](https://cipchk.github.io/ngx-weui/) & [Live Demo](https://cipchk.github.io/ngx-weui/)。
 
 ## Installation instructions
 
@@ -29,9 +33,18 @@ You will need weui styles
 <link href="//res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css" rel="stylesheet">
 ```
 
-## Usage & Demo
+Import the `ngx-weui` in to your root `AppModule`.
 
-[Live Demo](https://cipchk.github.io/ngx-weui/)
+```typescript
+import { WeUiModule } from 'ngx-weui';
+
+@NgModule({
+    imports: [ WeUiModule.forRoot() ]
+})
+export class AppModule { }
+```
+
+more [details](https://github.com/cipchk/ngx-weui/blob/master/docs/install.md) are available
 
 ## Troubleshooting
 

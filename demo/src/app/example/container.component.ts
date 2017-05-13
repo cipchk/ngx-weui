@@ -4,13 +4,13 @@ import { ActivatedRoute, Router } from "@angular/router";
 @Component({
     selector: 'component-container',
     template: `
-<div [ngSwitch]="menu.id">
+<div [ngSwitch]="menu.id" style="height:100%">
     <example-button *ngSwitchCase="'button'"></example-button>
     <example-input *ngSwitchCase="'input'"></example-input>
     <example-list *ngSwitchCase="'list'"></example-list>
     <example-slider *ngSwitchCase="'slider'"></example-slider>
     <example-picker *ngSwitchCase="'picker'"></example-picker>
-    <example-uploader *ngSwitchCase="'uploader'"></example-uploader>
+    <example-uploader *ngSwitchCase="'uploader'" [url]="url"></example-uploader>
     <example-article *ngSwitchCase="'article'"></example-article>
     <example-badge *ngSwitchCase="'badge'"></example-badge>
     <example-flex *ngSwitchCase="'flex'"></example-flex>
@@ -24,7 +24,7 @@ import { ActivatedRoute, Router } from "@angular/router";
     <example-progress *ngSwitchCase="'progress'"></example-progress>
     <example-actionsheet *ngSwitchCase="'actionsheet'"></example-actionsheet>
     <example-dialog *ngSwitchCase="'dialog'"></example-dialog>
-    <example-msg *ngSwitchCase="'msg'" [moduleName]="moduleName"></example-msg>
+    <example-msg *ngSwitchCase="'msg'" [url]="url"></example-msg>
     <example-msg-success *ngSwitchCase="'msg_success'"></example-msg-success>
     <example-msg-fail *ngSwitchCase="'msg_fail'"></example-msg-fail>
     <example-toast *ngSwitchCase="'toast'"></example-toast>
@@ -40,6 +40,6 @@ import { ActivatedRoute, Router } from "@angular/router";
 })
 export class ContainerComponent {
 
-    @Input() moduleName: string = 'example';
+    @Input() url: string = 'example';
     @Input() menu: any = {};
 }

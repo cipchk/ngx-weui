@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, Input } from '@angular/core';
 import { UploaderOptions, FileItem, Uploader, UploaderHeaders } from "ngx-weui";
 import { Observable } from 'rxjs/Rx';
 
@@ -12,6 +12,8 @@ export class DemoUploaderComponent {
     subTitle: string = `
     上传组件，一般配合<a class="link" href="#/example/gallery">组件Gallery</a>来使用。`;
 
+    @Input() url: string = 'example';
+    
     uploader:Uploader = new Uploader(<UploaderOptions>{
         url: './upload.php',
         headers: [

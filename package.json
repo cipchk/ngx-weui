@@ -1,6 +1,6 @@
 {
   "name": "ngx-weui",
-  "version": "1.0.0-bate.1",
+  "version": "1.0.0",
   "main": "index.js",
   "typings": "index.d.ts",
   "description": "weui for angular",
@@ -61,6 +61,7 @@
     "@types/gulp": "^4.0.2",
     "@types/jasmine": "2.5.47",
     "@types/node": "~6.0.60",
+    "angular-split": "^0.2.0",
     "classlist-polyfill": "^1.0.3",
     "codelyzer": "~2.0.0",
     "dgeni": "^0.4.7",
@@ -96,6 +97,7 @@
     "ngx-highlight-js": "^1.0.0",
     "npm-run-all": "4.0.2",
     "protractor": "~5.1.1",
+    "split.js": "^1.2.0",
     "ts-helpers": "^1.1.2",
     "ts-node": "~3.0.2",
     "tslint": "^4.5.1",

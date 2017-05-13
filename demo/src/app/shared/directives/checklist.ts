@@ -8,7 +8,7 @@ import { Directive, ElementRef } from '@angular/core';
         ],
         host: {
             '(change)': 'onChange($event)',
-            '[checked]': 'isChecked()'
+            '[checked]': 'checked'
         }
     }
 )
@@ -19,6 +19,13 @@ export class ChecklistDirective {
         this.el = el;
     }
 
+    checked: boolean = false;
+    ngAfterViewInit() {
+        setTimeout(() => {
+            this.checked = this.targetArray.indexOf(this.el.nativeElement.value) !== -1;
+        })
+    }
+
     onChange($event: any) {
         if ($event.target.checked) {
             this.targetArray.push($event.target.value);
@@ -26,9 +33,6 @@ export class ChecklistDirective {
         else {
             this.targetArray.splice(this.targetArray.indexOf(this.el.nativeElement.value), 1);
         }
-    }
-
-    isChecked() {
-        return (this.targetArray.indexOf(this.el.nativeElement.value) !== -1);
+        console.log('change')
     }
 }

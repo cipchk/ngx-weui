@@ -1,44 +1,42 @@
 {
-  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "project": {
-    "name": "ngx-weui"
-  },
-  "apps": [
-    {
-      "root": "demo/src",
-      "outDir": "demo/dist",
-      "assets": [
-        "assets",
-        "favicon.ico"
-      ],
-      "index": "index.html",
-      "main": "main.ts",
-      "polyfills": "polyfills.ts",
-      "test": "../../scripts/test.ts",
-      "tsconfig": "tsconfig.json",
-      "prefix": "",
-      "styles": [
-      ],
-      "scripts": [],
-      "environmentSource": "environments/environment.ts",
-      "environments": {
-        "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts"
-      }
+    "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+    "project": {
+        "name": "ngx-weui"
+    },
+    "apps": [{
+        "root": "demo/src",
+        "outDir": "demo/dist",
+        "assets": [
+            "assets",
+            "favicon.ico"
+        ],
+        "index": "index.html",
+        "main": "main.ts",
+        "polyfills": "polyfills.ts",
+        "test": "../../scripts/test.ts",
+        "tsconfig": "tsconfig.json",
+        "prefix": "",
+        "styles": [],
+        "scripts": [
+        ],
+        "environmentSource": "environments/environment.ts",
+        "environments": {
+            "dev": "environments/environment.ts",
+            "prod": "environments/environment.prod.ts"
+        }
+    }],
+    "e2e": {
+        "protractor": {
+            "config": "./protractor.conf.js"
+        }
+    },
+    "test": {
+        "karma": {
+            "config": "./karma.conf.js"
+        }
+    },
+    "defaults": {
+        "styleExt": "css",
+        "component": {}
     }
-  ],
-  "e2e": {
-    "protractor": {
-      "config": "./protractor.conf.js"
-    }
-  },
-  "test": {
-    "karma": {
-      "config": "./karma.conf.js"
-    }
-  },
-  "defaults": {
-    "styleExt": "css",
-    "component": {}
-  }
 }

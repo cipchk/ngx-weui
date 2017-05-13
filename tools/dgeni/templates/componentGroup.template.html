@@ -20,46 +20,42 @@
 {% endmacro %}
 
 <div class="docs-api">
-  <h2>
-    API reference for Angular WeUI {$ doc.name $}
-  </h2>
+  <h1>API reference for Angular WeUI {$ doc.name $}</h1>
 
-  <p class="docs-api-module-import">
-    <code>
-      import { {$ doc.ngModule.name $} } from 'ngx-weui/{$ doc.name $}';
-    </code>
+  <p class="module-import">
+    <code>import { {$ doc.ngModule.name $} } from 'ngx-weui/{$ doc.name $}';</code>
   </p>
   
   {%- if doc.directives.length -%}
-    <h3 class="docs-api-h3">Directives</h3>
+    <h2>Directives</h2>
     {% for directive in doc.directives %}
       {$ class(directive) $}
     {% endfor %}
   {%- endif -%}
 
   {%- if doc.services.length -%}
-    <h3 class="docs-api-h3">Services</h3>
+    <h2>Services</h2>
     {% for service in doc.services %}
       {$ class(service) $}
     {% endfor %}
   {%- endif -%}
 
   {%- if doc.additionalClasses.length -%}
-    <h3 class="docs-api-h3">Additional classes</h3>
+    <h2>Additional classes</h2>
     {% for other in doc.additionalClasses %}
       {$ class(other) $}
     {% endfor %}
   {%- endif -%}
 
   {%- if doc.interfaceClasses.length -%}
-    <h3 class="docs-api-h3">Interface classes</h3>
+    <h2>Interface classes</h2>
     {% for other in doc.interfaceClasses %}
       {$ class(other) $}
     {% endfor %}
   {%- endif -%}
 
   {%- if doc.typeClasses.length -%}
-    <h3 class="docs-api-h3">Type classes</h3>
+    <h2>Type classes</h2>
     {% for other in doc.typeClasses %}
       {$ class(other) $}
     {% endfor %}

@@ -1,56 +1,57 @@
 <table class="methods">
-  <thead>
-    <tr class="method-name">
-      <th colspan="2">
-        {%- if method.isDeprecated -%}
-          <div class="deprecated">Deprecated</div>
-        {%- endif -%}
-        {$ method.name $}
-      </th>
+    <thead>
+        <tr class="method-name">
+            <th colspan="2">
+                {%- if method.isDeprecated -%}
+                <div class="deprecated">Deprecated</div>
+                {%- endif -%}
+                {$ method.name $}
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="method-description">
+            <td colspan="2">{$ method.description | marked $}</td>
+        </tr>
+    </tbody>
+    {%- if method.params.length -%}
+    <thead>
+        <tr class="method-parameters">
+            <th colspan="2">Parameters</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for parameter in method.params %}
+    <tr class="method-parameter">
+        <td>
+            <p class="method-parameter-name">
+                {$ parameter.name $} {%- if parameter.isOptional -%}
+                <span class="optional">?</span> {%- endif -%}
+            </p>
+            <code class="method-parameter-type">{$ parameter.type $}</code>
+        </td>
+        <td class="parameter-description">{$ parameter.description | marked $}</td>
     </tr>
-  </thead>
-  <tr class="method-description">
-    <td colspan="2">{$ method.description | marked $}</td>
-  </tr>
-
-  {%- if method.params.length -%}
-  <thead>
-    <tr class="method-parameters">
-      <th colspan="2">Parameters</th>
-    </tr>
-  </thead>
-  {% for parameter in method.params %}
-  <tr class="method-parameter">
-    <td>
-      <p class="method-parameter-name">
-        {$ parameter.name $}
-        {%- if parameter.isOptional -%}
-          <span class="optional">?</span>
-        {%- endif -%}
-      </p>
-      <code class="method-parameter-type">{$ parameter.type $}</code>
-    </td>
-    <td class="parameter-description">{$ parameter.description | marked $}</td>
-  </tr>
-  {% endfor %}
-  {%- endif -%}
-
-  {%- if method.showReturns -%}
-  <thead>
-    <tr class="method-returns-header">
-      <th colspan="2">Returns</th>
-    </tr>
-  </thead>
-  <tr>
-    <td class="method-returns-type">
-      <code>{$ method.returnType $}</code>
-    </td>
-    <td class="method-returns-description">
-        {%- if method.this -%}
-        <p>指针对象：<code>{$ method.this $}</code></p>
-        {%- endif -%}
-        {$ method.returns.description | marked $}
-    </td>
-  </tr>
-  {%- endif -%}
+    {% endfor %}
+    </tbody>
+    {%- endif -%}
+    {%- if method.showReturns -%}
+    <thead>
+        <tr class="method-returns-header">
+            <th colspan="2">Returns</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="method-returns-type">
+                <code>{$ method.returnType $}</code>
+            </td>
+            <td class="method-returns-description">
+                {%- if method.this -%}
+                <p>指针对象：<code>{$ method.this $}</code></p>
+                {%- endif -%} {$ method.returns.description | marked $}
+            </td>
+        </tr>
+    </tbody>
+    {%- endif -%}
 </table>

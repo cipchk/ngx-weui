@@ -1,34 +1,34 @@
-<h4 class="docs-api-h4 docs-api-class-name" id="{$ class.name $}">
+<h3 id="{$ class.name $}">
   <code>{$ class.name $}</code>
-</h4>
+</h3>
 {%- if class.description -%}
-<p class="docs-api-class-description">
+<p>
     {$ class.description $}
 </p>
 {%- endif -%}
 
 {%- if class.isConfig -%}
-<p class="docs-api-class-description">
+<p>
     可用于[<a href="https://github.com/cipchk/ngx-weui/blob/master/docs/config.md" target="_blank">全局配置</a>]。
 </p>
 {%- endif -%}
 
 {%- if class.directiveSelectors -%}
-<div class="docs-api-directive-selectors">
-  <span class="docs-api-class-selector-label">selector:</span>
+<div class="directive-selectors">
+  <span class="class-selector-label">selector:</span>
   {% for s in class.directiveSelectors %}
-    <span class="docs-api-class-selector-name">{$ s $}</span>
+    <span class="class-selector-name">{$ s $}</span>
   {% endfor %}
 </div>
 {%- endif -%}
 
 {%- if class.directiveExportAs -%}
-<span class="docs-api-h4 docs-api-class-export-label">Exported as:</span>
-<span class="docs-api-class-export-name">{$ class.directiveExportAs $}</span>
+<span class="class-export-label">Exported as:</span>
+<span class="class-export-name">{$ class.directiveExportAs $}</span>
 {%- endif -%}
 
 {%- if class.isDeprecated -%}
-<div class="docs-api-class-deprecated-marker">Deprecated</div>
+<div class="class-deprecated-marker">Deprecated</div>
 {%- endif -%}
 
 {$ propertyList(class.properties) $}

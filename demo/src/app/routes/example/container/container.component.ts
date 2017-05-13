@@ -4,7 +4,7 @@ import { MenuService } from "../home/menu.service";
 
 @Component({
     selector: 'example-container',
-    template: `<component-container *ngIf="menu" [menu]="menu" [moduleName]="'example'"><component-container>`
+    template: `<component-container *ngIf="menu" [menu]="menu" [url]="'example'"></component-container>`
 })
 export class ExampleContainerComponent {
     constructor(private route: ActivatedRoute, private router: Router, private menuService: MenuService) {}

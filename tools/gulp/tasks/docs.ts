@@ -1,7 +1,7 @@
 import { task, src, dest } from 'gulp';
 import { Dgeni } from 'dgeni';
 import * as path from 'path';
-import { ASSETS_ROOT, HTML_MINIFIER_OPTIONS, SOURCE_ROOT } from '../constants';
+import { ASSETS_ROOT, HTML_MINIFIER_OPTIONS, SOURCE_ROOT, DEMO_SOURCE_ROOT } from '../constants';
 
 const markdown = require('gulp-markdown');
 const transform = require('gulp-transform');
@@ -47,8 +47,9 @@ const MARKDOWN_TAGS_TO_CLASS_ALIAS = [
 /** Generate all docs content. */
 task('docs', [
     'markdown-docs',
+    'highlight-examples',
     'api-docs',
-    'minified-api-docs'
+    'minified-api-docs',
 ]);
 
 /** Generates html files from the markdown overviews and guides. */
@@ -71,6 +72,20 @@ task('markdown-docs', () => {
         .pipe(dest(DIST_DOCS + '/markdown'));
 });
 
+task('highlight-examples', () => {
+  // rename files to fit format: [filename]-[filetype].html
+  const renameFile = (path: any) => {
+    const extension = path.extname.slice(1);
+    path.basename = `${path.basename}-${extension}`;
+  };
+
+  return src(DEMO_SOURCE_ROOT + '/app/example/*/*.+(html|scss|ts)')
+      .pipe(flatten())
+      .pipe(rename(renameFile))
+      .pipe(highlight())
+      .pipe(dest(DIST_DOCS + '/example'));
+});
+
 /** Generates API docs from the source JsDoc using dgeni. */
 task('api-docs', () => {
   const docsPackage = require(path.resolve(__dirname, '../../dgeni'));
@@ -84,6 +99,7 @@ task('minified-api-docs', ['api-docs'], () => {
     .pipe(htmlmin(HTML_MINIFIER_OPTIONS))
     .pipe(dest(DIST_DOCS + '/api/'));
 });
+
 
 /** Updates the markdown file's content to work inside of the docs app. */
 function transformMarkdownFiles(buffer: Buffer, file: any): string {
