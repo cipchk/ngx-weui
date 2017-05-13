@@ -44,7 +44,12 @@ import { WeUiModule } from 'ngx-weui';
 export class AppModule { }
 ```
 
-more [details](https://github.com/cipchk/ngx-weui/blob/master/docs/install.md) are available
+please refer to more [details](https://github.com/cipchk/ngx-weui/blob/master/docs/install.md).
+
+### How to use it with:
+
++ `angular-cli` please refer to [install](https://github.com/cipchk/ngx-weui/blob/master/docs/install.md).
++ `plnkr` sample available [here](http://embed.plnkr.co/vrb1b6KrhvyqyCFXQ7zg/).
 
 ## Troubleshooting
 
