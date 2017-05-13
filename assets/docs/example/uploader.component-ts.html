@@ -1,0 +1,84 @@
+<span class="hljs-keyword">import</span> { Component, ViewEncapsulation, ViewChild } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> { UploaderOptions, FileItem, Uploader, UploaderHeaders } <span class="hljs-keyword">from</span> <span class="hljs-string">"ngx-weui"</span>;
+<span class="hljs-keyword">import</span> { Observable } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/Rx'</span>;
+
+<span class="hljs-meta">@Component</span>({
+    selector: <span class="hljs-string">'example-uploader'</span>,
+    templateUrl: <span class="hljs-string">'./uploader.component.html'</span>,
+    styleUrls: [ <span class="hljs-string">'./uploader.component.scss'</span> ],
+    encapsulation: ViewEncapsulation.None
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> DemoUploaderComponent {
+    subTitle: <span class="hljs-built_in">string</span> = <span class="hljs-string">`
+    上传组件，一般配合&lt;a class="link" href="#/example/gallery"&gt;组件Gallery&lt;/a&gt;来使用。`</span>;
+
+    uploader:Uploader = <span class="hljs-keyword">new</span> Uploader(&lt;UploaderOptions&gt;{
+        url: <span class="hljs-string">'./upload.php'</span>,
+        headers: [
+            { name: <span class="hljs-string">'auth'</span>, value: <span class="hljs-string">'test'</span> }
+        ],
+        params: {
+            a: <span class="hljs-number">1</span>,
+            b: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(),
+            c: <span class="hljs-string">"test"</span>,
+            d: <span class="hljs-number">12.123</span>
+        },
+        <span class="hljs-comment">// 自定义transport</span>
+        <span class="hljs-comment">// uploadTransport: function(item: FileItem) {</span>
+        <span class="hljs-comment">//     return Observable.create(observer =&gt; {</span>
+        <span class="hljs-comment">//         setTimeout(() =&gt; {</span>
+        <span class="hljs-comment">//             observer.next(true);</span>
+        <span class="hljs-comment">//             observer.complete();</span>
+        <span class="hljs-comment">//         }, 1000 * 3);</span>
+        <span class="hljs-comment">//     });</span>
+        <span class="hljs-comment">// },</span>
+        onFileQueued: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onFileQueued'</span>, <span class="hljs-built_in">arguments</span>);
+        },
+        onFileDequeued: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onFileDequeued'</span>, <span class="hljs-built_in">arguments</span>);
+        },
+        onStart: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onStart'</span>, <span class="hljs-built_in">arguments</span>);
+        },
+        onCancel: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onCancel'</span>, <span class="hljs-built_in">arguments</span>);
+        },
+        onFinished: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onFinished'</span>, <span class="hljs-built_in">arguments</span>);
+        },
+        onUploadStart: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onUploadStart'</span>, <span class="hljs-built_in">arguments</span>);
+        },
+        onUploadProgress: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onUploadProgress'</span>, <span class="hljs-built_in">arguments</span>);
+        },
+        onUploadSuccess: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onUploadSuccess'</span>, <span class="hljs-built_in">arguments</span>);
+        },
+        onUploadError: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onUploadError'</span>, <span class="hljs-built_in">arguments</span>);
+        },
+        onUploadComplete: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onUploadComplete'</span>, <span class="hljs-built_in">arguments</span>);
+        },
+        onUploadCancel: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onUploadCancel'</span>, <span class="hljs-built_in">arguments</span>);
+        },
+        onError: <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>{
+            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onError'</span>, <span class="hljs-built_in">arguments</span>);
+        }
+    });
+
+    img: <span class="hljs-built_in">any</span>;
+    imgShow: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">false</span>;
+    onGallery(item: <span class="hljs-built_in">any</span>) {
+        <span class="hljs-keyword">this</span>.img = [{ file: item._file, item: item }];
+        <span class="hljs-keyword">this</span>.imgShow = <span class="hljs-literal">true</span>;
+    }
+
+    onDel(item: <span class="hljs-built_in">any</span>) {
+        <span class="hljs-built_in">console</span>.log(item);
+        <span class="hljs-keyword">this</span>.uploader.removeFromQueue(item.item);
+    }
+}

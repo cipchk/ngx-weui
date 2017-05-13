@@ -1,0 +1,28 @@
+<span class="hljs-tag">&lt;<span class="hljs-name">Page</span> [<span class="hljs-attr">ngClass</span>]=<span class="hljs-string">"'slider'"</span> [<span class="hljs-attr">title</span>]=<span class="hljs-string">"'Slider'"</span> [<span class="hljs-attr">subTitle</span>]=<span class="hljs-string">"'滑块'"</span> [<span class="hljs-attr">ftBottom</span>]=<span class="hljs-string">"true"</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>res1: {{res1}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-slider"</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"res1"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"res1"</span> <span class="hljs-attr">weui-slider</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-slider__inner"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-slider__track"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-slider__handler"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">br</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-slider-box"</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"res2"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"res2"</span>
+        <span class="hljs-attr">weui-slider</span> <span class="hljs-attr">weui-min</span>=<span class="hljs-string">"0"</span> <span class="hljs-attr">weui-max</span>=<span class="hljs-string">"20"</span> <span class="hljs-attr">weui-step</span>=<span class="hljs-string">"2"</span>
+        [<span class="hljs-attr">weui-enabled</span>]=<span class="hljs-string">"switchState"</span>
+        (<span class="hljs-attr">weui-change</span>)=<span class="hljs-string">"onChange($event)"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-slider"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-slider__inner"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-slider__track"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-slider__handler"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"sliderValue"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-slider-box__value"</span>&gt;</span>{{res2}}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-btn-area"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-btn weui-btn_primary"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"switchState=!switchState"</span>&gt;</span>{{switchState?'禁用' : '启用'}}<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">Page</span>&gt;</span>

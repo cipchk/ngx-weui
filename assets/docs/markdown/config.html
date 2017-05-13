@@ -1,0 +1,15 @@
+<html><head></head><body><div class="docs-markdown"><h1 id="-" class="docs-markdown-h1">全局默认配置项说明</h1>
+<pre class="docs-markdown-pre"><code class="lang-typescript docs-markdown-code"><span class="hljs-keyword">import</span> { NgModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> { WeUiModule, ButtonConfig } <span class="hljs-keyword">from</span> <span class="hljs-string">'ngx-weui'</span>;
+
+<span class="hljs-meta">@NgModule</span>({
+    imports: [
+        WeUiModule.forRoot()
+    ],
+    providers: [
+        <span class="hljs-comment">// 重置默认按钮样式为：warn</span>
+        { provide: ButtonConfig, useFactory: <span class="hljs-function"><span class="hljs-params">()</span>=&gt;</span> { <span class="hljs-keyword">return</span> <span class="hljs-built_in">Object</span>.assign(<span class="hljs-keyword">new</span> ButtonConfig(), { <span class="hljs-keyword">type</span>: <span class="hljs-string">'warn'</span> }); } }
+    ]
+})
+</code></pre>
+</div></body></html>

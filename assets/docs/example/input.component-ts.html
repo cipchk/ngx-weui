@@ -1,0 +1,42 @@
+<span class="hljs-keyword">import</span> { Component, ViewEncapsulation } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> { Observable, Subscriber } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/Rx'</span>;
+
+<span class="hljs-meta">@Component</span>({
+    selector: <span class="hljs-string">'example-input'</span>,
+    templateUrl: <span class="hljs-string">'./input.component.html'</span>,
+    styleUrls: [ <span class="hljs-string">'./input.component.scss'</span> ],
+    encapsulation: ViewEncapsulation.None
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> InputComponent {
+
+    res: <span class="hljs-built_in">any</span> = {
+        cho2: <span class="hljs-literal">true</span>,
+        worldpost: <span class="hljs-string">'1'</span>,
+        contact: <span class="hljs-string">'1'</span>,
+        country: <span class="hljs-string">'1'</span>,
+        agree: <span class="hljs-literal">true</span>
+    };
+
+    radio: <span class="hljs-built_in">any</span>[] = [
+        { id: <span class="hljs-number">1</span>, name: <span class="hljs-string">'asdf1'</span> },
+        { id: <span class="hljs-number">2</span>, name: <span class="hljs-string">'asdf2'</span> }
+    ];
+    checkbox: <span class="hljs-built_in">any</span>[] = [ <span class="hljs-string">'A'</span>, <span class="hljs-string">'B'</span> ];
+
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"></span>) {
+        <span class="hljs-keyword">this</span>.res.radio = <span class="hljs-keyword">this</span>.radio[<span class="hljs-number">0</span>];
+        <span class="hljs-keyword">this</span>.res.checkbox = [ <span class="hljs-keyword">this</span>.checkbox[<span class="hljs-number">0</span>] ];
+    }
+
+    onAddCheckbox() {
+        <span class="hljs-keyword">this</span>.checkbox.push(<span class="hljs-built_in">String</span>.fromCharCode(<span class="hljs-number">65</span> + <span class="hljs-keyword">this</span>.checkbox.length))
+    }
+
+    onSendCode(): Observable&lt;<span class="hljs-built_in">boolean</span>&gt; {
+        <span class="hljs-keyword">return</span> Observable.timer(<span class="hljs-number">1000</span>).map(<span class="hljs-function">(<span class="hljs-params">v, i</span>) =&gt;</span> { <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; });
+    }
+
+    onSave() {
+        alert(<span class="hljs-string">'请求数据：'</span> + <span class="hljs-built_in">JSON</span>.stringify(<span class="hljs-keyword">this</span>.res));
+    }
+}

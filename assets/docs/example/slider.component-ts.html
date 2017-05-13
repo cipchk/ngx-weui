@@ -1,0 +1,18 @@
+<span class="hljs-keyword">import</span> { Component, ViewEncapsulation } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+
+<span class="hljs-meta">@Component</span>({
+    selector: <span class="hljs-string">'example-slider'</span>,
+    templateUrl: <span class="hljs-string">'./slider.component.html'</span>,
+    styleUrls: [ <span class="hljs-string">'./slider.component.scss'</span> ],
+    encapsulation: ViewEncapsulation.None
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> SliderComponent {
+    res1: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>;
+    res2: <span class="hljs-built_in">number</span> = <span class="hljs-number">10</span>;
+
+    switchState: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">true</span>;
+
+    onChange(value: <span class="hljs-built_in">any</span>) {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'new'</span>, value)
+    }
+}

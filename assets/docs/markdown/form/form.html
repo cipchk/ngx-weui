@@ -1,0 +1,24 @@
+<html><head></head><body><div class="docs-markdown"><p class="docs-markdown-p">/**</p>
+<ul class="docs-markdown-ul">
+<li class="docs-markdown-li">文本框，指令是对文本框格式校验（邮箱、手机、身份证等）、视觉效果的增强而已</li>
+<li class="docs-markdown-li"></li>
+<li class="docs-markdown-li">@example</li>
+<li class="docs-markdown-li">1、必填手机号，同时带有视觉效果</li>
+<li class="docs-markdown-li"><input type="tel" weui-input="mobile" weui-required=""></li>
+<li class="docs-markdown-li">2、自定义银行卡号</li>
+<li class="docs-markdown-li"><input type="tel" weui-input="number" weui-requied="" weui-regex="[0-9]*" [(ngmodel)]="res.no" name="no">
+*/</li>
+</ul>
+<p class="docs-markdown-p">/**</p>
+<ul class="docs-markdown-ul">
+<li class="docs-markdown-li">文本域字数统计</li>
+<li class="docs-markdown-li">@example </li>
+<li class="docs-markdown-li"><p class="docs-markdown-p"><textarea weui-textarea="" weui-cn="2" maxlength="20"></textarea>
+*/</p>
+</li>
+<li class="docs-markdown-li"><p class="docs-markdown-p">@example</p>
+</li>
+<li class="docs-markdown-li"><button [weui-vcode]="onSendCode" weui-seconds="10" weui-tpl="${num}s" weui-error="重新发送">获取验证码</button>
+</li>
+</ul>
+</div></body></html>

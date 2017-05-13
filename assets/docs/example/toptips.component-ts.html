@@ -1,0 +1,36 @@
+<span class="hljs-keyword">import</span> { Component, ViewEncapsulation, ViewChild } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+
+<span class="hljs-keyword">import</span> { ToptipsComponent, ToptipsService } <span class="hljs-keyword">from</span> <span class="hljs-string">"ngx-weui/toptips"</span>;
+
+<span class="hljs-meta">@Component</span>({
+    selector: <span class="hljs-string">'example-toptips'</span>,
+    templateUrl: <span class="hljs-string">'./toptips.component.html'</span>,
+    styleUrls: [ <span class="hljs-string">'./toptips.component.scss'</span> ],
+    encapsulation: ViewEncapsulation.None
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> DemoToptipsComponent {
+
+    <span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">'toptips'</span>) toptips: ToptipsComponent;
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> asSrv: ToptipsService</span>) { }
+
+    onShow(<span class="hljs-keyword">type</span>: <span class="hljs-string">'warn'</span> | <span class="hljs-string">'info'</span> | <span class="hljs-string">'primary'</span>) {
+        <span class="hljs-keyword">this</span>.toptips.type = <span class="hljs-keyword">type</span>;
+        <span class="hljs-keyword">switch</span> (<span class="hljs-keyword">type</span>) {
+            <span class="hljs-keyword">case</span> <span class="hljs-string">'warn'</span>:
+                <span class="hljs-keyword">this</span>.toptips.text = <span class="hljs-string">' Oops, something is wrong! '</span>;
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">'primary'</span>:
+                <span class="hljs-keyword">this</span>.toptips.text = <span class="hljs-string">' Success submited! '</span>;
+                <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">'info'</span>:
+                <span class="hljs-keyword">this</span>.toptips.text = <span class="hljs-string">' Thanks for coming! '</span>;
+                <span class="hljs-keyword">break</span>;
+        }
+        <span class="hljs-keyword">this</span>.toptips.onShow();
+    }
+
+    onShowBySrv(<span class="hljs-keyword">type</span>: <span class="hljs-string">'warn'</span> | <span class="hljs-string">'info'</span> | <span class="hljs-string">'primary'</span> | <span class="hljs-string">'success'</span> | <span class="hljs-string">'default'</span>) {
+        <span class="hljs-keyword">this</span>.asSrv[<span class="hljs-keyword">type</span>](<span class="hljs-string">'这是一段文字'</span>);
+    }
+
+}

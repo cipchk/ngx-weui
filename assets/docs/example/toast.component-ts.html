@@ -1,0 +1,25 @@
+<span class="hljs-keyword">import</span> { Component, ViewEncapsulation, ViewChild } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+
+<span class="hljs-keyword">import</span> { ToastComponent, ToastService } <span class="hljs-keyword">from</span> <span class="hljs-string">"ngx-weui/toast"</span>;
+
+<span class="hljs-meta">@Component</span>({
+    selector: <span class="hljs-string">'example-toast'</span>,
+    templateUrl: <span class="hljs-string">'./toast.component.html'</span>,
+    styleUrls: [ <span class="hljs-string">'./toast.component.scss'</span> ],
+    encapsulation: ViewEncapsulation.None
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> DemoToastComponent {
+
+    <span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">'success'</span>) successToast: ToastComponent;
+    <span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">'loading'</span>) loadingToast: ToastComponent;
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> asSrv: ToastService</span>) { }
+
+    onShow(<span class="hljs-keyword">type</span>: <span class="hljs-string">'success'</span> | <span class="hljs-string">'loading'</span>) {
+        (&lt;ToastComponent&gt;<span class="hljs-keyword">this</span>[<span class="hljs-string">`<span class="hljs-subst">${type}</span>Toast`</span>]).onShow();
+    }
+
+    onShowBySrv(<span class="hljs-keyword">type</span>: <span class="hljs-string">'success'</span> | <span class="hljs-string">'loading'</span>) {
+        <span class="hljs-keyword">this</span>.asSrv[<span class="hljs-keyword">type</span>]();
+    }
+
+}

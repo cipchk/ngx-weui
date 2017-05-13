@@ -1,0 +1,31 @@
+<span class="hljs-comment">// #docregion</span>
+<span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> { Jsonp, URLSearchParams } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/http'</span>;
+
+<span class="hljs-keyword">import</span> <span class="hljs-string">'rxjs/add/operator/map'</span>;
+
+<span class="hljs-meta">@Injectable</span>()
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> WikipediaService {
+  <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> jsonp: Jsonp</span>) {}
+
+  search (term: <span class="hljs-built_in">string</span>) {
+
+    <span class="hljs-keyword">let</span> wikiUrl = <span class="hljs-string">'https://zh.wikipedia.org/w/api.php'</span>;
+
+    <span class="hljs-comment">// #docregion search-parameters</span>
+    <span class="hljs-keyword">let</span> params = <span class="hljs-keyword">new</span> URLSearchParams();
+    params.set(<span class="hljs-string">'search'</span>, term); <span class="hljs-comment">// the user's search value</span>
+    params.set(<span class="hljs-string">'action'</span>, <span class="hljs-string">'opensearch'</span>);
+    params.set(<span class="hljs-string">'limit'</span>, <span class="hljs-string">'5'</span>);
+    params.set(<span class="hljs-string">'format'</span>, <span class="hljs-string">'json'</span>);
+    params.set(<span class="hljs-string">'callback'</span>, <span class="hljs-string">'JSONP_CALLBACK'</span>);
+    <span class="hljs-comment">// #enddocregion search-parameters</span>
+
+    <span class="hljs-comment">// #docregion call-jsonp</span>
+    <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> Add error handling</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.jsonp
+               .get(wikiUrl, { search: params })
+               .map(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> &lt;<span class="hljs-built_in">string</span>[]&gt; response.json()[<span class="hljs-number">1</span>]);
+    <span class="hljs-comment">// #enddocregion call-jsonp</span>
+  }
+}

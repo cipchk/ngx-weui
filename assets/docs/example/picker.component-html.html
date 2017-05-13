@@ -1,0 +1,89 @@
+<span class="hljs-tag">&lt;<span class="hljs-name">Page</span> [<span class="hljs-attr">ngClass</span>]=<span class="hljs-string">"'picker'"</span> [<span class="hljs-attr">title</span>]=<span class="hljs-string">"'Picker'"</span> [<span class="hljs-attr">subTitle</span>]=<span class="hljs-string">"'多列选择器'"</span> [<span class="hljs-attr">spacing</span>]=<span class="hljs-string">"false"</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>Form Result: {{ res | json }}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">form</span> #<span class="hljs-attr">f</span>=<span class="hljs-string">"ngForm"</span> (<span class="hljs-attr">ngSubmit</span>)=<span class="hljs-string">"onSave()"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cells weui-cells_form"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__hd"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-label"</span>&gt;</span>* City<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__bd"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">weui-city-picker</span> <span class="hljs-attr">required</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Pick a City"</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"res.city"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"city"</span>
+                        [<span class="hljs-attr">data</span>]=<span class="hljs-string">"cityData"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">weui-city-picker</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cells weui-cells_form"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__hd"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-label"</span>&gt;</span>Date<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__bd"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">weui-date-picker</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Pick a Date"</span>
+                        [<span class="hljs-attr">min</span>]=<span class="hljs-string">"DT.min"</span> [<span class="hljs-attr">max</span>]=<span class="hljs-string">"DT.max"</span>
+                        [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"res.date"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"date"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">weui-date-picker</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cells weui-cells_form"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__hd"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-label"</span>&gt;</span>DateTime<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__bd"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">weui-date-picker</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Pick a DateTime"</span>
+                        <span class="hljs-attr">type</span>=<span class="hljs-string">"datetime"</span> [<span class="hljs-attr">format</span>]=<span class="hljs-string">"{hu:'',mu:''}"</span>
+                        [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"res.date2"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"date2"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">weui-date-picker</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cells weui-cells_form"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__hd"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-label"</span>&gt;</span>Time<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__bd"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">weui-date-picker</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Pick a Time"</span>
+                        <span class="hljs-attr">type</span>=<span class="hljs-string">"time"</span>
+                        [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"res.date3"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"date2"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">weui-date-picker</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cells weui-cells_form"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__hd"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-label"</span>&gt;</span>*Direct Picker<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__bd"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">weui-picker</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Pick a item"</span> <span class="hljs-attr">required</span>
+                        [<span class="hljs-attr">groups</span>]=<span class="hljs-string">"items"</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"res.item"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"item"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">weui-picker</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cells weui-cells_form"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__hd"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-label"</span>&gt;</span>Direct Picker<span class="hljs-tag">&lt;/<span class="hljs-name">label</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__bd"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">weui-picker</span> <span class="hljs-attr">placeholder</span>=<span class="hljs-string">"Pick a item"</span> [(<span class="hljs-attr">ngModel</span>)]=<span class="hljs-string">"res.mitem"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"mitem"</span>
+                        [<span class="hljs-attr">groups</span>]=<span class="hljs-string">"itemGroup"</span>
+                        [<span class="hljs-attr">options</span>]=<span class="hljs-string">"{cancel:'Cancel', confirm:'Confirm', backdrop: false}"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">weui-picker</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-btn-area"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">weui-button</span> [<span class="hljs-attr">disabled</span>]=<span class="hljs-string">"!f.form.valid || !f.form.dirty"</span>&gt;</span>保存<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">form</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cells__title"</span>&gt;</span>使用Service形式<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"margin-bottom: 8px;"</span>&gt;</span>Service Result: {{srvRes | json}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-btn-area"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">weui-button</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> <span class="hljs-attr">weui-mini</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onShowBySrv('city')"</span>&gt;</span>CityPicker<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">weui-button</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> <span class="hljs-attr">weui-mini</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onShowBySrv('date')"</span>&gt;</span>DatePicker<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">weui-button</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> <span class="hljs-attr">weui-mini</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onShowBySrv('datetime')"</span>&gt;</span>DateTimePicker<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">weui-button</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> <span class="hljs-attr">weui-mini</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onShowBySrv('time')"</span>&gt;</span>TimePicker<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">weui-button</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> <span class="hljs-attr">weui-mini</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onShowBySrv('data')"</span>&gt;</span>Data Picker<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">Page</span>&gt;</span>

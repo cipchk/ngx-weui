@@ -1,0 +1,18 @@
+<span class="hljs-keyword">import</span> { Component, ViewEncapsulation, Input } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-meta">@Component</span>({
+    selector: <span class="hljs-string">'example-msg'</span>,
+    template: <span class="hljs-string">`
+    &lt;Page [ngClass]="'msg'"
+      [title]="'Msg'"
+      [subTitle]="'提示页'"&gt;
+
+      &lt;button weui-button weui-type="default" [routerLink]="['/' + moduleName, 'msg_success']"&gt;成功提示页&lt;/button&gt;
+      &lt;button weui-button weui-type="default" [routerLink]="['/' + moduleName, 'msg_fail']"&gt;失败提示页&lt;/button&gt;
+
+    &lt;/Page&gt;
+    `</span>,
+    encapsulation: ViewEncapsulation.None
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> DemoMsgComponent {
+    <span class="hljs-meta">@Input</span>() moduleName: <span class="hljs-built_in">string</span> = <span class="hljs-string">'example'</span>;
+}

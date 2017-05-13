@@ -1,0 +1,32 @@
+<span class="hljs-tag">&lt;<span class="hljs-name">Page</span> [<span class="hljs-attr">ngClass</span>]=<span class="hljs-string">"'ptr'"</span> [<span class="hljs-attr">title</span>]=<span class="hljs-string">"'Pull To Refresh'"</span> [<span class="hljs-attr">subTitle</span>]=<span class="hljs-string">"'下拉刷新'"</span> [<span class="hljs-attr">spacing</span>]=<span class="hljs-string">"false"</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">weui-ptr</span> (<span class="hljs-attr">refresh</span>)=<span class="hljs-string">"onRefresh($event)"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"height: 200px; background: rgb(255, 255, 255);"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cells__title"</span>&gt;</span>List with link<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cells"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">a</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"let i of items"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell weui-cell_access"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"javascript:;"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__bd"</span>&gt;</span>{{i}}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__ft"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">weui-ptr</span>&gt;</span>
+   
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cells__title"</span>&gt;</span>自定义Loaders样式<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span> 
+    <span class="hljs-comment">&lt;!-- icon:null 必须是null自定义才会生效 --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">weui-ptr</span> (<span class="hljs-attr">refresh</span>)=<span class="hljs-string">"onRefresh($event)"</span> [<span class="hljs-attr">config</span>]=<span class="hljs-string">"{icon:null}"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"height: 200px; background: rgb(255, 255, 255);"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">loader</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"width:100%;"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"flex: 1 1 0%; padding: 5px;"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-ptr__icon"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">img</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"./assets/images/momentloader.png"</span> <span class="hljs-attr">width</span>=<span class="hljs-string">"40"</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cells__title"</span>&gt;</span>List with link<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cells"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">a</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"let i of items"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell weui-cell_access"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"javascript:;"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__bd"</span>&gt;</span>{{i}}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__ft"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">weui-ptr</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">Page</span>&gt;</span>

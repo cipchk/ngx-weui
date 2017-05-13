@@ -1,0 +1,11 @@
+<span class="hljs-keyword">import</span> { Component, ViewEncapsulation } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+
+<span class="hljs-meta">@Component</span>({
+    selector: <span class="hljs-string">'example-footer'</span>,
+    templateUrl: <span class="hljs-string">'./footer.component.html'</span>,
+    styleUrls: [ <span class="hljs-string">'./footer.component.scss'</span> ],
+    encapsulation: ViewEncapsulation.None
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> FooterComponent {
+    year: <span class="hljs-built_in">number</span> = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>().getFullYear();
+} 

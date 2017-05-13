@@ -1,0 +1,159 @@
+<span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+
+<span class="hljs-meta">@Injectable</span>()
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> MenuService {
+
+    menus: <span class="hljs-built_in">any</span> = [
+        {
+            name: <span class="hljs-string">'Form'</span>,
+            icon: <span class="hljs-string">'icon_nav_form'</span>,
+            isShow: <span class="hljs-literal">false</span>,
+            items: [
+                {
+                    label: <span class="hljs-string">'Button'</span>,
+                    to: <span class="hljs-string">'/button'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Input'</span>,
+                    to: <span class="hljs-string">'/input'</span>
+                },
+                {
+                    label: <span class="hljs-string">'List'</span>,
+                    to: <span class="hljs-string">'/list'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Slider'</span>,
+                    to: <span class="hljs-string">'/slider'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Picker'</span>,
+                    to: <span class="hljs-string">'/picker'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Uploader'</span>,
+                    to: <span class="hljs-string">'/uploader'</span>
+                }
+            ]
+        },
+        {
+            name: <span class="hljs-string">'Basic Components'</span>,
+            icon: <span class="hljs-string">'icon_nav_layout'</span>,
+            isShow: <span class="hljs-literal">false</span>,
+            items: [
+                {
+                    label: <span class="hljs-string">'Article'</span>,
+                    to: <span class="hljs-string">'/article'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Badge'</span>,
+                    to: <span class="hljs-string">'/badge'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Flex'</span>,
+                    to: <span class="hljs-string">'/flex'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Footer'</span>,
+                    to: <span class="hljs-string">'/footer'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Gallery'</span>,
+                    to: <span class="hljs-string">'/gallery'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Grid'</span>,
+                    to: <span class="hljs-string">'/grid'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Icons'</span>,
+                    to: <span class="hljs-string">'/icons'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Loadmore'</span>,
+                    to: <span class="hljs-string">'/loadmore'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Panel'</span>,
+                    to: <span class="hljs-string">'/panel'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Preview'</span>,
+                    to: <span class="hljs-string">'/preview'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Progress'</span>,
+                    to: <span class="hljs-string">'/progress'</span>
+                }
+            ]
+        },
+        {
+            name: <span class="hljs-string">'Feedbacks'</span>,
+            icon: <span class="hljs-string">'icon_nav_feedback'</span>,
+            isShow: <span class="hljs-literal">false</span>,
+            items: [
+                {
+                    label: <span class="hljs-string">'Actionsheet'</span>,
+                    to: <span class="hljs-string">'/actionsheet'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Dialog'</span>,
+                    to: <span class="hljs-string">'/dialog'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Msg'</span>,
+                    to: <span class="hljs-string">'/msg'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Toast'</span>,
+                    to: <span class="hljs-string">'/toast'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Toast'</span>,
+                    to: <span class="hljs-string">'/toast'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Toptips'</span>,
+                    to: <span class="hljs-string">'/toptips'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Popup'</span>,
+                    to: <span class="hljs-string">'/popup'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Pull To Refresh'</span>,
+                    to: <span class="hljs-string">'/ptr'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Infinite Loader'</span>,
+                    to: <span class="hljs-string">'/infiniteloader'</span>
+                }
+            ]
+        },
+        {
+            name: <span class="hljs-string">'Navigations'</span>,
+            icon: <span class="hljs-string">'icon_nav_nav'</span>,
+            isShow: <span class="hljs-literal">false</span>,
+            items: [
+                {
+                    label: <span class="hljs-string">'Navbar'</span>,
+                    to: <span class="hljs-string">'/navbar'</span>
+                },
+                {
+                    label: <span class="hljs-string">'Tabbar'</span>,
+                    to: <span class="hljs-string">'/tabbar'</span>
+                }
+            ]
+        },
+        {
+            name: <span class="hljs-string">'Search'</span>,
+            icon: <span class="hljs-string">'icon_nav_search'</span>,
+            isShow: <span class="hljs-literal">false</span>,
+            items: [
+                {
+                    label: <span class="hljs-string">'Search Bar'</span>,
+                    to: <span class="hljs-string">'/searchbar'</span>
+                }
+            ]
+        }
+    ]
+}
