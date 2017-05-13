@@ -11,7 +11,7 @@ const typescriptPackage = require('dgeni-packages/typescript');
 // Project configuration.
 const projectRootDir = path.resolve(__dirname, '../..');
 const sourceDir = path.resolve(projectRootDir, 'src/');
-const outputDir = path.resolve(projectRootDir, 'demo/dist/docs/api');
+const outputDir = path.resolve(projectRootDir, 'demo/src/assets/docs/api');
 const templateDir = path.resolve(__dirname, './templates');
 
 

@@ -1,7 +1,7 @@
 import { task, src, dest } from 'gulp';
 import { Dgeni } from 'dgeni';
 import * as path from 'path';
-import { DIST_DEMO_ROOT, HTML_MINIFIER_OPTIONS, SOURCE_ROOT } from '../constants';
+import { ASSETS_ROOT, HTML_MINIFIER_OPTIONS, SOURCE_ROOT } from '../constants';
 
 const markdown = require('gulp-markdown');
 const transform = require('gulp-transform');
@@ -12,7 +12,7 @@ const htmlmin = require('gulp-htmlmin');
 const hljs = require('highlight.js');
 const dom = require('gulp-dom');
 
-const DIST_DOCS = path.join(DIST_DEMO_ROOT, 'docs');
+const DIST_DOCS = path.join(ASSETS_ROOT, 'docs');
 
 // example 占位符
 const EXAMPLE_PATTERN = /<!--\W*example\(([^)]+)\)\W*-->/g;

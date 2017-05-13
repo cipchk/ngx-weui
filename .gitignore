@@ -9,6 +9,7 @@ npm-debug.log
 
 # ignore build and dist for now
 /demo/dist
+/demo/src/assets/docs
 /dist
 /coverage
 

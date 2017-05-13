@@ -3,12 +3,11 @@ import { Component, Input, Output, ViewEncapsulation, EventEmitter, OnDestroy, O
 @Component({
     selector: 'Accordion',
     template: `
-        <div [ngClass]="{'js_show': isShow}">
+        <div [ngClass]="{'js_show': show}">
             <div (click)="onChangeStatus()"><ng-content select="[header]"></ng-content></div>
             <ng-content></ng-content>
         </div>
     `,
-    styleUrls: ['./accordion.component.scss'],
     host: {
         '[class.accordion]': 'true'
     },
@@ -16,11 +15,11 @@ import { Component, Input, Output, ViewEncapsulation, EventEmitter, OnDestroy, O
 })
 export class AccordionComponent {
 
-    @Input() isShow: boolean;
-    @Output() isShowChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Input() show: boolean;
+    @Output() showChange: EventEmitter<boolean> = new EventEmitter<boolean>();
 
     onChangeStatus() {
-        this.isShow = !this.isShow;
-        this.isShowChange.emit(this.isShow);
+        this.show = !this.show;
+        this.showChange.emit(this.show);
     }
 }

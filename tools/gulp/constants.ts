@@ -8,6 +8,7 @@ export const SOURCE_ROOT = join(PROJECT_ROOT, 'src');
 /** Root build output directory */
 export const DIST_ROOT = join(PROJECT_ROOT, 'dist');
 export const DIST_DEMO_ROOT = join(PROJECT_ROOT, 'demo/dist');
+export const ASSETS_ROOT = join(PROJECT_ROOT, 'demo/src/assets');
 
 /** Output subdirectory where all bundles will be written (flat ES modules and UMD) */
 export const DIST_BUNDLES = join(DIST_ROOT, 'bundles');
