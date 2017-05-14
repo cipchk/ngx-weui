@@ -54,7 +54,7 @@ export class InputDirective implements OnChanges, Validator {
 
     ngOnInit() {
         this.parentEl = findParent(this.el.nativeElement, '.weui-cell');
-        if (!this.parentEl) throw new Error('文本框必须加上weui-cell类名');
+        if (!this.parentEl) throw new Error('父DOM结构至少必须包含一个.weui-cell');
         // 检查是否有 weui-cell__ft
         this.ftEl = add(this.parentEl);
     }
