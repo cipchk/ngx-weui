@@ -99,7 +99,7 @@ export class InputDirective implements OnChanges, Validator {
                         this.cleaner = true;
                         break;
                     case 'idcard': // 身份证
-                        regex = /^[0-9]{15,18}$/;
+                        regex = /^[X0-9]{15,18}$/;
                         this.cleaner = true;
                         break;
                 }
