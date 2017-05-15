@@ -22,8 +22,7 @@ export class ProgressComponent {
      * @type {number}
      */
     @Input() set value(d: number) {
-        if (d < 0 || d > 100) throw new Error('默认进度值取消范围必须是0-100');
-        this._value = d;
+        this._value = Math.max(0, Math.min(100, d));
     }
 
     /**
