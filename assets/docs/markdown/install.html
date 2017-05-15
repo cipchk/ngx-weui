@@ -1,4 +1,11 @@
 <html><head></head><body><div class="docs-markdown"><h1 id="-" class="docs-markdown-h1">使用介绍</h1>
+<h2 id="-" class="docs-markdown-h2">安装</h2>
+<pre class="docs-markdown-pre"><code class="lang-bash docs-markdown-code">npm install ngx-weui --save
+</code></pre>
+<p class="docs-markdown-p"><code class="docs-markdown-code">ngx-weui</code> 是不带任何weui样式的，所以你还需要导入weui.css文件。比如直接在 <code class="docs-markdown-code">index.html</code> 里加载官方CDN。</p>
+<pre class="docs-markdown-pre"><code class="lang-html docs-markdown-code"><span class="hljs-comment">&lt;!-- index.html --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"//res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css"</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span>&gt;</span>
+</code></pre>
 <h2 id="-" class="docs-markdown-h2">模块注册</h2>
 <p class="docs-markdown-p"><code class="docs-markdown-code">ngx-weui</code> 默认情况下可以直接使用：</p>
 <pre class="docs-markdown-pre"><code class="lang-typescript docs-markdown-code"><span class="hljs-keyword">import</span> { WeUiModule } <span class="hljs-keyword">from</span> <span class="hljs-string">'ngx-weui'</span>;
