@@ -5,7 +5,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect, async, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { ToastModule, ToastComponent, ToastConfig, ToastService } from '../Toast';
+import { ToastModule, ToastComponent, ToastConfig, ToastService } from '../toast';
 
 describe('Component: Toast', () => {
 
