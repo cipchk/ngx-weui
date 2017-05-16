@@ -1,7 +1,7 @@
 import { Component, Input, EventEmitter, Output, ElementRef, ViewEncapsulation, ViewChild, SimpleChanges, OnChanges, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs/Rx';
 import { findParent } from "../utils/dom";
-import { PositionType, ModeType } from "./sidebar.config";
+import { SidebarConfig, PositionType, ModeType } from "./sidebar.config";
 import { SidebarService } from './sidebar.service';
 import { isIOS } from "../utils/browser";
 
@@ -96,7 +96,9 @@ export class SidebarComponent implements OnChanges, OnDestroy {
     private _clickEvent: string = 'click';
     private _onClickOutsideAttached: boolean = false;
 
-    constructor(private _sidebarService: SidebarService) {
+    constructor(private _sidebarService: SidebarService, config: SidebarConfig) {
+        Object.assign(this, config);
+        
         if (isIOS() && 'ontouchstart' in window) {
             this._clickEvent = 'touchstart';
         }
