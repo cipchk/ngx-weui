@@ -147,6 +147,10 @@ export class MenuService {
                 {
                     label: 'Tabbar',
                     id: 'tabbar'
+                },
+                {
+                    label: 'Sidebar',
+                    id: 'sidebar'
                 }
             ]
         },

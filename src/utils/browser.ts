@@ -3,10 +3,24 @@ import { ɵgetDOM as getDOM } from '@angular/platform-browser';
 declare const window: any;
 
 /**
+ * 检查是否浏览器
+ */
+export function isBrowser(): boolean {
+    return typeof window !== 'undefined';
+}
+
+/**
  * 检查是否安卓系统 
  */
 export function isAndroid() {
     return /android (\d+)/.test(getDOM().getUserAgent().toLowerCase());
+}
+
+/**
+ * 检查是否IOS系统
+ */
+export function isIOS(): boolean {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
 }
 
 /**

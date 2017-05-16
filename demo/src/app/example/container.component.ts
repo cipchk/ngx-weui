@@ -35,6 +35,7 @@ import { ActivatedRoute, Router } from "@angular/router";
     <example-navbar *ngSwitchCase="'navbar'"></example-navbar>
     <example-tabbar *ngSwitchCase="'tabbar'"></example-tabbar>
     <example-searchbar *ngSwitchCase="'searchbar'"></example-searchbar>
+    <example-sidebar *ngSwitchCase="'sidebar'"></example-sidebar>
 </div>
     `
 })

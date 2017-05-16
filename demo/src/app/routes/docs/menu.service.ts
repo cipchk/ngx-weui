@@ -190,6 +190,10 @@ export class MenuService {
                 {
                     "name": "Uploader",
                     "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png'
+                },
+                {
+                    "name": "Sidebar",
+                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png'
                 }
             ]
         },

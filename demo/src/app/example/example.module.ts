@@ -35,6 +35,7 @@ import { DemoMsgSuccessComponent } from './msg/success.component';
 import { DemoPopupComponent } from './popup/popup.component';
 import { DemoPTRComponent } from './ptr/ptr.component';
 import { DemoInfiniteLoaderComponent } from './infiniteloader/infiniteloader.component'
+import { DemoSidebarComponent } from './sidebar/sidebar.component'
 
 const MODULES = [
     ContainerComponent, PageComponent, AccordionComponent,
@@ -44,7 +45,7 @@ const MODULES = [
     DemoLoadmoreComponent, DemoProgressComponent, DemoGalleryComponent, DemoPickerComponent,
     DemoSearchBarComponent, DemoNavbarComponent, DemoTabbarComponent, DemoToastComponent,
     DemoToptipsComponent, DemoMsgComponent, DemoMsgFailComponent, DemoMsgSuccessComponent,
-    DemoPopupComponent, DemoPTRComponent, DemoInfiniteLoaderComponent
+    DemoPopupComponent, DemoPTRComponent, DemoInfiniteLoaderComponent, DemoSidebarComponent
 ]
 
 @NgModule({
