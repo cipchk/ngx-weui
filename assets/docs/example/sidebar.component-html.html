@@ -1,0 +1,38 @@
+<span class="hljs-tag">&lt;<span class="hljs-name">weui-sidebar-container</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">weui-sidebar</span>
+        [(<span class="hljs-attr">status</span>)]=<span class="hljs-string">"_status"</span>
+        [<span class="hljs-attr">mode</span>]=<span class="hljs-string">"mode"</span>
+        [<span class="hljs-attr">position</span>]=<span class="hljs-string">"position"</span>
+        [<span class="hljs-attr">backdrop</span>]=<span class="hljs-string">"backdrop"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-article"</span>&gt;</span>
+             <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>这是侧边栏内容<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+             <span class="hljs-tag">&lt;<span class="hljs-name">weui-button</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"toggleOpened()"</span>&gt;</span>关闭<span class="hljs-tag">&lt;/<span class="hljs-name">weui-button</span>&gt;</span>
+             <span class="hljs-tag">&lt;<span class="hljs-name">weui-button</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> <span class="hljs-attr">closeSidebar</span>&gt;</span>使用指令[closeSidebar]关闭<span class="hljs-tag">&lt;/<span class="hljs-name">weui-button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">weui-sidebar</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Page</span> [<span class="hljs-attr">ngClass</span>]=<span class="hljs-string">"'sidebar'"</span>
+        [<span class="hljs-attr">title</span>]=<span class="hljs-string">"'Sidebar'"</span>
+        [<span class="hljs-attr">subTitle</span>]=<span class="hljs-string">"'侧边栏'"</span>
+        [<span class="hljs-attr">ftBottom</span>]=<span class="hljs-string">"true"</span>&gt;</span>
+
+        <span class="hljs-tag">&lt;<span class="hljs-name">weui-button</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"toggleOpened()"</span>&gt;</span>打开<span class="hljs-tag">&lt;/<span class="hljs-name">weui-button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button-sp-area"</span>&gt;</span>
+            Mode:
+            <span class="hljs-tag">&lt;<span class="hljs-name">weui-button</span> <span class="hljs-attr">weui-mini</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"mode='over'"</span>&gt;</span>Over<span class="hljs-tag">&lt;/<span class="hljs-name">weui-button</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">weui-button</span> <span class="hljs-attr">weui-mini</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"mode='slide'"</span>&gt;</span>Slide<span class="hljs-tag">&lt;/<span class="hljs-name">weui-button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button-sp-area"</span>&gt;</span>
+            Position:
+            <span class="hljs-tag">&lt;<span class="hljs-name">weui-button</span> <span class="hljs-attr">weui-mini</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"position='left'"</span>&gt;</span>Left<span class="hljs-tag">&lt;/<span class="hljs-name">weui-button</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">weui-button</span> <span class="hljs-attr">weui-mini</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"position='right'"</span>&gt;</span>Right<span class="hljs-tag">&lt;/<span class="hljs-name">weui-button</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">weui-button</span> <span class="hljs-attr">weui-mini</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"position='top'"</span>&gt;</span>Top<span class="hljs-tag">&lt;/<span class="hljs-name">weui-button</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">weui-button</span> <span class="hljs-attr">weui-mini</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"position='bottom'"</span>&gt;</span>Bottom<span class="hljs-tag">&lt;/<span class="hljs-name">weui-button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"button-sp-area"</span>&gt;</span>
+            点击背景关闭:
+            <span class="hljs-tag">&lt;<span class="hljs-name">weui-button</span> <span class="hljs-attr">weui-mini</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"backdrop=true"</span>&gt;</span>允许<span class="hljs-tag">&lt;/<span class="hljs-name">weui-button</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">weui-button</span> <span class="hljs-attr">weui-mini</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"backdrop=false"</span>&gt;</span>禁止<span class="hljs-tag">&lt;/<span class="hljs-name">weui-button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Page</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">weui-sidebar-container</span>&gt;</span>
