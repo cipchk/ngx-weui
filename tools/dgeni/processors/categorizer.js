@@ -72,7 +72,10 @@ module.exports = function categorizer() {
 
     function isTwoWays(doc, list) {
         doc.isTwoWays = false;
-        let changeIdx = _.findIndex(list, function(p) { return p.name === doc.name + 'Change'; });
+        let changeIdx = _.findIndex(list, function(p) {
+            if (!p) return false;
+            return p.name === doc.name + 'Change';
+        });
         if (changeIdx === -1) return;
         doc.isTwoWays = true;
         delete list[changeIdx];
