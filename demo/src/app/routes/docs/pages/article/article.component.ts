@@ -1,6 +1,8 @@
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
 import { MenuService } from './../../menu.service';
+
+import { NavbarComponent } from 'ngx-weui';
 
 @Component({
     selector: 'docs-article',
@@ -9,6 +11,9 @@ import { MenuService } from './../../menu.service';
     encapsulation: ViewEncapsulation.None
 })
 export class DocsArticleComponent {
+
+    @ViewChild('navbar') navbar: NavbarComponent;
+    @ViewChild('codebar') codebar: NavbarComponent;
 
     constructor(private router: Router, 
                 private route: ActivatedRoute,
@@ -23,6 +28,12 @@ export class DocsArticleComponent {
             for (let item of items) {
                 if (item.name.toLowerCase() == this.id) {
                     this.menu = Object.assign({}, item);
+                    setTimeout(() => {
+                        if (this.menu.doc_overview === true)
+                            this.navbar.tabs[0].active = true;
+                        else
+                            this.navbar.tabs[1].active = true;
+                    })
                     return;
                 }
             }
@@ -34,6 +45,6 @@ export class DocsArticleComponent {
     }
 
     extFileUrl(ext: string) {
-        return `./assets/docs/example/${this.id}.component-${ext.toLowerCase()}.html`;
+        return `./assets/docs/example/${this.menu.ext_url || this.id}.component-${ext.toLowerCase()}.html`;
     }
 }

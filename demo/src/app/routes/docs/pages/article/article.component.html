@@ -8,12 +8,12 @@
     </split-area>
     <split-area [size]="60">
         <div class="App__detail">
-            <weui-navbar>
-                <!--<weui-tab heading="OVERVIEW">
+            <weui-navbar #navbar>
+                <weui-tab heading="OVERVIEW">
                     <div class="weui-article">
-                        <doc-viewer url="/assets/docs/markdown/{{id}}/{{id}}.html"></doc-viewer>
+                        <doc-viewer url="/assets/docs/markdown/{{menu.ov_url || id}}/{{menu.ov_url || id}}.html"></doc-viewer>
                     </div>
-                </weui-tab>-->
+                </weui-tab>
                 <weui-tab heading="API">
                     <div class="weui-article">
                         <doc-viewer *ngIf="menu.api !== false" [url]="apiUrl()"></doc-viewer>
@@ -22,7 +22,7 @@
                 </weui-tab>
                 <weui-tab heading="Sample Code">
                     <div class="weui-article">
-                        <weui-navbar>
+                        <weui-navbar #codebar>
                             <weui-tab [heading]="ext" *ngFor="let ext of ['HTML', 'TS', 'SCSS']">
                                 <pre class="docs-example-source" style="height:600px;"><doc-viewer [url]="extFileUrl(ext)"></doc-viewer></pre>
                             </weui-tab>

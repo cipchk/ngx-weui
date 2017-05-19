@@ -198,6 +198,19 @@ export class MenuService {
                 {
                     "name": "Swiper",
                     "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png'
+                },
+                {
+                    "name": "Countdown",
+                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "doc_overview": true
+                },
+                {
+                    "name": "Gesture Password",
+                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "ov_url": "gesture-password",
+                    "example": "gesture-password",
+                    "ext_url": "gesture-password",
+                    "doc_overview": true
                 }
             ]
         },

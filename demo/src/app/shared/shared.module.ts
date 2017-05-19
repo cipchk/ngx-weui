@@ -6,6 +6,10 @@ import { HttpModule, Http, JsonpModule } from '@angular/http';
 
 import { WeUiModule, ButtonConfig } from 'ngx-weui';
 
+import { CountdownModule } from 'ngx-countdown';
+import { NotifyModule } from 'ngx-notify';
+import { GesturePasswordModule } from 'ngx-gesture-password';
+
 import { ChecklistDirective } from "./directives/checklist";
 
 @NgModule({
@@ -15,7 +19,14 @@ import { ChecklistDirective } from "./directives/checklist";
         ReactiveFormsModule,
         HttpModule, JsonpModule,
 
-        WeUiModule.forRoot()
+        WeUiModule.forRoot(),
+        CountdownModule,
+        NotifyModule.forRoot({
+            notify: {
+                progress: false
+            }
+        }),
+        GesturePasswordModule
     ],
     providers: [
         // { provide: ButtonConfig, useFactory: ()=> { return Object.assign(new ButtonConfig(), { type: 'warn' }); } }
@@ -31,7 +42,9 @@ import { ChecklistDirective } from "./directives/checklist";
         RouterModule,
         
         ChecklistDirective,
-        WeUiModule
+        WeUiModule,
+
+        CountdownModule, NotifyModule, GesturePasswordModule
     ],
     entryComponents: [
     ]

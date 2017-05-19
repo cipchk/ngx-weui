@@ -1,5 +1,5 @@
 import { Http } from '@angular/http';
-import { Component, OnDestroy, Input, ElementRef, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, Input, ElementRef, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
 @Component({
     selector: 'doc-viewer',
     template: `Loading document...`, 
@@ -12,6 +12,7 @@ export class DocViewerComponent {
     set url(url: string) {
         this._fetchDocument(url);
     }
+    @Input() error: string = 'Nothing';
 
     constructor(private el: ElementRef, private http: Http) { }
 
@@ -26,16 +27,16 @@ export class DocViewerComponent {
             response => {
                 if (response.ok) {
                     let docHtml = response.text();
+                    if (docHtml == '<html><head></head><body><div class="docs-markdown"></div></body></html>')
+                        docHtml = `<p>${this.error}</p>`;
                     this._cached[url] = docHtml;
                     this.el.nativeElement.innerHTML = docHtml;
                 } else {
-                    this.el.nativeElement.innerText =
-                        `Failed to load document: ${url}. Error: ${response.status}`;
+                this.el.nativeElement.innerText = this.error;
                 }
             },
             error => {
-                this.el.nativeElement.innerText =
-                    `Nothing`;
+                this.el.nativeElement.innerText = this.error;
             });
     }
 

@@ -10,10 +10,10 @@ export class DemoSwiperComponent {
     log: string = '';
     options: any = {
         onInit: () => {
-            this.log = '初始化完成';
+            setTimeout(() => { this.log = '初始化完成'; });
         },
         onSlideChangeEnd: (swiper: any) => {
-            this.log = `移动至第 ${swiper.realIndex + 1} 张`
+            setTimeout(() => { this.log = `移动至第 ${swiper.realIndex + 1} 张`; });
         }
     };
     images: any[] = [

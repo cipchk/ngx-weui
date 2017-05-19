@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from "@angular/router";
 @Component({
     selector: 'component-container',
     template: `
-<div [ngSwitch]="menu.id" style="height:100%">
+<div [ngSwitch]="menu.example || menu.id" style="height:100%">
     <example-button *ngSwitchCase="'button'"></example-button>
     <example-input *ngSwitchCase="'input'"></example-input>
     <example-list *ngSwitchCase="'list'"></example-list>
@@ -37,6 +37,8 @@ import { ActivatedRoute, Router } from "@angular/router";
     <example-searchbar *ngSwitchCase="'searchbar'"></example-searchbar>
     <example-sidebar *ngSwitchCase="'sidebar'"></example-sidebar>
     <example-swiper *ngSwitchCase="'swiper'"></example-swiper>
+    <example-countdown *ngSwitchCase="'countdown'"></example-countdown>
+    <example-gesture-password *ngSwitchCase="'gesture-password'"></example-gesture-password>
 </div>
     `
 })

@@ -87,6 +87,14 @@ export class MenuService {
                 {
                     label: 'Swiper',
                     id: 'swiper'
+                },
+                {
+                    label: 'Countdown',
+                    id: 'countdown'
+                },
+                {
+                    label: 'Gesture Password',
+                    id: 'gesture-password'
                 }
             ]
         },
