@@ -1,8 +1,8 @@
-import { Directive, OnInit, Input, HostBinding, Output, EventEmitter } from '@angular/core';
+import { Directive, OnInit, Input, HostBinding, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { BarComponent } from './bar.component';
 
 @Directive({ selector: 'weui-tab, [weui-tab]' })
-export class TabDirective {
+export class TabDirective implements OnDestroy {
     /** 选项卡名称 */
     @Input() heading: string;
     /** 是否禁用 */
@@ -54,4 +54,9 @@ export class TabDirective {
         this._tabComp = tab;
         this._tabComp.add(this);
     }
+
+    ngOnDestroy(): void {
+        this._tabComp.remove(this);
+    }
+    
 }
