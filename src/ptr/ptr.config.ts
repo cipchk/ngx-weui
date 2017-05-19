@@ -3,25 +3,32 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class PTRConfig {
     /**
-     * 下拉显示文本
+     * 是否使用默认icon样式
+     * 
+     * @type {boolean}
+     * @default false
+     */
+    customIcon?: boolean = false;
+    /**
+     * 下拉icon，支持HTML
      * 
      * @type {string}
      */
-    pull?: string = '';
+    pullIcon?: string = '<i class="weui-icon-download"></i>';
 
     /**
-     * 加载中显示文本
+     * 加载中icon，支持HTML
      * 
      * @type {string}
      */
-    loading?: string = '';
+    loadingIcon?: string = '<i class="weui-loading"></i>';
 
     /**
-     * icon代码，支持HTML
+     * 加载成功icon，支持HTML
      * 
      * @type {string}
      */
-    icon?: string = '<i class="weui-icon-download"></i>';
+    successIcon?: string = '<i class="weui-icon-success"></i>';
 
     /**
      * 下拉刷新容器高度（单位：px）
@@ -31,9 +38,10 @@ export class PTRConfig {
     height?: number = 100;
 
     /**
-     * 下拉范围有效
+     * 下拉范围有效（单位：%）
      * 
      * @type {number}
+     * @default 80
      */
-    treshold?: number = 60;
+    treshold?: number = 80;
 }

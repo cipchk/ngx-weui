@@ -11,8 +11,7 @@
     </weui-ptr>
    
     <div class="weui-cells__title">自定义Loaders样式</div> 
-    <!-- icon:null 必须是null自定义才会生效 -->
-    <weui-ptr (refresh)="onRefresh($event)" [config]="{icon:null}" style="height: 200px; background: rgb(255, 255, 255);">
+    <weui-ptr (refresh)="onRefresh($event)" [config]="{customIcon:true}" style="height: 200px; background: rgb(255, 255, 255);">
         <div loader style="width:100%;">
             <div style="flex: 1 1 0%; padding: 5px;">
                 <div class="weui-ptr__icon">
