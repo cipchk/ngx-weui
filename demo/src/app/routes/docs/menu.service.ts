@@ -194,6 +194,10 @@ export class MenuService {
                 {
                     "name": "Sidebar",
                     "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png'
+                },
+                {
+                    "name": "Swiper",
+                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png'
                 }
             ]
         },

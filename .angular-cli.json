@@ -15,8 +15,11 @@
         "test": "../../scripts/test.ts",
         "tsconfig": "tsconfig.json",
         "prefix": "",
-        "styles": [],
+        "styles": [
+            "../../node_modules/swiper/dist/css/swiper.css"
+        ],
         "scripts": [
+            "../../node_modules/swiper/dist/js/swiper.js"
         ],
         "environmentSource": "environments/environment.ts",
         "environments": {

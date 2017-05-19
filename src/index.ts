@@ -19,6 +19,7 @@ import { PopupModule } from "./popup/popup.module";
 import { PTRModule } from "./ptr/ptr.module";
 import { InfiniteLoaderModule } from "./infiniteloader/infiniteloader.module";
 import { SidebarModule } from "./sidebar/sidebar.module";
+import { SwiperModule } from "./swiper/swiper.module";
 
 export * from './utils/types';
 
@@ -41,12 +42,13 @@ export * from './popup';
 export * from './ptr';
 export * from './infiniteloader';
 export * from './sidebar';
+export * from './swiper';
 
 const MODULES = [
     CellModule, ButtonModule, FormModule, SliderModule, UploaderModule, ActionSheetModule, 
     DialogModule, LoadmoreModule, ProgressModule, GalleryModule, PickerModule, SearchBarModule,
     TabModule, ToastModule, ToptipsModule, PopupModule, PTRModule, InfiniteLoaderModule, 
-    SidebarModule
+    SidebarModule, SwiperModule
 ];
 
 @NgModule({
@@ -57,7 +59,7 @@ const MODULES = [
         GalleryModule.forRoot(), PickerModule.forRoot(), SearchBarModule.forRoot(),
         TabModule.forRoot(), ToastModule.forRoot(), ToptipsModule.forRoot(),
         PopupModule.forRoot(), PTRModule.forRoot(), InfiniteLoaderModule.forRoot(),
-        SidebarModule.forRoot()
+        SidebarModule.forRoot(), SwiperModule.forRoot()
     ],
     exports: MODULES
 })

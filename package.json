@@ -108,6 +108,7 @@
     "npm-run-all": "4.0.2",
     "protractor": "~5.1.1",
     "split.js": "^1.2.0",
+    "swiper": "^3.4.2",
     "ts-helpers": "^1.1.2",
     "ts-node": "~3.0.2",
     "tslint": "^4.5.1",

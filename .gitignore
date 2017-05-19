@@ -12,7 +12,7 @@ npm-debug.log
 /demo/src/assets/docs
 /dist
 /coverage
-/less/*.css
+/sass/*.css
 
 # ignore inline compiling
 /logs

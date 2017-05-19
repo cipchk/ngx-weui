@@ -83,6 +83,10 @@ export class MenuService {
                 {
                     label: 'Progress',
                     id: 'progress'
+                },
+                {
+                    label: 'Swiper',
+                    id: 'swiper'
                 }
             ]
         },
