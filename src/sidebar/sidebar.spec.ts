@@ -80,7 +80,6 @@ describe('Component: Sidebar', () => {
             context.status = true;
             fixture.detectChanges();
             expect(context._openStart).toHaveBeenCalled();
-            expect(context._opened).toHaveBeenCalled();
         }));
 
         it('should emit closes event', fakeAsync(() => {
@@ -89,7 +88,6 @@ describe('Component: Sidebar', () => {
             context.sidebar.close();
             fixture.detectChanges();
             expect(context._closeStart).toHaveBeenCalled();
-            expect(context._opened).toHaveBeenCalled();
         }));
 
     });
