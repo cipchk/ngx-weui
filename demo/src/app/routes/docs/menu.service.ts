@@ -197,7 +197,8 @@ export class MenuService {
                 },
                 {
                     "name": "Swiper",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png'
+                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "doc_overview": true
                 },
                 {
                     "name": "Countdown",
