@@ -10,10 +10,10 @@
     log: <span class="hljs-built_in">string</span> = <span class="hljs-string">''</span>;
     options: <span class="hljs-built_in">any</span> = {
         onInit: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-            <span class="hljs-keyword">this</span>.log = <span class="hljs-string">'初始化完成'</span>;
+            setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> { <span class="hljs-keyword">this</span>.log = <span class="hljs-string">'初始化完成'</span>; });
         },
         onSlideChangeEnd: <span class="hljs-function">(<span class="hljs-params">swiper: <span class="hljs-built_in">any</span></span>) =&gt;</span> {
-            <span class="hljs-keyword">this</span>.log = <span class="hljs-string">`移动至第 <span class="hljs-subst">${swiper.realIndex + 1}</span> 张`</span>
+            setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> { <span class="hljs-keyword">this</span>.log = <span class="hljs-string">`移动至第 <span class="hljs-subst">${swiper.realIndex + 1}</span> 张`</span>; });
         }
     };
     images: <span class="hljs-built_in">any</span>[] = [
