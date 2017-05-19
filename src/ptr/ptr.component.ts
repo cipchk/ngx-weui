@@ -7,14 +7,14 @@ import { PTRConfig } from "./ptr.config";
         <div class="weui-ptr__loader" 
             [ngStyle]="{
                 'height.px': config.height,
-                'margin-top.px': -config.height + (pullPercent / (100 / config.height)),
-                'transition': animating ? 'all .5s' : 'none'
+                'margin-top.px': -config.height + (_pullPercent / (100 / config.height)),
+                'transition': _animating ? 'all .5s' : 'none'
             }">
             <div style="flex: 1 1 0%; padding: 5px;" *ngIf="!config.customIcon">
-                <span [innerHTML]="pullPercent !== 100 ? config.pullIcon : loading ? config.loadingIcon : config.successIcon" class="weui-ptr__icon" style="display:inline-block"
+                <span [innerHTML]="_pullPercent !== 100 ? config.pullIcon : loading ? config.loadingIcon : config.successIcon" class="weui-ptr__icon" style="display:inline-block"
                     [ngStyle]="{
-                        'transform': 'rotate(' + -(pullPercent !== 100 ? pullPercent * 1.8 : 0) + 'deg)',
-                        'color': pullPercent !== 100 ? '#5f5f5f' : '#1AAD19'
+                        'transform': 'rotate(' + -(_pullPercent !== 100 ? _pullPercent * 1.8 : 0) + 'deg)',
+                        'color': _pullPercent !== 100 ? '#5f5f5f' : '#1AAD19'
                     }"></span>
                 <p *ngIf="_lastLabel">{{_lastLabel}}</p>
             </div>
@@ -36,9 +36,9 @@ export class PTRComponent implements OnChanges {
     private loading: boolean = false;
     private touching: boolean = false;
     private touchId: any;
-    private animating: boolean = false;
+    _animating: boolean = false;
     private initScrollTop: number = 0;
-    private pullPercent: number = 0;
+    _pullPercent: number = 0;
     private loaderEl: HTMLElement;
     private iconEl: HTMLElement;
     private contentEl: HTMLElement;
@@ -69,13 +69,13 @@ export class PTRComponent implements OnChanges {
      * @param {string} [lastUpdatedLabel] label 标签内容（支持HTML）
      */
     setFinished(lastUpdatedLabel?: string) {
-        this.pullPercent = 0;
+        this._pullPercent = 0;
         this.loading = false;
-        this.animating = true;
+        this._animating = true;
 
         if (!this.touching) {
             setTimeout(() => {
-                this.animating = false;
+                this._animating = false;
                 if (lastUpdatedLabel) this.setLastUpdatedLabel(lastUpdatedLabel);
             }, 350);
         }
@@ -86,9 +86,9 @@ export class PTRComponent implements OnChanges {
         if (this.touching || this.loading) return;
         this.touching = true;
         this.touchId = $event.targetTouches[0].identifier;
-        this.ogY = this.pullPercent === 0 ? $event.targetTouches[0].pageY : $event.targetTouches[0].pageY - this.pullPercent;
+        this.ogY = this._pullPercent === 0 ? $event.targetTouches[0].pageY : $event.targetTouches[0].pageY - this._pullPercent;
         this.initScrollTop = this.contentEl.scrollTop;
-        this.animating = false;
+        this._animating = false;
     }
 
     @HostListener('touchmove', ['$event'])
@@ -106,8 +106,8 @@ export class PTRComponent implements OnChanges {
         $event.preventDefault();
 
         // let diffY = Math.abs(this.ogY - pageY);
-        this.pullPercent = (diffY - this.initScrollTop) > 100 ? 100 : (diffY - this.initScrollTop);
-        this.scroll.emit(this.pullPercent);
+        this._pullPercent = (diffY - this.initScrollTop) > 100 ? 100 : (diffY - this.initScrollTop);
+        this.scroll.emit(this._pullPercent);
     }
 
     @HostListener('touchend', ['$event'])
@@ -115,20 +115,20 @@ export class PTRComponent implements OnChanges {
     onTouchEnd($event: any) {
         if (!this.touching || this.loading) return;
 
-        let pullPercent = this.pullPercent;
+        let _pullPercent = this._pullPercent;
         let loading = false;
-        if (pullPercent >= this.config.treshold) {
+        if (_pullPercent >= this.config.treshold) {
             loading = true;
         } else {
-            pullPercent = 0;
+            _pullPercent = 0;
         }
 
         this.touching = false;
         this.ogY = 0;
         this.touchId = undefined;
         this.initScrollTop = 0;
-        this.animating = loading;
-        this.pullPercent = pullPercent;
+        this._animating = loading;
+        this._pullPercent = _pullPercent;
         this.loading = loading;
         if (loading) this.refresh.emit(this);
     }
