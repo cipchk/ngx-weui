@@ -1,1 +1,28 @@
-<html><head></head><body><div class="docs-markdown"></div></body></html>
+<html><head></head><body><div class="docs-markdown"><p class="docs-markdown-p">Swiper触摸滑动</p>
+<p class="docs-markdown-p">只是<a href="http://idangero.us/swiper/" class="docs-markdown-a">swiper</a>的简单封装而已，默认 <code class="docs-markdown-code">ngx-weui</code> 并不强制依赖 <code class="docs-markdown-code">swiper</code>，所以如果你需要这个模块。
+还需要配置自行安装 swiper 插件：</p>
+<pre class="docs-markdown-pre"><code class="lang-bash docs-markdown-code">npm install swiper --save
+</code></pre>
+<p class="docs-markdown-p">当然，如果你想更好的编码体验，也可以选择安装一下swipe.d.ts</p>
+<pre class="docs-markdown-pre"><code class="lang-bash docs-markdown-code">npm install --save-dev @types/swiper
+</code></pre>
+<p class="docs-markdown-p">最后 .angular-cli.json 导入配置：</p>
+<pre class="docs-markdown-pre"><code class="lang-json docs-markdown-code">"styles": [
+    "./node_modules/swiper/dist/css/swiper.css"
+],
+"scripts": [
+    "./node_modules/swiper/dist/js/swiper.js"
+]
+</code></pre>
+<p class="docs-markdown-p">使用示例：</p>
+<pre class="docs-markdown-pre"><code class="lang-html docs-markdown-code"><span class="hljs-tag">&lt;<span class="hljs-name">weui-swiper</span> [<span class="hljs-attr">options</span>]=<span class="hljs-string">"options"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"swiper-container"</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"swiper-wrapper"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"swiper-slide"</span> *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"let i of [1, 2, 3, 4]"</span>&gt;</span>Slide {{i}}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"swiper-pagination"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">weui-swiper</span>&gt;</span>
+</code></pre>
+<p class="docs-markdown-p">组件内容的HTML跟swiper所需要的DOM结构完全一样。</p>
+</div></body></html>

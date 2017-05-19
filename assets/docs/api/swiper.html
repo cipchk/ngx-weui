@@ -1,17 +1,1 @@
-<div class="docs-api"><h1>API reference for Angular WeUI swiper</h1><p class="module-import"><code>import { SwiperModule } from 'ngx-weui/swiper';</code></p><h2>Components & Directives</h2><h3 id="SwiperComponent"><code>SwiperComponent</code></h3><p></p><p>Swiper触摸滑动</p><p>只是<a href="http://idangero.us/swiper/">swiper</a>的简单封装而已，默认 <code>ngx-weui</code> 并不强制依赖 <code>swiper</code>，所以如果你需要这个模块。 还需要配置自行安装 swiper 插件：</p><pre><code class="lang-bash">npm install swiper --save
-</code></pre><p>当然，如果你想更好的编码体验，也可以选择安装一下swipe.d.ts</p><pre><code class="lang-bash">npm install --save-dev @types/swiper
-</code></pre><p>最后 .angular-cli.json 导入配置：</p><pre><code class="lang-json">&quot;styles&quot;: [
- &quot;./node_modules/swiper/dist/css/swiper.css&quot;
-],
-&quot;scripts&quot;: [
- &quot;./node_modules/swiper/dist/js/swiper.js&quot;
-]
-</code></pre><p>使用示例：</p><pre><code class="lang-html">&lt;weui-swiper [options]=&quot;options&quot;&gt;
- &lt;div class=&quot;swiper-container&quot;&gt;
-     &lt;div class=&quot;swiper-wrapper&quot;&gt;
-         &lt;div class=&quot;swiper-slide&quot; *ngFor=&quot;let i of [1, 2, 3, 4]&quot;&gt;Slide {{i}}&lt;/div&gt;
-     &lt;/div&gt;
-     &lt;div class=&quot;swiper-pagination&quot;&gt;&lt;/div&gt;
- &lt;/div&gt;
-&lt;/weui-swiper&gt;
-</code></pre><p>组件内容的HTML跟swiper所需要的DOM结构完全一样。</p><p></p><div class="directive-selectors"><span class="class-selector-label">selector:</span> <code class="class-selector-name">weui-swiper</code></div><h3 class="propertie-header">Properties</h3><table class="properties"><tr><th>Name</th><th style="width: 15%">Type</th><th>Default</th><th>Description</th></tr><tr><td><div class="input">[options]</div></td><td><code>any</code></td><td></td><td><p>等同于swiper<a href="http://idangero.us/swiper/api/">参数项</a></p></td></tr><tr><td>swiper</td><td><code>any</code></td><td></td><td><p>Swiper 实例对象，可以通过 <code>@ViewChild</code> 访问到它</p></td></tr></table><h2>Services</h2><h3 id="SwiperConfig"><code>SwiperConfig</code></h3><p>可用于[<a href="https://github.com/cipchk/ngx-weui/blob/master/docs/config.md" target="_blank">全局配置</a>]。</p><h3 class="propertie-header">Properties</h3><table class="properties"><tr><th>Name</th><th style="width: 15%">Type</th><th>Default</th><th>Description</th></tr><tr><td>options</td><td><code>any</code></td><td></td><td><p>等同于swiper<a href="http://idangero.us/swiper/api/">参数项</a></p></td></tr></table></div>
+<div class="docs-api"><h1>API reference for Angular WeUI swiper</h1><p class="module-import"><code>import { SwiperModule } from 'ngx-weui/swiper';</code></p><h2>Components & Directives</h2><h3 id="SwiperComponent"><code>SwiperComponent</code></h3><div class="directive-selectors"><span class="class-selector-label">selector:</span> <code class="class-selector-name">weui-swiper</code></div><h3 class="propertie-header">Properties</h3><table class="properties"><tr><th>Name</th><th style="width: 15%">Type</th><th>Default</th><th>Description</th></tr><tr><td><div class="input">[options]</div></td><td><code>any</code></td><td></td><td><p>等同于swiper<a href="http://idangero.us/swiper/api/">参数项</a></p></td></tr><tr><td>swiper</td><td><code>any</code></td><td></td><td><p>Swiper 实例对象，可以通过 <code>@ViewChild</code> 访问到它</p></td></tr></table><h2>Services</h2><h3 id="SwiperConfig"><code>SwiperConfig</code></h3><p>可用于[<a href="https://github.com/cipchk/ngx-weui/blob/master/docs/config.md" target="_blank">全局配置</a>]。</p><h3 class="propertie-header">Properties</h3><table class="properties"><tr><th>Name</th><th style="width: 15%">Type</th><th>Default</th><th>Description</th></tr><tr><td>options</td><td><code>any</code></td><td></td><td><p>等同于swiper<a href="http://idangero.us/swiper/api/">参数项</a></p></td></tr></table></div>
