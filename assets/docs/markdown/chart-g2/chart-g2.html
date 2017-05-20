@@ -1,0 +1,32 @@
+<html><head></head><body><div class="docs-markdown"><h1 id="g2-mobile" class="docs-markdown-h1">G2 mobile</h1>
+<p class="docs-markdown-p"><a href="https://antv.alipay.com/g2-mobile/doc/index.html" class="docs-markdown-a">g2-mobile</a> 由阿里团队开发的针对移动端的图表，GZIP后（23KB）左右，还是蛮适合移动端的。</p>
+<p class="docs-markdown-p"><code class="docs-markdown-code">weui-chart-g2</code> 对其进行封装；但 <code class="docs-markdown-code">ngx-weui</code> 本身并没有强制依赖 g2-mobile 依赖包。所以，如果你需要这个模块，那么有两种办法可以解决依赖：</p>
+<p class="docs-markdown-p"><strong>使用CND</strong></p>
+<pre class="docs-markdown-pre"><code class="lang-html docs-markdown-code"><span class="hljs-comment">&lt;!-- index.html --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"https://a.alipayobjects.com/g/datavis/g2-mobile-all/2.1.14/index.js"</span>&gt;</span><span class="undefined"></span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+</code></pre>
+<p class="docs-markdown-p"><strong>Npm</strong></p>
+<pre class="docs-markdown-pre"><code class="lang-bash docs-markdown-code">npm install g2-mobile --save-dev
+</code></pre>
+<p class="docs-markdown-p">然后 .angular-cli.json 导入配置：</p>
+<pre class="docs-markdown-pre"><code class="lang-javascript docs-markdown-code"><span class="hljs-string">"scripts"</span>: [
+    <span class="hljs-string">"./node_modules/g2-mobile/index.js"</span>
+]
+</code></pre>
+<p class="docs-markdown-p"><strong>使用示例：</strong></p>
+<pre class="docs-markdown-pre"><code class="lang-html docs-markdown-code"><span class="hljs-tag">&lt;<span class="hljs-name">canvas</span> <span class="hljs-attr">weui-chart-g2</span> #<span class="hljs-attr">c1</span>=<span class="hljs-string">"chart-g2"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"width:100%;height:200px;"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">canvas</span>&gt;</span>
+</code></pre>
+<pre class="docs-markdown-pre"><code class="lang-typescript docs-markdown-code"><span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">'c1'</span>) c1: ChartG2Directive;
+renderC1() {
+    <span class="hljs-keyword">const</span> chart = <span class="hljs-keyword">this</span>.c1.chart;
+    chart.source([
+        { <span class="hljs-string">"tem"</span>: <span class="hljs-number">10</span>, <span class="hljs-string">"city"</span>: <span class="hljs-string">"tokyo"</span> },
+        { <span class="hljs-string">"tem"</span>: <span class="hljs-number">4</span>, <span class="hljs-string">"city"</span>: <span class="hljs-string">"newYork"</span> },
+        { <span class="hljs-string">"tem"</span>: <span class="hljs-number">3</span>, <span class="hljs-string">"city"</span>: <span class="hljs-string">"berlin"</span> }
+    ]);
+    chart.interval().position(<span class="hljs-string">'city*tem'</span>).color(<span class="hljs-string">'city'</span>);
+    chart.render();
+}
+</code></pre>
+<p class="docs-markdown-p">有关更多细节参考API以及<a href="https://antv.alipay.com/g2-mobile/demo/index.html" class="docs-markdown-a">官网文档</a>。</p>
+</div></body></html>
