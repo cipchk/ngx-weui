@@ -39,6 +39,7 @@ import { DemoSidebarComponent } from './sidebar/sidebar.component'
 import { DemoSwiperComponent } from './swiper/swiper.component'
 import { CountdownComponent } from './countdown/countdown.component'
 import { GesturePasswordComponent } from './gesture-password/gesture-password.component'
+import { DemoChartG2Component } from './chart-g2/chart-g2.component'
 
 const MODULES = [
     ContainerComponent, PageComponent, AccordionComponent,
@@ -49,7 +50,7 @@ const MODULES = [
     DemoSearchBarComponent, DemoNavbarComponent, DemoTabbarComponent, DemoToastComponent,
     DemoToptipsComponent, DemoMsgComponent, DemoMsgFailComponent, DemoMsgSuccessComponent,
     DemoPopupComponent, DemoPTRComponent, DemoInfiniteLoaderComponent, DemoSidebarComponent,
-    DemoSwiperComponent, CountdownComponent, GesturePasswordComponent
+    DemoSwiperComponent, CountdownComponent, GesturePasswordComponent, DemoChartG2Component
 ]
 
 @NgModule({

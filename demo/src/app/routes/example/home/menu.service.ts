@@ -95,6 +95,10 @@ export class MenuService {
                 {
                     label: 'Gesture Password',
                     id: 'gesture-password'
+                },
+                {
+                    label: 'Chart G2-Mobile',
+                    id: 'chart-g2'
                 }
             ]
         },

@@ -96,7 +96,8 @@ let apiDocsPackage = new DgeniPackage('ngx-weui-api-docs', dgeniPackageDeps)
         'toptips/index.ts',
         'uploader/index.ts',
         'sidebar/index.ts',
-        'swiper/index.ts'
+        'swiper/index.ts',
+        'chart-g2/index.ts'
     ];
 })
 

@@ -212,6 +212,15 @@ export class MenuService {
                     "example": "gesture-password",
                     "ext_url": "gesture-password",
                     "doc_overview": true
+                },
+                {
+                    "name": "Chart G2-Mobile",
+                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "ov_url": "chart-g2",
+                    "example": "chart-g2",
+                    "ext_url": "chart-g2",
+                    "api_url": "chart-g2",
+                    "doc_overview": true
                 }
             ]
         },
