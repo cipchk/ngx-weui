@@ -83,6 +83,17 @@ export class MenuService {
                 {
                     label: 'Progress',
                     id: 'progress'
+                }
+            ]
+        },
+        {
+            name: 'Third Party',
+            icon: 'icon_nav_layout',
+            show: false,
+            items: [
+                {
+                    label: 'Chart G2-Mobile',
+                    id: 'chart-g2'
                 },
                 {
                     label: 'Swiper',
@@ -95,10 +106,6 @@ export class MenuService {
                 {
                     label: 'Gesture Password',
                     id: 'gesture-password'
-                },
-                {
-                    label: 'Chart G2-Mobile',
-                    id: 'chart-g2'
                 }
             ]
         },
