@@ -9,7 +9,7 @@
 
 1. [Usage & Demo](#usage--demo)
 2. [Installation instructions](#installation-instructions)
-3. [API Docs](https://cipchk.github.io/ngx-weui/docs/)
+3. [API Docs](https://cipchk.github.io/ngx-weui/)
 4. [Global Config](https://github.com/cipchk/ngx-weui/blob/master/docs/config.md)
 5. [Troubleshooting](#troubleshooting)
 4. [License](#license)
