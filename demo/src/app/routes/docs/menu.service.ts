@@ -221,6 +221,14 @@ export class MenuService {
                     "ext_url": "chart-g2",
                     "api_url": "chart-g2",
                     "doc_overview": true
+                },
+                {
+                    "name": "QQ Map",
+                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "ov_url": "map-qq",
+                    "example": "map-qq",
+                    "ext_url": "map-qq",
+                    "doc_overview": true
                 }
             ]
         },

@@ -40,6 +40,7 @@ import { DemoSwiperComponent } from './swiper/swiper.component'
 import { CountdownComponent } from './countdown/countdown.component'
 import { GesturePasswordComponent } from './gesture-password/gesture-password.component'
 import { DemoChartG2Component } from './chart-g2/chart-g2.component'
+import { DemoMapQQComponent } from './map-qq/map-qq.component'
 
 const MODULES = [
     ContainerComponent, PageComponent, AccordionComponent,
@@ -50,7 +51,8 @@ const MODULES = [
     DemoSearchBarComponent, DemoNavbarComponent, DemoTabbarComponent, DemoToastComponent,
     DemoToptipsComponent, DemoMsgComponent, DemoMsgFailComponent, DemoMsgSuccessComponent,
     DemoPopupComponent, DemoPTRComponent, DemoInfiniteLoaderComponent, DemoSidebarComponent,
-    DemoSwiperComponent, CountdownComponent, GesturePasswordComponent, DemoChartG2Component
+    DemoSwiperComponent, CountdownComponent, GesturePasswordComponent, DemoChartG2Component,
+    DemoMapQQComponent
 ]
 
 @NgModule({

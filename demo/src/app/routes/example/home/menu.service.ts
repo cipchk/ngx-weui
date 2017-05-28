@@ -106,6 +106,10 @@ export class MenuService {
                 {
                     label: 'Gesture Password',
                     id: 'gesture-password'
+                },
+                {
+                    label: 'QQ Map',
+                    id: 'map-qq'
                 }
             ]
         },

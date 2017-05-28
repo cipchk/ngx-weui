@@ -9,6 +9,7 @@ import { WeUiModule, ButtonConfig } from 'ngx-weui';
 import { CountdownModule } from 'ngx-countdown';
 import { NotifyModule } from 'ngx-notify';
 import { GesturePasswordModule } from 'ngx-gesture-password';
+import { AqmModule } from 'angular-qq-maps';
 
 import { ChecklistDirective } from "./directives/checklist";
 
@@ -26,7 +27,10 @@ import { ChecklistDirective } from "./directives/checklist";
                 progress: false
             }
         }),
-        GesturePasswordModule
+        GesturePasswordModule,
+        AqmModule.forRoot({
+            apiKey: 'I3TBZ-QTN3J-MWPFI-FERMS-IBOCQ-LBBWY'
+        })
     ],
     providers: [
         // { provide: ButtonConfig, useFactory: ()=> { return Object.assign(new ButtonConfig(), { type: 'warn' }); } }
@@ -44,7 +48,7 @@ import { ChecklistDirective } from "./directives/checklist";
         ChecklistDirective,
         WeUiModule,
 
-        CountdownModule, NotifyModule, GesturePasswordModule
+        CountdownModule, NotifyModule, GesturePasswordModule, AqmModule
     ],
     entryComponents: [
     ]

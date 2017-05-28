@@ -70,6 +70,7 @@
     "@types/gulp": "^4.0.2",
     "@types/jasmine": "2.5.47",
     "@types/node": "~6.0.60",
+    "angular-qq-maps": "^1.0.0",
     "angular-split": "^0.2.0",
     "chart.js": "^2.5.0",
     "classlist-polyfill": "^1.0.3",
