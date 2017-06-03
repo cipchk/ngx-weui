@@ -17,7 +17,7 @@ import { InfiniteLoaderConfig } from "./infiniteloader.config";
         </div>
     `,
     styles: [
-       `.weui-infiniteloader{overflow:hidden}.weui-infiniteloader__content{height:100%;overflow:scroll;-webkit-overflow-scrolling:touch;z-index:1}`
+       `weui-infiniteloader{display:block}.weui-infiniteloader{overflow:hidden}.weui-infiniteloader__content{height:100%;overflow:scroll;-webkit-overflow-scrolling:touch;z-index:1}`
     ],
     host: {
         '[class.weui-infiniteloader]': 'true',

@@ -1,8 +1,17 @@
 <weui-tabbar>
     <weui-tab heading="微信" [badge]="8" [icon]="'<img src=./assets/images/icon_tabbar.png>'">
-        <article class="weui-article">
-            <h1>微信</h1>
-        </article>
+        <weui-infiniteloader (loadmore)="onLoadMore($event)">
+            <article class="weui-article">
+                <h1>微信</h1>
+                <div class="weui-cells__title">List with 22 Max</div>
+                <div class="weui-cells">
+                    <a *ngFor="let i of items" class="weui-cell weui-cell_access" href="javascript:;">
+                        <div class="weui-cell__bd">{{i}}</div>
+                        <div class="weui-cell__ft"></div>
+                    </a>
+                </div>
+            </article>
+        </weui-infiniteloader>
     </weui-tab>
     <weui-tab heading="通讯录" [icon]="'<img src=./assets/images/icon_tabbar.png>'" (select)="onSelect()">
         <article class="weui-article">
