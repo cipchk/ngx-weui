@@ -83,6 +83,10 @@ export class MenuService {
                 {
                     label: 'Progress',
                     id: 'progress'
+                },
+                {
+                    label: '微信JS-SDK',
+                    id: 'jweixin'
                 }
             ]
         },
@@ -110,10 +114,6 @@ export class MenuService {
                 {
                     label: 'QQ Map',
                     id: 'map-qq'
-                },
-                {
-                    label: '微信JS-SDK',
-                    id: 'jweixin'
                 }
             ]
         },
