@@ -41,6 +41,7 @@ import { ActivatedRoute, Router } from "@angular/router";
     <example-gesture-password *ngSwitchCase="'gesture-password'"></example-gesture-password>
     <example-chart-g2 *ngSwitchCase="'chart-g2'"></example-chart-g2>
     <example-map-qq *ngSwitchCase="'map-qq'"></example-map-qq>
+    <example-jweixin *ngSwitchCase="'jweixin'"></example-jweixin>
 </div>
     `
 })

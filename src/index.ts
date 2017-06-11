@@ -21,6 +21,7 @@ import { InfiniteLoaderModule } from "./infiniteloader/infiniteloader.module";
 import { SidebarModule } from "./sidebar/sidebar.module";
 import { SwiperModule } from "./swiper/swiper.module";
 import { ChartG2Module } from "./chart-g2/chart-g2.module";
+import { JWeiXinModule } from "./jweixin/jweixin.module";
 
 export * from './utils/types';
 
@@ -45,12 +46,13 @@ export * from './infiniteloader';
 export * from './sidebar';
 export * from './swiper';
 export * from './chart-g2';
+export * from './jweixin';
 
 const MODULES = [
     CellModule, ButtonModule, FormModule, SliderModule, UploaderModule, ActionSheetModule, 
     DialogModule, LoadmoreModule, ProgressModule, GalleryModule, PickerModule, SearchBarModule,
     TabModule, ToastModule, ToptipsModule, PopupModule, PTRModule, InfiniteLoaderModule, 
-    SidebarModule, SwiperModule, ChartG2Module
+    SidebarModule, SwiperModule, ChartG2Module, JWeiXinModule
 ];
 
 @NgModule({
@@ -61,7 +63,8 @@ const MODULES = [
         GalleryModule.forRoot(), PickerModule.forRoot(), SearchBarModule.forRoot(),
         TabModule.forRoot(), ToastModule.forRoot(), ToptipsModule.forRoot(),
         PopupModule.forRoot(), PTRModule.forRoot(), InfiniteLoaderModule.forRoot(),
-        SidebarModule.forRoot(), SwiperModule.forRoot(), ChartG2Module.forRoot()
+        SidebarModule.forRoot(), SwiperModule.forRoot(), ChartG2Module.forRoot(),
+        JWeiXinModule.forRoot()
     ],
     exports: MODULES
 })

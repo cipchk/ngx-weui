@@ -110,6 +110,10 @@ export class MenuService {
                 {
                     label: 'QQ Map',
                     id: 'map-qq'
+                },
+                {
+                    label: '微信JS-SDK',
+                    id: 'jweixin'
                 }
             ]
         },

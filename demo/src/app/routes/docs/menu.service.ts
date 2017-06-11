@@ -229,6 +229,15 @@ export class MenuService {
                     "example": "map-qq",
                     "ext_url": "map-qq",
                     "doc_overview": true
+                },
+                {
+                    "name": "微信JS-SDK",
+                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "ov_url": "jweixin",
+                    "example": "jweixin",
+                    "ext_url": "jweixin",
+                    "api_url": "jweixin",
+                    "doc_overview": true
                 }
             ]
         },

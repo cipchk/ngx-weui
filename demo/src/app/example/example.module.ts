@@ -41,6 +41,7 @@ import { CountdownComponent } from './countdown/countdown.component'
 import { GesturePasswordComponent } from './gesture-password/gesture-password.component'
 import { DemoChartG2Component } from './chart-g2/chart-g2.component'
 import { DemoMapQQComponent } from './map-qq/map-qq.component'
+import { JWeiXinComponent } from './jweixin/jweixin.component'
 
 const MODULES = [
     ContainerComponent, PageComponent, AccordionComponent,
@@ -52,7 +53,7 @@ const MODULES = [
     DemoToptipsComponent, DemoMsgComponent, DemoMsgFailComponent, DemoMsgSuccessComponent,
     DemoPopupComponent, DemoPTRComponent, DemoInfiniteLoaderComponent, DemoSidebarComponent,
     DemoSwiperComponent, CountdownComponent, GesturePasswordComponent, DemoChartG2Component,
-    DemoMapQQComponent
+    DemoMapQQComponent, JWeiXinComponent
 ]
 
 @NgModule({
