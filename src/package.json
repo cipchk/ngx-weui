@@ -3,7 +3,5 @@
   "dependencies": {
   },
   "peerDependencies": {
-    "@angular/common": "*",
-    "@angular/core": "*"
   }
 }

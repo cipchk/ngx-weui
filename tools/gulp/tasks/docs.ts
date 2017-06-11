@@ -1,8 +1,8 @@
-import { task, src, dest } from 'gulp';
 import { Dgeni } from 'dgeni';
 import * as path from 'path';
 import { ASSETS_ROOT, HTML_MINIFIER_OPTIONS, SOURCE_ROOT, DEMO_SOURCE_ROOT } from '../constants';
 
+const gulp = require('gulp');
 const markdown = require('gulp-markdown');
 const transform = require('gulp-transform');
 const highlight = require('gulp-highlight-files');
@@ -44,8 +44,9 @@ const MARKDOWN_TAGS_TO_CLASS_ALIAS = [
     'code',
 ];
 
+debugger;
 /** Generate all docs content. */
-task('docs', [
+gulp.task('docs', [
     'markdown-docs',
     'highlight-examples',
     'api-docs',
@@ -53,8 +54,8 @@ task('docs', [
 ]);
 
 /** Generates html files from the markdown overviews and guides. */
-task('markdown-docs', () => {
-    return src(['src/**/*.md', 'docs/*.md'])
+gulp.task('markdown-docs', () => {
+    return gulp.src(['src/**/*.md', 'docs/*.md'])
         .pipe(markdown({
             // Add syntax highlight using highlight.js
             highlight: (code: string, language: string) => {
@@ -69,35 +70,35 @@ task('markdown-docs', () => {
         }))
         .pipe(transform(transformMarkdownFiles))
         .pipe(dom(createTagNameAliaser('docs-markdown')))
-        .pipe(dest(DIST_DOCS + '/markdown'));
+        .pipe(gulp.dest(DIST_DOCS + '/markdown'));
 });
 
-task('highlight-examples', () => {
+gulp.task('highlight-examples', () => {
   // rename files to fit format: [filename]-[filetype].html
   const renameFile = (path: any) => {
     const extension = path.extname.slice(1);
     path.basename = `${path.basename}-${extension}`;
   };
 
-  return src(DEMO_SOURCE_ROOT + '/app/example/*/*.+(html|scss|ts)')
+  return gulp.src(DEMO_SOURCE_ROOT + '/app/example/*/*.+(html|scss|ts)')
       .pipe(flatten())
       .pipe(rename(renameFile))
       .pipe(highlight())
-      .pipe(dest(DIST_DOCS + '/example'));
+      .pipe(gulp.dest(DIST_DOCS + '/example'));
 });
 
 /** Generates API docs from the source JsDoc using dgeni. */
-task('api-docs', () => {
+gulp.task('api-docs', () => {
   const docsPackage = require(path.resolve(__dirname, '../../dgeni'));
   const docs = new Dgeni([docsPackage]);
   return docs.generate();
 });
 
 /** Generates minified html api docs. */
-task('minified-api-docs', ['api-docs'], () => {
-  return src(DIST_DOCS + '/api/*.html')
+gulp.task('minified-api-docs', ['api-docs'], () => {
+  return gulp.src(DIST_DOCS + '/api/*.html')
     .pipe(htmlmin(HTML_MINIFIER_OPTIONS))
-    .pipe(dest(DIST_DOCS + '/api/'));
+    .pipe(gulp.dest(DIST_DOCS + '/api/'));
 });
 
 
