@@ -24,7 +24,7 @@
                     <div class="weui-article">
                         <weui-navbar #codebar>
                             <weui-tab [heading]="ext" *ngFor="let ext of ['HTML', 'TS', 'SCSS']">
-                                <pre class="docs-example-source" style="height:600px;"><doc-viewer [url]="extFileUrl(ext)"></doc-viewer></pre>
+                                <pre class="docs-example-source"><doc-viewer [url]="extFileUrl(ext)"></doc-viewer></pre>
                             </weui-tab>
                         </weui-navbar>
                     </div>

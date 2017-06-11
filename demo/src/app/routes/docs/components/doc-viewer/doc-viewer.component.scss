@@ -1,3 +1,26 @@
-.docs-markdown-pre {
-    margin: 0 0 .8em;
+.weui-article {
+    .docs-markdown-pre,
+    .docs-markdown-ul {
+        margin: 0 0 .8em;
+    }
+    .docs-markdown-h1,
+    .docs-markdown-h2,
+    .docs-markdown-h3 {
+        font-weight: bold;
+    }
+    .docs-markdown-ul,
+    docs-markdown-ol {
+        margin-left: 2em;
+    }
+    .docs-markdown-ul {
+        list-style-type: disc;
+    }
+    .docs-markdown-ol {
+        list-style-type: decimal;
+    }
+    .docs-markdown-pre {
+        background: rgba(0, 0, 0, .05);
+        border-radius: 4px;
+        padding: 10px;
+    }
 }
