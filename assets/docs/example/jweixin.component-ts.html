@@ -1,0 +1,25 @@
+<span class="hljs-keyword">import</span> { Component, ViewEncapsulation } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> { WXService } <span class="hljs-keyword">from</span> <span class="hljs-string">"../../wx.service"</span>;
+
+<span class="hljs-meta">@Component</span>({
+    selector: <span class="hljs-string">'example-jweixin'</span>,
+    templateUrl: <span class="hljs-string">'./jweixin.component.html'</span>,
+    styleUrls: [<span class="hljs-string">'./jweixin.component.scss'</span>],
+    encapsulation: ViewEncapsulation.None,
+    providers: [WXService]
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> JWeiXinComponent {
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> wxService: WXService</span>) { }
+
+    status: <span class="hljs-built_in">string</span>;
+    ngOnInit() {
+        <span class="hljs-keyword">this</span>.wxService.config({
+            title: <span class="hljs-string">'新标题'</span>
+        }).then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+            <span class="hljs-comment">// 其它操作，可以确保注册成功以后才有效</span>
+            <span class="hljs-keyword">this</span>.status = <span class="hljs-string">'注册成功'</span>;
+        }).catch(<span class="hljs-function">(<span class="hljs-params">err: <span class="hljs-built_in">string</span></span>) =&gt;</span> {
+            <span class="hljs-keyword">this</span>.status = <span class="hljs-string">`注册失败，原因：<span class="hljs-subst">${err}</span>`</span>
+        });
+    }
+}

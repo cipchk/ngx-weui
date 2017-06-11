@@ -1,0 +1,154 @@
+<html><head></head><body><div class="docs-markdown"><p class="docs-markdown-p"><code class="docs-markdown-code">ngx-weui</code> 只对js-sdk提供以下特性：</p>
+<ul class="docs-markdown-ul">
+<li class="docs-markdown-li">完整 js-sdk 的声明文件。</li>
+<li class="docs-markdown-li">懒加载 <strong>jweixin-1.2.0.js</strong> 文件。</li>
+</ul>
+<h1 id="-" class="docs-markdown-h1">声明文件使用说明（非常重要）</h1>
+<p class="docs-markdown-p"><code class="docs-markdown-code">ngx-weui</code> 允许你单独使用这份声明文件，而无须任何模块的导入。</p>
+<pre class="docs-markdown-pre"><code class="lang-typescript docs-markdown-code"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> wx <span class="hljs-keyword">from</span> <span class="hljs-string">'ngx-weui/jweixin/wx'</span>;
+
+wx.config({
+
+});
+</code></pre>
+<p class="docs-markdown-p"><strong>但，由于当前Angular的版本BUG，此声明文件无法被使用，我会跟进该BUG直到解决它。</strong></p>
+<p class="docs-markdown-p">因此，暂时无法享受智能提醒带来的快感，当前可以先使用：</p>
+<pre class="docs-markdown-pre"><code class="lang-typescript docs-markdown-code"><span class="hljs-keyword">declare</span> <span class="hljs-keyword">const</span> wx: <span class="hljs-built_in">any</span>;
+</code></pre>
+<p class="docs-markdown-p">做为过渡吧。</p>
+<h1 id="-config-" class="docs-markdown-h1">通过config接口注入权限验证配置</h1>
+<p class="docs-markdown-p">由于Angular是一个SPA，因此，每一次路由的变动都需要重要注册一次，最简单的办法是在<strong>根组件</strong>里面订阅 <code class="docs-markdown-code">router.events</code> 并在每一次切换时重新注册。</p>
+<pre class="docs-markdown-pre"><code class="lang-typescript docs-markdown-code"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AppComponent {
+
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> router: Router, <span class="hljs-keyword">private</span> wxService: JWeiXinService</span>) {}
+
+    ngOnInit() {
+        <span class="hljs-keyword">this</span>.wxService.get().then(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {
+            <span class="hljs-keyword">if</span> (!res) {
+                <span class="hljs-built_in">console</span>.warn(<span class="hljs-string">'jweixin.js 加载失败'</span>);
+                <span class="hljs-keyword">return</span>;
+            }
+
+            <span class="hljs-keyword">this</span>.router.events.subscribe(<span class="hljs-function">(<span class="hljs-params">r</span>) =&gt;</span> {
+                <span class="hljs-keyword">if</span> (!(r <span class="hljs-keyword">instanceof</span> NavigationEnd)) <span class="hljs-keyword">return</span>;
+                <span class="hljs-comment">// 1、通过config接口注入权限验证配置</span>
+                wx.config({});
+                <span class="hljs-comment">// 2、通过ready接口处理成功验证</span>
+                wx.ready(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+                    <span class="hljs-comment">// 注册各种onMenuShareTimeline &amp; onMenuShareAppMessage</span>
+                });
+                <span class="hljs-comment">// 2、通过error接口处理失败验证</span>
+                wx.error(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+
+                });
+            });
+        });
+    }
+}
+</code></pre>
+<p class="docs-markdown-p">当然以上办法有一个最大的弊端，我们无法很优雅的定制我们分享的内容，即 <code class="docs-markdown-code">title</code>、<code class="docs-markdown-code">desc</code>、<code class="docs-markdown-code">imgUrl</code> 等之类的信息。<strong>所有通过抓取的都是流氓且不靠谱的行为</strong>，故而，我建议创建一个 Service　类，然后在你需要的页面加载并使用它，以下是一个范本：</p>
+<pre class="docs-markdown-pre"><code class="lang-typescript docs-markdown-code"><span class="hljs-keyword">import</span> { Observable } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/Rx'</span>;
+<span class="hljs-keyword">import</span> { Http } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/http'</span>;
+<span class="hljs-keyword">import</span> { Injectable } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> { JWeiXinService } <span class="hljs-keyword">from</span> <span class="hljs-string">'ngx-weui/jweixin'</span>;
+
+<span class="hljs-keyword">declare</span> <span class="hljs-keyword">const</span> wx: <span class="hljs-built_in">any</span>;
+
+<span class="hljs-comment">/**
+ * 微信JS-SDK服务器
+ */</span>
+<span class="hljs-meta">@Injectable</span>()
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> WXService {
+    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> DEFAULTSHARE: <span class="hljs-built_in">any</span> = {
+        title: <span class="hljs-string">'Site Name'</span>,
+        desc: <span class="hljs-string">''</span>,
+        link: <span class="hljs-string">''</span>,
+        imgUrl: <span class="hljs-string">''</span>
+    };
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> wxService: JWeiXinService, <span class="hljs-keyword">private</span> http: Http</span>) { }
+
+    <span class="hljs-keyword">private</span> share: <span class="hljs-built_in">any</span>;
+    config(shareData: <span class="hljs-built_in">any</span>): <span class="hljs-built_in">Promise</span>&lt;<span class="hljs-built_in">boolean</span>&gt; {
+        <span class="hljs-keyword">this</span>.share = shareData;
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> {
+            <span class="hljs-keyword">this</span>.wxService.get().then(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {
+                <span class="hljs-keyword">if</span> (!res) {
+                    reject(<span class="hljs-string">'jweixin.js 加载失败'</span>);
+                    <span class="hljs-keyword">return</span>;
+                }
+
+                wx.ready(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+                    <span class="hljs-keyword">this</span>._onMenuShareTimeline()
+                        ._onMenuShareAppMessage()
+                        ._onMenuShareQQ()
+                        ._onMenuShareQZone()
+                        ._onMenuShareWeibo();
+
+                    resolve();
+                });
+                wx.error(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+                    reject(<span class="hljs-string">'config 注册失败'</span>);
+                });
+
+                <span class="hljs-keyword">this</span>.http
+                    .get(<span class="hljs-string">'/wx-config'</span>)
+                    .map(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> { <span class="hljs-keyword">return</span> res.json(); })
+                    .catch(<span class="hljs-function">(<span class="hljs-params">error: Response | <span class="hljs-built_in">any</span></span>) =&gt;</span> {
+                        reject(<span class="hljs-string">'无法获取签名数据'</span>);
+                        <span class="hljs-keyword">return</span> Observable.throw(<span class="hljs-string">'error'</span>);
+                    })
+                    .subscribe(<span class="hljs-function">(<span class="hljs-params">res</span>) =&gt;</span> {
+                        <span class="hljs-keyword">if</span> (!res.success) {
+                            reject(<span class="hljs-string">'jsapi 获取失败'</span>);
+                            <span class="hljs-keyword">return</span>;
+                        }
+                        wx.config(res);
+                    });
+            });
+        });
+    }
+
+    <span class="hljs-keyword">private</span> _onMenuShareTimeline() {
+        wx.onMenuShareTimeline(<span class="hljs-built_in">Object</span>.assign({}, WXService.DEFAULTSHARE, <span class="hljs-keyword">this</span>.share));
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+
+    <span class="hljs-keyword">private</span> _onMenuShareAppMessage() {
+        wx.onMenuShareAppMessage(<span class="hljs-built_in">Object</span>.assign({}, WXService.DEFAULTSHARE, <span class="hljs-keyword">this</span>.share));
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+
+    <span class="hljs-keyword">private</span> _onMenuShareQQ() {
+        wx.onMenuShareQQ(<span class="hljs-built_in">Object</span>.assign({}, WXService.DEFAULTSHARE, <span class="hljs-keyword">this</span>.share));
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+
+    <span class="hljs-keyword">private</span> _onMenuShareWeibo() {
+        wx.onMenuShareWeibo(<span class="hljs-built_in">Object</span>.assign({}, WXService.DEFAULTSHARE, <span class="hljs-keyword">this</span>.share));
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+
+    <span class="hljs-keyword">private</span> _onMenuShareQZone() {
+        wx.onMenuShareQZone(<span class="hljs-built_in">Object</span>.assign({}, WXService.DEFAULTSHARE, <span class="hljs-keyword">this</span>.share));
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>;
+    }
+}
+</code></pre>
+<p class="docs-markdown-p">最后，你可以优雅的调用它。</p>
+<pre class="docs-markdown-pre"><code class="lang-typescript docs-markdown-code"><span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> JWeiXinComponent {
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> wxService: WXService</span>) { }
+
+    status: <span class="hljs-built_in">string</span>;
+    ngOnInit() {
+        <span class="hljs-keyword">this</span>.wxService.config({
+            title: <span class="hljs-string">'新标题'</span>
+        }).then(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+            <span class="hljs-comment">// 其它操作，可以确保注册成功以后才有效</span>
+            <span class="hljs-keyword">this</span>.status = <span class="hljs-string">'注册成功'</span>;
+        }).catch(<span class="hljs-function">(<span class="hljs-params">err: <span class="hljs-built_in">string</span></span>) =&gt;</span> {
+            <span class="hljs-keyword">this</span>.status = <span class="hljs-string">`注册失败，原因：<span class="hljs-subst">${err}</span>`</span>
+        });
+    }
+}
+</code></pre>
+</div></body></html>
