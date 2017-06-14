@@ -14,7 +14,20 @@ import { SidebarComponent } from './sidebar.component';
         </div>
     `,
     styles: [`
-weui-sidebar-container{box-sizing:border-box;display:block;height:100%;position:relative;-webkit-transition:-webkit-transform .3s cubic-bezier(0, 0, .3, 1);transition:-webkit-transform .3s cubic-bezier(0, 0, .3, 1);transition:transform .3s cubic-bezier(0, 0, .3, 1);transition:transform .3s cubic-bezier(0, 0, .3, 1), -webkit-transform .3s cubic-bezier(0, 0, .3, 1)}.weui-sidebar__content{display:block;height:100%;overflow:auto;-webkit-transition:margin .3s cubic-bezier(0, 0, .3, 1);transition:margin .3s cubic-bezier(0, 0, .3, 1)}
+weui-sidebar-container {
+    box-sizing: border-box;
+    display: block;
+    height: 100%;
+    position: relative;
+    transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
+}
+
+.weui-sidebar__content {
+    display: block;
+    height: 100%;
+    overflow: auto;
+    transition: margin 0.3s cubic-bezier(0, 0, 0.3, 1);
+}
     `],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None

@@ -25,189 +25,189 @@ export class MenuService {
             "items": [
                 {
                     "name": "ActionSheet",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_actionSheet.png'
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_actionSheet.png'
                 },
                 {
                     "name": "Button",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_button.png'
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_button.png'
                 },
                 {
                     "name": "Article",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_article.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_article.png',
                     "api": false
                 },
                 {
                     "name": "Badge",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api": false
                 },
                 {
                     "name": "Dialog",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_dialog.png'
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_dialog.png'
                 },
                 {
                     "name": "Flex",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api": false
                 },
                 {
                     "name": "Footer",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api": false
                 },
                 {
                     "name": "Gallery",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png'
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png'
                 },
                 {
                     "name": "Grid",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api": false
                 },
                 {
                     "name": "Icons",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_icons.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_icons.png',
                     "api": false
                 },
                 {
                     "name": "InfiniteLoader",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png'
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png'
                 },
                 {
                     "name": "Input",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api_url": "form"
                 },
                 {
                     "name": "VCode",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api_url": "form",
                     "example": "input"
                 },
                 {
                     "name": "Textarea",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api_url": "form",
                     "example": "input"
                 },
                 {
                     "name": "List",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api_url": "cell"
                 },
                 {
                     "name": "Swipe",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api_url": "cell",
                     "example": "list"
                 },
                 {
                     "name": "LoadMore",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png'
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png'
                 },
                 {
                     "name": "Msg",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_msg.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_msg.png',
                     "api": false
                 },
                 {
                     "name": "Navbar",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api_url": "tab"
                 },
                 {
                     "name": "Panel",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api": false
                 },
                 {
                     "name": "Picker",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png'
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png'
                 },
                 {
                     "name": "CityPicker",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api_url": "picker",
                     "example": "picker"
                 },
                 {
                     "name": "DatePicker",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api_url": "picker",
                     "example": "picker"
                 },
                 {
                     "name": "DateTimePicker",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api_url": "picker",
                     "example": "picker"
                 },
                 {
                     "name": "TimePicker",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api_url": "picker",
                     "example": "picker"
                 },
                 {
                     "name": "Popup",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png'
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png'
                 },
                 {
                     "name": "Preview",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api": false
                 },
                 {
                     "name": "Progress",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_progress.png'
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_progress.png'
                 },
                 {
                     "name": "PullToRefresh",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "id": 'ptr'
                 },
                 {
                     "name": "SearchBar",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_search_bar.png'
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_search_bar.png'
                 },
                 {
                     "name": "Slider",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png'
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png'
                 },
                 {
                     "name": "Tabbar",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_tab.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_tab.png',
                     "api_url": "tab"
                 },
                 {
                     "name": "Toast",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_toast.png'
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_toast.png'
                 },
                 {
                     "name": "Toptips",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png'
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png'
                 },
                 {
                     "name": "Uploader",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png'
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png'
                 },
                 {
                     "name": "Sidebar",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png'
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png'
                 },
                 {
                     "name": "Swiper",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "doc_overview": true
                 },
                 {
                     "name": "Countdown",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "doc_overview": true
                 },
                 {
                     "name": "Gesture Password",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "ov_url": "gesture-password",
                     "example": "gesture-password",
                     "ext_url": "gesture-password",
@@ -215,7 +215,7 @@ export class MenuService {
                 },
                 {
                     "name": "Chart G2-Mobile",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "ov_url": "chart-g2",
                     "example": "chart-g2",
                     "ext_url": "chart-g2",
@@ -224,7 +224,7 @@ export class MenuService {
                 },
                 {
                     "name": "QQ Map",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "ov_url": "map-qq",
                     "example": "map-qq",
                     "ext_url": "map-qq",
@@ -232,7 +232,7 @@ export class MenuService {
                 },
                 {
                     "name": "微信JS-SDK",
-                    "icon": 'http://weui.github.io/weui/images/icon_nav_panel.png',
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "ov_url": "jweixin",
                     "example": "jweixin",
                     "ext_url": "jweixin",
@@ -256,7 +256,7 @@ export class MenuService {
                         "en-US": "Get Started",
                         "zh-CN": "开始使用"
                     },
-                    "icon": "http://weui.github.io/weui/images/icon_nav_actionSheet.png",
+                    "icon": "//cipchk.github.io/ngx-weui/assets/images/icon_nav_actionSheet.png",
                     "guide": {
                         "en-US": "getstarted.en-US.md",
                         "zh-CN": "getstarted.zh-CN.md"

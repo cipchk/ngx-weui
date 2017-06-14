@@ -23,7 +23,44 @@ import { isIOS } from "../utils/browser";
     </aside>
     `,
     styles: [`
-.weui-sidebar{background-color:#fff;overflow:auto;pointer-events:auto;position:fixed;will-change:initial;z-index:99999999;-webkit-transition:-webkit-transform .3s cubic-bezier(0, 0, .3, 1);transition:-webkit-transform .3s cubic-bezier(0, 0, .3, 1);transition:transform .3s cubic-bezier(0, 0, .3, 1);transition:transform .3s cubic-bezier(0, 0, .3, 1), -webkit-transform .3s cubic-bezier(0, 0, .3, 1)}.weui-sidebar__left{bottom:0;left:0;top:0}.weui-sidebar__right{bottom:0;right:0;top:0}.weui-sidebar__top{left:0;right:0;top:0}.weui-sidebar__bottom{bottom:0;left:0;right:0}.weui-sidebar__inert{pointer-events:none;will-change:transform}
+.weui-sidebar {
+    background-color: #fff;
+    overflow: auto;
+    pointer-events: auto;
+    position: fixed;
+    will-change: initial;
+    z-index: 99999999;
+    transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
+}
+
+.weui-sidebar__left {
+    bottom: 0;
+    left: 0;
+    top: 0;
+}
+
+.weui-sidebar__right {
+    bottom: 0;
+    right: 0;
+    top: 0;
+}
+
+.weui-sidebar__top {
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.weui-sidebar__bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.weui-sidebar__inert {
+    pointer-events: none;
+    will-change: transform;
+}
     `],
     changeDetection: ChangeDetectionStrategy.OnPush,
     encapsulation: ViewEncapsulation.None
