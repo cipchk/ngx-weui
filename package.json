@@ -40,11 +40,9 @@
     "start": "ng serve --aot --host 0.0.0.0",
     "pretest": "run-s lint build link",
     "test": "ng test -sr",
-    "test-cross": "SET SAUCE=true & ng test -sr",
     "test-coverage": "ng test -sr -cc",
     "version": "npm run flow.changelog && git add -A",
     "e2e": "protractor",
-    "e2e-cross": "SET SAUCE=true & npm run e2e",
     "docs": "gulp docs",
     "api": "gulp api-docs"
   },

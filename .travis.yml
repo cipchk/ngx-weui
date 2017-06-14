@@ -13,3 +13,6 @@ script:
   - rm -rf node_modules/ngx-weui
   - npm i ./dist
   - npm run test-coverage
+
+after_success:
+  - ./node_modules/.bin/codecov
