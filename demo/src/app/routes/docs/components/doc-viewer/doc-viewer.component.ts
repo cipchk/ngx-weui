@@ -2,8 +2,8 @@ import { Http } from '@angular/http';
 import { Component, OnDestroy, Input, ElementRef, ViewEncapsulation, EventEmitter, Output } from '@angular/core';
 @Component({
     selector: 'doc-viewer',
-    template: `Loading document...`, 
-    styleUrls: [ './doc-viewer.component.scss' ],
+    template: `Loading document...`,
+    styleUrls: ['./doc-viewer.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class DocViewerComponent {
@@ -23,6 +23,8 @@ export class DocViewerComponent {
             return;
         }
 
+        this.el.nativeElement.innerText = `loading...`;
+
         this.http.get(url).subscribe(
             response => {
                 if (response.ok) {
@@ -32,7 +34,7 @@ export class DocViewerComponent {
                     this._cached[url] = docHtml;
                     this.el.nativeElement.innerHTML = docHtml;
                 } else {
-                this.el.nativeElement.innerText = this.error;
+                    this.el.nativeElement.innerText = this.error;
                 }
             },
             error => {
