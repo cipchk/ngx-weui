@@ -9,9 +9,7 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 script:
-  - npm run build
-  - rm -rf node_modules/ngx-weui
-  - npm i ./dist
+  - npm run pretest
   - npm run test-coverage
 
 after_success:
