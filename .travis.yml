@@ -1,6 +1,7 @@
+sudo: false
 language: node_js
 node_js:
-  - "6"
+  - "7"
   
 before_install:
   - export CHROME_BIN=chromium-browser
@@ -8,5 +9,7 @@ before_install:
   - sh -e /etc/init.d/xvfb start
 
 script:
-  - npm run pretest
-  - npm run test
+  - npm run build
+  - rm -rf node_modules/ngx-weui
+  - npm i ./dist
+  - npm run test-coverage

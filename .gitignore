@@ -3,16 +3,18 @@
 /node_modules
 npm-debug.log
 
-# WebStorm
-.idea
-.vscode
+# IDE
+/.idea
+/.vscode
+
+# misc
+/coverage/*
+/sass/*.css
 
 # ignore build and dist for now
 /demo/dist
 /demo/src/assets/docs
 /dist
-/coverage
-/sass/*.css
 
 # ignore inline compiling
 /logs

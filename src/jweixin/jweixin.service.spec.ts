@@ -4,12 +4,10 @@ import { By } from '@angular/platform-browser';
 
 import { JWeiXinModule } from './jweixin.module';
 import { JWeiXinService } from './jweixin.service';
-import { findParent } from '../utils/dom';
 
 describe('jweixin: JWeiXinService', () => {
     let fixture: ComponentFixture<EmptyTestComponent>;
     let el: HTMLElement;
-    let htmlEl: HTMLElement;
 
     beforeEach(() => {
 
@@ -22,14 +20,13 @@ describe('jweixin: JWeiXinService', () => {
         fixture = TestBed.createComponent(EmptyTestComponent);
         el = fixture.nativeElement;
         fixture.detectChanges();
-        htmlEl = findParent(el, 'html');
     });
 
     it('should create the default script URL', inject([JWeiXinService], (loader: JWeiXinService) => {
         const DEFAULTURL = '//res.wx.qq.com/open/js/jweixin-1.2.0.js';
         loader.get();
         let testNode: HTMLScriptElement = null;
-        htmlEl.querySelectorAll('script').forEach(node => {
+        document.querySelectorAll('script').forEach(node => {
             if (~node.src.indexOf(DEFAULTURL))
                 testNode = node;
         });

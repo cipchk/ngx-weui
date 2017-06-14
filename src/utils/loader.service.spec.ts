@@ -3,11 +3,10 @@ import { inject, TestBed, ComponentFixtureAutoDetect, ComponentFixture } from '@
 import { By } from '@angular/platform-browser';
 
 import { LoaderService } from './loader.service';
-import { findParent } from './dom';
 
-function expectScript(htmlEl: HTMLElement, url: string) {
+function expectScript(url: string) {
     let testNode: HTMLScriptElement = null;
-    htmlEl.querySelectorAll('script').forEach(node => {
+    document.querySelectorAll('script').forEach(node => {
         if (~node.src.indexOf(url))
             testNode = node;
     });
@@ -19,9 +18,9 @@ function expectScript(htmlEl: HTMLElement, url: string) {
     expect(testNode.src).toBe(url);
 }
 
-function expectLink(htmlEl: HTMLElement, url: string) {
+function expectLink(url: string) {
     let testNode: HTMLLinkElement = null;
-    htmlEl.querySelectorAll('link').forEach(node => {
+    document.querySelectorAll('link').forEach(node => {
         if (~node.href.indexOf(url))
             testNode = node;
     });
@@ -35,7 +34,6 @@ function expectLink(htmlEl: HTMLElement, url: string) {
 describe('LoaderService', () => {
     let fixture: ComponentFixture<EmptyTestComponent>;
     let el: HTMLElement;
-    let htmlEl: HTMLElement;
 
     beforeEach(() => {
 
@@ -47,28 +45,27 @@ describe('LoaderService', () => {
         fixture = TestBed.createComponent(EmptyTestComponent);
         el = fixture.nativeElement;
         fixture.detectChanges();
-        htmlEl = findParent(el, 'html');
     });
     
     it('should create script & link tag', inject([LoaderService], (loader: LoaderService) => {
         const JSURL = 'http://test.com/1.js';
         const CSSURL = 'http://test.com/1.css';
         loader.load([JSURL, CSSURL]);
-        expectScript(htmlEl, JSURL);
-        expectLink(htmlEl, CSSURL);
+        expectScript(JSURL);
+        expectLink(CSSURL);
     }));
 
     describe('JS', () => {
         it('should create http script tag', inject([LoaderService], (loader: LoaderService) => {
             const URL = 'http://test.com/1.js';
             loader.loadScript(URL);
-            expectScript(htmlEl, URL);
+            expectScript(URL);
         }));
 
         it('should create https script tag', inject([LoaderService], (loader: LoaderService) => {
             const URL = 'https://test.com/1.js';
             loader.loadScript(URL);
-            expectScript(htmlEl, URL);
+            expectScript(URL);
         }));
     });
 
@@ -76,13 +73,13 @@ describe('LoaderService', () => {
         it('should create http link tag', inject([LoaderService], (loader: LoaderService) => {
             const URL = 'http://test.com/1.css';
             loader.loadCss(URL);
-            expectLink(htmlEl, URL);
+            expectLink(URL);
         }));
 
         it('should create https link tag', inject([LoaderService], (loader: LoaderService) => {
             const URL = 'https://test.com/1.css';
             loader.loadCss(URL);
-            expectLink(htmlEl, URL);
+            expectLink(URL);
         }));
     });
 
