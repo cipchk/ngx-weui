@@ -20,7 +20,7 @@ export function isAndroid() {
  * 检查是否IOS系统
  */
 export function isIOS(): boolean {
-    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
+    return /iPad|iPhone|iPod/.test(getDOM().getUserAgent());
 }
 
 /**
