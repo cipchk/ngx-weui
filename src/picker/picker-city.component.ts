@@ -43,7 +43,11 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
     /** 当options.type=='form'时，占位符文本 */
     @Input() placeholder: string;
     @Input() disabled: boolean;
-    /** 确认后回调 */
+    /**
+     * 确认后回调当前选择数据（包括已选面板所有数据）
+     * 
+     * `{ value: '10000', items: [ {}, {}, {} ] }`
+     */
     @Output() change = new EventEmitter<any>();
     /** 列变更时回调 */
     @Output() groupChange = new EventEmitter<any>();

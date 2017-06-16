@@ -9,7 +9,7 @@
                 </div>
                 <div class="weui-cell__bd">
                     <weui-city-picker required placeholder="Pick a City" [(ngModel)]="res.city" name="city"
-                        [data]="cityData"></weui-city-picker>
+                        [data]="cityData" (change)="cityChange($event)"></weui-city-picker>
                 </div>
             </div>
         </div>

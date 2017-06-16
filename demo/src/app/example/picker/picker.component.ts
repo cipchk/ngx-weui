@@ -20,6 +20,10 @@ export class DemoPickerComponent {
 
     constructor(private srv: PickerService) {}
 
+    cityChange(item: any) {
+        console.log(item);
+    }
+
     onSave() {
         alert('请求数据：' + JSON.stringify(this.res));
         return false;
