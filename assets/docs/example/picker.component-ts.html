@@ -20,6 +20,10 @@
 
     <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> srv: PickerService</span>) {}
 
+    cityChange(item: <span class="hljs-built_in">any</span>) {
+        <span class="hljs-built_in">console</span>.log(item);
+    }
+
     onSave() {
         alert(<span class="hljs-string">'请求数据：'</span> + <span class="hljs-built_in">JSON</span>.stringify(<span class="hljs-keyword">this</span>.res));
         <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
