@@ -79,7 +79,7 @@
     "copyfiles": "^1.2.0",
     "dgeni": "^0.4.7",
     "dgeni-packages": "^0.19.0",
-    "g2-mobile": "^2.1.19",
+    "g2-mobile": "^2.1.21",
     "gulp": "^3.9.1",
     "gulp-clean": "^0.3.2",
     "gulp-clean-css": "^3.2.0",
