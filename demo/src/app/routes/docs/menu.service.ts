@@ -96,12 +96,6 @@ export class MenuService {
                     "api_url": "cell"
                 },
                 {
-                    "name": "Swipe",
-                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
-                    "api_url": "cell",
-                    "example": "list"
-                },
-                {
                     "name": "LoadMore",
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png'
                 },
@@ -164,7 +158,7 @@ export class MenuService {
                 {
                     "name": "PullToRefresh",
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
-                    "id": 'ptr'
+                    "example": 'ptr'
                 },
                 {
                     "name": "SearchBar",
@@ -208,35 +202,29 @@ export class MenuService {
                 {
                     "name": "Gesture Password",
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
-                    "ov_url": "gesture-password",
+                    "api_url": "gesture-password",
                     "example": "gesture-password",
-                    "ext_url": "gesture-password",
                     "doc_overview": true
                 },
                 {
                     "name": "Chart G2-Mobile",
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
-                    "ov_url": "chart-g2",
-                    "example": "chart-g2",
-                    "ext_url": "chart-g2",
                     "api_url": "chart-g2",
+                    "example": "chart-g2",
                     "doc_overview": true
                 },
                 {
                     "name": "QQ Map",
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
-                    "ov_url": "map-qq",
+                    "api_url": "map-qq",
                     "example": "map-qq",
-                    "ext_url": "map-qq",
                     "doc_overview": true
                 },
                 {
                     "name": "微信JS-SDK",
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
-                    "ov_url": "jweixin",
-                    "example": "jweixin",
-                    "ext_url": "jweixin",
                     "api_url": "jweixin",
+                    "example": "jweixin",
                     "doc_overview": true
                 }
             ]

@@ -45,6 +45,6 @@ export class DocsArticleComponent {
     }
 
     extFileUrl(ext: string) {
-        return `./assets/docs/example/${this.menu.ext_url || this.id}.component-${ext.toLowerCase()}.html`;
+        return `./assets/docs/example/${this.menu.api_url || this.id}.component-${ext.toLowerCase()}.html`;
     }
 }
