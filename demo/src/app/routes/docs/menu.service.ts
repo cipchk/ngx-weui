@@ -76,7 +76,8 @@ export class MenuService {
                 {
                     "name": "Input",
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
-                    "api_url": "form"
+                    "api_url": "form",
+                    "example": "input"
                 },
                 {
                     "name": "VCode",
@@ -158,6 +159,7 @@ export class MenuService {
                 {
                     "name": "PullToRefresh",
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
+                    "api_url": "ptr",
                     "example": 'ptr'
                 },
                 {
@@ -197,14 +199,16 @@ export class MenuService {
                 {
                     "name": "Countdown",
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
-                    "doc_overview": true
+                    "doc_overview": true,
+                    "api": false
                 },
                 {
                     "name": "Gesture Password",
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api_url": "gesture-password",
                     "example": "gesture-password",
-                    "doc_overview": true
+                    "doc_overview": true,
+                    "api": false
                 },
                 {
                     "name": "Chart G2-Mobile",
@@ -218,7 +222,8 @@ export class MenuService {
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api_url": "map-qq",
                     "example": "map-qq",
-                    "doc_overview": true
+                    "doc_overview": true,
+                    "api": false
                 },
                 {
                     "name": "微信JS-SDK",

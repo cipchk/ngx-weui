@@ -11,7 +11,8 @@
             <weui-navbar #navbar>
                 <weui-tab heading="OVERVIEW">
                     <div class="weui-article">
-                        <doc-viewer url="./assets/docs/markdown/{{menu.api_url || id}}/{{menu.api_url || id}}.html"></doc-viewer>
+                        <doc-viewer *ngIf="menu.doc_overview === true" url="./assets/docs/markdown/{{menu.api_url || id}}/{{menu.api_url || id}}.html"></doc-viewer>
+                        <p *ngIf="menu.doc_overview !== true">Nothing</p>
                     </div>
                 </weui-tab>
                 <weui-tab heading="API">
