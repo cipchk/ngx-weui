@@ -8,7 +8,8 @@ describe('Uploader: Class', () => {
 
     function addFiles(count: number = 1, ext: string = 'png') {
         for (let i = 0; i < count; i++) {
-            let f = new File(['a' + i], `${i + 1}.${ext}`);
+            let textFileAsBlob = new Blob(['a' + i], { type: 'text/plain' });
+            let f = new File([textFileAsBlob], `${i + 1}.${ext}`);
             instance.addToQueue([f]);
         }
     }
