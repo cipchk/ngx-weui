@@ -140,9 +140,7 @@ export class Uploader {
         });
     }
 
-    /**
-     * 过滤器，如果未指定采用内置
-     */
+    /** 过滤器，如果未指定采用内置 */
     private _getFilters(filters: FilterFunction[] | string): FilterFunction[] {
         if (!filters) return this._options.filters;
         if (Array.isArray(filters)) return filters;
@@ -158,13 +156,12 @@ export class Uploader {
         return typeof value === 'number' ? value : this._queue.indexOf(value);
     }
 
+    /** 获取未上传过列表 */
     private getNotUploadedItems(): Array<any> {
         return this._queue.filter((item: FileItem) => !item.isUploaded);
     }
 
-    /**
-     * 获取待上传文件
-     */
+    /** 获取待上传文件 */
     get getReadyItems(): Array<any> {
         return this._queue
             .filter((item: FileItem) => (item.isReady && !item.isUploading))
@@ -199,6 +196,14 @@ export class Uploader {
                 if (this._options.onError) this._options.onError(temp, filter, options);
             }
         });
+
+        if (this.queue.length !== count) {
+            this._progress = this._getTotalProgress();
+        }
+
+        if (this.options.auto) {
+            this.uploadAll();
+        }
     }
 
     /**
@@ -253,7 +258,13 @@ export class Uploader {
         let index = this._getIndexOfItem(value);
         let item = this._queue[index];
         if (item && item.isUploading) {
-            item._xhr.abort();
+            if (item.options.abortTransport) {
+                this._onCancelItem(item, null, null, null);
+                this._onCompleteItem(item, null, null, null);
+                item.options.abortTransport(item);
+            } else {
+                if (item._xhr) item._xhr.abort();
+            }
         }
     }
 

@@ -1,6 +1,6 @@
 {
   "name": "ngx-weui",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "bundles/ngx-weui.umd.js",
   "module": "index.js",
   "typings": "index.d.ts",
@@ -12,8 +12,8 @@
   "keywords": [
     "ngx-weui",
     "ng2-weui",
-    "angular-weui",
     "angular weui",
+    "angular2 weui",
     "weui"
   ],
   "author": "cipchk <cipchk>",
@@ -70,6 +70,7 @@
     "@types/gulp": "^4.0.2",
     "@types/jasmine": "2.5.47",
     "@types/node": "~6.0.60",
+    "@types/sinon": "^2.3.1",
     "angular-qq-maps": "^1.0.0",
     "angular-split": "^0.2.0",
     "chart.js": "^2.5.0",
@@ -117,6 +118,7 @@
     "npm-run-all": "4.0.2",
     "protractor": "~5.1.1",
     "rxjs": "^5.4.0",
+    "sinon": "^2.3.5",
     "split.js": "^1.2.0",
     "swiper": "^3.4.2",
     "ts-helpers": "^1.1.2",

@@ -237,4 +237,12 @@ export interface UploaderOptions {
      * @this Uploader 对象
      */
     uploadTransport?(item: FileItem): Observable<any>;
+
+    /**
+     * 自定义上传接口，当用户中止时回调
+     * 
+     * @param {FileItem} item 
+     * @this Uploader 对象
+     */
+    abortTransport?(item: FileItem): void;
 }
