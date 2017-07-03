@@ -85,6 +85,10 @@ export class MenuService {
                     id: 'progress'
                 },
                 {
+                    label: 'Accordion',
+                    id: 'accordion'
+                },
+                {
                     label: '微信JS-SDK',
                     id: 'jweixin'
                 }

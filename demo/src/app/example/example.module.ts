@@ -4,7 +4,7 @@ import { SharedModule } from '../shared/shared.module';
 
 import { ContainerComponent } from './container.component';
 import { PageComponent } from './page/page.component';
-import { AccordionComponent } from "./accordion/accordion.component";
+import { DemoAccordionComponent } from "./accordion/accordion.component";
 import { ButtonComponent } from './button/button.component';
 import { ListComponent } from './list/list.component';
 import { InputComponent } from './input/input.component';
@@ -44,7 +44,7 @@ import { DemoMapQQComponent } from './map-qq/map-qq.component'
 import { JWeiXinComponent } from './jweixin/jweixin.component'
 
 const MODULES = [
-    ContainerComponent, PageComponent, AccordionComponent,
+    ContainerComponent, PageComponent, DemoAccordionComponent,
     ButtonComponent, InputComponent, ListComponent, SliderComponent,
     DemoUploaderComponent, DemoActionSheetComponent, DemoDialogComponent, ArticleComponent, FlexComponent,
     BadgeComponent, FooterComponent, GridComponent, IconsComponent, PanelComponent, PreviewComponent,
@@ -62,8 +62,7 @@ const MODULES = [
     ],
     declarations: [ ...MODULES ],
     entryComponents: [
-        PageComponent,
-        AccordionComponent
+        PageComponent
     ],
     exports: [ ...MODULES ]
 })

@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from "@angular/router";
     selector: 'component-container',
     template: `
 <div [ngSwitch]="menu.example || menu.id" style="height:100%">
+    <example-accordion *ngSwitchCase="'accordion'"></example-accordion>
     <example-button *ngSwitchCase="'button'"></example-button>
     <example-input *ngSwitchCase="'input'"></example-input>
     <example-list *ngSwitchCase="'list'"></example-list>

@@ -1,25 +1,37 @@
 import { Component, Input, Output, ViewEncapsulation, EventEmitter, OnDestroy, OnInit } from '@angular/core';
 
+interface AccordionItem {
+    disabled: boolean;
+    active: boolean;
+    title: string;
+    list: number[];
+}
+
 @Component({
-    selector: 'Accordion',
-    template: `
-        <div [ngClass]="{'js_show': show}">
-            <div (click)="onChangeStatus()"><ng-content select="[header]"></ng-content></div>
-            <ng-content></ng-content>
-        </div>
-    `,
-    host: {
-        '[class.accordion]': 'true'
-    },
+    selector: 'example-accordion',
+    templateUrl: './accordion.component.html',
+    styleUrls: ['./accordion.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class AccordionComponent {
+export class DemoAccordionComponent {
+    collapsible: boolean = false;
 
-    @Input() show: boolean;
-    @Output() showChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+    list: AccordionItem[] = [];
 
-    onChangeStatus() {
-        this.show = !this.show;
-        this.showChange.emit(this.show);
+    ngOnInit() {
+        new Array(3).fill(0).forEach(() => this.add());
+    }
+
+    add() {
+        this.list.push({
+            disabled: false,
+            active: false,
+            title: `标题${this.list.length + 1}`,
+            list: new Array(this.list.length + 1)
+        });
+    }
+
+    remove() {
+        if (this.list.length > 1) this.list.pop();
     }
 }

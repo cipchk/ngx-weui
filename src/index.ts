@@ -22,6 +22,7 @@ import { SidebarModule } from "./sidebar/sidebar.module";
 import { SwiperModule } from "./swiper/swiper.module";
 import { ChartG2Module } from "./chart-g2/chart-g2.module";
 import { JWeiXinModule } from "./jweixin/jweixin.module";
+import { AccordionModule } from "./accordion/accordion.module";
 
 export * from './utils/types';
 
@@ -47,12 +48,13 @@ export * from './sidebar';
 export * from './swiper';
 export * from './chart-g2';
 export * from './jweixin';
+export * from './accordion';
 
 const MODULES = [
     CellModule, ButtonModule, FormModule, SliderModule, UploaderModule, ActionSheetModule, 
     DialogModule, LoadmoreModule, ProgressModule, GalleryModule, PickerModule, SearchBarModule,
     TabModule, ToastModule, ToptipsModule, PopupModule, PTRModule, InfiniteLoaderModule, 
-    SidebarModule, SwiperModule, ChartG2Module, JWeiXinModule
+    SidebarModule, SwiperModule, ChartG2Module, JWeiXinModule, AccordionModule
 ];
 
 @NgModule({
@@ -64,7 +66,7 @@ const MODULES = [
         TabModule.forRoot(), ToastModule.forRoot(), ToptipsModule.forRoot(),
         PopupModule.forRoot(), PTRModule.forRoot(), InfiniteLoaderModule.forRoot(),
         SidebarModule.forRoot(), SwiperModule.forRoot(), ChartG2Module.forRoot(),
-        JWeiXinModule.forRoot()
+        JWeiXinModule.forRoot(), AccordionModule.forRoot()
     ],
     exports: MODULES
 })

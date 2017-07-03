@@ -28,6 +28,11 @@ export class MenuService {
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_actionSheet.png'
                 },
                 {
+                    "name": "Accordion",
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_actionSheet.png',
+                    "doc_overview": true
+                },
+                {
                     "name": "Button",
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_button.png'
                 },
