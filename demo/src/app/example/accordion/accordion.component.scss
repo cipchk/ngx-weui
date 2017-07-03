@@ -13,7 +13,10 @@
     .weui-accordion-content {
         transition: max-height .5s ease-in;
     }
-    .weui-accordion-content-active {
+}
+
+.weui-accordion-active {
+    .weui-accordion-content {
         max-height: 100px;
     }
 }

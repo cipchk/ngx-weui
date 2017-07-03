@@ -14,16 +14,16 @@
 .weui-accordion-content { max-height: 0; }
 ```
 
-**weui-accordion-panel-disabled**
-
-当设置 `[disabled]="true"` 时，会自动加上。
-
-**weui-accordion-content-active**
+**weui-accordion-active**
 
 当设置 `[active]="true"` 时，会自动加上。
 
 ```css
-.weui-accordion-content-active { max-height: inherit; }
+.weui-accordion-active { max-height: inherit; }
 ```
 
 这里内容的展开与折叠是利用CSS的 `max-height` 值，因此，可以给它加上相应的 `transition` 可以实现一定的CSS动画效果，具体请参考示例。
+
+**weui-accordion-panel-disabled**
+
+当设置 `[disabled]="true"` 时，会自动加上。
