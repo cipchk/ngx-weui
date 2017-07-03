@@ -1,3 +1,8 @@
+# 1.0.7
+
+- [增] `weui-accordion` 手风琴组件 ([#9](https://github.com/cipchk/ngx-weui/issues/9))
+- [增] `weui-ptr` 组件增加 `disabled` 属性 ([#10](https://github.com/cipchk/ngx-weui/issues/10))
+
 # 1.0.6
 
 - [增] `UploaderOptions.abortTransport` 自定义上传接口，当用户中止时回调
