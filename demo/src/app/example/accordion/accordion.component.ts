@@ -34,4 +34,9 @@ export class DemoAccordionComponent {
     remove() {
         if (this.list.length > 1) this.list.pop();
     }
+
+    index: number = 0;
+    select(index: number) {
+        this.index = index;
+    }
 }

@@ -58,6 +58,7 @@ export class AccordionPanelComponent {
     _toggle(event: Event) {
         if (!this.disabled) {
             this.active = !this.active;
+            this.accordion.select.emit(this.accordion._index(this));
         }
     }
 }

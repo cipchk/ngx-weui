@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AccordionPanelComponent } from './accordion-panel.component';
 import { AccordionConfig } from "./accordion.config";
 import { AnimateType } from "../utils/types";
@@ -33,6 +33,11 @@ export class AccordionComponent {
      */
     @Input() _animate: AnimateType = 'slide';
 
+    /**
+     * 展开时回调，参数为面板下标。
+     */
+    @Output() select = new EventEmitter<number>();
+
     private panels: AccordionPanelComponent[] = [];
 
     constructor(config: AccordionConfig) {
@@ -48,6 +53,10 @@ export class AccordionComponent {
     _remove(item: AccordionPanelComponent) {
         const idx = this.panels.indexOf(item);
         if (idx !== -1) this.panels.splice(idx, 1);
+    }
+
+    _index(item: AccordionPanelComponent) {
+        return this.panels.indexOf(item);
     }
 
     _closeOthers(cur: AccordionPanelComponent) {
