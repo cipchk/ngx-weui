@@ -1,25 +1,42 @@
 <span class="hljs-keyword">import</span> { Component, Input, Output, ViewEncapsulation, EventEmitter, OnDestroy, OnInit } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
 
+<span class="hljs-keyword">interface</span> AccordionItem {
+    disabled: <span class="hljs-built_in">boolean</span>;
+    active: <span class="hljs-built_in">boolean</span>;
+    title: <span class="hljs-built_in">string</span>;
+    list: <span class="hljs-built_in">number</span>[];
+}
+
 <span class="hljs-meta">@Component</span>({
-    selector: <span class="hljs-string">'Accordion'</span>,
-    template: <span class="hljs-string">`
-        &lt;div [ngClass]="{'js_show': show}"&gt;
-            &lt;div (click)="onChangeStatus()"&gt;&lt;ng-content select="[header]"&gt;&lt;/ng-content&gt;&lt;/div&gt;
-            &lt;ng-content&gt;&lt;/ng-content&gt;
-        &lt;/div&gt;
-    `</span>,
-    host: {
-        <span class="hljs-string">'[class.accordion]'</span>: <span class="hljs-string">'true'</span>
-    },
+    selector: <span class="hljs-string">'example-accordion'</span>,
+    templateUrl: <span class="hljs-string">'./accordion.component.html'</span>,
+    styleUrls: [<span class="hljs-string">'./accordion.component.scss'</span>],
     encapsulation: ViewEncapsulation.None
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> AccordionComponent {
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> DemoAccordionComponent {
+    collapsible: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">false</span>;
 
-    <span class="hljs-meta">@Input</span>() show: <span class="hljs-built_in">boolean</span>;
-    <span class="hljs-meta">@Output</span>() showChange: EventEmitter&lt;<span class="hljs-built_in">boolean</span>&gt; = <span class="hljs-keyword">new</span> EventEmitter&lt;<span class="hljs-built_in">boolean</span>&gt;();
+    list: AccordionItem[] = [];
 
-    onChangeStatus() {
-        <span class="hljs-keyword">this</span>.show = !<span class="hljs-keyword">this</span>.show;
-        <span class="hljs-keyword">this</span>.showChange.emit(<span class="hljs-keyword">this</span>.show);
+    ngOnInit() {
+        <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(<span class="hljs-number">3</span>).fill(<span class="hljs-number">0</span>).forEach(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-keyword">this</span>.add());
+    }
+
+    add() {
+        <span class="hljs-keyword">this</span>.list.push({
+            disabled: <span class="hljs-literal">false</span>,
+            active: <span class="hljs-literal">false</span>,
+            title: <span class="hljs-string">`标题<span class="hljs-subst">${this.list.length + 1}</span>`</span>,
+            list: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Array</span>(<span class="hljs-keyword">this</span>.list.length + <span class="hljs-number">1</span>)
+        });
+    }
+
+    remove() {
+        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.list.length &gt; <span class="hljs-number">1</span>) <span class="hljs-keyword">this</span>.list.pop();
+    }
+
+    index: <span class="hljs-built_in">number</span> = <span class="hljs-number">0</span>;
+    select(index: <span class="hljs-built_in">number</span>) {
+        <span class="hljs-keyword">this</span>.index = index;
     }
 }

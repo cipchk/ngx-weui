@@ -11,6 +11,7 @@
 })
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> DemoPTRComponent {
 
+    disabled: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">false</span>;
     items: <span class="hljs-built_in">any</span>[] = [];
     onRefresh(ptr: PTRComponent) {
         Observable.timer(<span class="hljs-number">800</span>).subscribe(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {

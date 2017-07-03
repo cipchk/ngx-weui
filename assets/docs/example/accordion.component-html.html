@@ -1,0 +1,27 @@
+<span class="hljs-tag">&lt;<span class="hljs-name">Page</span> [<span class="hljs-attr">ngClass</span>]=<span class="hljs-string">"'accordion'"</span> [<span class="hljs-attr">title</span>]=<span class="hljs-string">"'Accordion'"</span> [<span class="hljs-attr">subTitle</span>]=<span class="hljs-string">"'手风琴'"</span> [<span class="hljs-attr">spacing</span>]=<span class="hljs-string">"false"</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"padding: 20px;"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">weui-button</span> [<span class="hljs-attr">weui-mini</span>]=<span class="hljs-string">"'mini'"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"add()"</span>&gt;</span>添加<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">weui-button</span> [<span class="hljs-attr">weui-mini</span>]=<span class="hljs-string">"'mini'"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"remove()"</span>&gt;</span>移除<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">weui-button</span> [<span class="hljs-attr">weui-mini</span>]=<span class="hljs-string">"'mini'"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"list[0].disabled=!list[0].disabled"</span>&gt;</span>{{list[0].disabled ? '启用' : '禁止'}}第一个<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">weui-button</span> [<span class="hljs-attr">weui-mini</span>]=<span class="hljs-string">"'mini'"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"collapsible=!collapsible"</span>&gt;</span>设置{{collapsible ? '只允许一个' : '所有'}}折叠<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span>&gt;</span>choose index: {{index}}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">weui-accordion</span> [<span class="hljs-attr">collapsible</span>]=<span class="hljs-string">"collapsible"</span> (<span class="hljs-attr">select</span>)=<span class="hljs-string">"select($event)"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">weui-accordion-panel</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-accordion-panel"</span> 
+            *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"let item of list"</span> [<span class="hljs-attr">disabled</span>]=<span class="hljs-string">"item.disabled"</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"heading"</span> <span class="hljs-attr">heading</span>&gt;</span>{{ item.title }}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"content"</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cells"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell weui-cell_access"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"javascript:;"</span>
+                        *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"let i of item.list; let idx = index;"</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__bd"</span>&gt;</span>item {{idx}}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__ft"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+                    <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">weui-accordion-panel</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">weui-accordion</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">Page</span>&gt;</span>
