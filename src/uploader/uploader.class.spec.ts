@@ -39,34 +39,34 @@ describe('Uploader: Class', () => {
         }
     });
 
-    it('#addToQueue should be return 1', () => {
+    xit('#addToQueue should be return 1', () => {
         addFiles(1, 'png');
         expect(instance.queue.length).toBe(1);
         expect(instance.queue[0].file.name).toBe('1.png');
     });
 
-    it('#removeFromQueue should be return 1', () => {
+    xit('#removeFromQueue should be return 1', () => {
         addFiles(2, 'png');
         expect(instance.queue.length).toBe(2);
         instance.removeFromQueue(instance.queue[0]);
         expect(instance.queue.length).toBe(1);
     });
 
-    it('#clearQueue should be return 0', () => {
+    xit('#clearQueue should be return 0', () => {
         addFiles(1, 'png');
         expect(instance.queue.length).toBe(1);
         instance.clearQueue();
         expect(instance.queue.length).toBe(0);
     });
 
-    it('#uploadItem should be isUploading=true', () => {
+    xit('#uploadItem should be isUploading=true', () => {
         addFiles(1, 'png');
         expect(instance.isUploading).toBe(false);
         instance.uploadItem(instance.queue[0]);
         expect(instance.isUploading).toBe(true);
     });
 
-    it('#cancelItem should be', fakeAsync(() => {
+    xit('#cancelItem should be', fakeAsync(() => {
         addFiles(1, 'png');
         instance.uploadItem(instance.queue[0]);
         instance.cancelItem(instance.queue[0]);
