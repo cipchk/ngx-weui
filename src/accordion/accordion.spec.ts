@@ -24,11 +24,11 @@ function expectOpenPanels(nativeEl: HTMLElement, openPanelsDef: boolean[]): void
     const panels = getPanels(nativeEl);
     expect(panels.length).toBe(openPanelsDef.length);
     for (let i = 0; i < panels.length; i++) {
-        const classes = panels[i].querySelector('.weui-accordion-content').classList;
+        const classes = panels[i].classList;
         if (openPanelsDef[i]) {
-            expect(classes).toContain('weui-accordion-content-active');
+            expect(classes).toContain('weui-accordion-active');
         } else {
-            expect(classes).not.toContain('weui-accordion-content-active');
+            expect(classes).not.toContain('weui-accordion-active');
         }
     }
 }
