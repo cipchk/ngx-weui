@@ -10,4 +10,10 @@ export class HomeComponent {
     title: string = `<img src="./assets/images/logo.png" alt="weui" height="21px" />`;
 
     constructor(public menuService: MenuService) {}
+
+    onSelecte(index: number) {
+        this.menuService.menus.forEach((item, idx) => {
+            item.show = idx === index;
+        });
+    }
 }

@@ -5,12 +5,12 @@ import { AccordionComponent } from './accordion.component';
     selector: 'weui-accordion-panel',
     template: `
     <div role="tab" (click)="_toggle($event)"><ng-content select="[heading]"></ng-content></div>
-    <div role="tabpanel" class="weui-accordion-content"
-        [class.weui-accordion-content-active]="active"><ng-content></ng-content></div>
+    <div role="tabpanel" class="weui-accordion-content"><ng-content></ng-content></div>
     `,
     host: {
         'style': 'display: block',
-        '[class.weui-accordion-panel-disabled]': 'disabled'
+        '[class.weui-accordion-panel-disabled]': 'disabled',
+        '[class.weui-accordion-active]': 'active'
     },
     styles: [
         `
@@ -41,8 +41,8 @@ export class AccordionPanelComponent {
     }
 
     set active(value: boolean) {
-        if (value) this.accordion._closeOthers(this);
         this._active = value;
+        if (value) this.accordion._closeOthers(this);
     }
 
     constructor( @Inject(AccordionComponent) protected accordion: AccordionComponent) { }
