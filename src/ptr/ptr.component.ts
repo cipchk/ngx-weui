@@ -46,6 +46,8 @@ export class PTRComponent implements OnChanges {
     _lastLabel: string;
     /** 配置项 */
     @Input() config: PTRConfig;
+    /** 是否禁止 */
+    @Input() disabled: boolean = false;
     /** 下拉滚动时回调，返回一个0-100%的参数 */
     @Output() scroll = new EventEmitter<number>();
     /** 刷新回调 */
@@ -83,7 +85,7 @@ export class PTRComponent implements OnChanges {
 
     @HostListener('touchstart', ['$event'])
     onTouchStart($event: any) {
-        if (this.touching || this.loading) return;
+        if (this.disabled || this.touching || this.loading) return;
         this.touching = true;
         this.touchId = $event.targetTouches[0].identifier;
         this.ogY = this._pullPercent === 0 ? $event.targetTouches[0].pageY : $event.targetTouches[0].pageY - this._pullPercent;
@@ -93,7 +95,7 @@ export class PTRComponent implements OnChanges {
 
     @HostListener('touchmove', ['$event'])
     onTouchMove($event: any) {
-        if (!this.touching || this.loading) return;
+        if (this.disabled || !this.touching || this.loading) return;
         if ($event.targetTouches[0].identifier !== this.touchId) return;
 
         const pageY = $event.targetTouches[0].pageY;
@@ -113,7 +115,7 @@ export class PTRComponent implements OnChanges {
     @HostListener('touchend', ['$event'])
     @HostListener('touchcancel', ['$event'])
     onTouchEnd($event: any) {
-        if (!this.touching || this.loading) return;
+        if (this.disabled || !this.touching || this.loading) return;
 
         let _pullPercent = this._pullPercent;
         let loading = false;

@@ -11,6 +11,7 @@ import { PTRComponent } from 'ngx-weui/ptr';
 })
 export class DemoPTRComponent {
 
+    disabled: boolean = false;
     items: any[] = [];
     onRefresh(ptr: PTRComponent) {
         Observable.timer(800).subscribe(() => {
