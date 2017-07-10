@@ -23,6 +23,7 @@ import { SwiperModule } from "./swiper/swiper.module";
 import { ChartG2Module } from "./chart-g2/chart-g2.module";
 import { JWeiXinModule } from "./jweixin/jweixin.module";
 import { AccordionModule } from "./accordion/accordion.module";
+import { MaskModule } from "./mask/mask.module";
 
 export * from './utils/types';
 
@@ -49,24 +50,25 @@ export * from './swiper';
 export * from './chart-g2';
 export * from './jweixin';
 export * from './accordion';
+export * from './mask';
 
 const MODULES = [
-    CellModule, ButtonModule, FormModule, SliderModule, UploaderModule, ActionSheetModule, 
+    CellModule, ButtonModule, FormModule, SliderModule, UploaderModule, ActionSheetModule,
     DialogModule, LoadmoreModule, ProgressModule, GalleryModule, PickerModule, SearchBarModule,
-    TabModule, ToastModule, ToptipsModule, PopupModule, PTRModule, InfiniteLoaderModule, 
-    SidebarModule, SwiperModule, ChartG2Module, JWeiXinModule, AccordionModule
+    TabModule, ToastModule, ToptipsModule, PopupModule, PTRModule, InfiniteLoaderModule,
+    SidebarModule, SwiperModule, ChartG2Module, JWeiXinModule, AccordionModule, MaskModule
 ];
 
 @NgModule({
     imports: [
-        CellModule.forRoot(), ButtonModule.forRoot(),  FormModule.forRoot(), 
+        CellModule.forRoot(), ButtonModule.forRoot(),  FormModule.forRoot(),
         SliderModule.forRoot(), UploaderModule.forRoot(), ActionSheetModule.forRoot(),
         DialogModule.forRoot(), LoadmoreModule.forRoot(), ProgressModule.forRoot(),
         GalleryModule.forRoot(), PickerModule.forRoot(), SearchBarModule.forRoot(),
         TabModule.forRoot(), ToastModule.forRoot(), ToptipsModule.forRoot(),
         PopupModule.forRoot(), PTRModule.forRoot(), InfiniteLoaderModule.forRoot(),
         SidebarModule.forRoot(), SwiperModule.forRoot(), ChartG2Module.forRoot(),
-        JWeiXinModule.forRoot(), AccordionModule.forRoot()
+        JWeiXinModule.forRoot(), AccordionModule.forRoot(), MaskModule.forRoot()
     ],
     exports: MODULES
 })

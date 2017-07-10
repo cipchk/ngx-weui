@@ -91,6 +91,10 @@ export class MenuService {
                 {
                     label: '微信JS-SDK',
                     id: 'jweixin'
+                },
+                {
+                    label: 'Mask',
+                    id: 'mask'
                 }
             ]
         },

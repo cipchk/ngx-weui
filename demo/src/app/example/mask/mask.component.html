@@ -1,0 +1,8 @@
+<Page [ngClass]="'mask'" [title]="'Mask'" [subTitle]="'遮罩层'">
+
+    <button weui-button weui-type="default" (click)="onShow(false)">显示（2秒后自动关闭）</button>
+    <button weui-button weui-type="default" (click)="onShow(true)">显示（手动关闭）</button>
+
+    <weui-mask #mask></weui-mask>
+
+</Page>

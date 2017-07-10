@@ -1,0 +1,16 @@
+import { NgModule, ModuleWithProviders  } from '@angular/core';
+import { CommonModule } from '@angular/common';
+
+import { MaskComponent } from "./index";
+
+@NgModule({
+    imports: [ CommonModule ],
+    declarations: [ MaskComponent ],
+    exports: [ MaskComponent ],
+    entryComponents: [ MaskComponent ]
+})
+export class MaskModule {
+    public static forRoot(): ModuleWithProviders {
+        return { ngModule: MaskModule, providers: [  ] };
+    }
+}

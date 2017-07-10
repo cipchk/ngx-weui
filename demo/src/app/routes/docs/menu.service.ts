@@ -51,6 +51,10 @@ export class MenuService {
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_dialog.png'
                 },
                 {
+                    "name": "Mask",
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_dialog.png'
+                },
+                {
                     "name": "Flex",
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "api": false

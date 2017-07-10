@@ -43,6 +43,7 @@ import { ActivatedRoute, Router } from "@angular/router";
     <example-chart-g2 *ngSwitchCase="'chart-g2'"></example-chart-g2>
     <example-map-qq *ngSwitchCase="'map-qq'"></example-map-qq>
     <example-jweixin *ngSwitchCase="'jweixin'"></example-jweixin>
+    <example-mask *ngSwitchCase="'mask'"></example-mask>
 </div>
     `
 })

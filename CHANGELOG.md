@@ -1,3 +1,7 @@
+# 1.0.8
+
+- [增] `weui-mask` 组件。
+
 # 1.0.7
 
 - [增] `weui-accordion` 手风琴组件 ([#9](https://github.com/cipchk/ngx-weui/issues/9))
