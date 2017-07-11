@@ -14,6 +14,7 @@
     <button weui-button weui-type="default" (click)="onShowBySrv('ios', false)">iOS Dialog</button>
     <button weui-button weui-type="default" (click)="onShowBySrv('android', false)">Android Dialog</button>
     <button weui-button weui-type="default" (click)="onShowBySrv('auto', true)">自动形式（且点背景可关闭）</button>
+    <button weui-button weui-type="default" (click)="onShowOfHtml()">内容为HTML</button>
 
     <!--忽必将对话框组件放在底部-->
     <weui-dialog #ios [config]="config"></weui-dialog>

@@ -1,6 +1,7 @@
 # 1.0.8
 
 - [增] `weui-mask` 组件。
+- [优] `weui-dialog` 内容支持HTML，新增 `open` 回调。
 
 # 1.0.7
 

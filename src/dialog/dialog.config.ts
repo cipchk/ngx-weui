@@ -5,28 +5,28 @@ import { SkinType, ButtonType } from "../utils/types";
 export class DialogConfig {
     /**
      * 样式
-     * 
+     *
      * @type {SkinType}
      */
     skin?: SkinType = 'auto';
 
     /**
      * 标题
-     * 
+     *
      * @type {string}
      */
     title?: string;
 
     /**
-     * 内容
-     * 
+     * 内容（支持HTML）
+     *
      * @type {string}
      */
     content?: string;
 
     /**
      * 取消，返回false
-     * 
+     *
      * @type {string}
      * @default 取消
      */
@@ -34,7 +34,7 @@ export class DialogConfig {
 
     /**
      * 取消按钮类型
-     * 
+     *
      * @type {ButtonType}
      * @default default
      */
@@ -42,14 +42,14 @@ export class DialogConfig {
 
     /**
      * 确认，返回true
-     * 
+     *
      * @type {string}
      */
     confirm?: string = '确认';
 
     /**
      * 确认按钮类型
-     * 
+     *
      * @type {ButtonType}
      * @default primary
      */
@@ -63,7 +63,7 @@ export class DialogConfig {
 
     /**
      * 允许点击背景关闭
-     * 
+     *
      * @type {boolean}
      * @default false
      */

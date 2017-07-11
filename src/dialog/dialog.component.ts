@@ -1,5 +1,4 @@
-import { Component, OnDestroy, Input, OnChanges, SimpleChanges, Output, EventEmitter, HostBinding } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs/Rx';
 import { isAndroid } from '../utils/browser';
 import { DialogConfig } from './dialog.config';
@@ -7,71 +6,102 @@ import { DialogConfig } from './dialog.config';
 @Component({
     selector: 'weui-dialog',
     template: `
-        <div class="weui-mask" (click)="hide(true)"></div>
-        <div class="weui-dialog" [ngClass]="{'weui-skin_android': config.skin === 'android'}">
+        <div class="weui-mask" [ngClass]="{'weui-mask__in': _shown}" (click)="hide(true)"></div>
+        <div class="weui-dialog" [ngClass]="{'weui-dialog__in': _shown, 'weui-skin_android': config.skin === 'android'}">
             <div class="weui-dialog__hd" *ngIf="config.title"><strong class="weui-dialog__title">{{config.title}}</strong></div>
-            <div class="weui-dialog__bd" *ngIf="config.content">{{config.content}}</div>
+            <div class="weui-dialog__bd" *ngIf="config.content" [innerHTML]="config.content"></div>
             <div class="weui-dialog__ft">
-                <a href="#" *ngFor="let item of config.btns" 
+                <a href="#" *ngFor="let item of config.btns"
                     class="weui-dialog__btn weui-dialog__btn_{{item.type}}"
                     (click)="_onSelect(item)">{{item.text}}</a>
             </div>
         </div>
     `,
-    animations: [trigger('visibility', [
-        state('show', style({ opacity: 1, display: 'block' })),
-        state('hide', style({ opacity: 0, display: 'none' })),
-        transition('hide <=> show', [animate(200)])
-    ])]
+    styles: [
+        `
+        .weui-mask,
+        .weui-dialog {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .weui-mask__in,
+        .weui-dialog__in {
+            opacity: 1;
+            visibility: visible;
+        }
+        .weui-mask {
+            transition-duration: .3s;
+        }
+        .weui-dialog {
+            transition-duration: .2s;
+            transform-origin: 0 0;
+        }
+        .weui-dialog__in {
+            transform: scale(1) translate(-50%, -50%);
+        }
+        `
+    ]
 })
 export class DialogComponent implements OnDestroy {
 
+    private _config: DialogConfig;
     /**
      * 对话框配置项
-     * 
+     *
      * @type {DialogConfig}
      */
-    @Input() config: DialogConfig;
+    @Input()
+    set config(value: DialogConfig) {
+        let config = Object.assign({
+            backdrop: false
+        }, this.DEF, value);
+        if (config.skin === 'auto') {
+            config.skin = isAndroid() ? 'android' : 'ios';
+        }
+        // 重组btns
+        if (!config.btns) {
+            config.btns = [];
+            if (config.cancel) {
+                config.btns.push({ text: config.cancel, type: config.cancelType, value: false });
+            }
+            if (config.confirm) {
+                config.btns.push({ text: config.confirm, type: config.confirmType, value: true });
+            }
+        }
+        this._config = config;
+    }
+
+    get config(): DialogConfig {
+        return this._config;
+    }
 
     /**
-     * 关闭回调
+     * 打开动画结束后回调（唯一参数：对话框实例对象）
      */
-    @Output() close = new EventEmitter();
+    @Output() open = new EventEmitter<DialogComponent>();
+
+    /**
+     * 关闭动画开始时回调（唯一参数：对话框实例对象）
+     */
+    @Output() close = new EventEmitter<DialogComponent>();
 
     private observer: Observer<any>;
 
-    private shown: boolean = false;
-
-    @HostBinding('@visibility') get _visibility(): string {
-        return this.shown ? 'show' : 'hide';
-    }
+    _shown: boolean = false;
 
     constructor(private DEF: DialogConfig) { }
 
     /**
      * 显示，组件载入页面后并不会显示，显示调用 `show()` 并订阅结果。
-     * 
+     *
      * @returns {Observable<any>}
      */
     show(): Observable<any> {
-        this.config = Object.assign({
-            backdrop: false
-        }, this.DEF, this.config);
-        if (this.config.skin === 'auto') {
-            this.config.skin = isAndroid() ? 'android' : 'ios';
-        }
-        // 重组btns
-        if (!this.config.btns) {
-            this.config.btns = [];
-            if (this.config.cancel) {
-                this.config.btns.push({ text: this.config.cancel, type: this.config.cancelType, value: false });
-            }
-            if (this.config.confirm) {
-                this.config.btns.push({ text: this.config.confirm, type: this.config.confirmType, value: true });
-            }
-        }
-
-        this.shown = true;
+        this._shown = true;
+        // 模拟动画结束后回调
+        setTimeout(() => {
+            this.open.emit(this);
+        }, 300);
         return Observable.create((observer: Observer<any>) => {
             this.observer = observer;
         });
@@ -79,14 +109,14 @@ export class DialogComponent implements OnDestroy {
 
     /**
      * 隐藏
-     * 
+     *
      * @param {boolean} [is_backdrop] 是否从背景上点击
      */
-    hide(is_backdrop?: boolean) {
+    hide(is_backdrop: boolean = false) {
         if (is_backdrop === true && this.config.backdrop === false) return false;
 
-        this.shown = false;
-        this.close.emit();
+        this._shown = false;
+        this.close.emit(this);
     }
 
     _onSelect(menu: any) {

@@ -30,6 +30,7 @@ export class DemoDialogComponent {
         this.config.cancel = null;
         this.config.confirm = null;
         this.config.btns = null;
+        this.config.content = '弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内';
         switch (style) {
             case 1:
                 this.config.cancel = '辅助操作';
@@ -57,6 +58,17 @@ export class DemoDialogComponent {
     onShowBySrv(type: SkinType, backdrop: boolean = true) {
         this.config.skin = type;
         this.config.backdrop = backdrop;
+        this.config.content = '弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内';
+        this.asSrv.show(this.config).subscribe((res: any) => {
+            console.log(res);
+        });
+    }
+
+    onShowOfHtml() {
+        this.config.content = `
+            <p>这是一段HTML<strong>加粗</strong></p>
+            <p>这是一段HTML<strong>加粗</strong></p>
+        `;
         this.asSrv.show(this.config).subscribe((res: any) => {
             console.log(res);
         });

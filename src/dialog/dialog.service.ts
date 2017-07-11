@@ -10,9 +10,9 @@ export class DialogService {
 
     /**
      * 创建一个对话框并显示
-     * 
+     *
      * @param {DialogConfig} data 对话框配置项
-     * @returns {Observable<any>} 
+     * @returns {Observable<any>}
      */
     show(data: DialogConfig): Observable<any> {
         let componentFactory = this.resolver.resolveComponentFactory(DialogComponent);
@@ -27,7 +27,7 @@ export class DialogService {
         componentRef.instance.close.subscribe(() => {
             setTimeout(() => {
                 componentRef.destroy();
-            }, 100)
+            }, 300)
         });
         return componentRef.instance.show();
     }
