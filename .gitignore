@@ -15,6 +15,7 @@ npm-debug.log
 /demo/dist
 /demo/src/assets/docs
 /dist
+/.tmp
 
 # ignore inline compiling
 /logs
