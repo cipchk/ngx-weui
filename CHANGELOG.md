@@ -1,3 +1,9 @@
+# 1.0.9
+
+## Bug Fixes
+
+- **weui-date-picker** 无法初始化默认值 ([#19](https://github.com/cipchk/ngx-weui/issues/19))
+
 # 1.0.8
 
 - [增] `weui-mask` 组件。
