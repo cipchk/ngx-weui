@@ -36,6 +36,10 @@ function getActions(nativeEl: HTMLElement): NodeListOf<Element> {
     return nativeEl.querySelectorAll('.weui-dialog__ft .weui-dialog__btn');
 }
 
+function getCog(cog: any) {
+    return Object.assign({}, CONFIG, cog)
+}
+
 describe('Component: Dialog', () => {
 
     describe('[default]', () => {
@@ -63,13 +67,13 @@ describe('Component: Dialog', () => {
             tick();
         }));
 
-        it('should init', fakeAsync(() => {
+        it('should init', () => {
             context.dialog.show();
             fixture.detectChanges();
             expect(getTitle(el).textContent).toBe(CONFIG.title);
             expect(getContent(el).textContent).toBe(CONFIG.content);
             expect(getActions(el).length).toBe(2);
-        }));
+        });
 
         it('should be opened set dialog title', () => {
             context.dialog.show();
@@ -84,7 +88,7 @@ describe('Component: Dialog', () => {
         });
 
         it('should be opened set dialog android style', () => {
-            context.config.skin = 'android';
+            context.config = getCog({ skin: 'android' });
             context.dialog.show();
             fixture.detectChanges();
             expect(dl.query(By.css('.weui-skin_android'))).not.toBeNull();
@@ -98,7 +102,7 @@ describe('Component: Dialog', () => {
         });
 
         it('should be opened set dialog three action items', () => {
-            context.config.btns = Object.assign([], BTNS); 
+            context.config = getCog({ btns: BTNS });
             context.dialog.show();
             fixture.detectChanges();
             expect(dl.query(By.css('.weui-dialog__btn_default'))).not.toBeNull();
@@ -131,7 +135,7 @@ describe('Component: Dialog', () => {
         });
 
         it('should close a dialog by click mask', (done: () => void) => {
-            context.config.backdrop = true;
+            context.config = getCog({ backdrop: true });
             context.dialog.show();
             fixture.detectChanges();
             context.dialog.close.subscribe(() => {
