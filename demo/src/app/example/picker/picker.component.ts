@@ -15,7 +15,8 @@ export class DemoPickerComponent {
         max: new Date()
     };
     res: any = {
-        city: '310105'
+        city: '310105',
+        date: new Date()
     };
 
     constructor(private srv: PickerService) {}
@@ -123,4 +124,4 @@ export class DemoPickerComponent {
                 break;
         }
     }
-} 
+}

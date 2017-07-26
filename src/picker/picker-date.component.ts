@@ -23,10 +23,10 @@ export type FORMAT_TYPE = string | { format: string, yu?: string, Mu?: string, d
     template: `
     <weui-picker [placeholder]="placeholder"
         [groups]="_groups" [defaultSelect]="_selected" [disabled]="disabled" [options]="options"
-        (show)="_onShow()" 
-        (hide)="_onHide()" 
-        (change)="_onCityChange($event)" 
-        (groupChange)="_onCityGroupChange($event)" 
+        (show)="_onShow()"
+        (hide)="_onHide()"
+        (change)="_onCityChange($event)"
+        (groupChange)="_onCityGroupChange($event)"
         (cancel)="_onCityCancelChange()"></weui-picker>
     `,
     providers: [
@@ -47,7 +47,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnC
 
     /**
      * 最小时间范围
-     * 
+     *
      * @type {Date}
      * @todo 当前只限定年月日，暂不包括时间范围
      */
@@ -55,7 +55,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnC
 
     /**
      * 最大时间范围
-     * 
+     *
      * @type {Date}
      * @todo 当前只限定年月日，暂不包括时间范围
      */
@@ -63,7 +63,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnC
 
     /**
      * 类型，date日期，datetime日期&时间（不包括秒），time时间（不包括秒）
-     * 
+     *
      * @type {('date' | 'datetime' | 'time')}
      */
     @Input() type: 'date' | 'datetime' | 'time' = 'date';
@@ -205,13 +205,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnC
         this._groups = null;
     }
 
-    _onCityChange(data: any) {
-        this.genValueBySelected();
-        const retVal = new Date(this._value.getTime());
-        this.onChange(retVal);
-        this.onTouched();
-
-        data.value = retVal;
+    private getFormatDate(date: Date) {
         let f: string = '';
         if (this._format && this._format.format)
             f = this._format.format;
@@ -228,8 +222,18 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnC
                     break;
             }
         }
+        return this.datePipe.transform(date, f);
+    }
 
-        data.formatValue = this.datePipe.transform(retVal, f);
+    _onCityChange(data: any) {
+        this.genValueBySelected();
+        const retVal = new Date(this._value.getTime());
+        this.onChange(retVal);
+        this.onTouched();
+
+        data.value = retVal;
+
+        data.formatValue = this.getFormatDate(retVal);
         this._pickerInstance._text = data.formatValue;
 
         this.change.emit(data);
@@ -269,6 +273,9 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnC
         if (value) {
             this._value = value;
             this.genGroups();
+            if (value instanceof Date) {
+                this._pickerInstance._text = this.getFormatDate(value);
+            }
         }
     }
 
