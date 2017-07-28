@@ -1,3 +1,9 @@
+# 1.0.10
+
+## Bug Fixes
+
+- **weui-date-picker** 使用 Service 方式打开后，会出现 `input` 表单问题。 ([#20](https://github.com/cipchk/ngx-weui/issues/20))
+
 # 1.0.9
 
 ## Bug Fixes

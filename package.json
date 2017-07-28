@@ -1,6 +1,6 @@
 {
   "name": "ngx-weui",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "main": "bundles/ngx-weui.umd.js",
   "module": "index.js",
   "typings": "index.d.ts",
@@ -12,8 +12,11 @@
   "keywords": [
     "ngx-weui",
     "ng2-weui",
+    "ngx weui",
+    "ng2 weui",
     "angular weui",
     "angular2 weui",
+    "angular4 weui",
     "weui"
   ],
   "author": "cipchk <cipchk>",
