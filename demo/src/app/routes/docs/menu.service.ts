@@ -193,6 +193,10 @@ export class MenuService {
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png'
                 },
                 {
+                    "name": "Rating",
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png'
+                },
+                {
                     "name": "Uploader",
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png'
                 },

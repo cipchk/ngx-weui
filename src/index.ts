@@ -24,6 +24,7 @@ import { ChartG2Module } from "./chart-g2/chart-g2.module";
 import { JWeiXinModule } from "./jweixin/jweixin.module";
 import { AccordionModule } from "./accordion/accordion.module";
 import { MaskModule } from "./mask/mask.module";
+import { RatingModule } from "./rating/rating.module";
 
 export * from './utils/types';
 
@@ -51,24 +52,23 @@ export * from './chart-g2';
 export * from './jweixin';
 export * from './accordion';
 export * from './mask';
+export * from './rating';
 
 const MODULES = [
     CellModule, ButtonModule, FormModule, SliderModule, UploaderModule, ActionSheetModule,
     DialogModule, LoadmoreModule, ProgressModule, GalleryModule, PickerModule, SearchBarModule,
     TabModule, ToastModule, ToptipsModule, PopupModule, PTRModule, InfiniteLoaderModule,
-    SidebarModule, SwiperModule, ChartG2Module, JWeiXinModule, AccordionModule, MaskModule
+    SidebarModule, SwiperModule, ChartG2Module, JWeiXinModule, AccordionModule, MaskModule,
+    RatingModule
 ];
 
 @NgModule({
     imports: [
-        CellModule.forRoot(), ButtonModule.forRoot(),  FormModule.forRoot(),
-        SliderModule.forRoot(), UploaderModule.forRoot(), ActionSheetModule.forRoot(),
-        DialogModule.forRoot(), LoadmoreModule.forRoot(), ProgressModule.forRoot(),
-        GalleryModule.forRoot(), PickerModule.forRoot(), SearchBarModule.forRoot(),
-        TabModule.forRoot(), ToastModule.forRoot(), ToptipsModule.forRoot(),
-        PopupModule.forRoot(), PTRModule.forRoot(), InfiniteLoaderModule.forRoot(),
-        SidebarModule.forRoot(), SwiperModule.forRoot(), ChartG2Module.forRoot(),
-        JWeiXinModule.forRoot(), AccordionModule.forRoot(), MaskModule.forRoot()
+        CellModule.forRoot(), ButtonModule.forRoot(),  FormModule.forRoot(), SliderModule.forRoot(), UploaderModule.forRoot(), ActionSheetModule.forRoot(),
+        DialogModule.forRoot(), LoadmoreModule.forRoot(), ProgressModule.forRoot(), GalleryModule.forRoot(), PickerModule.forRoot(), SearchBarModule.forRoot(),
+        TabModule.forRoot(), ToastModule.forRoot(), ToptipsModule.forRoot(), PopupModule.forRoot(), PTRModule.forRoot(), InfiniteLoaderModule.forRoot(),
+        SidebarModule.forRoot(), SwiperModule.forRoot(), ChartG2Module.forRoot(), JWeiXinModule.forRoot(), AccordionModule.forRoot(), MaskModule.forRoot(),
+        RatingModule.forRoot()
     ],
     exports: MODULES
 })

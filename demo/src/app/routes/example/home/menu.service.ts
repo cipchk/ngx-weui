@@ -95,6 +95,10 @@ export class MenuService {
                 {
                     label: 'Mask',
                     id: 'mask'
+                },
+                {
+                    label: 'Rating',
+                    id: 'rating'
                 }
             ]
         },

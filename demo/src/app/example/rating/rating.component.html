@@ -1,0 +1,19 @@
+<Page [ngClass]="'rating'" [title]="'Rating'" [subTitle]="'评分'">
+
+    <div class="weui-cells__title" style="margin-bottom:10px;">静态模式</div>
+    <p style="margin-bottom:10px;">value: {{rate}}</p>
+    <weui-rating [ngModel]="7" [config]="config" [readonly]="true"></weui-rating>
+    <div class="weui-cells__title" style="margin-bottom:10px;">动态模式</div>
+    <p style="margin-bottom:10px;">value: {{rate}} readonly: {{readonly}}</p>
+    <weui-rating [(ngModel)]="rate" [config]="config" [readonly]="readonly"></weui-rating>
+    <div style="padding: 20px 0;">
+        <button weui-button [weui-mini]="'mini'" (click)="rate=0">清除</button>
+        <button weui-button [weui-mini]="'mini'" (click)="readonly=!readonly">切换只读</button>
+    </div>
+    <div class="weui-cells__title" style="margin-bottom:10px;">自定义图标</div>
+    <p style="margin-bottom:10px;">value: {{rate}} readonly: {{readonly}}</p>
+    <weui-rating [(ngModel)]="rate" [config]="customIconsCog" [readonly]="readonly"></weui-rating>
+    <div class="weui-cells__title" style="margin-bottom:10px;">自定义图标与样式</div>
+    <p style="margin-bottom:10px;">value: {{rate}} readonly: {{readonly}}</p>
+    <weui-rating [(ngModel)]="rate" [config]="customIconsAndClassCog" [readonly]="readonly"></weui-rating>
+</Page>
