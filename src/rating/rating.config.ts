@@ -11,11 +11,11 @@ export class RatingConfig {
     max?: number = 5;
 
     /**
-     * 图标class
+     * 样式名
      *
      * @type {string}
      */
-    stateClass?: string = '';
+    cls?: string = '';
 
     /**
      * 未选中图标
@@ -36,7 +36,7 @@ export class RatingConfig {
     /**
      * 自定义图标，当存在时 `max`、`stateOff`、`stateOn` 失效
      *
-     * @type {{ on: string, off: string }[]}
+     * @type {Array({ on: string, off: string })}
      */
     states?: { on: string, off: string }[] = [];
 

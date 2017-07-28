@@ -40,7 +40,7 @@ export class RatingComponent implements ControlValueAccessor, OnChanges {
         let _c = Object.assign({
             states: []
         }, this.DEF, cog);
-        this._class = _c.stateClass || '';
+        this._class = _c.cls || '';
         let count = _c.states.length || _c.max;
         this._range = Array(count).fill(0).map((v, i) => {
             return Object.assign({

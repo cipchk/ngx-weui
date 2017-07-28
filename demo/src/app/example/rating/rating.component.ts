@@ -23,7 +23,7 @@ export class DemoRatingComponent {
         ]
     };
     customIconsAndClassCog: RatingConfig = {
-        stateClass: 'rating',
+        cls: 'rating',
         stateOff: 'off',
         stateOn: 'on'
     };
