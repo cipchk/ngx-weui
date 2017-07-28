@@ -1,6 +1,6 @@
 {
   "name": "ngx-weui",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "main": "bundles/ngx-weui.umd.js",
   "module": "index.js",
   "typings": "index.d.ts",
