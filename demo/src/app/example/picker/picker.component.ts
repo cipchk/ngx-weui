@@ -124,4 +124,8 @@ export class DemoPickerComponent {
                 break;
         }
     }
+
+    ngOnDestroy() {
+        this.srv.destroyAll();
+    }
 }

@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { SkinType } from 'ngx-weui';
@@ -24,7 +24,7 @@ export class DemoActionSheetComponent {
         title: '这是一段标题'
     };
 
-    constructor(private asSrv: ActionSheetService) { }
+    constructor(private srv: ActionSheetService) { }
 
     onShow(type: SkinType) {
         this.config.skin = type;
@@ -39,9 +39,13 @@ export class DemoActionSheetComponent {
     onShowBySrv(type: SkinType, backdrop: boolean = true) {
         this.config.skin = type;
         this.config.backdrop = backdrop;
-        this.asSrv.show(this.menus, this.config).subscribe((res: any) => {
+        this.srv.show(this.menus, this.config).subscribe((res: any) => {
             console.log(res);
         });
+    }
+
+    ngOnDestroy() {
+        this.srv.destroyAll();
     }
 
 }

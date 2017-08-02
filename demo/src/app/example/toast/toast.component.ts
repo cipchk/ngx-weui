@@ -12,14 +12,14 @@ export class DemoToastComponent {
 
     @ViewChild('success') successToast: ToastComponent;
     @ViewChild('loading') loadingToast: ToastComponent;
-    constructor(private asSrv: ToastService) { }
+    constructor(private srv: ToastService) { }
 
     onShow(type: 'success' | 'loading') {
         (<ToastComponent>this[`${type}Toast`]).onShow();
     }
 
     onShowBySrv(type: 'success' | 'loading') {
-        this.asSrv[type]();
+        this.srv[type]();
     }
 
 }

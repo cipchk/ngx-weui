@@ -1,34 +1,29 @@
-import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, Optional, EmbeddedViewRef } from '@angular/core';
+import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, Optional, EmbeddedViewRef, ComponentRef } from '@angular/core';
 import { ActionSheetConfig, ActionSheetComponent } from "./index";
 import { Observable, Observer } from "rxjs/Rx";
-
-declare const document: any;
+import { BaseService } from '../utils/base.service'
 
 @Injectable()
-export class ActionSheetService {
-    constructor(private resolver: ComponentFactoryResolver, private applicationRef: ApplicationRef, private injector: Injector) { }
+export class ActionSheetService extends BaseService {
+    constructor(resolver: ComponentFactoryResolver, applicationRef: ApplicationRef, injector: Injector) {
+        super(resolver, applicationRef, injector);
+    }
 
     /**
      * 创建一个弹出式菜单并显示
-     * 
+     *
      * @param {Array} menus 菜单内容
      * @param {ActionSheetConfig} [config] 配置性（可选）
-     * @returns {Observable<any>} 
+     * @returns {Observable<any>} 可订阅来获取结果
      */
     show(menus: { text?: string, [key: string]: any }[], config?: ActionSheetConfig): Observable<any> {
-        let componentFactory = this.resolver.resolveComponentFactory(ActionSheetComponent);
-        let componentRef = componentFactory.create(this.injector);
-        let componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-        this.applicationRef.attachView(componentRef.hostView);
-        componentRef.onDestroy(() => {
-            this.applicationRef.detachView(componentRef.hostView);
-        });
-        document.body.appendChild(componentRootNode);
+        let componentRef = this.build(ActionSheetComponent);
+
         componentRef.instance.menus = menus;
         if (config) componentRef.instance.config = config;
         componentRef.instance.close.subscribe(() => {
             setTimeout(() => {
-                componentRef.destroy();
+                this.destroy(componentRef);
             }, 100)
         });
         return componentRef.instance.show();

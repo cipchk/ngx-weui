@@ -1,3 +1,7 @@
+# 1.0.13
+
+- [增] `weui-actionsheet`、`weui-dialog`、`weui-picker`、`weui-toast`、`weui-toptips` 组件对应的Service类增加 `destroy`、`destroyAll` 方法用于强制销毁组件。
+
 # 1.0.12
 
 - [增] `weui-rating` 评分组件

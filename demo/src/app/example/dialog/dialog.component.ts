@@ -23,7 +23,7 @@ export class DemoDialogComponent {
         confirm: '主操作'
     };
 
-    constructor(private asSrv: DialogService) { }
+    constructor(private srv: DialogService) { }
 
     onShow(type: SkinType, style: 1 | 2 | 3) {
         this.config.skin = type;
@@ -59,7 +59,7 @@ export class DemoDialogComponent {
         this.config.skin = type;
         this.config.backdrop = backdrop;
         this.config.content = '弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内';
-        this.asSrv.show(this.config).subscribe((res: any) => {
+        this.srv.show(this.config).subscribe((res: any) => {
             console.log(res);
         });
     }
@@ -69,9 +69,13 @@ export class DemoDialogComponent {
             <p>这是一段HTML<strong>加粗</strong></p>
             <p>这是一段HTML<strong>加粗</strong></p>
         `;
-        this.asSrv.show(this.config).subscribe((res: any) => {
+        this.srv.show(this.config).subscribe((res: any) => {
             console.log(res);
         });
+    }
+
+    ngOnDestroy() {
+        this.srv.destroyAll();
     }
 
 }

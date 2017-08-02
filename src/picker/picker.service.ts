@@ -1,16 +1,17 @@
-import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, Optional, EmbeddedViewRef } from '@angular/core';
+import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, Optional, EmbeddedViewRef, ComponentRef } from '@angular/core';
 import { PickerComponent, DatePickerComponent, CityPickerComponent, PickerData, PickerOptions } from "./index";
 import { Observable, Observer } from "rxjs/Rx";
 import { FORMAT_TYPE } from "./picker-date.component";
-
-declare const document: any;
+import { BaseService } from '../utils/base.service'
 
 /**
  * 多列选择器Service，可直接通过Class构造选择器
  */
 @Injectable()
-export class PickerService {
-    constructor(private resolver: ComponentFactoryResolver, private applicationRef: ApplicationRef, private injector: Injector) { }
+export class PickerService extends BaseService {
+    constructor(resolver: ComponentFactoryResolver, applicationRef: ApplicationRef, injector: Injector) {
+        super(resolver, applicationRef, injector);
+    }
 
     /**
      * 构建一个多列选择器并显示
@@ -22,14 +23,7 @@ export class PickerService {
      * @returns {Observable<any>} 务必订阅结果才会显示。
      */
     show(data: PickerData[][] | String[], value?: any, defaultSelect?: number[], options?: PickerOptions): Observable<any> {
-        let componentFactory = this.resolver.resolveComponentFactory(PickerComponent);
-        let componentRef = componentFactory.create(this.injector);
-        let componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-        this.applicationRef.attachView(componentRef.hostView);
-        componentRef.onDestroy(() => {
-            this.applicationRef.detachView(componentRef.hostView);
-        });
-        document.body.appendChild(componentRootNode);
+        let componentRef = this.build(PickerComponent);
         // 通过Service打开的强制设置为 `default` 以免出现 `input`
         options = Object.assign({ }, options, { type: 'default' });
         componentRef.instance.options = options;
@@ -42,7 +36,7 @@ export class PickerService {
         }
         componentRef.instance.hide.subscribe(() => {
             setTimeout(() => {
-                componentRef.destroy();
+                this.destroy(componentRef);
             }, 100)
         });
         componentRef.instance._onShow();
@@ -59,14 +53,7 @@ export class PickerService {
      * @returns {Observable<any>} 务必订阅结果才会显示。
      */
     showCity(data: any, value?: string, dataMap?: any, options?: PickerOptions): Observable<any> {
-        let componentFactory = this.resolver.resolveComponentFactory(CityPickerComponent);
-        let componentRef = componentFactory.create(this.injector);
-        let componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-        this.applicationRef.attachView(componentRef.hostView);
-        componentRef.onDestroy(() => {
-            this.applicationRef.detachView(componentRef.hostView);
-        });
-        document.body.appendChild(componentRootNode);
+        let componentRef = this.build(CityPickerComponent);
         if (dataMap) componentRef.instance.dataMap = dataMap;
         // 通过Service打开的强制设置为 `default` 以免出现 `input`
         options = Object.assign({ }, options, { type: 'default' });
@@ -79,7 +66,7 @@ export class PickerService {
         }
         componentRef.instance.hide.subscribe(() => {
             setTimeout(() => {
-                componentRef.destroy();
+                this.destroy(componentRef);
             }, 100)
         });
         setTimeout(() => {
@@ -101,14 +88,7 @@ export class PickerService {
      */
     showDateTime(type?: 'date' | 'datetime' | 'time', format?: FORMAT_TYPE,
         value?: Date, min?: Date, max?: Date, options?: PickerOptions): Observable<any> {
-        let componentFactory = this.resolver.resolveComponentFactory(DatePickerComponent);
-        let componentRef = componentFactory.create(this.injector);
-        let componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-        this.applicationRef.attachView(componentRef.hostView);
-        componentRef.onDestroy(() => {
-            this.applicationRef.detachView(componentRef.hostView);
-        });
-        document.body.appendChild(componentRootNode);
+        let componentRef = this.build(DatePickerComponent);
         // 通过Service打开的强制设置为 `default` 以免出现 `input`
         options = Object.assign({ }, options, { type: 'default' });
         componentRef.instance.options = options;
@@ -122,7 +102,7 @@ export class PickerService {
         }
         componentRef.instance.hide.subscribe(() => {
             setTimeout(() => {
-                componentRef.destroy();
+                this.destroy(componentRef);
             }, 100)
         });
         setTimeout(() => {

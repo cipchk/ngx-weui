@@ -11,7 +11,7 @@ import { ToptipsComponent, ToptipsService } from "ngx-weui/toptips";
 export class DemoToptipsComponent {
 
     @ViewChild('toptips') toptips: ToptipsComponent;
-    constructor(private asSrv: ToptipsService) { }
+    constructor(private srv: ToptipsService) { }
 
     onShow(type: 'warn' | 'info' | 'primary') {
         this.toptips.type = type;
@@ -30,7 +30,7 @@ export class DemoToptipsComponent {
     }
 
     onShowBySrv(type: 'warn' | 'info' | 'primary' | 'success' | 'default') {
-        this.asSrv[type]('这是一段文字');
+        this.srv[type]('这是一段文字');
     }
 
 }
