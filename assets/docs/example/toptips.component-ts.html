@@ -11,7 +11,7 @@
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> DemoToptipsComponent {
 
     <span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">'toptips'</span>) toptips: ToptipsComponent;
-    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> asSrv: ToptipsService</span>) { }
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> srv: ToptipsService</span>) { }
 
     onShow(<span class="hljs-keyword">type</span>: <span class="hljs-string">'warn'</span> | <span class="hljs-string">'info'</span> | <span class="hljs-string">'primary'</span>) {
         <span class="hljs-keyword">this</span>.toptips.type = <span class="hljs-keyword">type</span>;
@@ -30,7 +30,7 @@
     }
 
     onShowBySrv(<span class="hljs-keyword">type</span>: <span class="hljs-string">'warn'</span> | <span class="hljs-string">'info'</span> | <span class="hljs-string">'primary'</span> | <span class="hljs-string">'success'</span> | <span class="hljs-string">'default'</span>) {
-        <span class="hljs-keyword">this</span>.asSrv[<span class="hljs-keyword">type</span>](<span class="hljs-string">'这是一段文字'</span>);
+        <span class="hljs-keyword">this</span>.srv[<span class="hljs-keyword">type</span>](<span class="hljs-string">'这是一段文字'</span>);
     }
 
 }

@@ -1,4 +1,4 @@
-<span class="hljs-keyword">import</span> { Component, ViewEncapsulation, ViewChild } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> { Component, ViewEncapsulation, ViewChild, OnDestroy } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
 <span class="hljs-keyword">import</span> { Observable } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/Rx'</span>;
 
 <span class="hljs-keyword">import</span> { SkinType } <span class="hljs-keyword">from</span> <span class="hljs-string">'ngx-weui'</span>;
@@ -24,7 +24,7 @@
         title: <span class="hljs-string">'这是一段标题'</span>
     };
 
-    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> asSrv: ActionSheetService</span>) { }
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> srv: ActionSheetService</span>) { }
 
     onShow(<span class="hljs-keyword">type</span>: SkinType) {
         <span class="hljs-keyword">this</span>.config.skin = <span class="hljs-keyword">type</span>;
@@ -39,9 +39,13 @@
     <span class="hljs-params">onShowBySrv</span>(<span class="hljs-params"><span class="hljs-keyword">type</span>: SkinType, backdrop: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">true</span></span>) {
         <span class="hljs-params">this</span>.<span class="hljs-params">config</span>.<span class="hljs-params">skin</span> = <span class="hljs-params">type</span>;
         <span class="hljs-params">this</span>.<span class="hljs-params">config</span>.<span class="hljs-params">backdrop</span> = <span class="hljs-params">backdrop</span>;
-        <span class="hljs-params">this</span>.<span class="hljs-params">asSrv</span>.<span class="hljs-params">show</span>(<span class="hljs-params"><span class="hljs-keyword">this</span>.menus, <span class="hljs-keyword">this</span>.config</span>).<span class="hljs-params">subscribe</span>(<span class="hljs-params">(<span class="hljs-params">res: <span class="hljs-built_in">any</span></span>) =&gt; {
+        <span class="hljs-params">this</span>.<span class="hljs-params">srv</span>.<span class="hljs-params">show</span>(<span class="hljs-params"><span class="hljs-keyword">this</span>.menus, <span class="hljs-keyword">this</span>.config</span>).<span class="hljs-params">subscribe</span>(<span class="hljs-params">(<span class="hljs-params">res: <span class="hljs-built_in">any</span></span>) =&gt; {
             <span class="hljs-built_in">console</span>.log(<span class="hljs-params">res</span>);
         }</span>);
+    }
+
+    <span class="hljs-params">ngOnDestroy</span><span class="hljs-params">()</span> {
+        <span class="hljs-params">this</span>.<span class="hljs-params">srv</span>.<span class="hljs-params">destroyAll</span><span class="hljs-params">()</span>;
     }
 
 }

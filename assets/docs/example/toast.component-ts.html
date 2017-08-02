@@ -12,14 +12,14 @@
 
     <span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">'success'</span>) successToast: ToastComponent;
     <span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">'loading'</span>) loadingToast: ToastComponent;
-    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> asSrv: ToastService</span>) { }
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> srv: ToastService</span>) { }
 
     onShow(<span class="hljs-keyword">type</span>: <span class="hljs-string">'success'</span> | <span class="hljs-string">'loading'</span>) {
         (&lt;ToastComponent&gt;<span class="hljs-keyword">this</span>[<span class="hljs-string">`<span class="hljs-subst">${type}</span>Toast`</span>]).onShow();
     }
 
     onShowBySrv(<span class="hljs-keyword">type</span>: <span class="hljs-string">'success'</span> | <span class="hljs-string">'loading'</span>) {
-        <span class="hljs-keyword">this</span>.asSrv[<span class="hljs-keyword">type</span>]();
+        <span class="hljs-keyword">this</span>.srv[<span class="hljs-keyword">type</span>]();
     }
 
 }
