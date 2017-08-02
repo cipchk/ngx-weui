@@ -44,7 +44,6 @@ const MARKDOWN_TAGS_TO_CLASS_ALIAS = [
     'code',
 ];
 
-debugger;
 /** Generate all docs content. */
 gulp.task('docs', [
     'markdown-docs',
