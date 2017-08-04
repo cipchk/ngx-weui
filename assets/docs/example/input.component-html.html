@@ -18,11 +18,11 @@
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cells__title"</span>&gt;</span>复选列表项<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
         <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cells weui-cells_checkbox"</span>&gt;</span>
-            <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell weui-check__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"checkbox-{{i}}"</span> 
+            <span class="hljs-tag">&lt;<span class="hljs-name">label</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell weui-check__label"</span> <span class="hljs-attr">for</span>=<span class="hljs-string">"checkbox-{{i}}"</span>
                 *<span class="hljs-attr">ngFor</span>=<span class="hljs-string">"let i of checkbox; let index = index"</span>&gt;</span>
                 <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__hd"</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"checkbox"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-check"</span> 
-                        [<span class="hljs-attr">checklist</span>]=<span class="hljs-string">"res.checkbox"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"radio1"</span> [<span class="hljs-attr">value</span>]=<span class="hljs-string">"i"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"checkbox-{{i}}"</span>&gt;</span>
+                    <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"checkbox"</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-check"</span>
+                        [<span class="hljs-attr">weui-checklist</span>]=<span class="hljs-string">"res.checkbox"</span> <span class="hljs-attr">name</span>=<span class="hljs-string">"radio1"</span> [<span class="hljs-attr">weui-value</span>]=<span class="hljs-string">"i"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"checkbox-{{i}}"</span>&gt;</span>
                     <span class="hljs-tag">&lt;<span class="hljs-name">i</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-icon-checked"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">i</span>&gt;</span>
                 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
                 <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__bd"</span>&gt;</span>
@@ -51,8 +51,8 @@
                         <span class="hljs-attr">weui-input</span>=<span class="hljs-string">"mobile"</span> <span class="hljs-attr">weui-required</span>&gt;</span>
                 <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
                 <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__ft"</span>&gt;</span>
-                    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-vcode-btn"</span> 
-                        [<span class="hljs-attr">weui-vcode</span>]=<span class="hljs-string">"onSendCode"</span> 
+                    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-vcode-btn"</span>
+                        [<span class="hljs-attr">weui-vcode</span>]=<span class="hljs-string">"onSendCode"</span>
                         <span class="hljs-attr">weui-seconds</span>=<span class="hljs-string">"10"</span>
                         <span class="hljs-attr">weui-tpl</span>=<span class="hljs-string">"${num}s"</span>
                         <span class="hljs-attr">weui-error</span>=<span class="hljs-string">"重新发送"</span>&gt;</span>获取验证码<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
