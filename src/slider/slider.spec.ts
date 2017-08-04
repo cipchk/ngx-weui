@@ -5,7 +5,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed, fakeAsync, tick, async, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { SliderModule, SliderDirective } from '../slider';
+import { SliderModule } from './slider.module'
+import { SliderDirective } from './slider'
 
 const MIN = 1, MAX = 100, STEP = 1, VALUE = 0, REALVALUE = 1;
 

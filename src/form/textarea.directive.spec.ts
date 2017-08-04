@@ -3,7 +3,8 @@ import { FormsModule, FormBuilder, FormGroup, FormControl, ReactiveFormsModule }
 import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect, async, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { FormModule, TextareaDirective } from '../form';
+import { FormModule } from './form.module'
+import { TextareaDirective } from './textarea.directive'
 
 const MAXLENGTH: number = 5;
 

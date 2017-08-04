@@ -4,7 +4,8 @@ import { FormsModule, FormBuilder, FormGroup, FormControl } from '@angular/forms
 import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect, async, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { FormModule, VCodeDirective } from '../form';
+import { FormModule } from './form.module'
+import { VCodeDirective } from './vcode.directive'
 
 const SECONDS: number = 10;
 const TPL: string = '${num}s';
@@ -61,8 +62,8 @@ describe('Directive: vcode', () => {
         <div class="weui-cell__hd"></div>
         <div class="weui-cell__bd"></div>
         <div class="weui-cell__ft">
-            <button class="weui-vcode-btn" 
-                [weui-vcode]="onSendCode" 
+            <button class="weui-vcode-btn"
+                [weui-vcode]="onSendCode"
                 [weui-seconds]="seconds"
                 [weui-tpl]="tpl"
                 [weui-error]="error">获取验证码</button>
