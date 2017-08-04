@@ -40,10 +40,6 @@
     config: DialogConfig = {};
 
     <span class="hljs-keyword">constructor</span>(<span class="hljs-params"><span class="hljs-keyword">private</span> srv: DialogService, <span class="hljs-keyword">private</span> toastService: ToastService</span>) {
-        <span class="hljs-comment">// <span class="hljs-doctag">todo:</span> test</span>
-        setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
-            <span class="hljs-comment">// this.onShowPrompt('checkbox');</span>
-        }, <span class="hljs-number">500</span>);
     }
 
     onShow(<span class="hljs-keyword">type</span>: SkinType, style: <span class="hljs-number">1</span> | <span class="hljs-number">2</span> | <span class="hljs-number">3</span>) {
@@ -75,6 +71,7 @@
                 <span class="hljs-built_in">console</span>.log(<span class="hljs-params">'<span class="hljs-keyword">type</span>', res</span>);
             }</span>);
         }, 10);
+        <span class="hljs-params">return</span> <span class="hljs-params">false</span>;
     }
 
     <span class="hljs-params">onShowBySrv</span>(<span class="hljs-params"><span class="hljs-keyword">type</span>: SkinType, backdrop: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">true</span></span>) {
@@ -86,6 +83,7 @@
         <span class="hljs-params">this</span>.<span class="hljs-params">srv</span>.<span class="hljs-params">show</span>(<span class="hljs-params"><span class="hljs-keyword">this</span>.config</span>).<span class="hljs-params">subscribe</span>(<span class="hljs-params">(<span class="hljs-params">res: <span class="hljs-built_in">any</span></span>) =&gt; {
             <span class="hljs-built_in">console</span>.log(<span class="hljs-params">res</span>);
         }</span>);
+        <span class="hljs-params">return</span> <span class="hljs-params">false</span>;
     }
 
     <span class="hljs-params">onShowOfHtml</span><span class="hljs-params">()</span> {
@@ -98,6 +96,7 @@
         <span class="hljs-params">this</span>.<span class="hljs-params">srv</span>.<span class="hljs-params">show</span>(<span class="hljs-params"><span class="hljs-keyword">this</span>.config</span>).<span class="hljs-params">subscribe</span>(<span class="hljs-params">(<span class="hljs-params">res: <span class="hljs-built_in">any</span></span>) =&gt; {
             <span class="hljs-built_in">console</span>.log(<span class="hljs-params">res</span>);
         }</span>);
+        <span class="hljs-params">return</span> <span class="hljs-params">false</span>;
     }
 
     <span class="hljs-params">promptValue</span>: <span class="hljs-params">any</span>;
@@ -134,6 +133,7 @@
                 <span class="hljs-built_in">console</span>.log(<span class="hljs-params">'prompt <span class="hljs-keyword">from</span> component', res</span>);
             }</span>);
         }
+        <span class="hljs-params">return</span> <span class="hljs-params">false</span>;
     }
 
     <span class="hljs-params">ngOnDestroy</span><span class="hljs-params">()</span> {
