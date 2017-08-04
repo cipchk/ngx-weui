@@ -1,3 +1,8 @@
+# 1.0.14
+
+- [增] `weui-dialog` 支持可输入类型。
+- [增] `weui-checklist` checkbox选择项。
+
 # 1.0.13
 
 - [增] `weui-actionsheet`、`weui-dialog`、`weui-picker`、`weui-toast`、`weui-toptips` 组件对应的Service类增加 `destroy`、`destroyAll` 方法用于强制销毁组件。
