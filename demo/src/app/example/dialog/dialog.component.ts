@@ -102,7 +102,8 @@ export class DemoDialogComponent {
     promptValue: any;
     promptTypes: string[] = ['text', 'email', 'url', 'range', 'textarea', 'select', 'radio', 'checkbox'];
     onShowPrompt(inputType: InputType, useSrv: boolean = false) {
-        this.config = Object.assign({}, this.DEFCONFIG, <DialogConfig>{
+        let cog = Object.assign({}, this.DEFCONFIG, <DialogConfig>{
+            skin: 'auto',
             type: 'prompt',
             confirm: '确认',
             cancel: '取消',
@@ -111,21 +112,24 @@ export class DemoDialogComponent {
             inputRegex: null
         });
         if (inputType === 'range') {
-            this.config.inputValue = 10;
+            cog.inputValue = 10;
         }
         if (inputType === 'select') {
-            this.config.inputValue = this.config.inputOptions[0];
+            cog.inputValue = cog.inputOptions[0];
         }
         if (inputType === 'checkbox') {
-            this.config.inputValue = this.config.inputOptions.slice(1, 3);
+            cog.inputValue = cog.inputOptions.slice(1, 3);
         }
         if (useSrv) {
-            this.srv.show(this.config).subscribe((res: any) => {
-                if (res.result)
-                    this.toastService.show(`结果：${JSON.stringify(res.result)}`);
-                console.log('prompt from service', res);
+            setTimeout(() => {
+                this.srv.show(cog).subscribe((res: any) => {
+                    if (res.result)
+                        this.toastService.show(`结果：${JSON.stringify(res.result)}`);
+                    console.log('prompt from service', res);
+                });
             });
         } else {
+            this.config = cog;
             this.autoAS.show().subscribe((res: any) => {
                 if (res.result) {
                     this.toastService.show(`结果：${JSON.stringify(res.result)}`);
