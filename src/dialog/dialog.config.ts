@@ -1,8 +1,19 @@
 import { Injectable } from '@angular/core';
-import { SkinType, ButtonType } from "../utils/types";
+import { SkinType, ButtonType, InputType, InputData } from "../utils/types";
 
 @Injectable()
 export class DialogConfig {
+
+    /**
+     * 对话框类型
+     * default：默认文本或HTML格式
+     * prompt：可输入对话框
+     *
+     * @type {('default' | 'prompt')}
+     * @default 'default'
+     */
+    type?: 'default' | 'prompt' = 'default';
+
     /**
      * 样式
      *
@@ -23,6 +34,59 @@ export class DialogConfig {
      * @type {string}
      */
     content?: string;
+
+    /**
+     * Input `type` 字段
+     *
+     * @type {InputType}
+     */
+    input?: InputType;
+    /**
+     * Input `placeholder` 字段
+     *
+     * @type {string}
+     */
+    inputPlaceholder?: string;
+    /**
+     * Input 初始化值
+     *
+     * @type {any}
+     */
+    inputValue?: any;
+    /**
+     * Input `required` 字段，必填项校验失败时【确定】按钮为 `disabled` 状态。
+     *
+     * @type {boolean}
+     * @default true
+     */
+    inputRequired?: boolean;
+    /**
+     * Input 正则判断校验。
+     * 如无指定，会根据 `input` 类型分别对：`email`、`url` 默认提供正则表达式
+     *
+     * @type {RegExp}
+     */
+    inputRegex?: RegExp;
+    /**
+     * 输入参数无效时提醒文本。
+     *
+     * @type {string}
+     */
+    inputError?: string;
+
+    /**
+     * 数据数组，如果input值为 `select` `radio` `checkbox` 时为必填项。
+     *
+     * @type {InputData[]}
+     */
+    inputOptions?: InputData[];
+
+    /**
+     * HTML元素属性对象，例如 `min` `max` 等，对象键表示属性名，对象值表示属性值
+     *
+     * @type {*}
+     */
+    inputAttributes?: any;
 
     /**
      * 取消，返回false
