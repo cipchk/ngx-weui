@@ -103,6 +103,7 @@
     <span class="hljs-params">promptTypes</span>: <span class="hljs-params">string</span>[] = ['<span class="hljs-params">text</span>', '<span class="hljs-params">email</span>', '<span class="hljs-params">url</span>', '<span class="hljs-params">range</span>', '<span class="hljs-params">textarea</span>', '<span class="hljs-params">select</span>', '<span class="hljs-params">radio</span>', '<span class="hljs-params">checkbox</span>'];
     <span class="hljs-params">onShowPrompt</span>(<span class="hljs-params">inputType: InputType, useSrv: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">false</span></span>) {
         <span class="hljs-params">this</span>.<span class="hljs-params">config</span> = <span class="hljs-params">Object</span>.<span class="hljs-params">assign</span>(<span class="hljs-params">{}, <span class="hljs-keyword">this</span>.DEFCONFIG, &lt;DialogConfig&gt;{
+            skin: 'auto',
             <span class="hljs-keyword">type</span>: 'prompt',
             confirm: '确认',
             cancel: '取消',
