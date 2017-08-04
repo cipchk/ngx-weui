@@ -11,8 +11,6 @@ import { NotifyModule } from 'ngx-notify';
 import { GesturePasswordModule } from 'ngx-gesture-password';
 import { AqmModule } from 'angular-qq-maps';
 
-import { ChecklistDirective } from "./directives/checklist";
-
 @NgModule({
     imports: [
         CommonModule,
@@ -36,7 +34,6 @@ import { ChecklistDirective } from "./directives/checklist";
         // { provide: ButtonConfig, useFactory: ()=> { return Object.assign(new ButtonConfig(), { type: 'warn' }); } }
     ],
     declarations: [
-        ChecklistDirective
     ],
     exports: [
         CommonModule,
@@ -44,8 +41,7 @@ import { ChecklistDirective } from "./directives/checklist";
         ReactiveFormsModule,
         HttpModule, JsonpModule,
         RouterModule,
-        
-        ChecklistDirective,
+
         WeUiModule,
 
         CountdownModule, NotifyModule, GesturePasswordModule, AqmModule

@@ -2,19 +2,21 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NgModule, ModuleWithProviders } from '@angular/core';
 
-import { InputDirective, VCodeDirective, TextareaDirective } from "./index";
+import { InputDirective, VCodeDirective, TextareaDirective, ChecklistDirective } from "./index";
 
 @NgModule({
     imports: [ CommonModule, FormsModule ],
     declarations: [
         InputDirective,
         VCodeDirective,
-        TextareaDirective
+        TextareaDirective,
+        ChecklistDirective
     ],
     exports: [
         InputDirective,
         VCodeDirective,
-        TextareaDirective
+        TextareaDirective,
+        ChecklistDirective
     ]
 })
 export class FormModule {

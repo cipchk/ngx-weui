@@ -18,11 +18,11 @@
         </div>
         <div class="weui-cells__title">复选列表项</div>
         <div class="weui-cells weui-cells_checkbox">
-            <label class="weui-cell weui-check__label" for="checkbox-{{i}}" 
+            <label class="weui-cell weui-check__label" for="checkbox-{{i}}"
                 *ngFor="let i of checkbox; let index = index">
                 <div class="weui-cell__hd">
-                    <input type="checkbox" class="weui-check" 
-                        [checklist]="res.checkbox" name="radio1" [value]="i" id="checkbox-{{i}}">
+                    <input type="checkbox" class="weui-check"
+                        [weui-checklist]="res.checkbox" name="radio1" [weui-value]="i" id="checkbox-{{i}}">
                     <i class="weui-icon-checked"></i>
                 </div>
                 <div class="weui-cell__bd">
@@ -51,8 +51,8 @@
                         weui-input="mobile" weui-required>
                 </div>
                 <div class="weui-cell__ft">
-                    <button class="weui-vcode-btn" 
-                        [weui-vcode]="onSendCode" 
+                    <button class="weui-vcode-btn"
+                        [weui-vcode]="onSendCode"
                         weui-seconds="10"
                         weui-tpl="${num}s"
                         weui-error="重新发送">获取验证码</button>
