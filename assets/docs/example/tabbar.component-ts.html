@@ -18,13 +18,13 @@
     onLoadMore(comp: InfiniteLoaderComponent) {
         Observable.timer(<span class="hljs-number">1500</span>).subscribe(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
 
-            <span class="hljs-keyword">this</span>.items.push(<span class="hljs-keyword">this</span>.items.length);
+            <span class="hljs-keyword">this</span>.items.push(...Array(<span class="hljs-number">10</span>).fill(<span class="hljs-keyword">this</span>.items.length).map(<span class="hljs-function">(<span class="hljs-params">v, i</span>) =&gt;</span> v + i));
 
-            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.items.length &gt; <span class="hljs-number">22</span>) {
+            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.items.length &gt;= <span class="hljs-number">50</span>) {
                 comp.setFinished();
                 <span class="hljs-keyword">return</span>;
             }
             comp.resolveLoading();
         });
     }
-} 
+}
