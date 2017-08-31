@@ -5,7 +5,61 @@ export class MenuService {
 
     menus: any[] = [
         {
-            name: 'Form',
+            name: '布局 Layout',
+            icon: 'icon_nav_form',
+            show: false,
+            items: [
+                {
+                    label: 'Flex',
+                    id: 'flex'
+                },
+                {
+                    label: 'Grid',
+                    id: 'grid'
+                },
+                {
+                    label: 'Article',
+                    id: 'article'
+                },
+                {
+                    label: 'Footer',
+                    id: 'footer'
+                },
+                {
+                    label: 'Preview',
+                    id: 'preview'
+                },
+                {
+                    label: 'Panel',
+                    id: 'panel'
+                }
+            ]
+        },
+        {
+            name: '导航 Navigation',
+            icon: 'icon_nav_nav',
+            show: false,
+            items: [
+                {
+                    label: 'Navbar',
+                    id: 'navbar'
+                },
+                {
+                    label: 'Tabbar',
+                    id: 'tabbar'
+                },
+                {
+                    label: 'Sidebar',
+                    id: 'sidebar'
+                },
+                {
+                    label: 'Popup',
+                    id: 'popup'
+                }
+            ]
+        },
+        {
+            name: '数据录入 Data Entry',
             icon: 'icon_nav_form',
             show: false,
             items: [
@@ -18,10 +72,6 @@ export class MenuService {
                     id: 'input'
                 },
                 {
-                    label: 'List',
-                    id: 'list'
-                },
-                {
                     label: 'Slider',
                     id: 'slider'
                 },
@@ -32,105 +82,54 @@ export class MenuService {
                 {
                     label: 'Uploader',
                     id: 'uploader'
-                }
-            ]
-        },
-        {
-            name: 'Basic Components',
-            icon: 'icon_nav_layout',
-            show: false,
-            items: [
-                {
-                    label: 'Article',
-                    id: 'article'
                 },
                 {
-                    label: 'Badge',
-                    id: 'badge'
-                },
-                {
-                    label: 'Flex',
-                    id: 'flex'
-                },
-                {
-                    label: 'Footer',
-                    id: 'footer'
-                },
-                {
-                    label: 'Gallery',
-                    id: 'gallery'
-                },
-                {
-                    label: 'Grid',
-                    id: 'grid'
-                },
-                {
-                    label: 'Icons',
-                    id: 'icons'
+                    label: 'Rating',
+                    id: 'rating'
                 },
                 {
                     label: 'Loadmore',
                     id: 'loadmore'
                 },
                 {
-                    label: 'Panel',
-                    id: 'panel'
-                },
-                {
-                    label: 'Preview',
-                    id: 'preview'
-                },
-                {
                     label: 'Progress',
                     id: 'progress'
-                },
+                }
+            ]
+        },
+        {
+            name: '数据展示 Data Display',
+            icon: 'icon_nav_form',
+            show: false,
+            items: [
                 {
                     label: 'Accordion',
                     id: 'accordion'
                 },
                 {
-                    label: '微信JS-SDK',
-                    id: 'jweixin'
+                    label: 'Badge',
+                    id: 'badge'
                 },
                 {
-                    label: 'Mask',
-                    id: 'mask'
+                    label: 'Icons',
+                    id: 'icons'
                 },
                 {
-                    label: 'Rating',
-                    id: 'rating'
-                }
-            ]
-        },
-        {
-            name: 'Third Party',
-            icon: 'icon_nav_layout',
-            show: false,
-            items: [
+                    label: 'List',
+                    id: 'list'
+                },
                 {
-                    label: 'Chart G2-Mobile',
-                    id: 'chart-g2'
+                    label: 'Gallery',
+                    id: 'gallery'
                 },
                 {
                     label: 'Swiper',
                     id: 'swiper'
-                },
-                {
-                    label: 'Countdown',
-                    id: 'countdown'
-                },
-                {
-                    label: 'Gesture Password',
-                    id: 'gesture-password'
-                },
-                {
-                    label: 'QQ Map',
-                    id: 'map-qq'
                 }
             ]
         },
         {
-            name: 'Feedbacks',
+            name: '操作反馈 Feedback',
             icon: 'icon_nav_feedback',
             show: false,
             items: [
@@ -163,11 +162,14 @@ export class MenuService {
                 {
                     label: 'Toptips',
                     id: 'toptips'
-                },
-                {
-                    label: 'Popup',
-                    id: 'popup'
-                },
+                }
+            ]
+        },
+        {
+            name: '手势 Gesture',
+            icon: 'icon_nav_feedback',
+            show: false,
+            items: [
                 {
                     label: 'Pull To Refresh',
                     id: 'ptr'
@@ -179,32 +181,51 @@ export class MenuService {
             ]
         },
         {
-            name: 'Navigations',
-            icon: 'icon_nav_nav',
-            show: false,
-            items: [
-                {
-                    label: 'Navbar',
-                    id: 'navbar'
-                },
-                {
-                    label: 'Tabbar',
-                    id: 'tabbar'
-                },
-                {
-                    label: 'Sidebar',
-                    id: 'sidebar'
-                }
-            ]
-        },
-        {
-            name: 'Search',
+            name: '组合组件 Combination',
             icon: 'icon_nav_search',
             show: false,
             items: [
                 {
                     label: 'Search Bar',
                     id: 'searchbar'
+                }
+            ]
+        },
+        {
+            name: '其他 Other',
+            icon: 'icon_nav_layout',
+            show: false,
+            items: [
+                {
+                    label: '微信JS-SDK',
+                    id: 'jweixin'
+                },
+                {
+                    label: 'Mask',
+                    id: 'mask'
+                }
+            ]
+        },
+        {
+            name: 'Third Party',
+            icon: 'icon_nav_layout',
+            show: false,
+            items: [
+                {
+                    label: 'Chart G2-Mobile',
+                    id: 'chart-g2'
+                },
+                {
+                    label: 'Countdown',
+                    id: 'countdown'
+                },
+                {
+                    label: 'Gesture Password',
+                    id: 'gesture-password'
+                },
+                {
+                    label: 'QQ Map',
+                    id: 'map-qq'
                 }
             ]
         }
