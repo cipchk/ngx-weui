@@ -16,13 +16,11 @@ import { InfiniteLoaderConfig } from "./infiniteloader.config";
             </div>
         </div>
     `,
-    styles: [
-       `weui-infiniteloader{display:block}.weui-infiniteloader{overflow:hidden}.weui-infiniteloader__content{height:100%;overflow:scroll;-webkit-overflow-scrolling:touch;z-index:1}`
-    ],
     host: {
         '[class.weui-infiniteloader]': 'true',
         '[style.height]': 'config.height'
     },
+    styleUrls: [ './infiniteloader.scss' ],
     encapsulation: ViewEncapsulation.None
 })
 export class InfiniteLoaderComponent implements OnChanges, OnDestroy {
@@ -31,7 +29,7 @@ export class InfiniteLoaderComponent implements OnChanges, OnDestroy {
 
     /**
      * 配置项
-     * 
+     *
      * @type {InfiniteLoaderConfig}
      */
     @Input() config: InfiniteLoaderConfig;

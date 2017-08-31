@@ -1,4 +1,4 @@
-import { Component, OnDestroy, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnDestroy, Input, Output, EventEmitter, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs/Rx';
 import { isAndroid } from '../utils/browser';
 import { DialogConfig } from './dialog.config';
@@ -85,34 +85,8 @@ import { DialogConfig } from './dialog.config';
             </div>
         </div>
     `,
-    styles: [
-        `
-        .weui-mask,
-        .weui-dialog {
-            opacity: 0;
-            visibility: hidden;
-        }
-        .weui-mask__in,
-        .weui-dialog__in {
-            opacity: 1;
-            visibility: visible;
-        }
-        .weui-mask {
-            transition-duration: .3s;
-        }
-        .weui-dialog {
-            transition-duration: .2s;
-            transform-origin: 0 0;
-        }
-        .weui-dialog__in {
-            transform: scale(1) translate(-50%, -50%);
-        }
-        .weui-dialog__error {
-            font-size: 14px;
-            color: #f50;
-        }
-        `
-    ]
+    styleUrls: [ './dialog.scss' ],
+    encapsulation: ViewEncapsulation.None
 })
 export class DialogComponent implements OnDestroy {
 

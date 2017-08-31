@@ -1,0 +1,10 @@
+.weui-mask {
+    opacity: 0;
+    visibility: hidden;
+    transition-duration: .3s;
+}
+
+.weui-mask--visible {
+    opacity: 1;
+    visibility: visible;
+}

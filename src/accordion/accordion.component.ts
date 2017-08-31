@@ -7,28 +7,27 @@ import { AnimateType } from "../utils/types";
     selector: 'weui-accordion',
     template: `<ng-content></ng-content>`,
     host: {
-        '[attr.aria-multiselectable]': 'closeOthers',
-        'style': 'display: block'
+        '[attr.aria-multiselectable]': 'closeOthers'
     }
 })
 export class AccordionComponent {
     /**
      * 是否可折叠，`true` 表示同时所有都允许展开，`false` 表示同时只允许一个展开
-     * 
+     *
      * @type {boolean}
      * @default false
      */
     @Input() collapsible: boolean = false;
     /**
      * 自动展开第一次
-     * 
+     *
      * @type {boolean}
      * @default true
      */
     @Input() activeFirst: boolean = true;
     /**
      * 动画类型，`none` 无动画，`slide` 滑动
-     * 
+     *
      * @type {AnimateType}
      */
     @Input() _animate: AnimateType = 'slide';

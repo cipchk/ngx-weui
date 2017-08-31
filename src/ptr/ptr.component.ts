@@ -4,7 +4,7 @@ import { PTRConfig } from "./ptr.config";
 @Component({
     selector: 'weui-ptr',
     template: `
-        <div class="weui-ptr__loader" 
+        <div class="weui-ptr__loader"
             [ngStyle]="{
                 'height.px': config.height,
                 'margin-top.px': -config.height + (_pullPercent / (100 / config.height)),
@@ -22,12 +22,10 @@ import { PTRConfig } from "./ptr.config";
         </div>
         <div class="weui-ptr__content"><ng-content></ng-content></div>
     `,
-    styles: [
-        `weui-ptr{display:block;overflow:hidden;}weui-ptr .weui-icon-download{color:#999;}.weui-ptr{overflow:hidden}.weui-ptr__loader{pointer-events:none;font-weight:700;text-align:center;width:100%;overflow:hidden;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-align:center;-ms-flex-align:center;align-items:center;-ms-flex-line-pack:stretch;align-content:stretch}.weui-ptr__content{height:100%;overflow:scroll}`
-    ],
     host: {
         '[class.weui-ptr]': 'true'
     },
+    styleUrls: [ './ptr.scss' ],
     encapsulation: ViewEncapsulation.None
 })
 export class PTRComponent implements OnChanges {
@@ -57,7 +55,7 @@ export class PTRComponent implements OnChanges {
 
     /**
      * 设置最后更新标签
-     * 
+     *
      * @param {string} label 标签内容（支持HTML）
      */
     setLastUpdatedLabel(label: string) {
@@ -67,7 +65,7 @@ export class PTRComponent implements OnChanges {
 
     /**
      * 设置刷新成功
-     * 
+     *
      * @param {string} [lastUpdatedLabel] label 标签内容（支持HTML）
      */
     setFinished(lastUpdatedLabel?: string) {

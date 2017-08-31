@@ -13,23 +13,8 @@ import { SidebarComponent } from './sidebar.component';
             <ng-content></ng-content>
         </div>
     `,
-    styles: [`
-weui-sidebar-container {
-    box-sizing: border-box;
-    display: block;
-    height: 100%;
-    position: relative;
-    transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
-}
-
-.weui-sidebar__content {
-    display: block;
-    height: 100%;
-    overflow: auto;
-    transition: margin 0.3s cubic-bezier(0, 0, 0.3, 1);
-}
-    `],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: [ './sidebar.scss' ],
     encapsulation: ViewEncapsulation.None
 })
 export class SidebarContainerComponent implements AfterContentInit, OnChanges, OnDestroy {

@@ -1,22 +1,11 @@
-import { Component, Input, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnDestroy, ViewEncapsulation } from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs/Rx';
 
 @Component({
     selector: 'weui-mask',
     template: `<div class="weui-mask" [ngClass]="{'weui-mask--visible': _shown }" (click)="hide(true)"></div>`,
-    styles: [
-        `
-        .weui-mask {
-            opacity: 0;
-            visibility: hidden;
-            transition-duration: .3s;
-        }
-        .weui-mask--visible {
-            opacity: 1;
-            visibility: visible;
-        }
-        `
-    ]
+    styleUrls: [ './mask.scss' ],
+    encapsulation: ViewEncapsulation.None
 })
 export class MaskComponent implements OnDestroy {
     /**

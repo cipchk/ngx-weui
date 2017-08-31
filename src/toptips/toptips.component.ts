@@ -6,25 +6,23 @@ export type ToptipsType = 'default' | 'warn' | 'info' | 'primary' | 'success';
     selector: 'weui-toptips',
     template: `
     <div class="weui-toptips" style="display:block" [ngClass]="_classMap">{{text}}<ng-content></ng-content></div>`,
-    styles: [
-        `.weui-toptips_default{ background-color: #B2B2B2; } .weui-toptips_info{ background-color: #586C94; } .weui-toptips_primary{ background-color: #1AAD19; }`
-    ],
     host: {
         '[hidden]': '!_showd'
     },
+    styleUrls: [ './toptips.scss' ],
     encapsulation: ViewEncapsulation.None
 })
 export class ToptipsComponent {
 
     /**
      * 文本
-     * 
+     *
      * @type {string}
      */
     @Input() text: string;
     /**
      * 显示时长后自动关闭（单位：ms）
-     * 
+     *
      * @type {number}
      * @default 2000
      */
@@ -54,7 +52,7 @@ export class ToptipsComponent {
             [`weui-toptips_${this._type}`]: true
         };
     }
-    
+
     _showd: boolean = false;
     private timer: any;
     /**
@@ -62,7 +60,7 @@ export class ToptipsComponent {
      */
     onShow() {
         this.destroy();
-        
+
         this._showd = true;
         this.timer = setTimeout(() => {
             this.onHide();

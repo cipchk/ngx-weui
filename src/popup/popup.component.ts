@@ -17,9 +17,6 @@ import { PopupConfig } from './popup.config';
             </div>
         </div>
     `,
-    styles: [
-        `.weui-popup_full{height: 100vh; overflow: scroll;}.weui-popup{position:fixed;left:0;bottom:0;-webkit-transform:translateY(100%);transform:translateY(100%);-webkit-backface-visibility:hidden;backface-visibility:hidden;z-index:5000;width:100%;background-color:#efeff4;-webkit-transition:-webkit-transform .3s;transition:-webkit-transform .3s;transition:transform .3s;transition:transform .3s,-webkit-transform .3s}.weui-popup_toggle{-webkit-transform:translate(0);transform:translate(0)}.weui-popup__hd{display:-webkit-box;display:-ms-flexbox;display:flex;padding:10px 15px;background-color:#fbf9fe;position:relative;text-align:center}.weui-popup__hd:after{content:" ";position:absolute;left:0;bottom:0;right:0;height:1px;border-bottom:1px solid #e5e5e5;color:#e5e5e5;-webkit-transform-origin:0 100%;transform-origin:0 100%;-webkit-transform:scaleY(.5);transform:scaleY(.5)}.weui-popup__action{display:block;-webkit-box-flex:1;-ms-flex:1;flex:1;color:#586c94}.weui-popup__action:first-child{text-align:left}.weui-popup__action:last-child{text-align:right}`
-    ],
     animations: [trigger('visibility', [
         state('show', style({ opacity: 1 })),
         state('hide', style({ opacity: 0 })),
@@ -28,12 +25,13 @@ import { PopupConfig } from './popup.config';
     host: {
         '[hidden]': '!shown'
     },
+    styleUrls: [ './popup.scss' ],
     encapsulation: ViewEncapsulation.None
 })
 export class PopupComponent implements OnDestroy, OnChanges {
     /**
      * 配置项
-     * 
+     *
      * @type {PopupConfig}
      */
     @Input() config: PopupConfig;
@@ -50,7 +48,7 @@ export class PopupComponent implements OnDestroy, OnChanges {
     get _visibility(): string {
         return this._shownAnt ? 'show' : 'hide';
     }
-    
+
     constructor(private DEF: PopupConfig) {}
 
     private parseConfig() {
@@ -60,7 +58,7 @@ export class PopupComponent implements OnDestroy, OnChanges {
     ngOnInit() {
         this.parseConfig();
     }
-    
+
     ngOnChanges(changes: SimpleChanges): void {
         if ('config' in changes)
             this.parseConfig();
@@ -68,8 +66,8 @@ export class PopupComponent implements OnDestroy, OnChanges {
 
     /**
      * 显示，并支持订阅结果，如果点击取消值为false，反之 true
-     * 
-     * @returns {Observable<boolean>} 
+     *
+     * @returns {Observable<boolean>}
      */
     show(): Observable<boolean> {
         this.shown = true;
@@ -81,14 +79,14 @@ export class PopupComponent implements OnDestroy, OnChanges {
 
     /**
      * 隐藏
-     * 
+     *
      * @param {boolean} [is_backdrop] 是否从背景上点击(可选)
      */
     hide(is_backdrop?: boolean) {
         if (is_backdrop === true && this.config.backdrop === false) return false;
-        
+
         this._shownAnt = false;
-        setTimeout(() => { 
+        setTimeout(() => {
             this.shown = false;
         }, 300);
     }

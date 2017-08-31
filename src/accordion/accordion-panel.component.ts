@@ -8,22 +8,16 @@ import { AccordionComponent } from './accordion.component';
     <div role="tabpanel" class="weui-accordion-content"><ng-content></ng-content></div>
     `,
     host: {
-        'style': 'display: block',
         '[class.weui-accordion-panel-disabled]': 'disabled',
         '[class.weui-accordion-active]': 'active'
     },
-    styles: [
-        `
-        .weui-accordion-content { max-height: 0; }
-        .weui-accordion-content-active { max-height: inherit; }
-        `
-    ],
+    styleUrls: [ './accordion.scss' ],
     encapsulation: ViewEncapsulation.None
 })
 export class AccordionPanelComponent {
     /**
      * 是否禁止
-     * 
+     *
      * @type {boolean}
      */
     @Input() disabled: boolean = false;
@@ -32,7 +26,7 @@ export class AccordionPanelComponent {
 
     /**
      * 是否展开
-     * 
+     *
      * @type {boolean}
      */
     @Input()

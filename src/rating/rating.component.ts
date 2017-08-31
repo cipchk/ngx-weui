@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output, forwardRef, SimpleChanges, OnChanges } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output, forwardRef, SimpleChanges, OnChanges, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { RatingConfig } from './rating.config'
 
@@ -14,7 +14,8 @@ import { RatingConfig } from './rating.config'
             </ng-template>
         </span>
     `,
-    styles: [ `.weui-rating__container {outline:none}` ],
+    styleUrls: [ './rating.scss' ],
+    encapsulation: ViewEncapsulation.None,
     providers: [{
         provide: NG_VALUE_ACCESSOR,
         useExisting: forwardRef(() => RatingComponent),

@@ -113,7 +113,7 @@
     "lite-server": "^2.3.0",
     "lodash": "^4.17.4",
     "ng2-checklist": "^1.0.2",
-    "ngm-cli": "0.6.1",
+    "ngm-cli": "^0.6.1",
     "ngx-countdown": "^1.0.1",
     "ngx-gesture-password": "^1.0.0",
     "ngx-highlight-js": "^1.0.1",

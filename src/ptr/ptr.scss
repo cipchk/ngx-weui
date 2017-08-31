@@ -1,0 +1,28 @@
+weui-ptr {
+    display: block;
+    overflow: hidden;
+}
+
+weui-ptr .weui-icon-download {
+    color: #999;
+}
+
+.weui-ptr {
+    overflow: hidden
+}
+
+.weui-ptr__loader {
+    pointer-events: none;
+    font-weight: 700;
+    text-align: center;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    align-content: stretch
+}
+
+.weui-ptr__content {
+    height: 100%;
+    overflow: scroll
+}

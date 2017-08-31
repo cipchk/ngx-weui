@@ -22,60 +22,21 @@ import { isIOS } from "../utils/browser";
       <ng-content></ng-content>
     </aside>
     `,
-    styles: [`
-.weui-sidebar {
-    background-color: #fff;
-    overflow: auto;
-    pointer-events: auto;
-    position: fixed;
-    will-change: initial;
-    z-index: 99999999;
-    transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
-}
-
-.weui-sidebar__left {
-    bottom: 0;
-    left: 0;
-    top: 0;
-}
-
-.weui-sidebar__right {
-    bottom: 0;
-    right: 0;
-    top: 0;
-}
-
-.weui-sidebar__top {
-    left: 0;
-    right: 0;
-    top: 0;
-}
-
-.weui-sidebar__bottom {
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-
-.weui-sidebar__inert {
-    pointer-events: none;
-    will-change: transform;
-}
-    `],
     changeDetection: ChangeDetectionStrategy.OnPush,
+    styleUrls: [ './sidebar.scss' ],
     encapsulation: ViewEncapsulation.None
 })
 export class SidebarComponent implements OnChanges, OnDestroy {
     /**
      * 状态，true表示打开，false表示关闭
-     * 
+     *
      * @type {boolean}
      */
     @Input() status: boolean = false;
     @Output() statusChange: EventEmitter<boolean> = new EventEmitter<boolean>();
     /**
      * 位置方向
-     * 
+     *
      * @type {PositionType}
      * @default left
      */
@@ -85,7 +46,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
      * 类型
      * over: 不覆盖
      * slide：侧边移动
-     * 
+     *
      * @type {ModeType}
      * @default slide
      */
@@ -93,20 +54,20 @@ export class SidebarComponent implements OnChanges, OnDestroy {
 
     /**
      * 允许点击背景关闭
-     * 
+     *
      * @type {boolean}
      * @default true
      */
     @Input() backdrop: boolean = true;
     /**
      * 自定义CLSS
-     * 
+     *
      * @type {string}
      */
     @Input() sidebarClass: string;
     /**
      * 辅助设备标识
-     * 
+     *
      * @type {string}
      */
     @Input() ariaLabel: string;
@@ -135,7 +96,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
 
     constructor(private _sidebarService: SidebarService, config: SidebarConfig) {
         Object.assign(this, config);
-        
+
         if (isIOS() && 'ontouchstart' in window) {
             this._clickEvent = 'touchstart';
         }
