@@ -20,6 +20,7 @@
             "../../node_modules/swiper/dist/css/swiper.css"
         ],
         "scripts": [
+            "app/core/preloader.js",
             "../../node_modules/swiper/dist/js/swiper.js",
             "../../node_modules/g2-mobile/index.js"
         ],
