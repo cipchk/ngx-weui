@@ -44,6 +44,7 @@ import { DemoMapQQComponent } from './map-qq/map-qq.component'
 import { JWeiXinComponent } from './jweixin/jweixin.component'
 import { DemoMaskComponent } from './mask/mask.component'
 import { DemoRatingComponent } from './rating/rating.component'
+import { DemoStepperComponent } from './stepper/stepper.component'
 
 const MODULES = [
     ContainerComponent, PageComponent, DemoAccordionComponent,
@@ -55,7 +56,7 @@ const MODULES = [
     DemoToptipsComponent, DemoMsgComponent, DemoMsgFailComponent, DemoMsgSuccessComponent,
     DemoPopupComponent, DemoPTRComponent, DemoInfiniteLoaderComponent, DemoSidebarComponent,
     DemoSwiperComponent, CountdownComponent, GesturePasswordComponent, DemoChartG2Component,
-    DemoMapQQComponent, JWeiXinComponent, DemoMaskComponent, DemoRatingComponent
+    DemoMapQQComponent, JWeiXinComponent, DemoMaskComponent, DemoRatingComponent, DemoStepperComponent
 ]
 
 @NgModule({

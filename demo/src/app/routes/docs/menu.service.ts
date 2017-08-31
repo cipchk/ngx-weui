@@ -205,6 +205,12 @@ export class MenuService {
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png'
                 },
                 {
+                    "name": "Stepper 步进器",
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
+                    "api_url": "stepper",
+                    "example": "stepper"
+                },
+                {
                     "name": "Swiper",
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "doc_overview": true

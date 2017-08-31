@@ -101,7 +101,8 @@ let apiDocsPackage = new DgeniPackage('ngx-weui-api-docs', dgeniPackageDeps)
         'jweixin/index.ts',
         'accordion/index.ts',
         'mask/index.ts',
-        'rating/index.ts'
+        'rating/index.ts',
+        'stepper/index.ts'
     ];
 })
 

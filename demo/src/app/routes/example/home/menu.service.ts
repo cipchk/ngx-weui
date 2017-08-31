@@ -94,6 +94,10 @@ export class MenuService {
                 {
                     label: 'Progress',
                     id: 'progress'
+                },
+                {
+                    label: 'Stepper 步进器',
+                    id: 'stepper'
                 }
             ]
         },

@@ -45,6 +45,7 @@ import { ActivatedRoute, Router } from "@angular/router";
     <example-jweixin *ngSwitchCase="'jweixin'"></example-jweixin>
     <example-mask *ngSwitchCase="'mask'"></example-mask>
     <example-rating *ngSwitchCase="'rating'"></example-rating>
+    <example-stepper *ngSwitchCase="'stepper'"></example-stepper>
 </div>
     `
 })

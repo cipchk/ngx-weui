@@ -1,0 +1,29 @@
+<Page [ngClass]="'stepper'" [title]="'Stepper 步进器'" [subTitle]="'Stepper 步进器'" [spacing]="false">
+    <div class="weui-cells__title">Demos</div>
+    <div class="weui-cells">
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>很长的标题，真的，不骗人，就是很长。很长的标题，真的，不骗人，就是很长。【{{val1}}】</p>
+            </div>
+            <div class="weui-cell__ft">
+                <weui-stepper [(ngModel)]="val1" [min]="1" [max]="10"></weui-stepper>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>精度为.1【{{val2}}】</p>
+            </div>
+            <div class="weui-cell__ft">
+                <weui-stepper [(ngModel)]="val2" [min]="-10" [max]="10" [step]=".1"></weui-stepper>
+            </div>
+        </div>
+        <div class="weui-cell">
+            <div class="weui-cell__bd">
+                <p>Disabled【{{val3}}】</p>
+            </div>
+            <div class="weui-cell__ft">
+                <weui-stepper [(ngModel)]="val3" [disabled]="true"></weui-stepper>
+            </div>
+        </div>
+    </div>
+</Page>
