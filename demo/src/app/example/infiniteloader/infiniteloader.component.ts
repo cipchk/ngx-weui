@@ -15,9 +15,9 @@ export class DemoInfiniteLoaderComponent {
     onLoadMore(comp: InfiniteLoaderComponent) {
         Observable.timer(1500).subscribe(() => {
 
-            this.items.push(this.items.length);
+            this.items.push(...Array(10).fill(this.items.length).map((v, i) => v + i));
 
-            if (this.items.length > 22) {
+            if (this.items.length >= 50) {
                 comp.setFinished();
                 return;
             }
