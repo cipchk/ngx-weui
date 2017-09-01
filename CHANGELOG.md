@@ -1,3 +1,11 @@
+# 1.0.15
+
+- [增] `weui-stepper`、`weui-pagination` 组件
+- [修] `check-list` 指令 `ExpressionChangedAfterItHasBeenCheckedError` BUG
+- [优] `weui-infiniteloader` 修正一些细节，调整默认节流值至 `100` 改善触发能力
+- [优] 将组件样式外部化
+- [优] 增强demo视觉效果
+
 # 1.0.14
 
 - [增] `weui-dialog` 支持可输入类型。
