@@ -32,5 +32,5 @@ export class InfiniteLoaderConfig {
     finished?: string = '<div class="weui-loadmore weui-loadmore_line"><span class="weui-loadmore__tips">已加载完毕</span></div>';
 
     /**滚动节流时长（单位：ms） */
-    throttle?: number = 300;
+    throttle?: number = 100;
 }
