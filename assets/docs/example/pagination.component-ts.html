@@ -1,0 +1,20 @@
+<span class="hljs-keyword">import</span> { Component, ViewEncapsulation } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+
+<span class="hljs-meta">@Component</span>({
+    selector: <span class="hljs-string">'example-pagination'</span>,
+    templateUrl: <span class="hljs-string">'./pagination.component.html'</span>,
+    styleUrls: [<span class="hljs-string">'./pagination.component.scss'</span>],
+    encapsulation: ViewEncapsulation.None
+})
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> DemoPaginationComponent {
+
+    prev = <span class="hljs-string">`&lt;i class="iconfont icon-left"&gt;&lt;/i&gt; Prev`</span>;
+    next = <span class="hljs-string">`Next &lt;i class="iconfont icon-right"&gt;&lt;/i&gt;`</span>;
+    cur = <span class="hljs-number">1</span>;
+    total = <span class="hljs-number">10</span>;
+
+    change(value: <span class="hljs-built_in">number</span>) {
+        <span class="hljs-keyword">this</span>.cur = value;
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'pi='</span>, value);
+    }
+}
