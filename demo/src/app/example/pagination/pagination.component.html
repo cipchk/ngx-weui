@@ -1,0 +1,16 @@
+<Page [ngClass]="'pagination'" [title]="'Pagination'" [subTitle]="'分页器'" [spacing]="true">
+
+    <div class="weui-cells__title">Button with text</div>
+    <weui-pagination [current]="cur" [total]="total" (change)="change($event)"></weui-pagination>
+    <div class="weui-cells__title">Button with text and icon</div>
+    <weui-pagination [current]="cur" [total]="total" (change)="change($event)"
+        [prevText]="prev"
+        [nextText]="next"></weui-pagination>
+    <div class="weui-cells__title">Hide number</div>
+    <weui-pagination [current]="cur" [total]="total" (change)="change($event)" [simple]="true"></weui-pagination>
+    <div class="weui-cells__title">Button Size</div>
+    <weui-pagination [current]="cur" [total]="total" (change)="change($event)" [mini]="false"></weui-pagination>
+    <div class="weui-cells__title">Point Style</div>
+    <weui-pagination [mode]="'pointer'" [current]="cur" [total]="total" (change)="change($event)"></weui-pagination>
+
+</Page>

@@ -46,6 +46,7 @@ import { ActivatedRoute, Router } from "@angular/router";
     <example-mask *ngSwitchCase="'mask'"></example-mask>
     <example-rating *ngSwitchCase="'rating'"></example-rating>
     <example-stepper *ngSwitchCase="'stepper'"></example-stepper>
+    <example-pagination *ngSwitchCase="'pagination'"></example-pagination>
 </div>
     `
 })

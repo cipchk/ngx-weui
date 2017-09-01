@@ -17,7 +17,8 @@
         "testTsconfig": "../../src/tsconfig.spec.json",
         "prefix": "",
         "styles": [
-            "../../node_modules/swiper/dist/css/swiper.css"
+            "../../node_modules/swiper/dist/css/swiper.css",
+            "styles.scss"
         ],
         "scripts": [
             "app/core/preloader.js",

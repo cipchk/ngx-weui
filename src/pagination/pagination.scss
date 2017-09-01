@@ -1,0 +1,52 @@
+.weui-pagination {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    overflow-y: hidden;
+}
+
+.weui-pagination__item {
+    box-sizing: border-box;
+    flex: 1;
+    min-width: 10px;
+    margin-left: 8px;
+    &:first-child {
+        margin-left: 0;
+    }
+    .weui-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.weui-pagination__prev {
+    text-align: left;
+}
+
+.weui-pagination__num {
+    text-align: center;
+}
+
+.weui-pagination__next {
+    text-align: right;
+}
+
+.weui-pagination__dot {
+    display: inline-block;
+    zoom: 1;
+    >span {
+        display: block;
+        width: 8px;
+        height: 8px;
+        margin-right: 5px;
+        border-radius: 50%;
+        background: #ccc;
+    }
+}
+
+.weui-pagination__dot-active {
+    >span {
+        background: #888;
+    }
+}

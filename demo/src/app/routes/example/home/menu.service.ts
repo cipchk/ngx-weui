@@ -55,6 +55,10 @@ export class MenuService {
                 {
                     label: 'Popup',
                     id: 'popup'
+                },
+                {
+                    label: 'Pagination 分页器',
+                    id: 'pagination'
                 }
             ]
         },

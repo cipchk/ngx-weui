@@ -211,6 +211,12 @@ export class MenuService {
                     "example": "stepper"
                 },
                 {
+                    "name": "Pagination 分页器",
+                    "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
+                    "api_url": "pagination",
+                    "example": "pagination"
+                },
+                {
                     "name": "Swiper",
                     "icon": '//cipchk.github.io/ngx-weui/assets/images/icon_nav_panel.png',
                     "doc_overview": true

@@ -26,6 +26,7 @@ import { AccordionModule } from "./accordion/accordion.module";
 import { MaskModule } from "./mask/mask.module";
 import { RatingModule } from "./rating/rating.module";
 import { StepperModule } from "./stepper/stepper.module";
+import { PaginationModule } from './pagination/pagination.module';
 
 export * from './utils/types';
 
@@ -55,13 +56,14 @@ export * from './accordion';
 export * from './mask';
 export * from './rating';
 export * from './stepper';
+export * from './pagination';
 
 const MODULES = [
     CellModule, ButtonModule, FormModule, SliderModule, UploaderModule, ActionSheetModule,
     DialogModule, LoadmoreModule, ProgressModule, GalleryModule, PickerModule, SearchBarModule,
     TabModule, ToastModule, ToptipsModule, PopupModule, PTRModule, InfiniteLoaderModule,
     SidebarModule, SwiperModule, ChartG2Module, JWeiXinModule, AccordionModule, MaskModule,
-    RatingModule, StepperModule
+    RatingModule, StepperModule, PaginationModule
 ];
 
 @NgModule({
@@ -70,7 +72,7 @@ const MODULES = [
         DialogModule.forRoot(), LoadmoreModule.forRoot(), ProgressModule.forRoot(), GalleryModule.forRoot(), PickerModule.forRoot(), SearchBarModule.forRoot(),
         TabModule.forRoot(), ToastModule.forRoot(), ToptipsModule.forRoot(), PopupModule.forRoot(), PTRModule.forRoot(), InfiniteLoaderModule.forRoot(),
         SidebarModule.forRoot(), SwiperModule.forRoot(), ChartG2Module.forRoot(), JWeiXinModule.forRoot(), AccordionModule.forRoot(), MaskModule.forRoot(),
-        RatingModule.forRoot(), StepperModule.forRoot()
+        RatingModule.forRoot(), StepperModule.forRoot(), PaginationModule.forRoot()
     ],
     exports: MODULES
 })
