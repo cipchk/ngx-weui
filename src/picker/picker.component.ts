@@ -79,7 +79,7 @@ export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChang
     @Input() disabled: boolean = false;
     /**
      * 确认后回调当前选择数据（包括已选面板所有数据）
-     * 
+     *
      * `{ value: '10000', items: [ {}, {}, {} ] }`
      */
     @Output() change = new EventEmitter<any>();
@@ -133,7 +133,9 @@ export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChang
         let res: any[] = [];
         this._groups.forEach((items: PickerData[], idx: number) => {
             const item = items[this._selected[idx]];
-            res.push(item);
+            if (item) {
+                res.push(item);
+            }
         });
         return res;
     }
