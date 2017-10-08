@@ -49,7 +49,7 @@ please refer to more [details](https://github.com/cipchk/ngx-weui/blob/master/do
 ### How to use it with:
 
 + `angular-cli` please refer to [install](https://github.com/cipchk/ngx-weui/blob/master/docs/install.md).
-+ `plnkr` sample available [here](http://embed.plnkr.co/vrb1b6KrhvyqyCFXQ7zg/).
++ `plnkr` sample available [here](http://plnkr.co/edit/tpl:vrb1b6KrhvyqyCFXQ7zg).
 
 ## Troubleshooting
 
