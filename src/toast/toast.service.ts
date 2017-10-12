@@ -13,7 +13,7 @@ export class ToastService extends BaseService {
      * 构建toast并显示
      *
      * @param {string} [text] 文本（可选）
-     * @param {number} [time] 显示时长后自动关闭（单位：ms）（可选）
+     * @param {number} [time] 显示时长后自动关闭（单位：ms），0 表示永久（可选）
      * @param {string} [icon] icon图标Class名（可选）
      * @param {('success' | 'loading')} [type] 类型（可选）
      * @returns {ToastComponent}
@@ -31,6 +31,13 @@ export class ToastService extends BaseService {
             }, 300)
         });
         return componentRef.instance.onShow();
+    }
+
+    /**
+     * 关闭最新toast
+     */
+    hide() {
+        this.destroy();
     }
 
     /**

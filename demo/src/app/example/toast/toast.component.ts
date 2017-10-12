@@ -18,8 +18,13 @@ export class DemoToastComponent {
         (<ToastComponent>this[`${type}Toast`]).onShow();
     }
 
-    onShowBySrv(type: 'success' | 'loading') {
+    onShowBySrv(type: 'success' | 'loading', forceHide: boolean = false) {
         this.srv[type]();
+        if (forceHide === true) {
+            setTimeout(() => {
+                this.srv.hide();
+            }, 1000)
+        }
     }
 
 }

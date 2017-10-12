@@ -38,7 +38,7 @@ export class ToastComponent implements OnDestroy {
      */
     @Input() icon: string;
     /**
-     * 显示时长后自动关闭（单位：ms）
+     * 显示时长后自动关闭（单位：ms），0 表示永久
      * 
      * @type {number}
      * @default 2000
@@ -60,9 +60,11 @@ export class ToastComponent implements OnDestroy {
      */
     onShow() {
         this._showd = true;
-        this.timer = setTimeout(() => {
-            this.onHide();
-        }, this.time);
+        if (this.time > 0) {
+            this.timer = setTimeout(() => {
+                this.onHide();
+            }, this.time);
+        }
         return this;
     }
 

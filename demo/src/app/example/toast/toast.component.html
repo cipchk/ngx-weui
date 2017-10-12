@@ -8,6 +8,7 @@
     <div class="weui-cells__title">使用Service形式</div>
     <button weui-button [weui-type]="'default'" (click)="onShowBySrv('success')">成功提示</button>
     <button weui-button [weui-type]="'default'" (click)="onShowBySrv('loading')">Loading Toast</button>
+    <button weui-button [weui-type]="'default'" (click)="onShowBySrv('loading', true)">打开后1s强制关闭</button>
 
     <!--将对话框组件放在底部-->
     <weui-toast #success></weui-toast>
