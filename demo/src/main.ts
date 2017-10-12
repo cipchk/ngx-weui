@@ -5,10 +5,14 @@ import { enableProdMode, ViewEncapsulation } from '@angular/core';
 import { environment } from './environments/environment';
 import { AppModule } from './app/app.module';
 
+import './app/core/preloader';
+
 if (environment.production) {
     enableProdMode();
 }
 
 platformBrowserDynamic().bootstrapModule(AppModule).then(() => {
-    (<any>window).appBootstrap && (<any>window).appBootstrap();
+    if ((<any>window).appBootstrap) {
+      (<any>window).appBootstrap();
+    }
 });
