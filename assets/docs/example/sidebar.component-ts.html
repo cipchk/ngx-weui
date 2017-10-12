@@ -17,4 +17,20 @@
     toggleOpened(): <span class="hljs-built_in">void</span> {
         <span class="hljs-keyword">this</span>._status = !<span class="hljs-keyword">this</span>._status;
     }
+
+    openStart() {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'openStart'</span>);
+    }
+
+    opened() {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'opened'</span>);
+    }
+
+    closeStart() {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'closeStart'</span>);
+    }
+
+    closed() {
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'closed'</span>);
+    }
 }
