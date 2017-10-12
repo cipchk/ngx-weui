@@ -93,6 +93,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
     private _closeSub: Subscription;
     private _clickEvent: string = 'click';
     private _onClickOutsideAttached: boolean = false;
+    private _anting = false;
 
     constructor(private _sidebarService: SidebarService, config: SidebarConfig) {
         Object.assign(this, config);
@@ -104,22 +105,23 @@ export class SidebarComponent implements OnChanges, OnDestroy {
         this.open = this.open.bind(this);
         this.close = this.close.bind(this);
 
-        this._onTransitionEnd = this._onTransitionEnd.bind(this);
         this._onClickOutside = this._onClickOutside.bind(this);
 
         this._openSub = this._sidebarService.onOpen(this.open);
         this._closeSub = this._sidebarService.onClose(this.close);
     }
 
-    ngOnInit() { }
+    ngOnInit() {
+    }
 
     ngOnChanges(changes: SimpleChanges): void {
-        if ('status' in changes) {
+        if ('status' in changes && !this._anting) {
             if (changes['status'].currentValue) {
                 this.open();
             } else {
                 this.close();
             }
+            if (changes['status'].firstChange) this._anting = false;
         }
         if ('mode' in changes) {
             this.modeChange.emit(changes['mode'].currentValue);
@@ -145,22 +147,24 @@ export class SidebarComponent implements OnChanges, OnDestroy {
 
     /** 打开侧边栏 */
     open() {
+        this._anting = true;
         this.status = true;
         this.statusChange.emit(true);
 
         this.openStart.emit();
 
-        this._elSidebar.nativeElement.addEventListener('transitionend', this._onTransitionEnd);
+        this.closeAnt();
     }
 
     /** 关闭侧边栏 */
     close() {
+        this._anting = true;
         this.status = false;
         this.statusChange.emit(false);
 
         this.closeStart.emit();
 
-        this._elSidebar.nativeElement.addEventListener('transitionend', this._onTransitionEnd);
+        this.closeAnt();
     }
 
     /** 手动触发容器的重新渲染 */
@@ -186,8 +190,9 @@ export class SidebarComponent implements OnChanges, OnDestroy {
         }) as CSSStyleDeclaration;
     }
 
-    _onTransitionEnd(e: TransitionEvent) {
-        if (e.target === this._elSidebar.nativeElement && e.propertyName.endsWith('transform')) {
+    private closeAnt() {
+        setTimeout(() => {
+            this._anting = false;
             if (this.status) {
                 this._initCloseListeners();
                 this.opened.emit();
@@ -195,9 +200,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
                 this._destroyCloseListeners();
                 this.closed.emit();
             }
-
-            this._elSidebar.nativeElement.removeEventListener('transitionend', this._onTransitionEnd);
-        }
+        }, 300);
     }
 
     private _initCloseListeners(): void {

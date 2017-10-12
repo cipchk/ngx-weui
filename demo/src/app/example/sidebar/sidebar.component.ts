@@ -17,4 +17,20 @@ export class DemoSidebarComponent {
     toggleOpened(): void {
         this._status = !this._status;
     }
+
+    openStart() {
+        console.log('openStart');
+    }
+
+    opened() {
+        console.log('opened');
+    }
+
+    closeStart() {
+        console.log('closeStart');
+    }
+
+    closed() {
+        console.log('closed');
+    }
 }
