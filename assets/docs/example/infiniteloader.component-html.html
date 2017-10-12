@@ -1,4 +1,4 @@
-<span class="hljs-tag">&lt;<span class="hljs-name">weui-infiniteloader</span> (<span class="hljs-attr">loadmore</span>)=<span class="hljs-string">"onLoadMore($event)"</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">weui-infiniteloader</span> (<span class="hljs-attr">loadmore</span>)=<span class="hljs-string">"onLoadMore($event)"</span> #<span class="hljs-attr">comp</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">Page</span> [<span class="hljs-attr">ngClass</span>]=<span class="hljs-string">"'infiniteloader'"</span> [<span class="hljs-attr">title</span>]=<span class="hljs-string">"'Infinite Loader'"</span> [<span class="hljs-attr">subTitle</span>]=<span class="hljs-string">"'滚动加载'"</span> [<span class="hljs-attr">spacing</span>]=<span class="hljs-string">"false"</span> [<span class="hljs-attr">noBottom</span>]=<span class="hljs-string">"true"</span>&gt;</span>
 
         <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cells__title"</span>&gt;</span>List with 50 Max<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
@@ -8,6 +8,7 @@
                 <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cell__ft"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
             <span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>
         <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-
+        
+        <span class="hljs-tag">&lt;<span class="hljs-name">weui-button</span> *<span class="hljs-attr">ngIf</span>=<span class="hljs-string">"restartBtn"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"restart()"</span>&gt;</span>重新开始<span class="hljs-tag">&lt;/<span class="hljs-name">weui-button</span>&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-name">Page</span>&gt;</span>
 <span class="hljs-tag">&lt;/<span class="hljs-name">weui-infiniteloader</span>&gt;</span>

@@ -1,5 +1,5 @@
 <span class="hljs-keyword">import</span> { Observable } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/Rx'</span>;
-<span class="hljs-keyword">import</span> { Component, ViewEncapsulation } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
+<span class="hljs-keyword">import</span> { Component, ViewEncapsulation, ViewChild } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
 
 <span class="hljs-keyword">import</span> { InfiniteLoaderComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'ngx-weui/infiniteloader'</span>;
 
@@ -11,17 +11,27 @@
 })
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> DemoInfiniteLoaderComponent {
 
+    <span class="hljs-meta">@ViewChild</span>(InfiniteLoaderComponent) il;
+    restartBtn = <span class="hljs-literal">false</span>;
+
     items: <span class="hljs-built_in">any</span>[] = <span class="hljs-built_in">Array</span>(<span class="hljs-number">20</span>).fill(<span class="hljs-number">0</span>).map(<span class="hljs-function">(<span class="hljs-params">v: <span class="hljs-built_in">any</span>, i: <span class="hljs-built_in">number</span></span>) =&gt;</span> i);
     onLoadMore(comp: InfiniteLoaderComponent) {
+        <span class="hljs-keyword">this</span>.restartBtn = <span class="hljs-literal">false</span>;
         Observable.timer(<span class="hljs-number">1500</span>).subscribe(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
 
             <span class="hljs-keyword">this</span>.items.push(...Array(<span class="hljs-number">10</span>).fill(<span class="hljs-keyword">this</span>.items.length).map(<span class="hljs-function">(<span class="hljs-params">v, i</span>) =&gt;</span> v + i));
 
             <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.items.length &gt;= <span class="hljs-number">50</span>) {
+                <span class="hljs-keyword">this</span>.restartBtn = <span class="hljs-literal">true</span>;
                 comp.setFinished();
                 <span class="hljs-keyword">return</span>;
             }
             comp.resolveLoading();
         });
+    }
+
+    restart() {
+        <span class="hljs-keyword">this</span>.items.length = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">this</span>.il.restart();
     }
 }
