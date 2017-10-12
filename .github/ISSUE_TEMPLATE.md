@@ -8,11 +8,11 @@
 -->
 
 ## Bug Report or Feature Request (mark with an `x`)
-```
-- [ ] Bug report -> please search issues before submitting
-- [ ] Feature request
-- [ ] Documentation issue or request
-```
+<pre><code>
+[ ] Bug report -> please search issues before submitting
+[ ] Feature request
+[ ] Documentation issue or request
+</code></pre>
 
 ## Current behavior
 <!-- Describe how the issue manifests. -->
