@@ -1,3 +1,13 @@
+# 1.1.0
+
+- [增] `toast.service` 支持 `hide` 关闭最新方法 [#49](https://github.com/cipchk/ngx-weui/issues/49)
+- [增] `weui-infiniteloader` 增加 `restart` 方法 [#36](https://github.com/cipchk/ngx-weui/issues/36)
+- [修] `weui-sidebar` 打开状态时会出现X轴滚动条 [#52](https://github.com/cipchk/ngx-weui/issues/52)
+- [修] `weui-sidebar` 多次触发事件 [#48](https://github.com/cipchk/ngx-weui/issues/48)
+- [优] 修复循环依赖问题
+- [优] 优化 `rxjs` 导入问题，减少 `ngx-weui` 包体大小
+- [优] 重写 `preloader` 类
+
 # 1.0.15
 
 - [增] `weui-stepper`、`weui-pagination` 组件
