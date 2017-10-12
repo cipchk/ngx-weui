@@ -55,6 +55,11 @@ export class InfiniteLoaderComponent implements OnChanges, OnDestroy {
         this._finished = true;
     }
 
+    /** 设置重新开始 */
+    restart() {
+        this._finished = false;
+    }
+
     _onScroll($event: any) {
         if (this._loading || this._finished) return;
         const target = $event.target;

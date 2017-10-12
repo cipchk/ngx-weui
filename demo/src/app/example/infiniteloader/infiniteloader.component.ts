@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs/Rx';
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
 
 import { InfiniteLoaderComponent } from 'ngx-weui/infiniteloader';
 
@@ -11,17 +11,27 @@ import { InfiniteLoaderComponent } from 'ngx-weui/infiniteloader';
 })
 export class DemoInfiniteLoaderComponent {
 
+    @ViewChild(InfiniteLoaderComponent) il;
+    restartBtn = false;
+
     items: any[] = Array(20).fill(0).map((v: any, i: number) => i);
     onLoadMore(comp: InfiniteLoaderComponent) {
+        this.restartBtn = false;
         Observable.timer(1500).subscribe(() => {
 
             this.items.push(...Array(10).fill(this.items.length).map((v, i) => v + i));
 
             if (this.items.length >= 50) {
+                this.restartBtn = true;
                 comp.setFinished();
                 return;
             }
             comp.resolveLoading();
         });
+    }
+
+    restart() {
+        this.items.length = 0;
+        this.il.restart();
     }
 }
