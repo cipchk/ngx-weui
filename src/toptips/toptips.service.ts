@@ -1,7 +1,6 @@
 import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, Optional, EmbeddedViewRef, ComponentRef } from '@angular/core';
-import { ToptipsComponent } from "./index";
-import { ToptipsType } from "./toptips.component";
-import { BaseService } from '../utils/base.service'
+import { ToptipsType, ToptipsComponent } from "./toptips.component";
+import { BaseService } from '../utils/base.service';
 
 @Injectable()
 export class ToptipsService extends BaseService {

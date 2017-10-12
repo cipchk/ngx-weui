@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders  } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { RatingConfig, RatingComponent } from "./index";
+import { RatingComponent } from './rating.component';
+import { RatingConfig } from './rating.config';
 
 @NgModule({
     imports: [ CommonModule ],

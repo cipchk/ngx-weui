@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
-
-import { SwipeDirective } from "./index";
+import { SwipeDirective } from './swipe.directive';
 
 @NgModule({
     imports: [ CommonModule ],

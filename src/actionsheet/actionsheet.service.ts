@@ -1,6 +1,7 @@
 import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, Optional, EmbeddedViewRef, ComponentRef } from '@angular/core';
-import { ActionSheetConfig, ActionSheetComponent } from "./index";
 import { Observable, Observer } from "rxjs/Rx";
+import { ActionSheetComponent } from './actionsheet.component';
+import { ActionSheetConfig } from './actionsheet.config';
 import { BaseService } from '../utils/base.service'
 
 @Injectable()

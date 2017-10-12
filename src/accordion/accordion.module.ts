@@ -1,7 +1,8 @@
 import { NgModule, ModuleWithProviders  } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { AccordionPanelComponent, AccordionComponent, AccordionConfig } from "./index";
+import { AccordionPanelComponent } from './accordion-panel.component';
+import { AccordionComponent } from './accordion.component';
+import { AccordionConfig } from './accordion.config';
 
 @NgModule({
     imports: [ CommonModule ],

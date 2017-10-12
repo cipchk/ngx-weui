@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders  } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { ToptipsService, ToptipsComponent } from "./index";
+import { ToptipsComponent } from './toptips.component';
+import { ToptipsService } from './toptips.service';
 
 @NgModule({
     imports: [ CommonModule ],

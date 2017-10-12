@@ -1,11 +1,12 @@
 import { NgModule, ModuleWithProviders  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-import { DialogService, DialogConfig, DialogComponent } from "./index";
 import { FormModule } from './../form/form.module';
 import { SliderModule } from './../slider/slider.module';
 import { MaskModule } from './../mask/mask.module';
+import { DialogComponent } from './dialog.component';
+import { DialogService } from './dialog.service';
+import { DialogConfig } from './dialog.config';
 
 @NgModule({
     imports: [ CommonModule, FormsModule, MaskModule, FormModule, SliderModule ],

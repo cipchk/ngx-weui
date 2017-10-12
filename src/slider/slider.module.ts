@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
-
-import { SliderDirective } from "./index";
+import { SliderDirective } from './slider';
 
 @NgModule({
     imports: [ CommonModule ],

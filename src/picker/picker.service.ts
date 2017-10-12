@@ -1,8 +1,11 @@
 import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, Optional, EmbeddedViewRef, ComponentRef } from '@angular/core';
-import { PickerComponent, DatePickerComponent, CityPickerComponent, PickerData, PickerOptions } from "./index";
 import { Observable, Observer } from "rxjs/Rx";
-import { FORMAT_TYPE } from "./picker-date.component";
+import { FORMAT_TYPE, DatePickerComponent } from "./picker-date.component";
 import { BaseService } from '../utils/base.service'
+import { PickerData } from './data';
+import { PickerOptions } from './options';
+import { PickerComponent } from './picker.component';
+import { CityPickerComponent } from './picker-city.component';
 
 /**
  * 多列选择器Service，可直接通过Class构造选择器

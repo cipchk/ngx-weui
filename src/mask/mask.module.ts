@@ -1,7 +1,6 @@
 import { NgModule, ModuleWithProviders  } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { MaskComponent } from "./index";
+import { MaskComponent } from './mask.component';
 
 @NgModule({
     imports: [ CommonModule ],

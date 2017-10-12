@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders  } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { PTRConfig, PTRComponent } from "./index";
+import { PTRComponent } from './ptr.component';
+import { PTRConfig } from './ptr.config';
 
 @NgModule({
     imports: [ CommonModule ],

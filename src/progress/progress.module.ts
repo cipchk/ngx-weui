@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
-
-import { ProgressComponent } from "./index";
+import { ProgressComponent } from './progress.component';
 
 @NgModule({
     imports: [ CommonModule ],

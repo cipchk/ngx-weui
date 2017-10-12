@@ -1,7 +1,7 @@
 import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, Optional, EmbeddedViewRef } from '@angular/core';
-import { ToastComponent } from "./index";
 import { Observable, Observer } from "rxjs/Rx";
 import { BaseService } from '../utils/base.service'
+import { ToastComponent } from './toast.component';
 
 @Injectable()
 export class ToastService extends BaseService {

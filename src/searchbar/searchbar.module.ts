@@ -1,8 +1,8 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
-
-import { SearchBarComponent, SearchBarConfig } from "./index";
+import { SearchBarComponent } from './searchbar.component';
+import { SearchBarConfig } from './searchbar.config';
 
 @NgModule({
     imports: [ CommonModule, FormsModule ],

@@ -1,7 +1,7 @@
 import { NgModule, ModuleWithProviders  } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { PopupConfig, PopupComponent } from "./index";
+import { PopupComponent } from './popup.component';
+import { PopupConfig } from './popup.config';
 
 @NgModule({
     imports: [ CommonModule ],

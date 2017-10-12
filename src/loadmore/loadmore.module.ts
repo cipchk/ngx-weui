@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
-
-import { LoadmoreComponent, LoadmoreConfig } from "./index";
+import { LoadmoreComponent } from './loadmore.component';
+import { LoadmoreConfig } from './loadmore.config';
 
 @NgModule({
     imports: [ CommonModule ],

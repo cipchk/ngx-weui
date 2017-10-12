@@ -1,8 +1,8 @@
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders } from '@angular/core';
-
-import { SwiperComponent, SwiperConfig } from "./index";
+import { SwiperComponent } from './swiper.component';
+import { SwiperConfig } from './swiper.config';
 
 @NgModule({
     imports: [ CommonModule, FormsModule ],

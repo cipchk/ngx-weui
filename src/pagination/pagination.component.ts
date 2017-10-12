@@ -1,6 +1,6 @@
-import { PaginationConfig } from './pagination.config';
 import { Component, ViewEncapsulation, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { PaginationMode } from './pagination.type';
+import { PaginationConfig } from './pagination.config';
 
 @Component({
     selector: 'weui-pagination',
