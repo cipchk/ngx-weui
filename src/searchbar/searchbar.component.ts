@@ -1,6 +1,9 @@
 import { Component, HostListener, ElementRef, HostBinding, Input, OnChanges, SimpleChanges, Output, EventEmitter, ViewChild, OnDestroy } from '@angular/core';
 import { SearchBarConfig } from "./searchbar.config";
-import { Subject, Subscription } from "rxjs/Rx";
+import { Subject } from 'rxjs/Subject';
+import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 @Component({
     selector: 'weui-searchbar',

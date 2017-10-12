@@ -1,5 +1,6 @@
 import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, Optional, EmbeddedViewRef, ComponentRef } from '@angular/core';
-import { Observable, Observer } from "rxjs/Rx";
+import { Observer } from 'rxjs/Observer';
+import { Observable } from 'rxjs/Observable';
 import { BaseService } from '../utils/base.service'
 import { DialogComponent } from './dialog.component';
 import { DialogConfig } from './dialog.config';

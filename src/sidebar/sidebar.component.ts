@@ -1,5 +1,7 @@
 import { Component, Input, EventEmitter, Output, ElementRef, ViewEncapsulation, ViewChild, SimpleChanges, OnChanges, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Observable, Observer, Subscription } from 'rxjs/Rx';
+import { Observer } from 'rxjs/Observer';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import { findParent } from "../utils/dom";
 import { SidebarConfig, PositionType, ModeType } from "./sidebar.config";
 import { SidebarService } from './sidebar.service';

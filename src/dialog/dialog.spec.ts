@@ -1,4 +1,4 @@
-import { Subscriber } from 'rxjs/Rx';
+import { Subscription } from 'rxjs/Subscription';
 import { Component, ViewChild, DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';

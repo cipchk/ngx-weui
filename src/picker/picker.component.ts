@@ -1,4 +1,5 @@
-import { Observable, Subscriber } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import { PickerData } from './data';
 import { Component, forwardRef, OnDestroy, OnChanges, SimpleChanges, Input, EventEmitter, Output, ElementRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';

@@ -2,6 +2,8 @@ import { Component, ViewEncapsulation, Input, OnChanges, SimpleChanges, EventEmi
 
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/observable/fromEvent';
+import 'rxjs/add/operator/throttleTime';
 
 import { InfiniteLoaderConfig } from "./infiniteloader.config";
 

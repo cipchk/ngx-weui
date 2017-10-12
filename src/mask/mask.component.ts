@@ -1,5 +1,7 @@
 import { Component, Input, EventEmitter, Output, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { Observable, Observer, Subscription } from 'rxjs/Rx';
+import { Observer } from 'rxjs/Observer';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
     selector: 'weui-mask',

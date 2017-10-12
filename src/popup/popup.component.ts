@@ -1,6 +1,8 @@
 import { Component, ViewEncapsulation, OnDestroy, Output, Input, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Observable, Observer, Subscription } from 'rxjs/Rx';
+import { Observer } from 'rxjs/Observer';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import { PopupConfig } from './popup.config';
 
 @Component({

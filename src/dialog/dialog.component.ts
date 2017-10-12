@@ -1,5 +1,7 @@
 import { Component, OnDestroy, Input, Output, EventEmitter, ViewChild, ViewEncapsulation } from '@angular/core';
-import { Observable, Observer, Subscription } from 'rxjs/Rx';
+import { Observer } from 'rxjs/Observer';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import { isAndroid } from '../utils/browser';
 import { DialogConfig } from './dialog.config';
 

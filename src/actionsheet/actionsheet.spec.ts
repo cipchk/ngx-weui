@@ -1,7 +1,7 @@
-import { Subscriber } from 'rxjs/Rx';
 import { Component, ViewChild, DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
+import { Subscription } from 'rxjs/Subscription';
 import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect, async, inject } from '@angular/core/testing';
 
 import { ActionSheetModule, ActionSheetComponent, ActionSheetConfig, ActionSheetService } from '../actionsheet';

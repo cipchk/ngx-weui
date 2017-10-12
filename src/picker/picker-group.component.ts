@@ -1,4 +1,5 @@
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 import { Component, Input, EventEmitter, Output, OnDestroy, HostListener, OnChanges, SimpleChanges } from '@angular/core';
 import { PickerData } from './data';
 

@@ -1,5 +1,6 @@
 import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, Optional, EmbeddedViewRef, ComponentRef } from '@angular/core';
-import { Observable, Observer } from "rxjs/Rx";
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 import { FORMAT_TYPE, DatePickerComponent } from "./picker-date.component";
 import { BaseService } from '../utils/base.service'
 import { PickerData } from './data';

@@ -1,9 +1,9 @@
-import { Subscriber } from 'rxjs/Rx';
 import { Component, ViewChild, DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed, fakeAsync, tick, async, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { Subscription } from 'rxjs/Subscription';
 
 import { ChartG2Module, ChartG2Directive } from '../chart-g2';
 
