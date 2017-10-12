@@ -1,4 +1,4 @@
-import { Component, AfterContentInit, OnChanges, OnDestroy, SimpleChanges, ViewEncapsulation, ChangeDetectionStrategy, QueryList, ContentChildren, Input, Output, EventEmitter, ChangeDetectorRef, ElementRef } from '@angular/core';
+import { Component, AfterContentInit, OnChanges, OnDestroy, SimpleChanges, ViewEncapsulation, ChangeDetectionStrategy, QueryList, ContentChildren, Input, Output, EventEmitter, ChangeDetectorRef, ElementRef, Inject } from '@angular/core';
 import { SidebarComponent } from './sidebar.component';
 
 /**
@@ -24,6 +24,8 @@ export class SidebarContainerComponent implements AfterContentInit, OnChanges, O
     @Input() _showBackdrop: boolean = false;
     @Output() _showBackdropChange = new EventEmitter<boolean>();
 
+    private orgOverflowX = '';
+
     constructor(
         private _ref: ChangeDetectorRef,
         private _el: ElementRef) { }
@@ -44,8 +46,15 @@ export class SidebarContainerComponent implements AfterContentInit, OnChanges, O
         }
     }
 
+    ngOnInit() {
+        const $body = document.querySelector('body');
+        this.orgOverflowX = $body.style.overflowX;
+        $body.style.overflowX = 'hidden';
+    }
+
     ngOnDestroy(): void {
         this._unsubscribe();
+        document.querySelector('body').style.overflowX = this.orgOverflowX;
     }
 
     _getStyles(): CSSStyleDeclaration {
