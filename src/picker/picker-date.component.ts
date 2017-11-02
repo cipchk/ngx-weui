@@ -2,7 +2,7 @@ import { Component, Input, Output, forwardRef, EventEmitter, OnDestroy, ViewChil
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { PickerOptions } from './options';
-import { PickerComponent } from "./picker.component";
+import { PickerComponent } from './picker.component';
 
 export const FORMAT: any = {
     format: null,
@@ -185,7 +185,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnC
             this._value = new Date(now.getFullYear(), now.getMonth() + 1, now.getDate(), this._groups[0][this._selected[0]].value, this._groups[1][this._selected[1]].value, 0);
             return this;
         }
-        let obj = {
+        const obj = {
             y: this._groups[0][this._selected[0]].value,
             M: this._groups[1][this._selected[1]].value - 1,
             d: this._groups[2][this._selected[2]].value,

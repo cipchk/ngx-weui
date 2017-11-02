@@ -1,4 +1,4 @@
-import { Directive, forwardRef, ElementRef, OnDestroy, HostListener, ContentChild, Input, EventEmitter, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { Directive, forwardRef, ElementRef, OnDestroy, HostListener, ContentChild, Input, EventEmitter, Output, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
@@ -12,7 +12,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
         multi: true
     }]
 })
-export class SliderDirective implements ControlValueAccessor, OnDestroy, OnChanges {
+export class SliderDirective implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
 
     private _state: any = null;
 
@@ -26,7 +26,7 @@ export class SliderDirective implements ControlValueAccessor, OnDestroy, OnChang
 
     /**
      * 允许的最小值
-     * 
+     *
      * @type {number}
      * @default 0
      */
@@ -34,7 +34,7 @@ export class SliderDirective implements ControlValueAccessor, OnDestroy, OnChang
 
     /**
      * 允许的最大值
-     * 
+     *
      * @type {number}
      * @default 100
      */
@@ -42,7 +42,7 @@ export class SliderDirective implements ControlValueAccessor, OnDestroy, OnChang
 
     /**
      * 步长
-     * 
+     *
      * @type {number}
      * @default 1
      */
@@ -50,7 +50,7 @@ export class SliderDirective implements ControlValueAccessor, OnDestroy, OnChang
 
     /**
      * 是否可用
-     * 
+     *
      * @type {number}
      * @default true
      */
@@ -130,21 +130,21 @@ export class SliderDirective implements ControlValueAccessor, OnDestroy, OnChang
     }
 
     private getPercentage(pageX: number, $event: any): number {
-	    const distanceToSlide = pageX - this._state.left;
+        const distanceToSlide = pageX - this._state.left;
         let percentage = distanceToSlide / this._state.size * 100;
         percentage = Math.round(percentage / this._state.percentage[2]) * this._state.percentage[2];
         return Math.max(0, Math.min(100, percentage));
     }
 
     private calculateValue(percentage: number) {
-        let rawValue = percentage / 100 * (this.max - this.min);
+        const rawValue = percentage / 100 * (this.max - this.min);
         // adjustment = this.min
         let value = this.min + Math.round(rawValue / this.step) * this.step;
         if (value < this.min)
             value = this.min;
         else if (value > this.max)
             value = this.max;
-        
+
         this._value = value;
         this.onChange(this._value);
         this.onTouched();

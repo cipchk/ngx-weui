@@ -22,16 +22,16 @@ export abstract class BaseService {
      * 销毁所有
      */
     destroyAll() {
-        for (let component of this.list)
+        for (const component of this.list)
             this.destroy(component);
     }
 
     /** 动态构建组件 */
     protected build<T>(component: { new (...args: any[]): T; }): ComponentRef<T> {
-        let componentFactory = this.resolver.resolveComponentFactory(component);
-        let componentRef = componentFactory.create(this.injector);
+        const componentFactory = this.resolver.resolveComponentFactory(component);
+        const componentRef = componentFactory.create(this.injector);
         this.list.push(componentRef);
-        let componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
+        const componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
         this.applicationRef.attachView(componentRef.hostView);
         componentRef.onDestroy(() => {
             this.applicationRef.detachView(componentRef.hostView);

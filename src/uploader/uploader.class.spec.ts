@@ -8,8 +8,8 @@ describe('Uploader: Class', () => {
 
     function addFiles(count: number = 1, ext: string = 'png') {
         for (let i = 0; i < count; i++) {
-            let textFileAsBlob = new Blob(['a' + i], { type: 'text/plain' });
-            let f = new File([textFileAsBlob], `${i + 1}.${ext}`);
+            const textFileAsBlob = new Blob(['a' + i], { type: 'text/plain' });
+            const f = new File([textFileAsBlob], `${i + 1}.${ext}`);
             instance.addToQueue([f]);
         }
     }
@@ -34,7 +34,8 @@ describe('Uploader: Class', () => {
             limit: 10
         };
         instance.setOptions(args);
-        for (let k in args) {
+        // tslint:disable-next-line:forin
+        for (const k in args) {
             expect(instance.options[k]).toBe(args[k], `参数${k}值应该是：${args[k]}`);
         }
     });

@@ -3,7 +3,7 @@ import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
 import { ActionSheetComponent } from './actionsheet.component';
 import { ActionSheetConfig } from './actionsheet.config';
-import { BaseService } from '../utils/base.service'
+import { BaseService } from '../utils/base.service';
 
 @Injectable()
 export class ActionSheetService extends BaseService {
@@ -19,14 +19,14 @@ export class ActionSheetService extends BaseService {
      * @returns {Observable<any>} 可订阅来获取结果
      */
     show(menus: { text?: string, [key: string]: any }[], config?: ActionSheetConfig): Observable<any> {
-        let componentRef = this.build(ActionSheetComponent);
+        const componentRef = this.build(ActionSheetComponent);
 
         componentRef.instance.menus = menus;
         if (config) componentRef.instance.config = config;
         componentRef.instance.close.subscribe(() => {
             setTimeout(() => {
                 this.destroy(componentRef);
-            }, 100)
+            }, 100);
         });
         return componentRef.instance.show();
     }

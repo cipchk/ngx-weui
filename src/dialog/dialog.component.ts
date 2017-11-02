@@ -100,7 +100,7 @@ export class DialogComponent implements OnDestroy {
      */
     @Input()
     set config(value: DialogConfig) {
-        let config = Object.assign({
+        const config = Object.assign({
             backdrop: false
         }, this.DEF, value);
 
@@ -260,7 +260,7 @@ export class DialogComponent implements OnDestroy {
         if (!menu && this.config.btns.length > 0) {
             menu = this.config.btns.find(w => w.value === true);
         }
-        let ret = menu;
+        const ret = menu;
         if (menu.value === true && this._config.type === 'prompt') {
             if (!this.promptCheck()) return false;
             ret.result = this._promptData;

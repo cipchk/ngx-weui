@@ -2,8 +2,8 @@ import { Component, ViewChild, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect, async, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { FormModule } from './form.module'
-import { ChecklistDirective } from './check.directive'
+import { FormModule } from './form.module';
+import { ChecklistDirective } from './check.directive';
 
 const DATALIST = [ 'A', 'B' ];
 
@@ -23,7 +23,7 @@ describe('Directive: Checklist', () => {
         fixture = TestBed.createComponent(TestInputComponent);
         context = fixture.componentInstance;
 
-        let inputs = fixture.debugElement.queryAll(By.directive(ChecklistDirective));
+        const inputs = fixture.debugElement.queryAll(By.directive(ChecklistDirective));
         directives = inputs.map((de: DebugElement) => de.injector.get(ChecklistDirective) as ChecklistDirective);
 
         fixture.detectChanges();
@@ -40,7 +40,7 @@ describe('Directive: Checklist', () => {
         fixture.detectChanges();
         expect(context.res.length).toBe(1);
         expect(context.res[0]).toBe(DATALIST[0]);
-    })
+    });
 
 });
 

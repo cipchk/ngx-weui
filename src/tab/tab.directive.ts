@@ -1,4 +1,4 @@
-import { Directive, OnInit, Input, HostBinding, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Directive, Input, HostBinding, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { BarComponent } from './bar.component';
 
 @Directive({ selector: 'weui-tab, [weui-tab]' })
@@ -58,5 +58,5 @@ export class TabDirective implements OnDestroy {
     ngOnDestroy(): void {
         this._tabComp.remove(this);
     }
-    
+
 }

@@ -38,7 +38,7 @@ describe('Component: Progress', () => {
             { v: 101, r: 100 },
             { v: -10, r: 0 }
         ];
-        for (let item of VALUES) {
+        for (const item of VALUES) {
             comp.value = item.v;
             expect(comp._value).toBe(item.r);
         }

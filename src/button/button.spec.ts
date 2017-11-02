@@ -42,14 +42,14 @@ describe('Component: Button', () => {
             tick();
             expect(el.querySelector('#default').classList).toContain('weui-btn_default');
             context.type = 'warn';
-            fixture.detectChanges(); 
+            fixture.detectChanges();
             tick();
             expect(el.querySelector('#default').classList).toContain('weui-btn_warn');
         }));
 
         it('should have class loading by loading=true', fakeAsync(() => {
             context.loading = true;
-            fixture.detectChanges(); 
+            fixture.detectChanges();
             tick();
             expect(el.querySelector('#default').classList).toContain('weui-btn_loading');
             expect(el.querySelector('.weui-loading')).not.toBeNull();
@@ -57,24 +57,24 @@ describe('Component: Button', () => {
 
         it('should have class plain by plain=true', fakeAsync(() => {
             context.plain = true;
-            fixture.detectChanges(); 
+            fixture.detectChanges();
             tick();
             expect(el.querySelector('#default').classList).toContain('weui-btn_plain-primary');
         }));
 
         it('should have class mini by mini=true', fakeAsync(() => {
             context.mini = true;
-            fixture.detectChanges(); 
+            fixture.detectChanges();
             tick();
             expect(el.querySelector('#default').classList).toContain('weui-btn_mini');
         }));
 
         it('should have class disabled by disabled=true', fakeAsync(() => {
             context.disabled = true;
-            fixture.detectChanges(); 
+            fixture.detectChanges();
             tick();
             expect(el.querySelector('#default').classList).toContain('weui-btn_disabled');
-        })); 
+        }));
 
     });
 
@@ -85,11 +85,10 @@ describe('Component: Button', () => {
     template: ``
 })
 class TestButtonComponent extends ButtonComponent {
-    type: string = 'primary';
-    loading: boolean = false;
-    mini: boolean = false;
-    plain: boolean = false;
-    disabled: boolean = false;
+    loading = false;
+    mini = false;
+    plain = false;
+    disabled = false;
     constructor(config: ButtonConfig) {
         super(config);
     }

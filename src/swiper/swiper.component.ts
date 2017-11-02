@@ -1,5 +1,5 @@
 import { SwiperConfig } from './swiper.config';
-import { Component, ViewEncapsulation, Input, OnChanges, SimpleChanges, OnDestroy, EventEmitter, Output, ElementRef, NgZone } from '@angular/core';
+import { Component, ViewEncapsulation, Input, OnChanges, SimpleChanges, OnDestroy, EventEmitter, Output, ElementRef, NgZone, OnInit, AfterViewInit } from '@angular/core';
 
 declare const Swiper: any;
 
@@ -8,11 +8,11 @@ declare const Swiper: any;
     template: `<ng-content></ng-content>`,
     styles: [ `:host {display:block; position: relative;}` ]
 })
-export class SwiperComponent implements OnChanges, OnDestroy {
+export class SwiperComponent implements AfterViewInit, OnChanges, OnInit, OnDestroy {
 
     /**
      * 等同于swiper[参数项](http://idangero.us/swiper/api/)
-     * 
+     *
      * @type {any}
      */
     @Input() options: any;
@@ -21,7 +21,7 @@ export class SwiperComponent implements OnChanges, OnDestroy {
 
     /**
      * Swiper 实例对象，可以通过 `@ViewChild` 访问到它
-     * 
+     *
      * @type {Swiper}
      */
     swiper: any;
@@ -33,7 +33,7 @@ export class SwiperComponent implements OnChanges, OnDestroy {
     private containerEl: HTMLElement;
     private init() {
         this.destroy();
-        
+
         this.zone.runOutsideAngular(() => {
             this.swiper = new Swiper(this.containerEl, this.options);
         });

@@ -1,4 +1,6 @@
-import { FileLikeObject, UploaderOptions, Uploader, ParsedResponseHeaders } from "./index";
+import { FileLikeObject } from './file-like-object.class';
+import { Uploader, ParsedResponseHeaders } from './uploader.class';
+import { UploaderOptions } from './uploader.options';
 
 declare const window: any;
 
@@ -9,21 +11,21 @@ export class FileItem {
 
     /**
      * 文件ID，每个对象具有唯一ID，与文件名无关
-     * 
+     *
      * @type {string}
      */
     id: string;
 
     /**
      * 重建文件结构对象
-     * 
+     *
      * @type {FileLikeObject}
      */
     file: FileLikeObject;
 
     /**
      * 原生对象
-     * 
+     *
      * @type {File}
      */
     _file: File;
@@ -35,58 +37,58 @@ export class FileItem {
 
     /**
      * 上传进度
-     * 
+     *
      * @type {number}
      */
     progress: number = 0;
 
     /**
      * 准备上传就绪
-     * 
+     *
      * @type {boolean}
      */
     isReady: boolean = false;
     /**
      * 上传中
-     * 
+     *
      * @type {boolean}
      */
     isUploading: boolean = false;
     /**
      * 已上传（不管错误与否都是true）
-     * 
+     *
      * @type {boolean}
      */
     isUploaded: boolean = false;
     /**
      * 上传成功
-     * 
+     *
      * @type {boolean}
      */
     isSuccess: boolean = false;
     /**
      * 用户取消上传
-     * 
+     *
      * @type {boolean}
      */
     isCancel: boolean = false;
     /**
      * 上传失败
-     * 
+     *
      * @type {boolean}
      */
     isError: boolean = false;
 
     /**
      * HTTP请求对象
-     * 
+     *
      * @type {XMLHttpRequest}
      */
     _xhr: XMLHttpRequest;
 
     /**
      * 上传配置信息
-     * 
+     *
      * @type {UploaderOptions}
      */
     options: UploaderOptions;

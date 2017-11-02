@@ -1,5 +1,5 @@
 import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, Optional, EmbeddedViewRef, ComponentRef } from '@angular/core';
-import { ToptipsType, ToptipsComponent } from "./toptips.component";
+import { ToptipsType, ToptipsComponent } from './toptips.component';
 import { BaseService } from '../utils/base.service';
 
 @Injectable()
@@ -17,7 +17,7 @@ export class ToptipsService extends BaseService {
      * @returns {ToptipsComponent}
      */
     show(text: string, type: ToptipsType, time: number = 2000) {
-        let componentRef = this.build(ToptipsComponent);
+        const componentRef = this.build(ToptipsComponent);
 
         if (type) componentRef.instance.type = type;
         if (text) componentRef.instance.text = text;
@@ -25,7 +25,7 @@ export class ToptipsService extends BaseService {
         componentRef.instance.hide.subscribe(() => {
             setTimeout(() => {
                 this.destroy(componentRef);
-            }, 100)
+            }, 100);
         });
         return componentRef.instance.onShow();
     }

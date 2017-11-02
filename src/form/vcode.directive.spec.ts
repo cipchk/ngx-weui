@@ -1,12 +1,13 @@
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/observable/of';
 import { Component, ViewChild, DebugElement } from '@angular/core';
 import { FormsModule, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect, async, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { FormModule } from './form.module'
-import { VCodeDirective } from './vcode.directive'
+import { FormModule } from './form.module';
+import { VCodeDirective } from './vcode.directive';
 
 const SECONDS: number = 10;
 const TPL: string = '${num}s';
@@ -31,7 +32,7 @@ describe('Directive: vcode', () => {
 
         buttonEl = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
 
-        let ds = fixture.debugElement.queryAll(By.directive(VCodeDirective));
+        const ds = fixture.debugElement.queryAll(By.directive(VCodeDirective));
         directive = ds.map((de: DebugElement) => de.injector.get(VCodeDirective) as VCodeDirective)[0];
 
         fixture.detectChanges();
@@ -78,6 +79,6 @@ class TestVCodeComponent {
     error: string = ERRORS;
 
     onSendCode(): Observable<boolean> {
-        return Observable.timer(0).map((v, i) => { return true; });
+        return Observable.of(true);
     }
 }

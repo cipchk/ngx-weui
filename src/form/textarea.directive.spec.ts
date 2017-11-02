@@ -3,8 +3,8 @@ import { FormsModule, FormBuilder, FormGroup, FormControl, ReactiveFormsModule }
 import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect, async, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { FormModule } from './form.module'
-import { TextareaDirective } from './textarea.directive'
+import { FormModule } from './form.module';
+import { TextareaDirective } from './textarea.directive';
 
 const MAXLENGTH: number = 5;
 
@@ -33,7 +33,7 @@ describe('Directive: Textarea', () => {
         context = fixture.componentInstance;
         inputEl = fixture.debugElement.query(By.css('textarea')).nativeElement as HTMLInputElement;
 
-        let inputs = fixture.debugElement.queryAll(By.directive(TextareaDirective));
+        const inputs = fixture.debugElement.queryAll(By.directive(TextareaDirective));
         directive = inputs.map((de: DebugElement) => de.injector.get(TextareaDirective) as TextareaDirective)[0];
 
         counterEl = fixture.debugElement.query(By.css('.weui-textarea-counter')).nativeElement as HTMLElement;

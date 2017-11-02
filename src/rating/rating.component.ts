@@ -1,6 +1,6 @@
 import { Component, EventEmitter, HostListener, Input, OnInit, Output, forwardRef, SimpleChanges, OnChanges, ViewEncapsulation } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { RatingConfig } from './rating.config'
+import { RatingConfig } from './rating.config';
 
 @Component({
     selector: 'weui-rating',
@@ -38,11 +38,11 @@ export class RatingComponent implements ControlValueAccessor, OnChanges {
     constructor(private DEF: RatingConfig) { }
 
     _setConfig(cog: RatingConfig) {
-        let _c = Object.assign({
+        const _c = Object.assign({
             states: []
         }, this.DEF, cog);
         this._class = _c.cls || '';
-        let count = _c.states.length || _c.max;
+        const count = _c.states.length || _c.max;
         this._range = Array(count).fill(0).map((v, i) => {
             return Object.assign({
                 index: i,
@@ -67,7 +67,7 @@ export class RatingComponent implements ControlValueAccessor, OnChanges {
 
         event.preventDefault();
         event.stopPropagation();
-        let sign = event.which === 38 || event.which === 39 ? 1 : -1;
+        const sign = event.which === 38 || event.which === 39 ? 1 : -1;
         this._rate(this._value + sign);
     }
 

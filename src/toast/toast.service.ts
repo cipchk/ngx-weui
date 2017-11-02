@@ -1,7 +1,7 @@
 import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, Optional, EmbeddedViewRef } from '@angular/core';
-import { Observable } from "rxjs/Observable";
-import { Observer } from "rxjs/Observer";
-import { BaseService } from '../utils/base.service'
+import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
+import { BaseService } from '../utils/base.service';
 import { ToastComponent } from './toast.component';
 
 @Injectable()
@@ -20,7 +20,7 @@ export class ToastService extends BaseService {
      * @returns {ToastComponent}
      */
     show(text?: string, time?: number, icon?: string, type?: 'success' | 'loading') {
-        let componentRef = this.build(ToastComponent);
+        const componentRef = this.build(ToastComponent);
 
         if (type) componentRef.instance.type = type;
         if (text) componentRef.instance.text = text;
@@ -29,7 +29,7 @@ export class ToastService extends BaseService {
         componentRef.instance.hide.subscribe(() => {
             setTimeout(() => {
                 componentRef.destroy();
-            }, 300)
+            }, 300);
         });
         return componentRef.instance.onShow();
     }

@@ -3,8 +3,8 @@ import { FormsModule, FormBuilder, FormGroup, FormControl, ReactiveFormsModule }
 import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect, async, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { FormModule } from './form.module'
-import { InputDirective } from './input.directive'
+import { FormModule } from './form.module';
+import { InputDirective } from './input.directive';
 
 describe('Directive: Input', () => {
 
@@ -30,7 +30,7 @@ describe('Directive: Input', () => {
         context = fixture.componentInstance;
         inputEl = fixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement;
 
-        let inputs = fixture.debugElement.queryAll(By.directive(InputDirective));
+        const inputs = fixture.debugElement.queryAll(By.directive(InputDirective));
         directive = inputs.map((de: DebugElement) => de.injector.get(InputDirective) as InputDirective)[0];
 
         fixture.detectChanges();
@@ -50,7 +50,7 @@ describe('Directive: Input', () => {
         idcard: { valid: '350000000000000000', invalid: '35000000000000000a' }
     };
 
-    for (let key of Object.keys(TYPES_IT)) {
+    for (const key of Object.keys(TYPES_IT)) {
         describe(`[type="${key}"]`, () => {
 
             it(`should not error on valid ${key}`, () => {

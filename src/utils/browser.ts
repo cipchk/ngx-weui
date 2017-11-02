@@ -10,7 +10,7 @@ export function isBrowser(): boolean {
 }
 
 /**
- * 检查是否安卓系统 
+ * 检查是否安卓系统
  */
 export function isAndroid() {
     return /android (\d+)/.test(getDOM().getUserAgent().toLowerCase());
@@ -28,7 +28,7 @@ export function isIOS(): boolean {
  */
 export function isImage(file: File) {
     if (!(file instanceof window.File)) return false;
-    let type = '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
+    const type = '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
     return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
 }
 

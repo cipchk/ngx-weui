@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
-import { FileItem, FileLikeObject } from "./index";
+import { FileItem, FileLikeObject } from './index';
 
-export type FilterFunction = { name: string, fn: (item?: FileLikeObject, options?: UploaderOptions) => boolean };
+// tslint:disable-next-line:interface-over-type-literal
+export type FilterFunction = {
+    name: string,
+    fn: (item?: FileLikeObject, options?: UploaderOptions) => boolean
+};
 
 /**
  * 组件Header对象接口
@@ -20,14 +24,14 @@ export interface UploaderOptions {
 
     /**
      * 服务端网址
-     * 
+     *
      * @type {string}
      */
     url?: string;
 
     /**
      * HTTP请求方式
-     * 
+     *
      * @type {('POST' | 'GET')}
      * @default POST
      */
@@ -35,7 +39,7 @@ export interface UploaderOptions {
 
     /**
      * 设置文件上传域的name
-     * 
+     *
      * @type {string}
      * @default file
      */
@@ -43,7 +47,7 @@ export interface UploaderOptions {
 
     /**
      * 是否发送凭据
-     * 
+     *
      * @type {boolean}
      * @default true
      */
@@ -51,21 +55,21 @@ export interface UploaderOptions {
 
     /**
      * headers 信息
-     * 
+     *
      * @type {UploaderHeaders[]}
      */
     headers?: UploaderHeaders[];
 
     /**
      * HTTP提交其他参数
-     * 
+     *
      * @type {Object}
      */
     params?: { [key: string]: any };
 
     /**
      * 过滤器
-     * 
+     *
      * @type {FilterFunction[]}
      */
     filters?: FilterFunction[];
@@ -73,7 +77,7 @@ export interface UploaderOptions {
     /**
      * 是否自动上传
      * 设置为 true 后，不需要手动调用 `upload`，有文件选择即开始上传。
-     * 
+     *
      * @type {boolean}
      * @default false
      */
@@ -81,14 +85,14 @@ export interface UploaderOptions {
 
     /**
      * 限定文件mime类型，例如：[ '' ]
-     * 
+     *
      * @type {string[]}
      */
     mimes?: string[];
 
     /**
      * 限定文件类型，例如：[ 'jpg', 'png' ]
-     * 
+     *
      * @type {string[]}
      */
     types?: string[];
@@ -96,7 +100,7 @@ export interface UploaderOptions {
     /**
      * 允许最多上传数量
      * -1 表示不受限
-     * 
+     *
      * @type {number}
      * @default -1
      */
@@ -105,7 +109,7 @@ export interface UploaderOptions {
     /**
      * 限定文件大小（单位：字节）
      * -1 表示不受限
-     * 
+     *
      * @type {number}
      * @default -1
      */
@@ -113,7 +117,7 @@ export interface UploaderOptions {
 
     /**
      * 是否自动移除上传成功文件
-     * 
+     *
      * @type {boolean}
      * @default false
      */
@@ -121,7 +125,7 @@ export interface UploaderOptions {
 
     /**
      * 禁止使用multipart/form-data
-     * 
+     *
      * @type {boolean}
      * @default false
      */
@@ -129,7 +133,7 @@ export interface UploaderOptions {
 
     /**
      * 当文件被加入队列以后触发
-     * 
+     *
      * @param {FileItem} file File对象
      * @type {Function}
      */
@@ -137,7 +141,7 @@ export interface UploaderOptions {
 
     /**
      * 当文件被移除队列后触发
-     * 
+     *
      * @param {FileItem} file File对象，如果是clear则file为空
      * @type {Function}
      */
@@ -151,21 +155,21 @@ export interface UploaderOptions {
 
     /**
      * 当开始上传流程取消时触发。
-     * 
+     *
      * @type {Function}
      */
     onCancel?: Function;
 
     /**
      * 当所有文件上传结束时触发
-     * 
+     *
      * @type {Function}
      */
     onFinished?: Function;
 
     /**
      * 某个文件开始上传前触发，一个文件只会触发一次。
-     * 
+     *
      * @param {FileItem} file File对象
      * @type {Function}
      */
@@ -212,7 +216,7 @@ export interface UploaderOptions {
 
     /**
      * 取消某文件时触发
-     * 
+     *
      * @param {FileItem} file File对象
      * @type {Function}
      */
@@ -231,17 +235,17 @@ export interface UploaderOptions {
      * 内置的上传组件是基于HTML5
      * 如有特殊需求可以自定义上传接口（Observable<any> 中的 any 指的是事件当中的response）
      * 不管成功与否都会触发 onUploadComplete & onUploadSuccess
-     * 
-     * @param {FileItem} item 
-     * @returns {Observable<any>} 
+     *
+     * @param {FileItem} item
+     * @returns {Observable<any>}
      * @this Uploader 对象
      */
     uploadTransport?(item: FileItem): Observable<any>;
 
     /**
      * 自定义上传接口，当用户中止时回调
-     * 
-     * @param {FileItem} item 
+     *
+     * @param {FileItem} item
      * @this Uploader 对象
      */
     abortTransport?(item: FileItem): void;

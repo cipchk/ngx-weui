@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 
+// tslint:disable-next-line:interface-over-type-literal
 export type ToastConfigType = { text: string, icon: string, time: number };
 
 @Injectable()

@@ -1,11 +1,11 @@
-import { Component, ViewEncapsulation, Input, OnChanges, SimpleChanges, EventEmitter, Output, HostListener, ElementRef, OnDestroy, NgZone } from '@angular/core';
+import { Component, ViewEncapsulation, Input, OnChanges, SimpleChanges, EventEmitter, Output, HostListener, ElementRef, OnDestroy, NgZone, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/throttleTime';
 
-import { InfiniteLoaderConfig } from "./infiniteloader.config";
+import { InfiniteLoaderConfig } from './infiniteloader.config';
 
 @Component({
     selector: 'weui-infiniteloader',
@@ -25,7 +25,7 @@ import { InfiniteLoaderConfig } from "./infiniteloader.config";
     styleUrls: [ './infiniteloader.scss' ],
     encapsulation: ViewEncapsulation.None
 })
-export class InfiniteLoaderComponent implements OnChanges, OnDestroy {
+export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
     _loading: boolean = false;
     _finished: boolean = false;
 

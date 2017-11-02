@@ -1,4 +1,4 @@
-import { Directive, Input, ElementRef, OnDestroy } from '@angular/core';
+import { Directive, Input, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -14,18 +14,18 @@ import { findParent, add, remove } from './../utils/dom';
         '[disabled]': '_disabled'
     }
 })
-export class VCodeDirective implements OnDestroy {
+export class VCodeDirective implements OnInit, OnDestroy {
 
     /**
      * 发送事件
-     * 
+     *
      * @type {Function}
      */
     @Input('weui-vcode') onSend: Function;
-    
+
     /**
      * 时长（单位：秒）
-     * 
+     *
      * @type {number}
      * @default 60
      */
@@ -33,14 +33,14 @@ export class VCodeDirective implements OnDestroy {
 
     /**
      * 倒计时模板，使用 `${num}` 表示当前秒数
-     * 
+     *
      * @type {string}
      */
     @Input('weui-tpl') tpl: string = '${num} 秒';
-    
+
     /**
      * 重新发送提醒文本
-     * 
+     *
      * @type {string}
      */
     @Input('weui-error') error: string = '重新发送';
@@ -60,7 +60,7 @@ export class VCodeDirective implements OnDestroy {
         this._disabled = true;
         (<Observable<boolean>>this.onSend()).subscribe((res) => {
             res ? this.tick() : this.err();
-        })
+        });
     }
 
     private err(): void {

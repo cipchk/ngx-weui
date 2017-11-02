@@ -18,13 +18,13 @@ export class BarComponent implements OnDestroy {
     }
 
     remove(tab: TabDirective): void {
-        let index = this.tabs.indexOf(tab);
+        const index = this.tabs.indexOf(tab);
         if (index === -1 || this.isDestroyed) {
             return;
         }
         // Select a new tab if the tab to be removed is selected and not destroyed
         if (tab.active && this.hasAvailableTabs(index)) {
-            let newActiveIndex = this.getClosestTabIndex(index);
+            const newActiveIndex = this.getClosestTabIndex(index);
             this.tabs[newActiveIndex].active = true;
         }
 
@@ -33,14 +33,14 @@ export class BarComponent implements OnDestroy {
     }
 
     protected getClosestTabIndex(index: number): number {
-        let tabsLength = this.tabs.length;
+        const tabsLength = this.tabs.length;
         if (!tabsLength) {
             return -1;
         }
 
         for (let step = 1; step <= tabsLength; step += 1) {
-            let prevIndex = index - step;
-            let nextIndex = index + step;
+            const prevIndex = index - step;
+            const nextIndex = index + step;
             if (this.tabs[prevIndex] && !this.tabs[prevIndex].disabled) {
                 return prevIndex;
             }
@@ -52,7 +52,7 @@ export class BarComponent implements OnDestroy {
     }
 
     protected hasAvailableTabs(index: number): boolean {
-        let tabsLength = this.tabs.length;
+        const tabsLength = this.tabs.length;
         if (!tabsLength) {
             return false;
         }

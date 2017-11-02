@@ -1,7 +1,7 @@
 import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, Optional, EmbeddedViewRef, ComponentRef } from '@angular/core';
 import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
-import { BaseService } from '../utils/base.service'
+import { BaseService } from '../utils/base.service';
 import { DialogComponent } from './dialog.component';
 import { DialogConfig } from './dialog.config';
 
@@ -18,13 +18,13 @@ export class DialogService extends BaseService {
      * @returns {Observable<any>} 可订阅来获取结果
      */
     show(data: DialogConfig): Observable<any> {
-        let componentRef = this.build(DialogComponent);
+        const componentRef = this.build(DialogComponent);
 
         componentRef.instance.config = data;
         componentRef.instance.close.subscribe(() => {
             setTimeout(() => {
                 this.destroy(componentRef);
-            }, 300)
+            }, 300);
         });
         return componentRef.instance.show();
     }

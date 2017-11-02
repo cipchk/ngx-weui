@@ -13,10 +13,10 @@ export class FileLikeObject {
     name: string;
 
     constructor(fileOrInput: any) {
-        let isInput = isElement(fileOrInput);
-        let fakePathOrObject = isInput ? fileOrInput.value : fileOrInput;
-        let postfix = typeof fakePathOrObject === 'string' ? 'FakePath' : 'Object';
-        let method = '_createFrom' + postfix;
+        const isInput = isElement(fileOrInput);
+        const fakePathOrObject = isInput ? fileOrInput.value : fileOrInput;
+        const postfix = typeof fakePathOrObject === 'string' ? 'FakePath' : 'Object';
+        const method = '_createFrom' + postfix;
         (this as any)[method](fakePathOrObject);
     }
 

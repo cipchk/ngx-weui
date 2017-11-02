@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, ViewEncapsulation } from '@angular/core';
+import { Component, Input, EventEmitter, Output, ViewEncapsulation, OnInit, OnDestroy } from '@angular/core';
 
 export type ToptipsType = 'default' | 'warn' | 'info' | 'primary' | 'success';
 
@@ -12,7 +12,7 @@ export type ToptipsType = 'default' | 'warn' | 'info' | 'primary' | 'success';
     styleUrls: [ './toptips.scss' ],
     encapsulation: ViewEncapsulation.None
 })
-export class ToptipsComponent {
+export class ToptipsComponent implements OnInit, OnDestroy {
 
     /**
      * 文本

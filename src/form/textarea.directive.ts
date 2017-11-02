@@ -1,4 +1,4 @@
-import { Directive, Input, OnChanges, SimpleChanges, ElementRef } from '@angular/core';
+import { Directive, Input, OnChanges, SimpleChanges, ElementRef, OnInit } from '@angular/core';
 import { add, remove } from './../utils/dom';
 
 /**
@@ -10,18 +10,18 @@ import { add, remove } from './../utils/dom';
         '(ngModelChange)': '_onChange($event)'
     }
 })
-export class TextareaDirective implements OnChanges {
+export class TextareaDirective implements OnInit, OnChanges {
 
     /**
      * 最大长度
-     * 
+     *
      * @type {number}
      */
     @Input() maxlength: number = 0;
 
     /**
      * 中文部分应该算多少个字符，使用【/[^\x00-\xff]/g】正则表达式统计中文部分（默认：1个字符）
-     * 
+     *
      * @type {number}
      * @default 1
      */
@@ -44,8 +44,8 @@ export class TextareaDirective implements OnChanges {
     }
 
     private init() {
-        let clsName = `weui-textarea-counter`;
-        let pel = this.el.nativeElement.parentElement;
+        const clsName = `weui-textarea-counter`;
+        const pel = this.el.nativeElement.parentElement;
         if (this.maxlength <= 0) {
             remove(pel, '.' + clsName);
             this._count = null;
@@ -57,7 +57,7 @@ export class TextareaDirective implements OnChanges {
 
     _onChange(value: any) {
         if (!this._count) return;
-        
+
         value = value || '';
         if (this.cn > 1) {
             value = value.replace(/[^\x00-\xff]/g, '**');

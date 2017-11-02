@@ -1,8 +1,8 @@
 import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, Optional, EmbeddedViewRef, ComponentRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-import { FORMAT_TYPE, DatePickerComponent } from "./picker-date.component";
-import { BaseService } from '../utils/base.service'
+import { FORMAT_TYPE, DatePickerComponent } from './picker-date.component';
+import { BaseService } from '../utils/base.service';
 import { PickerData } from './data';
 import { PickerOptions } from './options';
 import { PickerComponent } from './picker.component';
@@ -27,7 +27,7 @@ export class PickerService extends BaseService {
      * @returns {Observable<any>} 务必订阅结果才会显示。
      */
     show(data: PickerData[][] | String[], value?: any, defaultSelect?: number[], options?: PickerOptions): Observable<any> {
-        let componentRef = this.build(PickerComponent);
+        const componentRef = this.build(PickerComponent);
         // 通过Service打开的强制设置为 `default` 以免出现 `input`
         options = Object.assign({ }, options, { type: 'default' });
         componentRef.instance.options = options;
@@ -41,7 +41,7 @@ export class PickerService extends BaseService {
         componentRef.instance.hide.subscribe(() => {
             setTimeout(() => {
                 this.destroy(componentRef);
-            }, 100)
+            }, 100);
         });
         componentRef.instance._onShow();
         return componentRef.instance.change;
@@ -57,7 +57,7 @@ export class PickerService extends BaseService {
      * @returns {Observable<any>} 务必订阅结果才会显示。
      */
     showCity(data: any, value?: string, dataMap?: any, options?: PickerOptions): Observable<any> {
-        let componentRef = this.build(CityPickerComponent);
+        const componentRef = this.build(CityPickerComponent);
         if (dataMap) componentRef.instance.dataMap = dataMap;
         // 通过Service打开的强制设置为 `default` 以免出现 `input`
         options = Object.assign({ }, options, { type: 'default' });
@@ -71,11 +71,11 @@ export class PickerService extends BaseService {
         componentRef.instance.hide.subscribe(() => {
             setTimeout(() => {
                 this.destroy(componentRef);
-            }, 100)
+            }, 100);
         });
         setTimeout(() => {
             componentRef.instance._triggerShow();
-        }, 200)
+        }, 200);
         return componentRef.instance.change;
     }
 
@@ -92,7 +92,7 @@ export class PickerService extends BaseService {
      */
     showDateTime(type?: 'date' | 'datetime' | 'time', format?: FORMAT_TYPE,
         value?: Date, min?: Date, max?: Date, options?: PickerOptions): Observable<any> {
-        let componentRef = this.build(DatePickerComponent);
+        const componentRef = this.build(DatePickerComponent);
         // 通过Service打开的强制设置为 `default` 以免出现 `input`
         options = Object.assign({ }, options, { type: 'default' });
         componentRef.instance.options = options;
@@ -107,12 +107,12 @@ export class PickerService extends BaseService {
         componentRef.instance.hide.subscribe(() => {
             setTimeout(() => {
                 this.destroy(componentRef);
-            }, 100)
+            }, 100);
         });
         setTimeout(() => {
             componentRef.instance.ngOnChanges(null);
             componentRef.instance._triggerShow();
-        }, 200)
+        }, 200);
         return componentRef.instance.change;
     }
 

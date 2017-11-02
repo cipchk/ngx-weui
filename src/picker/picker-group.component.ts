@@ -1,6 +1,6 @@
+import { Component, Input, EventEmitter, Output, OnDestroy, HostListener, OnChanges, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { Component, Input, EventEmitter, Output, OnDestroy, HostListener, OnChanges, SimpleChanges } from '@angular/core';
 import { PickerData } from './data';
 
 declare const window: any;

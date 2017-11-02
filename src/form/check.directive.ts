@@ -22,8 +22,7 @@ export class ChecklistDirective {
     _change($event: any) {
         if ($event.target.checked) {
             this.targetArray.push(this._value);
-        }
-        else {
+        } else {
             this.targetArray.splice(this.targetArray.indexOf(this._value), 1);
         }
     }

@@ -16,7 +16,7 @@ const CONFIG: DialogConfig = <DialogConfig>{
     confirm: 'Confirm',
     confirmType: 'primary',
     backdrop: false
-}
+};
 
 const BTNS: any[] = [
     { text: '否', type: 'default', value: 1 },
@@ -37,7 +37,7 @@ function getActions(nativeEl: HTMLElement): NodeListOf<Element> {
 }
 
 function getCog(cog: any) {
-    return Object.assign({}, CONFIG, cog)
+    return Object.assign({}, CONFIG, cog);
 }
 
 describe('Component: Dialog', () => {

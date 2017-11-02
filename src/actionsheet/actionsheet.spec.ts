@@ -15,7 +15,7 @@ const CONFIG: ActionSheetConfig = <ActionSheetConfig>{
     title: 'test title',
     skin: 'ios',
     cancel: '取消'
-}
+};
 
 function getTitle(nativeEl: HTMLElement): Element {
     return nativeEl.querySelector('.weui-actionsheet__title-text');
@@ -39,7 +39,7 @@ describe('Component: ActionSheet', () => {
 
         const html = `
             <weui-actionsheet
-                [menus]="menus" 
+                [menus]="menus"
                 [config]="config"
                 (close)="_close()"></weui-actionsheet>
         `;

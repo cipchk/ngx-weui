@@ -5,8 +5,8 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { ComponentFixture, TestBed, fakeAsync, tick, async, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { SliderModule } from './slider.module'
-import { SliderDirective } from './slider'
+import { SliderModule } from './slider.module';
+import { SliderDirective } from './slider';
 
 const MIN = 1, MAX = 100, STEP = 1, VALUE = 0, REALVALUE = 1;
 
@@ -28,7 +28,7 @@ describe('Component: Slider', () => {
             spyOn(context, '_change');
             el = fixture.nativeElement;
 
-            let directives = fixture.debugElement.queryAll(By.directive(SliderDirective));
+            const directives = fixture.debugElement.queryAll(By.directive(SliderDirective));
             directive = directives.map((de: DebugElement) => de.injector.get(SliderDirective) as SliderDirective)[0];
 
             fixture.detectChanges();

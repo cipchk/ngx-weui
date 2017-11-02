@@ -2,10 +2,10 @@ import { Component, Input, EventEmitter, Output, ElementRef, ViewEncapsulation, 
 import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import { findParent } from "../utils/dom";
-import { SidebarConfig, PositionType, ModeType } from "./sidebar.config";
+import { findParent } from '../utils/dom';
+import { SidebarConfig, PositionType, ModeType } from './sidebar.config';
 import { SidebarService } from './sidebar.service';
-import { isIOS } from "../utils/browser";
+import { isIOS } from '../utils/browser';
 
 /**
  * 侧边栏
@@ -113,9 +113,6 @@ export class SidebarComponent implements OnChanges, OnDestroy {
         this._closeSub = this._sidebarService.onClose(this.close);
     }
 
-    ngOnInit() {
-    }
-
     ngOnChanges(changes: SimpleChanges): void {
         if ('status' in changes && !this._anting) {
             if (changes['status'].currentValue) {
@@ -176,7 +173,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
 
     _getStyle(): CSSStyleDeclaration {
         let transformStyle: string = 'none';
-        let marginStyle = {};
+        const marginStyle = {};
         const isSlideMode: boolean = this.mode === 'slide';
 
         if (!this.status || isSlideMode) {

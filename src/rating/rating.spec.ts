@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testin
 import { FormsModule } from '@angular/forms';
 import { RatingComponent } from './rating.component';
 import { RatingModule } from './rating.module';
-import { RatingConfig } from "./rating.config";
+import { RatingConfig } from './rating.config';
 
 describe('Component: Rating', () => {
 
@@ -83,8 +83,8 @@ describe('Component: Rating', () => {
         }));
 
         it('check simple click', fakeAsync(() => {
-            let items = element.querySelectorAll('.sr-only');
-            let icons = element.querySelectorAll('i');
+            const items = element.querySelectorAll('.sr-only');
+            const icons = element.querySelectorAll('i');
 
             expect(items[0].innerHTML).toEqual('( )');
             expect(icons[0].classList).toContain('weui-icon-circle');
@@ -102,8 +102,8 @@ describe('Component: Rating', () => {
         it('check disabling', fakeAsync(() => {
 
 
-            let items = element.querySelectorAll('.sr-only');
-            let icons = element.querySelectorAll('i');
+            const items = element.querySelectorAll('.sr-only');
+            const icons = element.querySelectorAll('i');
 
             expect(items[0].innerHTML).toEqual('( )');
             expect(icons[0].classList).toContain('weui-icon-circle');

@@ -1,15 +1,15 @@
-import { Directive, OnDestroy, ElementRef, Input, OnChanges, SimpleChanges, NgZone } from '@angular/core';
+import { Directive, OnInit, OnDestroy, ElementRef, Input, OnChanges, SimpleChanges, NgZone } from '@angular/core';
 
 declare const GM: any;
 
 @Directive({ selector: 'canvas[weui-chart-g2]', exportAs: 'chart-g2' })
-export class ChartG2Directive implements OnDestroy, OnChanges {
+export class ChartG2Directive implements OnInit, OnDestroy, OnChanges {
 
     _chart: any;
 
     /**
      * chart实例对象
-     * 
+     *
      * @readonly
      * @type {*}
      */
@@ -19,7 +19,7 @@ export class ChartG2Directive implements OnDestroy, OnChanges {
 
     /**
      * GM对象
-     * 
+     *
      * @readonly
      */
     get GM(): any {
@@ -28,7 +28,7 @@ export class ChartG2Directive implements OnDestroy, OnChanges {
 
     /**
      * 画布内部的边距，可以是数组 [top, right, bottom, left] 也可以是一个数字。
-     * 
+     *
      * @type {(number[] | number)}
      */
     @Input() margin: number[] | number;
@@ -42,7 +42,7 @@ export class ChartG2Directive implements OnDestroy, OnChanges {
     }
 
     private buildChart() {
-        let object: any = {
+        const object: any = {
             el: this.el.nativeElement
         };
         if (this.margin) object.margin = this.margin;
@@ -51,9 +51,9 @@ export class ChartG2Directive implements OnDestroy, OnChanges {
             this._chart = new GM.Chart(object);
         });
     }
-    
+
     ngOnChanges(changes: SimpleChanges): void {
-        if (this.initFlag) { 
+        if (this.initFlag) {
             if ('margin' in changes && !changes['margin'].firstChange) {
                 this.buildChart();
             }
@@ -66,7 +66,7 @@ export class ChartG2Directive implements OnDestroy, OnChanges {
                 // fixed: TypeError: Cannot read property 'stop' of null
                 try {
                     this._chart.destroy();
-                } catch(e) {
+                } catch (e) {
                     console.warn(e);
                 }
             });

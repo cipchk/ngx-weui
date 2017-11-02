@@ -1,6 +1,6 @@
 import { Component, Directive, EventEmitter, Input, OnInit, Output, HostBinding, ViewEncapsulation } from '@angular/core';
 import { ButtonConfig } from './button.config';
-import { ButtonType } from "../utils/types";
+import { ButtonType } from '../utils/types';
 import { toBoolean } from '../utils/boolean-property';
 
 @Component({
@@ -25,7 +25,7 @@ export class ButtonComponent {
 
     /**
      * 操作场景：primary、default、warn
-     * 
+     *
      * @type {ButtonType}
      * @default primary
      */
@@ -33,11 +33,11 @@ export class ButtonComponent {
 
     /**
      * 是否加载状态
-     * 
+     *
      * @type {boolean}
      * @default false
      */
-    @HostBinding('class.weui-btn_loading') 
+    @HostBinding('class.weui-btn_loading')
     @Input('weui-loading')
     get loading(): boolean { return this._loading; }
     set loading(value) { this._loading = toBoolean(value); }
@@ -45,11 +45,11 @@ export class ButtonComponent {
 
     /**
      * 是否小号
-     * 
+     *
      * @type {boolean}
      * @default false
      */
-    @HostBinding('class.weui-btn_mini') 
+    @HostBinding('class.weui-btn_mini')
     @Input('weui-mini')
     get mini(): boolean { return this._mini; }
     set mini(value) { this._mini = toBoolean(value); }
@@ -57,7 +57,7 @@ export class ButtonComponent {
 
     /**
      * 镂空按钮
-     * 
+     *
      * @type {boolean}
      * @default false
      */
@@ -65,10 +65,10 @@ export class ButtonComponent {
     get plain(): boolean { return this._plain; }
     set plain(value) { this._plain = toBoolean(value); }
     private _plain: boolean = false;
-    
+
     /**
      * disabled状态
-     * 
+     *
      * @type {boolean}
      * @default false
      */

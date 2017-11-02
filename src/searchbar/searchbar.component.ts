@@ -1,5 +1,5 @@
-import { Component, HostListener, ElementRef, HostBinding, Input, OnChanges, SimpleChanges, Output, EventEmitter, ViewChild, OnDestroy } from '@angular/core';
-import { SearchBarConfig } from "./searchbar.config";
+import { Component, HostListener, ElementRef, HostBinding, Input, OnChanges, SimpleChanges, Output, EventEmitter, ViewChild, OnDestroy, OnInit } from '@angular/core';
+import { SearchBarConfig } from './searchbar.config';
 import { Subject } from 'rxjs/Subject';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/debounceTime';
@@ -26,14 +26,14 @@ import 'rxjs/add/operator/distinctUntilChanged';
         </div>
     `
 })
-export class SearchBarComponent implements OnDestroy {
+export class SearchBarComponent implements OnInit, OnDestroy {
     _q: string = '';
     @Input() set value(_value: string) {
         this._q = _value;
     }
     /**
      * placeholder
-     * 
+     *
      * @type {string}
      * @default 搜索
      */
@@ -41,7 +41,7 @@ export class SearchBarComponent implements OnDestroy {
 
     /**
      * 取消按键文字
-     * 
+     *
      * @type {string}
      * @default 取消
      */

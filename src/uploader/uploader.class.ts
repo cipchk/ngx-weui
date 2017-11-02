@@ -1,6 +1,11 @@
-import { Optional, Inject } from "@angular/core";
-import { UploaderConfig, UploaderOptions, FileItem, FileType, FileLikeObject, FilterFunction } from './index';
+import { Optional, Inject } from '@angular/core';
+import { UploaderOptions, FilterFunction } from './uploader.options';
+import { FileItem } from './file-item.class';
+import { UploaderConfig } from './uploader.config';
+import { FileLikeObject } from './file-like-object.class';
+import { FileType } from './file-type.class';
 
+// tslint:disable-next-line:interface-over-type-literal
 export type ParsedResponseHeaders = { [headerFieldName: string]: string };
 
 /**
@@ -44,7 +49,7 @@ export class Uploader {
 
     /**
      * 获取未上传数量
-     * 
+     *
      * @readonly
      * @type {number}
      */
@@ -54,7 +59,7 @@ export class Uploader {
 
     /**
      * 获取已上传数量
-     * 
+     *
      * @readonly
      * @type {number}
      */
@@ -68,8 +73,8 @@ export class Uploader {
 
     /**
      * Creates an instance of Uploader.
-     * @param {UploaderOptions} [options] 
-     * @param {UploaderConfig} [globalConfig] 
+     * @param {UploaderOptions} [options]
+     * @param {UploaderConfig} [globalConfig]
      */
     constructor(options?: UploaderOptions,
         @Inject(UploaderConfig) @Optional() private globalConfig?: UploaderConfig) {
@@ -79,8 +84,8 @@ export class Uploader {
 
     /**
      * 重置选项
-     * 
-     * @param {UploaderOptions} options 
+     *
+     * @param {UploaderOptions} options
      * @param {boolean} [includeOldQueue=true] 是否包括已存在队列中的文件
      */
     setOptions(options: UploaderOptions, includeOldQueue: boolean = true) {
@@ -111,7 +116,7 @@ export class Uploader {
         // 对已经存在的队列重置所有配置信息
         if (includeOldQueue) {
             for (let i = 0; i < this._queue.length; i++) {
-                this._queue[i].setOptions(this._options)
+                this._queue[i].setOptions(this._options);
             }
         }
     }
@@ -145,7 +150,7 @@ export class Uploader {
         if (!filters) return this._options.filters;
         if (Array.isArray(filters)) return filters;
         if (typeof filters === 'string') {
-            let names = filters.match(/[^\s,]+/g);
+            const names = filters.match(/[^\s,]+/g);
             return this._options.filters
                 .filter((filter: any) => names.indexOf(filter.name) !== -1);
         }
@@ -170,29 +175,29 @@ export class Uploader {
 
     /**
      * 将文件放入队列中
-     * 
-     * @param {File[]} files 
-     * @param {UploaderOptions} [options] 
-     * @param {(FilterFunction[] | string)} [filters] 
+     *
+     * @param {File[]} files
+     * @param {UploaderOptions} [options]
+     * @param {(FilterFunction[] | string)} [filters]
      */
     addToQueue(files: File[], options?: UploaderOptions, filters?: FilterFunction[] | string) {
-        let list: File[] = [];
-        for (let file of files) list.push(file);
-        let arrayOfFilters = this._getFilters(filters);
-        let count = this._queue.length;
-        let addedFileItems: FileItem[] = [];
+        const list: File[] = [];
+        for (const file of files) list.push(file);
+        const arrayOfFilters = this._getFilters(filters);
+        const count = this._queue.length;
+        const addedFileItems: FileItem[] = [];
         if (!options) {
             options = this._options;
         }
         list.map((some: File) => {
-            let temp = new FileLikeObject(some);
+            const temp = new FileLikeObject(some);
             if (this._isValidFile(temp, arrayOfFilters, options)) {
-                let fileItem = new FileItem(this, some, options);
+                const fileItem = new FileItem(this, some, options);
                 addedFileItems.push(fileItem);
                 this._queue.push(fileItem);
                 if (this._options.onFileQueued) this._options.onFileQueued(fileItem);
             } else {
-                let filter = arrayOfFilters[this._failFilterIndex];
+                const filter = arrayOfFilters[this._failFilterIndex];
                 if (this._options.onError) this._options.onError(temp, filter, options);
             }
         });
@@ -208,12 +213,12 @@ export class Uploader {
 
     /**
      * 从队列中移除一个文件
-     * 
+     *
      * @param {(FileItem | Number)} value FileItem对象或下标
      */
     removeFromQueue(value: FileItem | Number): void {
-        let index = this._getIndexOfItem(value);
-        let item = this._queue[index];
+        const index = this._getIndexOfItem(value);
+        const item = this._queue[index];
         if (item.isUploading) {
             item.cancel();
         }
@@ -235,12 +240,12 @@ export class Uploader {
 
     /**
      * 上传某个文件
-     * 
-     * @param {FileItem} value 
+     *
+     * @param {FileItem} value
      */
     uploadItem(value: FileItem): void {
-        let index = this._getIndexOfItem(value);
-        let item = this._queue[index];
+        const index = this._getIndexOfItem(value);
+        const item = this._queue[index];
         item._prepareToUploading();
         if (this._isUploading) {
             return;
@@ -251,12 +256,12 @@ export class Uploader {
 
     /**
      * 取消某个文件
-     * 
-     * @param {FileItem} value 
+     *
+     * @param {FileItem} value
      */
     cancelItem(value: FileItem): void {
-        let index = this._getIndexOfItem(value);
-        let item = this._queue[index];
+        const index = this._getIndexOfItem(value);
+        const item = this._queue[index];
         if (item && item.isUploading) {
             if (item.options.abortTransport) {
                 this._onCancelItem(item, null, null, null);
@@ -272,7 +277,7 @@ export class Uploader {
      * 上传队列中所有未上传的文件
      */
     uploadAll(): void {
-        let items = this.getNotUploadedItems().filter((item: FileItem) => !item.isUploading);
+        const items = this.getNotUploadedItems().filter((item: FileItem) => !item.isUploading);
         if (!items.length) {
             return;
         }
@@ -286,7 +291,7 @@ export class Uploader {
      * 取消所有上传中文件
      */
     cancelAll(): void {
-        let items = this.getNotUploadedItems();
+        const items = this.getNotUploadedItems();
         items.map((item: FileItem) => item.cancel());
 
         if (this._options.onCancel) this._options.onCancel();
@@ -308,7 +313,7 @@ export class Uploader {
             return this;
         }
 
-        let xhr = item._xhr = new XMLHttpRequest();
+        const xhr = item._xhr = new XMLHttpRequest();
         let sendable: any;
         if (typeof item._file.size !== 'number') {
             throw new TypeError('The file specified is no longer valid');
@@ -328,33 +333,33 @@ export class Uploader {
         }
 
         xhr.upload.onprogress = (event: any) => {
-            let progress = Math.round(event.lengthComputable ? event.loaded * 100 / event.total : 0);
+            const progress = Math.round(event.lengthComputable ? event.loaded * 100 / event.total : 0);
             this._onProgressItem(item, progress);
         };
         xhr.onload = () => {
-            let headers = this._parseHeaders(xhr.getAllResponseHeaders());
-            let response = this._transformResponse(xhr.response, headers);
-            let gist = this._isSuccessCode(xhr.status) ? 'Success' : 'Error';
-            let method = '_on' + gist + 'Item';
+            const headers = this._parseHeaders(xhr.getAllResponseHeaders());
+            const response = this._transformResponse(xhr.response, headers);
+            const gist = this._isSuccessCode(xhr.status) ? 'Success' : 'Error';
+            const method = '_on' + gist + 'Item';
             (this as any)[method](item, response, xhr.status, headers);
             this._onCompleteItem(item, response, xhr.status, headers);
         };
         xhr.onerror = () => {
-            let headers = this._parseHeaders(xhr.getAllResponseHeaders());
-            let response = this._transformResponse(xhr.response, headers);
+            const headers = this._parseHeaders(xhr.getAllResponseHeaders());
+            const response = this._transformResponse(xhr.response, headers);
             this._onErrorItem(item, response, xhr.status, headers);
             this._onCompleteItem(item, response, xhr.status, headers);
         };
         xhr.onabort = () => {
-            let headers = this._parseHeaders(xhr.getAllResponseHeaders());
-            let response = this._transformResponse(xhr.response, headers);
+            const headers = this._parseHeaders(xhr.getAllResponseHeaders());
+            const response = this._transformResponse(xhr.response, headers);
             this._onCancelItem(item, response, xhr.status, headers);
             this._onCompleteItem(item, response, xhr.status, headers);
         };
         xhr.open(item.options.method, item.options.url, true);
         xhr.withCredentials = item.options.withCredentials;
         if (item.options.headers && item.options.headers.length > 0) {
-            for (let header of item.options.headers) {
+            for (const header of item.options.headers) {
                 xhr.setRequestHeader(header.name, header.value);
             }
         }
@@ -366,15 +371,15 @@ export class Uploader {
         if (this._options.removeAfterUpload) {
             return value;
         }
-        let notUploaded = this.getNotUploadedItems().length;
-        let uploaded = notUploaded ? this._queue.length - notUploaded : this._queue.length;
-        let ratio = 100 / this._queue.length;
-        let current = value * ratio / 100;
+        const notUploaded = this.getNotUploadedItems().length;
+        const uploaded = notUploaded ? this._queue.length - notUploaded : this._queue.length;
+        const ratio = 100 / this._queue.length;
+        const current = value * ratio / 100;
         return Math.round(uploaded * ratio + current);
     }
 
     private _parseHeaders(headers: string): ParsedResponseHeaders {
-        let parsed: any = {};
+        const parsed: any = {};
         let key: any;
         let val: any;
         let i: any;
@@ -401,7 +406,7 @@ export class Uploader {
     }
 
     private _onProgressItem(item: FileItem, progress: any): void {
-        let total = this._getTotalProgress(progress);
+        const total = this._getTotalProgress(progress);
         this._progress = total;
         item._onProgress(progress);
     }
@@ -420,7 +425,7 @@ export class Uploader {
 
     _onCompleteItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): void {
         item._onComplete(response, status, headers);
-        let nextItem = this.getReadyItems[0];
+        const nextItem = this.getReadyItems[0];
         this._isUploading = false;
         if (nextItem) {
             nextItem.upload();

@@ -1,5 +1,5 @@
 import { Component, HostListener, ElementRef, HostBinding, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { LoadmoreConfig } from "./loadmore.config";
+import { LoadmoreConfig } from './loadmore.config';
 
 @Component({
     selector: 'weui-loadmore',
@@ -17,21 +17,21 @@ export class LoadmoreComponent {
 
     /**
      * 类型
-     * 
+     *
      * @type {('loading' | 'line' | 'dot')}
      */
     @Input() type: 'loading' | 'line' | 'dot' = 'loading';
 
     /**
      * 当type=='loading'时显示的文本
-     * 
+     *
      * @type {string}
      */
     @Input() loadingText: string = '正在加载';
 
     /**
      * 当type=='line'时显示的文本
-     * 
+     *
      * @type {string}
      */
     @Input() lineText: string = '暂无数据';

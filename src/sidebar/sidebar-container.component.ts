@@ -1,4 +1,4 @@
-import { Component, AfterContentInit, OnChanges, OnDestroy, SimpleChanges, ViewEncapsulation, ChangeDetectionStrategy, QueryList, ContentChildren, Input, Output, EventEmitter, ChangeDetectorRef, ElementRef, Inject } from '@angular/core';
+import { Component, AfterContentInit, OnChanges, OnDestroy, SimpleChanges, ViewEncapsulation, ChangeDetectionStrategy, QueryList, ContentChildren, Input, Output, EventEmitter, ChangeDetectorRef, ElementRef, Inject, OnInit } from '@angular/core';
 import { SidebarComponent } from './sidebar.component';
 
 /**
@@ -17,7 +17,7 @@ import { SidebarComponent } from './sidebar.component';
     styleUrls: [ './sidebar.scss' ],
     encapsulation: ViewEncapsulation.None
 })
-export class SidebarContainerComponent implements AfterContentInit, OnChanges, OnDestroy {
+export class SidebarContainerComponent implements AfterContentInit, OnChanges, OnInit, OnDestroy {
     @ContentChildren(SidebarComponent)
     _sidebars: QueryList<SidebarComponent>;
 
@@ -58,11 +58,6 @@ export class SidebarContainerComponent implements AfterContentInit, OnChanges, O
     }
 
     _getStyles(): CSSStyleDeclaration {
-        let left = 0,
-            right = 0,
-            top = 0,
-            bottom = 0;
-
         if (this._sidebars) {
             this._sidebars.forEach((sidebar: SidebarComponent) => {
                 if (!sidebar) { return; }
@@ -86,7 +81,7 @@ export class SidebarContainerComponent implements AfterContentInit, OnChanges, O
         }
 
         return {
-            margin: `${top}px ${right}px ${bottom}px ${left}px`
+            margin: `0px 0px 0px 0px`
         } as CSSStyleDeclaration;
     }
 

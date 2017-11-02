@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SkinType, ButtonType, InputType, InputData } from "../utils/types";
+import { SkinType, ButtonType, InputType, InputData } from '../utils/types';
 
 @Injectable()
 export class DialogConfig {

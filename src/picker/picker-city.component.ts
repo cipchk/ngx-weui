@@ -1,7 +1,7 @@
 import { Component, Input, Output, forwardRef, EventEmitter, OnDestroy, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PickerOptions } from './options';
-import { PickerComponent } from "./picker.component";
+import { PickerComponent } from './picker.component';
 
 /**
  * 城市选择器（并不包含城市数据，可以参考示例中的数据格式）
@@ -11,10 +11,10 @@ import { PickerComponent } from "./picker.component";
     template: `
     <weui-picker [placeholder]="placeholder"
         [groups]="_groups" [defaultSelect]="_selected" [disabled]="disabled" [options]="options"
-        (show)="_onShow()" 
-        (hide)="_onHide()" 
-        (change)="_onCityChange($event)" 
-        (groupChange)="_onCityGroupChange($event)" 
+        (show)="_onShow()"
+        (hide)="_onHide()"
+        (change)="_onCityChange($event)"
+        (groupChange)="_onCityGroupChange($event)"
         (cancel)="_onCityCancelChange()"></weui-picker>
     `,
     providers: [{
@@ -45,7 +45,7 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
     @Input() disabled: boolean;
     /**
      * 确认后回调当前选择数据（包括已选面板所有数据）
-     * 
+     *
      * `{ value: '10000', items: [ {}, {}, {} ] }`
      */
     @Output() change = new EventEmitter<any>();
@@ -67,7 +67,7 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
         let _selected = 0;
 
         if (Array.isArray(selected) && selected.length > 0) {
-            let _selectedClone = selected.slice(0);
+            const _selectedClone = selected.slice(0);
             _selected = _selectedClone.shift();
             selected = _selectedClone;
         }
@@ -78,9 +78,9 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
 
         newselected.push(_selected);
 
-        let item = data[_selected];
+        const item = data[_selected];
 
-        var _group = JSON.parse(JSON.stringify(data));
+        const _group = JSON.parse(JSON.stringify(data));
         _group.forEach((g: any) => {
             delete g[subKey];
             g.label = g[this.dataMap.label];
@@ -108,7 +108,7 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
         }
         newSelected.push(_selected);
 
-        let item = data[_selected];
+        const item = data[_selected];
         if (typeof item[subKey] !== 'undefined' && Array.isArray(item[subKey])) {
             return this.valueToSelect(item[subKey], subKey, ++dept, newSelected);
         } else {

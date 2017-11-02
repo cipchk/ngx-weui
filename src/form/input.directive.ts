@@ -1,5 +1,5 @@
-import { Directive, Input, Renderer, ElementRef, OnChanges, SimpleChanges, forwardRef } from '@angular/core';
-import { Validator, AbstractControl, Validators, NG_VALIDATORS, ValidatorFn, ValidationErrors } from "@angular/forms";
+import { Directive, Input, Renderer, ElementRef, OnInit, OnChanges, SimpleChanges, forwardRef } from '@angular/core';
+import { Validator, AbstractControl, Validators, NG_VALIDATORS, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { findParent, add, remove } from './../utils/dom';
 
 /**
@@ -13,7 +13,7 @@ import { findParent, add, remove } from './../utils/dom';
         multi: true
     }]
 })
-export class InputDirective implements OnChanges, Validator {
+export class InputDirective implements OnInit, OnChanges, Validator {
 
     private parentEl: any;
     private ftEl: any;
@@ -25,27 +25,27 @@ export class InputDirective implements OnChanges, Validator {
      * 文本框类型，**不等同于** <intpu type="text"> 的值
      * 因为 weui-input 属性只是内置格式校验的简洁写法而已。
      * 内置包括：number/digit(允许小数点)/qq/email/tel/mobile/idcard，如需要更为复杂的校验可以使用 weui-regex
-     * 
+     *
      * @type {string}
      */
     @Input('weui-input') inputType: string;
     /**
      * 格式校验正则表达式，优先级高于 [weui-input]。
-     * 
+     *
      * @type {(RegExp | string)}
      */
     @Input('weui-regex') inputRegex: RegExp | string;
 
     /**
      * 是否必填项，**等同于** <intpu required> 的值，当值必填时会有视觉效果
-     * 
+     *
      * @type {('info' | 'warn' | 'waiting')}
      */
     @Input('weui-required') required: 'info' | 'warn' | 'waiting' = 'warn';
-    
+
     /**
      * 是否自动清除内容中的空格
-     * 
+     *
      * @type {boolean}
      */
     @Input('weui-cleaner') cleaner: boolean = false;
@@ -124,14 +124,14 @@ export class InputDirective implements OnChanges, Validator {
 
     registerOnValidatorChange(fn: () => void): void { this._onChange = fn; }
     validate(c: AbstractControl): ValidationErrors | null {
-        let ret = this._validator(c);
+        const ret = this._validator(c);
         if (ret === null) {
             this.parentEl.classList.remove('weui-cell_warn');
             remove(this.ftEl, 'i');
         } else {
             remove(this.ftEl, 'i');
             this.parentEl.classList.add('weui-cell_warn');
-            let icon = `weui-icon-${ret.icon}`;
+            const icon = `weui-icon-${ret.icon}`;
             add(this.ftEl, '.' + icon, 'i', icon);
         }
         return ret;

@@ -2,7 +2,7 @@ import { Subscriber } from 'rxjs/Subscriber';
 import { Component, ViewChild, DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentFixture, TestBed, fakeAsync, tick, async, inject } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, async, inject, discardPeriodicTasks } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { SidebarModule, SidebarContainerComponent, SidebarComponent, CloseSidebarDirective } from '../sidebar';
@@ -28,17 +28,17 @@ describe('Component: Sidebar', () => {
             spyOn(context, '_closed');
             el = fixture.nativeElement;
             fixture.detectChanges();
-            tick();
+            tick(1000);
         }));
 
-        it('should default values', () => {
+        it('should default values', fakeAsync(() => {
             const sidebarEl = el.querySelector('.weui-sidebar') as HTMLElement;
             const classs = sidebarEl.classList;
             expect(classs).toContain('weui-sidebar__closed');
             expect(classs).toContain('weui-sidebar__left');
             expect(classs).toContain('weui-sidebar__slide');
             expect(sidebarEl.style.transform).toBe('translateX(-100%)');
-        });
+        }));
 
         it('should set mode="over"', () => {
             context.mode = 'over';
@@ -46,7 +46,7 @@ describe('Component: Sidebar', () => {
             expect(el.querySelector('.weui-sidebar').classList).toContain('weui-sidebar__over');
         });
 
-        for (let pos of ['left', 'right', 'top', 'bottom']) {
+        for (const pos of ['left', 'right', 'top', 'bottom']) {
             it(`should set position="${pos}"`, () => {
                 context.position = pos;
                 fixture.detectChanges();
@@ -64,6 +64,7 @@ describe('Component: Sidebar', () => {
         it('should be opened and status=true', fakeAsync(() => {
             context.status = true;
             fixture.detectChanges();
+            tick(1000);
             expect(context.sidebar.status).toBe(true);
             expect(el.querySelector('.weui-mask')).not.toBeNull();
         }));
@@ -73,12 +74,14 @@ describe('Component: Sidebar', () => {
             fixture.detectChanges();
             context.sidebar.close();
             fixture.detectChanges();
+            tick(1000);
             expect(context.sidebar.status).toBe(false);
         }));
 
         it('should emit opens event', fakeAsync(() => {
             context.status = true;
             fixture.detectChanges();
+            tick(1000);
             expect(context._openStart).toHaveBeenCalled();
         }));
 
@@ -87,6 +90,7 @@ describe('Component: Sidebar', () => {
             fixture.detectChanges();
             context.sidebar.close();
             fixture.detectChanges();
+            tick(1000);
             expect(context._closeStart).toHaveBeenCalled();
         }));
 

@@ -1,5 +1,5 @@
-import { Component, ViewEncapsulation, Input, OnChanges, SimpleChanges, EventEmitter, Output, HostListener, ElementRef } from '@angular/core';
-import { PTRConfig } from "./ptr.config";
+import { Component, ViewEncapsulation, Input, OnChanges, SimpleChanges, EventEmitter, Output, HostListener, ElementRef, OnInit } from '@angular/core';
+import { PTRConfig } from './ptr.config';
 
 @Component({
     selector: 'weui-ptr',
@@ -28,7 +28,7 @@ import { PTRConfig } from "./ptr.config";
     styleUrls: [ './ptr.scss' ],
     encapsulation: ViewEncapsulation.None
 })
-export class PTRComponent implements OnChanges {
+export class PTRComponent implements OnInit, OnChanges {
 
     private ogY: number = 0;
     private loading: boolean = false;

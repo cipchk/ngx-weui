@@ -1,16 +1,16 @@
+import { Component, forwardRef, OnDestroy, OnChanges, SimpleChanges, Input, EventEmitter, Output, ElementRef, OnInit } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import { PickerData } from './data';
-import { Component, forwardRef, OnDestroy, OnChanges, SimpleChanges, Input, EventEmitter, Output, ElementRef } from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PickerOptions } from './options';
 import { PickerConfig } from './picker.config';
 
 @Component({
     selector: 'weui-picker',
     template: `
-        <input type="text" class="weui-input" value="{{_text}}" placeholder="{{placeholder}}" 
-            readonly="readonly" (focus)="_onFocus($event)" 
+        <input type="text" class="weui-input" value="{{_text}}" placeholder="{{placeholder}}"
+            readonly="readonly" (focus)="_onFocus($event)"
             (click)="_onShow()" [disabled]="disabled" *ngIf="options.type==='form'">
         <div [hidden]="!_showP">
             <div class="weui-mask" (click)="_onHide(false)"
@@ -37,7 +37,7 @@ import { PickerConfig } from './picker.config';
         multi: true
     }]
 })
-export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChanges {
+export class PickerComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
 
     /** 配置项 */
     @Input() options: PickerOptions;
@@ -59,12 +59,12 @@ export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChang
      * 支持string[]单列数组，单纯只是为了方便
      */
     @Input() set groups(d: PickerData[][] | String[]) {
-        if (!d) throw new Error('无效数据源')
+        if (!d) throw new Error('无效数据源');
         if (d.length > 0) {
             if (typeof d[0] === 'string') {
                 d = [
                     (<string[]>d).map<PickerData>((v: string) => {
-                        return { label: v, value: v}
+                        return { label: v, value: v};
                     })
                 ];
             }
@@ -80,7 +80,7 @@ export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChang
     @Input() disabled: boolean = false;
     /**
      * 确认后回调当前选择数据（包括已选面板所有数据）
-     * 
+     *
      * `{ value: '10000', items: [ {}, {}, {} ] }`
      */
     @Output() change = new EventEmitter<any>();
@@ -131,7 +131,7 @@ export class PickerComponent implements ControlValueAccessor, OnDestroy, OnChang
     }
 
     private getSelecteItem() {
-        let res: any[] = [];
+        const res: any[] = [];
         this._groups.forEach((items: PickerData[], idx: number) => {
             const item = items[this._selected[idx]];
             res.push(item);

@@ -1,4 +1,4 @@
-import { Component, Input, Inject, HostBinding, ViewEncapsulation } from '@angular/core';
+import { Component, Input, Inject, HostBinding, ViewEncapsulation, OnDestroy, OnInit } from '@angular/core';
 import { AccordionComponent } from './accordion.component';
 
 @Component({
@@ -14,7 +14,7 @@ import { AccordionComponent } from './accordion.component';
     styleUrls: [ './accordion.scss' ],
     encapsulation: ViewEncapsulation.None
 })
-export class AccordionPanelComponent {
+export class AccordionPanelComponent implements OnInit, OnDestroy {
     /**
      * 是否禁止
      *

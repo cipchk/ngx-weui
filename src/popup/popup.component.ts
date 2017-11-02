@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, OnDestroy, Output, Input, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, ViewEncapsulation, OnDestroy, Output, Input, EventEmitter, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Observer } from 'rxjs/Observer';
 import { Observable } from 'rxjs/Observable';
@@ -30,7 +30,7 @@ import { PopupConfig } from './popup.config';
     styleUrls: [ './popup.scss' ],
     encapsulation: ViewEncapsulation.None
 })
-export class PopupComponent implements OnDestroy, OnChanges {
+export class PopupComponent implements OnInit, OnDestroy, OnChanges {
     /**
      * 配置项
      *

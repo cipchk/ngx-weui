@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { AccordionPanelComponent } from './accordion-panel.component';
-import { AccordionConfig } from "./accordion.config";
-import { AnimateType } from "../utils/types";
+import { AccordionConfig } from './accordion.config';
+import { AnimateType } from '../utils/types';
 
 @Component({
     selector: 'weui-accordion',

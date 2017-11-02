@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { Subject } from "rxjs/Subject";
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class LoaderService {
 
     private list: any = {};
-    
+
     load(paths: string | string[]): Promise<boolean> {
         return new Promise((resolve, reject) => {
-            let promises: Promise<any>[] = [];
+            const promises: Promise<any>[] = [];
 
             if (!Array.isArray(paths)) paths = [ paths ];
 
@@ -41,7 +41,7 @@ export class LoaderService {
 
             this.list[path] = true;
 
-            let node = document.createElement('script');
+            const node = document.createElement('script');
             node.type = 'text/javascript';
             node.src = path;
             node.charset = 'utf-8';
@@ -75,7 +75,7 @@ export class LoaderService {
 
             this.list[path] = true;
 
-            let node = document.createElement('link');
+            const node = document.createElement('link');
             node.rel = 'stylesheet';
             node.type = 'text/css';
             node.href = path;

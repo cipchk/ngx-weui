@@ -1,5 +1,4 @@
 import { Component, HostBinding, Input, Output, EventEmitter, OnDestroy, ViewEncapsulation } from '@angular/core';
-import { animate, state, style, transition, trigger } from '@angular/animations';
 import { ToastConfig } from './toast.config';
 
 @Component({
@@ -27,19 +26,19 @@ export class ToastComponent implements OnDestroy {
     }
     /**
      * 文本
-     * 
+     *
      * @type {string}
      */
     @Input() text: string;
     /**
      * icon图标Class名
-     * 
+     *
      * @type {string}
      */
     @Input() icon: string;
     /**
      * 显示时长后自动关闭（单位：ms），0 表示永久
-     * 
+     *
      * @type {number}
      * @default 2000
      */
@@ -52,7 +51,7 @@ export class ToastComponent implements OnDestroy {
     constructor(private DEF: ToastConfig) {
         this.type = 'success';
     }
-    
+
     _showd: boolean = false;
     private timer: any;
     /**
