@@ -44,5 +44,5 @@ module.exports = function linkInheritedDocs(readTypeScriptModules, tsParser) {
 
         return typeExpression ? checker.getTypeAtLocation(typeExpression) : null;
     }
-    
+
 };

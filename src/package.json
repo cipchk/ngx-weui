@@ -1,7 +1,3 @@
 {
-  "name": "ngx-weui",
-  "dependencies": {
-  },
-  "peerDependencies": {
-  }
+  "name": "ngx-weui"
 }

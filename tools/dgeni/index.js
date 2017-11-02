@@ -18,12 +18,12 @@ const templateDir = path.resolve(__dirname, './templates');
 const dgeniPackageDeps = [
     jsdocPackage,
     nunjucksPackage,
-    typescriptPackage,
+    typescriptPackage
 ];
 
 let apiDocsPackage = new DgeniPackage('ngx-weui-api-docs', dgeniPackageDeps)
 
-.processor(require('./processors/link-inherited-docs'))
+// .processor(require('./processors/link-inherited-docs'))
 
 // Processor that filters out symbols that should not be shown in the docs.
 .processor(require('./processors/docs-private-filter'))

@@ -1,9 +1,8 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Component, ViewEncapsulation, ViewChild, OnDestroy } from '@angular/core';
 
 import { SkinType, InputType } from 'ngx-weui';
-import { DialogService, DialogConfig, DialogComponent } from "ngx-weui/dialog";
-import { ToastService } from "ngx-weui/toast";
+import { DialogService, DialogConfig, DialogComponent } from 'ngx-weui/dialog';
+import { ToastService } from 'ngx-weui/toast';
 
 @Component({
     selector: 'example-dialog',
@@ -11,7 +10,7 @@ import { ToastService } from "ngx-weui/toast";
     styleUrls: ['./dialog.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class DemoDialogComponent {
+export class DemoDialogComponent implements OnDestroy {
 
     @ViewChild('ios') iosAS: DialogComponent;
     @ViewChild('android') androidAS: DialogComponent;
@@ -102,7 +101,7 @@ export class DemoDialogComponent {
     promptValue: any;
     promptTypes: string[] = ['text', 'email', 'url', 'range', 'textarea', 'select', 'radio', 'checkbox'];
     onShowPrompt(inputType: InputType, useSrv: boolean = false) {
-        let cog = Object.assign({}, this.DEFCONFIG, <DialogConfig>{
+        const cog = Object.assign({}, this.DEFCONFIG, <DialogConfig>{
             skin: 'auto',
             type: 'prompt',
             confirm: '确认',
