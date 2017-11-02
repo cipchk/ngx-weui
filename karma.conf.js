@@ -41,7 +41,9 @@ module.exports = function(config) {
             }
         },
         mime: { 'text/x-typescript': ['ts', 'tsx'] },
-        client: { captureConsole: true, clearContext: false }
+        client: { captureConsole: true, clearContext: false },
+        browserNoActivityTimeout: 60000,
+        captureTimeout: 60000
     };
 
     if (process.env.TRAVIS) {
