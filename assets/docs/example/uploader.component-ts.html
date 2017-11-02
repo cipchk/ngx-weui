@@ -1,6 +1,5 @@
 <span class="hljs-keyword">import</span> { Component, ViewEncapsulation, ViewChild, Input } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
-<span class="hljs-keyword">import</span> { UploaderOptions, FileItem, Uploader, UploaderHeaders } <span class="hljs-keyword">from</span> <span class="hljs-string">"ngx-weui"</span>;
-<span class="hljs-keyword">import</span> { Observable } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/Rx'</span>;
+<span class="hljs-keyword">import</span> { UploaderOptions, FileItem, Uploader, UploaderHeaders } <span class="hljs-keyword">from</span> <span class="hljs-string">'ngx-weui'</span>;
 
 <span class="hljs-meta">@Component</span>({
     selector: <span class="hljs-string">'example-uploader'</span>,
@@ -13,8 +12,8 @@
     上传组件，一般配合&lt;a class="link" href="#/example/gallery"&gt;组件Gallery&lt;/a&gt;来使用。`</span>;
 
     <span class="hljs-meta">@Input</span>() url: <span class="hljs-built_in">string</span> = <span class="hljs-string">'example'</span>;
-    
-    uploader:Uploader = <span class="hljs-keyword">new</span> Uploader(&lt;UploaderOptions&gt;{
+
+    uploader: Uploader = <span class="hljs-keyword">new</span> Uploader(&lt;UploaderOptions&gt;{
         url: <span class="hljs-string">'./upload.php'</span>,
         headers: [
             { name: <span class="hljs-string">'auth'</span>, value: <span class="hljs-string">'test'</span> }
@@ -22,7 +21,7 @@
         params: {
             a: <span class="hljs-number">1</span>,
             b: <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(),
-            c: <span class="hljs-string">"test"</span>,
+            c: <span class="hljs-string">'test'</span>,
             d: <span class="hljs-number">12.123</span>
         },
         <span class="hljs-comment">// 自定义transport</span>

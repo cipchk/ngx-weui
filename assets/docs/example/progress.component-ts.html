@@ -1,4 +1,6 @@
-<span class="hljs-keyword">import</span> { Observable, Subscription } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/Rx'</span>;
+<span class="hljs-keyword">import</span> { Subscription } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/Subscription'</span>;
+<span class="hljs-keyword">import</span> { Observable } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/Observable'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-string">'rxjs/add/observable/timer'</span>;
 <span class="hljs-keyword">import</span> { Component, ViewEncapsulation, OnDestroy } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
 
 <span class="hljs-meta">@Component</span>({
@@ -28,8 +30,8 @@
 
         <span class="hljs-keyword">this</span>.subscription = Observable.timer(<span class="hljs-number">0</span>, <span class="hljs-number">40</span>).subscribe(<span class="hljs-function">(<span class="hljs-params">res: <span class="hljs-built_in">any</span></span>) =&gt;</span> {
             <span class="hljs-keyword">let</span> endCount = <span class="hljs-number">0</span>;
-            <span class="hljs-built_in">Object</span>.keys(<span class="hljs-keyword">this</span>.res).forEach(<span class="hljs-function">(<span class="hljs-params">key:<span class="hljs-built_in">string</span></span>) =&gt;</span> {
-                <span class="hljs-keyword">let</span> item = <span class="hljs-keyword">this</span>.res[key];
+            <span class="hljs-built_in">Object</span>.keys(<span class="hljs-keyword">this</span>.res).forEach(<span class="hljs-function">(<span class="hljs-params">key: <span class="hljs-built_in">string</span></span>) =&gt;</span> {
+                <span class="hljs-keyword">const</span> item = <span class="hljs-keyword">this</span>.res[key];
                 <span class="hljs-keyword">if</span> (!item.doing) {
                     ++endCount;
                     <span class="hljs-keyword">return</span> ;
@@ -54,4 +56,4 @@
         <span class="hljs-keyword">this</span>.onCancelAll();
     }
 
-} 
+}

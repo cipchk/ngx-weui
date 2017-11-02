@@ -1,9 +1,8 @@
-<span class="hljs-keyword">import</span> { Component, ViewEncapsulation, ViewChild } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
-<span class="hljs-keyword">import</span> { Observable } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/Rx'</span>;
+<span class="hljs-keyword">import</span> { Component, ViewEncapsulation, ViewChild, OnDestroy } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
 
 <span class="hljs-keyword">import</span> { SkinType, InputType } <span class="hljs-keyword">from</span> <span class="hljs-string">'ngx-weui'</span>;
-<span class="hljs-keyword">import</span> { DialogService, DialogConfig, DialogComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">"ngx-weui/dialog"</span>;
-<span class="hljs-keyword">import</span> { ToastService } <span class="hljs-keyword">from</span> <span class="hljs-string">"ngx-weui/toast"</span>;
+<span class="hljs-keyword">import</span> { DialogService, DialogConfig, DialogComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'ngx-weui/dialog'</span>;
+<span class="hljs-keyword">import</span> { ToastService } <span class="hljs-keyword">from</span> <span class="hljs-string">'ngx-weui/toast'</span>;
 
 <span class="hljs-meta">@Component</span>({
     selector: <span class="hljs-string">'example-dialog'</span>,
@@ -11,7 +10,7 @@
     styleUrls: [<span class="hljs-string">'./dialog.component.scss'</span>],
     encapsulation: ViewEncapsulation.None
 })
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> DemoDialogComponent {
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> DemoDialogComponent <span class="hljs-keyword">implements</span> OnDestroy {
 
     <span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">'ios'</span>) iosAS: DialogComponent;
     <span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">'android'</span>) androidAS: DialogComponent;
@@ -102,7 +101,7 @@
     <span class="hljs-params">promptValue</span>: <span class="hljs-params">any</span>;
     <span class="hljs-params">promptTypes</span>: <span class="hljs-params">string</span>[] = ['<span class="hljs-params">text</span>', '<span class="hljs-params">email</span>', '<span class="hljs-params">url</span>', '<span class="hljs-params">range</span>', '<span class="hljs-params">textarea</span>', '<span class="hljs-params">select</span>', '<span class="hljs-params">radio</span>', '<span class="hljs-params">checkbox</span>'];
     <span class="hljs-params">onShowPrompt</span>(<span class="hljs-params">inputType: InputType, useSrv: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">false</span></span>) {
-        <span class="hljs-params">let</span> <span class="hljs-params">cog</span> = <span class="hljs-params">Object</span>.<span class="hljs-params">assign</span>(<span class="hljs-params">{}, <span class="hljs-keyword">this</span>.DEFCONFIG, &lt;DialogConfig&gt;{
+        <span class="hljs-params">const</span> <span class="hljs-params">cog</span> = <span class="hljs-params">Object</span>.<span class="hljs-params">assign</span>(<span class="hljs-params">{}, <span class="hljs-keyword">this</span>.DEFCONFIG, &lt;DialogConfig&gt;{
             skin: 'auto',
             <span class="hljs-keyword">type</span>: 'prompt',
             confirm: '确认',

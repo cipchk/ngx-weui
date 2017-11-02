@@ -1,6 +1,6 @@
+<span class="hljs-keyword">import</span> { Observable } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/Observable'</span>;
 <span class="hljs-keyword">import</span> { Component, ViewEncapsulation } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
-<span class="hljs-keyword">import</span> { TaobaoService } <span class="hljs-keyword">from</span> <span class="hljs-string">"./tb.service"</span>;
-<span class="hljs-keyword">import</span> { Observable } <span class="hljs-keyword">from</span> <span class="hljs-string">'rxjs/Rx'</span>;
+<span class="hljs-keyword">import</span> { TaobaoService } <span class="hljs-keyword">from</span> <span class="hljs-string">'./tb.service'</span>;
 
 <span class="hljs-meta">@Component</span>({
     selector: <span class="hljs-string">'example-searchbar'</span>,
@@ -21,14 +21,14 @@
     }
 
     onCancel() {
-        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onCancel'</span>)
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onCancel'</span>);
     }
 
     onClear() {
-        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onCancel'</span>)
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onCancel'</span>);
     }
 
     onSubmit(value: <span class="hljs-built_in">string</span>) {
         <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'onSubmit'</span>, value);
     }
-} 
+}
