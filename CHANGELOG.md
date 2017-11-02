@@ -1,3 +1,10 @@
+# 1.2.0
+
++ 支持Angular5
++ 修复 `infiniteloader` 组件可能引起丢帧问题，close #45
++ 优化API文档显示
++ 优化代码风格
+
 # 1.1.0
 
 - [增] `toast.service` 支持 `hide` 关闭最新方法 [#49](https://github.com/cipchk/ngx-weui/issues/49)
