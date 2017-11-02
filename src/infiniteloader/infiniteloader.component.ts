@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation, Input, OnChanges, SimpleChanges, EventEmitter, Output, HostListener, ElementRef, OnDestroy, NgZone, OnInit } from '@angular/core';
-
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/observable/fromEvent';
@@ -26,6 +25,11 @@ import { InfiniteLoaderConfig } from './infiniteloader.config';
     encapsulation: ViewEncapsulation.None
 })
 export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
+    private didScroll = false;
+    private scrollEvent: any = null;
+    private scrollTime: any = null;
+    private disposeScroller: Subscription;
+
     _loading: boolean = false;
     _finished: boolean = false;
 
@@ -62,9 +66,9 @@ export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
         this._finished = false;
     }
 
-    _onScroll($event: any) {
+    _onScroll() {
         if (this._loading || this._finished) return;
-        const target = $event.target;
+        const target = this.scrollEvent.target;
         const scrollPercent = Math.floor(((target.scrollTop + target.clientHeight) / target.scrollHeight) * 100);
 
         if (scrollPercent > this.config.percent) {
@@ -73,14 +77,21 @@ export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
         }
     }
 
-    private disposeScroller: Subscription;
     ngOnInit() {
         this.parseConfig();
+
+        this.scrollTime = setInterval(() => {
+            if (this.didScroll) {
+                this.didScroll = false;
+                this._onScroll();
+            }
+        }, this.config.throttle);
+
         this.disposeScroller = Observable
                             .fromEvent(this.el.nativeElement.querySelector('.weui-infiniteloader__content'), 'scroll')
-                            .throttleTime(this.config.throttle)
                             .subscribe(($event: any) => {
-                                this._onScroll($event);
+                                this.scrollEvent = $event;
+                                this.didScroll = true;
                             });
     }
 
@@ -89,6 +100,7 @@ export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        if (this.scrollTime) clearTimeout(this.scrollTime);
         if (this.disposeScroller) this.disposeScroller.unsubscribe();
     }
 
