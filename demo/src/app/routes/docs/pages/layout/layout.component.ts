@@ -1,6 +1,7 @@
 import { Router, ActivatedRoute, RoutesRecognized } from '@angular/router';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { MenuService } from '../../menu.service'
+import { MenuService } from '../../menu.service';
+import 'rxjs/add/operator/filter';
 
 @Component({
     selector: 'app-layout',
@@ -15,7 +16,7 @@ export class AppLayoutComponent {
 
     locale: string = 'en-US';
 
-    constructor(public menuService: MenuService, 
+    constructor(public menuService: MenuService,
         private route: ActivatedRoute,
         private router: Router) { }
 

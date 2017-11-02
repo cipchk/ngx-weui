@@ -1,5 +1,6 @@
-import { Observable } from 'rxjs/Rx';
 import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/timer';
 
 import { InfiniteLoaderComponent } from 'ngx-weui/infiniteloader';
 

@@ -1,7 +1,8 @@
-import { Observable } from 'rxjs/Rx';
-import { Http } from '@angular/http';
+import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { JWeiXinService } from 'ngx-weui/jweixin';
+import { HttpClient } from '@angular/common/http';
+import 'rxjs/add/operator/catch';
 
 declare const wx: any;
 
@@ -16,7 +17,7 @@ export class WXService {
         link: '',
         imgUrl: ''
     };
-    constructor(private wxService: JWeiXinService, private http: Http) { }
+    constructor(private wxService: JWeiXinService, private http: HttpClient) { }
 
     private share: any;
     config(shareData: any): Promise<boolean> {
@@ -43,17 +44,16 @@ export class WXService {
 
                 this.http
                     .get('/wx-config')
-                    .map(res => { return res.json(); })
                     .catch((error: Response | any) => {
                         reject('无法获取签名数据');
                         return Observable.throw('error');
                     })
-                    .subscribe((res) => {
-                        if (!res.success) {
+                    .subscribe((ret: any) => {
+                        if (!ret.success) {
                             reject('jsapi 获取失败');
                             return;
                         }
-                        wx.config(res);
+                        wx.config(ret);
                     });
             });
         });

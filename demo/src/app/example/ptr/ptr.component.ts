@@ -1,4 +1,5 @@
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/timer';
 import { Component, ViewEncapsulation, OnDestroy } from '@angular/core';
 
 import { PTRComponent } from 'ngx-weui/ptr';

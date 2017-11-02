@@ -1,5 +1,6 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { Observable, Subscriber } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/timer';
 
 @Component({
     selector: 'example-input',
@@ -29,11 +30,11 @@ export class InputComponent {
     }
 
     onAddCheckbox() {
-        this.checkbox.push(String.fromCharCode(65 + this.checkbox.length))
+        this.checkbox.push(String.fromCharCode(65 + this.checkbox.length));
     }
 
     onSendCode(): Observable<boolean> {
-        return Observable.timer(1000).map((v, i) => { return true; });
+        return Observable.timer(1000).map((v, i) => true);
     }
 
     onSave() {

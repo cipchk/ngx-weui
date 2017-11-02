@@ -1,6 +1,6 @@
+import { Observable } from 'rxjs/Observable';
 import { Component, ViewEncapsulation } from '@angular/core';
-import { TaobaoService } from "./tb.service";
-import { Observable } from 'rxjs/Rx';
+import { TaobaoService } from './tb.service';
 
 @Component({
     selector: 'example-searchbar',
@@ -21,14 +21,14 @@ export class DemoSearchBarComponent {
     }
 
     onCancel() {
-        console.log('onCancel')
+        console.log('onCancel');
     }
 
     onClear() {
-        console.log('onCancel')
+        console.log('onCancel');
     }
 
     onSubmit(value: string) {
         console.log('onSubmit', value);
     }
-} 
+}

@@ -1,6 +1,5 @@
 import { Component, ViewEncapsulation, ViewChild, Input } from '@angular/core';
-import { UploaderOptions, FileItem, Uploader, UploaderHeaders } from "ngx-weui";
-import { Observable } from 'rxjs/Rx';
+import { UploaderOptions, FileItem, Uploader, UploaderHeaders } from 'ngx-weui';
 
 @Component({
     selector: 'example-uploader',
@@ -13,8 +12,8 @@ export class DemoUploaderComponent {
     上传组件，一般配合<a class="link" href="#/example/gallery">组件Gallery</a>来使用。`;
 
     @Input() url: string = 'example';
-    
-    uploader:Uploader = new Uploader(<UploaderOptions>{
+
+    uploader: Uploader = new Uploader(<UploaderOptions>{
         url: './upload.php',
         headers: [
             { name: 'auth', value: 'test' }
@@ -22,7 +21,7 @@ export class DemoUploaderComponent {
         params: {
             a: 1,
             b: new Date(),
-            c: "test",
+            c: 'test',
             d: 12.123
         },
         // 自定义transport

@@ -1,7 +1,6 @@
-import { Observable, Subscriber } from 'rxjs/Rx';
 import { Component, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { PickerData, PickerOptions, PickerService } from 'ngx-weui/picker'
-import { DATA } from './cn'
+import { PickerData, PickerOptions, PickerService } from 'ngx-weui/picker';
+import { DATA } from './cn';
 
 @Component({
     selector: 'example-picker',
@@ -9,7 +8,7 @@ import { DATA } from './cn'
     styleUrls: ['./picker.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
-export class DemoPickerComponent {
+export class DemoPickerComponent implements OnDestroy {
     DT: any = {
         min: new Date(2015, 1, 5),
         max: new Date()
@@ -98,27 +97,27 @@ export class DemoPickerComponent {
     onShowBySrv(type: string) {
         switch (type) {
             case 'city':
-                this.srv.showCity(this.cityData).subscribe((res:any) => {
+                this.srv.showCity(this.cityData).subscribe((res: any) => {
                     this.srvRes = res.value;
                 });
                 break;
             case 'date':
-                this.srv.showDateTime(type).subscribe((res:any) => {
+                this.srv.showDateTime(type).subscribe((res: any) => {
                     this.srvRes = res.value;
                 });
                 break;
             case 'datetime':
-                this.srv.showDateTime(type).subscribe((res:any) => {
+                this.srv.showDateTime(type).subscribe((res: any) => {
                     this.srvRes = res.value;
                 });
                 break;
             case 'time':
-                this.srv.showDateTime(type).subscribe((res:any) => {
+                this.srv.showDateTime(type).subscribe((res: any) => {
                     this.srvRes = res.value;
                 });
                 break;
             case 'data':
-                this.srv.show(this.items, 'Item3').subscribe((res:any) => {
+                this.srv.show(this.items, 'Item3').subscribe((res: any) => {
                     this.srvRes = res.value;
                 });
                 break;

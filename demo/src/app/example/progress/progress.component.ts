@@ -1,4 +1,6 @@
-import { Observable, Subscription } from 'rxjs/Rx';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/timer';
 import { Component, ViewEncapsulation, OnDestroy } from '@angular/core';
 
 @Component({
@@ -28,8 +30,8 @@ export class DemoProgressComponent implements OnDestroy {
 
         this.subscription = Observable.timer(0, 40).subscribe((res: any) => {
             let endCount = 0;
-            Object.keys(this.res).forEach((key:string) => {
-                let item = this.res[key];
+            Object.keys(this.res).forEach((key: string) => {
+                const item = this.res[key];
                 if (!item.doing) {
                     ++endCount;
                     return ;
@@ -54,4 +56,4 @@ export class DemoProgressComponent implements OnDestroy {
         this.onCancelAll();
     }
 
-} 
+}

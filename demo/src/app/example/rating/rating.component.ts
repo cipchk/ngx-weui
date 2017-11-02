@@ -1,4 +1,3 @@
-import { Observable, Subscription } from 'rxjs/Rx';
 import { Component, ViewEncapsulation, OnDestroy } from '@angular/core';
 
 import { RatingComponent, RatingConfig } from 'ngx-weui/rating';

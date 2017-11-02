@@ -1,6 +1,7 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { Router, RoutesRecognized } from '@angular/router';
 import { MenuService } from '../../menu.service';
+import 'rxjs/add/operator/filter';
 
 @Component({
     selector: 'docs-nav',
@@ -8,10 +9,10 @@ import { MenuService } from '../../menu.service';
     styleUrls: [ './nav.component.scss' ],
     encapsulation: ViewEncapsulation.None
 })
-export class DocsNavComponent {
+export class DocsNavComponent implements OnInit {
 
     constructor(private router: Router, private menuService: MenuService) {}
-    
+
     navList: any[];
     private _data: any[];
     ngOnInit() {

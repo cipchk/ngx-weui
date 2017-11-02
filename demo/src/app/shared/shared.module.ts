@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { HttpModule, Http, JsonpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { WeUiModule, ButtonConfig } from 'ngx-weui';
 
@@ -10,14 +10,15 @@ import { CountdownModule } from 'ngx-countdown';
 import { NotifyModule } from 'ngx-notify';
 import { GesturePasswordModule } from 'ngx-gesture-password';
 import { AqmModule } from 'angular-qq-maps';
+import { JsonpModule } from '@angular/http';
 
 @NgModule({
     imports: [
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpModule, JsonpModule,
-
+        HttpClientModule,
+        JsonpModule,
         WeUiModule.forRoot(),
         CountdownModule,
         NotifyModule.forRoot({
@@ -39,7 +40,8 @@ import { AqmModule } from 'angular-qq-maps';
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        HttpModule, JsonpModule,
+        HttpClientModule,
+        JsonpModule,
         RouterModule,
 
         WeUiModule,

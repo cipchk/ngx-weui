@@ -1,5 +1,4 @@
 import { Component, ViewEncapsulation, ViewChild, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
 
 import { SkinType } from 'ngx-weui';
 import { ActionSheetService, ActionSheetConfig, ActionSheetComponent } from "ngx-weui/actionsheet";
