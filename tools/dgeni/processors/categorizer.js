@@ -138,7 +138,7 @@ function resolveMethods(classDoc) {
         methods = methods.concat(resolveMethods(classDoc.inheritedDoc));
     }
 
-    return methods;
+    return methods.filter(item => !item.name.startsWith('_'));
 }
 
 /** Function that walks through all inherited docs and collects public properties. */
@@ -149,7 +149,7 @@ function resolveProperties(classDoc) {
         properties = properties.concat(resolveProperties(classDoc.inheritedDoc));
     }
 
-    return properties;
+    return properties.filter(item => !item.name.startsWith('_'));
 }
 
 
