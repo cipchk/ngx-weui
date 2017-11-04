@@ -101,6 +101,11 @@
                     <span class="hljs-keyword">this</span>.srvRes = res.value;
                 });
                 <span class="hljs-keyword">break</span>;
+            <span class="hljs-keyword">case</span> <span class="hljs-string">'date-ym'</span>:
+                <span class="hljs-keyword">this</span>.srv.showDateTime(<span class="hljs-keyword">type</span>).subscribe(<span class="hljs-function">(<span class="hljs-params">res: <span class="hljs-built_in">any</span></span>) =&gt;</span> {
+                    <span class="hljs-keyword">this</span>.srvRes = res.value;
+                });
+                <span class="hljs-keyword">break</span>;
             <span class="hljs-keyword">case</span> <span class="hljs-string">'date'</span>:
                 <span class="hljs-keyword">this</span>.srv.showDateTime(<span class="hljs-keyword">type</span>).subscribe(<span class="hljs-function">(<span class="hljs-params">res: <span class="hljs-built_in">any</span></span>) =&gt;</span> {
                     <span class="hljs-keyword">this</span>.srvRes = res.value;
