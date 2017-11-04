@@ -1,7 +1,7 @@
 import { Injectable, ComponentFactoryResolver, ApplicationRef, Injector, Optional, EmbeddedViewRef, ComponentRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Observer } from 'rxjs/Observer';
-import { FORMAT_TYPE, DatePickerComponent } from './picker-date.component';
+import { FORMAT_TYPE, DatePickerComponent, DatePickerType } from './picker-date.component';
 import { BaseService } from '../utils/base.service';
 import { PickerData } from './data';
 import { PickerOptions } from './options';
@@ -82,7 +82,7 @@ export class PickerService extends BaseService {
     /**
      * 构建一个日期时间选择器并显示
      *
-     * @param {('date' | 'datetime' | 'time')} [type] 类型，date日期，datetime日期&时间（不包括秒），time时间（不包括秒）
+     * @param {DatePickerType} [type] 类型，date-ym年月，date日期，datetime日期&时间（不包括秒），time时间（不包括秒）
      * @param {FORMAT_TYPE} [format] 日期格式化代码，实际是采用 DatePipe，所有代码内容和它一样
      * @param {Date} [value] 默认显示日期
      * @param {Date} [min] 最小时间范围
@@ -90,12 +90,13 @@ export class PickerService extends BaseService {
      * @param {PickerOptions} [options] 配置项
      * @returns {Observable<any>} 务必订阅结果才会显示。
      */
-    showDateTime(type?: 'date' | 'datetime' | 'time', format?: FORMAT_TYPE,
+    showDateTime(type?: DatePickerType, format?: FORMAT_TYPE,
         value?: Date, min?: Date, max?: Date, options?: PickerOptions): Observable<any> {
         const componentRef = this.build(DatePickerComponent);
         // 通过Service打开的强制设置为 `default` 以免出现 `input`
         options = Object.assign({ }, options, { type: 'default' });
         componentRef.instance.options = options;
+        if (type) componentRef.instance.type = type;
         if (format) componentRef.instance.format = format;
         if (min) componentRef.instance.min = min;
         if (max) componentRef.instance.max = max;

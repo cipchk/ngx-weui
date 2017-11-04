@@ -101,6 +101,11 @@ export class DemoPickerComponent implements OnDestroy {
                     this.srvRes = res.value;
                 });
                 break;
+            case 'date-ym':
+                this.srv.showDateTime(type).subscribe((res: any) => {
+                    this.srvRes = res.value;
+                });
+                break;
             case 'date':
                 this.srv.showDateTime(type).subscribe((res: any) => {
                     this.srvRes = res.value;

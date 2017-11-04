@@ -13,6 +13,8 @@ export const FORMAT: any = {
     mu: '分'
 };
 
+export type DatePickerType = 'date-ym' | 'date' | 'datetime' | 'time';
+
 export type FORMAT_TYPE = string | { format: string, yu?: string, Mu?: string, du?: string, hu?: string, mu?: string };
 
 /**
@@ -62,11 +64,15 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnC
     @Input() max: Date;
 
     /**
-     * 类型，date日期，datetime日期&时间（不包括秒），time时间（不包括秒）
+     * 类型
+     * + `date-ym` 年月
+     * + `date` 日期
+     * + `datetime` 日期&时间（不包括秒）
+     * + `time` 时间（不包括秒）
      *
-     * @type {('date' | 'datetime' | 'time')}
+     * @type {DatePickerType}
      */
-    @Input() type: 'date' | 'datetime' | 'time' = 'date';
+    @Input() type: DatePickerType = 'date';
 
     private _format: any = Object.assign({}, FORMAT);
     /**
@@ -143,17 +149,19 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnC
         this._selected.push(_selected);
 
         // day
-        const cm = this._groups[1][_selected].value;
-        let startDay = 1, endDay = new Date(year, month, 0).getDate();
-        if (cy === startYear && cm === startMonth) startDay = this.min.getDate();
-        if (cy === endYear && cm === endMonth) endDay = this.max.getDate();
-        _selected = 0;
-        this._groups.push(Array(endDay - startDay + 1).fill(0).map((v: number, idx: number) => {
-            const _v = startDay + idx;
-            if (_v === day) _selected = idx;
-            return { label: _v + this._format.du, value: _v };
-        }));
-        this._selected.push(_selected);
+        if (this.type !== 'date-ym') {
+            const cm = this._groups[1][_selected].value;
+            let startDay = 1, endDay = new Date(year, month, 0).getDate();
+            if (cy === startYear && cm === startMonth) startDay = this.min.getDate();
+            if (cy === endYear && cm === endMonth) endDay = this.max.getDate();
+            _selected = 0;
+            this._groups.push(Array(endDay - startDay + 1).fill(0).map((v: number, idx: number) => {
+                const _v = startDay + idx;
+                if (_v === day) _selected = idx;
+                return { label: _v + this._format.du, value: _v };
+            }));
+            this._selected.push(_selected);
+        }
     }
 
     private genDateTimeGroups() {
@@ -188,7 +196,7 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnC
         const obj = {
             y: this._groups[0][this._selected[0]].value,
             M: this._groups[1][this._selected[1]].value - 1,
-            d: this._groups[2][this._selected[2]].value,
+            d: this.type !== 'date-ym' ? this._groups[2][this._selected[2]].value : 1,
             h: 0,
             m: 0,
             s: 0
@@ -211,6 +219,9 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnC
             f = this._format.format;
         else {
             switch (this.type) {
+                case 'date-ym':
+                    f = 'yyyy-MM';
+                    break;
                 case 'date':
                     f = 'yyyy-MM-dd';
                     break;

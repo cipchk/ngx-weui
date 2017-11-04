@@ -16,6 +16,18 @@
         <div class="weui-cells weui-cells_form">
             <div class="weui-cell">
                 <div class="weui-cell__hd">
+                    <label class="weui-label">YearMonth</label>
+                </div>
+                <div class="weui-cell__bd">
+                    <weui-date-picker placeholder="Pick a Year&Month"
+                        [min]="DT.min" [max]="DT.max" type="date-ym"
+                        [(ngModel)]="res.ym" name="date-ym"></weui-date-picker>
+                </div>
+            </div>
+        </div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd">
                     <label class="weui-label">Date</label>
                 </div>
                 <div class="weui-cell__bd">
@@ -80,6 +92,7 @@
     <p style="margin-bottom: 8px;">Service Result: {{srvRes | json}}</p>
     <div class="weui-btn-area">
         <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('city')">CityPicker</button>
+        <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('date-ym')">Year&MonthPicker</button>
         <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('date')">DatePicker</button>
         <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('datetime')">DateTimePicker</button>
         <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('time')">TimePicker</button>
