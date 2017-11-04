@@ -5,6 +5,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect, async, inject } from '@angular/core/testing';
 
 import { ActionSheetModule, ActionSheetComponent, ActionSheetConfig, ActionSheetService } from '../actionsheet';
+import { isAndroid } from '../utils/browser';
+import { By } from '@angular/platform-browser';
 
 const MENUS: any[] = [
     { text: 'menu1', value: 'value1', other: 1 },
@@ -64,6 +66,25 @@ describe('Component: ActionSheet', () => {
             expect(getAction(el)).not.toBeNull();
             expect(getItems(el).length).toBe(2);
         }));
+
+        it('should auto style', (done: () => void) => {
+            context.config = Object.assign(context.config, { skin: 'auto' });
+            fixture.detectChanges();
+            context
+                .actioinSheet
+                .show()
+                .subscribe(res => {
+                    fixture.detectChanges();
+                    console.log(el);
+                    if (isAndroid()) {
+                        expect((el as HTMLElement).querySelectorAll('.weui-skin_android').length).toBe(1);
+                    } else {
+                        expect(true).toBeTruthy();
+                    }
+                    done();
+                });
+            (<any>getItems(el)[0]).click();
+        });
 
         it('should be opened set actionsheet title', (done: () => void) => {
             context
@@ -151,6 +172,14 @@ describe('Component: ActionSheet', () => {
             el.querySelector('.weui-mask').click();
         });
 
+        it('should click backdrop not-allow closing', () => {
+            context.config = Object.assign(context.config, { backdrop: false });
+            context.actioinSheet.show();
+            fixture.detectChanges();
+            el.querySelector('.weui-mask').click();
+            expect(context.actioinSheet._shown).toBe(true);
+        });
+
     });
 
     describe('[service]', () => {
@@ -187,7 +216,9 @@ describe('Component: ActionSheet', () => {
                     expect(res.text).toBe('menu1');
                     expect(res.value).toBe('value1');
                     expect(res.other).toBe(1);
-                    done();
+                    setTimeout(() => {
+                        done();
+                    }, 500);
                 });
 
             fixture.detectChanges();

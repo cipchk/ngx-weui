@@ -11,10 +11,10 @@ export class SwipeDirective {
     private curX: number = 0;
     private opend: boolean = false;
     private swipeEl: any;
-    
+
     /**
      * 右边滑动宽度（单位：px）
-     * 
+     *
      * @type {number}
      * @default 68
      */
@@ -25,7 +25,7 @@ export class SwipeDirective {
     ngOnInit() {
         const el = this.el.nativeElement;
         this.swipeEl = el.querySelector('.weui-cell__bd');
-        if (!this.swipeEl) 
+        if (!this.swipeEl)
             this.width = 0;
         else {
             this.setPos(0);

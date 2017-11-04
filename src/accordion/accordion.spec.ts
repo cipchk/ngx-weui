@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
 import { AccordionModule } from './accordion.module';
 import { AccordionConfig } from './accordion.config';
 
 const html = `
   <weui-accordion [collapsible]="collapsible" [activeFirst]="false">
-    <weui-accordion-panel 
+    <weui-accordion-panel
         *ngFor="let item of panels; let index=index;"
         [disabled]="item.disabled"
         [active]="item.active">
@@ -14,6 +15,18 @@ const html = `
         <div class="content">{{item.content}}</div>
     </weui-accordion-panel>
   </weui-accordion>
+`;
+
+const htmlAutoActiveFirst = `
+<weui-accordion [collapsible]="collapsible" [activeFirst]="true">
+  <weui-accordion-panel
+      *ngFor="let item of panels; let index=index;"
+      [disabled]="item.disabled"
+      [active]="item.active">
+      <div class="heading" heading>{{item.title}}</div>
+      <div class="content">{{item.content}}</div>
+  </weui-accordion-panel>
+</weui-accordion>
 `;
 
 function getPanels(element: HTMLElement): Element[] {
@@ -39,18 +52,20 @@ function hasTitle(element: HTMLElement, str: string): boolean {
 
 describe('Component: Accordion', () => {
     let fixture: ComponentFixture<TestAccordionComponent>;
-    let context: any;
+    let context: TestAccordionComponent;
     let element: any;
+    let dl: DebugElement;
 
     beforeEach(() => {
-        TestBed.configureTestingModule({ 
-            declarations: [TestAccordionComponent], 
-            imports: [AccordionModule.forRoot()] 
+        TestBed.configureTestingModule({
+            declarations: [TestAccordionComponent],
+            imports: [AccordionModule.forRoot()]
         });
         TestBed.overrideComponent(TestAccordionComponent, { set: { template: html } });
         fixture = TestBed.createComponent(TestAccordionComponent);
         context = fixture.componentInstance;
         element = fixture.nativeElement;
+        dl = fixture.debugElement;
         fixture.detectChanges();
     });
 
@@ -63,7 +78,46 @@ describe('Component: Accordion', () => {
         fixture.detectChanges();
         expectOpenPanels(element, [true, false, false]);
     });
+
+    it('should toggle panel via click header', () => {
+        const panels = getPanels(element);
+        ((panels[1] as HTMLDivElement).querySelector('[role="tab"]') as HTMLDivElement).click();
+        fixture.detectChanges();
+        expectOpenPanels(element, [false, true, false]);
+    });
+
+    it('should collapsible=true', () => {
+        context.collapsible = true;
+        context.panels[0].active = true;
+        context.panels[1].active = true;
+        fixture.detectChanges();
+        expectOpenPanels(element, [true, true, false]);
+    });
+
 });
+
+describe('Component: Accordion: Auto', () => {
+    let fixture: ComponentFixture<TestAccordionComponent>;
+    let context: any;
+    let element: any;
+
+    beforeEach(() => {
+        TestBed.configureTestingModule({
+            declarations: [TestAccordionComponent],
+            imports: [AccordionModule.forRoot()]
+        });
+        TestBed.overrideComponent(TestAccordionComponent, { set: { template: htmlAutoActiveFirst } });
+        fixture = TestBed.createComponent(TestAccordionComponent);
+        context = fixture.componentInstance;
+        element = fixture.nativeElement;
+        fixture.detectChanges();
+    });
+
+    it('should have auto active first panel', () => {
+        expectOpenPanels(element, [true, false, false]);
+    });
+});
+
 
 
 @Component({ template: '' })

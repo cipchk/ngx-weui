@@ -28,7 +28,7 @@ import { Subscription } from 'rxjs/Subscription';
         transition('hide <=> show', [animate(200)])
     ])],
     host: {
-        '[hidden]': '!shown',
+        '[hidden]': '!_shown',
         '[class.weui-skin_android]': 'config.skin === "android"'
     }
 })
@@ -36,14 +36,14 @@ export class ActionSheetComponent implements OnDestroy {
 
     /**
      * 配置项
-     * 
+     *
      * @type {ActionSheetConfig}
      */
     @Input() config: ActionSheetConfig;
 
     /**
      * 菜单内容
-     * 
+     *
      * @type {Array}
      */
     @Input() menus: { text?: string, [key: string]: any }[];
@@ -53,7 +53,7 @@ export class ActionSheetComponent implements OnDestroy {
      */
     @Output() close = new EventEmitter();
 
-    private shown: boolean = false;
+    _shown: boolean = false;
     /**
      * 动画状态码
      */
@@ -69,7 +69,7 @@ export class ActionSheetComponent implements OnDestroy {
 
     /**
      * 显示，组件载入页面后并不会显示，显示调用 `show()` 并订阅结果。
-     * 
+     *
      * @returns {Observable<any>}
      */
     show(): Observable<any> {
@@ -80,7 +80,7 @@ export class ActionSheetComponent implements OnDestroy {
         if (this.config.skin === 'auto') {
             this.config.skin = isAndroid() ? 'android' : 'ios';
         }
-        this.shown = true;
+        this._shown = true;
         setTimeout(() => { this._shownAnt = true; }, 10);
         return Observable.create((observer: Observer<any>) => {
             this.observer = observer;
@@ -89,15 +89,15 @@ export class ActionSheetComponent implements OnDestroy {
 
     /**
      * 隐藏
-     * 
+     *
      * @param {boolean} [is_backdrop] 是否从背景上点击
      */
     hide(is_backdrop?: boolean) {
         if (is_backdrop === true && this.config.backdrop === false) return false;
-        
+
         this._shownAnt = false;
-        setTimeout(() => { 
-            this.shown = false; 
+        setTimeout(() => {
+            this._shown = false;
             this.close.emit();
         }, this.config.skin === 'android' ? 200 : 300);
     }

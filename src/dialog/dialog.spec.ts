@@ -6,6 +6,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect,
 import { By } from '@angular/platform-browser';
 
 import { DialogModule, DialogComponent, DialogConfig, DialogService } from '../dialog';
+import { isAndroid } from '../utils/browser';
 
 const CONFIG: DialogConfig = <DialogConfig>{
     title: 'title',
@@ -73,6 +74,17 @@ describe('Component: Dialog', () => {
             expect(getTitle(el).textContent).toBe(CONFIG.title);
             expect(getContent(el).textContent).toBe(CONFIG.content);
             expect(getActions(el).length).toBe(2);
+        });
+
+        it('should auto style', () => {
+            context.config = Object.assign({}, context.config, { skin: 'auto' });
+            context.dialog.show();
+            fixture.detectChanges();
+            if (isAndroid()) {
+                expect((el as HTMLElement).querySelectorAll('.weui-skin_android').length).toBe(1);
+            } else {
+                expect(true).toBeTruthy();
+            }
         });
 
         it('should be opened set dialog title', () => {
@@ -145,6 +157,125 @@ describe('Component: Dialog', () => {
             el.querySelector('.weui-mask').click();
         });
 
+        it('should click backdrop not-allow closing', () => {
+            context.config = Object.assign(context.config, { backdrop: false });
+            context.dialog.show().subscribe();
+            fixture.detectChanges();
+            el.querySelector('.weui-mask').click();
+            expect(context.dialog._shown).toBe(true);
+        });
+
+    });
+
+    describe('[prompt]', () => {
+        let fixture: ComponentFixture<TestDialogComponent>;
+        let context: TestDialogComponent;
+        let dl: DebugElement;
+        let el: any;
+
+        const html = `
+            <weui-dialog [config]="config"></weui-dialog>
+        `;
+
+        beforeEach(fakeAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestDialogComponent],
+                imports: [DialogModule.forRoot(), FormsModule, NoopAnimationsModule],
+                providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }]
+            });
+            TestBed.overrideComponent(TestDialogComponent, { set: { template: html } });
+            fixture = TestBed.createComponent(TestDialogComponent);
+            context = fixture.componentInstance;
+            dl = fixture.debugElement;
+            el = fixture.nativeElement;
+            fixture.detectChanges();
+            tick();
+        }));
+
+        const TYPES: any[] = [
+            { input: 'checkbox', inputValue: 'durex',
+                inputOptions: [
+                    { text: '请选择', value: 'choose' },
+                    { text: '杜蕾斯', value: 'durex', other: 1 },
+                    { text: '杰士邦', value: 'jissbon' },
+                    { text: '多乐士', value: 'donless' },
+                    { text: '处男', value: 'first' }
+                ]
+            },
+            { input: 'email', inputValue: 'cipchk@qq.com', result: 'asdf@qq.com', inputRequired: true },
+            { input: 'url', inputValue: 'https://cipchk.github.io/ngx-weui/' }
+        ];
+        for (const item of TYPES) {
+            it(`should be return ${item.input}`, (done: () => void) => {
+                context.config = Object.assign({}, CONFIG, item, { type: 'prompt'});
+                context.dialog.show().subscribe(res => {
+                    if (Array.isArray(res.result))
+                        res.result = res.result[0];
+                    expect(res.result).toBe(item.result || item.inputValue);
+                    done();
+                });
+                fixture.detectChanges();
+                if (item.result) {
+                    context.dialog._promptData = item.result;
+                    context.dialog._chanage();
+                    fixture.detectChanges();
+                }
+                expect(dl.queryAll(By.css('.weui-dialog__prompt')).length).toBe(1);
+                (<any>getActions(el)[1]).click();
+            });
+        }
+
+        it('should be regex error in text', () => {
+            const ERROR = '格式不正确';
+            context.config = Object.assign({}, CONFIG, TYPES[0], {
+                type: 'prompt',
+                inputRequired: true,
+                inputValue: '123',
+                inputRegex: /^[a-z]+$/,
+                inputError: ERROR
+            });
+            console.log(context.config);
+            context.dialog.show().subscribe();
+            fixture.detectChanges();
+            expect(dl.queryAll(By.css('.weui-dialog__prompt')).length).toBe(1);
+            (<any>getActions(el)[1]).click();
+            fixture.detectChanges();
+            const errorEl = dl.queryAll(By.css('.weui-dialog__error'));
+            expect(errorEl.length).toBe(1);
+            expect((errorEl[0].nativeElement as HTMLDivElement).textContent).toBe(ERROR);
+        });
+
+        it('should be required in checkbox', () => {
+            const ERROR = '必填';
+            context.config = Object.assign({}, CONFIG, TYPES[0], {
+                type: 'prompt',
+                inputRequired: true,
+                inputValue: undefined,
+                inputError: ERROR
+            });
+            console.log(context.config);
+            context.dialog.show().subscribe();
+            fixture.detectChanges();
+            expect(dl.queryAll(By.css('.weui-dialog__prompt')).length).toBe(1);
+            (<any>getActions(el)[1]).click();
+            fixture.detectChanges();
+            const errorEl = dl.queryAll(By.css('.weui-dialog__error'));
+            expect(errorEl.length).toBe(1);
+            expect((errorEl[0].nativeElement as HTMLDivElement).textContent).toBe(ERROR);
+        });
+
+        it('should be auto focus and enter return', fakeAsync(() => {
+            const VALUE = 'cipchk@qq.com';
+            context.config = Object.assign({}, CONFIG, { type: 'prompt', input: 'email', inputValue: VALUE });
+            context.dialog.show().subscribe(res => {
+                expect(res.result).toBe(VALUE);
+            });
+            fixture.detectChanges();
+            tick(300);
+            // spy
+            context.dialog._keyup(<any>{ keyCode: 13 });
+            fixture.detectChanges();
+        }));
     });
 
     describe('[service]', () => {
