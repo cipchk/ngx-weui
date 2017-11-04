@@ -1,10 +1,13 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/platform-browser';
 import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class LoaderService {
 
     private list: any = {};
+
+    constructor(@Inject(DOCUMENT) private doc: any) {}
 
     load(paths: string | string[]): Promise<boolean> {
         return new Promise((resolve, reject) => {
@@ -41,7 +44,7 @@ export class LoaderService {
 
             this.list[path] = true;
 
-            const node = document.createElement('script');
+            const node = this.doc.createElement('script');
             node.type = 'text/javascript';
             node.src = path;
             node.charset = 'utf-8';
@@ -58,7 +61,7 @@ export class LoaderService {
                 loaded: false,
                 status: 'Loaded'
             });
-            document.getElementsByTagName('head')[0].appendChild(node);
+            this.doc.getElementsByTagName('head')[0].appendChild(node);
         });
     }
 
@@ -75,11 +78,11 @@ export class LoaderService {
 
             this.list[path] = true;
 
-            const node = document.createElement('link');
+            const node = this.doc.createElement('link');
             node.rel = 'stylesheet';
             node.type = 'text/css';
             node.href = path;
-            document.getElementsByTagName('head')[0].appendChild(node);
+            this.doc.getElementsByTagName('head')[0].appendChild(node);
             resolve(<any>{
                 path: path,
                 loaded: true,

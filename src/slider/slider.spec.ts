@@ -8,7 +8,33 @@ import { By } from '@angular/platform-browser';
 import { SliderModule } from './slider.module';
 import { SliderDirective } from './slider';
 
-const MIN = 1, MAX = 100, STEP = 1, VALUE = 0, REALVALUE = 1;
+const CONTAINER_WIDTH = 500, MIN = 1, MAX = 100, STEP = 1, VALUE = 0, REALVALUE = 1;
+
+function spyTouchArgument(val: number) {
+    return {
+        touches: [ { pageX: val, identifier: 1 } ],
+        targetTouches: [ { pageX: val, identifier: 1 } ],
+        preventDefault: function() {}
+    };
+}
+
+const html = `
+<div style="width: ${CONTAINER_WIDTH}px; height: 100px; display: block; overflow: hidden;" [(ngModel)]="val" name="val"
+weui-slider [weui-min]="min" [weui-max]="max" [weui-step]="step"
+[weui-enabled]="enabled"
+(weui-change)="_change()">
+<div class="weui-slider">
+    <div class="weui-slider__inner">
+        <div class="weui-slider__track"></div>
+        <div class="weui-slider__handler"></div>
+    </div>
+</div>
+<div class="weui-slider-box__value">{{val}}</div>
+</div>`;
+const htmlInValid = `<div class="weui-slider-box" [(ngModel)]="val" name="val"
+weui-slider [weui-min]="min" [weui-max]="max" [weui-step]="step"
+[weui-enabled]="enabled"
+(weui-change)="_change()"></div>`;
 
 describe('Component: Slider', () => {
     let fixture: ComponentFixture<TestSliderComponent>;
@@ -16,13 +42,14 @@ describe('Component: Slider', () => {
     let el: HTMLElement;
     let directive: SliderDirective;
 
-    describe('[basic]', () => {
+    describe('[default]', () => {
 
         beforeEach(fakeAsync(() => {
             TestBed.configureTestingModule({
                 declarations: [TestSliderComponent],
                 imports: [SliderModule.forRoot(), FormsModule, NoopAnimationsModule]
             });
+            TestBed.overrideComponent(TestSliderComponent, { set: { template: html } });
             fixture = TestBed.createComponent(TestSliderComponent);
             context = fixture.componentInstance;
             spyOn(context, '_change');
@@ -53,45 +80,57 @@ describe('Component: Slider', () => {
             const val = 10;
             context.val = val;
             fixture.detectChanges();
+            tick(10);
 
             expect(el.querySelector('.weui-slider-box__value').textContent).toBe('' + val);
-            tick(100);
             expect(context._change).toHaveBeenCalled();
         }));
 
-        // 当赋值超出最大或最小值时，不做修饰
-        // it('should exceed minimum return min value', () => {
-        //     context.val = -VALUE;
-        //     fixture.detectChanges();
-        //     expect(context.val).toBe(MIN);
-        // });
+        it('should exceed minimum return min value', fakeAsync(() => {
+            context.val = -10;
+            fixture.detectChanges();
+            tick(10);
 
-        // it('should exceed maximum return max value', () => {
-        //     context.val = VALUE + 1000;
-        //     fixture.detectChanges();
-        //     expect(context.val).toBe(MAX);
-        // });
+            expect(context.val).toBe(MIN);
+            expect(context._change).toHaveBeenCalled();
+        }));
+
+        it('should exceed maximum return max value', fakeAsync(() => {
+            context.val = 110;
+            fixture.detectChanges();
+            tick(10);
+
+            expect(context.val).toBe(MAX);
+            expect(context._change).toHaveBeenCalled();
+        }));
+
+        it('should be new value via touch', fakeAsync(() => {
+            const moveSize = 1;
+            const result = Math.ceil((moveSize / CONTAINER_WIDTH) * 100);
+            directive.onTouchStart(spyTouchArgument(0));
+            directive.onTouchMove(spyTouchArgument(moveSize));
+            fixture.detectChanges();
+            tick(10);
+            expect(context.val).toBe(result);
+            expect(context._change).toHaveBeenCalled();
+        }));
 
     });
 
+    it('should be throw error if invalid html', fakeAsync(() => {
+        expect(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestSliderComponent],
+                imports: [SliderModule.forRoot(), FormsModule, NoopAnimationsModule]
+            });
+            TestBed.overrideComponent(TestSliderComponent, { set: { template: htmlInValid } });
+            TestBed.createComponent(TestSliderComponent).detectChanges();
+        }).toThrowError();
+    }));
+
 });
 
-@Component({
-    template: `
-    <div class="weui-slider-box" [(ngModel)]="val" name="val"
-        weui-slider [weui-min]="min" [weui-max]="max" [weui-step]="step"
-        [weui-enabled]="enabled"
-        (weui-change)="_change()">
-        <div class="weui-slider">
-            <div class="weui-slider__inner">
-                <div class="weui-slider__track"></div>
-                <div class="weui-slider__handler"></div>
-            </div>
-        </div>
-        <div class="weui-slider-box__value">{{val}}</div>
-    </div>
-    `
-})
+@Component({ template: `` })
 class TestSliderComponent {
 
     val: number = VALUE;

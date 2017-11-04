@@ -21,6 +21,7 @@ describe('Component: Progress', () => {
         });
         fixture = TestBed.createComponent(TestProgressComponent);
         context = fixture.componentInstance;
+        spyOn(context, 'cancel');
         fixture.detectChanges();
         comp = fixture.debugElement.query(By.css('weui-progress')).componentInstance as ProgressComponent;
         barEl = fixture.debugElement.query(By.css('.weui-progress__inner-bar')).nativeElement as HTMLElement;
@@ -54,7 +55,15 @@ describe('Component: Progress', () => {
         expect(barEl.style.width).toBe('99%');
     });
 
+    it('should be cancel', () => {
+        (fixture.debugElement.query(By.css('.weui-progress__opr')).nativeElement as HTMLLinkElement).click();
+        fixture.detectChanges();
+        expect(context.cancel).toHaveBeenCalled();
+    });
+
 });
 
-@Component({ template: `<weui-progress></weui-progress>` })
-class TestProgressComponent { }
+@Component({ template: `<weui-progress (cancel)="cancel()"></weui-progress>` })
+class TestProgressComponent {
+    cancel() {}
+}

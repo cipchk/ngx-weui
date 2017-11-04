@@ -8,7 +8,7 @@ import { isImage, genImageUrl } from '../utils/browser';
 export class FileThumbDirective implements OnChanges {
     /**
      * 文件对象，必填项
-     * 
+     *
      * @type {File}
      */
     @Input('weui-thumb') file: File;

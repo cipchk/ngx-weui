@@ -4,17 +4,29 @@ import { By } from '@angular/platform-browser';
 
 import { JWeiXinModule } from './jweixin.module';
 import { JWeiXinService } from './jweixin.service';
+import { LoaderService } from '../utils/loader.service';
+
+class MockLoaderService {
+    loadScript() {
+        return new Promise((resolve, reject) => {
+            resolve({ loaded: true });
+        });
+    }
+}
 
 describe('jweixin: JWeiXinService', () => {
     let fixture: ComponentFixture<EmptyTestComponent>;
     let el: HTMLElement;
+    let service: JWeiXinService;
 
     beforeEach(() => {
 
         TestBed.configureTestingModule({
             declarations: [EmptyTestComponent],
             imports: [JWeiXinModule.forRoot()],
-            providers: [JWeiXinService, { provide: ComponentFixtureAutoDetect, useValue: true }]
+            providers: [
+                JWeiXinService,
+                { provide: LoaderService, useClass: MockLoaderService }]
         });
 
         fixture = TestBed.createComponent(EmptyTestComponent);
@@ -22,22 +34,16 @@ describe('jweixin: JWeiXinService', () => {
         fixture.detectChanges();
     });
 
-    it('should create the default script URL', inject([JWeiXinService], (loader: JWeiXinService) => {
-        expect(true).toBe(true);
-        // const DEFAULTURL = '//res.wx.qq.com/open/js/jweixin-1.2.0.js';
-        // loader.get();
-        // let testNode: HTMLScriptElement = null;
-        // document.querySelectorAll('script').forEach(node => {
-        //     if (~node.src.indexOf(DEFAULTURL))
-        //         testNode = node;
-        // });
-
-        // expect(testNode).not.toBeNull();
-        // expect(testNode.type).toEqual('text/javascript');
-        // expect(testNode.async).toEqual(true);
-        // expect(testNode.defer).toEqual(true);
-        // expect(testNode.src).toContain(DEFAULTURL);
+    beforeEach(inject([JWeiXinService], (loader: JWeiXinService) => {
+        service = loader;
     }));
+
+    it('#get', (done: () => void) => {
+        service.get().then(status => {
+            expect(status).toBe(true);
+            done();
+        });
+    });
 
 });
 

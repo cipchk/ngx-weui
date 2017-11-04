@@ -16,7 +16,7 @@ import { PTRConfig } from './ptr.config';
                         'transform': 'rotate(' + -(_pullPercent !== 100 ? _pullPercent * 1.8 : 0) + 'deg)',
                         'color': _pullPercent !== 100 ? '#5f5f5f' : '#1AAD19'
                     }"></span>
-                <p *ngIf="_lastLabel">{{_lastLabel}}</p>
+                <p *ngIf="_lastLabel" class="weui-ptr__label">{{_lastLabel}}</p>
             </div>
             <ng-content select="[loader]"></ng-content>
         </div>

@@ -5,12 +5,11 @@ import { RatingConfig } from './rating.config';
 @Component({
     selector: 'weui-rating',
     template: `
-        <span class="weui-rating__container{{_class ? ' ' + _class : ''}}" (mouseleave)="_reset()" (keydown)="onKeydown($event)" tabindex="0"
+        <span class="weui-rating__container{{_class ? ' ' + _class : ''}}" tabindex="0"
             role="slider" aria-valuemin="0" [attr.aria-valuemax]="_range.length" [attr.aria-valuenow]="_value">
             <ng-template ngFor let-r [ngForOf]="_range" let-index="index">
                 <span class="sr-only">({{ index < _value ? '*' : ' ' }})</span>
-                <i (mouseenter)="_enter(index + 1)" (click)="_rate(index + 1)"
-                    [ngClass]="index < _value ? r.on : r.off" [title]="r.title" ></i>
+                <i (click)="_rate(index + 1)" [ngClass]="index < _value ? r.on : r.off" [title]="r.title" ></i>
             </ng-template>
         </span>
     `,
@@ -57,29 +56,6 @@ export class RatingComponent implements ControlValueAccessor, OnChanges {
         if (changes.config) {
             this._setConfig(changes.config.currentValue);
         }
-    }
-
-    @HostListener('keydown', ['$event'])
-    onKeydown(event: any): void {
-        if ([37, 38, 39, 40].indexOf(event.which) === -1) {
-            return;
-        }
-
-        event.preventDefault();
-        event.stopPropagation();
-        const sign = event.which === 38 || event.which === 39 ? 1 : -1;
-        this._rate(this._value + sign);
-    }
-
-    _enter(value: number): void {
-        if (!this.readonly) {
-            this._value = value;
-        }
-    }
-
-    _reset(): void {
-        this._value = this._preValue;
-        this.selected.emit(this._value);
     }
 
     _rate(value: number): void {

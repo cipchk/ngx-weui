@@ -93,6 +93,7 @@ export class SidebarContainerComponent implements AfterContentInit, OnChanges, O
                 sidebar.close();
             }
         });
+        return false;
     }
 
     private _subscribe() {

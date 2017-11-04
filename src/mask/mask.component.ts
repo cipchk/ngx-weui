@@ -47,8 +47,6 @@ export class MaskComponent implements OnDestroy {
 
         this._shown = false;
         this.close.emit();
-        setTimeout(() => {
-        }, 300);
     }
 
     ngOnDestroy(): void {

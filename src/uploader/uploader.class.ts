@@ -109,6 +109,10 @@ export class Uploader {
         if (this._options.size !== -1)
             this._options.filters.unshift({ name: 'fileSize', fn: this._fileSizeFilter });
 
+        // 类型
+        if (this._options.types)
+            this._options.filters.unshift({ name: 'fileType', fn: this._fileTypeFilter });
+
         // mime类型
         if (this._options.mimes)
             this._options.filters.unshift({ name: 'mimeType', fn: this._mimeTypeFilter });
@@ -176,9 +180,9 @@ export class Uploader {
     /**
      * 将文件放入队列中
      *
-     * @param {File[]} files
-     * @param {UploaderOptions} [options]
-     * @param {(FilterFunction[] | string)} [filters]
+     * @param {File[]} files 文件列表
+     * @param {UploaderOptions} [options] 强制重新指定新 `options` 内容
+     * @param {(FilterFunction[] | string)} [filters] 强制重新指定新 `filters` 内容
      */
     addToQueue(files: File[], options?: UploaderOptions, filters?: FilterFunction[] | string) {
         const list: File[] = [];

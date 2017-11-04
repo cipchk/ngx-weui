@@ -6,7 +6,14 @@ import { By } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { Subscriber } from 'rxjs/Subscriber';
 
-import { PTRModule, PTRComponent } from '../ptr';
+import { PTRModule, PTRComponent, PTRConfig } from '../ptr';
+
+function spyTouchArgument(val: number) {
+    return {
+        targetTouches: [ { pageY: val, identifier: 1 } ],
+        preventDefault: function() {}
+    };
+}
 
 describe('Component: PTR', () => {
 
@@ -30,16 +37,60 @@ describe('Component: PTR', () => {
         tick();
     }));
 
-    it('should correctly initialize and attach to DOM', () => { 
+    it('should correctly initialize and attach to DOM', () => {
         expect(el.querySelector('.weui-ptr__loader')).not.toBeNull();
         expect(el.querySelector('.weui-ptr__content')).not.toBeNull();
         expect(el.querySelectorAll('.weui-cell_access').length).toBe(context.items.length);
     });
 
+    it('should be set last updated labled', () => {
+        const labelText = 'test';
+        comp.setLastUpdatedLabel(labelText);
+        fixture.detectChanges();
+        expect(el.querySelector('.weui-ptr__label').textContent).toBe(labelText);
+    });
+
+    it('should be set finished', fakeAsync(() => {
+        const labelText = 'test';
+        comp.setFinished(labelText);
+        fixture.detectChanges();
+        tick(500);
+        expect(comp._animating).toBe(false);
+        fixture.detectChanges();
+        expect(el.querySelector('.weui-ptr__label').textContent).toBe(labelText);
+    }));
+
+    it('should be re-setting config', () => {
+        expect(comp.config.height).toBe(100);
+        context.config = { height: 110 };
+        fixture.detectChanges();
+        expect(comp.config.height).toBe(110);
+    });
+
+    it('should be open', () => {
+        comp.onTouchStart(spyTouchArgument(0));
+        comp.onTouchMove(spyTouchArgument(80));
+        fixture.detectChanges();
+        comp.onTouchEnd(spyTouchArgument(80));
+        fixture.detectChanges();
+        expect(context.onScroll).toHaveBeenCalled();
+        expect(context.onRefresh).toHaveBeenCalled();
+    });
+
+    it('should be no-allow open in less than treshold', () => {
+        comp.onTouchStart(spyTouchArgument(0));
+        comp.onTouchMove(spyTouchArgument(50));
+        fixture.detectChanges();
+        comp.onTouchEnd(spyTouchArgument(50));
+        fixture.detectChanges();
+        expect(context.onScroll).toHaveBeenCalled();
+        expect(context.onRefresh).not.toHaveBeenCalled();
+    });
+
 });
 
 @Component({ template: `
-<weui-ptr (scroll)="onScroll($event)" (refresh)="onRefresh($event)" style="height: 200px; background: rgb(255, 255, 255);">
+<weui-ptr (scroll)="onScroll($event)" [config]="config" (refresh)="onRefresh($event)" style="height: 200px; background: rgb(255, 255, 255);">
     <div class="weui-cells__title">List with link</div>
     <div class="weui-cells">
         <a *ngFor="let i of items" class="weui-cell weui-cell_access" href="javascript:;">
@@ -50,6 +101,10 @@ describe('Component: PTR', () => {
 </weui-ptr>
 ` })
 class TestPTRComponent {
+
+    config: PTRConfig = {
+        height: 100
+    };
 
     items: any[] = Array(6).fill({}).map((v: any, idx: number) => {
         return `${idx}:${Math.random()}`;

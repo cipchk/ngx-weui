@@ -3,13 +3,6 @@ import { ɵgetDOM as getDOM } from '@angular/platform-browser';
 declare const window: any;
 
 /**
- * 检查是否浏览器
- */
-export function isBrowser(): boolean {
-    return typeof window !== 'undefined';
-}
-
-/**
  * 检查是否安卓系统
  */
 export function isAndroid() {

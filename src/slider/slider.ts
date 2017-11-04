@@ -21,8 +21,8 @@ export class SliderDirective implements ControlValueAccessor, OnInit, OnDestroy,
     private isInit: boolean = false;
     private trackEl: any;
     private handlerEl: any;
-    private onStart: any;
-    private onMove: any;
+    onTouchStart: any;
+    onTouchMove: any;
 
     /**
      * 允许的最小值
@@ -69,15 +69,15 @@ export class SliderDirective implements ControlValueAccessor, OnInit, OnDestroy,
         if (this.trackEl === null || this.handlerEl === null)
             throw new Error('失效DOM结构');
 
-        this.onStart = this._onStart.bind(this);
-        this.onMove = this._onMove.bind(this);
-        this.handlerEl.addEventListener('touchstart', this.onStart, false);
-        this.handlerEl.addEventListener('touchmove', this.onMove, false);
+        this.onTouchStart = this.startHandle.bind(this);
+        this.onTouchMove = this.moveHandle.bind(this);
+        this.handlerEl.addEventListener('touchstart', this.onTouchStart, false);
+        this.handlerEl.addEventListener('touchmove', this.onTouchMove, false);
     }
 
     ngOnDestroy(): void {
-        this.handlerEl.removeEventListener('touchstart', this.onStart, false);
-        this.handlerEl.removeEventListener('touchmove', this.onMove, false);
+        this.handlerEl.removeEventListener('touchstart', this.onTouchStart, false);
+        this.handlerEl.removeEventListener('touchmove', this.onTouchMove, false);
     }
 
     private refresh() {
@@ -110,13 +110,13 @@ export class SliderDirective implements ControlValueAccessor, OnInit, OnDestroy,
         this.handlerEl.style.left = this._state.percentage[0] + '%';
     }
 
-    private _onStart($event: any) {
+    private startHandle($event: any) {
         if (this._state === null) this.refresh();
 
         this._state.x = ($event.touches[0] || $event.changedTouches[0]).pageX;
     }
 
-    private _onMove($event: any) {
+    private moveHandle($event: any) {
         if (!this._state.enabled) return false;
 
         const pageX = ($event.touches[0] || $event.changedTouches[0]).pageX;
