@@ -30,7 +30,7 @@ describe('Component: Button', () => {
     }));
 
     it('should be inited', () => {
-        expect(dl.queryAll(By.css('.weui-mask')).length).toBe(1);
+        expect(fixture).not.toBeUndefined();
     });
 
     it('should closed via backdrop', fakeAsync(() => {
