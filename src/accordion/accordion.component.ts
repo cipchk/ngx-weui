@@ -50,8 +50,7 @@ export class AccordionComponent {
     }
 
     _remove(item: AccordionPanelComponent) {
-        const idx = this.panels.indexOf(item);
-        if (idx !== -1) this.panels.splice(idx, 1);
+        this.panels.splice(this.panels.indexOf(item), 1);
     }
 
     _index(item: AccordionPanelComponent) {

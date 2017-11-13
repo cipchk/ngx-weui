@@ -13,7 +13,7 @@ import { add, remove } from './../utils/dom';
 export class TextareaDirective implements OnInit, OnChanges {
 
     /**
-     * 最大长度
+     * 最大长度，0表示不受限
      *
      * @type {number}
      */
@@ -33,8 +33,7 @@ export class TextareaDirective implements OnInit, OnChanges {
     constructor(private el: ElementRef) {}
 
     ngOnInit() {
-        if (this.maxlength !== undefined)
-            this.init();
+        this.init();
     }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -46,6 +45,7 @@ export class TextareaDirective implements OnInit, OnChanges {
     private init() {
         const clsName = `weui-textarea-counter`;
         const pel = this.el.nativeElement.parentElement;
+        this.maxlength = +this.maxlength;
         if (this.maxlength <= 0) {
             remove(pel, '.' + clsName);
             this._count = null;

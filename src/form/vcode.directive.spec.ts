@@ -13,6 +13,22 @@ const SECONDS: number = 10;
 const TPL: string = '${num}s';
 const ERRORS: string = 'resend';
 
+const html = `
+<div class="weui-cell weui-cell_vcode">
+    <div class="weui-cell__hd"></div>
+    <div class="weui-cell__bd"></div>
+    <div class="weui-cell__ft">
+        <button
+            [weui-vcode]="onSendCode"
+            [weui-seconds]="seconds"
+            [weui-tpl]="tpl"
+            [weui-error]="error">获取验证码</button>
+    </div>
+</div>
+`;
+
+const htmlInValid = `<button [weui-vcode]=""></button>`;
+
 describe('Directive: vcode', () => {
 
     let fixture: ComponentFixture<TestVCodeComponent>;
@@ -20,59 +36,105 @@ describe('Directive: vcode', () => {
     let directive: VCodeDirective;
     let buttonEl: HTMLButtonElement;
 
-    beforeEach(fakeAsync(() => {
-        TestBed.configureTestingModule({
-            declarations: [TestVCodeComponent],
-            imports: [FormModule.forRoot(), FormsModule],
-            providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }]
+    describe('[default]', () => {
+        beforeEach(fakeAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestVCodeComponent],
+                imports: [FormModule.forRoot(), FormsModule],
+                providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }]
+            });
+
+            TestBed.overrideComponent(TestVCodeComponent, { set: { template: html } });
+            fixture = TestBed.createComponent(TestVCodeComponent);
+            context = fixture.componentInstance;
+
+            buttonEl = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
+
+            const ds = fixture.debugElement.queryAll(By.directive(VCodeDirective));
+            directive = ds.map((de: DebugElement) => de.injector.get(VCodeDirective) as VCodeDirective)[0];
+
+            fixture.detectChanges();
+
+            tick();
+        }));
+
+        it('should be defined on the test component', () => {
+            expect(directive).not.toBeNull();
         });
 
-        fixture = TestBed.createComponent(TestVCodeComponent);
-        context = fixture.componentInstance;
+        it('should set the default values', () => {
+            expect(directive.error).toBe(ERRORS);
+            expect(directive.tpl).toBe(TPL);
+            expect(directive.seconds).toBe(SECONDS);
+        });
 
-        buttonEl = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
+        it('should button disabled by sended', () => {
+            context.seconds = 0;
+            buttonEl.click();
+            fixture.detectChanges();
+            expect(buttonEl.disabled).toBeTruthy();
+        });
 
-        const ds = fixture.debugElement.queryAll(By.directive(VCodeDirective));
-        directive = ds.map((de: DebugElement) => de.injector.get(VCodeDirective) as VCodeDirective)[0];
+        it('should be resend in to late', (done: () => void) => {
+            context.seconds = 2;
+            fixture.detectChanges();
+            buttonEl.click();
+            fixture.detectChanges();
+            expect(buttonEl.disabled).toBeTruthy();
+            setTimeout(() => {
+                expect(buttonEl.disabled).toBeFalsy();
+                done();
+            }, 2500);
+        });
 
-        fixture.detectChanges();
-
-        tick();
-    }));
-
-    it('should be defined on the test component', () => {
-        expect(directive).not.toBeNull();
     });
 
-    it('should set the default values', () => {
-        expect(directive.error).toBe(ERRORS);
-        expect(directive.tpl).toBe(TPL);
-        expect(directive.seconds).toBe(SECONDS);
+    it('should be throw error if invalid html', () => {
+        expect(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestVCodeComponent],
+                imports: [FormModule.forRoot(), FormsModule],
+                providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }]
+            });
+
+            TestBed.overrideComponent(TestVCodeComponent, { set: { template: htmlInValid } });
+            TestBed.createComponent(TestVCodeComponent).detectChanges();
+        }).toThrowError();
     });
 
-    it('should button disabled by sended', () => {
-        buttonEl.click();
-        fixture.detectChanges();
-        expect(buttonEl.disabled).toBeTruthy();
-    });
+    describe('send error', () => {
+        beforeEach(fakeAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [TestVCodeComponent],
+                imports: [FormModule.forRoot(), FormsModule],
+                providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }]
+            });
 
+            TestBed.overrideComponent(TestVCodeComponent, { set: { template: html } });
+            fixture = TestBed.createComponent(TestVCodeComponent);
+            context = fixture.componentInstance;
+
+            spyOn(context, 'onSendCode').and.returnValue(Observable.of(false));
+
+            buttonEl = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
+
+            const ds = fixture.debugElement.queryAll(By.directive(VCodeDirective));
+            directive = ds.map((de: DebugElement) => de.injector.get(VCodeDirective) as VCodeDirective)[0];
+
+            fixture.detectChanges();
+
+            tick();
+        }));
+
+        it('should be resend', () => {
+            buttonEl.click();
+            fixture.detectChanges();
+            expect(buttonEl.textContent).toBe(ERRORS);
+        });
+    });
 });
 
-@Component({
-    template: `
-    <div class="weui-cell weui-cell_vcode">
-        <div class="weui-cell__hd"></div>
-        <div class="weui-cell__bd"></div>
-        <div class="weui-cell__ft">
-            <button class="weui-vcode-btn"
-                [weui-vcode]="onSendCode"
-                [weui-seconds]="seconds"
-                [weui-tpl]="tpl"
-                [weui-error]="error">获取验证码</button>
-        </div>
-    </div>
-    `
-})
+@Component({ template: `` })
 class TestVCodeComponent {
     tpl: string = TPL;
     seconds: number = SECONDS;

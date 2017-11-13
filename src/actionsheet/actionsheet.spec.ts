@@ -7,6 +7,7 @@ import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect,
 import { ActionSheetModule, ActionSheetComponent, ActionSheetConfig, ActionSheetService } from '../actionsheet';
 import { isAndroid } from '../utils/browser';
 import { By } from '@angular/platform-browser';
+import * as browserModule from '../utils/browser';
 
 const MENUS: any[] = [
     { text: 'menu1', value: 'value1', other: 1 },
@@ -50,7 +51,9 @@ describe('Component: ActionSheet', () => {
             TestBed.configureTestingModule({
                 declarations: [TestActionSheetComponent],
                 imports: [ActionSheetModule.forRoot(), FormsModule, NoopAnimationsModule],
-                providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }]
+                providers: [
+                    { provide: ComponentFixtureAutoDetect, useValue: true }
+                ]
             });
             TestBed.overrideComponent(TestActionSheetComponent, { set: { template: html } });
             fixture = TestBed.createComponent(TestActionSheetComponent);
@@ -75,7 +78,6 @@ describe('Component: ActionSheet', () => {
                 .show()
                 .subscribe(res => {
                     fixture.detectChanges();
-                    console.log(el);
                     if (isAndroid()) {
                         expect((el as HTMLElement).querySelectorAll('.weui-skin_android').length).toBe(1);
                     } else {
@@ -84,6 +86,26 @@ describe('Component: ActionSheet', () => {
                     done();
                 });
             (<any>getItems(el)[0]).click();
+        });
+
+        describe('[Android] style', () => {
+            beforeEach(() => {
+                spyOn(browserModule, 'isAndroid').and.returnValue(true);
+            });
+
+            it('should be inited', (done: () => void) => {
+                context.config = Object.assign(context.config, { skin: 'auto' });
+                fixture.detectChanges();
+                context
+                    .actioinSheet
+                    .show()
+                    .subscribe(res => {
+                        fixture.detectChanges();
+                        expect((el as HTMLElement).querySelectorAll('.weui-skin_android').length).toBe(1);
+                        done();
+                    });
+                (<any>getItems(el)[0]).click();
+            });
         });
 
         it('should be opened set actionsheet title', (done: () => void) => {
@@ -208,9 +230,9 @@ describe('Component: ActionSheet', () => {
             service = _s;
         }));
 
-        it('should return menu1', (done: () => void) => {
+        it('should be show', (done: () => void) => {
             service
-                .show(Object.assign([], MENUS), Object.assign({}, CONFIG))
+                .show(Object.assign([], MENUS))
                 .subscribe(res => {
                     fixture.detectChanges();
                     expect(res.text).toBe('menu1');
@@ -222,7 +244,13 @@ describe('Component: ActionSheet', () => {
                 });
 
             fixture.detectChanges();
-            (<any>getItems(el.parentElement)[0]).click();
+            (<any>getItems(el.nextSibling)[0]).click();
+        });
+
+        it('should be show if specify [config] param', () => {
+            service.show(Object.assign([], MENUS), Object.assign({}, CONFIG));
+            fixture.detectChanges();
+            expect(el.nextSibling.nodeName).toBe('WEUI-ACTIONSHEET');
         });
 
     });

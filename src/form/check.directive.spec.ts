@@ -42,6 +42,14 @@ describe('Directive: Checklist', () => {
         expect(context.res[0]).toBe(DATALIST[0]);
     });
 
+    it('should be unchecked', () => {
+        fixture.nativeElement.querySelector('.weui-check').click();
+        fixture.detectChanges();
+        fixture.nativeElement.querySelector('.weui-check').click();
+        fixture.detectChanges();
+        expect(context.res.length).toBe(0);
+    });
+
 });
 
 @Component({

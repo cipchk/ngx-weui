@@ -106,10 +106,8 @@ export class ActionSheetComponent implements OnDestroy {
      * 选择动作
      */
     _onSelect(menu: { text?: string, [key: string]: any }) {
-        if (this.observer) {
-            this.observer.next(menu);
-            this.observer.complete();
-        }
+        this.observer.next(menu);
+        this.observer.complete();
         this.hide();
     }
 

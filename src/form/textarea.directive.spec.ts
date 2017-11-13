@@ -58,6 +58,12 @@ describe('Directive: Textarea', () => {
         expect(counterEl.textContent).toBe(`4 / ${MAXLENGTH}`);
     });
 
+    it('should be inited if nospecify [maxlength]', () => {
+        context.maxlength = 0;
+        fixture.detectChanges();
+        expect(fixture.debugElement.nativeElement.querySelectorAll('.weui-textarea-counter').length).toBe(0);
+    });
+
 });
 
 @Component({

@@ -94,6 +94,15 @@ describe('Component: Accordion', () => {
         expectOpenPanels(element, [true, true, false]);
     });
 
+    it('should be not toggle if panel has disabled', () => {
+        context.panels[1].disabled = true;
+        fixture.detectChanges();
+        expectOpenPanels(element, [false, false, false]);
+        const panels = getPanels(element);
+        ((panels[1] as HTMLDivElement).querySelector('[role="tab"]') as HTMLDivElement).click();
+        expectOpenPanels(element, [false, false, false]);
+    });
+
 });
 
 describe('Component: Accordion: Auto', () => {

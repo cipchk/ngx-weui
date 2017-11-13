@@ -64,10 +64,6 @@ export class InputDirective implements OnInit, OnChanges, Validator {
         if (this._onChange) this._onChange();
     }
 
-    private _genIcon(type: string = 'warn') {
-
-    }
-
     private _createValidator(): void {
         let regex: RegExp = null;
         if (this.inputRegex) {
@@ -110,7 +106,7 @@ export class InputDirective implements OnInit, OnChanges, Validator {
             let value: string = control.value;
             if (value == null || value.length === 0) {
                 if (this.required !== undefined)
-                    return { 'icon': this.required || 'warn', 'type': 'required', 'actualValue': value };
+                    return { 'icon': this.required, 'type': 'required', 'actualValue': value };
 
                 return null;
             }
