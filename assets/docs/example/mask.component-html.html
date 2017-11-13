@@ -2,7 +2,22 @@
 
     <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">weui-button</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onShow(false)"</span>&gt;</span>显示（2秒后自动关闭）<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
     <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">weui-button</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onShow(true)"</span>&gt;</span>显示（手动关闭）<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">weui-button</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"onShowLoading()"</span>&gt;</span>显示Loading<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
 
-    <span class="hljs-tag">&lt;<span class="hljs-name">weui-mask</span> #<span class="hljs-attr">mask</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">weui-mask</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">weui-mask</span> #<span class="hljs-attr">mask</span> [<span class="hljs-attr">loading</span>]=<span class="hljs-string">"loading"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">weui-mask</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"weui-cells__title"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"margin-bottom:10px;"</span>&gt;</span>自定义内容<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+
+    <span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">weui-button</span> <span class="hljs-attr">weui-type</span>=<span class="hljs-string">"default"</span> (<span class="hljs-attr">click</span>)=<span class="hljs-string">"showContent()"</span>&gt;</span>显示<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">weui-mask</span> #<span class="hljs-attr">maskContent</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"
+            background: rgba(255, 255, 255, 0.7);
+            width: 100px;
+            text-align: center;
+            line-height: 30px;
+            border-radius: 5px;
+            color: #f50;
+        "</span>&gt;</span>test content<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">weui-mask</span>&gt;</span>
 
 <span class="hljs-tag">&lt;/<span class="hljs-name">Page</span>&gt;</span>

@@ -1,5 +1,5 @@
 <span class="hljs-keyword">import</span> { Component, ViewChild } <span class="hljs-keyword">from</span> <span class="hljs-string">'@angular/core'</span>;
-<span class="hljs-keyword">import</span> { MaskComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">"ngx-weui/mask"</span>;
+<span class="hljs-keyword">import</span> { MaskComponent } <span class="hljs-keyword">from</span> <span class="hljs-string">'ngx-weui/mask'</span>;
 
 <span class="hljs-meta">@Component</span>({
     selector: <span class="hljs-string">'example-mask'</span>,
@@ -8,7 +8,11 @@
 })
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">class</span> DemoMaskComponent {
 
+    loading = <span class="hljs-literal">false</span>;
+
     <span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">'mask'</span>) mask: MaskComponent;
+
+    <span class="hljs-meta">@ViewChild</span>(<span class="hljs-string">'maskContent'</span>) maskContent: MaskComponent;
 
     onShow(isNormal: <span class="hljs-built_in">boolean</span> = <span class="hljs-literal">false</span>) {
         <span class="hljs-keyword">this</span>.mask.show().subscribe(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
@@ -18,8 +22,23 @@
         <span class="hljs-keyword">if</span> (!isNormal) {
             setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
                 <span class="hljs-keyword">this</span>.mask.hide();
-            }, <span class="hljs-number">1000</span>* <span class="hljs-number">2</span>);
+            }, <span class="hljs-number">1000</span> * <span class="hljs-number">2</span>);
         }
+    }
+
+    onShowLoading() {
+        <span class="hljs-keyword">this</span>.mask.show();
+        <span class="hljs-keyword">this</span>.loading = <span class="hljs-literal">true</span>;
+        setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+            <span class="hljs-keyword">this</span>.mask.hide();
+        }, <span class="hljs-number">1000</span> * <span class="hljs-number">2</span>);
+    }
+
+    showContent() {
+        <span class="hljs-keyword">this</span>.maskContent.show();
+        setTimeout(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+            <span class="hljs-keyword">this</span>.maskContent.hide();
+        }, <span class="hljs-number">1000</span> * <span class="hljs-number">2</span>);
     }
 
 }
