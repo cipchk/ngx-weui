@@ -150,6 +150,7 @@ export class DialogComponent implements OnDestroy {
 
             this._promptData = config.inputValue;
             if (this._promptData) {
+                this._config = config;
                 this.promptCheck();
             }
 
