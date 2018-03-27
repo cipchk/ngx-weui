@@ -1,0 +1,18 @@
+<div class="navMenu">
+    <weui-searchbar (search)="onSearch($event)"></weui-searchbar>
+    <div class="menuItems">
+        <div class="weui-cells__title">{{navList.length}} items</div>
+        <div class="weui-cells">
+            <a class="weui-cell weui-cell_link weui_cell"
+                *ngFor="let item of navList"
+                [routerLink]="['/' + type, item.id || item.name.toLowerCase() ]"
+                routerLinkActive="active">
+                <div class="weui-cell__hd" *ngIf="item.icon">
+                    <img src="{{item.icon}}" alt="{{item.name}}" class="navMenu--icon">
+                </div>
+                <div class="weui-cell__bd"></div>
+                <div class="weui-cell__ft">{{item.name}}</div>
+            </a>
+        </div>
+    </div>
+</div>

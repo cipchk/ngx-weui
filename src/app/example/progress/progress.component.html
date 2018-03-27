@@ -1,0 +1,12 @@
+<Page [ngClass]="'progress'" [title]="'Progress'" [subTitle]="'进度条'" [ftBottom]="true">
+
+    <weui-progress [value]="res.g1.value" (cancel)="onCancel('g1')"></weui-progress>
+    <br>
+    <weui-progress [value]="res.g2.value" (cancel)="onCancel('g2')"></weui-progress>
+    <br>
+    <weui-progress [value]="res.g3.value" (cancel)="onCancel('g3')" [canCancel]="false"></weui-progress>
+    <br>
+
+    <button weui-button [disabled]="uploading" (click)="onUpload()">上传</button>
+
+</Page>

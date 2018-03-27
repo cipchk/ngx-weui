@@ -1,0 +1,67 @@
+.App__preview {
+    flex: 5;
+    background-color: #eee;
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 1024px) {
+    .App__preview {
+        display: none;
+    }
+    .Resizer {
+        display: none;
+    }
+    .Pane:first-of-type {
+        display: none;
+    }
+}
+
+.App__detail {
+    height: 100%;
+    border-left: 1px solid #bcbab6;
+}
+
+.App__mobileview {
+    width: 375px;
+    height: 667px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 5px;
+    position: relative;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.App__mobileview::-webkit-scrollbar,
+.App__mobileview .page::-webkit-scrollbar {
+    display: none;
+}
+
+.Pane.vertical.Pane1 {
+    height: 100%;
+}
+
+.App__preview--none {
+    font-size: 1.5em;
+    color: rgba(0, 0, 0, .25);
+    text-align: center;
+}
+
+.App__preview--none .fa {
+    opacity: 0.3;
+    margin: 10px auto;
+}
+
+.flex-center {
+    justify-content: center;
+    align-items: center;
+}
+
+.weui-article {
+    .docs-example-source {
+        background: rgba(0, 0, 0, .05);
+        padding: 10px;
+        height: 600px;
+    }
+}

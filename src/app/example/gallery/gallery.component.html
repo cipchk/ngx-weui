@@ -1,0 +1,8 @@
+<Page [ngClass]="'gallery'" [title]="'Gallery'" [subTitle]="'Full screen photo display'" [ftBottom]="true">
+
+    <weui-gallery [imgs]="'./assets/images/pic_article.png'" 
+                  [(show)]="show"
+                  (delete)="onDelete($event)"></weui-gallery>
+    <button weui-button (click)="show=true">显示</button>
+    
+</Page>

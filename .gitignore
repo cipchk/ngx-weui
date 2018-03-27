@@ -3,21 +3,21 @@
 /node_modules
 npm-debug.log
 package-lock.json
-.tmp
-
-# IDE
-/.idea
-/.vscode
+publish
+publish-es5
+publish-es2015
 
 # misc
-/coverage/*
-/sass/*.css
+/coverage
 
 # ignore build and dist for now
-/demo/dist
-/demo/src/assets/docs
-/dist
-/.tmp
+src/app/routes/components/meta.ts
+src/app/routes/docs/meta.ts
+.tmp
+__gen_components/
+publish-es2015/
+dist/
+publish/
 
 # ignore inline compiling
 /logs

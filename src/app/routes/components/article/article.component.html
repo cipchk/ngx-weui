@@ -1,0 +1,29 @@
+<split direction="horizontal" *ngIf="menu">
+    <split-area [size]="40" style="overflow: hidden;">
+        <div class="App__preview background--canvas flex-center">
+            <div class="App__mobileview">
+                <component-container [menu]="menu" [url]="'components'"></component-container>
+            </div>
+        </div>
+    </split-area>
+    <split-area [size]="60">
+        <div class="App__detail">
+            <section class="weui-article markdown">
+                <h1>
+                    {{item.meta.title}}
+                    <span *ngIf="item.meta.subtitle" class="subtitle">{{item.meta.subtitle}}</span>
+                    <edit-button [item]="item"></edit-button>
+                </h1>
+                <div *ngIf="item.data.content" [innerHTML]="item.data.content"></div>
+                <ng-container *ngIf="item.meta.module">
+                    <p>引用方式：</p>
+                    <pre class="typescript hljs"><span class="hljs-section">import</span> &#123; <span class="hljs-attribute">{{item.meta.module}}</span> &#125; from <span class="hljs-string">'ngx-weui'</span>;</pre>
+                    <p *ngIf="item.meta.config">
+                        模块允许对<code>{{item.meta.config}}</code><a routerLink="/docs/config">全局配置</a>。
+                    </p>
+                </ng-container>
+                <div class="api-container" *ngIf="item.data.api" [innerHTML]="item.data.api"></div>
+            </section>
+        </div>
+    </split-area>
+</split>

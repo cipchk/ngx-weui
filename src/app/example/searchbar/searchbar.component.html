@@ -1,0 +1,32 @@
+<Page [ngClass]="'searchbar'" [title]="'SearchBar'" [subTitle]="'搜索栏'" [spacing]="false" [ftBottom]="true">
+
+    <weui-searchbar 
+        (search)="onSearch($event)" 
+        (cancel)="onCancel()" 
+        (clear)="onClear()" 
+        (submit)="onSubmit($event)"></weui-searchbar>
+
+    <div class="weui-panel" style="margin-top: 0px;" *ngIf="value">
+        <div class="weui-panel__hd">查询淘宝【{{value}}】</div>
+        <div class="weui-panel__bd" *ngIf="items | async; let items; else loading">
+            <div class="weui-cell weui-cell_access" *ngFor="let item of items">
+                <div class="weui-cell__bd weui-cell_primary">
+                    <p>{{item}}</p>
+                </div>
+            </div>
+            <div class="weui-media-box weui-media-box_text" *ngIf="items?.length === 0">Can't find any！</div>
+        </div>
+        <ng-template #loading>
+            <div class="weui-panel__bd">
+                <div class="weui-media-box weui-media-box_text">Loading...</div>
+            </div>
+        </ng-template>
+        <a class="weui-panel__ft" href="javascript:void(0);">
+            <div class="weui-cell weui-cell_access weui-cell_link">
+                <div class="weui-cell__bd">More</div>
+                <div class="weui-cell__ft"></div>
+            </div>
+        </a>
+    </div>
+
+</Page>

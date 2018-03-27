@@ -1,9 +1,6 @@
-# ngx-weui [![NPM version](https://img.shields.io/npm/v/ngx-weui.svg)](https://www.npmjs.com/package/ngx-weui) [![npm downloads](https://img.shields.io/npm/dm/ngx-weui.svg)](https://npmjs.org/ngx-weui)
+# ngx-weui [![NPM version](https://img.shields.io/npm/v/ngx-weui.svg)](https://www.npmjs.com/package/ngx-weui) [![NPM version](https://img.shields.io/npm/v/ngx-weui/next.svg)](https://www.npmjs.com/package/ngx-weui) [![npm downloads](https://img.shields.io/npm/dm/ngx-weui.svg)](https://npmjs.org/ngx-weui) [![Angular 2 Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide) [![Build Status](https://travis-ci.org/cipchk/ngx-weui.svg?branch=master)](https://travis-ci.org/cipchk/ngx-weui) [![codecov](https://codecov.io/gh/cipchk/ngx-weui/branch/master/graph/badge.svg)](https://codecov.io/gh/cipchk/ngx-weui)
 
 [WeUI](https://github.com/weui/weui) Components build with [Angular](https://angular.io/).
-
-
-[![Angular 2 Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide) [![Build Status](https://travis-ci.org/cipchk/ngx-weui.svg?branch=master)](https://travis-ci.org/cipchk/ngx-weui) [![codecov](https://codecov.io/gh/cipchk/ngx-weui/branch/master/graph/badge.svg)](https://codecov.io/gh/cipchk/ngx-weui)
 
 ## Table of Contents
 
@@ -26,11 +23,11 @@ Install `ngx-weui` from `npm`
 npm install ngx-weui --save
 ```
 
-You will need weui styles
+You will need weui & ngx-weui styles in `src/styles.scss`:
 
 ```html
-<!-- index.html -->
-<link href="//res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css" rel="stylesheet">
+@import '~weui/dist/style/weui.css';
+@import '~ngx-weui/index';
 ```
 
 Import the `ngx-weui` in to your root `AppModule`.
@@ -44,12 +41,12 @@ import { WeUiModule } from 'ngx-weui';
 export class AppModule { }
 ```
 
-please refer to more [details](https://github.com/cipchk/ngx-weui/blob/master/docs/install.md).
+please refer to more [details](https://github.com/cipchk/ngx-weui/blob/master/docs/how.md).
 
 ### How to use it with:
 
-+ `angular-cli` please refer to [install](https://github.com/cipchk/ngx-weui/blob/master/docs/install.md).
-+ `plnkr` sample available [here](http://plnkr.co/edit/tpl:vrb1b6KrhvyqyCFXQ7zg).
++ `angular-cli` please refer to [how](https://github.com/cipchk/ngx-weui/blob/master/docs/how.md).
++ `stackblitz` sample available [here](https://stackblitz.com/edit/ngx-weui).
 
 ## Troubleshooting
 

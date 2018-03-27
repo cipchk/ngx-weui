@@ -4,8 +4,8 @@
         "name": "ngx-weui"
     },
     "apps": [{
-        "root": "demo/src",
-        "outDir": "demo/dist",
+        "root": "src",
+        "outDir": "dist",
         "assets": [
             "assets",
             "favicon.ico"
@@ -13,17 +13,19 @@
         "index": "index.html",
         "main": "main.ts",
         "polyfills": "polyfills.ts",
-        "test": "../../scripts/test.ts",
-        "tsconfig": "tsconfig.json",
-        "testTsconfig": "../../src/tsconfig.spec.json",
+        "test": "../components/test.ts",
+        "tsconfig": "tsconfig.app.json",
+        "testTsconfig": "../components/tsconfig.spec.json",
         "prefix": "",
         "styles": [
-            "../../node_modules/swiper/dist/css/swiper.css",
+            "../node_modules/weui/dist/style/weui.css",
+            "../node_modules/font-awesome/css/font-awesome.css",
+            "../node_modules/swiper/dist/css/swiper.css",
             "styles.scss"
         ],
         "scripts": [
-            "../../node_modules/swiper/dist/js/swiper.js",
-            "../../node_modules/g2-mobile/index.js"
+            "../node_modules/swiper/dist/js/swiper.js",
+            "../node_modules/g2-mobile/index.js"
         ],
         "environmentSource": "environments/environment.ts",
         "environments": {
@@ -39,6 +41,13 @@
     "test": {
         "karma": {
             "config": "./karma.conf.js"
+        },
+        "codeCoverage": {
+            "exclude": [
+                "./src/**",
+                "./components/test.ts",
+                "./components/**/demo/**"
+            ]
         }
     },
     "defaults": {

@@ -1,0 +1,27 @@
+<Page [ngClass]="'accordion'" [title]="'Accordion'" [subTitle]="'手风琴'" [spacing]="false">
+
+    <div style="padding: 20px;">
+        <button weui-button [weui-mini]="'mini'" (click)="add()">添加</button>
+        <button weui-button [weui-mini]="'mini'" (click)="remove()">移除</button>
+        <button weui-button [weui-mini]="'mini'" (click)="list[0].disabled=!list[0].disabled">{{list[0].disabled ? '启用' : '禁止'}}第一个</button>
+        <button weui-button [weui-mini]="'mini'" (click)="collapsible=!collapsible">设置{{collapsible ? '只允许一个' : '所有'}}折叠</button>
+        <p>choose index: {{index}}</p>
+    </div>
+
+    <weui-accordion [collapsible]="collapsible" (select)="select($event)">
+        <weui-accordion-panel class="weui-accordion-panel" 
+            *ngFor="let item of list" [disabled]="item.disabled">
+            <div class="heading" heading>{{ item.title }}</div>
+            <div class="content">
+                <div class="weui-cells">
+                    <a class="weui-cell weui-cell_access" href="javascript:;"
+                        *ngFor="let i of item.list; let idx = index;">
+                        <div class="weui-cell__bd">item {{idx}}</div>
+                        <div class="weui-cell__ft"></div>
+                    </a>
+                </div>
+            </div>
+        </weui-accordion-panel>
+    </weui-accordion>
+
+</Page>

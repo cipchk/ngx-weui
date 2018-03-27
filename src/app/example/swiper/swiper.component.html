@@ -1,0 +1,34 @@
+<Page [ngClass]="'swiper'" 
+      [title]="'Swiper'" 
+      [subTitle]="'触摸滑动'"
+      [spacing]="false">
+
+    <p>log: {{log}}</p>
+    <!-- options等同于：Swiper API（@see: http://www.swiper.com.cn/api/index.html） -->
+    <weui-swiper [options]="options">
+        <div class="swiper-container">
+            <!-- 容器（必选） -->
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" *ngFor="let i of [1, 2, 3, 4]">
+                    Slide {{i}}
+                </div>
+            </div>
+            <!-- 分页（可选） -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </weui-swiper>
+    <p>渐变效果</p>
+    <weui-swiper [options]="{effect: 'fade', spaceBetween: 30, autoplay: 2000}">
+        <div class="swiper-container">
+            <!-- 容器（必选） -->
+            <div class="swiper-wrapper">
+                <div class="swiper-slide" *ngFor="let i of images">
+                    <img src="{{i.url}}">
+                </div>
+            </div>
+            <!-- 分页（可选） -->
+            <div class="swiper-pagination"></div>
+        </div>
+    </weui-swiper>
+
+</Page>

@@ -1,0 +1,8 @@
+<section class="weui-article markdown">
+    <h1>
+        {{item.meta.title}}
+        <span *ngIf="item.meta.subtitle" class="subtitle">{{item.meta.subtitle}}</span>
+        <edit-button [item]="item"></edit-button>
+    </h1>
+    <div *ngIf="item.content" [innerHTML]="item.content"></div>
+</section>

@@ -1,0 +1,20 @@
+<div class="App__nav" [ngClass]="{
+    'nomenu': !needNav,
+    'menu': needNav
+    }">
+    <nav class="navSidebar background--nav">
+        <div class="navSidebar--logo" [ngClass]="{'loading': isFetching}">
+            <img src="./assets/weui.png" alt="logo">
+        </div>
+        <div class="navmenu">
+            <a class="navmenu__item"
+                *ngFor="let m of menuService.menus"
+                routerLink="/{{m.link}}" routerLinkActive="active">
+                <span aria-hidden="true" class="fa fa-{{m.icon}} fa-2x"></span>
+                <p>{{m.name[locale]}}</p>
+            </a>
+        </div>
+    </nav>
+    <docs-nav [hidden]="!needNav" style="width: 100%;"></docs-nav>
+</div>
+<div class="App__content"><router-outlet></router-outlet></div>

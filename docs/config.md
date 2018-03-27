@@ -1,4 +1,6 @@
-# 全局默认配置项说明
+---
+title: 全局默认配置项说明
+---
 
 有一些模块（比如：actionsheet、button等），虽然已经有一些默认的配置，但你可以通过全局注册来改变它。
 
@@ -15,13 +17,17 @@
 import { NgModule } from '@angular/core';
 import { WeUiModule, ButtonConfig } from 'ngx-weui';
 
+export function buttonConfig() {
+    return Object.assign(new ButtonConfig(), { type: 'warn' });
+}
+
 @NgModule({
     imports: [
         WeUiModule.forRoot()
     ],
     providers: [
         // 重置默认按钮样式为：warn
-        { provide: ButtonConfig, useFactory: ()=> { return Object.assign(new ButtonConfig(), { type: 'warn' }); } }
+        { provide: ButtonConfig, useFactory: buttonConfig }
     ]
 })
 ```

@@ -1,0 +1,42 @@
+weui-mask {
+    .weui-mask {
+        opacity: 0;
+        visibility: hidden;
+        transition-duration: .3s;
+        &__visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        &__content {
+            position: fixed;
+            z-index: 1001;
+            height: 100%;
+            width: 100%;
+            display: flex;
+
+            .weui-loading {
+                margin: 0;
+            }
+        }
+        &__top {
+            justify-content: center;
+            align-items: flex-start;
+        }
+        &__bottom {
+            justify-content: center;
+            align-items: flex-end;
+        }
+        &__vertical-left {
+            justify-content: flex-start;
+            align-items: center;
+        }
+        &__vertical {
+            justify-content: center;
+            align-items: center;
+        }
+        &__vertical-right {
+            justify-content: flex-end;
+            align-items: center;
+        }
+    }
+}
