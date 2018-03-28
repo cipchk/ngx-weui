@@ -160,11 +160,11 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
 
     private genDateTimeGroups() {
         const hours = this._value.getHours(),
-            minutes = this._value.getMinutes();
+              minutes = this._value.getMinutes();
         // hours
         let _selected = 0;
         this._groups.push(Array(24).fill(0).map((v: number, idx: number) => {
-            const _v = idx + 1;
+            const _v = idx;
             if (_v === hours) _selected = idx;
             return { label: _v + this._format.hu, value: _v };
         }));
