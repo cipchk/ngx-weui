@@ -133,7 +133,7 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnDestroy,
         const res: any[] = [];
         this._groups.forEach((items: PickerData[], idx: number) => {
             const item = items[this._selected[idx]];
-            res.push(item);
+            if (item) res.push(item);
         });
         return res;
     }
