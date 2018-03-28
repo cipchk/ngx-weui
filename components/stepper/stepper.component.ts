@@ -123,6 +123,7 @@ export class StepperComponent implements ControlValueAccessor {
 
     writeValue(value: any): void {
         this.value = value;
+        this._checkDisabled();
     }
 
     private onChange: any = Function.prototype;

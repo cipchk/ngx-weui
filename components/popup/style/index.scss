@@ -11,10 +11,8 @@
     backface-visibility: hidden;
     z-index: 5000;
     width: 100%;
-    background-color: #efeff4;
-    transition: -webkit-transform .3s;
+    background-color: $popup-bg;
     transition: transform .3s;
-    transition: transform .3s, -webkit-transform .3s
 }
 
 .weui-popup_toggle {
@@ -23,8 +21,8 @@
 
 .weui-popup__hd {
     display: flex;
-    padding: 10px 15px;
-    background-color: #fbf9fe;
+    padding: $popup-head-padding;
+    background-color: $popup-head-bg;
     position: relative;
     text-align: center
 }
@@ -36,8 +34,8 @@
     bottom: 0;
     right: 0;
     height: 1px;
-    border-bottom: 1px solid #e5e5e5;
-    color: #e5e5e5;
+    border-bottom: 1px solid $popup-head-border-bottom-color;
+    color: $popup-head-color;
     transform-origin: 0 100%;
     transform: scaleY(.5)
 }
@@ -45,7 +43,7 @@
 .weui-popup__action {
     display: block;
     flex: 1;
-    color: #586c94
+    color: $popup-head-action-color;
 }
 
 .weui-popup__action:first-child {

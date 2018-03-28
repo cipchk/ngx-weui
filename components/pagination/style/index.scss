@@ -37,16 +37,16 @@
     zoom: 1;
     >span {
         display: block;
-        width: 8px;
-        height: 8px;
+        width: $pagination-dot-wh;
+        height: $pagination-dot-wh;
         margin-right: 5px;
         border-radius: 50%;
-        background: #ccc;
+        background: $pagination-dot-bg;
     }
 }
 
 .weui-pagination__dot-active {
     >span {
-        background: #888;
+        background: $pagination-dot-active-bg;
     }
 }

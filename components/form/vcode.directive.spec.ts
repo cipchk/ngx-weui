@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/observable/of';
+import { of } from 'rxjs/observable/of';
 import { Component, ViewChild, DebugElement } from '@angular/core';
 import { FormsModule, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect, async, inject } from '@angular/core/testing';
@@ -114,7 +114,7 @@ describe('Directive: vcode', () => {
             fixture = TestBed.createComponent(TestVCodeComponent);
             context = fixture.componentInstance;
 
-            spyOn(context, 'onSendCode').and.returnValue(Observable.of(false));
+            spyOn(context, 'onSendCode').and.returnValue(of(false));
 
             buttonEl = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
 
@@ -141,6 +141,6 @@ class TestVCodeComponent {
     error: string = ERRORS;
 
     onSendCode(): Observable<boolean> {
-        return Observable.of(true);
+        return of(true);
     }
 }

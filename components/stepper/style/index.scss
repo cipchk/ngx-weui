@@ -3,20 +3,20 @@ weui-stepper {
     align-items: center;
     justify-content: center;
     >span {
-        border: 1px solid #ddd;
+        border: 1px solid $stepper-color;
         border-radius: 5px;
-        height: 30px;
-        line-height: 30px;
-        width: 30px;
+        height: $stepper-wh;
+        line-height: $stepper-wh;
+        width: $stepper-wh;
         text-align: center;
         em {
-            font-size: 20px;
+            font-size: $stepper-font-size;
         }
     }
     >.input {
         display: inline-block;
-        height: 30px;
-        width: 60px;
+        height: $stepper-wh;
+        width: $stepper-input-width;
     }
     input {
         border: none;

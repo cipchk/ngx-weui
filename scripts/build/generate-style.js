@@ -6,7 +6,8 @@ const sourcePath = path.resolve(__dirname, '../../components');
 const targetPath = path.resolve(__dirname, '../../publish/src');
 
 const targetFolder = fs.readdirSync(targetPath);
-let componentsStyleContent = '';
+let componentsStyleContent = '@import "./src/style/theme.scss";\n';
+fse.copySync(`${sourcePath}/style`, `${targetPath}/style`);
 targetFolder.forEach(dir => {
     if (fs.existsSync(`${sourcePath}/${dir}/style/index.scss`)) {
       componentsStyleContent += `@import "./src/${dir}/style/index.scss";\n`

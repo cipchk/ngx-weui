@@ -258,6 +258,10 @@ export class MenuService {
                 {
                     'id': 'config',
                     'name': '全局默认配置'
+                },
+                {
+                    'id': 'style',
+                    'name': 'ngx-weui 样式'
                 }
             ]
         }

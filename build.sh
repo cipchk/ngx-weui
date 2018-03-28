@@ -51,4 +51,5 @@ cp package.json publish/package.json
 echo 'Copying wx.d.ts'
 cp components/jweixin/jweixin.d.ts publish/jweixin.d.ts
 
+echo 'Copying scss'
 node ./scripts/build/generate-style.js

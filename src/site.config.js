@@ -12,7 +12,7 @@ module.exports = {
                 meta: './src/templates/meta.ts'
             },
             dist: './src/app/routes/components',
-            ignores: [ 'utils' ]
+            ignores: [ 'utils', 'style' ]
         },
         {
             name: 'docs',

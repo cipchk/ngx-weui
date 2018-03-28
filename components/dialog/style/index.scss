@@ -1,3 +1,5 @@
+@import "../../style/theme.scss";
+
 weui-dialog {
     .weui-mask,
     .weui-dialog {
@@ -25,7 +27,7 @@ weui-dialog {
     }
 
     .weui-dialog__error {
-        font-size: 14px;
-        color: #f50;
+        font-size: $dialog-error-font-size;
+        color: $dialog-error-color;
     }
 }

@@ -1,8 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges, EventEmitter, Output, HostListener, ElementRef, OnDestroy, NgZone, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/observable/fromEvent';
-import 'rxjs/add/operator/throttleTime';
+import { FromEventObservable } from 'rxjs/observable/FromEventObservable';
 
 import { InfiniteLoaderConfig } from './infiniteloader.config';
 
@@ -83,8 +82,7 @@ export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
             }
         }, this.config.throttle);
 
-        this.disposeScroller = Observable
-                            .fromEvent(this.el.nativeElement.querySelector('.weui-infiniteloader__content'), 'scroll')
+        this.disposeScroller = FromEventObservable.create(this.el.nativeElement.querySelector('.weui-infiniteloader__content'), 'scroll')
                             .subscribe(($event: any) => {
                                 this.scrollEvent = $event;
                                 this.didScroll = true;
