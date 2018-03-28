@@ -1,4 +1,4 @@
-import { Component, Input, Output, forwardRef, EventEmitter, OnDestroy, ViewChild, LOCALE_ID, OnChanges, SimpleChanges, ElementRef } from '@angular/core';
+import { Component, Input, Output, forwardRef, EventEmitter, OnDestroy, ViewChild, LOCALE_ID, OnChanges, SimpleChanges, ElementRef, OnInit } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { PickerOptions } from './options';
@@ -39,7 +39,7 @@ export type FORMAT_TYPE = string | { format: string, yu?: string, Mu?: string, d
         }
     ]
 })
-export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnChanges {
+export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDestroy, OnChanges {
 
     @ViewChild(PickerComponent) _pickerInstance: PickerComponent;
 
@@ -257,8 +257,14 @@ export class DatePickerComponent implements ControlValueAccessor, OnDestroy, OnC
         this.cancel.emit();
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
+    private initFlag = false;
+    ngOnInit(): void {
+        this.initFlag = true;
         this.genGroups();
+    }
+
+    ngOnChanges(changes: SimpleChanges): void {
+        if (this.initFlag) this.genGroups();
     }
 
     /** 服务于Service，并无实际意义 */
