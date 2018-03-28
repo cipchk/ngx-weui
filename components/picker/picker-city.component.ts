@@ -153,12 +153,14 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
     }
 
     writeValue(value: any): void {
-        if (value) {
-            this._value = value;
-            if (this._value && this._value.length === 6) {
-                this.valueToSelect(this._tmpData, this.dataMap.items, 1);
-                this.parseData(this._tmpData, this.dataMap.items, this._selected);
-            }
+        if (!value) {
+            this._pickerInstance._text = '';
+            return;
+        }
+        this._value = value;
+        if (this._value && this._value.length === 6) {
+            this.valueToSelect(this._tmpData, this.dataMap.items, 1);
+            this.parseData(this._tmpData, this.dataMap.items, this._selected);
         }
     }
 

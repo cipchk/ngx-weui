@@ -281,13 +281,9 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
     }
 
     writeValue(value: Date): void {
-        if (value) {
-            this._value = value;
-            this.genGroups();
-            if (value instanceof Date) {
-                this._pickerInstance._text = this.getFormatDate(value);
-            }
-        }
+        if (value) this.genGroups();
+        this._value = value;
+        this._pickerInstance._text = value instanceof Date ? this.getFormatDate(value) : '';
     }
 
     private onChange: any = Function.prototype;

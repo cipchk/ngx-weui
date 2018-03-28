@@ -193,6 +193,7 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnDestroy,
     }
 
     writeValue(value: any): void {
+        if (!value) this._text = '';
         if (value && value !== this._value) {
             this._value = value;
             // todo：当ngModel传递一个未列表中的值的情况 & 多列时数据对应问题
