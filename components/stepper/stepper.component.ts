@@ -58,7 +58,6 @@ export class StepperComponent implements ControlValueAccessor {
 
     private _value: number;
 
-    /** @docs-private */
     get value() { return this._value; }
     set value(value: number) {
         if (isNaN(value) || value === this.value) return;
@@ -79,9 +78,15 @@ export class StepperComponent implements ControlValueAccessor {
 
     _disabledMinus: boolean = false;
     _disabledPlus: boolean = false;
-    _checkDisabled() {
+    _checkDisabled(): this {
         this._disabledPlus = this.disabled || !((this.value + this.step) <= this.max);
         this._disabledMinus = this.disabled || !((this.value - this.step) >= this.min);
+        return this;
+    }
+
+    _notify() {
+        this.change.emit(this.value);
+        this.onChange(this.value);
     }
 
     _plus() {
@@ -90,8 +95,7 @@ export class StepperComponent implements ControlValueAccessor {
 
         if (this._disabledPlus) return;
         this.value = this._toPrecisionAsStep((this._precisionFactor * this.value + this._precisionFactor * this.step) / this._precisionFactor);
-        this._checkDisabled();
-        this.onChange(this.value);
+        this._checkDisabled()._notify();
     }
 
     _minus() {
@@ -100,16 +104,14 @@ export class StepperComponent implements ControlValueAccessor {
 
         if (this._disabledMinus) return;
         this.value = this._toPrecisionAsStep((this._precisionFactor * this.value - this._precisionFactor * this.step) / this._precisionFactor);
-        this._checkDisabled();
-        this.onChange(this.value);
+        this._checkDisabled()._notify();
     }
 
     _blur() {
         const el = this._inputNumber.nativeElement;
         this.value = +el.value;
         el.value = this.value;
-        this._checkDisabled();
-        this.onChange(this.value);
+        this._checkDisabled()._notify();
     }
 
     _toPrecisionAsStep(num: any) {
@@ -120,7 +122,7 @@ export class StepperComponent implements ControlValueAccessor {
     }
 
     writeValue(value: any): void {
-        if (value) this.value = value;
+        this.value = value;
     }
 
     private onChange: any = Function.prototype;
