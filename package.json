@@ -37,6 +37,9 @@
     "release:next": "bash ./build.sh && cd publish && npm publish --access public --tag next",
     "release": "bash ./build.sh && cd publish && npm publish --access public"
   },
+  "peerDependencies": {
+    "weui": "^1.1.2"
+  },
   "dependencies": {},
   "devDependencies": {
     "@angular/animations": "^5.0.0",
