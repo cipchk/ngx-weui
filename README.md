@@ -23,10 +23,16 @@ Install `ngx-weui` from `npm`
 npm install ngx-weui --save
 ```
 
-You will need weui & ngx-weui styles in `src/styles.scss`:
+You will need weui styles:
 
 ```html
-@import '~weui/dist/style/weui.css';
+<!-- index.html -->
+<link href="//res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css" rel="stylesheet">
+```
+
+And ngx-weui styles in `src/styles.scss`:
+
+```html
 @import '~ngx-weui/index';
 ```
 

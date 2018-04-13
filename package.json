@@ -1,6 +1,6 @@
 {
   "name": "ngx-weui",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "main": "./bundles/weui.umd.js",
   "module": "./esm5/weui.js",
   "es2015": "./esm2015/weui.js",
@@ -36,9 +36,6 @@
     "site:gh": "npm run site:init && ng build --prod --build-optimizer --bh /ngx-weui/ && gh-pages -d ./dist",
     "release:next": "bash ./build.sh && cd publish && npm publish --access public --tag next",
     "release": "bash ./build.sh && cd publish && npm publish --access public"
-  },
-  "peerDependencies": {
-    "weui": "^1.1.2"
   },
   "dependencies": {},
   "devDependencies": {
