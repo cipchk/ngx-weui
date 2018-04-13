@@ -12,7 +12,11 @@ module.exports = {
                 meta: './src/templates/meta.ts'
             },
             dist: './src/app/routes/components',
-            ignores: [ 'utils', 'style' ]
+            ignores: [ 'utils', 'style' ],
+            example: {
+                src: './src/app/example',
+                template: './src/templates/example.ts'
+            }
         },
         {
             name: 'docs',

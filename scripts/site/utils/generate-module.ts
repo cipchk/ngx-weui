@@ -2,7 +2,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 const fse = require('fs-extra');
 import { parseMd } from './parse-md';
-import { generateDoc, genUpperName } from './utils';
+import { generateDoc, genUpperName, escapeHTML } from './utils';
 
 export function generateModule(config: any, isSyncSpecific: boolean, target: string, rootDir: string) {
     const srcPath = path.join(rootDir, config.src);
@@ -35,14 +35,35 @@ export function generateModule(config: any, isSyncSpecific: boolean, target: str
             },
             meta: md.meta,
             path: `/components/${dirName}/index.md`,
-            componentName: `${genUpperName(config.name)}${genUpperName(dirName)}Component`,
-            demo: {
-                html: '',
-                style: '',
-                ts: ''
-            }
+            componentName: `${genUpperName(config.name)}${genUpperName(dirName)}Component`
         };
         metas.push(meta);
+    }
+
+    function genExamples(exampleConfig: { src: string, template: string }) {
+        if (!exampleConfig) return ;
+
+        const examples: any = {};
+        const exampleDir = path.join(rootDir, exampleConfig.src);
+        fse.readdirSync(exampleDir).forEach((dirName: string) => {
+            const demoDir = path.join(exampleDir, dirName);
+            if (!fse.statSync(demoDir).isDirectory()) return;
+            examples[dirName] = {
+                html: getCode(path.join(demoDir, `${dirName}.component.html`)),
+                ts: getCode(path.join(demoDir, `${dirName}.component.ts`)),
+                scss: getCode(path.join(demoDir, `${dirName}.component.scss`))
+            };
+        });
+        generateDoc(
+            { data: JSON.stringify(examples) },
+            fs.readFileSync(path.join(rootDir, exampleConfig.template)).toString('utf8'),
+            path.join(targetPath, `examples.ts`)
+        );
+    }
+
+    function getCode(file: string) {
+        if (!fs.existsSync(file)) return '';
+        return escapeHTML(fse.readFileSync(file, 'utf8'));
     }
 
     fse.readdirSync(srcPath).forEach((dirName: string) => {
@@ -65,4 +86,7 @@ export function generateModule(config: any, isSyncSpecific: boolean, target: str
     });
 
     generateDoc({ data: JSON.stringify(metas) }, tpl.meta, path.join(targetPath, `meta.ts`));
+
+    // examples
+    genExamples(config.example);
 }

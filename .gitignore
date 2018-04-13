@@ -12,6 +12,7 @@ publish-es2015
 
 # ignore build and dist for now
 src/app/routes/components/meta.ts
+src/app/routes/components/examples.ts
 src/app/routes/docs/meta.ts
 .tmp
 __gen_components/

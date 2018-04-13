@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuService } from '../../../core/menu.service';
 import { META } from '../meta';
+import { EXAMPLE } from '../examples';
 
 @Component({
     selector: 'app-article',
@@ -32,6 +33,10 @@ export class ArticleComponent implements OnInit {
                 subtitle: ''
             }
         }, META.find(w => w.name === (this.menu.api || id)));
+
+        // examples
+        const example = EXAMPLE[menu.example || this.menu.id];
+        if (!!example) this.item.demo = example;
         this.initHLJS();
     }
 
@@ -54,6 +59,10 @@ export class ArticleComponent implements OnInit {
                 hljs.highlightBlock(element);
             }
         }, 250);
+    }
+
+    changeCode() {
+       // this.initHLJS();
     }
 
 }
