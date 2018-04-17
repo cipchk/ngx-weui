@@ -4,24 +4,35 @@ title: ngx-weui 样式
 
 ## 写在前面
 
-`ngx-weui` 是不带任何weui样式，因此还需要加载样式，打开 `src/styles.scss`：
+`ngx-weui` 提供一种高度定制化的方案，这些定制包括 `weui` 的主体字体、颜色、各部件等。
 
-```css
-@import '~weui/dist/style/weui.css';
+> **注：** `weui` 是由 Less 编写的，因此应用也必须 Less 才能覆盖。
+
+默认 `ngx-weui` 并没有强制依赖 `weui`，这是因为在某些特殊场景下可能会由于 `package.json` 的入口关系导致失败。因此在使用样式之前必须先安装 `weui` 依赖包：
+
+```bash
+npm i --save weui
+```
+
+最后，在项目 `styles.less` 里加入 `weui` 和 `ngx-weui` 样式：
+
+```less
+@import '~weui/src/style/weui.less';
 @import '~ngx-weui/index';
 ```
 
-上面两条 `@import` 命令，前者为 `weui` 样式，后者为 `ngx-weui` 针对部分组件特有的样式，它包括若干样式参数，你可以两条命令前前重新覆盖它们，例如：
+## 自定义主题
 
-```css
-$toptips-bg-primary: #f50;
+只需要在 `styles.less` 加入相应的要覆盖的参数即可，例如：你想改变字体和主按钮的背景色为红色：
 
-/* You can add global styles to this file, and also import other style files */
-@import '~weui/dist/style/weui.css';
-@import '~ngx-weui/index';
+```less
+@weuiFontDefault: "Helvetica Neue";
+@weuiBtnPrimaryBg: #f50;
 ```
 
-## 参数
+`weui` 包含着几十种参数这些参数你可以通过 [variable](https://github.com/Tencent/weui/tree/master/src/style/base/variable) 目录下获得，每一个文件分布都非常简单明了。
+
+`ngx-weui` 也包含十几种参数，这些包括：
 
 | 名称 | 默认值 | 描述
 | ---- | ----- | ----
