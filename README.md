@@ -36,6 +36,8 @@ And ngx-weui styles in `src/styles.scss`:
 @import '~ngx-weui/index';
 ```
 
+> ngx-weui allows you to customize some basic design aspects in order to meet the needs of UI diversity from business and brand, including weui primary color, font size, etc. pls read [ngx-weui 样式](https://cipchk.github.io/ngx-weui/#/docs/style).
+
 Import the `ngx-weui` in to your root `AppModule`.
 
 ```typescript

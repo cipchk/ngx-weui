@@ -1,7 +1,7 @@
 .markdown {
-    $font-family: Lato,"Monospaced Number","Chinese Quote",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif;
-    $site-border-color-split: #ebedf0;
-    $site-text-color-secondary: #697b8c;
+    @font-family: Lato,"Monospaced Number","Chinese Quote",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"PingFang SC","Hiragino Sans GB","Microsoft YaHei","Helvetica Neue",Helvetica,Arial,sans-serif;
+    @site-border-color-split: #ebedf0;
+    @site-text-color-secondary: #697b8c;
 
     color: #314659;
     font-size: 14px;
@@ -22,7 +22,7 @@
         font-weight: 500;
         margin-bottom: 20px;
         margin-top: 8px;
-        font-family: $font-family;
+        font-family: @font-family;
         font-size: 30px;
         line-height: 38px;
         .subtitle {
@@ -35,7 +35,7 @@
     h5,
     h6 {
         color: #0d1a26;
-        font-family: $font-family;
+        font-family: @font-family;
         margin: 1.6em 0 .6em;
         font-weight: 500;
         clear: both
@@ -107,12 +107,12 @@
         border-collapse: collapse;
         border-spacing: 0;
         empty-cells: show;
-        border: 1px solid $site-border-color-split;
+        border: 1px solid @site-border-color-split;
         width: 100%;
         margin: 8px 0 16px;
         th,
         td {
-            border: 1px solid $site-border-color-split;
+            border: 1px solid @site-border-color-split;
             padding: 8px;
             text-align: left;
         }
@@ -125,8 +125,8 @@
     }
     blockquote {
         font-size: 90%;
-        color: $site-text-color-secondary;
-        border-left: 4px solid $site-border-color-split;
+        color: @site-text-color-secondary;
+        border-left: 4px solid @site-border-color-split;
         padding-left: 0.8em;
         margin: 1em 0;
         p {

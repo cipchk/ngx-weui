@@ -35,7 +35,7 @@
 }
 
 .page.home {
-    $pageHomePadding: 20px;
+    @pageHomePadding: 20px;
     .page__intro-icon {
         margin-top: -.2em;
         margin-left: 5px;
@@ -54,7 +54,7 @@
         }
     }
     .weui-flex {
-        padding: $pageHomePadding;
+        padding: @pageHomePadding;
         align-items: center;
         transition: .3s;
     }
@@ -66,11 +66,11 @@
         }
     }
     .weui-cell {
-        padding-left: $pageHomePadding;
-        padding-right: $pageHomePadding;
+        padding-left: @pageHomePadding;
+        padding-right: @pageHomePadding;
         &:before {
-            left: $pageHomePadding;
-            right: $pageHomePadding;
+            left: @pageHomePadding;
+            right: @pageHomePadding;
         }
     }
 }

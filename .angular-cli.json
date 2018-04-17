@@ -18,10 +18,9 @@
         "testTsconfig": "../components/tsconfig.spec.json",
         "prefix": "",
         "styles": [
-            "../node_modules/weui/dist/style/weui.css",
             "../node_modules/font-awesome/css/font-awesome.css",
             "../node_modules/swiper/dist/css/swiper.css",
-            "styles.scss"
+            "styles.less"
         ],
         "scripts": [
             "../node_modules/swiper/dist/js/swiper.js",
@@ -51,7 +50,7 @@
         }
     },
     "defaults": {
-        "styleExt": "css",
+        "styleExt": "less",
         "component": {}
     }
 }

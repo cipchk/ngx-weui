@@ -8,32 +8,7 @@ title: 如何使用？
 npm install ngx-weui --save
 ```
 
-`ngx-weui` 是不带任何weui样式，因此还需要分别打开加载 `weui` 和 `ngx-weui` 样式。
-
-**weui样式**
-
-方式一：使用CDN，在 `index.html` 头部加上：
-
-```html
-<!-- index.html -->
-<link href="//res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css" rel="stylesheet">
-```
-
-方式二：安装 `weui` 依赖包，并在 `.angular-cli.json` 的 `styles` 节点加入对应路径：
-
-```json
-"styles": [
-    "../node_modules/weui/dist/style/weui.css"
-]
-```
-
-**ngx-weui样式**
-
-打开 `src/styles.scss` 在顶部加入：
-
-```css
-@import '~ngx-weui/index';
-```
+`ngx-weui` 是**不带任何weui样式**，有关样式说明，请阅读[ngx-weui 样式](https://cipchk.github.io/ngx-weui/#/docs/style)。
 
 ## 模块注册
 
