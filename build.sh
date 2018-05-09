@@ -48,8 +48,11 @@ rm publish/src/index.d.ts publish/src/index.metadata.json
 echo 'Copying package.json'
 cp package.json publish/package.json
 
+echo 'Copying README.md'
+cp README.md publish/README.md
+
 echo 'Copying wx.d.ts'
 cp components/jweixin/jweixin.d.ts publish/jweixin.d.ts
 
-echo 'Copying scss'
+echo 'Copying less'
 node ./scripts/build/generate-style.js

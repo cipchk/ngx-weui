@@ -5,16 +5,12 @@ import { FileThumbDirective } from './file-thumb.directive';
 import { UploaderConfig } from './uploader.config';
 
 @NgModule({
-    imports: [ CommonModule ],
-    declarations: [
-        UploaderFileDirective, FileThumbDirective
-    ],
-    exports: [
-        UploaderFileDirective, FileThumbDirective
-    ]
+  imports: [CommonModule],
+  declarations: [UploaderFileDirective, FileThumbDirective],
+  exports: [UploaderFileDirective, FileThumbDirective],
 })
 export class UploaderModule {
-    public static forRoot(): ModuleWithProviders {
-        return { ngModule: UploaderModule, providers: [ UploaderConfig ] };
-    }
+  static forRoot(): ModuleWithProviders {
+    return { ngModule: UploaderModule, providers: [UploaderConfig] };
+  }
 }

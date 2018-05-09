@@ -1,5 +1,5 @@
-import { Observable } from 'rxjs/Observable';
 import { Component, ViewEncapsulation } from '@angular/core';
+import { Observable } from 'rxjs';
 import { TaobaoService } from './tb.service';
 
 @Component({

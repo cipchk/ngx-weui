@@ -1,0 +1,23 @@
+.split {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-direction: row;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  .area {
+    overflow-x: hidden;
+    overflow-y: auto;
+    height: 100%;
+  }
+  .area-left {
+    order: 0;
+    flex: 0 0 calc(40% - 4.4px);
+  }
+  .area-right {
+    order: 2;
+    flex: 0 0 calc(60% - 6.6px);
+  }
+}

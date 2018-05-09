@@ -5,13 +5,13 @@ import { SearchBarComponent } from './searchbar.component';
 import { SearchBarConfig } from './searchbar.config';
 
 @NgModule({
-    imports: [ CommonModule, FormsModule ],
-    declarations: [ SearchBarComponent ],
-    exports: [ SearchBarComponent ],
-    entryComponents: [ SearchBarComponent ]
+  imports: [CommonModule, FormsModule],
+  declarations: [SearchBarComponent],
+  exports: [SearchBarComponent],
+  entryComponents: [SearchBarComponent],
 })
 export class SearchBarModule {
-    public static forRoot(): ModuleWithProviders {
-        return { ngModule: SearchBarModule, providers: [ SearchBarConfig ] };
-    }
+  static forRoot(): ModuleWithProviders {
+    return { ngModule: SearchBarModule, providers: [SearchBarConfig] };
+  }
 }

@@ -6,15 +6,18 @@ import { CloseSidebarDirective } from './close.directive';
 import { SidebarService } from './sidebar.service';
 import { SidebarConfig } from './sidebar.config';
 
-
 @NgModule({
-    imports: [ CommonModule ],
-    declarations: [ SidebarContainerComponent, SidebarComponent, CloseSidebarDirective ],
-    exports: [ SidebarContainerComponent, SidebarComponent, CloseSidebarDirective ],
-    providers: [ SidebarService ]
+  imports: [CommonModule],
+  declarations: [
+    SidebarContainerComponent,
+    SidebarComponent,
+    CloseSidebarDirective,
+  ],
+  exports: [SidebarContainerComponent, SidebarComponent, CloseSidebarDirective],
+  providers: [SidebarService],
 })
 export class SidebarModule {
-    public static forRoot(): ModuleWithProviders {
-        return { ngModule: SidebarModule, providers: [ SidebarConfig ] };
-    }
+  static forRoot(): ModuleWithProviders {
+    return { ngModule: SidebarModule, providers: [SidebarConfig] };
+  }
 }

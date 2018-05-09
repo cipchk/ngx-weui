@@ -3,16 +3,12 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { SliderDirective } from './slider';
 
 @NgModule({
-    imports: [ CommonModule ],
-    declarations: [
-        SliderDirective
-    ],
-    exports: [
-        SliderDirective
-    ]
+  imports: [CommonModule],
+  declarations: [SliderDirective],
+  exports: [SliderDirective],
 })
 export class SliderModule {
-    public static forRoot(): ModuleWithProviders {
-        return { ngModule: SliderModule, providers: [] };
-    }
+  static forRoot(): ModuleWithProviders {
+    return { ngModule: SliderModule, providers: [] };
+  }
 }

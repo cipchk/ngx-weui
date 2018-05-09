@@ -1,9 +1,20 @@
-import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
-import { of } from 'rxjs/observable/of';
+import { Observable, Subscription, of } from 'rxjs';
 import { Component, ViewChild, DebugElement } from '@angular/core';
-import { FormsModule, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect, async, inject } from '@angular/core/testing';
+import {
+  FormsModule,
+  FormBuilder,
+  FormGroup,
+  FormControl,
+} from '@angular/forms';
+import {
+  ComponentFixture,
+  TestBed,
+  fakeAsync,
+  tick,
+  ComponentFixtureAutoDetect,
+  async,
+  inject,
+} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { FormModule } from './form.module';
@@ -27,120 +38,136 @@ const html = `
 </div>
 `;
 
-const htmlInValid = `<button [weui-vcode]=""></button>`;
+const htmlInValid = `<button weui-vcode></button>`;
 
 describe('Directive: vcode', () => {
+  let fixture: ComponentFixture<TestVCodeComponent>;
+  let context: TestVCodeComponent;
+  let directive: VCodeDirective;
+  let buttonEl: HTMLButtonElement;
 
-    let fixture: ComponentFixture<TestVCodeComponent>;
-    let context: TestVCodeComponent;
-    let directive: VCodeDirective;
-    let buttonEl: HTMLButtonElement;
-
-    describe('[default]', () => {
-        beforeEach(fakeAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestVCodeComponent],
-                imports: [FormModule.forRoot(), FormsModule],
-                providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }]
-            });
-
-            TestBed.overrideComponent(TestVCodeComponent, { set: { template: html } });
-            fixture = TestBed.createComponent(TestVCodeComponent);
-            context = fixture.componentInstance;
-
-            buttonEl = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
-
-            const ds = fixture.debugElement.queryAll(By.directive(VCodeDirective));
-            directive = ds.map((de: DebugElement) => de.injector.get(VCodeDirective) as VCodeDirective)[0];
-
-            fixture.detectChanges();
-
-            tick();
-        }));
-
-        it('should be defined on the test component', () => {
-            expect(directive).not.toBeNull();
+  describe('[default]', () => {
+    beforeEach(
+      fakeAsync(() => {
+        TestBed.configureTestingModule({
+          declarations: [TestVCodeComponent],
+          imports: [FormModule.forRoot(), FormsModule],
+          providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
         });
 
-        it('should set the default values', () => {
-            expect(directive.error).toBe(ERRORS);
-            expect(directive.tpl).toBe(TPL);
-            expect(directive.seconds).toBe(SECONDS);
+        TestBed.overrideComponent(TestVCodeComponent, {
+          set: { template: html },
         });
+        fixture = TestBed.createComponent(TestVCodeComponent);
+        context = fixture.componentInstance;
 
-        it('should button disabled by sended', () => {
-            context.seconds = 0;
-            buttonEl.click();
-            fixture.detectChanges();
-            expect(buttonEl.disabled).toBeTruthy();
-        });
+        buttonEl = fixture.debugElement.query(By.css('button'))
+          .nativeElement as HTMLButtonElement;
 
-        it('should be resend in to late', (done: () => void) => {
-            context.seconds = 2;
-            fixture.detectChanges();
-            buttonEl.click();
-            fixture.detectChanges();
-            expect(buttonEl.disabled).toBeTruthy();
-            setTimeout(() => {
-                expect(buttonEl.disabled).toBeFalsy();
-                done();
-            }, 2500);
-        });
+        const ds = fixture.debugElement.queryAll(By.directive(VCodeDirective));
+        directive = ds.map(
+          (de: DebugElement) =>
+            de.injector.get(VCodeDirective) as VCodeDirective,
+        )[0];
 
+        fixture.detectChanges();
+
+        tick();
+      }),
+    );
+
+    it('should be defined on the test component', () => {
+      expect(directive).not.toBeNull();
     });
 
-    it('should be throw error if invalid html', () => {
-        expect(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestVCodeComponent],
-                imports: [FormModule.forRoot(), FormsModule],
-                providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }]
-            });
-
-            TestBed.overrideComponent(TestVCodeComponent, { set: { template: htmlInValid } });
-            TestBed.createComponent(TestVCodeComponent).detectChanges();
-        }).toThrowError();
+    it('should set the default values', () => {
+      expect(directive.error).toBe(ERRORS);
+      expect(directive.tpl).toBe(TPL);
+      expect(directive.seconds).toBe(SECONDS);
     });
 
-    describe('send error', () => {
-        beforeEach(fakeAsync(() => {
-            TestBed.configureTestingModule({
-                declarations: [TestVCodeComponent],
-                imports: [FormModule.forRoot(), FormsModule],
-                providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }]
-            });
+    it('should button disabled by sended', () => {
+      context.seconds = 0;
+      buttonEl.click();
+      fixture.detectChanges();
+      expect(buttonEl.disabled).toBeTruthy();
+    });
 
-            TestBed.overrideComponent(TestVCodeComponent, { set: { template: html } });
-            fixture = TestBed.createComponent(TestVCodeComponent);
-            context = fixture.componentInstance;
+    it('should be resend in to late', (done: () => void) => {
+      context.seconds = 2;
+      fixture.detectChanges();
+      buttonEl.click();
+      fixture.detectChanges();
+      expect(buttonEl.disabled).toBeTruthy();
+      setTimeout(() => {
+        expect(buttonEl.disabled).toBeFalsy();
+        done();
+      }, 2500);
+    });
+  });
 
-            spyOn(context, 'onSendCode').and.returnValue(of(false));
+  it('should be console.error if invalid html', () => {
+    spyOn(console, 'error');
+    TestBed.configureTestingModule({
+      declarations: [TestVCodeComponent],
+      imports: [FormModule.forRoot(), FormsModule],
+      providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
+    });
 
-            buttonEl = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
+    TestBed.overrideComponent(TestVCodeComponent, {
+      set: { template: htmlInValid },
+    });
+    TestBed.createComponent(TestVCodeComponent).detectChanges();
+    expect(console.error).toHaveBeenCalled();
+  });
 
-            const ds = fixture.debugElement.queryAll(By.directive(VCodeDirective));
-            directive = ds.map((de: DebugElement) => de.injector.get(VCodeDirective) as VCodeDirective)[0];
-
-            fixture.detectChanges();
-
-            tick();
-        }));
-
-        it('should be resend', () => {
-            buttonEl.click();
-            fixture.detectChanges();
-            expect(buttonEl.textContent).toBe(ERRORS);
+  describe('send error', () => {
+    beforeEach(
+      fakeAsync(() => {
+        TestBed.configureTestingModule({
+          declarations: [TestVCodeComponent],
+          imports: [FormModule.forRoot(), FormsModule],
+          providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
         });
+
+        TestBed.overrideComponent(TestVCodeComponent, {
+          set: { template: html },
+        });
+        fixture = TestBed.createComponent(TestVCodeComponent);
+        context = fixture.componentInstance;
+
+        spyOn(context, 'onSendCode').and.returnValue(of(false));
+
+        buttonEl = fixture.debugElement.query(By.css('button'))
+          .nativeElement as HTMLButtonElement;
+
+        const ds = fixture.debugElement.queryAll(By.directive(VCodeDirective));
+        directive = ds.map(
+          (de: DebugElement) =>
+            de.injector.get(VCodeDirective) as VCodeDirective,
+        )[0];
+
+        fixture.detectChanges();
+
+        tick();
+      }),
+    );
+
+    it('should be resend', () => {
+      buttonEl.click();
+      fixture.detectChanges();
+      expect(buttonEl.textContent).toBe(ERRORS);
     });
+  });
 });
 
 @Component({ template: `` })
 class TestVCodeComponent {
-    tpl: string = TPL;
-    seconds: number = SECONDS;
-    error: string = ERRORS;
+  tpl: string = TPL;
+  seconds: number = SECONDS;
+  error: string = ERRORS;
 
-    onSendCode(): Observable<boolean> {
-        return of(true);
-    }
+  onSendCode(): Observable<boolean> {
+    return of(true);
+  }
 }

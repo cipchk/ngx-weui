@@ -1,4 +1,7 @@
-# ngx-weui [![NPM version](https://img.shields.io/npm/v/ngx-weui.svg)](https://www.npmjs.com/package/ngx-weui) [![NPM version](https://img.shields.io/npm/v/ngx-weui/next.svg)](https://www.npmjs.com/package/ngx-weui) [![npm downloads](https://img.shields.io/npm/dm/ngx-weui.svg)](https://npmjs.org/ngx-weui) [![Angular 2 Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide) [![Build Status](https://travis-ci.org/cipchk/ngx-weui.svg?branch=master)](https://travis-ci.org/cipchk/ngx-weui) [![codecov](https://codecov.io/gh/cipchk/ngx-weui/branch/master/graph/badge.svg)](https://codecov.io/gh/cipchk/ngx-weui)
+# ngx-weui
+
+[![NPM version](https://img.shields.io/npm/v/ngx-weui.svg)](https://www.npmjs.com/package/ngx-weui) [![NPM version](https://img.shields.io/npm/v/ngx-weui/next.svg)](https://www.npmjs.com/package/ngx-weui) [![npm downloads](https://img.shields.io/npm/dm/ngx-weui.svg)](https://npmjs.org/ngx-weui) [![Angular 2 Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide) [![Build Status](https://travis-ci.org/cipchk/ngx-weui.svg?branch=master)](https://travis-ci.org/cipchk/ngx-weui) [![codecov](https://codecov.io/gh/cipchk/ngx-weui/branch/master/graph/badge.svg)](https://codecov.io/gh/cipchk/ngx-weui)
+[![prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io/)
 
 [WeUI](https://github.com/weui/weui) Components build with [Angular](https://angular.io/).
 
@@ -13,7 +16,9 @@
 
 ## Usage & Demo
 
-[Documentation](https://cipchk.github.io/ngx-weui/) & [Live Demo](https://cipchk.github.io/ngx-weui/)。
+- [Documentation](https://cipchk.github.io/ngx-weui/)
+- [Live Demo](https://cipchk.github.io/ngx-weui/)
+- [Stackblitz](https://stackblitz.com/edit/ngx-weui)
 
 ## Installation instructions
 

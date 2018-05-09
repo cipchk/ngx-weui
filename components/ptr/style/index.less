@@ -1,17 +1,14 @@
 weui-ptr {
-    display: block;
-    overflow: hidden;
-}
-
-weui-ptr .weui-icon-download {
+  display: block;
+  overflow: hidden;
+  .weui-icon-download {
     color: #999;
+  }
 }
 
 .weui-ptr {
-    overflow: hidden
-}
-
-.weui-ptr__loader {
+  overflow: hidden;
+  &__loader {
     pointer-events: none;
     font-weight: 700;
     text-align: center;
@@ -19,10 +16,10 @@ weui-ptr .weui-icon-download {
     overflow: hidden;
     display: flex;
     align-items: center;
-    align-content: stretch
-}
-
-.weui-ptr__content {
+    align-content: stretch;
+  }
+  &__content {
     height: 100%;
-    overflow: scroll
+    overflow: scroll;
+  }
 }

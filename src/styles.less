@@ -1,4 +1,9 @@
-@import '~weui/src/style/weui.less';
+// cli v6 bug，暂不支持 `~weui` 写法，相关ISSUES
+// - [#10717](https://github.com/angular/angular-cli/issues/10717)
+// - [#10721](https://github.com/angular/angular-cli/issues/10721)
+// @import '~weui/src/style/weui.less';
+@import '../node_modules/weui/src/style/weui.less';
+
 @import '../components/index';
 
 // @weuiBtnPrimaryBg: #f50;
@@ -32,3 +37,4 @@
 @import './styles/solarized-light.less';
 @import './styles/doc-viewer.less';
 @import './styles/example-home.less';
+@import './styles/split.less';

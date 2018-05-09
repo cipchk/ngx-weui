@@ -1,33 +1,27 @@
-@import "../../style/theme.less";
-
+@import '../../style/theme.less';
 weui-dialog {
-    .weui-mask,
-    .weui-dialog {
-        opacity: 0;
-        visibility: hidden;
-    }
-
-    .weui-mask__in,
-    .weui-dialog__in {
-        opacity: 1;
-        visibility: visible;
-    }
-
-    .weui-mask {
-        transition-duration: .3s;
-    }
-
-    .weui-dialog {
-        transition-duration: .2s;
-        transform-origin: 0 0;
-    }
-
-    .weui-dialog__in {
-        transform: scale(1) translate(-50%, -50%);
-    }
-
-    .weui-dialog__error {
-        font-size: @dialog-error-font-size;
-        color: @dialog-error-color;
-    }
+  .weui-mask,
+  .weui-dialog {
+    opacity: 0;
+    visibility: hidden;
+  }
+  .weui-mask__in,
+  .weui-dialog__in {
+    opacity: 1;
+    visibility: visible;
+  }
+  .weui-mask {
+    transition-duration: 0.3s;
+  }
+  .weui-dialog {
+    transition-duration: 0.2s;
+    transform-origin: 0 0;
+  }
+  .weui-dialog__in {
+    transform: scale(1) translate(-50%, -50%);
+  }
+  .weui-dialog__error {
+    font-size: @dialog-error-font-size;
+    color: @dialog-error-color;
+  }
 }

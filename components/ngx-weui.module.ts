@@ -28,60 +28,73 @@ import { RatingModule } from './rating/rating.module';
 import { StepperModule } from './stepper/stepper.module';
 import { PaginationModule } from './pagination/pagination.module';
 
-export * from './utils/types';
-
-export * from './cell';
-export * from './button';
-export * from './form';
-export * from './slider';
-export * from './uploader';
-export * from './actionsheet';
-export * from './dialog';
-export * from './loadmore';
-export * from './progress';
-export * from './gallery';
-export * from './picker';
-export * from './searchbar';
-export * from './tab';
-export * from './toast';
-export * from './toptips';
-export * from './popup';
-export * from './ptr';
-export * from './infiniteloader';
-export * from './sidebar';
-export * from './swiper';
-export * from './chart-g2';
-export * from './jweixin';
-export * from './accordion';
-export * from './mask';
-export * from './rating';
-export * from './stepper';
-export * from './pagination';
-
 const MODULES = [
-    CellModule, ButtonModule, FormModule, SliderModule, UploaderModule, ActionSheetModule,
-    DialogModule, LoadmoreModule, ProgressModule, GalleryModule, PickerModule, SearchBarModule,
-    TabModule, ToastModule, ToptipsModule, PopupModule, PTRModule, InfiniteLoaderModule,
-    SidebarModule, SwiperModule, ChartG2Module, JWeiXinModule, AccordionModule, MaskModule,
-    RatingModule, StepperModule, PaginationModule
+  CellModule,
+  ButtonModule,
+  FormModule,
+  SliderModule,
+  UploaderModule,
+  ActionSheetModule,
+  DialogModule,
+  LoadmoreModule,
+  ProgressModule,
+  GalleryModule,
+  PickerModule,
+  SearchBarModule,
+  TabModule,
+  ToastModule,
+  ToptipsModule,
+  PopupModule,
+  PTRModule,
+  InfiniteLoaderModule,
+  SidebarModule,
+  SwiperModule,
+  ChartG2Module,
+  JWeiXinModule,
+  AccordionModule,
+  MaskModule,
+  RatingModule,
+  StepperModule,
+  PaginationModule,
 ];
 
 @NgModule({
-    imports: [
-        CellModule.forRoot(), ButtonModule.forRoot(),  FormModule.forRoot(), SliderModule.forRoot(), UploaderModule.forRoot(), ActionSheetModule.forRoot(),
-        DialogModule.forRoot(), LoadmoreModule.forRoot(), ProgressModule.forRoot(), GalleryModule.forRoot(), PickerModule.forRoot(), SearchBarModule.forRoot(),
-        TabModule.forRoot(), ToastModule.forRoot(), ToptipsModule.forRoot(), PopupModule.forRoot(), PTRModule.forRoot(), InfiniteLoaderModule.forRoot(),
-        SidebarModule.forRoot(), SwiperModule.forRoot(), ChartG2Module.forRoot(), JWeiXinModule.forRoot(), AccordionModule.forRoot(), MaskModule.forRoot(),
-        RatingModule.forRoot(), StepperModule.forRoot(), PaginationModule.forRoot()
-    ],
-    exports: MODULES
+  imports: [
+    CellModule.forRoot(),
+    ButtonModule.forRoot(),
+    FormModule.forRoot(),
+    SliderModule.forRoot(),
+    UploaderModule.forRoot(),
+    ActionSheetModule.forRoot(),
+    DialogModule.forRoot(),
+    LoadmoreModule.forRoot(),
+    ProgressModule.forRoot(),
+    GalleryModule.forRoot(),
+    PickerModule.forRoot(),
+    SearchBarModule.forRoot(),
+    TabModule.forRoot(),
+    ToastModule.forRoot(),
+    ToptipsModule.forRoot(),
+    PopupModule.forRoot(),
+    PTRModule.forRoot(),
+    InfiniteLoaderModule.forRoot(),
+    SidebarModule.forRoot(),
+    SwiperModule.forRoot(),
+    ChartG2Module.forRoot(),
+    JWeiXinModule.forRoot(),
+    AccordionModule.forRoot(),
+    MaskModule.forRoot(),
+    RatingModule.forRoot(),
+    StepperModule.forRoot(),
+    PaginationModule.forRoot(),
+  ],
+  exports: MODULES,
 })
-export class WeUiRootModule {
-}
+export class WeUiRootModule {}
 
 @NgModule({ exports: MODULES })
 export class WeUiModule {
-    public static forRoot(): ModuleWithProviders {
-        return { ngModule: WeUiRootModule };
-    }
+  static forRoot(): ModuleWithProviders {
+    return { ngModule: WeUiRootModule };
+  }
 }

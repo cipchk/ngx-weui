@@ -6,11 +6,10 @@ import { SidebarService } from './sidebar.service';
  */
 @Directive({ selector: '[closeSidebar]' })
 export class CloseSidebarDirective {
+  constructor(private _sidebarService: SidebarService) {}
 
-    constructor(private _sidebarService: SidebarService) { }
-
-    @HostListener('click')
-    _onClick(): void {
-        this._sidebarService.close();
-    }
+  @HostListener('click')
+  _onClick(): void {
+    this._sidebarService.close();
+  }
 }

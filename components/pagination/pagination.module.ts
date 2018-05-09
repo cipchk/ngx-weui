@@ -6,16 +6,12 @@ import { PaginationComponent } from './pagination.component';
 import { PaginationConfig } from './pagination.config';
 
 @NgModule({
-    imports: [ CommonModule, ButtonModule.forRoot() ],
-    declarations: [
-        PaginationComponent
-    ],
-    exports: [
-        PaginationComponent
-    ]
+  imports: [CommonModule, ButtonModule.forRoot()],
+  declarations: [PaginationComponent],
+  exports: [PaginationComponent],
 })
 export class PaginationModule {
-    public static forRoot(): ModuleWithProviders {
-        return { ngModule: PaginationModule, providers: [ PaginationConfig ] };
-    }
+  static forRoot(): ModuleWithProviders {
+    return { ngModule: PaginationModule, providers: [PaginationConfig] };
+  }
 }

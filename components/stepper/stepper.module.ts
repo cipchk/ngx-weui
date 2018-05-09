@@ -4,16 +4,12 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { StepperComponent } from './stepper.component';
 
 @NgModule({
-    imports: [ CommonModule, FormsModule ],
-    declarations: [
-        StepperComponent
-    ],
-    exports: [
-        StepperComponent
-    ]
+  imports: [CommonModule, FormsModule],
+  declarations: [StepperComponent],
+  exports: [StepperComponent],
 })
 export class StepperModule {
-    public static forRoot(): ModuleWithProviders {
-        return { ngModule: StepperModule, providers: [] };
-    }
+  static forRoot(): ModuleWithProviders {
+    return { ngModule: StepperModule, providers: [] };
+  }
 }

@@ -4,13 +4,13 @@ import { LoadmoreComponent } from './loadmore.component';
 import { LoadmoreConfig } from './loadmore.config';
 
 @NgModule({
-    imports: [ CommonModule ],
-    declarations: [ LoadmoreComponent ],
-    exports: [ LoadmoreComponent ],
-    entryComponents: [ LoadmoreComponent ]
+  imports: [CommonModule],
+  declarations: [LoadmoreComponent],
+  exports: [LoadmoreComponent],
+  entryComponents: [LoadmoreComponent],
 })
 export class LoadmoreModule {
-    public static forRoot(): ModuleWithProviders {
-        return { ngModule: LoadmoreModule, providers: [ LoadmoreConfig ] };
-    }
+  static forRoot(): ModuleWithProviders {
+    return { ngModule: LoadmoreModule, providers: [LoadmoreConfig] };
+  }
 }

@@ -5,12 +5,12 @@ import { ButtonConfig } from './button.config';
 import { ButtonComponent } from './button.component';
 
 @NgModule({
-    imports: [ CommonModule ],
-    declarations: [ ButtonComponent ],
-    exports: [ ButtonComponent ]
+  imports: [CommonModule],
+  declarations: [ButtonComponent],
+  exports: [ButtonComponent],
 })
 export class ButtonModule {
-    public static forRoot(): ModuleWithProviders {
-        return { ngModule: ButtonModule, providers: [ ButtonConfig ] };
-    }
+  static forRoot(): ModuleWithProviders {
+    return { ngModule: ButtonModule, providers: [ButtonConfig] };
+  }
 }

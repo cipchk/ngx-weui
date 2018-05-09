@@ -3,10 +3,10 @@ import { JWeiXinService } from './jweixin.service';
 import { LoaderService } from '../utils/loader.service';
 
 @NgModule({
-    providers: [ JWeiXinService, LoaderService ]
+  providers: [JWeiXinService, LoaderService],
 })
 export class JWeiXinModule {
-    public static forRoot(): ModuleWithProviders {
-        return { ngModule: JWeiXinModule, providers: [  ] };
-    }
+  static forRoot(): ModuleWithProviders {
+    return { ngModule: JWeiXinModule, providers: [] };
+  }
 }

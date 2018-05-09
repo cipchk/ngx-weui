@@ -1,15 +1,15 @@
-import { NgModule, ModuleWithProviders  } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MaskComponent } from './mask.component';
 
 @NgModule({
-    imports: [ CommonModule ],
-    declarations: [ MaskComponent ],
-    exports: [ MaskComponent ],
-    entryComponents: [ MaskComponent ]
+  imports: [CommonModule],
+  declarations: [MaskComponent],
+  exports: [MaskComponent],
+  entryComponents: [MaskComponent],
 })
 export class MaskModule {
-    public static forRoot(): ModuleWithProviders {
-        return { ngModule: MaskModule, providers: [  ] };
-    }
+  static forRoot(): ModuleWithProviders {
+    return { ngModule: MaskModule, providers: [] };
+  }
 }

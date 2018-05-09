@@ -7,12 +7,12 @@ import { TabbarComponent } from './tabbar.component';
 import { BarComponent } from './bar.component';
 
 @NgModule({
-    imports: [ CommonModule, FormsModule ],
-    declarations: [ TabDirective, NavbarComponent, TabbarComponent, BarComponent ],
-    exports: [ TabDirective, NavbarComponent, TabbarComponent ]
+  imports: [CommonModule, FormsModule],
+  declarations: [TabDirective, NavbarComponent, TabbarComponent, BarComponent],
+  exports: [TabDirective, NavbarComponent, TabbarComponent],
 })
-export class TabModule  {
-    public static forRoot(): ModuleWithProviders {
-        return { ngModule: TabModule, providers: [  ] };
-    }
+export class TabModule {
+  static forRoot(): ModuleWithProviders {
+    return { ngModule: TabModule, providers: [] };
+  }
 }

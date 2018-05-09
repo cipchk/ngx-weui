@@ -6,12 +6,26 @@ export type ButtonType = 'default' | 'primary' | 'warn';
 /**
  * 文本框类型
  */
-export type InputType = 'text' | 'email' | 'password' | 'number' | 'tel' | 'range' | 'textarea' | 'select' | 'radio' | 'checkbox' | 'url';
+export type InputType =
+  | 'text'
+  | 'email'
+  | 'password'
+  | 'number'
+  | 'tel'
+  | 'range'
+  | 'textarea'
+  | 'select'
+  | 'radio'
+  | 'checkbox'
+  | 'url';
 
 /**
  * 文本框数据项
  */
-export interface InputData { text: string; [key: string]: any; }
+export interface InputData {
+  text: string;
+  [key: string]: any;
+}
 
 /**
  * 样式类型

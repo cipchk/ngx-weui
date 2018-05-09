@@ -7,22 +7,22 @@ import { TextareaDirective } from './textarea.directive';
 import { ChecklistDirective } from './check.directive';
 
 @NgModule({
-    imports: [ CommonModule, FormsModule ],
-    declarations: [
-        InputDirective,
-        VCodeDirective,
-        TextareaDirective,
-        ChecklistDirective
-    ],
-    exports: [
-        InputDirective,
-        VCodeDirective,
-        TextareaDirective,
-        ChecklistDirective
-    ]
+  imports: [CommonModule, FormsModule],
+  declarations: [
+    InputDirective,
+    VCodeDirective,
+    TextareaDirective,
+    ChecklistDirective,
+  ],
+  exports: [
+    InputDirective,
+    VCodeDirective,
+    TextareaDirective,
+    ChecklistDirective,
+  ],
 })
 export class FormModule {
-    public static forRoot(): ModuleWithProviders {
-        return { ngModule: FormModule, providers: [] };
-    }
+  static forRoot(): ModuleWithProviders {
+    return { ngModule: FormModule, providers: [] };
+  }
 }

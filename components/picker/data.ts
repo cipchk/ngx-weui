@@ -1,18 +1,18 @@
 export interface PickerData {
-    [key: string]: any;
+  [key: string]: any;
 
-    /**
-     * 显示文本
-     */
-    label: string;
+  /**
+   * 显示文本
+   */
+  label: string;
 
-    /**
-     * 值
-     */
-    value: string;
+  /**
+   * 值
+   */
+  value: string;
 
-    /**
-     * 是否禁用
-     */
-    disabled?: boolean;
+  /**
+   * 是否禁用
+   */
+  disabled?: boolean;
 }

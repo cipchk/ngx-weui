@@ -5,13 +5,13 @@ import { SwiperComponent } from './swiper.component';
 import { SwiperConfig } from './swiper.config';
 
 @NgModule({
-    imports: [ CommonModule, FormsModule ],
-    declarations: [ SwiperComponent ],
-    exports: [ SwiperComponent ],
-    providers: [ SwiperConfig ]
+  imports: [CommonModule, FormsModule],
+  declarations: [SwiperComponent],
+  exports: [SwiperComponent],
+  providers: [SwiperConfig],
 })
-export class SwiperModule  {
-    public static forRoot(): ModuleWithProviders {
-        return { ngModule: SwiperModule, providers: [ SwiperConfig ] };
-    }
+export class SwiperModule {
+  static forRoot(): ModuleWithProviders {
+    return { ngModule: SwiperModule, providers: [SwiperConfig] };
+  }
 }

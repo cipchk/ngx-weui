@@ -8,7 +8,7 @@
         "types": [],
         "paths": {
             "ngx-weui": [
-                "../components/ngx-weui.module"
+                "../components/index"
             ],
             "ngx-weui/*": [
                 "../components/*"

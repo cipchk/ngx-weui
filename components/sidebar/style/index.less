@@ -1,53 +1,47 @@
 .weui-sidebar {
-    background-color: #fff;
-    overflow: auto;
-    pointer-events: auto;
-    position: fixed;
-    will-change: initial;
-    z-index: 99999;
-    transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
-}
-
-.weui-sidebar__left {
+  background-color: #fff;
+  overflow: auto;
+  pointer-events: auto;
+  position: fixed;
+  will-change: initial;
+  z-index: 99999;
+  transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
+  &__left {
     bottom: 0;
     left: 0;
     top: 0;
-}
-
-.weui-sidebar__right {
+  }
+  &__right {
     bottom: 0;
     right: 0;
     top: 0;
-}
-
-.weui-sidebar__top {
+  }
+  &__top {
     left: 0;
     right: 0;
     top: 0;
-}
-
-.weui-sidebar__bottom {
+  }
+  &__bottom {
     bottom: 0;
     left: 0;
     right: 0;
-}
-
-.weui-sidebar__inert {
+  }
+  &__inert {
     pointer-events: none;
     will-change: transform;
-}
-
-weui-sidebar-container {
-    box-sizing: border-box;
-    display: block;
-    height: 100%;
-    position: relative;
-    transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
-}
-
-.weui-sidebar__content {
+  }
+  &__content {
     display: block;
     height: 100%;
     overflow: auto;
     transition: margin 0.3s cubic-bezier(0, 0, 0.3, 1);
+  }
+}
+
+weui-sidebar-container {
+  box-sizing: border-box;
+  display: block;
+  height: 100%;
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0, 0, 0.3, 1);
 }
