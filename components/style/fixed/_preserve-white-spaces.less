@@ -1,0 +1,8 @@
+.preserve-white-spaces-mixin(@enabled) when(@enabled =true) {
+  // 按钮
+  .weui-btn + .weui-btn {
+    margin-left: @gutter;
+  }
+}
+
+.preserve-white-spaces-mixin(@preserve-white-spaces-enabled);

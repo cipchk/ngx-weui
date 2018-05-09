@@ -54,3 +54,5 @@ npm i --save weui
 | @toptips-bg-default | `#B2B2B2` | 弹出式提示 `default` 背景色
 | @toptips-bg-info | `#586C94` | 弹出式提示 `info` 背景色
 | @toptips-bg-primary | `#1AAD19` | 弹出式提示 `primary` 背景色
+| @gutter | `8px` | 间距
+| @preserve-white-spaces-enabled | `true` | 是否开启 `preserveWhitespaces: false` 时强制对两个相邻按钮 `@gutter` 间距
