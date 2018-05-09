@@ -95,6 +95,9 @@
     "invoke-injectable": true
   },
   "linterOptions": {
-    "exclude": ["components/**/*.spec.ts"]
+    "exclude": [
+      "components/**/*.spec.ts",
+      "components/schematics/**/*"
+    ]
   }
 }
