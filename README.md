@@ -10,9 +10,10 @@
 1. [Usage & Demo](#usage--demo)
 2. [Installation instructions](#installation-instructions)
 3. [API Docs](https://cipchk.github.io/ngx-weui/)
-4. [Global Config](https://github.com/cipchk/ngx-weui/blob/master/docs/config.md)
-5. [Troubleshooting](#troubleshooting)
-4. [License](#license)
+4. [Customize Theme](https://cipchk.github.io/ngx-weui/#/docs/style)
+5. [Global Config](https://cipchk.github.io/ngx-weui/#/docs/config)
+6. [Troubleshooting](#troubleshooting)
+7. [License](#license)
 
 ## Usage & Demo
 
@@ -20,46 +21,36 @@
 - [Live Demo](https://cipchk.github.io/ngx-weui/)
 - [Stackblitz](https://stackblitz.com/edit/ngx-weui)
 
-## Installation instructions
+## Create project
 
-Install `ngx-weui` from `npm`
+1. Install global `angular-cli`:
 
 ```bash
-npm install ngx-weui --save
+npm install -g @angular/cli
+# Optional: Set default use of yarn to install dependencies
+# ng config -g cli.packageManager yarn
 ```
 
-You will need weui styles:
+2. New a empty angular project
 
-```html
-<!-- index.html -->
-<link href="//res.wx.qq.com/open/libs/weui/1.1.2/weui.min.css" rel="stylesheet">
+```bash
+# Specify less style
+ng new demo --style less
 ```
 
-And ngx-weui styles in `src/styles.scss`:
+3. add `ngx-weui`
 
-```html
-@import '~ngx-weui/index';
+```bash
+cd demo
+ng add ngx-weui
 ```
 
-> ngx-weui allows you to customize some basic design aspects in order to meet the needs of UI diversity from business and brand, including weui primary color, font size, etc. pls read [ngx-weui 样式](https://cipchk.github.io/ngx-weui/#/docs/style).
-
-Import the `ngx-weui` in to your root `AppModule`.
-
-```typescript
-import { WeUiModule } from 'ngx-weui';
-
-@NgModule({
-    imports: [ WeUiModule.forRoot() ]
-})
-export class AppModule { }
-```
-
-please refer to more [details](https://github.com/cipchk/ngx-weui/blob/master/docs/how.md).
+> please refer to more [details](https://github.com/cipchk/ngx-weui/blob/master/docs/how.md).
 
 ### How to use it with:
 
 + `angular-cli` please refer to [how](https://github.com/cipchk/ngx-weui/blob/master/docs/how.md).
-+ `stackblitz` sample available [here](https://stackblitz.com/edit/ngx-weui).
++ ~~`stackblitz` sample available [here](https://stackblitz.com/edit/ngx-weui).~~
 
 ## Troubleshooting
 
