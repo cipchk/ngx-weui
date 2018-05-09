@@ -26,18 +26,13 @@
     "url": "https://github.com/cipchk/ngx-weui/issues"
   },
   "homepage": "https://github.com/cipchk/ngx-weui#readme",
-  "peerDependencies": {
-    "weui": "^1.1.2"
-  },
   "dependencies": {
-    "tslib": "^1.7.1"
+    "tslib": "^1.9.0"
   },
   "schematics": "./schematics/collection.json",
   "ng-update": {
     "migrations": "./schematics/migration.json",
-    "packageGroup": [
-      "ngx-weui"
-    ]
+    "packageGroup": ["ngx-weui"]
   },
   "sideEffects": false
 }

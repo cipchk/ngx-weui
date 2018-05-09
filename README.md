@@ -36,12 +36,18 @@ npm install -g @angular/cli
 ```bash
 # Specify less style
 ng new demo --style less
+cd demo
 ```
 
-3. add `ngx-weui`
+3. install `weui`
 
 ```bash
-cd demo
+yarn add weui
+```
+
+4. add `ngx-weui`
+
+```bash
 ng add ngx-weui
 ```
 
@@ -50,7 +56,7 @@ ng add ngx-weui
 ### How to use it with:
 
 + `angular-cli` please refer to [how](https://github.com/cipchk/ngx-weui/blob/master/docs/how.md).
-+ ~~`stackblitz` sample available [here](https://stackblitz.com/edit/ngx-weui).~~
++ `stackblitz` sample available [here](https://stackblitz.com/edit/ngx-weui).
 
 ## Troubleshooting
 

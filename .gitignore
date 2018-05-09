@@ -6,6 +6,7 @@ package-lock.json
 publish
 publish-es5
 publish-es2015
+yarn.lock
 
 # misc
 /coverage
