@@ -3,38 +3,28 @@ title: 如何使用？
 order: 1
 ---
 
-## 安装
+## 创建项目
+
+1、安装全局 `angular-cli`：
 
 ```bash
-npm install ngx-weui --save
+npm install -g @angular/cli
+# 可选：设置默认使用 yarn 来安装依赖包
+# ng config -g cli.packageManager yarn
 ```
 
-`ngx-weui` 是**不带任何weui样式**，有关样式说明，请阅读[ngx-weui 样式](https://cipchk.github.io/ngx-weui/#/docs/style)。
+2、创建空项目
 
-## 模块注册
-
-`ngx-weui` 默认情况下可以直接使用：
-
-```typescript
-import { WeUiModule } from 'ngx-weui';
-
-@NgModule({
-    imports: [ WeUiModule.forRoot() ]
-})
-export class AppModule { }
+```bash
+# 指定 less 样式
+ng new demo --style less
 ```
 
-注册所有的模块。
+3、添加 `ngx-weui`
 
-当然，如果你明确知道只使用其中几个模块的话，可以针对模块进行导入，比如导入一个弹出式菜单模块：
-
-```typescript
-import { ActionSheetModule } from 'ngx-weui/actionsheet';
-
-@NgModule({
-    imports: [ ActionSheetModule.forRoot() ]
-})
-export class AppModule { }
+```bash
+cd demo
+ng add ngx-weui
 ```
 
 ## 全局模块配置注册
@@ -43,7 +33,7 @@ export class AppModule { }
 
 ## HTML模板使用
 
-几个写法：
+几种写法：
 
 ```html
 <!--按钮-->

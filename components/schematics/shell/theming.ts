@@ -21,7 +21,7 @@ export function addThemeToAppStyles(options: Schema): (host: Tree) => Tree {
 
     const stylesPath = getStylesPath(host, project);
     if (stylesPath.endsWith('.less')) {
-      throw new SchematicsException('Your project is not using less styles');
+      console.error(`Your project is not using less styles, current file: ${stylesPath}`);
     }
     const buffer = host.read(stylesPath);
     if (buffer) {

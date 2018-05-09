@@ -9,19 +9,6 @@ order: 3
 
 > **注：** `weui` 是由 Less 编写的，因此应用也必须 Less 才能覆盖。
 
-默认 `ngx-weui` 并没有强制依赖 `weui`，这是因为在某些特殊场景下可能会由于 `package.json` 的入口关系导致失败。因此在使用样式之前必须先安装 `weui` 依赖包：
-
-```bash
-npm i --save weui
-```
-
-最后，在项目 `styles.less` 里加入 `weui` 和 `ngx-weui` 样式：
-
-```less
-@import '~weui/src/style/weui.less';
-@import '~ngx-weui/index';
-```
-
 ## 自定义主题
 
 只需要在 `styles.less` 加入相应的要覆盖的参数即可，例如：你想改变字体和主按钮的背景色为红色：

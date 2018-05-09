@@ -27,6 +27,7 @@
   },
   "homepage": "https://github.com/cipchk/ngx-weui#readme",
   "peerDependencies": {
+    "weui": "^1.1.2"
   },
   "dependencies": {
     "tslib": "^1.7.1"

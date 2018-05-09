@@ -20,6 +20,7 @@ export default function(options: Schema): Rule {
   return chain([
     options && options.skipPackageJson ? noop() : addWeUIToPackageJson(),
     addThemeToAppStyles(options),
+    addWeUIRootConfig(options),
     addAnimationRootConfig(options),
   ]);
 }
@@ -28,6 +29,23 @@ function addWeUIToPackageJson() {
   return (host: Tree, context: SchematicContext) => {
     addPackageToPackageJson(host, 'dependencies', 'ngx-weui', weuiVersion);
     context.addTask(new NodePackageInstallTask());
+    return host;
+  };
+}
+
+/** Add ngx-weui module to app.module */
+function addWeUIRootConfig(options: Schema) {
+  return (host: Tree) => {
+    const workspace = getWorkspace(host);
+    const project = getProjectFromWorkspace(workspace, options.project);
+
+    addModuleImportToRootModule(
+      host,
+      'WeUiModule.forRoot()',
+      'ngx-weui',
+      project,
+    );
+
     return host;
   };
 }

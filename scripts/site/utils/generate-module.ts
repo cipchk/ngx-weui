@@ -78,8 +78,10 @@ export function generateModule(config: any, isSyncSpecific: boolean, target: str
             );
         } else {
             if (!fse.statSync(srcDirPath).isDirectory()) return;
+            const indexMd = path.join(srcPath, dirName, 'index.md');
+            if (!fs.existsSync(indexMd)) return ;
             genComponentMeta(
-                fse.readFileSync(path.join(srcPath, dirName, 'index.md')),
+                fse.readFileSync(indexMd),
                 dirName
             );
         }
