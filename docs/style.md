@@ -1,5 +1,6 @@
 ---
 title: ngx-weui 样式
+order: 3
 ---
 
 ## 写在前面
