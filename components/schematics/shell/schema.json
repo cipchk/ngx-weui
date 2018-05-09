@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "id": "SchematicsWeUIShell",
+  "title": "WeUI Shell Options Schema",
+  "type": "object",
+  "properties": {
+    "skipPackageJson": {
+      "type": "boolean",
+      "default": false,
+      "description": "Do not add ngx-weui dependencies to package.json (e.g., --skipPackageJson)"
+    }
+  },
+  "required": []
+}

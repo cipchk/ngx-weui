@@ -8,6 +8,33 @@ rm -rf publish-es2015
 cp -r components __gen_components
 node ./scripts/build/inline-template.js
 
+VERSION=$(node -p "require('./package.json').version")
+
+buildSchematics() {
+  echo '  Compiling schematics'
+  schematics_source_dir=${PWD}/__gen_components/schematics/
+  schematics_dist_dir=${PWD}/publish/schematics/
+  $(npm bin)/tsc -p ${schematics_source_dir}tsconfig.json
+  echo '  Coping all json files'
+  rsync -am --include="*.json" --include="*/" --exclude=* ${schematics_source_dir}/ ${schematics_dist_dir}/
+}
+
+#######################################
+# update version references
+# Arguments:
+#   param1 - Source directory
+# Returns:
+#   None
+#######################################
+updateVersionReferences() {
+  NPM_DIR="$1"
+  (
+    echo "======    VERSION: Updating version references in ${NPM_DIR}"
+    cd ${NPM_DIR}
+    perl -p -i -e "s/0\.0\.0\-PLACEHOLDER/${VERSION}/g" $(grep -ril 0\.0\.0\-PLACEHOLDER .) < /dev/null 2> /dev/null
+  )
+}
+
 echo 'Compiling to es2015 via Angular compiler'
 $(npm bin)/ngc -p tsconfig-build.json -t es2015 --outDir publish-es2015/src
 
@@ -35,6 +62,9 @@ mv publish-es5 publish
 mv publish-es2015/esm2015 publish/esm2015
 rm -rf publish-es2015
 
+echo 'Build schematics'
+buildSchematics
+
 echo 'Cleaning up temporary files'
 rm -rf __gen_components
 rm -rf publish/src/*.js
@@ -45,8 +75,9 @@ sed -e "s/from '.\//from '.\/src\//g" publish/src/index.d.ts > publish/weui.d.ts
 sed -e "s/\":\".\//\":\".\/src\//g" publish/src/index.metadata.json > publish/weui.metadata.json
 rm publish/src/index.d.ts publish/src/index.metadata.json
 
-echo 'Copying package.json'
-cp package.json publish/package.json
+echo 'update version'
+cp components/package.json publish/package.json
+updateVersionReferences publish
 
 echo 'Copying README.md'
 cp README.md publish/README.md

@@ -83,7 +83,7 @@
     rxjs "^6.0.0"
     source-map "^0.5.6"
 
-"@angular-devkit/schematics@0.6.0":
+"@angular-devkit/schematics@0.6.0", "@angular-devkit/schematics@^0.6.0":
   version "0.6.0"
   resolved "http://registry.npm.taobao.org/@angular-devkit/schematics/download/@angular-devkit/schematics-0.6.0.tgz#0117dc7d5905b053df4f2918e2e073efd1091f5c"
   dependencies:
@@ -196,7 +196,7 @@
     tree-kill "^1.0.0"
     webpack-sources "^1.1.0"
 
-"@schematics/angular@0.6.0":
+"@schematics/angular@0.6.0", "@schematics/angular@^0.6.0":
   version "0.6.0"
   resolved "http://registry.npm.taobao.org/@schematics/angular/download/@schematics/angular-0.6.0.tgz#d7589c50f80ef089f7fba526ed9becefb187b6a2"
   dependencies:
