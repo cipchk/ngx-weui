@@ -27,7 +27,8 @@
   },
   "homepage": "https://github.com/cipchk/ngx-weui#readme",
   "dependencies": {
-    "tslib": "^1.9.0"
+    "tslib": "^1.9.0",
+    "weui": "^1.1.2"
   },
   "schematics": "./schematics/collection.json",
   "ng-update": {
