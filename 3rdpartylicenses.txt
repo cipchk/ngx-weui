@@ -275,11 +275,11 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
-@angular/platform-browser@6.0.0
+@angular/platform-browser@6.0.2
 MIT
 MIT
 
-tslib@1.9.0
+tslib@1.9.1
 Apache-2.0
 Apache License
 
@@ -337,7 +337,7 @@ If the Work includes a "NOTICE" text file as part of its distribution, then any 
 
 END OF TERMS AND CONDITIONS
 
-@angular/common@6.0.0
+@angular/common@6.0.2
 MIT
 MIT
 
@@ -357,18 +357,18 @@ ngx-gesture-password@2.0.1
 MIT
 MIT
 
-@angular/http@6.0.0
+@angular/http@6.0.2
 MIT
 MIT
 
-@angular/router@6.0.0
+@angular/router@6.0.2
 MIT
 MIT
 
-@angular/core@6.0.0
+@angular/core@6.0.2
 MIT
 MIT
 
-@angular/forms@6.0.0
+@angular/forms@6.0.2
 MIT
 MIT
