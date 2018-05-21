@@ -39,13 +39,7 @@ ng new demo --style less
 cd demo
 ```
 
-3. install `weui`
-
-```bash
-yarn add weui
-```
-
-4. add `ngx-weui`
+3. add `ngx-weui`
 
 ```bash
 ng add ngx-weui

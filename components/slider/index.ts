@@ -1,2 +1,1 @@
-export { SliderDirective } from './slider';
-export { SliderModule } from './slider.module';
+export * from './public-api';
