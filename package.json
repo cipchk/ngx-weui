@@ -1,6 +1,6 @@
 {
   "name": "ngx-weui",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "main": "./bundles/weui.umd.js",
   "module": "./esm5/weui.js",
   "es2015": "./esm2015/weui.js",
