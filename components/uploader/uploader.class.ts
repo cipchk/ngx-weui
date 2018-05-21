@@ -354,13 +354,11 @@ export class Uploader {
     if (!this._options.disableMultipart) {
       sendable = new FormData();
 
-      sendable.append(item.options.alias, item._file, item.file.name);
+      Object.keys(this._options.params || {}).forEach((key: string) =>
+        sendable.append(key, this._options.params[key]),
+      );
 
-      if (this._options.params !== undefined) {
-        Object.keys(this._options.params).forEach((key: string) => {
-          sendable.append(key, this._options.params[key]);
-        });
-      }
+      sendable.append(item.options.alias, item._file, item.file.name);
     } else {
       sendable = item._file;
     }
