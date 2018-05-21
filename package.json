@@ -100,7 +100,8 @@
     "ts-node": "~5.0.1",
     "tslint": "~5.9.1",
     "typescript": "~2.7.2",
-    "weui": "^1.1.2"
+    "weui": "^1.1.2",
+    "less-plugin-clean-css": "^1.5.1"
   },
   "lint-staged": {
     "*.{cmd,html,json,md,sh,txt,xml,yml}": [
