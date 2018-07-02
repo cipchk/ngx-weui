@@ -39,7 +39,7 @@ export class ToastService extends BaseService {
     if (type) componentRef.instance.type = type;
     if (text) componentRef.instance.text = text;
     if (icon) componentRef.instance.icon = icon;
-    if (time) componentRef.instance.time = time;
+    if (time || time === 0) componentRef.instance.time = time;
     componentRef.instance.hide.subscribe(() => {
       setTimeout(() => {
         componentRef.destroy();
