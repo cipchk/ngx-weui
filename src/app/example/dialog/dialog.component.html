@@ -20,7 +20,7 @@
     <div class="weui-cells__title">使用Service Prompt形式</div>
     <button weui-button weui-type="default" *ngFor="let i of promptTypes" (click)="onShowPrompt(i, true)">{{i}}框</button>
 
-    <!--忽必将对话框组件放在底部-->
+    <!--务必将对话框组件放在底部-->
     <weui-dialog #ios [config]="config"></weui-dialog>
     <weui-dialog #android [config]="config"></weui-dialog>
     <weui-dialog #auto [config]="config"></weui-dialog>
