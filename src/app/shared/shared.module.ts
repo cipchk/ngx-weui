@@ -6,40 +6,40 @@ import { RouterModule } from '@angular/router';
 import { WeUiModule } from 'ngx-weui';
 import { AqmModule } from 'angular-qq-maps';
 import { GesturePasswordModule } from 'ngx-gesture-password';
-import { NotifyModule } from 'ngx-notify';
+import { ToastrModule } from 'ngx-toastr';
 import { CountdownModule } from 'ngx-countdown';
 
 import { DocsNavComponent } from './docs-nav/docs-nav.component';
 import { EditButtonComponent } from './edit-button/edit-button.component';
 
-const COMPONENTS = [ DocsNavComponent, EditButtonComponent ];
+const COMPONENTS = [DocsNavComponent, EditButtonComponent];
 
 const THIDS = [
-    CountdownModule,
-    NotifyModule,
-    GesturePasswordModule,
-    AqmModule
+  CountdownModule,
+  ToastrModule,
+  GesturePasswordModule,
+  AqmModule
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        RouterModule,
-        ReactiveFormsModule,
-        WeUiModule,
-        ...THIDS
-    ],
-    declarations: COMPONENTS,
-    exports: [
-        CommonModule,
-        FormsModule,
-        RouterModule,
-        ReactiveFormsModule,
-        WeUiModule,
-        ...THIDS,
-        ...COMPONENTS
-    ]
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    ReactiveFormsModule,
+    WeUiModule,
+    ...THIDS
+  ],
+  declarations: COMPONENTS,
+  exports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    ReactiveFormsModule,
+    WeUiModule,
+    ...THIDS,
+    ...COMPONENTS
+  ]
 })
 export class SharedModule {
 }

@@ -27,8 +27,7 @@ import { toBoolean } from '../utils/boolean-property';
   },
   exportAs: 'weuiButton',
   template:
-    '<i class="weui-loading" *ngIf="loading"></i><ng-content></ng-content>',
-  preserveWhitespaces: false
+    '<i class="weui-loading" *ngIf="loading"></i><ng-content></ng-content>'
 })
 export class ButtonComponent {
   /**

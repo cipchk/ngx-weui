@@ -41,7 +41,6 @@ import { PickerConfig } from './picker.config';
       </div>
     </div>
   `,
-  preserveWhitespaces: false,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -107,7 +106,7 @@ export class PickerComponent
   /** 隐藏后回调 */
   @Output() hide = new EventEmitter();
 
-  constructor(private el: ElementRef, private DEF: PickerConfig) {}
+  constructor(private el: ElementRef, private DEF: PickerConfig) { }
 
   ngOnInit() {
     if (!this.options) this.parseOptions();
@@ -210,7 +209,7 @@ export class PickerComponent
     }
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void { }
 
   writeValue(value: any): void {
     if (!value) this._text = '';
@@ -231,7 +230,9 @@ export class PickerComponent
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {}
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
 
   _onFocus($event: FocusEvent) {
     arguments[0].target.blur();

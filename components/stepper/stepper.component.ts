@@ -27,7 +27,6 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
   </div>
   <span class="plus" [ngClass]="{'disabled':_disabledPlus}" (click)="_plus()"><em>+</em></span>
   `,
-  preserveWhitespaces: false,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -118,7 +117,7 @@ export class StepperComponent implements ControlValueAccessor {
     if (this._disabledPlus) return;
     this.value = this._toPrecisionAsStep(
       (this._precisionFactor * this.value + this._precisionFactor * this.step) /
-        this._precisionFactor,
+      this._precisionFactor,
     );
     this._checkDisabled()._notify();
   }
@@ -130,7 +129,7 @@ export class StepperComponent implements ControlValueAccessor {
     if (this._disabledMinus) return;
     this.value = this._toPrecisionAsStep(
       (this._precisionFactor * this.value - this._precisionFactor * this.step) /
-        this._precisionFactor,
+      this._precisionFactor,
     );
     this._checkDisabled()._notify();
   }
@@ -164,5 +163,7 @@ export class StepperComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {}
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
 }

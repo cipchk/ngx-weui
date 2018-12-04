@@ -44,8 +44,7 @@ import { Observer, Observable, Subscription } from 'rxjs';
   host: {
     '[hidden]': '!_shown',
     '[class.weui-skin_android]': 'config.skin === "android"',
-  },
-  preserveWhitespaces: false
+  }
 })
 export class ActionSheetComponent implements OnDestroy {
   /**
@@ -75,7 +74,7 @@ export class ActionSheetComponent implements OnDestroy {
     return this._shownAnt ? 'show' : 'hide';
   }
 
-  constructor(private DEF: ActionSheetConfig) {}
+  constructor(private DEF: ActionSheetConfig) { }
 
   /**
    * 显示，组件载入页面后并不会显示，显示调用 `show()` 并订阅结果。

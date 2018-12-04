@@ -1,13 +1,5 @@
-import {
-  Injectable,
-  ComponentFactoryResolver,
-  ApplicationRef,
-  Injector,
-  Optional,
-  EmbeddedViewRef,
-  ComponentRef,
-} from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { BaseService } from '../utils/base.service';
 
@@ -26,13 +18,6 @@ import { CityPickerComponent } from './picker-city.component';
  */
 @Injectable()
 export class PickerService extends BaseService {
-  constructor(
-    resolver: ComponentFactoryResolver,
-    applicationRef: ApplicationRef,
-    injector: Injector,
-  ) {
-    super(resolver, applicationRef, injector);
-  }
 
   /**
    * 构建一个多列选择器并显示

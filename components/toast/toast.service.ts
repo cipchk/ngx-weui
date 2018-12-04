@@ -1,25 +1,9 @@
-import {
-  Injectable,
-  ComponentFactoryResolver,
-  ApplicationRef,
-  Injector,
-  Optional,
-  EmbeddedViewRef,
-} from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { BaseService } from '../utils/base.service';
 import { ToastComponent } from './toast.component';
 
 @Injectable()
 export class ToastService extends BaseService {
-  constructor(
-    resolver: ComponentFactoryResolver,
-    applicationRef: ApplicationRef,
-    injector: Injector,
-  ) {
-    super(resolver, applicationRef, injector);
-  }
-
   /**
    * 构建toast并显示
    *
@@ -39,7 +23,7 @@ export class ToastService extends BaseService {
     if (type) componentRef.instance.type = type;
     if (text) componentRef.instance.text = text;
     if (icon) componentRef.instance.icon = icon;
-    if (time) componentRef.instance.time = time;
+    if (typeof time === 'number') componentRef.instance.time = time;
     componentRef.instance.hide.subscribe(() => {
       setTimeout(() => {
         componentRef.destroy();

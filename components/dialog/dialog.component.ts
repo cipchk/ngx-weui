@@ -21,7 +21,6 @@ import { DialogConfig } from './dialog.config';
 @Component({
   selector: 'weui-dialog',
   templateUrl: './dialog.component.html',
-  preserveWhitespaces: false,
 })
 export class DialogComponent implements OnDestroy {
   private _config: DialogConfig;
@@ -125,7 +124,7 @@ export class DialogComponent implements OnDestroy {
 
   _shown: boolean = false;
 
-  constructor(private DEF: DialogConfig) {}
+  constructor(private DEF: DialogConfig) { }
 
   @ViewChild('container') container: any;
   _prompError: boolean = false;

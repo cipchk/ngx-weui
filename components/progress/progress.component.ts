@@ -12,7 +12,6 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
       </a>
     </div>
   `,
-  preserveWhitespaces: false,
 })
 export class ProgressComponent {
   _value: number = 0;

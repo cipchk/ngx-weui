@@ -28,7 +28,6 @@ import { PaginationConfig } from './pagination.config';
   host: {
     class: 'weui-pagination',
   },
-  preserveWhitespaces: false,
 })
 export class PaginationComponent implements OnChanges {
   _ptArr: number[] = [];

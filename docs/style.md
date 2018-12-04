@@ -20,6 +20,8 @@ order: 3
 
 `weui` 包含着几十种参数这些参数你可以通过 [variable](https://github.com/Tencent/weui/tree/master/src/style/base/variable) 目录下获得，每一个文件分布都非常简单明了。
 
+> **注意：** css 文件是无法调用 less 变量，若第三方组件或所有非less样式，可以在 `angular.json` 的 `styles` 节点自行添加相应非 less 格式样式文件（包含：`scss`、`stylus` 等），但你将无法使用 `ngx-weui` 的 Less 参数。
+
 `ngx-weui` 也包含十几种参数，这些包括：
 
 | 名称 | 默认值 | 描述

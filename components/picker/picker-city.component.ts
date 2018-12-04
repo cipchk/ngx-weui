@@ -25,7 +25,6 @@ import { PickerComponent } from './picker.component';
       (groupChange)="_onCityGroupChange($event)"
       (cancel)="_onCityCancelChange()"></weui-picker>
   `,
-  preserveWhitespaces: false,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -201,5 +200,7 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {}
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
 }

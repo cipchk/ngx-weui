@@ -67,12 +67,12 @@ export class AppComponent {
 当然以上办法有一个最大的弊端，我们无法很优雅的定制我们分享的内容，即 `title`、`desc`、`imgUrl` 等之类的信息。**所有通过抓取的都是流氓且不靠谱的行为**，故而，我建议创建一个 Service　类，然后在你需要的页面加载并使用它，以下是一个范本：
 
 ```ts
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { JWeiXinService } from 'ngx-weui/jweixin';
 
-declare const wx: any;
+declare var wx: any;
 
 /**
  * 微信JS-SDK服务器

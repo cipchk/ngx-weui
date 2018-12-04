@@ -17,8 +17,7 @@ import { AccordionComponent } from './accordion.component';
   host: {
     '[class.weui-accordion-panel-disabled]': 'disabled',
     '[class.weui-accordion-active]': 'active',
-  },
-  preserveWhitespaces: false
+  }
 })
 export class AccordionPanelComponent implements OnInit, OnDestroy {
   /**
@@ -43,7 +42,7 @@ export class AccordionPanelComponent implements OnInit, OnDestroy {
 
   constructor(
     @Inject(AccordionComponent) protected accordion: AccordionComponent,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.accordion._add(this);

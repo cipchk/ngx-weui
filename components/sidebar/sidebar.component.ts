@@ -9,12 +9,13 @@ import {
   OnChanges,
   OnDestroy,
   ChangeDetectionStrategy,
+  Inject,
 } from '@angular/core';
-import { Observable, Observer, Subscription } from 'rxjs';
-import { findParent } from '../utils/dom';
+import { Subscription } from 'rxjs';
 import { isIOS } from '../utils/browser';
 import { SidebarConfig, PositionType, ModeType } from './sidebar.config';
 import { SidebarService } from './sidebar.service';
+import { DOCUMENT } from '@angular/common';
 
 /**
  * 侧边栏
@@ -33,7 +34,6 @@ import { SidebarService } from './sidebar.service';
     <ng-content></ng-content>
   </aside>
   `,
-  preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent implements OnChanges, OnDestroy {
@@ -90,7 +90,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
   private _onClickOutsideAttached: boolean = false;
   private _anting = false;
 
-  constructor(private _sidebarService: SidebarService, config: SidebarConfig) {
+  constructor(private _sidebarService: SidebarService, config: SidebarConfig, @Inject(DOCUMENT) private doc: any) {
     Object.assign(this, config);
 
     if (isIOS() && 'ontouchstart' in window) {
@@ -172,7 +172,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
     if (!this.status || isSlideMode) {
       transformStyle = `translate${
         this.position === 'left' || this.position === 'right' ? 'X' : 'Y'
-      }`;
+        }`;
       const isLeftOrTop: boolean =
         this.position === 'left' || this.position === 'top';
       const translateAmt: string = `${isLeftOrTop ? '-' : ''}100%`;
@@ -202,7 +202,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
     if (this.status && this.backdrop) {
       setTimeout(() => {
         if (this.backdrop && !this._onClickOutsideAttached) {
-          document.addEventListener(this._clickEvent, this._onClickOutside);
+          this.doc.addEventListener(this._clickEvent, this._onClickOutside, false);
           this._onClickOutsideAttached = true;
         }
       });
@@ -211,12 +211,12 @@ export class SidebarComponent implements OnChanges, OnDestroy {
 
   private _destroyCloseListeners() {
     if (this._onClickOutsideAttached) {
-      document.removeEventListener(this._clickEvent, this._onClickOutside);
+      this.doc.removeEventListener(this._clickEvent, this._onClickOutside, false);
       this._onClickOutsideAttached = false;
     }
   }
 
-  private _onClickOutside(e: MouseEvent) {
+  private _onClickOutside(e: Event): void {
     if (
       this._onClickOutsideAttached &&
       this._elSidebar &&

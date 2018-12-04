@@ -32,7 +32,6 @@ import { PopupConfig } from './popup.config';
       </div>
     </div>
   `,
-  preserveWhitespaces: false,
   animations: [
     trigger('visibility', [
       state('show', style({ opacity: 1 })),

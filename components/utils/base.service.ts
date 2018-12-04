@@ -4,15 +4,16 @@ import {
   ApplicationRef,
   Injector,
   EmbeddedViewRef,
+  Inject,
 } from '@angular/core';
-
-declare const document: any;
+import { DOCUMENT } from '@angular/common';
 
 export abstract class BaseService {
   constructor(
     private resolver: ComponentFactoryResolver,
     private applicationRef: ApplicationRef,
     private injector: Injector,
+    @Inject(DOCUMENT) private doc: any,
   ) {}
 
   protected list: ComponentRef<any>[] = [];
@@ -46,7 +47,7 @@ export abstract class BaseService {
     componentRef.onDestroy(() => {
       this.applicationRef.detachView(componentRef.hostView);
     });
-    document.body.appendChild(componentRootNode);
+    this.doc.body.appendChild(componentRootNode);
     return componentRef;
   }
 }

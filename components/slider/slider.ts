@@ -63,7 +63,7 @@ export class SliderDirective
    */
   @Output('weui-change') change = new EventEmitter<number>();
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef) { }
 
   ngOnInit() {
     this.isInit = true;
@@ -182,5 +182,7 @@ export class SliderDirective
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {}
+  setDisabledState(isDisabled: boolean): void {
+    this.enabled = !isDisabled;
+  }
 }

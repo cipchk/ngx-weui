@@ -68,7 +68,6 @@ export interface GalleryItem {
       transition('hide <=> show', [animate(200)]),
     ]),
   ],
-  preserveWhitespaces: false
 })
 export class GalleryComponent implements OnChanges {
   _imgs: any[];

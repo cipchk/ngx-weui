@@ -5,13 +5,11 @@ import {
   SimpleChanges,
   EventEmitter,
   Output,
-  HostListener,
   ElementRef,
   OnDestroy,
-  NgZone,
   OnInit,
 } from '@angular/core';
-import { Observable, Subscription, fromEvent } from 'rxjs';
+import { Subscription, fromEvent } from 'rxjs';
 
 import { InfiniteLoaderConfig } from './infiniteloader.config';
 
@@ -52,9 +50,8 @@ export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
 
   constructor(
     private el: ElementRef,
-    private zone: NgZone,
     private DEF: InfiniteLoaderConfig,
-  ) {}
+  ) { }
 
   /** 设置本次加载完成 */
   resolveLoading() {

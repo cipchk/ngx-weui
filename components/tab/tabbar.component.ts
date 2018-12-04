@@ -10,7 +10,7 @@ import { BarComponent } from './bar.component';
   <div class="weui-tab__panel"><ng-content></ng-content></div>
   <div class="weui-tabbar">
     <div class="weui-tabbar__item" [ngClass]="{'weui-bar__item_on': item.active}"
-      *ngFor="let item of tabs" (click)="item.active=true">
+      *ngFor="let item of tabs" (click)="setActive(item)">
       <div style="display: inline-block;position: relative;">
         <div class="weui-tabbar__icon" [innerHTML]="item.icon"></div>
         <span class="weui-badge" style="position: absolute;top: -2px;right: -13px;" *ngIf="item.badge && item.badge !== 'dot'">{{item.badge}}</span>
@@ -20,7 +20,6 @@ import { BarComponent } from './bar.component';
     </div>
   </div>
   `,
-  preserveWhitespaces: false,
   providers: [
     { provide: BarComponent, useExisting: forwardRef(() => TabbarComponent) },
   ],
@@ -28,8 +27,4 @@ import { BarComponent } from './bar.component';
     '[class.weui-tab]': 'true',
   },
 })
-export class TabbarComponent extends BarComponent {
-  constructor() {
-    super();
-  }
-}
+export class TabbarComponent extends BarComponent { }

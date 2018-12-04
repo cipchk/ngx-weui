@@ -20,7 +20,6 @@ import { LoadmoreConfig } from './loadmore.config';
       <span class="weui-loadmore__tips">{{type==='dot'?'':type==='line'?lineText:loadingText}}</span>
     </div>
   `,
-  preserveWhitespaces: false
 })
 export class LoadmoreComponent {
   /**

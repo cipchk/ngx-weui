@@ -1,9 +1,22 @@
-# ngx-weui
 
-[![NPM version](https://img.shields.io/npm/v/ngx-weui.svg)](https://www.npmjs.com/package/ngx-weui) [![NPM version](https://img.shields.io/npm/v/ngx-weui/next.svg)](https://www.npmjs.com/package/ngx-weui) [![npm downloads](https://img.shields.io/npm/dm/ngx-weui.svg)](https://npmjs.org/ngx-weui) [![Angular 2 Style Guide](https://mgechev.github.io/angular2-style-guide/images/badge.svg)](https://angular.io/styleguide) [![Build Status](https://travis-ci.org/cipchk/ngx-weui.svg?branch=master)](https://travis-ci.org/cipchk/ngx-weui) [![codecov](https://codecov.io/gh/cipchk/ngx-weui/branch/master/graph/badge.svg)](https://codecov.io/gh/cipchk/ngx-weui)
-[![prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io/)
+<h1 align="center">
+ngx-weui
+</h1>
+
+<div align="center">
 
 [WeUI](https://github.com/weui/weui) Components build with [Angular](https://angular.io/).
+
+[![Build Status](https://img.shields.io/travis/cipchk/ngx-weui/master.svg?style=flat-square)](https://travis-ci.org/cipchk/ngx-weui)
+[![NPM version](https://img.shields.io/npm/v/ngx-weui.svg?style=flat-square)](https://www.npmjs.com/package/ngx-weui)
+[![npm downloads](https://img.shields.io/npm/dm/ngx-weui.svg?style=flat-square)](https://npmjs.org/ngx-weui)
+[![Codecov](https://img.shields.io/codecov/c/github/cipchk/ngx-weui.svg?style=flat-square)](https://codecov.io/gh/cipchk/ngx-weui)
+[![GitHub license](https://img.shields.io/github/license/mashape/apistatus.svg?style=flat-square)](https://github.com/cipchk/ngx-weui/blob/master/LICENSE)
+[![prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://prettier.io/)
+
+</div>
+
+[![](https://cdn-images-1.medium.com/max/3840/1*DzVxlbQups8aAEhFRuZ6dQ.png)](https://cipchk.github.io/ngx-weui/)
 
 ## Table of Contents
 

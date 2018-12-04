@@ -1,13 +1,5 @@
-import {
-  Injectable,
-  ComponentFactoryResolver,
-  ApplicationRef,
-  Injector,
-  Optional,
-  EmbeddedViewRef,
-  ComponentRef,
-} from '@angular/core';
-import { Observer, Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
 import { ActionSheetComponent } from './actionsheet.component';
 import { ActionSheetConfig } from './actionsheet.config';
@@ -15,14 +7,6 @@ import { BaseService } from '../utils/base.service';
 
 @Injectable()
 export class ActionSheetService extends BaseService {
-  constructor(
-    resolver: ComponentFactoryResolver,
-    applicationRef: ApplicationRef,
-    injector: Injector,
-  ) {
-    super(resolver, applicationRef, injector);
-  }
-
   /**
    * 创建一个弹出式菜单并显示
    *

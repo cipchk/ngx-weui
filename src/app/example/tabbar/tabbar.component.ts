@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { Observable, timer } from 'rxjs';
+import { timer } from 'rxjs';
 import { InfiniteLoaderComponent } from 'ngx-weui/infiniteloader';
 
 @Component({
@@ -14,9 +14,7 @@ export class DemoTabbarComponent {
     this.time = new Date().getTime();
   }
 
-  items: any[] = Array(20)
-    .fill(0)
-    .map((v: any, i: number) => i);
+  items: any[] = Array(20).fill(0).map((v: any, i: number) => i);
   onLoadMore(comp: InfiniteLoaderComponent) {
     timer(1500).subscribe(() => {
       this.items.push(
