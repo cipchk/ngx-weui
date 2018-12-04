@@ -21,7 +21,6 @@ import { RatingConfig } from './rating.config';
     </ng-template>
   </span>
   `,
-  preserveWhitespaces: false,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

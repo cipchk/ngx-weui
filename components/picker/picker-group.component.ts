@@ -32,7 +32,6 @@ const getWindowHeight = (): number => {
         [ngClass]="{'weui-picker__item_disabled': item.disabled}">{{item.label || item.value}}</div>
     </div>
   `,
-  preserveWhitespaces: false,
   host: {
     '[class.weui-picker__group]': 'true',
   },
@@ -170,5 +169,5 @@ export class PickerGroupComponent implements OnDestroy, OnChanges {
     return -(rowHeight * (length - offset - 1));
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void { }
 }

@@ -28,7 +28,6 @@ import { SidebarComponent } from './sidebar.component';
     <ng-content></ng-content>
   </div>
   `,
-  preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarContainerComponent

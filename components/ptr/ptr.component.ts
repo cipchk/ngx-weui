@@ -32,7 +32,6 @@ import { PTRConfig } from './ptr.config';
   </div>
   <div class="weui-ptr__content"><ng-content></ng-content></div>
   `,
-  preserveWhitespaces: false,
   host: {
     '[class.weui-ptr]': 'true',
   },
@@ -59,7 +58,7 @@ export class PTRComponent implements OnInit, OnChanges {
   /** 刷新回调 */
   @Output() refresh = new EventEmitter<PTRComponent>();
 
-  constructor(private el: ElementRef, private DEF: PTRConfig) {}
+  constructor(private el: ElementRef, private DEF: PTRConfig) { }
 
   /**
    * 设置最后更新标签

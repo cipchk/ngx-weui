@@ -25,7 +25,6 @@ import { PickerComponent } from './picker.component';
       (groupChange)="_onCityGroupChange($event)"
       (cancel)="_onCityCancelChange()"></weui-picker>
   `,
-  preserveWhitespaces: false,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

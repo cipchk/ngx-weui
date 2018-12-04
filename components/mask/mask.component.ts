@@ -18,7 +18,6 @@ import { Observable, Observer, Subscription } from 'rxjs';
       </div>
     </div>
   </div>`,
-  preserveWhitespaces: false,
 })
 export class MaskComponent implements OnDestroy {
   /**

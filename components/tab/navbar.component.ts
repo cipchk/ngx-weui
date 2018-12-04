@@ -15,7 +15,6 @@ import { BarComponent } from './bar.component';
   </div>
   <div class="weui-tab__panel"><ng-content></ng-content></div>
   `,
-  preserveWhitespaces: false,
   providers: [
     { provide: BarComponent, useExisting: forwardRef(() => NavbarComponent) },
   ],

@@ -27,7 +27,6 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
   </div>
   <span class="plus" [ngClass]="{'disabled':_disabledPlus}" (click)="_plus()"><em>+</em></span>
   `,
-  preserveWhitespaces: false,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

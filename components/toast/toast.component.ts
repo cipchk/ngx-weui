@@ -17,7 +17,6 @@ import { ToastConfig } from './toast.config';
       <p class="weui-toast__content">{{text}}</p>
     </div>
   `,
-  preserveWhitespaces: false,
   host: {
     '[hidden]': '!_showd',
   },

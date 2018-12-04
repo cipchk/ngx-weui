@@ -13,7 +13,6 @@ export type ToptipsType = 'default' | 'warn' | 'info' | 'primary' | 'success';
   selector: 'weui-toptips',
   template: `
     <div class="weui-toptips" style="display:block" [ngClass]="_classMap">{{text}}<ng-content></ng-content></div>`,
-  preserveWhitespaces: false,
   host: {
     '[hidden]': '!_showd',
   },

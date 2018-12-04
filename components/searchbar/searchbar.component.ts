@@ -36,7 +36,6 @@ template: `
     <a href="javascript:" class="weui-search-bar__cancel-btn" (click)="_onCancel()">{{cancelText}}</a>
   </div>
   `,
-  preserveWhitespaces: false
 })
 export class SearchBarComponent implements OnInit, OnDestroy {
   _q: string = '';

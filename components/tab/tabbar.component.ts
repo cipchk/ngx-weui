@@ -20,7 +20,6 @@ import { BarComponent } from './bar.component';
     </div>
   </div>
   `,
-  preserveWhitespaces: false,
   providers: [
     { provide: BarComponent, useExisting: forwardRef(() => TabbarComponent) },
   ],

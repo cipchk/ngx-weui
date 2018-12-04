@@ -44,8 +44,7 @@ import { Observer, Observable, Subscription } from 'rxjs';
   host: {
     '[hidden]': '!_shown',
     '[class.weui-skin_android]': 'config.skin === "android"',
-  },
-  preserveWhitespaces: false
+  }
 })
 export class ActionSheetComponent implements OnDestroy {
   /**
@@ -56,7 +55,7 @@ export class ActionSheetComponent implements OnDestroy {
   /**
    * 菜单内容
    */
-  @Input() menus: { text?: string; [key: string]: any }[];
+  @Input() menus: { text?: string;[key: string]: any }[];
 
   /**
    * 关闭回调
@@ -75,7 +74,7 @@ export class ActionSheetComponent implements OnDestroy {
     return this._shownAnt ? 'show' : 'hide';
   }
 
-  constructor(private DEF: ActionSheetConfig) {}
+  constructor(private DEF: ActionSheetConfig) { }
 
   /**
    * 显示，组件载入页面后并不会显示，显示调用 `show()` 并订阅结果。
@@ -119,7 +118,7 @@ export class ActionSheetComponent implements OnDestroy {
   /**
    * 选择动作
    */
-  _onSelect(menu: { text?: string; [key: string]: any }) {
+  _onSelect(menu: { text?: string;[key: string]: any }) {
     this.observer.next(menu);
     this.observer.complete();
     this.hide();

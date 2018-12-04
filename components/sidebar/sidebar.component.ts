@@ -34,7 +34,6 @@ import { DOCUMENT } from '@angular/common';
     <ng-content></ng-content>
   </aside>
   `,
-  preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent implements OnChanges, OnDestroy {

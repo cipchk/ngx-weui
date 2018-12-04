@@ -53,7 +53,6 @@ export type FORMAT_TYPE =
       (groupChange)="_onCityGroupChange($event)"
       (cancel)="_onCityCancelChange()"></weui-picker>
   `,
-  preserveWhitespaces: false,
   providers: [
     DatePipe,
     {
