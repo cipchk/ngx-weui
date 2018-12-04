@@ -1,9 +1,7 @@
 import {
   Component,
   EventEmitter,
-  HostListener,
   Input,
-  OnInit,
   Output,
   forwardRef,
   SimpleChanges,
@@ -18,7 +16,7 @@ import { RatingConfig } from './rating.config';
   <span class="weui-rating__container{{_class ? ' ' + _class : ''}}" tabindex="0"
       role="slider" aria-valuemin="0" [attr.aria-valuemax]="_range.length" [attr.aria-valuenow]="_value">
     <ng-template ngFor let-r [ngForOf]="_range" let-index="index">
-      <span class="sr-only">({{ index < _value ? '*' : ' ' }})</span>
+      <span class="weui-rating__sr-only">({{ index < _value ? '*' : ' ' }})</span>
       <i (click)="_rate(index + 1)" [ngClass]="index < _value ? r.on : r.off" [title]="r.title" ></i>
     </ng-template>
   </span>
@@ -45,7 +43,7 @@ export class RatingComponent implements ControlValueAccessor, OnChanges {
   _preValue: number;
   _class: string = '';
 
-  constructor(private DEF: RatingConfig) {}
+  constructor(private DEF: RatingConfig) { }
 
   _setConfig(cog: RatingConfig) {
     const _c = Object.assign(
@@ -106,5 +104,5 @@ export class RatingComponent implements ControlValueAccessor, OnChanges {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {}
+  setDisabledState(isDisabled: boolean): void { }
 }
