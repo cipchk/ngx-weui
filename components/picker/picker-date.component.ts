@@ -31,13 +31,13 @@ export type DatePickerType = 'date-ym' | 'date' | 'datetime' | 'time';
 export type FORMAT_TYPE =
   | string
   | {
-      format: string;
-      yu?: string;
-      Mu?: string;
-      du?: string;
-      hu?: string;
-      mu?: string;
-    };
+    format: string;
+    yu?: string;
+    Mu?: string;
+    du?: string;
+    hu?: string;
+    mu?: string;
+  };
 
 /**
  * 日期时间选择器
@@ -122,7 +122,7 @@ export class DatePickerComponent
   /** 隐藏后回调 */
   @Output() hide = new EventEmitter<any>();
 
-  constructor(private el: ElementRef, private datePipe: DatePipe) {}
+  constructor(private el: ElementRef, private datePipe: DatePipe) { }
 
   // todo: 太粗暴，需要优化代码
   private genGroups() {
@@ -347,5 +347,7 @@ export class DatePickerComponent
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {}
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
 }

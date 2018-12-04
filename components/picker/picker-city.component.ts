@@ -200,5 +200,7 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {}
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
 }

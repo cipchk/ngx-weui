@@ -117,7 +117,7 @@ export class StepperComponent implements ControlValueAccessor {
     if (this._disabledPlus) return;
     this.value = this._toPrecisionAsStep(
       (this._precisionFactor * this.value + this._precisionFactor * this.step) /
-        this._precisionFactor,
+      this._precisionFactor,
     );
     this._checkDisabled()._notify();
   }
@@ -129,7 +129,7 @@ export class StepperComponent implements ControlValueAccessor {
     if (this._disabledMinus) return;
     this.value = this._toPrecisionAsStep(
       (this._precisionFactor * this.value - this._precisionFactor * this.step) /
-        this._precisionFactor,
+      this._precisionFactor,
     );
     this._checkDisabled()._notify();
   }
@@ -163,5 +163,7 @@ export class StepperComponent implements ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void {}
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
 }

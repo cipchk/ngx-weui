@@ -230,7 +230,9 @@ export class PickerComponent
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void { }
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
 
   _onFocus($event: FocusEvent) {
     arguments[0].target.blur();

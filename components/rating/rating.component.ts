@@ -103,5 +103,7 @@ export class RatingComponent implements ControlValueAccessor, OnChanges {
     this.onTouched = fn;
   }
 
-  setDisabledState(isDisabled: boolean): void { }
+  setDisabledState(isDisabled: boolean): void {
+    this.readonly = isDisabled;
+  }
 }
