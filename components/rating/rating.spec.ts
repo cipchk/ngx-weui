@@ -30,7 +30,7 @@ describe('Component: Rating', () => {
     });
 
     it('should working with default value', () => {
-      const items = el.querySelectorAll('.sr-only');
+      const items = el.querySelectorAll('.weui-rating__sr-only');
 
       expect(items.length).toEqual(5);
       expect(items[0].innerHTML).toEqual('( )');
@@ -51,7 +51,7 @@ describe('Component: Rating', () => {
         stateOff: 'fa-circle',
       });
       fixture.detectChanges();
-      const items = el.querySelectorAll('.sr-only');
+      const items = el.querySelectorAll('.weui-rating__sr-only');
 
       expect(items.length).toEqual(3);
       expect(items[0].innerHTML).toEqual('( )');
@@ -90,7 +90,7 @@ describe('Component: Rating', () => {
     it(
       'check simple click',
       fakeAsync(() => {
-        const items = element.querySelectorAll('.sr-only');
+        const items = element.querySelectorAll('.weui-rating__sr-only');
         const icons = element.querySelectorAll('i');
 
         expect(items[0].innerHTML).toEqual('( )');
@@ -110,7 +110,7 @@ describe('Component: Rating', () => {
     it(
       'check disabling',
       fakeAsync(() => {
-        const items = element.querySelectorAll('.sr-only');
+        const items = element.querySelectorAll('.weui-rating__sr-only');
         const icons = element.querySelectorAll('i');
 
         expect(items[0].innerHTML).toEqual('( )');

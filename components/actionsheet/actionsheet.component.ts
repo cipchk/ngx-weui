@@ -55,7 +55,7 @@ export class ActionSheetComponent implements OnDestroy {
   /**
    * 菜单内容
    */
-  @Input() menus: { text?: string;[key: string]: any }[];
+  @Input() menus: { text?: string; [key: string]: any }[];
 
   /**
    * 关闭回调
@@ -118,7 +118,7 @@ export class ActionSheetComponent implements OnDestroy {
   /**
    * 选择动作
    */
-  _onSelect(menu: { text?: string;[key: string]: any }) {
+  _onSelect(menu: { text?: string; [key: string]: any }) {
     this.observer.next(menu);
     this.observer.complete();
     this.hide();
