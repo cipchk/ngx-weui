@@ -11,7 +11,7 @@ import { BarComponent } from './bar.component';
     <div class="weui-navbar__item"
       [ngClass]="{'weui-bar__item_on': item.active}"
       [class.disabled]="item.disabled"
-      *ngFor="let item of tabs" (click)="item.active=true">{{item.heading}}</div>
+      *ngFor="let item of tabs" (click)="setActive(item)">{{item.heading}}</div>
   </div>
   <div class="weui-tab__panel"><ng-content></ng-content></div>
   `,
@@ -23,8 +23,4 @@ import { BarComponent } from './bar.component';
     '[class.weui-tab]': 'true',
   },
 })
-export class NavbarComponent extends BarComponent {
-  constructor() {
-    super();
-  }
-}
+export class NavbarComponent extends BarComponent { }

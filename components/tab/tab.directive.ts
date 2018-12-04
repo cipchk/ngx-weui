@@ -20,11 +20,11 @@ export class TabDirective implements OnDestroy {
   @Input() badge: number | 'dot';
 
   /** 当tab激活时触发 */
-  @Output() select: EventEmitter<TabDirective> = new EventEmitter();
+  @Output() readonly select = new EventEmitter<TabDirective>();
   /** 当tab无效时触发 */
-  @Output() deselect: EventEmitter<TabDirective> = new EventEmitter();
+  @Output() readonly deselect = new EventEmitter<TabDirective>();
   /** 当tab移除时触发 */
-  @Output() removed: EventEmitter<TabDirective> = new EventEmitter();
+  @Output() readonly removed = new EventEmitter<TabDirective>();
 
   /**
    * 激活
@@ -45,12 +45,7 @@ export class TabDirective implements OnDestroy {
     }
 
     this._active = active;
-    this.select.emit(this);
-    this._tabComp.tabs.forEach((tab: TabDirective) => {
-      if (tab !== this) {
-        tab.active = false;
-      }
-    });
+    this._tabComp.tabs.filter(t => t !== this).forEach(tab => tab.active = false);
   }
 
   protected _active: boolean;

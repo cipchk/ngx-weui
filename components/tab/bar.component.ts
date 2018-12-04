@@ -1,4 +1,4 @@
-import { Component, Injectable, OnDestroy } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { TabDirective } from './tab.directive';
 
 @Component({
@@ -27,6 +27,11 @@ export class BarComponent implements OnDestroy {
 
     tab.removed.emit(tab);
     this.tabs.splice(index, 1);
+  }
+
+  setActive(tab: TabDirective) {
+    tab.active = true;
+    tab.select.emit(tab);
   }
 
   protected getClosestTabIndex(index: number): number {
