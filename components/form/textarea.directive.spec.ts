@@ -63,6 +63,13 @@ describe('Directive: Textarea', () => {
     expect(counterEl.textContent).toBe(`4 / ${MAXLENGTH}`);
   });
 
+  it('should 3 characters in chinese', () => {
+    context.cn = 3;
+    fixture.detectChanges();
+    setValue('中国');
+    expect(counterEl.textContent).toBe(`6 / ${MAXLENGTH}`);
+  });
+
   it('should be inited if nospecify [maxlength]', () => {
     context.maxlength = 0;
     fixture.detectChanges();
