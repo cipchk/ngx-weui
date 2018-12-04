@@ -8,7 +8,6 @@ import {
   OnChanges,
   SimpleChanges,
 } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
 import { PickerData } from './data';
 
 declare const window: any;

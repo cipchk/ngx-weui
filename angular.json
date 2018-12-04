@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "ngx-weui": {
+    "ngx-weui-doc": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -23,6 +23,7 @@
             "styles": [
               "node_modules/font-awesome/css/font-awesome.css",
               "node_modules/swiper/dist/css/swiper.css",
+              "node_modules/ngx-toastr/toastr.css",
               "src/styles.less"
             ],
             "scripts": [
@@ -41,49 +42,22 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
-              "fileReplacements": [
-                {
-                  "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.prod.ts"
-                }
-              ]
+              "fileReplacements": [{
+                "replace": "src/environments/environment.ts",
+                "with": "src/environments/environment.prod.ts"
+              }]
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ngx-weui:build"
+            "browserTarget": "ngx-weui-doc:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "ngx-weui:build:production"
+              "browserTarget": "ngx-weui-doc:build:production"
             }
-          }
-        },
-        "extract-i18n": {
-          "builder": "@angular-devkit/build-angular:extract-i18n",
-          "options": {
-            "browserTarget": "ngx-weui:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "components/test.ts",
-            "karmaConfig": "./karma.conf.js",
-            "polyfills": "src/polyfills.ts",
-            "tsConfig": "components/tsconfig.spec.json",
-            "scripts": [
-              "node_modules/swiper/dist/js/swiper.js",
-              "node_modules/g2-mobile/index.js"
-            ],
-            "styles": [
-            ],
-            "assets": [
-              "src/assets",
-              "src/favicon.ico"
-            ]
           }
         },
         "lint": {
@@ -95,29 +69,35 @@
         }
       }
     },
-    "ngx-weui-e2e": {
-      "root": "",
-      "sourceRoot": "",
-      "projectType": "application",
+    "ngx-weui-lib": {
+      "root": "components",
+      "projectType": "library",
+      "prefix": "",
       "architect": {
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "ngx-weui:serve"
+            "tsConfig": "components/tsconfig.lib.json",
+            "project": "components/ng-package.json"
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "tsConfig": [],
-            "exclude": []
+            "main": "components/test.ts",
+            "karmaConfig": "components/karma.conf.js",
+            "polyfills": "components/polyfills.ts",
+            "tsConfig": "components/tsconfig.spec.json",
+            "scripts": [
+              "node_modules/swiper/dist/js/swiper.js",
+              "node_modules/g2-mobile/index.js"
+            ]
           }
         }
       }
     }
   },
-  "defaultProject": "ngx-weui",
+  "defaultProject": "ngx-weui-doc",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "",

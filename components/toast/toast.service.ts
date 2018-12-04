@@ -1,25 +1,9 @@
-import {
-  Injectable,
-  ComponentFactoryResolver,
-  ApplicationRef,
-  Injector,
-  Optional,
-  EmbeddedViewRef,
-} from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { Injectable } from '@angular/core';
 import { BaseService } from '../utils/base.service';
 import { ToastComponent } from './toast.component';
 
 @Injectable()
 export class ToastService extends BaseService {
-  constructor(
-    resolver: ComponentFactoryResolver,
-    applicationRef: ApplicationRef,
-    injector: Injector,
-  ) {
-    super(resolver, applicationRef, injector);
-  }
-
   /**
    * 构建toast并显示
    *

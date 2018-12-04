@@ -1,24 +1,9 @@
-import {
-  Injectable,
-  ComponentFactoryResolver,
-  ApplicationRef,
-  Injector,
-  Optional,
-  EmbeddedViewRef,
-  ComponentRef,
-} from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BaseService } from '../utils/base.service';
 import { ToptipsType, ToptipsComponent } from './toptips.component';
 
 @Injectable()
 export class ToptipsService extends BaseService {
-  constructor(
-    resolver: ComponentFactoryResolver,
-    applicationRef: ApplicationRef,
-    injector: Injector,
-  ) {
-    super(resolver, applicationRef, injector);
-  }
 
   /**
    * 构建一个Toptips并显示

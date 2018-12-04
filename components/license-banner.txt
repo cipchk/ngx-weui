@@ -1,0 +1,5 @@
+/**
+ * @license ngx-weui(cipchk@qq.com) v0.0.0-PLACEHOLDER
+ * (c) 2018 Cipchk https://github.com/cipchk/ngx-weui
+ * License: MIT
+ */

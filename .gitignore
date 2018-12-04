@@ -3,9 +3,6 @@
 /node_modules
 npm-debug.log
 package-lock.json
-publish
-publish-es5
-publish-es2015
 yarn.lock
 
 # misc
@@ -17,7 +14,6 @@ src/app/routes/components/examples.ts
 src/app/routes/docs/meta.ts
 .tmp
 __gen_components/
-publish-es2015/
 dist/
 publish/
 

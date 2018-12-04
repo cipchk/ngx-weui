@@ -12,7 +12,6 @@ import {
   EventEmitter,
   ChangeDetectorRef,
   ElementRef,
-  Inject,
   OnInit,
 } from '@angular/core';
 import { SidebarComponent } from './sidebar.component';
@@ -41,7 +40,7 @@ export class SidebarContainerComponent
 
   private orgOverflowX = '';
 
-  constructor(private _ref: ChangeDetectorRef, private _el: ElementRef) {}
+  constructor(private _ref: ChangeDetectorRef, private _el: ElementRef) { }
 
   ngAfterContentInit(): void {
     this._onToggle();
@@ -89,7 +88,7 @@ export class SidebarContainerComponent
             const transformDir: string = isLeftOrRight ? 'X' : 'Y';
             const transformAmt: string = `${isLeftOrTop ? '' : '-'}${
               isLeftOrRight ? sidebar._width : sidebar._height
-            }`;
+              }`;
 
             transformStyle = `translate${transformDir}(${transformAmt}px)`;
           }

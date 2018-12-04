@@ -1,27 +1,11 @@
-import {
-  Injectable,
-  ComponentFactoryResolver,
-  ApplicationRef,
-  Injector,
-  Optional,
-  EmbeddedViewRef,
-  ComponentRef,
-} from '@angular/core';
-import { Observable, Observer } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { BaseService } from '../utils/base.service';
 import { DialogComponent } from './dialog.component';
 import { DialogConfig } from './dialog.config';
 
 @Injectable()
 export class DialogService extends BaseService {
-  constructor(
-    resolver: ComponentFactoryResolver,
-    applicationRef: ApplicationRef,
-    injector: Injector,
-  ) {
-    super(resolver, applicationRef, injector);
-  }
-
   /**
    * 创建一个对话框并显示
    *

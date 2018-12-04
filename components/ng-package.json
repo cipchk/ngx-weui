@@ -1,0 +1,13 @@
+{
+  "$schema": "../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../publish",
+  "deleteDestPath": true,
+  "lib": {
+    "entryFile": "ngx-weui.module.ts"
+  },
+  "whitelistedNonPeerDependencies": [
+    "tslib",
+    "angular",
+    "weui"
+  ]
+}
