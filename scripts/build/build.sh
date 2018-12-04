@@ -26,6 +26,15 @@ updateVersionReferences() {
   )
 }
 
+buildSchematics() {
+  echo '>> Compiling schematics'
+  schematics_source_dir=${PWD}/components/schematics/
+  schematics_dist_dir=${PWD}/publish/schematics/
+  $(npm bin)/tsc -p ${schematics_source_dir}tsconfig.json
+  echo '>>>> Coping all json files'
+  rsync -am --include="*.json" --include="*/" --exclude=* ${schematics_source_dir}/ ${schematics_dist_dir}/
+}
+
 PWD=`pwd`
 VERSION=$(node -p "require('./package.json').version")
 SOURCE=${PWD}/components
@@ -48,6 +57,9 @@ updateVersionReferences ${DIST}
 
 echo ">> generate css"
 node ./scripts/build/generate-css.js
+
+echo 'Build schematics'
+buildSchematics
 
 # copy readme
 cp README.md ${DIST}/README.md
