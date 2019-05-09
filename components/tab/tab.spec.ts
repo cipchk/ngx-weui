@@ -115,7 +115,7 @@ describe('Component: Tabs', () => {
       const newTitle: string = 'new title';
       context.tabs[0].heading = newTitle;
       fixture.detectChanges();
-      expect(getItems(el)[0].innerHTML).toBe(newTitle);
+      expect(getItems(el)[0].innerHTML.trim()).toBe(newTitle);
     });
 
     it('should set tab disabled', () => {

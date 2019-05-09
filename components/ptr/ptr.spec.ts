@@ -67,7 +67,7 @@ describe('Component: PTR', () => {
     comp.onTouchStart(spyTouchArgument(0));
     comp.onTouchMove(spyTouchArgument(80));
     fixture.detectChanges();
-    comp.onTouchEnd(spyTouchArgument(80));
+    comp.onTouchEnd();
     fixture.detectChanges();
     expect(context.onScroll).toHaveBeenCalled();
     expect(context.onRefresh).toHaveBeenCalled();
@@ -77,7 +77,7 @@ describe('Component: PTR', () => {
     comp.onTouchStart(spyTouchArgument(0));
     comp.onTouchMove(spyTouchArgument(50));
     fixture.detectChanges();
-    comp.onTouchEnd(spyTouchArgument(50));
+    comp.onTouchEnd();
     fixture.detectChanges();
     expect(context.onScroll).toHaveBeenCalled();
     expect(context.onRefresh).not.toHaveBeenCalled();

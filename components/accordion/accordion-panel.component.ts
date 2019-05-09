@@ -4,7 +4,7 @@ import { AccordionComponent } from './accordion.component';
 @Component({
   selector: 'weui-accordion-panel',
   template: `
-    <div role="tab" (click)="_toggle($event)"><ng-content select="[heading]"></ng-content></div>
+    <div role="tab" (click)="_toggle()"><ng-content select="[heading]"></ng-content></div>
     <div role="tabpanel" class="weui-accordion-content"><ng-content></ng-content></div>
   `,
   host: {
