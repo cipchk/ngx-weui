@@ -1,13 +1,4 @@
-import {
-  Directive,
-  OnInit,
-  OnDestroy,
-  ElementRef,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  NgZone,
-} from '@angular/core';
+import { Directive, OnInit, OnDestroy, ElementRef, Input, OnChanges, SimpleChanges, NgZone } from '@angular/core';
 
 declare const GM: any;
 

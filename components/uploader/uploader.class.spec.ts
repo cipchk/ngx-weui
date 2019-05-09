@@ -1,4 +1,4 @@
-import { TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { fakeAsync, tick } from '@angular/core/testing';
 import { Uploader } from './uploader.class';
 import * as sinon from 'sinon';
 
@@ -6,11 +6,7 @@ describe('Uploader: Class', () => {
   let instance: Uploader = null;
   let xhr: any, requests: any[];
 
-  function addFiles(
-    count: number = 1,
-    ext: string = 'png',
-    type: string = 'image/png',
-  ) {
+  function addFiles(count: number = 1, ext: string = 'png', type: string = 'image/png') {
     for (let i = 0; i < count; i++) {
       const textFileAsBlob = new Blob(['a' + i], { type: type });
       const f = new File([textFileAsBlob], `${i + 1}.${ext}`);
@@ -66,10 +62,7 @@ describe('Uploader: Class', () => {
       for (const item of files) {
         instance.clearQueue();
         addFiles(1, item.e, item.t);
-        expect(instance.queue.length).toBe(
-          0,
-          `the ${item.e} file need invalid`,
-        );
+        expect(instance.queue.length).toBe(0, `the ${item.e} file need invalid`);
       }
     });
   });
@@ -95,14 +88,11 @@ describe('Uploader: Class', () => {
     expect(instance.isUploading).toBe(true);
   });
 
-  it(
-    '#cancelItem should be',
-    fakeAsync(() => {
-      addFiles(1, 'png');
-      instance.uploadItem(instance.queue[0]);
-      instance.cancelItem(instance.queue[0]);
-      tick(100);
-      expect(instance.queue[0].isCancel).toBe(true);
-    }),
-  );
+  it('#cancelItem should be', fakeAsync(() => {
+    addFiles(1, 'png');
+    instance.uploadItem(instance.queue[0]);
+    instance.cancelItem(instance.queue[0]);
+    tick(100);
+    expect(instance.queue[0].isCancel).toBe(true);
+  }));
 });

@@ -1,26 +1,10 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  Output,
-  forwardRef,
-  SimpleChanges,
-  OnChanges,
-} from '@angular/core';
+import { Component, EventEmitter, Input, Output, forwardRef, SimpleChanges, OnChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { RatingConfig } from './rating.config';
 
 @Component({
   selector: 'weui-rating',
-  template: `
-  <span class="weui-rating__container{{_class ? ' ' + _class : ''}}" tabindex="0"
-      role="slider" aria-valuemin="0" [attr.aria-valuemax]="_range.length" [attr.aria-valuenow]="_value">
-    <ng-template ngFor let-r [ngForOf]="_range" let-index="index">
-      <span class="weui-rating__sr-only">({{ index < _value ? '*' : ' ' }})</span>
-      <i (click)="_rate(index + 1)" [ngClass]="index < _value ? r.on : r.off" [title]="r.title" ></i>
-    </ng-template>
-  </span>
-  `,
+  templateUrl: './rating.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -35,14 +19,14 @@ export class RatingComponent implements ControlValueAccessor, OnChanges {
   /** 是否只读模式，默认：`false` */
   @Input() readonly: boolean = false;
   /** 选中后回调，参数：选中值 */
-  @Output() selected = new EventEmitter<number>();
+  @Output() readonly selected = new EventEmitter<number>();
 
   _range: any[];
   _value: number;
   _preValue: number;
   _class: string = '';
 
-  constructor(private DEF: RatingConfig) { }
+  constructor(private DEF: RatingConfig) {}
 
   _setConfig(cog: RatingConfig) {
     const _c = Object.assign(

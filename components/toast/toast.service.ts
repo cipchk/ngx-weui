@@ -12,12 +12,7 @@ export class ToastService extends BaseService {
    * @param [icon] icon图标Class名（可选）
    * @param [type] 类型（可选）
    */
-  show(
-    text?: string,
-    time?: number,
-    icon?: string,
-    type?: 'success' | 'loading',
-  ): ToastComponent {
+  show(text?: string, time?: number, icon?: string, type?: 'success' | 'loading'): ToastComponent {
     const componentRef = this.build(ToastComponent);
 
     if (type) componentRef.instance.type = type;

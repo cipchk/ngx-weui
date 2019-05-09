@@ -120,7 +120,7 @@ const MODULES = [
   ],
   exports: MODULES,
 })
-export class WeUiRootModule { }
+export class WeUiRootModule {}
 
 @NgModule({ exports: MODULES })
 export class WeUiModule {

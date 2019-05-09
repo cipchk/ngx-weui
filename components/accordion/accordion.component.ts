@@ -5,7 +5,9 @@ import { AnimateType } from '../utils/types';
 
 @Component({
   selector: 'weui-accordion',
-  template: `<ng-content></ng-content>`,
+  template: `
+    <ng-content></ng-content>
+  `,
   host: {
     '[attr.aria-multiselectable]': 'closeOthers',
   },
@@ -27,7 +29,7 @@ export class AccordionComponent {
   /**
    * 展开时回调，参数为面板下标。
    */
-  @Output() select = new EventEmitter<number>();
+  @Output() readonly select = new EventEmitter<number>();
 
   private panels: AccordionPanelComponent[] = [];
 

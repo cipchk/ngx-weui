@@ -5,10 +5,9 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import {SchematicsException, Tree} from '@angular-devkit/schematics';
+import { SchematicsException, Tree } from '@angular-devkit/schematics';
 
 export const ANGULAR_CLI_WORKSPACE_PATH = '/angular.json';
-
 
 /** An Angular CLI Workspacer config (angular.json) */
 export interface Workspace {
@@ -98,7 +97,7 @@ export function getProjectFromWorkspace(config: Workspace, projectName?: string)
         throw new SchematicsException(`No project named "${projectName}" exists.`);
       }
 
-      Object.defineProperty(project, 'name', {enumerable: false, value: projectName});
+      Object.defineProperty(project, 'name', { enumerable: false, value: projectName });
       return project;
     }
 
@@ -109,7 +108,7 @@ export function getProjectFromWorkspace(config: Workspace, projectName?: string)
       const project = config.projects[allProjectNames[0]];
       // Set a non-enumerable project name to the project. We need the name for schematics
       // later on, but don't want to write it back out to the config file.
-      Object.defineProperty(project, 'name', {enumerable: false, value: projectName});
+      Object.defineProperty(project, 'name', { enumerable: false, value: projectName });
       return project;
     } else {
       throw new SchematicsException('Multiple projects are defined; please specify a project name');

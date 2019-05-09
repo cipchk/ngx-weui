@@ -9,25 +9,10 @@ import { PickerConfig } from './picker.config';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [
-    PickerComponent,
-    PickerGroupComponent,
-    DatePickerComponent,
-    CityPickerComponent,
-  ],
-  exports: [
-    PickerComponent,
-    PickerGroupComponent,
-    DatePickerComponent,
-    CityPickerComponent,
-  ],
+  declarations: [PickerComponent, PickerGroupComponent, DatePickerComponent, CityPickerComponent],
+  exports: [PickerComponent, PickerGroupComponent, DatePickerComponent, CityPickerComponent],
   providers: [PickerService],
-  entryComponents: [
-    PickerComponent,
-    PickerGroupComponent,
-    DatePickerComponent,
-    CityPickerComponent,
-  ],
+  entryComponents: [PickerComponent, PickerGroupComponent, DatePickerComponent, CityPickerComponent],
 })
 export class PickerModule {
   static forRoot(): ModuleWithProviders {

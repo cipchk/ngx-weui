@@ -1,4 +1,4 @@
-import {normalize, strings} from '@angular-devkit/core';
+import { normalize, strings } from '@angular-devkit/core';
 import {
   apply,
   branchAndMerge,
@@ -15,12 +15,12 @@ import {
   url,
 } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
-import {addDeclarationToModule, addExportToModule} from './ast-utils';
-import {InsertChange} from './change';
-import {buildRelativePath, findModuleFromOptions} from './find-module';
-import {getWorkspace} from './config';
-import {parseName} from './parse-name';
-import {validateName} from './validation';
+import { addDeclarationToModule, addExportToModule } from './ast-utils';
+import { InsertChange } from './change';
+import { buildRelativePath, findModuleFromOptions } from './find-module';
+import { getWorkspace } from './config';
+import { parseName } from './parse-name';
+import { validateName } from './validation';
 
 function addDeclarationToNgModule(options: any): Rule {
   return (host: Tree) => {
@@ -36,16 +36,14 @@ function addDeclarationToNgModule(options: any): Rule {
     const sourceText = text.toString('utf-8');
     const source = ts.createSourceFile(modulePath, sourceText, ts.ScriptTarget.Latest, true);
 
-    const componentPath = `/${options.path}/`
-                          + (options.flat ? '' : strings.dasherize(options.name) + '/')
-                          + strings.dasherize(options.name)
-                          + '.component';
+    const componentPath =
+      `/${options.path}/` +
+      (options.flat ? '' : strings.dasherize(options.name) + '/') +
+      strings.dasherize(options.name) +
+      '.component';
     const relativePath = buildRelativePath(modulePath, componentPath);
     const classifiedName = strings.classify(`${options.name}Component`);
-    const declarationChanges = addDeclarationToModule(source,
-                                                      modulePath,
-                                                      classifiedName,
-                                                      relativePath);
+    const declarationChanges = addDeclarationToModule(source, modulePath, classifiedName, relativePath);
 
     const declarationRecorder = host.beginUpdate(modulePath);
     for (const change of declarationChanges) {
@@ -65,9 +63,12 @@ function addDeclarationToNgModule(options: any): Rule {
       const source = ts.createSourceFile(modulePath, sourceText, ts.ScriptTarget.Latest, true);
 
       const exportRecorder = host.beginUpdate(modulePath);
-      const exportChanges = addExportToModule(source, modulePath,
-                                              strings.classify(`${options.name}Component`),
-                                              relativePath);
+      const exportChanges = addExportToModule(
+        source,
+        modulePath,
+        strings.classify(`${options.name}Component`),
+        relativePath,
+      );
 
       for (const change of exportChanges) {
         if (change instanceof InsertChange) {
@@ -77,11 +78,9 @@ function addDeclarationToNgModule(options: any): Rule {
       host.commitUpdate(exportRecorder);
     }
 
-
     return host;
   };
 }
-
 
 function buildSelector(options: any) {
   let selector = strings.dasherize(options.name);
@@ -91,7 +90,6 @@ function buildSelector(options: any) {
 
   return selector;
 }
-
 
 export function buildComponent(options: any): Rule {
   return (host: Tree, context: SchematicContext) => {
@@ -120,17 +118,15 @@ export function buildComponent(options: any): Rule {
       options.inlineTemplate ? filter(path => !path.endsWith('.html')) : noop(),
       template({
         ...strings,
-        'if-flat': (s: string) => options.flat ? '' : s,
+        'if-flat': (s: string) => (options.flat ? '' : s),
         ...options,
       }),
       move(null, parsedPath.path),
     ]);
 
-    return chain([
-      branchAndMerge(chain([
-        addDeclarationToNgModule(options),
-        mergeWith(templateSource),
-      ])),
-    ])(host, context);
+    return chain([branchAndMerge(chain([addDeclarationToNgModule(options), mergeWith(templateSource)]))])(
+      host,
+      context,
+    );
   };
 }

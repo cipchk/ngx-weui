@@ -6,10 +6,8 @@ import {
   EventEmitter,
   OnDestroy,
   ViewChild,
-  LOCALE_ID,
   OnChanges,
   SimpleChanges,
-  ElementRef,
   OnInit,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -31,13 +29,13 @@ export type DatePickerType = 'date-ym' | 'date' | 'datetime' | 'time';
 export type FORMAT_TYPE =
   | string
   | {
-    format: string;
-    yu?: string;
-    Mu?: string;
-    du?: string;
-    hu?: string;
-    mu?: string;
-  };
+      format: string;
+      yu?: string;
+      Mu?: string;
+      du?: string;
+      hu?: string;
+      mu?: string;
+    };
 
 /**
  * 日期时间选择器
@@ -45,13 +43,18 @@ export type FORMAT_TYPE =
 @Component({
   selector: 'weui-date-picker',
   template: `
-  <weui-picker [placeholder]="placeholder"
-      [groups]="_groups" [defaultSelect]="_selected" [disabled]="disabled" [options]="options"
+    <weui-picker
+      [placeholder]="placeholder"
+      [groups]="_groups"
+      [defaultSelect]="_selected"
+      [disabled]="disabled"
+      [options]="options"
       (show)="_onShow()"
       (hide)="_onHide()"
       (change)="_onCityChange($event)"
       (groupChange)="_onCityGroupChange($event)"
-      (cancel)="_onCityCancelChange()"></weui-picker>
+      (cancel)="_onCityCancelChange()"
+    ></weui-picker>
   `,
   providers: [
     DatePipe,
@@ -62,8 +65,7 @@ export type FORMAT_TYPE =
     },
   ],
 })
-export class DatePickerComponent
-  implements OnInit, ControlValueAccessor, OnDestroy, OnChanges {
+export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDestroy, OnChanges {
   @ViewChild(PickerComponent) _pickerInstance: PickerComponent;
 
   _value: Date;
@@ -112,17 +114,17 @@ export class DatePickerComponent
   @Input() placeholder: string;
   @Input() disabled: boolean;
   /** 确认后回调 */
-  @Output() change = new EventEmitter<any>();
+  @Output() readonly change = new EventEmitter<any>();
   /** 列变更时回调 */
-  @Output() groupChange = new EventEmitter<any>();
+  @Output() readonly groupChange = new EventEmitter<any>();
   /** 取消后回调 */
-  @Output() cancel = new EventEmitter<any>();
+  @Output() readonly cancel = new EventEmitter<any>();
   /** 显示时回调 */
-  @Output() show = new EventEmitter<any>();
+  @Output() readonly show = new EventEmitter<any>();
   /** 隐藏后回调 */
-  @Output() hide = new EventEmitter<any>();
+  @Output() readonly hide = new EventEmitter<any>();
 
-  constructor(private el: ElementRef, private datePipe: DatePipe) { }
+  constructor(private datePipe: DatePipe) {}
 
   // todo: 太粗暴，需要优化代码
   private genGroups() {
@@ -333,8 +335,7 @@ export class DatePickerComponent
   writeValue(value: Date): void {
     if (value) this.genGroups();
     this._value = value;
-    this._pickerInstance._text =
-      value instanceof Date ? this.getFormatDate(value) : '';
+    this._pickerInstance._text = value instanceof Date ? this.getFormatDate(value) : '';
   }
 
   private onChange: any = Function.prototype;

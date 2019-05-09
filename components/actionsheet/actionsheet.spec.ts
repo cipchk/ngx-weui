@@ -14,19 +14,11 @@ import { By } from '@angular/platform-browser';
 
 import { Subscription } from 'rxjs';
 
-import {
-  ActionSheetModule,
-  ActionSheetComponent,
-  ActionSheetConfig,
-  ActionSheetService,
-} from '../actionsheet';
+import { ActionSheetModule, ActionSheetComponent, ActionSheetConfig, ActionSheetService } from '../actionsheet';
 import { isAndroid } from '../utils/browser';
 import * as browserModule from '../utils/browser';
 
-const MENUS: any[] = [
-  { text: 'menu1', value: 'value1', other: 1 },
-  { text: 'menu2', value: 'value2' },
-];
+const MENUS: any[] = [{ text: 'menu1', value: 'value1', other: 1 }, { text: 'menu2', value: 'value2' }];
 
 const CONFIG: ActionSheetConfig = <ActionSheetConfig>{
   title: 'test title',
@@ -39,15 +31,11 @@ function getTitle(nativeEl: HTMLElement): Element {
 }
 
 function getItems(nativeEl: HTMLElement): NodeListOf<Element> {
-  return nativeEl.querySelectorAll(
-    '.weui-actionsheet__menu .weui-actionsheet__cell',
-  );
+  return nativeEl.querySelectorAll('.weui-actionsheet__menu .weui-actionsheet__cell');
 }
 
 function getAction(nativeEl: HTMLElement): Element {
-  return nativeEl.querySelector(
-    '.weui-actionsheet__action .weui-actionsheet__cell',
-  );
+  return nativeEl.querySelector('.weui-actionsheet__action .weui-actionsheet__cell');
 }
 
 describe('Component: ActionSheet', () => {
@@ -64,37 +52,28 @@ describe('Component: ActionSheet', () => {
                 (close)="_close()"></weui-actionsheet>
         `;
 
-    beforeEach(
-      fakeAsync(() => {
-        TestBed.configureTestingModule({
-          declarations: [TestActionSheetComponent],
-          imports: [
-            ActionSheetModule.forRoot(),
-            FormsModule,
-            NoopAnimationsModule,
-          ],
-          providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
-        });
-        TestBed.overrideComponent(TestActionSheetComponent, {
-          set: { template: html },
-        });
-        fixture = TestBed.createComponent(TestActionSheetComponent);
-        context = fixture.componentInstance;
-        dl = fixture.debugElement;
-        el = fixture.nativeElement;
-        fixture.detectChanges();
-        tick();
-      }),
-    );
+    beforeEach(fakeAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TestActionSheetComponent],
+        imports: [ActionSheetModule.forRoot(), FormsModule, NoopAnimationsModule],
+        providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
+      });
+      TestBed.overrideComponent(TestActionSheetComponent, {
+        set: { template: html },
+      });
+      fixture = TestBed.createComponent(TestActionSheetComponent);
+      context = fixture.componentInstance;
+      dl = fixture.debugElement;
+      el = fixture.nativeElement;
+      fixture.detectChanges();
+      tick();
+    }));
 
-    it(
-      'should init',
-      fakeAsync(() => {
-        expect(getTitle(el)).not.toBeNull();
-        expect(getAction(el)).not.toBeNull();
-        expect(getItems(el).length).toBe(2);
-      }),
-    );
+    it('should init', fakeAsync(() => {
+      expect(getTitle(el)).not.toBeNull();
+      expect(getAction(el)).not.toBeNull();
+      expect(getItems(el).length).toBe(2);
+    }));
 
     it('should auto style', (done: () => void) => {
       context.config = Object.assign(context.config, { skin: 'auto' });
@@ -102,9 +81,7 @@ describe('Component: ActionSheet', () => {
       context.actioinSheet.show().subscribe(res => {
         fixture.detectChanges();
         if (isAndroid()) {
-          expect(
-            (el as HTMLElement).querySelectorAll('.weui-skin_android').length,
-          ).toBe(1);
+          expect((el as HTMLElement).querySelectorAll('.weui-skin_android').length).toBe(1);
         } else {
           expect(true).toBeTruthy();
         }
@@ -123,9 +100,7 @@ describe('Component: ActionSheet', () => {
         fixture.detectChanges();
         context.actioinSheet.show().subscribe(res => {
           fixture.detectChanges();
-          expect(
-            (el as HTMLElement).querySelectorAll('.weui-skin_android').length,
-          ).toBe(1);
+          expect((el as HTMLElement).querySelectorAll('.weui-skin_android').length).toBe(1);
           done();
         });
         (<any>getItems(el)[0]).click();
@@ -216,31 +191,23 @@ describe('Component: ActionSheet', () => {
     let dl: DebugElement;
     let el: any;
 
-    beforeEach(
-      fakeAsync(() => {
-        TestBed.configureTestingModule({
-          imports: [
-            ActionSheetModule.forRoot(),
-            FormsModule,
-            NoopAnimationsModule,
-          ],
-          declarations: [TestActionSheetServiceComponent],
-          providers: [ActionSheetService],
-        }).createComponent(TestActionSheetServiceComponent);
+    beforeEach(fakeAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [ActionSheetModule.forRoot(), FormsModule, NoopAnimationsModule],
+        declarations: [TestActionSheetServiceComponent],
+        providers: [ActionSheetService],
+      }).createComponent(TestActionSheetServiceComponent);
 
-        fixture = TestBed.createComponent(TestActionSheetServiceComponent);
-        context = fixture.componentInstance;
-        dl = fixture.debugElement;
-        el = fixture.nativeElement;
-        fixture.detectChanges();
-      }),
-    );
+      fixture = TestBed.createComponent(TestActionSheetServiceComponent);
+      context = fixture.componentInstance;
+      dl = fixture.debugElement;
+      el = fixture.nativeElement;
+      fixture.detectChanges();
+    }));
 
-    beforeEach(
-      inject([ActionSheetService], (_s: ActionSheetService) => {
-        service = _s;
-      }),
-    );
+    beforeEach(inject([ActionSheetService], (_s: ActionSheetService) => {
+      service = _s;
+    }));
 
     it('should be show', (done: () => void) => {
       service.show(Object.assign([], MENUS)).subscribe(res => {
@@ -266,7 +233,9 @@ describe('Component: ActionSheet', () => {
 });
 
 @Component({
-  template: `<h1>Test Service</h1>`,
+  template: `
+    <h1>Test Service</h1>
+  `,
 })
 class TestActionSheetServiceComponent {}
 

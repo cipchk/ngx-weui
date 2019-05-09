@@ -1,24 +1,10 @@
-import { Subscription } from 'rxjs';
 import { Component, ViewChild, DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  ComponentFixture,
-  TestBed,
-  fakeAsync,
-  tick,
-  ComponentFixtureAutoDetect,
-  async,
-  inject,
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import {
-  DialogModule,
-  DialogComponent,
-  DialogConfig,
-  DialogService,
-} from '../dialog';
+import { DialogModule, DialogComponent, DialogConfig, DialogService } from '../dialog';
 import { isAndroid } from '../utils/browser';
 
 const CONFIG: DialogConfig = <DialogConfig>{
@@ -65,24 +51,22 @@ describe('Component: Dialog', () => {
             <weui-dialog [config]="config"></weui-dialog>
         `;
 
-    beforeEach(
-      fakeAsync(() => {
-        TestBed.configureTestingModule({
-          declarations: [TestDialogComponent],
-          imports: [DialogModule.forRoot(), FormsModule, NoopAnimationsModule],
-          providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
-        });
-        TestBed.overrideComponent(TestDialogComponent, {
-          set: { template: html },
-        });
-        fixture = TestBed.createComponent(TestDialogComponent);
-        context = fixture.componentInstance;
-        dl = fixture.debugElement;
-        el = fixture.nativeElement;
-        fixture.detectChanges();
-        tick();
-      }),
-    );
+    beforeEach(fakeAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TestDialogComponent],
+        imports: [DialogModule.forRoot(), FormsModule, NoopAnimationsModule],
+        providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
+      });
+      TestBed.overrideComponent(TestDialogComponent, {
+        set: { template: html },
+      });
+      fixture = TestBed.createComponent(TestDialogComponent);
+      context = fixture.componentInstance;
+      dl = fixture.debugElement;
+      el = fixture.nativeElement;
+      fixture.detectChanges();
+      tick();
+    }));
 
     it('should init', () => {
       context.dialog.show();
@@ -97,9 +81,7 @@ describe('Component: Dialog', () => {
       context.dialog.show();
       fixture.detectChanges();
       if (isAndroid()) {
-        expect(
-          (el as HTMLElement).querySelectorAll('.weui-skin_android').length,
-        ).toBe(1);
+        expect((el as HTMLElement).querySelectorAll('.weui-skin_android').length).toBe(1);
       } else {
         expect(true).toBeTruthy();
       }
@@ -127,12 +109,8 @@ describe('Component: Dialog', () => {
     it('should be opened set dialog action items', () => {
       context.dialog.show();
       fixture.detectChanges();
-      expect(
-        dl.query(By.css('.weui-dialog__btn_' + CONFIG.cancelType)),
-      ).not.toBeNull();
-      expect(
-        dl.query(By.css('.weui-dialog__btn_' + CONFIG.confirmType)),
-      ).not.toBeNull();
+      expect(dl.query(By.css('.weui-dialog__btn_' + CONFIG.cancelType))).not.toBeNull();
+      expect(dl.query(By.css('.weui-dialog__btn_' + CONFIG.confirmType))).not.toBeNull();
     });
 
     it('should be opened set dialog three action items', () => {
@@ -192,24 +170,22 @@ describe('Component: Dialog', () => {
             <weui-dialog [config]="config"></weui-dialog>
         `;
 
-    beforeEach(
-      fakeAsync(() => {
-        TestBed.configureTestingModule({
-          declarations: [TestDialogComponent],
-          imports: [DialogModule.forRoot(), FormsModule, NoopAnimationsModule],
-          providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
-        });
-        TestBed.overrideComponent(TestDialogComponent, {
-          set: { template: html },
-        });
-        fixture = TestBed.createComponent(TestDialogComponent);
-        context = fixture.componentInstance;
-        dl = fixture.debugElement;
-        el = fixture.nativeElement;
-        fixture.detectChanges();
-        tick();
-      }),
-    );
+    beforeEach(fakeAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TestDialogComponent],
+        imports: [DialogModule.forRoot(), FormsModule, NoopAnimationsModule],
+        providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
+      });
+      TestBed.overrideComponent(TestDialogComponent, {
+        set: { template: html },
+      });
+      fixture = TestBed.createComponent(TestDialogComponent);
+      context = fixture.componentInstance;
+      dl = fixture.debugElement;
+      el = fixture.nativeElement;
+      fixture.detectChanges();
+      tick();
+    }));
 
     const TYPES: any[] = [
       {
@@ -267,9 +243,7 @@ describe('Component: Dialog', () => {
       fixture.detectChanges();
       const errorEl = dl.queryAll(By.css('.weui-dialog__error'));
       expect(errorEl.length).toBe(1);
-      expect((errorEl[0].nativeElement as HTMLDivElement).textContent).toBe(
-        ERROR,
-      );
+      expect((errorEl[0].nativeElement as HTMLDivElement).textContent).toBe(ERROR);
     });
 
     it('should be required in checkbox', () => {
@@ -288,30 +262,25 @@ describe('Component: Dialog', () => {
       fixture.detectChanges();
       const errorEl = dl.queryAll(By.css('.weui-dialog__error'));
       expect(errorEl.length).toBe(1);
-      expect((errorEl[0].nativeElement as HTMLDivElement).textContent).toBe(
-        ERROR,
-      );
+      expect((errorEl[0].nativeElement as HTMLDivElement).textContent).toBe(ERROR);
     });
 
-    it(
-      'should be auto focus and enter return',
-      fakeAsync(() => {
-        const VALUE = 'cipchk@qq.com';
-        context.config = Object.assign({}, CONFIG, {
-          type: 'prompt',
-          input: 'email',
-          inputValue: VALUE,
-        });
-        context.dialog.show().subscribe(res => {
-          expect(res.result).toBe(VALUE);
-        });
-        fixture.detectChanges();
-        tick(300);
-        // spy
-        context.dialog._keyup(<any>{ keyCode: 13 });
-        fixture.detectChanges();
-      }),
-    );
+    it('should be auto focus and enter return', fakeAsync(() => {
+      const VALUE = 'cipchk@qq.com';
+      context.config = Object.assign({}, CONFIG, {
+        type: 'prompt',
+        input: 'email',
+        inputValue: VALUE,
+      });
+      context.dialog.show().subscribe(res => {
+        expect(res.result).toBe(VALUE);
+      });
+      fixture.detectChanges();
+      tick(300);
+      // spy
+      context.dialog._keyup(<any>{ keyCode: 13 });
+      fixture.detectChanges();
+    }));
   });
 
   describe('[service]', () => {
@@ -321,27 +290,23 @@ describe('Component: Dialog', () => {
     let dl: DebugElement;
     let el: any;
 
-    beforeEach(
-      fakeAsync(() => {
-        TestBed.configureTestingModule({
-          imports: [DialogModule.forRoot(), FormsModule, NoopAnimationsModule],
-          declarations: [TestDialogServiceComponent],
-          providers: [DialogService],
-        }).createComponent(TestDialogServiceComponent);
+    beforeEach(fakeAsync(() => {
+      TestBed.configureTestingModule({
+        imports: [DialogModule.forRoot(), FormsModule, NoopAnimationsModule],
+        declarations: [TestDialogServiceComponent],
+        providers: [DialogService],
+      }).createComponent(TestDialogServiceComponent);
 
-        fixture = TestBed.createComponent(TestDialogServiceComponent);
-        context = fixture.componentInstance;
-        dl = fixture.debugElement;
-        el = fixture.nativeElement;
-        fixture.detectChanges();
-      }),
-    );
+      fixture = TestBed.createComponent(TestDialogServiceComponent);
+      context = fixture.componentInstance;
+      dl = fixture.debugElement;
+      el = fixture.nativeElement;
+      fixture.detectChanges();
+    }));
 
-    beforeEach(
-      inject([DialogService], (_s: DialogService) => {
-        service = _s;
-      }),
-    );
+    beforeEach(inject([DialogService], (_s: DialogService) => {
+      service = _s;
+    }));
 
     it('should close a dialog and get back a value [true] result', (done: () => void) => {
       service.show(Object.assign({}, CONFIG)).subscribe(res => {
@@ -357,7 +322,9 @@ describe('Component: Dialog', () => {
 });
 
 @Component({
-  template: `<h1>Test Service</h1>`,
+  template: `
+    <h1>Test Service</h1>
+  `,
 })
 class TestDialogServiceComponent {}
 

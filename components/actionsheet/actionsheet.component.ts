@@ -1,39 +1,12 @@
-import {
-  Component,
-  OnDestroy,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  Output,
-  EventEmitter,
-} from '@angular/core';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { Component, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { isAndroid } from '../utils/browser';
 import { ActionSheetConfig } from './actionsheet.config';
 import { Observer, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'weui-actionsheet',
-  template: `
-    <div class="weui-mask" [@visibility]="_visibility" (click)="hide(true)"></div>
-    <div class="weui-actionsheet" [ngClass]="{'weui-actionsheet_toggle': _shownAnt && config.skin === 'ios'}">
-      <div class="weui-actionsheet__title" *ngIf="config.skin === 'ios' && config.title">
-        <p class="weui-actionsheet__title-text">{{config.title}}</p>
-      </div>
-      <div class="weui-actionsheet__menu">
-        <div class="weui-actionsheet__cell" *ngFor="let item of menus" (click)="_onSelect(item)">{{item.text}}</div>
-      </div>
-      <div class="weui-actionsheet__action" *ngIf="config.skin === 'ios' && config.cancel">
-        <div class="weui-actionsheet__cell" (click)="hide()">{{config.cancel}}</div>
-      </div>
-    </div>
-  `,
+  templateUrl: './actionsheet.component.html',
   animations: [
     trigger('visibility', [
       state('show', style({ opacity: 1 })),
@@ -44,7 +17,7 @@ import { Observer, Observable, Subscription } from 'rxjs';
   host: {
     '[hidden]': '!_shown',
     '[class.weui-skin_android]': 'config.skin === "android"',
-  }
+  },
 })
 export class ActionSheetComponent implements OnDestroy {
   /**
@@ -60,7 +33,7 @@ export class ActionSheetComponent implements OnDestroy {
   /**
    * 关闭回调
    */
-  @Output() close = new EventEmitter();
+  @Output() readonly close = new EventEmitter();
 
   _shown: boolean = false;
   /**
@@ -74,7 +47,7 @@ export class ActionSheetComponent implements OnDestroy {
     return this._shownAnt ? 'show' : 'hide';
   }
 
-  constructor(private DEF: ActionSheetConfig) { }
+  constructor(private DEF: ActionSheetConfig) {}
 
   /**
    * 显示，组件载入页面后并不会显示，显示调用 `show()` 并订阅结果。
@@ -109,10 +82,13 @@ export class ActionSheetComponent implements OnDestroy {
     if (is_backdrop === true && this.config.backdrop === false) return false;
 
     this._shownAnt = false;
-    setTimeout(() => {
-      this._shown = false;
-      this.close.emit();
-    }, this.config.skin === 'android' ? 200 : 300);
+    setTimeout(
+      () => {
+        this._shown = false;
+        this.close.emit();
+      },
+      this.config.skin === 'android' ? 200 : 300,
+    );
   }
 
   /**

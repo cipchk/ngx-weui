@@ -1,13 +1,4 @@
-import {
-  Component,
-  Input,
-  forwardRef,
-  Output,
-  EventEmitter,
-  HostBinding,
-  ViewChild,
-  ElementRef,
-} from '@angular/core';
+import { Component, Input, forwardRef, Output, EventEmitter, HostBinding, ViewChild, ElementRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 
 /**
@@ -16,16 +7,21 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
 @Component({
   selector: 'weui-stepper',
   template: `
-  <span class="minus" [ngClass]="{'disabled':_disabledMinus}" (click)="_minus()"><em>-</em></span>
-  <div class="input">
-    <input type="tel" #inputNumber [(ngModel)]="value" (blur)="_blur()"
-      [disabled]="disabled"
-      [attr.min]="min"
-      [attr.max]="max"
-      [attr.step]="_step"
-      autocomplete="off">
-  </div>
-  <span class="plus" [ngClass]="{'disabled':_disabledPlus}" (click)="_plus()"><em>+</em></span>
+    <span class="minus" [ngClass]="{ disabled: _disabledMinus }" (click)="_minus()"><em>-</em></span>
+    <div class="input">
+      <input
+        type="tel"
+        #inputNumber
+        [(ngModel)]="value"
+        (blur)="_blur()"
+        [disabled]="disabled"
+        [attr.min]="min"
+        [attr.max]="max"
+        [attr.step]="_step"
+        autocomplete="off"
+      />
+    </div>
+    <span class="plus" [ngClass]="{ disabled: _disabledPlus }" (click)="_plus()"><em>+</em></span>
   `,
   providers: [
     {
@@ -45,7 +41,7 @@ export class StepperComponent implements ControlValueAccessor {
   @HostBinding('class.disabled')
   disabled: boolean = false;
   /** 变更时回调 */
-  @Output() change = new EventEmitter<number>();
+  @Output() readonly change = new EventEmitter<number>();
 
   _step: number = 1;
   _precisionStep = 0;
@@ -63,10 +59,7 @@ export class StepperComponent implements ControlValueAccessor {
 
     const stepString = value.toString();
     if (stepString.indexOf('e-') >= 0) {
-      this._precisionStep = parseInt(
-        stepString.slice(stepString.indexOf('e-')),
-        10,
-      );
+      this._precisionStep = parseInt(stepString.slice(stepString.indexOf('e-')), 10);
     }
     if (stepString.indexOf('.') >= 0) {
       this._precisionStep = stepString.length - stepString.indexOf('.') - 1;
@@ -100,8 +93,7 @@ export class StepperComponent implements ControlValueAccessor {
   _disabledPlus: boolean = false;
   _checkDisabled(): this {
     this._disabledPlus = this.disabled || !(this.value + this.step <= this.max);
-    this._disabledMinus =
-      this.disabled || !(this.value - this.step >= this.min);
+    this._disabledMinus = this.disabled || !(this.value - this.step >= this.min);
     return this;
   }
 
@@ -116,8 +108,7 @@ export class StepperComponent implements ControlValueAccessor {
 
     if (this._disabledPlus) return;
     this.value = this._toPrecisionAsStep(
-      (this._precisionFactor * this.value + this._precisionFactor * this.step) /
-      this._precisionFactor,
+      (this._precisionFactor * this.value + this._precisionFactor * this.step) / this._precisionFactor,
     );
     this._checkDisabled()._notify();
   }
@@ -128,8 +119,7 @@ export class StepperComponent implements ControlValueAccessor {
 
     if (this._disabledMinus) return;
     this.value = this._toPrecisionAsStep(
-      (this._precisionFactor * this.value - this._precisionFactor * this.step) /
-      this._precisionFactor,
+      (this._precisionFactor * this.value - this._precisionFactor * this.step) / this._precisionFactor,
     );
     this._checkDisabled()._notify();
   }

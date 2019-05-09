@@ -1,0 +1,8 @@
+<div class="weui-mask" [ngClass]="{ 'weui-mask__visible': _shown }" (click)="hide(true)">
+  <div class="weui-mask__content" [ngClass]="placement !== 'none' ? 'weui-mask__' + placement : ''">
+    <div [ngStyle]="{ 'background-color': bg }">
+      <div *ngIf="loading"><i class="weui-loading weui-icon_toast"></i></div>
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

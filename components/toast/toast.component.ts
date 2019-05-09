@@ -1,11 +1,4 @@
-import {
-  Component,
-  HostBinding,
-  Input,
-  Output,
-  EventEmitter,
-  OnDestroy,
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { ToastConfig } from './toast.config';
 
 @Component({
@@ -13,8 +6,8 @@ import { ToastConfig } from './toast.config';
   template: `
     <div class="weui-mask_transparent"></div>
     <div class="weui-toast">
-      <i class="{{icon}} weui-icon_toast"></i>
-      <p class="weui-toast__content">{{text}}</p>
+      <i class="{{ icon }} weui-icon_toast"></i>
+      <p class="weui-toast__content">{{ text }}</p>
     </div>
   `,
   host: {
@@ -44,7 +37,7 @@ export class ToastComponent implements OnDestroy {
   /**
    * 隐藏后回调
    */
-  @Output() hide = new EventEmitter();
+  @Output() readonly hide = new EventEmitter();
 
   constructor(private DEF: ToastConfig) {
     this.type = 'success';

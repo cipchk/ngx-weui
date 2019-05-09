@@ -5,23 +5,13 @@ import { DocsArticleComponent } from './article/article.component';
 
 // region: components
 
-const COMPONENTS = [ DocsArticleComponent ];
+const COMPONENTS = [DocsArticleComponent];
 
-const routes: Routes = [
-    { path: '', redirectTo: 'how' },
-    { path: ':id', component: DocsArticleComponent },
-];
+const routes: Routes = [{ path: '', redirectTo: 'how' }, { path: ':id', component: DocsArticleComponent }];
 // endregion
 
 @NgModule({
-    imports: [
-        SharedModule,
-        RouterModule.forChild(routes)
-    ],
-    declarations: [
-        ...COMPONENTS
-    ]
+  imports: [SharedModule, RouterModule.forChild(routes)],
+  declarations: [...COMPONENTS],
 })
-export class DocsModule {
-
-}
+export class DocsModule {}

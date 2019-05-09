@@ -1,12 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  forwardRef,
-  EventEmitter,
-  OnDestroy,
-  ViewChild,
-} from '@angular/core';
+import { Component, Input, Output, forwardRef, EventEmitter, OnDestroy, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PickerOptions } from './options';
 import { PickerComponent } from './picker.component';
@@ -17,13 +9,18 @@ import { PickerComponent } from './picker.component';
 @Component({
   selector: 'weui-city-picker',
   template: `
-    <weui-picker [placeholder]="placeholder"
-      [groups]="_groups" [defaultSelect]="_selected" [disabled]="disabled" [options]="options"
+    <weui-picker
+      [placeholder]="placeholder"
+      [groups]="_groups"
+      [defaultSelect]="_selected"
+      [disabled]="disabled"
+      [options]="options"
       (show)="_onShow()"
       (hide)="_onHide()"
       (change)="_onCityChange($event)"
       (groupChange)="_onCityGroupChange($event)"
-      (cancel)="_onCityCancelChange()"></weui-picker>
+      (cancel)="_onCityCancelChange()"
+    ></weui-picker>
   `,
   providers: [
     {
@@ -63,28 +60,22 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
    *
    * `{ value: '10000', items: [ {}, {}, {} ] }`
    */
-  @Output() change = new EventEmitter<any>();
+  @Output() readonly change = new EventEmitter<any>();
   /** 列变更时回调 */
-  @Output() groupChange = new EventEmitter<any>();
+  @Output() readonly groupChange = new EventEmitter<any>();
   /** 取消后回调 */
-  @Output() cancel = new EventEmitter<any>();
+  @Output() readonly cancel = new EventEmitter<any>();
   /** 显示时回调 */
-  @Output() show = new EventEmitter<any>();
+  @Output() readonly show = new EventEmitter<any>();
   /** 隐藏后回调 */
-  @Output() hide = new EventEmitter<any>();
+  @Output() readonly hide = new EventEmitter<any>();
 
   ngOnDestroy(): void {
     this._tmpData = null;
     this._groups = null;
   }
 
-  private parseData(
-    data: any,
-    subKey: any,
-    selected: any[] = [],
-    group: any[] = [],
-    newselected: any[] = [],
-  ): any {
+  private parseData(data: any, subKey: any, selected: any[] = [], group: any[] = [], newselected: any[] = []): any {
     let _selected = 0;
 
     if (Array.isArray(selected) && selected.length > 0) {
@@ -121,12 +112,7 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
   /**
    * 将值转换成位置
    */
-  private valueToSelect(
-    data: any,
-    subKey: any,
-    dept: number = 1,
-    newSelected: any[] = [],
-  ): any {
+  private valueToSelect(data: any, subKey: any, dept: number = 1, newSelected: any[] = []): any {
     const code = (this._value.substr(0, dept * 2) + '0000').substr(0, 6);
     let _selected = data.findIndex((w: any) => w[this.dataMap.value] === code);
     if (_selected <= -1) {
@@ -155,8 +141,7 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
 
   _onCityGroupChange(res: any) {
     this._selected[res.groupIndex] = res.index;
-    if (res.groupIndex !== 2)
-      this.parseData(this._tmpData, this.dataMap.items, this._selected);
+    if (res.groupIndex !== 2) this.parseData(this._tmpData, this.dataMap.items, this._selected);
 
     this.groupChange.emit(res);
   }

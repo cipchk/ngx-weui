@@ -26,14 +26,10 @@ import { AppComponent } from './app.component';
     WeUiModule.forRoot(),
     ToastrModule.forRoot(),
     AqmModule.forRoot({
-      apiKey: 'I3TBZ-QTN3J-MWPFI-FERMS-IBOCQ-LBBWY'
-    })
+      apiKey: 'I3TBZ-QTN3J-MWPFI-FERMS-IBOCQ-LBBWY',
+    }),
   ],
-  declarations: [
-    AppComponent
-  ],
-  bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
 })
-
-export class AppModule {
-}
+export class AppModule {}

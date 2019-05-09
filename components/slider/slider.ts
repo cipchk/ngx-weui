@@ -3,13 +3,10 @@ import {
   forwardRef,
   ElementRef,
   OnDestroy,
-  HostListener,
-  ContentChild,
   Input,
   EventEmitter,
   Output,
   OnChanges,
-  SimpleChanges,
   OnInit,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -27,8 +24,7 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     },
   ],
 })
-export class SliderDirective
-  implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
+export class SliderDirective implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
   private _state: any = null;
 
   private _value: number = 0;
@@ -61,18 +57,15 @@ export class SliderDirective
   /**
    * 值改变时触发
    */
-  @Output('weui-change') change = new EventEmitter<number>();
+  @Output('weui-change') readonly change = new EventEmitter<number>();
 
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef) {}
 
   ngOnInit() {
     this.isInit = true;
     this.trackEl = this.el.nativeElement.querySelector('.weui-slider__track');
-    this.handlerEl = this.el.nativeElement.querySelector(
-      '.weui-slider__handler',
-    );
-    if (this.trackEl === null || this.handlerEl === null)
-      throw new Error('失效DOM结构');
+    this.handlerEl = this.el.nativeElement.querySelector('.weui-slider__handler');
+    if (this.trackEl === null || this.handlerEl === null) throw new Error('失效DOM结构');
 
     this.onTouchStart = this.startHandle.bind(this);
     this.onTouchMove = this.moveHandle.bind(this);
@@ -105,9 +98,9 @@ export class SliderDirective
   private setValue(value: number) {
     if (this.max > this.min) {
       this._state.percentage = [
-        100 * (value - this.min) / (this.max - this.min),
+        (100 * (value - this.min)) / (this.max - this.min),
         0,
-        this.step * 100 / (this.max - this.min),
+        (this.step * 100) / (this.max - this.min),
       ];
     } else {
       this._state.percentage = [0, 0, 100];
@@ -132,23 +125,21 @@ export class SliderDirective
 
     const xDiff = pageX - this._state.x;
     if (xDiff >= 15 || xDiff <= 15) {
-      this._state.percentage[0] = this.getPercentage(pageX, $event);
+      this._state.percentage[0] = this.getPercentage(pageX);
       this.layout();
       this.calculateValue(this._state.percentage[0]);
     }
   }
 
-  private getPercentage(pageX: number, $event: any): number {
+  private getPercentage(pageX: number): number {
     const distanceToSlide = pageX - this._state.left;
-    let percentage = distanceToSlide / this._state.size * 100;
-    percentage =
-      Math.round(percentage / this._state.percentage[2]) *
-      this._state.percentage[2];
+    let percentage = (distanceToSlide / this._state.size) * 100;
+    percentage = Math.round(percentage / this._state.percentage[2]) * this._state.percentage[2];
     return Math.max(0, Math.min(100, percentage));
   }
 
   private calculateValue(percentage: number) {
-    const rawValue = percentage / 100 * (this.max - this.min);
+    const rawValue = (percentage / 100) * (this.max - this.min);
     // adjustment = this.min
     let value = this.min + Math.round(rawValue / this.step) * this.step;
     if (value < this.min) value = this.min;
@@ -160,7 +151,7 @@ export class SliderDirective
     this.change.emit(this._value);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.isInit) this.refresh();
   }
 

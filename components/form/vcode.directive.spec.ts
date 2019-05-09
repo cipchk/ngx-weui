@@ -1,20 +1,7 @@
-import { Observable, Subscription, of } from 'rxjs';
-import { Component, ViewChild, DebugElement } from '@angular/core';
-import {
-  FormsModule,
-  FormBuilder,
-  FormGroup,
-  FormControl,
-} from '@angular/forms';
-import {
-  ComponentFixture,
-  TestBed,
-  fakeAsync,
-  tick,
-  ComponentFixtureAutoDetect,
-  async,
-  inject,
-} from '@angular/core/testing';
+import { Observable, of } from 'rxjs';
+import { Component, DebugElement } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { FormModule } from './form.module';
@@ -47,34 +34,28 @@ describe('Directive: vcode', () => {
   let buttonEl: HTMLButtonElement;
 
   describe('[default]', () => {
-    beforeEach(
-      fakeAsync(() => {
-        TestBed.configureTestingModule({
-          declarations: [TestVCodeComponent],
-          imports: [FormModule.forRoot(), FormsModule],
-          providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
-        });
+    beforeEach(fakeAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TestVCodeComponent],
+        imports: [FormModule.forRoot(), FormsModule],
+        providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
+      });
 
-        TestBed.overrideComponent(TestVCodeComponent, {
-          set: { template: html },
-        });
-        fixture = TestBed.createComponent(TestVCodeComponent);
-        context = fixture.componentInstance;
+      TestBed.overrideComponent(TestVCodeComponent, {
+        set: { template: html },
+      });
+      fixture = TestBed.createComponent(TestVCodeComponent);
+      context = fixture.componentInstance;
 
-        buttonEl = fixture.debugElement.query(By.css('button'))
-          .nativeElement as HTMLButtonElement;
+      buttonEl = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
 
-        const ds = fixture.debugElement.queryAll(By.directive(VCodeDirective));
-        directive = ds.map(
-          (de: DebugElement) =>
-            de.injector.get(VCodeDirective) as VCodeDirective,
-        )[0];
+      const ds = fixture.debugElement.queryAll(By.directive(VCodeDirective));
+      directive = ds.map((de: DebugElement) => de.injector.get(VCodeDirective) as VCodeDirective)[0];
 
-        fixture.detectChanges();
+      fixture.detectChanges();
 
-        tick();
-      }),
-    );
+      tick();
+    }));
 
     it('should be defined on the test component', () => {
       expect(directive).not.toBeNull();
@@ -122,36 +103,30 @@ describe('Directive: vcode', () => {
   });
 
   describe('send error', () => {
-    beforeEach(
-      fakeAsync(() => {
-        TestBed.configureTestingModule({
-          declarations: [TestVCodeComponent],
-          imports: [FormModule.forRoot(), FormsModule],
-          providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
-        });
+    beforeEach(fakeAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TestVCodeComponent],
+        imports: [FormModule.forRoot(), FormsModule],
+        providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
+      });
 
-        TestBed.overrideComponent(TestVCodeComponent, {
-          set: { template: html },
-        });
-        fixture = TestBed.createComponent(TestVCodeComponent);
-        context = fixture.componentInstance;
+      TestBed.overrideComponent(TestVCodeComponent, {
+        set: { template: html },
+      });
+      fixture = TestBed.createComponent(TestVCodeComponent);
+      context = fixture.componentInstance;
 
-        spyOn(context, 'onSendCode').and.returnValue(of(false));
+      spyOn(context, 'onSendCode').and.returnValue(of(false));
 
-        buttonEl = fixture.debugElement.query(By.css('button'))
-          .nativeElement as HTMLButtonElement;
+      buttonEl = fixture.debugElement.query(By.css('button')).nativeElement as HTMLButtonElement;
 
-        const ds = fixture.debugElement.queryAll(By.directive(VCodeDirective));
-        directive = ds.map(
-          (de: DebugElement) =>
-            de.injector.get(VCodeDirective) as VCodeDirective,
-        )[0];
+      const ds = fixture.debugElement.queryAll(By.directive(VCodeDirective));
+      directive = ds.map((de: DebugElement) => de.injector.get(VCodeDirective) as VCodeDirective)[0];
 
-        fixture.detectChanges();
+      fixture.detectChanges();
 
-        tick();
-      }),
-    );
+      tick();
+    }));
 
     it('should be resend', () => {
       buttonEl.click();

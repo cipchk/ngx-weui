@@ -8,7 +8,6 @@
 import { Path, join, normalize, relative, strings } from '@angular-devkit/core';
 import { DirEntry, Tree } from '@angular-devkit/schematics';
 
-
 export interface ModuleOptions {
   module?: string;
   name: string;
@@ -16,7 +15,6 @@ export interface ModuleOptions {
   path?: string;
   skipImport?: boolean;
 }
-
 
 /**
  * Find the module referred by a set of options passed to the schematics.
@@ -27,14 +25,14 @@ export function findModuleFromOptions(host: Tree, options: ModuleOptions): Path 
   }
 
   if (!options.module) {
-    const pathToCheck = (options.path || '')
-                      + (options.flat ? '' : '/' + strings.dasherize(options.name));
+    const pathToCheck = (options.path || '') + (options.flat ? '' : '/' + strings.dasherize(options.name));
 
     return normalize(findModule(host, pathToCheck));
   } else {
-    const modulePath = normalize(
-      '/' + (options.path) + '/' + options.module);
-    const moduleBaseName = normalize(modulePath).split('/').pop();
+    const modulePath = normalize('/' + options.path + '/' + options.module);
+    const moduleBaseName = normalize(modulePath)
+      .split('/')
+      .pop();
 
     if (host.exists(modulePath)) {
       return normalize(modulePath);
@@ -65,15 +63,16 @@ export function findModule(host: Tree, generateDir: string): Path {
     if (matches.length == 1) {
       return join(dir.path, matches[0]);
     } else if (matches.length > 1) {
-      throw new Error('More than one module matches. Use skip-import option to skip importing '
-        + 'the component into the closest module.');
+      throw new Error(
+        'More than one module matches. Use skip-import option to skip importing ' +
+          'the component into the closest module.',
+      );
     }
 
     dir = dir.parent;
   }
 
-  throw new Error('Could not find an NgModule. Use the skip-import '
-    + 'option to skip importing in NgModule.');
+  throw new Error('Could not find an NgModule. Use the skip-import ' + 'option to skip importing in NgModule.');
 }
 
 /**

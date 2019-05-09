@@ -1,20 +1,6 @@
-import { Component, ViewChild, DebugElement } from '@angular/core';
-import {
-  FormsModule,
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import {
-  ComponentFixture,
-  TestBed,
-  fakeAsync,
-  tick,
-  ComponentFixtureAutoDetect,
-  async,
-  inject,
-} from '@angular/core/testing';
+import { Component, DebugElement } from '@angular/core';
+import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { ComponentFixture, TestBed, ComponentFixtureAutoDetect } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
 import { FormModule } from './form.module';
@@ -75,13 +61,10 @@ describe('Directive: Input', () => {
     });
     fixture = TestBed.createComponent(TestInputComponent);
     context = fixture.componentInstance;
-    inputEl = fixture.debugElement.query(By.css('input'))
-      .nativeElement as HTMLInputElement;
+    inputEl = fixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement;
 
     const inputs = fixture.debugElement.queryAll(By.directive(InputDirective));
-    directive = inputs.map(
-      (de: DebugElement) => de.injector.get(InputDirective) as InputDirective,
-    )[0];
+    directive = inputs.map((de: DebugElement) => de.injector.get(InputDirective) as InputDirective)[0];
 
     fixture.detectChanges();
   }
@@ -89,9 +72,7 @@ describe('Directive: Input', () => {
   function expectValidator(val: string, validStatus: boolean) {
     context.control.setValue(val);
     fixture.detectChanges();
-    expect(inputEl.classList).toContain(
-      validStatus ? 'ng-valid' : 'ng-invalid',
-    );
+    expect(inputEl.classList).toContain(validStatus ? 'ng-valid' : 'ng-invalid');
   }
 
   describe('[default]', () => {

@@ -48,27 +48,56 @@ import { DemoStepperComponent } from './stepper/stepper.component';
 import { DemoPaginationComponent } from './pagination/pagination.component';
 
 const COMPONENTS = [
-    ContainerComponent, PageComponent, DemoAccordionComponent,
-    ButtonComponent, InputComponent, ListComponent, SliderComponent,
-    DemoUploaderComponent, DemoActionSheetComponent, DemoDialogComponent, ArticleComponent, FlexComponent,
-    BadgeComponent, FooterComponent, GridComponent, IconsComponent, PanelComponent, PreviewComponent,
-    DemoLoadmoreComponent, DemoProgressComponent, DemoGalleryComponent, DemoPickerComponent,
-    DemoSearchBarComponent, DemoNavbarComponent, DemoTabbarComponent, DemoToastComponent,
-    DemoToptipsComponent, DemoMsgComponent, DemoMsgFailComponent, DemoMsgSuccessComponent,
-    DemoPopupComponent, DemoPTRComponent, DemoInfiniteLoaderComponent, DemoSidebarComponent,
-    DemoSwiperComponent, CountdownComponent, GesturePasswordComponent, DemoChartG2Component,
-    DemoMapQQComponent, JWeiXinComponent, DemoMaskComponent, DemoRatingComponent, DemoStepperComponent,
-    DemoPaginationComponent
+  ContainerComponent,
+  PageComponent,
+  DemoAccordionComponent,
+  ButtonComponent,
+  InputComponent,
+  ListComponent,
+  SliderComponent,
+  DemoUploaderComponent,
+  DemoActionSheetComponent,
+  DemoDialogComponent,
+  ArticleComponent,
+  FlexComponent,
+  BadgeComponent,
+  FooterComponent,
+  GridComponent,
+  IconsComponent,
+  PanelComponent,
+  PreviewComponent,
+  DemoLoadmoreComponent,
+  DemoProgressComponent,
+  DemoGalleryComponent,
+  DemoPickerComponent,
+  DemoSearchBarComponent,
+  DemoNavbarComponent,
+  DemoTabbarComponent,
+  DemoToastComponent,
+  DemoToptipsComponent,
+  DemoMsgComponent,
+  DemoMsgFailComponent,
+  DemoMsgSuccessComponent,
+  DemoPopupComponent,
+  DemoPTRComponent,
+  DemoInfiniteLoaderComponent,
+  DemoSidebarComponent,
+  DemoSwiperComponent,
+  CountdownComponent,
+  GesturePasswordComponent,
+  DemoChartG2Component,
+  DemoMapQQComponent,
+  JWeiXinComponent,
+  DemoMaskComponent,
+  DemoRatingComponent,
+  DemoStepperComponent,
+  DemoPaginationComponent,
 ];
 
 @NgModule({
-    imports: [
-        SharedModule
-    ],
-    declarations: COMPONENTS,
-    entryComponents: [
-        PageComponent
-    ],
-    exports: COMPONENTS
+  imports: [SharedModule],
+  declarations: COMPONENTS,
+  entryComponents: [PageComponent],
+  exports: COMPONENTS,
 })
 export class ExampleCoreModule {}

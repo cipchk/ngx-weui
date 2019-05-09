@@ -1,11 +1,4 @@
-import {
-  Directive,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  ElementRef,
-  OnInit,
-} from '@angular/core';
+import { Directive, Input, OnChanges, SimpleChanges, ElementRef, OnInit } from '@angular/core';
 import { add, remove } from '../utils/dom';
 
 /**
@@ -37,7 +30,7 @@ export class TextareaDirective implements OnInit, OnChanges {
   private _value: string;
   private _count: any;
 
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef) {}
 
   ngOnInit() {
     this.init();

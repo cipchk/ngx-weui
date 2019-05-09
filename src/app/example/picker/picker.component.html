@@ -1,102 +1,131 @@
 <Page [ngClass]="'picker'" [title]="'Picker'" [subTitle]="'多列选择器'" [spacing]="false">
-
-    <p>Form Result: {{ res | json }}</p>
-    <form #f="ngForm" (ngSubmit)="onSave()">
-        <div class="weui-cells weui-cells_form">
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">* City</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <weui-city-picker required placeholder="Pick a City" [(ngModel)]="res.city" name="city"
-                        [data]="cityData" (change)="cityChange($event)"></weui-city-picker>
-                </div>
-            </div>
+  <p>Form Result: {{ res | json }}</p>
+  <form #f="ngForm" (ngSubmit)="onSave()">
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell">
+        <div class="weui-cell__hd">
+          <label class="weui-label">* City</label>
         </div>
-        <div class="weui-cells weui-cells_form">
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">YearMonth</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <weui-date-picker placeholder="Pick a Year&Month"
-                        [min]="DT.min" [max]="DT.max" type="date-ym"
-                        [(ngModel)]="res.ym" name="date-ym"></weui-date-picker>
-                </div>
-            </div>
+        <div class="weui-cell__bd">
+          <weui-city-picker
+            required
+            placeholder="Pick a City"
+            [(ngModel)]="res.city"
+            name="city"
+            [data]="cityData"
+            (change)="cityChange($event)"
+          ></weui-city-picker>
         </div>
-        <div class="weui-cells weui-cells_form">
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">Date</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <weui-date-picker placeholder="Pick a Date"
-                        [min]="DT.min" [max]="DT.max"
-                        [(ngModel)]="res.date" name="date"></weui-date-picker>
-                </div>
-            </div>
-        </div>
-        <div class="weui-cells weui-cells_form">
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">DateTime</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <weui-date-picker placeholder="Pick a DateTime"
-                        type="datetime" [format]="{hu:'',mu:''}"
-                        [(ngModel)]="res.date2" name="date2"></weui-date-picker>
-                </div>
-            </div>
-        </div>
-        <div class="weui-cells weui-cells_form">
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">Time</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <weui-date-picker placeholder="Pick a Time"
-                        type="time"
-                        [(ngModel)]="res.date3" name="date2"></weui-date-picker>
-                </div>
-            </div>
-        </div>
-        <div class="weui-cells weui-cells_form">
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">*Direct Picker</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <weui-picker placeholder="Pick a item" required
-                        [groups]="items" [(ngModel)]="res.item" name="item"></weui-picker>
-                </div>
-            </div>
-        </div>
-        <div class="weui-cells weui-cells_form">
-            <div class="weui-cell">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">Direct Picker</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <weui-picker placeholder="Pick a item" [(ngModel)]="res.mitem" name="mitem"
-                        [groups]="itemGroup"
-                        [options]="{cancel:'Cancel', confirm:'Confirm', backdrop: false}"></weui-picker>
-                </div>
-            </div>
-        </div>
-        <div class="weui-btn-area">
-            <button weui-button [disabled]="!f.form.valid || !f.form.dirty">保存</button>
-        </div>
-    </form>
-    <div class="weui-cells__title">使用Service形式</div>
-    <p style="margin-bottom: 8px;">Service Result: {{srvRes | json}}</p>
-    <div class="weui-btn-area">
-        <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('city')">CityPicker</button>
-        <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('date-ym')">Year&MonthPicker</button>
-        <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('date')">DatePicker</button>
-        <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('datetime')">DateTimePicker</button>
-        <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('time')">TimePicker</button>
-        <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('data')">Data Picker</button>
+      </div>
     </div>
-
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell">
+        <div class="weui-cell__hd">
+          <label class="weui-label">YearMonth</label>
+        </div>
+        <div class="weui-cell__bd">
+          <weui-date-picker
+            placeholder="Pick a Year&Month"
+            [min]="DT.min"
+            [max]="DT.max"
+            type="date-ym"
+            [(ngModel)]="res.ym"
+            name="date-ym"
+          ></weui-date-picker>
+        </div>
+      </div>
+    </div>
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell">
+        <div class="weui-cell__hd">
+          <label class="weui-label">Date</label>
+        </div>
+        <div class="weui-cell__bd">
+          <weui-date-picker
+            placeholder="Pick a Date"
+            [min]="DT.min"
+            [max]="DT.max"
+            [(ngModel)]="res.date"
+            name="date"
+          ></weui-date-picker>
+        </div>
+      </div>
+    </div>
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell">
+        <div class="weui-cell__hd">
+          <label class="weui-label">DateTime</label>
+        </div>
+        <div class="weui-cell__bd">
+          <weui-date-picker
+            placeholder="Pick a DateTime"
+            type="datetime"
+            [format]="{ hu: '', mu: '' }"
+            [(ngModel)]="res.date2"
+            name="date2"
+          ></weui-date-picker>
+        </div>
+      </div>
+    </div>
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell">
+        <div class="weui-cell__hd">
+          <label class="weui-label">Time</label>
+        </div>
+        <div class="weui-cell__bd">
+          <weui-date-picker
+            placeholder="Pick a Time"
+            type="time"
+            [(ngModel)]="res.date3"
+            name="date2"
+          ></weui-date-picker>
+        </div>
+      </div>
+    </div>
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell">
+        <div class="weui-cell__hd">
+          <label class="weui-label">*Direct Picker</label>
+        </div>
+        <div class="weui-cell__bd">
+          <weui-picker
+            placeholder="Pick a item"
+            required
+            [groups]="items"
+            [(ngModel)]="res.item"
+            name="item"
+          ></weui-picker>
+        </div>
+      </div>
+    </div>
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell">
+        <div class="weui-cell__hd">
+          <label class="weui-label">Direct Picker</label>
+        </div>
+        <div class="weui-cell__bd">
+          <weui-picker
+            placeholder="Pick a item"
+            [(ngModel)]="res.mitem"
+            name="mitem"
+            [groups]="itemGroup"
+            [options]="{ cancel: 'Cancel', confirm: 'Confirm', backdrop: false }"
+          ></weui-picker>
+        </div>
+      </div>
+    </div>
+    <div class="weui-btn-area">
+      <button weui-button [disabled]="!f.form.valid || !f.form.dirty">保存</button>
+    </div>
+  </form>
+  <div class="weui-cells__title">使用Service形式</div>
+  <p style="margin-bottom: 8px;">Service Result: {{ srvRes | json }}</p>
+  <div class="weui-btn-area">
+    <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('city')">CityPicker</button>
+    <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('date-ym')">Year&MonthPicker</button>
+    <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('date')">DatePicker</button>
+    <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('datetime')">DateTimePicker</button>
+    <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('time')">TimePicker</button>
+    <button weui-button weui-type="default" weui-mini (click)="onShowBySrv('data')">Data Picker</button>
+  </div>
 </Page>

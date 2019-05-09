@@ -14,12 +14,10 @@ export class DocsNavComponent implements OnInit {
   private _data: any[];
   type = '';
   ngOnInit() {
-    this.router.events
-      .pipe(filter(e => e instanceof NavigationEnd))
-      .subscribe(e => {
-        this.updateData();
-        window.scrollTo(0, 0);
-      });
+    this.router.events.pipe(filter(e => e instanceof NavigationEnd)).subscribe(e => {
+      this.updateData();
+      window.scrollTo(0, 0);
+    });
 
     this.updateData();
   }
@@ -35,8 +33,6 @@ export class DocsNavComponent implements OnInit {
 
   onSearch(term: string) {
     term = term.toLowerCase();
-    this.navList = this._data.filter(
-      (w: any) => ~w.name.toLowerCase().indexOf(term),
-    );
+    this.navList = this._data.filter((w: any) => ~w.name.toLowerCase().indexOf(term));
   }
 }

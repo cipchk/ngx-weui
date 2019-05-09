@@ -1,6 +1,5 @@
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 
 import { AccordionModule } from './accordion.module';
 import { AccordionConfig } from './accordion.config';
@@ -33,10 +32,7 @@ function getPanels(element: HTMLElement): Element[] {
   return Array.from(element.querySelectorAll('weui-accordion-panel'));
 }
 
-function expectOpenPanels(
-  nativeEl: HTMLElement,
-  openPanelsDef: boolean[],
-): void {
+function expectOpenPanels(nativeEl: HTMLElement, openPanelsDef: boolean[]): void {
   const panels = getPanels(nativeEl);
   expect(panels.length).toBe(openPanelsDef.length);
   for (let i = 0; i < panels.length; i++) {
@@ -86,9 +82,7 @@ describe('Component: Accordion', () => {
 
   it('should toggle panel via click header', () => {
     const panels = getPanels(element);
-    ((panels[1] as HTMLDivElement).querySelector(
-      '[role="tab"]',
-    ) as HTMLDivElement).click();
+    ((panels[1] as HTMLDivElement).querySelector('[role="tab"]') as HTMLDivElement).click();
     fixture.detectChanges();
     expectOpenPanels(element, [false, true, false]);
   });
@@ -106,9 +100,7 @@ describe('Component: Accordion', () => {
     fixture.detectChanges();
     expectOpenPanels(element, [false, false, false]);
     const panels = getPanels(element);
-    ((panels[1] as HTMLDivElement).querySelector(
-      '[role="tab"]',
-    ) as HTMLDivElement).click();
+    ((panels[1] as HTMLDivElement).querySelector('[role="tab"]') as HTMLDivElement).click();
     expectOpenPanels(element, [false, false, false]);
   });
 });

@@ -3,11 +3,7 @@ import { Observable } from 'rxjs';
 
 import { BaseService } from '../utils/base.service';
 
-import {
-  FORMAT_TYPE,
-  DatePickerComponent,
-  DatePickerType,
-} from './picker-date.component';
+import { FORMAT_TYPE, DatePickerComponent, DatePickerType } from './picker-date.component';
 import { PickerData } from './data';
 import { PickerOptions } from './options';
 import { PickerComponent } from './picker.component';
@@ -18,7 +14,6 @@ import { CityPickerComponent } from './picker-city.component';
  */
 @Injectable()
 export class PickerService extends BaseService {
-
   /**
    * 构建一个多列选择器并显示
    *
@@ -63,12 +58,7 @@ export class PickerService extends BaseService {
    * @param options 配置项
    * @returns 务必订阅结果才会显示。
    */
-  showCity(
-    data: any,
-    value?: string,
-    dataMap?: any,
-    options?: PickerOptions,
-  ): Observable<any> {
+  showCity(data: any, value?: string, dataMap?: any, options?: PickerOptions): Observable<any> {
     const componentRef = this.build(CityPickerComponent);
     if (dataMap) componentRef.instance.dataMap = dataMap;
     // 通过Service打开的强制设置为 `default` 以免出现 `input`

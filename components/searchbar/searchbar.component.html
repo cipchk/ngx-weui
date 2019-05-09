@@ -1,0 +1,25 @@
+<div class="weui-search-bar" [ngClass]="{ 'weui-search-bar_focusing': _focus }">
+  <form class="weui-search-bar__form" (ngSubmit)="_onSubmit($event)">
+    <div class="weui-search-bar__box">
+      <i class="weui-icon-search"></i>
+      <input
+        #term
+        type="search"
+        autocomplete="off"
+        name="q"
+        class="weui-search-bar__input"
+        [placeholder]="placeholder"
+        [(ngModel)]="_q"
+        (ngModelChange)="_onSearch()"
+        (focus)="_focus = true"
+        (blur)="_onBlur()"
+      />
+      <a href="javascript:" class="weui-icon-clear" (click)="_onClear()"></a>
+    </div>
+    <label class="weui-search-bar__label" (click)="_doFocus()">
+      <i class="weui-icon-search"></i>
+      <span>{{ placeholder }}</span>
+    </label>
+  </form>
+  <a href="javascript:" class="weui-search-bar__cancel-btn" (click)="_onCancel()">{{ cancelText }}</a>
+</div>

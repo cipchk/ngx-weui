@@ -1,18 +1,18 @@
 .rating {
-    >i {
-        display: inline-block;
-        &:before {
-            font-style: normal;
-        }
+  > i {
+    display: inline-block;
+    &::before {
+      font-style: normal;
     }
-    .off {
-        &:before {
-            content: '☆';
-        }
+  }
+  .off {
+    &::before {
+      content: '☆';
     }
-    .on {
-        &:before {
-            content: '★';
-        }
+  }
+  .on {
+    &::before {
+      content: '★';
     }
+  }
 }

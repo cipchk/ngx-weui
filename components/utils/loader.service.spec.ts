@@ -1,12 +1,10 @@
-import { Injector, ReflectiveInjector } from '@angular/core';
+import { ReflectiveInjector } from '@angular/core';
 import { DOCUMENT } from '@angular/platform-browser';
 
 import { LoaderService } from './loader.service';
 
 class MockDocument {
-  createElement = jasmine
-    .createSpy('Document createElement')
-    .and.returnValue({});
+  createElement = jasmine.createSpy('Document createElement').and.returnValue({});
   getElementsByTagName = jasmine.createSpy('Document getElementsByTagName');
 }
 

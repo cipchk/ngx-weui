@@ -1,21 +1,5 @@
-import {
-  Directive,
-  Input,
-  Renderer,
-  ElementRef,
-  OnInit,
-  OnChanges,
-  SimpleChanges,
-  forwardRef,
-} from '@angular/core';
-import {
-  Validator,
-  AbstractControl,
-  Validators,
-  NG_VALIDATORS,
-  ValidatorFn,
-  ValidationErrors,
-} from '@angular/forms';
+import { Directive, Input, ElementRef, OnInit, OnChanges, forwardRef } from '@angular/core';
+import { Validator, AbstractControl, NG_VALIDATORS, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { findParent, add, remove } from '../utils/dom';
 
 /**
@@ -34,7 +18,6 @@ import { findParent, add, remove } from '../utils/dom';
 export class InputDirective implements OnInit, OnChanges, Validator {
   private parentEl: any;
   private ftEl: any;
-  private pattern: RegExp;
   private _validator: ValidatorFn;
   private _onChange: () => void;
 
@@ -65,13 +48,13 @@ export class InputDirective implements OnInit, OnChanges, Validator {
     this.parentEl = findParent(this.el.nativeElement, '.weui-cell');
     if (!this.parentEl) {
       console.error('父DOM结构至少必须包含一个.weui-cell');
-      return ;
+      return;
     }
     // 检查是否有 weui-cell__ft
     this.ftEl = add(this.parentEl);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this._createValidator();
     if (this._onChange) this._onChange();
   }
@@ -117,8 +100,7 @@ export class InputDirective implements OnInit, OnChanges, Validator {
     this._validator = (control: AbstractControl): ValidationErrors | null => {
       let value: string = control.value;
       if (value == null || value.length === 0) {
-        if (this.required !== undefined)
-          return { icon: this.required, type: 'required', actualValue: value };
+        if (this.required !== undefined) return { icon: this.required, type: 'required', actualValue: value };
 
         return null;
       }
@@ -126,9 +108,7 @@ export class InputDirective implements OnInit, OnChanges, Validator {
         value = value.replace(/ /g, '');
         control.setValue(value, { emitEvent: false });
       }
-      return regex === null || regex.test(value)
-        ? null
-        : { icon: 'warn', type: 'regex', actualValue: value };
+      return regex === null || regex.test(value) ? null : { icon: 'warn', type: 'regex', actualValue: value };
     };
   }
 

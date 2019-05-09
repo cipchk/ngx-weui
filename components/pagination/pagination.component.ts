@@ -1,30 +1,10 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { PaginationMode } from './pagination.type';
 import { PaginationConfig } from './pagination.config';
 
 @Component({
   selector: 'weui-pagination',
-  template: `
-  <ng-template [ngIf]="mode==='button'">
-    <div class="weui-pagination__item weui-pagination__prev">
-      <a weui-button (click)="_goto(-1)" weui-plain [weui-mini]="mini" weui-type="default" [disabled]="_prevDisabled" [innerHTML]="prevText"></a>
-    </div>
-    <div class="weui-pagination__item weui-pagination__num" *ngIf="!simple">{{current}}/{{total}}</div>
-    <div class="weui-pagination__item weui-pagination__next">
-      <a weui-button (click)="_goto(1)" weui-plain [weui-mini]="mini" weui-type="default" [disabled]="_nextDisabled" [innerHTML]="nextText"></a>
-    </div>
-  </ng-template>
-  <div class="weui-pagination__item weui-pagination__num" *ngIf="mode==='pointer'">
-    <div *ngFor="let i of _ptArr" class="weui-pagination__dot" [class.weui-pagination__dot-active]="current === i"><span></span></div>
-  </div>
-  `,
+  templateUrl: './pagination.component.html',
   host: {
     class: 'weui-pagination',
   },
@@ -56,13 +36,13 @@ export class PaginationComponent implements OnChanges {
    */
   @Input() nextText: string;
   /** 分页触发的回调函数 */
-  @Output() change = new EventEmitter<number>();
+  @Output() readonly change = new EventEmitter<number>();
 
   constructor(cog: PaginationConfig) {
     Object.assign(this, cog);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.mode === 'pointer')
       this._ptArr = Array(this.total)
         .fill(1)

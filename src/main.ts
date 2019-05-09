@@ -8,11 +8,13 @@ import { AppModule } from './app/app.module';
 import './app/core/preloader';
 
 if (environment.production) {
-    enableProdMode();
+  enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule).then(() => {
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  .then(() => {
     if ((<any>window).appBootstrap) {
       (<any>window).appBootstrap();
     }
-});
+  });

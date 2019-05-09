@@ -1,12 +1,4 @@
-import {
-  Component,
-  Directive,
-  EventEmitter,
-  Input,
-  OnInit,
-  Output,
-  HostBinding,
-} from '@angular/core';
+import { Component, Input, HostBinding } from '@angular/core';
 import { ButtonConfig } from './button.config';
 import { ButtonType } from '../utils/types';
 import { toBoolean } from '../utils/boolean-property';
@@ -26,8 +18,7 @@ import { toBoolean } from '../utils/boolean-property';
     '[attr.disabled]': 'disabled ? "disabled" : null',
   },
   exportAs: 'weuiButton',
-  template:
-    '<i class="weui-loading" *ngIf="loading"></i><ng-content></ng-content>'
+  template: '<i class="weui-loading" *ngIf="loading"></i><ng-content></ng-content>',
 })
 export class ButtonComponent {
   /**

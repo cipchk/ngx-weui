@@ -4,7 +4,6 @@ import { ToptipsType, ToptipsComponent } from './toptips.component';
 
 @Injectable()
 export class ToptipsService extends BaseService {
-
   /**
    * 构建一个Toptips并显示
    *

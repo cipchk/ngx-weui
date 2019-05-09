@@ -8,18 +8,8 @@ import { ChecklistDirective } from './check.directive';
 
 @NgModule({
   imports: [CommonModule, FormsModule],
-  declarations: [
-    InputDirective,
-    VCodeDirective,
-    TextareaDirective,
-    ChecklistDirective,
-  ],
-  exports: [
-    InputDirective,
-    VCodeDirective,
-    TextareaDirective,
-    ChecklistDirective,
-  ],
+  declarations: [InputDirective, VCodeDirective, TextareaDirective, ChecklistDirective],
+  exports: [InputDirective, VCodeDirective, TextareaDirective, ChecklistDirective],
 })
 export class FormModule {
   static forRoot(): ModuleWithProviders {

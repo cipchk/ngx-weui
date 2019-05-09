@@ -1,37 +1,11 @@
-import {
-  Component,
-  OnDestroy,
-  Output,
-  Input,
-  EventEmitter,
-  OnChanges,
-  SimpleChanges,
-  OnInit,
-} from '@angular/core';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
+import { Component, OnDestroy, Output, Input, EventEmitter, OnChanges, SimpleChanges, OnInit } from '@angular/core';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Observable, Observer, Subscription } from 'rxjs';
 import { PopupConfig } from './popup.config';
 
 @Component({
   selector: 'weui-popup',
-  template: `
-    <div class="weui-mask" [@visibility]="_visibility" (click)="hide(true)"></div>
-    <div class="weui-popup" [ngClass]="{'weui-popup_toggle': _shownAnt}">
-      <div class="weui-popup__hd" *ngIf="!config.is_full">
-        <a href="#" class="weui-popup__action" (click)="_onCancel()">{{config.cancel}}</a>
-        <a href="#" class="weui-popup__action" (click)="_onConfirm()">{{config.confirm}}</a>
-      </div>
-      <div [ngClass]="{'weui-popup_full': config.is_full }">
-        <ng-content></ng-content>
-      </div>
-    </div>
-  `,
+  templateUrl: './popup.component.html',
   animations: [
     trigger('visibility', [
       state('show', style({ opacity: 1 })),
@@ -49,11 +23,11 @@ export class PopupComponent implements OnInit, OnDestroy, OnChanges {
    */
   @Input() config: PopupConfig;
   /** 取消回调 */
-  @Output() cancel = new EventEmitter();
+  @Output() readonly cancel = new EventEmitter();
   /** 确认回调 */
-  @Output() confirm = new EventEmitter();
+  @Output() readonly confirm = new EventEmitter();
 
-  private shown: boolean = false;
+  shown: boolean = false;
   _shownAnt = false;
 
   private observer: Observer<boolean>;
@@ -73,7 +47,7 @@ export class PopupComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ('config' in changes) this.parseConfig();
+    if (changes.config) this.parseConfig();
   }
 
   /**

@@ -1,11 +1,4 @@
-import {
-  Component,
-  OnDestroy,
-  Input,
-  Output,
-  EventEmitter,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnDestroy, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs';
 
 import { isAndroid } from '../utils/browser';
@@ -88,8 +81,7 @@ export class DialogComponent implements OnDestroy {
       // 默认值
       let defaultValue = config.inputValue;
       if (config.input === 'checkbox' && !Array.isArray(config.inputValue)) {
-        defaultValue =
-          typeof defaultValue !== 'undefined' ? [defaultValue] : [];
+        defaultValue = typeof defaultValue !== 'undefined' ? [defaultValue] : [];
       }
       config.inputValue = defaultValue || '';
 
@@ -113,18 +105,18 @@ export class DialogComponent implements OnDestroy {
   /**
    * 打开动画结束后回调（唯一参数：对话框实例对象）
    */
-  @Output() open = new EventEmitter<DialogComponent>();
+  @Output() readonly open = new EventEmitter<DialogComponent>();
 
   /**
    * 关闭动画开始时回调（唯一参数：对话框实例对象）
    */
-  @Output() close = new EventEmitter<DialogComponent>();
+  @Output() readonly close = new EventEmitter<DialogComponent>();
 
   private observer: Observer<any>;
 
   _shown: boolean = false;
 
-  constructor(private DEF: DialogConfig) { }
+  constructor(private DEF: DialogConfig) {}
 
   @ViewChild('container') container: any;
   _prompError: boolean = false;
@@ -142,10 +134,7 @@ export class DialogComponent implements OnDestroy {
       }
     }
 
-    if (
-      this.config.inputRegex &&
-      !this.config.inputRegex.test(this._promptData.toString())
-    ) {
+    if (this.config.inputRegex && !this.config.inputRegex.test(this._promptData.toString())) {
       this._prompError = true;
       return false;
     }

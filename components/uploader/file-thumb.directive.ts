@@ -1,11 +1,5 @@
-import {
-  Directive,
-  Input,
-  ElementRef,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
-import { isImage, genImageUrl } from '../utils/browser';
+import { Directive, Input, ElementRef, OnChanges } from '@angular/core';
+import { genImageUrl } from '../utils/browser';
 
 /**
  * 创建缩略图
@@ -26,7 +20,7 @@ export class FileThumbDirective implements OnChanges {
     this.el.nativeElement.style.backgroundImage = `url(${url})`;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.render();
   }
 }

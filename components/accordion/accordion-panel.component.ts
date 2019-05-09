@@ -1,11 +1,4 @@
-import {
-  Component,
-  Input,
-  Inject,
-  HostBinding,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
+import { Component, Input, Inject, OnDestroy, OnInit } from '@angular/core';
 import { AccordionComponent } from './accordion.component';
 
 @Component({
@@ -13,11 +6,11 @@ import { AccordionComponent } from './accordion.component';
   template: `
     <div role="tab" (click)="_toggle($event)"><ng-content select="[heading]"></ng-content></div>
     <div role="tabpanel" class="weui-accordion-content"><ng-content></ng-content></div>
-    `,
+  `,
   host: {
     '[class.weui-accordion-panel-disabled]': 'disabled',
     '[class.weui-accordion-active]': 'active',
-  }
+  },
 })
 export class AccordionPanelComponent implements OnInit, OnDestroy {
   /**
@@ -40,9 +33,7 @@ export class AccordionPanelComponent implements OnInit, OnDestroy {
     if (value) this.accordion._closeOthers(this);
   }
 
-  constructor(
-    @Inject(AccordionComponent) protected accordion: AccordionComponent,
-  ) { }
+  constructor(@Inject(AccordionComponent) protected accordion: AccordionComponent) {}
 
   ngOnInit() {
     this.accordion._add(this);
@@ -52,7 +43,7 @@ export class AccordionPanelComponent implements OnInit, OnDestroy {
     this.accordion._remove(this);
   }
 
-  _toggle(event: Event) {
+  _toggle() {
     if (!this.disabled) {
       this.active = !this.active;
       this.accordion.select.emit(this.accordion._index(this));

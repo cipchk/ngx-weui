@@ -1,12 +1,6 @@
 import { Component, DebugElement } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  ComponentFixture,
-  TestBed,
-  fakeAsync,
-  tick,
-  ComponentFixtureAutoDetect,
-} from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect } from '@angular/core/testing';
 
 import { CellModule, SwipeDirective } from '../cell';
 import { By } from '@angular/platform-browser';
@@ -39,18 +33,11 @@ function spyPageX(val: number) {
   return { touches: [{ pageX: val }] };
 }
 
-function open(
-  directive: SwipeDirective,
-  el: any,
-  width: number,
-  shouldOpen: boolean,
-) {
+function open(directive: SwipeDirective, el: any, width: number, shouldOpen: boolean) {
   directive.onTouchStart(spyPageX(0));
   directive.onTouchMove(spyPageX(-width));
   fixture.detectChanges();
-  expect(el.querySelector('.weui-cell__bd').style.transform).toBe(
-    `translateX(-${width}px)`,
-  );
+  expect(el.querySelector('.weui-cell__bd').style.transform).toBe(`translateX(-${width}px)`);
   directive.onTouchEnd(spyPageX(-width));
   fixture.detectChanges();
   expect(el.querySelector('.weui-cell__bd').style.transform).toBe(
@@ -65,55 +52,42 @@ describe('Directive: Swipe', () => {
   let dl: DebugElement;
   let directives: SwipeDirective[];
 
-  beforeEach(
-    fakeAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [TestSwipeComponent],
-        imports: [CellModule.forRoot(), FormsModule],
-        providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
-      });
-      TestBed.overrideComponent(TestSwipeComponent, {
-        set: { template: html },
-      });
-      fixture = TestBed.createComponent(TestSwipeComponent);
-      context = fixture.componentInstance;
-      el = fixture.nativeElement;
-      dl = fixture.debugElement;
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [TestSwipeComponent],
+      imports: [CellModule.forRoot(), FormsModule],
+      providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
+    });
+    TestBed.overrideComponent(TestSwipeComponent, {
+      set: { template: html },
+    });
+    fixture = TestBed.createComponent(TestSwipeComponent);
+    context = fixture.componentInstance;
+    el = fixture.nativeElement;
+    dl = fixture.debugElement;
 
-      const list = fixture.debugElement.queryAll(By.directive(SwipeDirective));
-      directives = list.map(
-        (de: DebugElement) => de.injector.get(SwipeDirective) as SwipeDirective,
-      );
+    const list = fixture.debugElement.queryAll(By.directive(SwipeDirective));
+    directives = list.map((de: DebugElement) => de.injector.get(SwipeDirective) as SwipeDirective);
 
-      fixture.detectChanges();
-      tick();
-    }),
-  );
+    fixture.detectChanges();
+    tick();
+  }));
 
-  it(
-    'should init',
-    fakeAsync(() => {
-      expect(directives.length).toBe(1);
-      expect(el.querySelector('.weui-cell__bd').style.transform).toBe(
-        'translateX(0px)',
-      );
-    }),
-  );
+  it('should init', fakeAsync(() => {
+    expect(directives.length).toBe(1);
+    expect(el.querySelector('.weui-cell__bd').style.transform).toBe('translateX(0px)');
+  }));
 
   for (const moveWidth of [10, WIDTH - 10]) {
     const hasOpened = moveWidth > 10;
-    it(`should be ${
-      hasOpened ? 'open' : 'close'
-    } by 0px to ${moveWidth}px in closed`, () => {
+    it(`should be ${hasOpened ? 'open' : 'close'} by 0px to ${moveWidth}px in closed`, () => {
       open(directives[0], el, moveWidth, hasOpened);
     });
   }
 
   for (const moveWidth of [WIDTH - 10, 10]) {
     const hasOpened = moveWidth !== 10;
-    it(`should be ${
-      hasOpened ? 'open' : 'close'
-    } by ${WIDTH}px to ${moveWidth}px in opened`, () => {
+    it(`should be ${hasOpened ? 'open' : 'close'} by ${WIDTH}px to ${moveWidth}px in opened`, () => {
       // 先强制打开状态
       open(directives[0], el, WIDTH - 10, true);
 
@@ -121,9 +95,7 @@ describe('Directive: Swipe', () => {
       directives[0].onTouchMove(spyPageX(-moveWidth));
       directives[0].onTouchEnd(spyPageX(-moveWidth));
       fixture.detectChanges();
-      expect(el.querySelector('.weui-cell__bd').style.transform).toBe(
-        `translateX(${hasOpened ? '-' + WIDTH : '0'}px)`,
-      );
+      expect(el.querySelector('.weui-cell__bd').style.transform).toBe(`translateX(${hasOpened ? '-' + WIDTH : '0'}px)`);
     });
   }
 
@@ -132,43 +104,34 @@ describe('Directive: Swipe', () => {
     directives[0].onTouchMove(spyPageX(0));
     directives[0].onTouchEnd(spyPageX(0));
     fixture.detectChanges();
-    expect(el.querySelector('.weui-cell__bd').style.transform).toBe(
-      `translateX(0px)`,
-    );
+    expect(el.querySelector('.weui-cell__bd').style.transform).toBe(`translateX(0px)`);
   });
 });
 
 describe('Directive: Swipe(not body)', () => {
   let directive: SwipeDirective[];
 
-  beforeEach(
-    fakeAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [TestSwipeComponent],
-        imports: [CellModule.forRoot(), FormsModule],
-        providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
-      });
-      TestBed.overrideComponent(TestSwipeComponent, {
-        set: { template: htmlNotBody },
-      });
-      fixture = TestBed.createComponent(TestSwipeComponent);
-      const list = fixture.debugElement.queryAll(By.directive(SwipeDirective));
-      directive = list.map(
-        (de: DebugElement) => de.injector.get(SwipeDirective) as SwipeDirective,
-      );
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [TestSwipeComponent],
+      imports: [CellModule.forRoot(), FormsModule],
+      providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
+    });
+    TestBed.overrideComponent(TestSwipeComponent, {
+      set: { template: htmlNotBody },
+    });
+    fixture = TestBed.createComponent(TestSwipeComponent);
+    const list = fixture.debugElement.queryAll(By.directive(SwipeDirective));
+    directive = list.map((de: DebugElement) => de.injector.get(SwipeDirective) as SwipeDirective);
 
-      fixture.detectChanges();
-      tick();
-    }),
-  );
+    fixture.detectChanges();
+    tick();
+  }));
 
-  it(
-    'should init',
-    fakeAsync(() => {
-      expect(directive.length).toBe(1);
-      expect(directive[0].width).toBe(0);
-    }),
-  );
+  it('should init', fakeAsync(() => {
+    expect(directive.length).toBe(1);
+    expect(directive[0].width).toBe(0);
+  }));
 });
 
 @Component({

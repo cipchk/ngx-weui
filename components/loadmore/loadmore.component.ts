@@ -1,23 +1,18 @@
-import {
-  Component,
-  HostListener,
-  ElementRef,
-  HostBinding,
-  Input,
-  OnChanges,
-  SimpleChanges,
-} from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { LoadmoreConfig } from './loadmore.config';
 
 @Component({
   selector: 'weui-loadmore',
   template: `
-    <div class="weui-loadmore" [ngClass]="{
-      'weui-loadmore_line': type!=='loading',
-      'weui-loadmore_dot': type==='dot'
-    }">
-      <i class="weui-loading" *ngIf="type==='loading'"></i>
-      <span class="weui-loadmore__tips">{{type==='dot'?'':type==='line'?lineText:loadingText}}</span>
+    <div
+      class="weui-loadmore"
+      [ngClass]="{
+        'weui-loadmore_line': type !== 'loading',
+        'weui-loadmore_dot': type === 'dot'
+      }"
+    >
+      <i class="weui-loading" *ngIf="type === 'loading'"></i>
+      <span class="weui-loadmore__tips">{{ type === 'dot' ? '' : type === 'line' ? lineText : loadingText }}</span>
     </div>
   `,
 })

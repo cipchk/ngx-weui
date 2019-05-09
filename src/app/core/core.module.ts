@@ -4,12 +4,10 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 import { MenuService } from './menu.service';
 
 @NgModule({
-    providers: [
-        MenuService
-    ]
+  providers: [MenuService],
 })
 export class CoreModule {
-    constructor( @Optional() @SkipSelf() parentModule: CoreModule) {
-        throwIfAlreadyLoaded(parentModule, 'CoreModule');
-    }
+  constructor(@Optional() @SkipSelf() parentModule: CoreModule) {
+    throwIfAlreadyLoaded(parentModule, 'CoreModule');
+  }
 }

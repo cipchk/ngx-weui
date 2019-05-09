@@ -131,11 +131,7 @@ export interface UploaderOptions {
    * @param percentage 当前文件上传进度
    * @param totaoPercentage 总上传进度
    */
-  onUploadProgress?: (
-    file: FileItem,
-    percentage: number,
-    totaoPercentage: number,
-  ) => void;
+  onUploadProgress?: (file: FileItem, percentage: number, totaoPercentage: number) => void;
 
   /**
    * 当文件上传成功时触发
@@ -144,12 +140,7 @@ export interface UploaderOptions {
    * @param status 状态码
    * @param headers Headers
    */
-  onUploadSuccess?: (
-    file: FileItem,
-    response: string,
-    status: number,
-    headers: ParsedResponseHeaders,
-  ) => void;
+  onUploadSuccess?: (file: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => void;
 
   /**
    * 当文件上传出错时触发
@@ -158,12 +149,7 @@ export interface UploaderOptions {
    * @param status 状态码
    * @param headers Headers
    */
-  onUploadError?: (
-    file: FileItem,
-    response: string,
-    status: number,
-    headers: ParsedResponseHeaders,
-  ) => void;
+  onUploadError?: (file: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => void;
   /**
    * 不管成功或者失败，文件上传完成时触发
    * @param file File对象
@@ -171,12 +157,7 @@ export interface UploaderOptions {
    * @param status 状态码
    * @param headers Headers
    */
-  onUploadComplete?: (
-    file: FileItem,
-    response: string,
-    status: number,
-    headers: ParsedResponseHeaders,
-  ) => void;
+  onUploadComplete?: (file: FileItem, response: string, status: number, headers: ParsedResponseHeaders) => void;
 
   /**
    * 取消某文件时触发
@@ -191,11 +172,7 @@ export interface UploaderOptions {
    * @param filter 过滤器
    * @param options 选项
    */
-  onError?: (
-    file: FileLikeObject,
-    filter: FilterFunction,
-    options: UploaderOptions,
-  ) => void;
+  onError?: (file: FileLikeObject, filter: FilterFunction, options: UploaderOptions) => void;
 
   /**
    * 内置的上传组件是基于HTML5

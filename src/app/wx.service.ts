@@ -60,16 +60,12 @@ export class WXService {
   }
 
   private _onMenuShareTimeline() {
-    wx.onMenuShareTimeline(
-      Object.assign({}, WXService.DEFAULTSHARE, this.share),
-    );
+    wx.onMenuShareTimeline(Object.assign({}, WXService.DEFAULTSHARE, this.share));
     return this;
   }
 
   private _onMenuShareAppMessage() {
-    wx.onMenuShareAppMessage(
-      Object.assign({}, WXService.DEFAULTSHARE, this.share),
-    );
+    wx.onMenuShareAppMessage(Object.assign({}, WXService.DEFAULTSHARE, this.share));
     return this;
   }
 

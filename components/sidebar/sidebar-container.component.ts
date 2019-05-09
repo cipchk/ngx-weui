@@ -22,24 +22,23 @@ import { SidebarComponent } from './sidebar.component';
 @Component({
   selector: 'weui-sidebar-container',
   template: `
-  <ng-content select="weui-sidebar"></ng-content>
-  <div *ngIf="_showBackdrop" aria-hidden="true" class="weui-mask" (click)="_onBackdropClicked($event)"></div>
-  <div class="weui-sidebar__content" [ngStyle]="_getStyles()">
-    <ng-content></ng-content>
-  </div>
+    <ng-content select="weui-sidebar"></ng-content>
+    <div *ngIf="_showBackdrop" aria-hidden="true" class="weui-mask" (click)="_onBackdropClicked($event)"></div>
+    <div class="weui-sidebar__content" [ngStyle]="_getStyles()">
+      <ng-content></ng-content>
+    </div>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidebarContainerComponent
-  implements AfterContentInit, OnChanges, OnInit, OnDestroy {
+export class SidebarContainerComponent implements AfterContentInit, OnChanges, OnInit, OnDestroy {
   @ContentChildren(SidebarComponent) _sidebars: QueryList<SidebarComponent>;
 
   @Input() _showBackdrop: boolean = false;
-  @Output() _showBackdropChange = new EventEmitter<boolean>();
+  @Output() readonly _showBackdropChange = new EventEmitter<boolean>();
 
   private orgOverflowX = '';
 
-  constructor(private _ref: ChangeDetectorRef, private _el: ElementRef) { }
+  constructor(private _ref: ChangeDetectorRef, private _el: ElementRef) {}
 
   ngAfterContentInit(): void {
     this._onToggle();
@@ -52,8 +51,8 @@ export class SidebarContainerComponent
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ('_showBackdrop' in changes) {
-      this._showBackdropChange.emit(changes['_showBackdrop'].currentValue);
+    if (changes._showBackdrop) {
+      this._showBackdropChange.emit(changes._showBackdrop.currentValue);
     }
   }
 
@@ -79,15 +78,11 @@ export class SidebarContainerComponent
           let transformStyle = null;
 
           if (sidebar.status) {
-            const isLeftOrTop: boolean =
-              sidebar.position === 'left' || sidebar.position === 'top';
-            const isLeftOrRight: boolean =
-              sidebar.position === 'left' || sidebar.position === 'right';
+            const isLeftOrTop: boolean = sidebar.position === 'left' || sidebar.position === 'top';
+            const isLeftOrRight: boolean = sidebar.position === 'left' || sidebar.position === 'right';
 
             const transformDir: string = isLeftOrRight ? 'X' : 'Y';
-            const transformAmt: string = `${isLeftOrTop ? '' : '-'}${
-              isLeftOrRight ? sidebar._width : sidebar._height
-              }`;
+            const transformAmt: string = `${isLeftOrTop ? '' : '-'}${isLeftOrRight ? sidebar._width : sidebar._height}`;
 
             transformStyle = `translate${transformDir}(${transformAmt}px)`;
           }

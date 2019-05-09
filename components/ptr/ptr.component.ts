@@ -13,25 +13,7 @@ import { PTRConfig } from './ptr.config';
 
 @Component({
   selector: 'weui-ptr',
-  template: `
-  <div class="weui-ptr__loader"
-    [ngStyle]="{
-      'height.px': config.height,
-      'margin-top.px': -config.height + (_pullPercent / (100 / config.height)),
-      'transition': _animating ? 'all .5s' : 'none'
-    }">
-    <div style="flex: 1 1 0%; padding: 5px;" *ngIf="!config.customIcon">
-      <span [innerHTML]="_pullPercent !== 100 ? config.pullIcon : loading ? config.loadingIcon : config.successIcon" class="weui-ptr__icon" style="display:inline-block"
-        [ngStyle]="{
-          'transform': 'rotate(' + -(_pullPercent !== 100 ? _pullPercent * 1.8 : 0) + 'deg)',
-          'color': _pullPercent !== 100 ? '#5f5f5f' : '#1AAD19'
-        }"></span>
-      <p *ngIf="_lastLabel" class="weui-ptr__label">{{_lastLabel}}</p>
-    </div>
-    <ng-content select="[loader]"></ng-content>
-  </div>
-  <div class="weui-ptr__content"><ng-content></ng-content></div>
-  `,
+  templateUrl: './ptr.component.html',
   host: {
     '[class.weui-ptr]': 'true',
   },
@@ -44,8 +26,6 @@ export class PTRComponent implements OnInit, OnChanges {
   _animating: boolean = false;
   private initScrollTop: number = 0;
   _pullPercent: number = 0;
-  private loaderEl: HTMLElement;
-  private iconEl: HTMLElement;
   private contentEl: HTMLElement;
 
   _lastLabel: string;
@@ -54,11 +34,11 @@ export class PTRComponent implements OnInit, OnChanges {
   /** 是否禁止 */
   @Input() disabled: boolean = false;
   /** 下拉滚动时回调，返回一个0-100%的参数 */
-  @Output() scroll = new EventEmitter<number>();
+  @Output() readonly scroll = new EventEmitter<number>();
   /** 刷新回调 */
-  @Output() refresh = new EventEmitter<PTRComponent>();
+  @Output() readonly refresh = new EventEmitter<PTRComponent>();
 
-  constructor(private el: ElementRef, private DEF: PTRConfig) { }
+  constructor(private el: ElementRef, private DEF: PTRConfig) {}
 
   /**
    * 设置最后更新标签
@@ -93,9 +73,7 @@ export class PTRComponent implements OnInit, OnChanges {
     this.touching = true;
     this.touchId = $event.targetTouches[0].identifier;
     this.ogY =
-      this._pullPercent === 0
-        ? $event.targetTouches[0].pageY
-        : $event.targetTouches[0].pageY - this._pullPercent;
+      this._pullPercent === 0 ? $event.targetTouches[0].pageY : $event.targetTouches[0].pageY - this._pullPercent;
     this.initScrollTop = this.contentEl.scrollTop;
     this._animating = false;
   }
@@ -115,14 +93,13 @@ export class PTRComponent implements OnInit, OnChanges {
     $event.preventDefault();
 
     // let diffY = Math.abs(this.ogY - pageY);
-    this._pullPercent =
-      diffY - this.initScrollTop > 100 ? 100 : diffY - this.initScrollTop;
+    this._pullPercent = diffY - this.initScrollTop > 100 ? 100 : diffY - this.initScrollTop;
     this.scroll.emit(this._pullPercent);
   }
 
-  @HostListener('touchend', ['$event'])
-  @HostListener('touchcancel', ['$event'])
-  onTouchEnd($event: any) {
+  @HostListener('touchend')
+  @HostListener('touchcancel')
+  onTouchEnd() {
     if (this.disabled || !this.touching || this.loading) return;
 
     let _pullPercent = this._pullPercent;
@@ -149,13 +126,10 @@ export class PTRComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ('config' in changes) this.parseConfig();
+    if (changes.config) this.parseConfig();
   }
 
   private parseConfig() {
     this.config = Object.assign({}, this.DEF, this.config);
-    const el = this.el.nativeElement;
-    this.loaderEl = el.querySelector('.weui-ptr__loader');
-    this.iconEl = el.querySelector('.weui-ptr__icon');
   }
 }

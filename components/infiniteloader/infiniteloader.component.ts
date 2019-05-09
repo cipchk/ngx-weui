@@ -16,14 +16,14 @@ import { InfiniteLoaderConfig } from './infiniteloader.config';
 @Component({
   selector: 'weui-infiniteloader',
   template: `
-        <div class="weui-infiniteloader__content">
-            <ng-content></ng-content>
-            <div *ngIf="_loading || _finished">
-                <div *ngIf="_loading" [innerHTML]="config.loading"></div>
-                <div *ngIf="_finished" [innerHTML]="config.finished"></div>
-            </div>
-        </div>
-    `,
+    <div class="weui-infiniteloader__content">
+      <ng-content></ng-content>
+      <div *ngIf="_loading || _finished">
+        <div *ngIf="_loading" [innerHTML]="config.loading"></div>
+        <div *ngIf="_finished" [innerHTML]="config.finished"></div>
+      </div>
+    </div>
+  `,
   host: {
     '[class.weui-infiniteloader]': 'true',
     '[style.height]': 'config.height',
@@ -46,12 +46,9 @@ export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
   /**
    * 加载更多回调
    */
-  @Output() loadmore = new EventEmitter<InfiniteLoaderComponent>();
+  @Output() readonly loadmore = new EventEmitter<InfiniteLoaderComponent>();
 
-  constructor(
-    private el: ElementRef,
-    private DEF: InfiniteLoaderConfig,
-  ) { }
+  constructor(private el: ElementRef, private DEF: InfiniteLoaderConfig) {}
 
   /** 设置本次加载完成 */
   resolveLoading() {
@@ -73,9 +70,7 @@ export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
   _onScroll() {
     if (this._loading || this._finished) return;
     const target = this.scrollEvent.target;
-    const scrollPercent = Math.floor(
-      (target.scrollTop + target.clientHeight) / target.scrollHeight * 100,
-    );
+    const scrollPercent = Math.floor(((target.scrollTop + target.clientHeight) / target.scrollHeight) * 100);
 
     if (scrollPercent > this.config.percent) {
       this._loading = true;

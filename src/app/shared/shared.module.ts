@@ -14,32 +14,11 @@ import { EditButtonComponent } from './edit-button/edit-button.component';
 
 const COMPONENTS = [DocsNavComponent, EditButtonComponent];
 
-const THIDS = [
-  CountdownModule,
-  ToastrModule,
-  GesturePasswordModule,
-  AqmModule
-];
+const THIDS = [CountdownModule, ToastrModule, GesturePasswordModule, AqmModule];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    WeUiModule,
-    ...THIDS
-  ],
+  imports: [CommonModule, FormsModule, RouterModule, ReactiveFormsModule, WeUiModule, ...THIDS],
   declarations: COMPONENTS,
-  exports: [
-    CommonModule,
-    FormsModule,
-    RouterModule,
-    ReactiveFormsModule,
-    WeUiModule,
-    ...THIDS,
-    ...COMPONENTS
-  ]
+  exports: [CommonModule, FormsModule, RouterModule, ReactiveFormsModule, WeUiModule, ...THIDS, ...COMPONENTS],
 })
-export class SharedModule {
-}
+export class SharedModule {}

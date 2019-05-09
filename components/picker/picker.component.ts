@@ -7,40 +7,16 @@ import {
   Input,
   EventEmitter,
   Output,
-  ElementRef,
   OnInit,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
 import { PickerData } from './data';
 import { PickerOptions } from './options';
 import { PickerConfig } from './picker.config';
 
 @Component({
   selector: 'weui-picker',
-  template: `
-    <input type="text" class="weui-input" value="{{_text}}" placeholder="{{placeholder}}"
-      readonly="readonly" (focus)="_onFocus($event)"
-      (click)="_onShow()" [disabled]="disabled" *ngIf="options.type==='form'">
-    <div [hidden]="!_showP">
-      <div class="weui-mask" (click)="_onHide(false)"
-        [ngClass]="{'weui-animate-fade-in': _shown, 'weui-animate-fade-out': !_shown}"></div>
-      <div class="weui-picker"
-          [ngClass]="{'weui-animate-slide-up': _shown, 'weui-animate-slide-down': !_shown}">
-        <div class="weui-picker__hd">
-          <a href="#" class="weui-picker__action" (click)="_onCancel()">{{options.cancel}}</a>
-          <a href="#" class="weui-picker__action" (click)="_onConfirm()">{{options.confirm}}</a>
-        </div>
-        <div class="weui-picker__bd">
-          <weui-picker-group tappable
-            *ngFor="let items of _groups; let i = index;"
-            [items]="items"
-            [defaultIndex]="_selected[i]"
-            groupIndex="{{i}}" (change)="_onGroupChange($event, i)"></weui-picker-group>
-        </div>
-      </div>
-    </div>
-  `,
+  templateUrl: './picker.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -49,8 +25,7 @@ import { PickerConfig } from './picker.config';
     },
   ],
 })
-export class PickerComponent
-  implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
+export class PickerComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
   /** 配置项 */
   @Input() options: PickerOptions;
 
@@ -96,17 +71,17 @@ export class PickerComponent
    *
    * `{ value: '10000', items: [ {}, {}, {} ] }`
    */
-  @Output() change = new EventEmitter<any>();
+  @Output() readonly change = new EventEmitter<any>();
   /** 列变更时回调 */
-  @Output() groupChange = new EventEmitter<any>();
+  @Output() readonly groupChange = new EventEmitter<any>();
   /** 取消后回调 */
-  @Output() cancel = new EventEmitter();
+  @Output() readonly cancel = new EventEmitter();
   /** 显示时回调 */
-  @Output() show = new EventEmitter();
+  @Output() readonly show = new EventEmitter();
   /** 隐藏后回调 */
-  @Output() hide = new EventEmitter();
+  @Output() readonly hide = new EventEmitter();
 
-  constructor(private el: ElementRef, private DEF: PickerConfig) { }
+  constructor(private DEF: PickerConfig) {}
 
   ngOnInit() {
     if (!this.options) this.parseOptions();
@@ -158,10 +133,7 @@ export class PickerComponent
 
   _setText(res: any[] = null) {
     if (res === null) res = this.getSelecteItem();
-    if (res.length > 0)
-      this._text = res
-        .map((i: any) => i.label || i.value)
-        .join(this.options.separator);
+    if (res.length > 0) this._text = res.map((i: any) => i.label || i.value).join(this.options.separator);
 
     return this;
   }
@@ -209,7 +181,7 @@ export class PickerComponent
     }
   }
 
-  ngOnDestroy(): void { }
+  ngOnDestroy(): void {}
 
   writeValue(value: any): void {
     if (!value) this._text = '';

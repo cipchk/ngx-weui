@@ -8,11 +8,7 @@ import { SidebarConfig } from './sidebar.config';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [
-    SidebarContainerComponent,
-    SidebarComponent,
-    CloseSidebarDirective,
-  ],
+  declarations: [SidebarContainerComponent, SidebarComponent, CloseSidebarDirective],
   exports: [SidebarContainerComponent, SidebarComponent, CloseSidebarDirective],
   providers: [SidebarService],
 })

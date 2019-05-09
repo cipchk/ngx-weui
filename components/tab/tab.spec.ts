@@ -1,23 +1,7 @@
-import { Subscriber } from 'rxjs';
-import { Component, ViewChild, DebugElement } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  ComponentFixture,
-  TestBed,
-  fakeAsync,
-  tick,
-  async,
-  inject,
-} from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import { Component } from '@angular/core';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
-import {
-  TabModule,
-  NavbarComponent,
-  TabbarComponent,
-  TabDirective,
-} from '../tab';
+import { TabModule } from '../tab';
 
 const TABS: any[] = [
   {
@@ -99,25 +83,23 @@ describe('Component: Tabs', () => {
   let el: any;
 
   describe('[Navbar]', () => {
-    beforeEach(
-      fakeAsync(() => {
-        TestBed.configureTestingModule({
-          declarations: [TestTabComponent],
-          imports: [TabModule.forRoot()],
-        });
-        TestBed.overrideComponent(TestTabComponent, {
-          set: { template: navbar_html },
-        });
-        fixture = TestBed.createComponent(TestTabComponent);
-        context = fixture.componentInstance;
-        spyOn(context, '_select');
-        spyOn(context, '_deselect');
-        spyOn(context, '_removed');
-        el = fixture.nativeElement;
-        fixture.detectChanges();
-        tick();
-      }),
-    );
+    beforeEach(fakeAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TestTabComponent],
+        imports: [TabModule.forRoot()],
+      });
+      TestBed.overrideComponent(TestTabComponent, {
+        set: { template: navbar_html },
+      });
+      fixture = TestBed.createComponent(TestTabComponent);
+      context = fixture.componentInstance;
+      spyOn(context, '_select');
+      spyOn(context, '_deselect');
+      spyOn(context, '_removed');
+      el = fixture.nativeElement;
+      fixture.detectChanges();
+      tick();
+    }));
 
     it('should select first tab as active by default', () => {
       expectActiveTabs(el, [true, false, false, false]);
@@ -160,46 +142,36 @@ describe('Component: Tabs', () => {
   });
 
   describe('[Tabbar]', () => {
-    beforeEach(
-      fakeAsync(() => {
-        TestBed.configureTestingModule({
-          declarations: [TestTabComponent],
-          imports: [TabModule.forRoot()],
-        });
-        TestBed.overrideComponent(TestTabComponent, {
-          set: { template: tabbar_html },
-        });
-        fixture = TestBed.createComponent(TestTabComponent);
-        context = fixture.componentInstance;
-        spyOn(context, '_select');
-        spyOn(context, '_deselect');
-        spyOn(context, '_removed');
-        el = fixture.nativeElement;
-        fixture.detectChanges();
-        tick();
-      }),
-    );
+    beforeEach(fakeAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TestTabComponent],
+        imports: [TabModule.forRoot()],
+      });
+      TestBed.overrideComponent(TestTabComponent, {
+        set: { template: tabbar_html },
+      });
+      fixture = TestBed.createComponent(TestTabComponent);
+      context = fixture.componentInstance;
+      spyOn(context, '_select');
+      spyOn(context, '_deselect');
+      spyOn(context, '_removed');
+      el = fixture.nativeElement;
+      fixture.detectChanges();
+      tick();
+    }));
 
     it('should set tab has icon', () => {
-      expect(
-        (getItemsByTabbar(el)[0] as HTMLElement).querySelector(
-          '.weui-tabbar__icon',
-        ),
-      ).not.toBeNull();
+      expect((getItemsByTabbar(el)[0] as HTMLElement).querySelector('.weui-tabbar__icon')).not.toBeNull();
     });
 
     it('should set tab badge number value', () => {
-      expect(
-        (getItemsByTabbar(el)[0] as HTMLElement).querySelector('.weui-badge')
-          .innerHTML,
-      ).toBe('8');
+      expect((getItemsByTabbar(el)[0] as HTMLElement).querySelector('.weui-badge').innerHTML).toBe('8');
     });
 
     it('should set tab badge dot value', () => {
-      expect(
-        (getItemsByTabbar(el)[1] as HTMLElement).querySelector('.weui-badge')
-          .classList,
-      ).toContain('weui-badge_dot');
+      expect((getItemsByTabbar(el)[1] as HTMLElement).querySelector('.weui-badge').classList).toContain(
+        'weui-badge_dot',
+      );
     });
   });
 });

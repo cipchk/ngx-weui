@@ -41,8 +41,7 @@ export abstract class BaseService {
     const componentFactory = this.resolver.resolveComponentFactory(component);
     const componentRef = componentFactory.create(this.injector);
     this.list.push(componentRef);
-    const componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>)
-      .rootNodes[0] as HTMLElement;
+    const componentRootNode = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
     this.applicationRef.attachView(componentRef.hostView);
     componentRef.onDestroy(() => {
       this.applicationRef.detachView(componentRef.hostView);

@@ -4,8 +4,6 @@ import {
   OnChanges,
   SimpleChanges,
   OnDestroy,
-  EventEmitter,
-  Output,
   ElementRef,
   NgZone,
   OnInit,
@@ -17,20 +15,17 @@ declare const Swiper: any;
 
 @Component({
   selector: 'weui-swiper',
-  template: `<ng-content></ng-content>`,
+  template: `
+    <ng-content></ng-content>
+  `,
 })
-export class SwiperComponent
-  implements AfterViewInit, OnChanges, OnInit, OnDestroy {
+export class SwiperComponent implements AfterViewInit, OnChanges, OnInit, OnDestroy {
   /**
    * 等同于swiper[参数项](http://idangero.us/swiper/api/)
    */
   @Input() options: any;
 
-  constructor(
-    private el: ElementRef,
-    private zone: NgZone,
-    private DEF: SwiperConfig,
-  ) {}
+  constructor(private el: ElementRef, private zone: NgZone, private DEF: SwiperConfig) {}
 
   /**
    * Swiper 实例对象，可以通过 `@ViewChild` 访问到它
@@ -67,8 +62,7 @@ export class SwiperComponent
   ngOnInit() {
     if (!this.options) this.initOptions();
     this.containerEl = this.el.nativeElement.querySelector('.swiper-container');
-    if (!this.containerEl)
-      throw new Error('组件内容的HTML跟swiper所需要的DOM结构必须完全一样。');
+    if (!this.containerEl) throw new Error('组件内容的HTML跟swiper所需要的DOM结构必须完全一样。');
   }
 
   ngAfterViewInit() {

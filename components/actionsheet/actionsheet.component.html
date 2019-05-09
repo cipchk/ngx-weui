@@ -1,0 +1,12 @@
+<div class="weui-mask" [@visibility]="_visibility" (click)="hide(true)"></div>
+<div class="weui-actionsheet" [ngClass]="{ 'weui-actionsheet_toggle': _shownAnt && config.skin === 'ios' }">
+  <div class="weui-actionsheet__title" *ngIf="config.skin === 'ios' && config.title">
+    <p class="weui-actionsheet__title-text">{{ config.title }}</p>
+  </div>
+  <div class="weui-actionsheet__menu">
+    <div class="weui-actionsheet__cell" *ngFor="let item of menus" (click)="_onSelect(item)">{{ item.text }}</div>
+  </div>
+  <div class="weui-actionsheet__action" *ngIf="config.skin === 'ios' && config.cancel">
+    <div class="weui-actionsheet__cell" (click)="hide()">{{ config.cancel }}</div>
+  </div>
+</div>

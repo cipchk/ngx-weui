@@ -1,23 +1,9 @@
-import {
-  Component,
-  Input,
-  EventEmitter,
-  Output,
-  OnDestroy,
-} from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnDestroy } from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs';
 
 @Component({
   selector: 'weui-mask',
-  template: `
-  <div class="weui-mask" [ngClass]="{'weui-mask__visible': _shown }" (click)="hide(true)">
-    <div class="weui-mask__content" [ngClass]="placement !== 'none' ? 'weui-mask__' + placement : ''">
-      <div [ngStyle]="{'background-color':bg}">
-        <div *ngIf="loading"><i class="weui-loading weui-icon_toast"></i></div>
-        <ng-content></ng-content>
-      </div>
-    </div>
-  </div>`,
+  templateUrl: './mask.component.html',
 })
 export class MaskComponent implements OnDestroy {
   /**
@@ -35,13 +21,7 @@ export class MaskComponent implements OnDestroy {
    * + `none`: 无
    */
   @Input()
-  placement:
-    | 'top'
-    | 'bottom'
-    | 'vertical'
-    | 'vertical-left'
-    | 'vertical-right'
-    | 'none' = 'vertical';
+  placement: 'top' | 'bottom' | 'vertical' | 'vertical-left' | 'vertical-right' | 'none' = 'vertical';
 
   /**
    * 内容背景色
@@ -56,7 +36,7 @@ export class MaskComponent implements OnDestroy {
   /**
    * 关闭回调
    */
-  @Output() close = new EventEmitter();
+  @Output() readonly close = new EventEmitter();
 
   private observer: Observer<void>;
   _shown: boolean = false;

@@ -10,12 +10,13 @@ import {
   OnDestroy,
   ChangeDetectionStrategy,
   Inject,
+  SimpleChange,
 } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { isIOS } from '../utils/browser';
 import { SidebarConfig, PositionType, ModeType } from './sidebar.config';
 import { SidebarService } from './sidebar.service';
-import { DOCUMENT } from '@angular/common';
 
 /**
  * 侧边栏
@@ -23,16 +24,20 @@ import { DOCUMENT } from '@angular/common';
 @Component({
   selector: 'weui-sidebar',
   template: `
-  <aside #sidebar
-    role="complementary"
-    [attr.aria-hidden]="!status"
-    [attr.aria-label]="ariaLabel"
-    class="weui-sidebar weui-sidebar__{{status ? 'opened' : 'closed'}} weui-sidebar__{{position}} weui-sidebar__{{mode}}"
-    [class.weui-sidebar__inert]="!status"
-    [ngClass]="sidebarClass"
-    [ngStyle]="_getStyle()">
-    <ng-content></ng-content>
-  </aside>
+    <aside
+      #sidebar
+      role="complementary"
+      [attr.aria-hidden]="!status"
+      [attr.aria-label]="ariaLabel"
+      class="weui-sidebar weui-sidebar__{{ status ? 'opened' : 'closed' }} weui-sidebar__{{ position }} weui-sidebar__{{
+        mode
+      }}"
+      [class.weui-sidebar__inert]="!status"
+      [ngClass]="sidebarClass"
+      [ngStyle]="_getStyle()"
+    >
+      <ng-content></ng-content>
+    </aside>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -41,7 +46,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
    * 状态，true表示打开，false表示关闭
    */
   @Input() status: boolean = false;
-  @Output() statusChange: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @Output() readonly statusChange = new EventEmitter<boolean>();
   /**
    * 位置方向，默认：`left`
    */
@@ -68,19 +73,19 @@ export class SidebarComponent implements OnChanges, OnDestroy {
   @Input() ariaLabel: string;
 
   /** 打开前回调 */
-  @Output() openStart: EventEmitter<null> = new EventEmitter<null>();
+  @Output() readonly openStart = new EventEmitter<null>();
   /** 打开后回调 */
-  @Output() opened: EventEmitter<null> = new EventEmitter<null>();
+  @Output() readonly opened = new EventEmitter<null>();
   /** 关闭前回调 */
-  @Output() closeStart: EventEmitter<null> = new EventEmitter<null>();
+  @Output() readonly closeStart = new EventEmitter<null>();
   /** 关闭后回调 */
-  @Output() closed: EventEmitter<null> = new EventEmitter<null>();
+  @Output() readonly closed = new EventEmitter<null>();
   /** 模式变更通知 */
-  @Output() modeChange: EventEmitter<string> = new EventEmitter<string>();
+  @Output() readonly modeChange = new EventEmitter<string>();
   /** 位置变更通知 */
-  @Output() positionChange: EventEmitter<string> = new EventEmitter<string>();
+  @Output() readonly positionChange = new EventEmitter<string>();
 
-  @Output() _rerender: EventEmitter<null> = new EventEmitter<null>();
+  @Output() readonly _rerender = new EventEmitter<null>();
 
   @ViewChild('sidebar') _elSidebar: ElementRef;
 
@@ -106,22 +111,22 @@ export class SidebarComponent implements OnChanges, OnDestroy {
     this._closeSub = this._sidebarService.onClose(this.close);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if ('status' in changes && !this._anting) {
-      if (changes['status'].currentValue) {
+  ngOnChanges(changes: { [P in keyof this]?: SimpleChange } & SimpleChanges): void {
+    if (changes.status && !this._anting) {
+      if (changes.status.currentValue) {
         this.open();
       } else {
         this.close();
       }
-      if (changes['status'].firstChange) this._anting = false;
+      if (changes.status.firstChange) this._anting = false;
     }
-    if ('mode' in changes) {
-      this.modeChange.emit(changes['mode'].currentValue);
+    if (changes.mode) {
+      this.modeChange.emit(changes.mode.currentValue);
     }
-    if ('position' in changes) {
-      this.positionChange.emit(changes['position'].currentValue);
+    if (changes.position) {
+      this.positionChange.emit(changes.position.currentValue);
     }
-    if ('backdrop' in changes) {
+    if (changes.backdrop) {
       this._initCloseListeners();
     }
   }
@@ -170,11 +175,8 @@ export class SidebarComponent implements OnChanges, OnDestroy {
     const isSlideMode: boolean = this.mode === 'slide';
 
     if (!this.status || isSlideMode) {
-      transformStyle = `translate${
-        this.position === 'left' || this.position === 'right' ? 'X' : 'Y'
-        }`;
-      const isLeftOrTop: boolean =
-        this.position === 'left' || this.position === 'top';
+      transformStyle = `translate${this.position === 'left' || this.position === 'right' ? 'X' : 'Y'}`;
+      const isLeftOrTop: boolean = this.position === 'left' || this.position === 'top';
       const translateAmt: string = `${isLeftOrTop ? '-' : ''}100%`;
       transformStyle += `(${translateAmt})`;
     }
@@ -217,26 +219,18 @@ export class SidebarComponent implements OnChanges, OnDestroy {
   }
 
   private _onClickOutside(e: Event): void {
-    if (
-      this._onClickOutsideAttached &&
-      this._elSidebar &&
-      !this._elSidebar.nativeElement.contains(e.target)
-    ) {
+    if (this._onClickOutsideAttached && this._elSidebar && !this._elSidebar.nativeElement.contains(e.target)) {
       this.close();
     }
   }
 
   /** 获取侧边栏容器高度 */
   get _height(): number {
-    return this._elSidebar.nativeElement
-      ? this._elSidebar.nativeElement.offsetHeight
-      : 0;
+    return this._elSidebar.nativeElement ? this._elSidebar.nativeElement.offsetHeight : 0;
   }
 
   /** 获取侧边栏容器宽度 */
   get _width(): number {
-    return this._elSidebar.nativeElement
-      ? this._elSidebar.nativeElement.offsetWidth
-      : 0;
+    return this._elSidebar.nativeElement ? this._elSidebar.nativeElement.offsetWidth : 0;
   }
 }

@@ -7,25 +7,18 @@ import { ExampleCoreModule } from '../../example/example.module';
 
 // region: components
 
-const COMPONENTS = [ ArticleComponent ];
+const COMPONENTS = [ArticleComponent];
 
-const routes: Routes = [
-    { path: '', redirectTo: 'button' },
-    { path: ':id', component: ArticleComponent },
-];
+const routes: Routes = [{ path: '', redirectTo: 'button' }, { path: ':id', component: ArticleComponent }];
 // endregion
 
 @NgModule({
-    imports: [
-        SharedModule,
-        // AngularSplitModule,
-        ExampleCoreModule,
-        RouterModule.forChild(routes)
-    ],
-    declarations: [
-        ...COMPONENTS
-    ]
+  imports: [
+    SharedModule,
+    // AngularSplitModule,
+    ExampleCoreModule,
+    RouterModule.forChild(routes),
+  ],
+  declarations: [...COMPONENTS],
 })
-export class ComponentsModule {
-
-}
+export class ComponentsModule {}

@@ -1,18 +1,12 @@
-import {
-  Component,
-  Input,
-  EventEmitter,
-  Output,
-  OnInit,
-  OnDestroy,
-} from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
 
 export type ToptipsType = 'default' | 'warn' | 'info' | 'primary' | 'success';
 
 @Component({
   selector: 'weui-toptips',
   template: `
-    <div class="weui-toptips" style="display:block" [ngClass]="_classMap">{{text}}<ng-content></ng-content></div>`,
+    <div class="weui-toptips" style="display:block" [ngClass]="_classMap">{{ text }}<ng-content></ng-content></div>
+  `,
   host: {
     '[hidden]': '!_showd',
   },
@@ -29,7 +23,7 @@ export class ToptipsComponent implements OnInit, OnDestroy {
   /**
    * 隐藏后回调
    */
-  @Output() hide = new EventEmitter();
+  @Output() readonly hide = new EventEmitter();
 
   _type: ToptipsType;
   /**

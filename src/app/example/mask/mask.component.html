@@ -1,23 +1,25 @@
 <Page [ngClass]="'mask'" [title]="'Mask'" [subTitle]="'遮罩层'">
+  <button weui-button weui-type="default" (click)="onShow(false)">显示（2秒后自动关闭）</button>
+  <button weui-button weui-type="default" (click)="onShow(true)">显示（手动关闭）</button>
+  <button weui-button weui-type="default" (click)="onShowLoading()">显示Loading</button>
 
-    <button weui-button weui-type="default" (click)="onShow(false)">显示（2秒后自动关闭）</button>
-    <button weui-button weui-type="default" (click)="onShow(true)">显示（手动关闭）</button>
-    <button weui-button weui-type="default" (click)="onShowLoading()">显示Loading</button>
+  <weui-mask #mask [loading]="loading"></weui-mask>
 
-    <weui-mask #mask [loading]="loading"></weui-mask>
+  <div class="weui-cells__title" style="margin-bottom:10px;">自定义内容</div>
 
-    <div class="weui-cells__title" style="margin-bottom:10px;">自定义内容</div>
-
-    <button weui-button weui-type="default" (click)="showContent()">显示</button>
-    <weui-mask #maskContent>
-        <p style="
+  <button weui-button weui-type="default" (click)="showContent()">显示</button>
+  <weui-mask #maskContent>
+    <p
+      style="
             background: rgba(255, 255, 255, 0.7);
             width: 100px;
             text-align: center;
             line-height: 30px;
             border-radius: 5px;
             color: #f50;
-        ">test content</p>
-    </weui-mask>
-
+        "
+    >
+      test content
+    </p>
+  </weui-mask>
 </Page>

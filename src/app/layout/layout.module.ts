@@ -3,18 +3,12 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from '../shared/shared.module';
 import { AppLayoutComponent } from './default/default.component';
 
-const COMPONENTS = [
-    AppLayoutComponent
-];
+const COMPONENTS = [AppLayoutComponent];
 
 @NgModule({
-    imports: [SharedModule],
-    providers: [],
-    declarations: [
-        ...COMPONENTS
-    ],
-    exports: [
-        ...COMPONENTS
-    ]
+  imports: [SharedModule],
+  providers: [],
+  declarations: [...COMPONENTS],
+  exports: [...COMPONENTS],
 })
-export class LayoutModule { }
+export class LayoutModule {}

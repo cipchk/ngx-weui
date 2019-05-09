@@ -31,7 +31,7 @@ export class ProgressComponent {
   /**
    * 取消回调
    */
-  @Output() cancel = new EventEmitter();
+  @Output() readonly cancel = new EventEmitter();
 
   _onCancel() {
     if (this.canCancel) this.cancel.emit();

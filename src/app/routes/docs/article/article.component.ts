@@ -6,11 +6,13 @@ import { META } from '../meta';
   selector: 'app-docs-article',
   templateUrl: './article.component.html',
   styles: [
-    `:host {
-      display: block;
-      overflow-y: auto;
-      height: 100%;
-    }`,
+    `
+      :host {
+        display: block;
+        overflow-y: auto;
+        height: 100%;
+      }
+    `,
   ],
 })
 export class DocsArticleComponent implements OnInit {

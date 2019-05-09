@@ -1,0 +1,19 @@
+<div *ngIf="_imgs" class="weui-galleries">
+  <ng-template ngFor let-item [ngForOf]="_imgs">
+    <div
+      class="weui-gallery"
+      [ngStyle]="{ display: _showd ? 'block' : 'none' }"
+      [@visibility]="_visibility"
+      (@visibility.start)="_antStart($event)"
+      (@visibility.done)="_antDone($event)"
+      (click)="_onHide()"
+    >
+      <span class="weui-gallery__img" [ngStyle]="{ 'background-image': 'url(' + item?.url + ')' }"></span>
+      <div class="weui-gallery__opr" *ngIf="canDelete">
+        <a href="#" class="weui-gallery__del" (click)="_onDel(item)">
+          <i class="weui-icon-delete weui-icon_gallery-delete"></i>
+        </a>
+      </div>
+    </div>
+  </ng-template>
+</div>

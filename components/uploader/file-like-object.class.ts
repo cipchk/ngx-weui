@@ -12,8 +12,7 @@ export class FileLikeObject {
   constructor(fileOrInput: any) {
     const isInput = isElement(fileOrInput);
     const fakePathOrObject = isInput ? fileOrInput.value : fileOrInput;
-    const postfix =
-      typeof fakePathOrObject === 'string' ? 'FakePath' : 'Object';
+    const postfix = typeof fakePathOrObject === 'string' ? 'FakePath' : 'Object';
     const method = '_createFrom' + postfix;
     (this as any)[method](fakePathOrObject);
   }
@@ -25,11 +24,7 @@ export class FileLikeObject {
     this.name = path.slice(path.lastIndexOf('/') + path.lastIndexOf('\\') + 2);
   }
 
-  _createFromObject(object: {
-    size: number;
-    type: string;
-    name: string;
-  }): void {
+  _createFromObject(object: { size: number; type: string; name: string }): void {
     // this.lastModifiedDate = copy(object.lastModifiedDate);
     this.size = object.size;
     this.type = object.type;

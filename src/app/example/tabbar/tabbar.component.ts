@@ -14,7 +14,9 @@ export class DemoTabbarComponent {
     this.time = new Date().getTime();
   }
 
-  items: any[] = Array(20).fill(0).map((v: any, i: number) => i);
+  items: any[] = Array(20)
+    .fill(0)
+    .map((v: any, i: number) => i);
   onLoadMore(comp: InfiniteLoaderComponent) {
     timer(1500).subscribe(() => {
       this.items.push(

@@ -1,7 +1,5 @@
 import { Directive, Input, ElementRef, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-
-import { findParent, add, remove } from '../utils/dom';
+import { Observable } from 'rxjs';
 
 /**
  * 获取验证码
@@ -41,8 +39,7 @@ export class VCodeDirective implements OnInit, OnDestroy {
   constructor(private el: ElementRef) {}
 
   ngOnInit() {
-    if (typeof this.onSend !== 'function')
-      console.error('weui-vcode必须传递一个返回值为 `Observable<boolean>` 函数');
+    if (typeof this.onSend !== 'function') console.error('weui-vcode必须传递一个返回值为 `Observable<boolean>` 函数');
     this._cur = this.el.nativeElement.innerHTML;
   }
 
@@ -71,10 +68,7 @@ export class VCodeDirective implements OnInit, OnDestroy {
   }
 
   private setText(num: number): void {
-    this.el.nativeElement.innerHTML = this.tpl.replace(
-      /\${num}/,
-      num.toString(),
-    );
+    this.el.nativeElement.innerHTML = this.tpl.replace(/\${num}/, num.toString());
   }
 
   private destroy() {

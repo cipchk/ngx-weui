@@ -1,11 +1,4 @@
-import {
-  Directive,
-  Input,
-  HostBinding,
-  Output,
-  EventEmitter,
-  OnDestroy,
-} from '@angular/core';
+import { Directive, Input, HostBinding, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { BarComponent } from './bar.component';
 
 @Directive({ selector: 'weui-tab, [weui-tab]' })
@@ -45,7 +38,7 @@ export class TabDirective implements OnDestroy {
     }
 
     this._active = active;
-    this._tabComp.tabs.filter(t => t !== this).forEach(tab => tab.active = false);
+    this._tabComp.tabs.filter(t => t !== this).forEach(tab => (tab.active = false));
   }
 
   protected _active: boolean;
