@@ -1,16 +1,12 @@
 import { CommonModule } from '@angular/common';
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 
-import { ButtonConfig } from './button.config';
 import { ButtonComponent } from './button.component';
+import { ButtonIconComponent } from './button-icon.component';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [ButtonComponent],
-  exports: [ButtonComponent],
+  declarations: [ButtonComponent, ButtonIconComponent],
+  exports: [ButtonComponent, ButtonIconComponent],
 })
-export class ButtonModule {
-  static forRoot(): ModuleWithProviders {
-    return { ngModule: ButtonModule, providers: [ButtonConfig] };
-  }
-}
+export class ButtonModule {}
