@@ -49,7 +49,7 @@ describe('Component: Slider', () => {
     beforeEach(fakeAsync(() => {
       TestBed.configureTestingModule({
         declarations: [TestSliderComponent],
-        imports: [SliderModule.forRoot(), FormsModule, NoopAnimationsModule],
+        imports: [SliderModule, FormsModule, NoopAnimationsModule],
       });
       TestBed.overrideComponent(TestSliderComponent, {
         set: { template: html },
@@ -123,7 +123,7 @@ describe('Component: Slider', () => {
     expect(() => {
       TestBed.configureTestingModule({
         declarations: [TestSliderComponent],
-        imports: [SliderModule.forRoot(), FormsModule, NoopAnimationsModule],
+        imports: [SliderModule, FormsModule, NoopAnimationsModule],
       });
       TestBed.overrideComponent(TestSliderComponent, {
         set: { template: htmlInValid },

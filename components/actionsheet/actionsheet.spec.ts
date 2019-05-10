@@ -44,7 +44,7 @@ describe('Component: ActionSheet', () => {
     beforeEach(fakeAsync(() => {
       TestBed.configureTestingModule({
         declarations: [TestActionSheetComponent],
-        imports: [ActionSheetModule.forRoot(), FormsModule, NoopAnimationsModule],
+        imports: [ActionSheetModule, FormsModule, NoopAnimationsModule],
         providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
       });
       TestBed.overrideComponent(TestActionSheetComponent, {
@@ -180,7 +180,7 @@ describe('Component: ActionSheet', () => {
 
     beforeEach(fakeAsync(() => {
       TestBed.configureTestingModule({
-        imports: [ActionSheetModule.forRoot(), FormsModule, NoopAnimationsModule],
+        imports: [ActionSheetModule, FormsModule, NoopAnimationsModule],
         declarations: [TestActionSheetServiceComponent],
         providers: [ActionSheetService],
       }).createComponent(TestActionSheetServiceComponent);

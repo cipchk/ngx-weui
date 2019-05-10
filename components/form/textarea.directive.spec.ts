@@ -21,7 +21,7 @@ describe('Directive: Textarea', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestInputComponent],
-      imports: [FormModule.forRoot(), FormsModule],
+      imports: [FormModule, FormsModule],
     });
 
     fixture = TestBed.createComponent(TestInputComponent);

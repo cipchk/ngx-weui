@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SkinType } from 'ngx-weui/core';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ActionSheetConfig {
   /**
    * 样式，默认：`ios`

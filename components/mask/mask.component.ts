@@ -1,15 +1,28 @@
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
+import { InputBoolean } from 'ngx-weui/core';
 import { Observable, Observer, Subscription } from 'rxjs';
 
 @Component({
   selector: 'weui-mask',
+  exportAs: 'weuiMask',
   templateUrl: './mask.component.html',
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class MaskComponent implements OnDestroy {
   /**
    * 点击是否允许关闭（默认：`false`）
    */
-  @Input() backdrop: boolean = false;
+  @Input() @InputBoolean() backdrop: boolean = false;
 
   /**
    * 内容方向（默认：`vertical`）
@@ -31,7 +44,7 @@ export class MaskComponent implements OnDestroy {
   /**
    * 内容为Loading效果（默认：`false`）
    */
-  @Input() loading = false;
+  @Input() @InputBoolean() loading = false;
 
   /**
    * 关闭回调

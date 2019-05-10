@@ -54,7 +54,7 @@ describe('Component: Dialog', () => {
     beforeEach(fakeAsync(() => {
       TestBed.configureTestingModule({
         declarations: [TestDialogComponent],
-        imports: [DialogModule.forRoot(), FormsModule, NoopAnimationsModule],
+        imports: [DialogModule, FormsModule, NoopAnimationsModule],
         providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
       });
       TestBed.overrideComponent(TestDialogComponent, {
@@ -173,7 +173,7 @@ describe('Component: Dialog', () => {
     beforeEach(fakeAsync(() => {
       TestBed.configureTestingModule({
         declarations: [TestDialogComponent],
-        imports: [DialogModule.forRoot(), FormsModule, NoopAnimationsModule],
+        imports: [DialogModule, FormsModule, NoopAnimationsModule],
         providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
       });
       TestBed.overrideComponent(TestDialogComponent, {
@@ -289,7 +289,7 @@ describe('Component: Dialog', () => {
 
     beforeEach(fakeAsync(() => {
       TestBed.configureTestingModule({
-        imports: [DialogModule.forRoot(), FormsModule, NoopAnimationsModule],
+        imports: [DialogModule, FormsModule, NoopAnimationsModule],
         declarations: [TestDialogServiceComponent],
         providers: [DialogService],
       }).createComponent(TestDialogServiceComponent);

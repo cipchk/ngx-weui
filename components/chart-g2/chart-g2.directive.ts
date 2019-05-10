@@ -2,7 +2,7 @@ import { Directive, ElementRef, Input, NgZone, OnChanges, OnDestroy, OnInit, Sim
 
 declare const GM: any;
 
-@Directive({ selector: 'canvas[weui-chart-g2]', exportAs: 'chart-g2' })
+@Directive({ selector: 'canvas[weui-chart-g2]', exportAs: 'weuiChartG2' })
 export class ChartG2Directive implements OnInit, OnDestroy, OnChanges {
   _chart: any;
 

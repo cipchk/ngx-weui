@@ -15,7 +15,7 @@ describe('Component: Button', () => {
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TestMaskComponent],
-      imports: [MaskModule.forRoot(), FormsModule],
+      imports: [MaskModule, FormsModule],
       providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
     });
     TestBed.overrideComponent(TestMaskComponent, { set: { template: html } });

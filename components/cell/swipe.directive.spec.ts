@@ -53,7 +53,7 @@ describe('Directive: Swipe', () => {
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TestSwipeComponent],
-      imports: [CellModule.forRoot(), FormsModule],
+      imports: [CellModule, FormsModule],
       providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
     });
     TestBed.overrideComponent(TestSwipeComponent, {
@@ -110,7 +110,7 @@ describe('Directive: Swipe(not body)', () => {
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TestSwipeComponent],
-      imports: [CellModule.forRoot(), FormsModule],
+      imports: [CellModule, FormsModule],
       providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
     });
     TestBed.overrideComponent(TestSwipeComponent, {

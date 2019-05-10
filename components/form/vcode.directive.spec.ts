@@ -38,7 +38,7 @@ describe('Directive: vcode', () => {
     beforeEach(fakeAsync(() => {
       TestBed.configureTestingModule({
         declarations: [TestVCodeComponent],
-        imports: [FormModule.forRoot(), FormsModule],
+        imports: [FormModule, FormsModule],
         providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
       });
 
@@ -92,7 +92,7 @@ describe('Directive: vcode', () => {
     spyOn(console, 'error');
     TestBed.configureTestingModule({
       declarations: [TestVCodeComponent],
-      imports: [FormModule.forRoot(), FormsModule],
+      imports: [FormModule, FormsModule],
       providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
     });
 
@@ -107,7 +107,7 @@ describe('Directive: vcode', () => {
     beforeEach(fakeAsync(() => {
       TestBed.configureTestingModule({
         declarations: [TestVCodeComponent],
-        imports: [FormModule.forRoot(), FormsModule],
+        imports: [FormModule, FormsModule],
         providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
       });
 

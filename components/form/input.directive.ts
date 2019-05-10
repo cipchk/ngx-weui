@@ -1,12 +1,13 @@
 import { forwardRef, Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator, ValidatorFn } from '@angular/forms';
-import { add, findParent, remove } from 'ngx-weui/core';
+import { add, findParent, remove, InputBoolean } from 'ngx-weui/core';
 
 /**
  * 文本框，指令是对文本框格式校验（邮箱、手机、身份证等）、视觉效果的增强而已
  */
 @Directive({
   selector: '[weui-input]',
+  exportAs: 'weuiInput',
   providers: [
     {
       provide: NG_VALIDATORS,
@@ -40,7 +41,7 @@ export class InputDirective implements OnInit, OnChanges, Validator {
   /**
    * 是否自动清除内容中的空格
    */
-  @Input('weui-cleaner') cleaner: boolean = false;
+  @Input('weui-cleaner') @InputBoolean() cleaner: boolean = false;
 
   constructor(private el: ElementRef) {}
 

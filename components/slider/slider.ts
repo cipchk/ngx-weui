@@ -10,12 +10,14 @@ import {
   Output,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { InputBoolean, InputNumber } from 'ngx-weui/core';
 
 /**
  * 滑块指令，支持[(ngModel)]
  */
 @Directive({
   selector: '[weui-slider]',
+  exportAs: 'weuiSlider',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -38,22 +40,22 @@ export class SliderDirective implements ControlValueAccessor, OnInit, OnDestroy,
   /**
    * 允许的最小值，默认：`0`
    */
-  @Input('weui-min') min: number = 0;
+  @Input('weui-min') @InputNumber() min: number = 0;
 
   /**
    * 允许的最大值，默认：`100`
    */
-  @Input('weui-max') max: number = 100;
+  @Input('weui-max') @InputNumber() max: number = 100;
 
   /**
    * 步长，默认：`1`
    */
-  @Input('weui-step') step: number = 1;
+  @Input('weui-step') @InputNumber() step: number = 1;
 
   /**
    * 是否可用
    */
-  @Input('weui-enabled') enabled: boolean = true;
+  @Input('weui-enabled') @InputBoolean() enabled: boolean = true;
   /**
    * 值改变时触发
    */

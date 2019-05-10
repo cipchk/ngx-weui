@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { FormModule } from './../form/form.module';
-import { MaskModule } from './../mask/mask.module';
-import { SliderModule } from './../slider/slider.module';
+import { FormModule } from 'ngx-weui/form';
+import { MaskModule } from 'ngx-weui/mask';
+import { SliderModule } from 'ngx-weui/slider';
+
 import { DialogComponent } from './dialog.component';
-import { DialogConfig } from './dialog.config';
 import { DialogService } from './dialog.service';
 
 @NgModule({
@@ -15,8 +15,4 @@ import { DialogService } from './dialog.service';
   providers: [DialogService],
   entryComponents: [DialogComponent],
 })
-export class DialogModule {
-  static forRoot(): ModuleWithProviders {
-    return { ngModule: DialogModule, providers: [DialogConfig] };
-  }
-}
+export class DialogModule {}

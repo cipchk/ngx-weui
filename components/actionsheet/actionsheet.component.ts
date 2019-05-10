@@ -1,11 +1,20 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 import { isAndroid } from 'ngx-weui/core';
 import { Observable, Observer, Subscription } from 'rxjs';
 import { ActionSheetConfig } from './actionsheet.config';
 
 @Component({
   selector: 'weui-actionsheet',
+  exportAs: 'weuiActionsheet',
   templateUrl: './actionsheet.component.html',
   animations: [
     trigger('visibility', [
@@ -18,6 +27,9 @@ import { ActionSheetConfig } from './actionsheet.config';
     '[hidden]': '!_shown',
     '[class.weui-skin_android]': 'config.skin === "android"',
   },
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class ActionSheetComponent implements OnDestroy {
   /**

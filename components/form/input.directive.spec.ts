@@ -38,7 +38,7 @@ describe('Directive: Input', () => {
   function genModule(html: string) {
     TestBed.configureTestingModule({
       declarations: [TestInputComponent],
-      imports: [FormModule.forRoot(), FormsModule, ReactiveFormsModule],
+      imports: [FormModule, FormsModule, ReactiveFormsModule],
       providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
     });
 
@@ -137,7 +137,7 @@ describe('Directive: Input', () => {
     spyOn(console, 'error');
     TestBed.configureTestingModule({
       declarations: [TestInputComponent],
-      imports: [FormModule.forRoot(), FormsModule, ReactiveFormsModule],
+      imports: [FormModule, FormsModule, ReactiveFormsModule],
       providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
     });
 

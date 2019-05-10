@@ -11,7 +11,7 @@ describe('Component: ChartG2', () => {
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TestChartG2Component],
-      imports: [ChartG2Module.forRoot(), NoopAnimationsModule],
+      imports: [ChartG2Module, NoopAnimationsModule],
     });
     fixture = TestBed.createComponent(TestChartG2Component);
     context = fixture.componentInstance;
@@ -34,7 +34,7 @@ describe('Component: ChartG2', () => {
 
 @Component({
   template: `
-    <canvas weui-chart-g2 [margin]="margin" #c1="chart-g2" style="width:100%;height:200px;"></canvas>
+    <canvas weui-chart-g2 [margin]="margin" #c1="weuiChartG2" style="width:100%;height:200px;"></canvas>
   `,
 })
 class TestChartG2Component {

@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs';
 
 import { isAndroid } from 'ngx-weui/core';
@@ -13,7 +22,11 @@ import { DialogConfig } from './dialog.config';
  */
 @Component({
   selector: 'weui-dialog',
+  exportAs: 'weuiDialog',
   templateUrl: './dialog.component.html',
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class DialogComponent implements OnDestroy {
   private _config: DialogConfig;

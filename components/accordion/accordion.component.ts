@@ -1,26 +1,30 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { AnimateType } from 'ngx-weui/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { AnimateType, InputBoolean } from 'ngx-weui/core';
 import { AccordionPanelComponent } from './accordion-panel.component';
 import { AccordionConfig } from './accordion.config';
 
 @Component({
   selector: 'weui-accordion',
+  exportAs: 'weuiAccordion',
   template: `
     <ng-content></ng-content>
   `,
   host: {
     '[attr.aria-multiselectable]': 'closeOthers',
   },
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class AccordionComponent {
   /**
    * 是否可折叠，`true` 表示同时所有都允许展开，`false` 表示同时只允许一个展开，默认：`false`
    */
-  @Input() collapsible: boolean = false;
+  @Input() @InputBoolean() collapsible: boolean = false;
   /**
    * 自动展开第一次，默认：`true`
    */
-  @Input() activeFirst: boolean = true;
+  @Input() @InputBoolean() activeFirst: boolean = true;
   /**
    * 动画类型，`none` 无动画，`slide` 滑动，默认：`slide`
    */

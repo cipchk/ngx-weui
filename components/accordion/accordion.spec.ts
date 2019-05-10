@@ -53,7 +53,7 @@ describe('Component: Accordion', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestAccordionComponent],
-      imports: [AccordionModule.forRoot()],
+      imports: [AccordionModule],
     });
     TestBed.overrideComponent(TestAccordionComponent, {
       set: { template: html },

@@ -1,10 +1,12 @@
 import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
+import { InputNumber } from 'ngx-weui/core';
 
 /**
  * 单元格滑块
  */
 @Directive({
   selector: '[weui-swipe]',
+  exportAs: 'weuiSwipe',
 })
 export class SwipeDirective implements OnInit {
   private curX: number = 0;
@@ -14,7 +16,7 @@ export class SwipeDirective implements OnInit {
   /**
    * 右边滑动宽度（单位：px），默认：`68`
    */
-  @Input('weui-width') width: number = 68;
+  @Input('weui-width') @InputNumber() width: number = 68;
 
   constructor(private el: ElementRef) {}
 

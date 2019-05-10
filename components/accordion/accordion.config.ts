@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AnimateType } from 'ngx-weui/core';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class AccordionConfig {
   /**
    * 是否可折叠，`false` 表示保持只有一个可折叠，`true` 表示所有都允许，默认：`false`

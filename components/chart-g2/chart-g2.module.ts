@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { ChartG2Directive } from './chart-g2.directive';
 
@@ -8,8 +8,4 @@ import { ChartG2Directive } from './chart-g2.directive';
   declarations: [ChartG2Directive],
   exports: [ChartG2Directive],
 })
-export class ChartG2Module {
-  static forRoot(): ModuleWithProviders {
-    return { ngModule: ChartG2Module, providers: [] };
-  }
-}
+export class ChartG2Module {}

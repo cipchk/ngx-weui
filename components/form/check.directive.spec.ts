@@ -15,7 +15,7 @@ describe('Directive: Checklist', () => {
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TestInputComponent],
-      imports: [FormModule.forRoot()],
+      imports: [FormModule],
       providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
     });
 

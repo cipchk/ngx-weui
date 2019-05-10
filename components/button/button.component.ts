@@ -75,6 +75,7 @@ export class ButtonComponent implements OnInit, OnChanges {
       [`${prefixCls}_${median}-${type}`]: median,
       [`${prefixCls}_${type}`]: !median,
       [`${prefixCls}_loading`]: loading,
+      [`${prefixCls}_plain-disabled`]: plain && disabled,
     });
   }
 

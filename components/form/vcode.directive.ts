@@ -1,4 +1,5 @@
 import { Directive, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
+import { InputNumber } from 'ngx-weui/core';
 import { Observable } from 'rxjs';
 
 /**
@@ -6,6 +7,7 @@ import { Observable } from 'rxjs';
  */
 @Directive({
   selector: '[weui-vcode]',
+  exportAs: 'weuiVcode',
   host: {
     '(click)': '_onClick()',
     '[disabled]': '_disabled',
@@ -20,7 +22,7 @@ export class VCodeDirective implements OnInit, OnDestroy {
   /**
    * 时长（单位：秒），默认：`60`
    */
-  @Input('weui-seconds') seconds: number = 60;
+  @Input('weui-seconds') @InputNumber() seconds: number = 60;
 
   /**
    * 倒计时模板，使用 `${num}` 表示当前秒数

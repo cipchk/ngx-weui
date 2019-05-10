@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ButtonType, InputData, InputType, SkinType } from 'ngx-weui/core';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class DialogConfig {
   /**
    * 对话框类型，默认：`default`

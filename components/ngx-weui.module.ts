@@ -60,12 +60,7 @@ export * from 'ngx-weui/version';
 
 @NgModule({
   imports: [
-    CellModule.forRoot(),
-    FormModule.forRoot(),
-    SliderModule.forRoot(),
     UploaderModule.forRoot(),
-    ActionSheetModule.forRoot(),
-    DialogModule.forRoot(),
     LoadmoreModule.forRoot(),
     ProgressModule.forRoot(),
     GalleryModule.forRoot(),
@@ -78,10 +73,7 @@ export * from 'ngx-weui/version';
     InfiniteLoaderModule.forRoot(),
     SidebarModule.forRoot(),
     SwiperModule.forRoot(),
-    ChartG2Module.forRoot(),
     JWeiXinModule.forRoot(),
-    AccordionModule.forRoot(),
-    MaskModule.forRoot(),
     RatingModule.forRoot(),
     StepperModule.forRoot(),
     PaginationModule.forRoot(),
