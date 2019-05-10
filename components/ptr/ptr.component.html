@@ -2,7 +2,7 @@
   class="weui-ptr__loader"
   [ngStyle]="{
     'height.px': config.height,
-    'margin-top.px': -config.height + _pullPercent / (100 / config.height),
+    'margin-top.px': -config.height! + _pullPercent / (100 / config.height!),
     transition: _animating ? 'all .5s' : 'none'
   }"
 >

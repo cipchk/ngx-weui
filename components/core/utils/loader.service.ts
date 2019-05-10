@@ -22,12 +22,8 @@ export class LoaderService {
       });
 
       Promise.all(promises)
-        .then(() => {
-          resolve(true);
-        })
-        .catch(() => {
-          resolve(false);
-        });
+        .then(() => resolve(true))
+        .catch(() => resolve(false));
     });
   }
 

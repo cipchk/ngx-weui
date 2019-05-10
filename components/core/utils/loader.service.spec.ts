@@ -1,6 +1,3 @@
-import { Injector, StaticProvider } from '@angular/core';
-
-import { DOCUMENT } from '@angular/common';
 import { LoaderService } from './loader.service';
 
 class MockDocument {
@@ -10,30 +7,25 @@ class MockDocument {
 
 describe('LoaderService', () => {
   let service: LoaderService;
-  let document: MockDocument;
+  let doc: MockDocument;
 
   beforeEach(() => {
-    const providers = [
-      { provide: LoaderService, useClass: LoaderService, deps: [] },
-      { provide: DOCUMENT, useClass: MockDocument, deps: [] },
-    ] as StaticProvider[];
-    const injector = Injector.create({ providers });
-    service = injector.get<LoaderService>(LoaderService);
-    document = injector.get<MockDocument>(DOCUMENT);
+    doc = new MockDocument();
+    service = new LoaderService(doc);
   });
 
   it('should create script tag', () => {
     const JSURL = 'http://test.com/1.js';
     service.load([JSURL]);
-    expect(document.createElement).toHaveBeenCalled();
-    expect(document.getElementsByTagName).toHaveBeenCalled();
+    expect(doc.createElement).toHaveBeenCalled();
+    expect(doc.getElementsByTagName).toHaveBeenCalled();
   });
 
   it('should create link tag', () => {
     const CSSURL = 'http://test.com/1.css';
     service.load(CSSURL);
-    expect(document.createElement).toHaveBeenCalled();
-    expect(document.getElementsByTagName).toHaveBeenCalled();
+    expect(doc.createElement).toHaveBeenCalled();
+    expect(doc.getElementsByTagName).toHaveBeenCalled();
   });
 
   it('should at once if create exists', () => {
@@ -41,7 +33,7 @@ describe('LoaderService', () => {
     const CSSURL = 'http://test.com/1.css';
     service.load([JSURL, CSSURL]);
     service.load([JSURL, CSSURL]);
-    expect(document.createElement).toHaveBeenCalled();
-    expect(document.getElementsByTagName).toHaveBeenCalled();
+    expect(doc.createElement).toHaveBeenCalled();
+    expect(doc.getElementsByTagName).toHaveBeenCalled();
   });
 });

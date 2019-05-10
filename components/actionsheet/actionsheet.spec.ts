@@ -54,7 +54,8 @@ describe('Component: ActionSheet', () => {
       context = fixture.componentInstance;
       el = fixture.nativeElement;
       fixture.detectChanges();
-      tick();
+      tick(1000);
+      fixture.detectChanges();
     }));
 
     it('should init', fakeAsync(() => {
@@ -194,7 +195,7 @@ describe('Component: ActionSheet', () => {
     }));
 
     it('should be show', done => {
-      service.show({ ...[], ...MENUS }).subscribe(res => {
+      service.show([...MENUS]).subscribe(res => {
         fixture.detectChanges();
         expect(res.text).toBe('menu1');
         expect(res.value).toBe('value1');
@@ -209,7 +210,7 @@ describe('Component: ActionSheet', () => {
     });
 
     it('should be show if specify [config] param', () => {
-      service.show({ ...[], ...MENUS }, { ...CONFIG });
+      service.show([...MENUS], { ...CONFIG });
       fixture.detectChanges();
       expect(el.nextSibling.nodeName).toBe('WEUI-ACTIONSHEET');
     });
@@ -230,7 +231,7 @@ class TestActionSheetServiceComponent {}
 class TestActionSheetComponent {
   @ViewChild(ActionSheetComponent) actioinSheet: ActionSheetComponent;
 
-  menus: any[] = { ...[], ...MENUS };
+  menus: any[] = [...MENUS];
 
   config: ActionSheetConfig = { ...CONFIG };
 

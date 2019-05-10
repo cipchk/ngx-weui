@@ -124,6 +124,6 @@ export class GalleryComponent implements OnChanges {
 
     // todo: 永远只返回一个
     // 针对未来可能直接上下个
-    this._imgs = { ...[], ...(imgs && (imgs as any[]).length > 0 ? imgs.slice(0, 1) : []) };
+    this._imgs = imgs && (imgs as any[]).length > 0 ? imgs.slice(0, 1) : [];
   }
 }

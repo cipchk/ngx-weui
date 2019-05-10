@@ -23,11 +23,10 @@ export class PTRComponent implements OnInit, OnChanges {
   private loading: boolean = false;
   private touching: boolean = false;
   private touchId: any;
-  _animating: boolean = false;
   private initScrollTop: number = 0;
-  _pullPercent: number = 0;
   private contentEl: HTMLElement;
-
+  _animating: boolean = false;
+  _pullPercent: number = 0;
   _lastLabel: string;
   /** 配置项 */
   @Input() config: PTRConfig;

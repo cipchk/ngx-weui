@@ -66,7 +66,7 @@ export class DialogComponent implements OnDestroy {
         }
       }
 
-      config.inputOptions = { ...[], ...config.inputOptions };
+      config.inputOptions = (config.inputOptions || [])!.slice(0);
       config.inputAttributes = {
         maxlength: null,
         min: 0,
@@ -167,6 +167,7 @@ export class DialogComponent implements OnDestroy {
    * @returns 当 `type==='prompt'` 时会多一 `result` 属性表示结果值
    */
   show(): Observable<any> {
+    console.log(this.config.inputOptions);
     this._shown = true;
     this._prompError = false;
     // 模拟动画结束后回调

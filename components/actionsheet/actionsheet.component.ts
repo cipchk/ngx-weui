@@ -28,7 +28,7 @@ export class ActionSheetComponent implements OnDestroy {
   /**
    * 菜单内容
    */
-  @Input() menus: Array<{ text?: string; [key: string]: any }>;
+  @Input() menus: Array<{ text?: string; [key: string]: any }> = [];
 
   /**
    * 关闭回调

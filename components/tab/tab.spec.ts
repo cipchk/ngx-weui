@@ -105,30 +105,30 @@ describe('Component: Tabs', () => {
       expectActiveTabs(el, [true, false, false, false]);
     });
 
-    xit('should set tab active', () => {
+    it('should set tab active', () => {
       (getItems(el)[1] as HTMLElement).click();
       fixture.detectChanges();
       expectActiveTabs(el, [false, true, false, false]);
     });
 
-    xit('should set tab heading', () => {
+    it('should set tab heading', () => {
       const newTitle = 'new title';
       context.tabs[0].heading = newTitle;
       fixture.detectChanges();
       expect(getItems(el)[0].innerHTML.trim()).toBe(newTitle);
     });
 
-    xit('should set tab disabled', () => {
+    it('should set tab disabled', () => {
       expect(getItems(el)[2].classList).toContain('disabled');
     });
 
-    xit('should ignore click on disalbed tab', () => {
+    it('should ignore click on disalbed tab', () => {
       (getItems(el)[2] as HTMLElement).click();
       fixture.detectChanges();
       expectActiveTabs(el, [true, false, false, false]);
     });
 
-    xit('should emit select event', () => {
+    it('should emit select event', () => {
       (getItems(el)[1] as HTMLElement).click();
       fixture.detectChanges();
 
@@ -145,7 +145,7 @@ describe('Component: Tabs', () => {
     beforeEach(fakeAsync(() => {
       TestBed.configureTestingModule({
         declarations: [TestTabComponent],
-        imports: [TabModule.forRoot()],
+        imports: [TabModule],
       });
       TestBed.overrideComponent(TestTabComponent, {
         set: { template: tabbar_html },
@@ -160,15 +160,15 @@ describe('Component: Tabs', () => {
       tick();
     }));
 
-    xit('should set tab has icon', () => {
+    it('should set tab has icon', () => {
       expect((getItemsByTabbar(el)[0] as HTMLElement).querySelector('.weui-tabbar__icon')).not.toBeNull();
     });
 
-    xit('should set tab badge number value', () => {
+    it('should set tab badge number value', () => {
       expect((getItemsByTabbar(el)[0] as HTMLElement).querySelector('.weui-badge')!.innerHTML).toBe('8');
     });
 
-    xit('should set tab badge dot value', () => {
+    it('should set tab badge dot value', () => {
       expect((getItemsByTabbar(el)[1] as HTMLElement).querySelector('.weui-badge')!.classList).toContain(
         'weui-badge_dot',
       );
@@ -178,7 +178,7 @@ describe('Component: Tabs', () => {
 
 @Component({ template: `` })
 class TestTabComponent {
-  tabs: any[] = { ...[], ...TABS };
+  tabs: any[] = [...TABS];
 
   _select(e: TabModule): TabModule {
     return e;

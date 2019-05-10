@@ -42,13 +42,13 @@ export class DemoDialogComponent implements OnDestroy {
   onShow(type: SkinType, style: 1 | 2 | 3) {
     this.config = {
       ...this.DEFCONFIG,
-      ...({
+      ...{
         skin: type,
-        cancel: null,
-        confirm: null,
-        btns: null,
+        cancel: undefined,
+        confirm: undefined,
+        btns: undefined,
         content: '弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内',
-      } as DialogConfig),
+      },
     } as DialogConfig;
     switch (style) {
       case 1:
@@ -117,7 +117,7 @@ export class DemoDialogComponent implements OnDestroy {
         cancel: '取消',
         input: inputType,
         inputValue: undefined,
-        inputRegex: null,
+        inputRegex: undefined,
       } as DialogConfig),
     } as DialogConfig;
     if (inputType === 'range') {

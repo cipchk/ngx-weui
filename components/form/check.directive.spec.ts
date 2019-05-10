@@ -74,6 +74,6 @@ describe('Directive: Checklist', () => {
 })
 class TestInputComponent {
   show: boolean = true;
-  list: string[] = { ...[], ...DATALIST };
+  list: string[] = [...DATALIST];
   res: string[] = [];
 }
