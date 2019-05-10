@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
+import { fakeAsync, inject, tick, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentFixture, TestBed, fakeAsync, tick, inject } from '@angular/core/testing';
 
-import { ToastModule, ToastComponent, ToastService } from '../toast';
+import { ToastComponent, ToastModule, ToastService } from '../toast';
 
 describe('Component: Toast', () => {
   describe('[default]', () => {
@@ -24,14 +24,14 @@ describe('Component: Toast', () => {
     }));
 
     it('should default values', () => {
-      expect(el.querySelector('.weui-toast__content').textContent).toBe('已完成');
-      expect(el.querySelector('.weui-icon_toast').classList).toContain('weui-icon-success-no-circle');
+      expect(el.querySelector('.weui-toast__content')!.textContent).toBe('已完成');
+      expect(el.querySelector('.weui-icon_toast')!.classList).toContain('weui-icon-success-no-circle');
     });
 
     it('should be open by onShow()', () => {
       context.toast.onShow();
       fixture.detectChanges();
-      expect(el.querySelector('weui-toast').attributes['hidden']).toBeUndefined();
+      expect(el.querySelector('weui-toast')!.attributes.getNamedItem('hidden')).toBeNull();
     });
 
     it('should hide', fakeAsync(() => {
@@ -40,7 +40,7 @@ describe('Component: Toast', () => {
       // 等待动画结束
       tick(200);
       fixture.detectChanges();
-      expect(el.querySelector('weui-toast').attributes['hidden']).not.toBeUndefined();
+      expect(el.querySelector('weui-toast')!.attributes.getNamedItem('hidden')).not.toBeNull();
       tick();
     }));
   });

@@ -1,4 +1,4 @@
-import { Directive, OnInit, OnDestroy, ElementRef, Input, OnChanges, SimpleChanges, NgZone } from '@angular/core';
+import { Directive, ElementRef, Input, NgZone, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
 
 declare const GM: any;
 
@@ -46,7 +46,7 @@ export class ChartG2Directive implements OnInit, OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.initFlag) {
-      if ('margin' in changes && !changes['margin'].firstChange) {
+      if ('margin' in changes && !changes.margin.firstChange) {
         this.buildChart();
       }
     }

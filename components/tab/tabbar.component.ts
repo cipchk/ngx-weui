@@ -1,4 +1,4 @@
-import { Component, forwardRef } from '@angular/core';
+import { forwardRef, Component } from '@angular/core';
 import { BarComponent } from './bar.component';
 
 /**

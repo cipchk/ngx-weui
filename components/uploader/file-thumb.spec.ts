@@ -1,8 +1,8 @@
-import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { Component, DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UploaderModule, FileThumbDirective } from '../uploader';
 import { By } from '@angular/platform-browser';
+import { FileThumbDirective, UploaderModule } from '../uploader';
 
 const html = `<div weui-thumb [weui-thumb]="file"></div>`;
 
@@ -23,7 +23,7 @@ describe('Component: file-thumb', () => {
 
     directives = fixture.debugElement
       .queryAll(By.directive(FileThumbDirective))
-      .map((de: DebugElement) => de.injector.get(FileThumbDirective) as FileThumbDirective);
+      .map((de: DebugElement) => de.injector.get<FileThumbDirective>(FileThumbDirective));
   });
 
   it('should be init', () => {

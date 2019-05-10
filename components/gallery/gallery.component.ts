@@ -1,6 +1,6 @@
-import { Component, Input, OnChanges, SimpleChanges, EventEmitter, Output } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { genImageUrl } from '../utils/browser';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { genImageUrl } from 'ngx-weui/core';
 
 /**
  * 数据对象
@@ -97,30 +97,33 @@ export class GalleryComponent implements OnChanges {
   }
 
   private parseImgs() {
-    let imgs = this.imgs;
+    let imgs = this.imgs as any;
     if (Array.isArray(imgs)) {
       if (imgs.length > 0) {
         if (typeof imgs[0] === 'string') {
-          imgs = (<string[]>imgs).map((url: string) => {
-            return { url: url };
+          imgs = (imgs as string[]).map((url: string) => {
+            return { url };
           });
         } else {
-          imgs = (<GalleryItem[]>imgs).map((item: GalleryItem) => {
+          imgs = (imgs as GalleryItem[]).map((item: GalleryItem) => {
             if (item.file) item.url = genImageUrl(item.file);
             return item;
           });
         }
       }
     } else {
-      if (typeof imgs === 'string') imgs = [{ url: imgs }];
-      else {
+      if (typeof imgs === 'string') {
+        imgs = [{ url: imgs }];
+      } else {
         const imgUrl = genImageUrl(imgs);
-        if (imgUrl) imgs = [{ url: imgUrl }];
+        if (imgUrl) {
+          imgs = [{ url: imgUrl }];
+        }
       }
     }
 
     // todo: 永远只返回一个
     // 针对未来可能直接上下个
-    this._imgs = Object.assign([], imgs && (<any[]>imgs).length > 0 ? imgs.slice(0, 1) : []);
+    this._imgs = { ...[], ...(imgs && (imgs as any[]).length > 0 ? imgs.slice(0, 1) : []) };
   }
 }

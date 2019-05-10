@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { META } from '../meta';
 
@@ -24,12 +24,12 @@ export class DocsArticleComponent implements OnInit {
       this.router.navigateByUrl('/');
       return;
     }
-    this.item = Object.assign({}, item);
+    this.item = { ...item };
     this.initHLJS();
   }
 
   constructor(private router: Router, route: ActivatedRoute) {
-    route.params.subscribe(params => this.genData('' + params['id']));
+    route.params.subscribe(params => this.genData('' + params.id));
   }
 
   ngOnInit(): void {
@@ -41,6 +41,7 @@ export class DocsArticleComponent implements OnInit {
       const elements = document.querySelectorAll(
         'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code',
       );
+      // tslint:disable-next-line: no-conditional-assignment
       for (let i = 0, element; (element = elements[i++]); ) {
         hljs.highlightBlock(element);
       }

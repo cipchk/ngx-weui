@@ -1,13 +1,13 @@
 import {
-  Directive,
   forwardRef,
+  Directive,
   ElementRef,
-  OnDestroy,
-  Input,
   EventEmitter,
-  Output,
+  Input,
   OnChanges,
+  OnDestroy,
   OnInit,
+  Output,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -98,6 +98,7 @@ export class SliderDirective implements ControlValueAccessor, OnInit, OnDestroy,
   private setValue(value: number) {
     if (this.max > this.min) {
       this._state.percentage = [
+        // tslint:disable-next-line: binary-expression-operand-order
         (100 * (value - this.min)) / (this.max - this.min),
         0,
         (this.step * 100) / (this.max - this.min),

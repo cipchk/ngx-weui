@@ -1,24 +1,23 @@
 import { Component, DebugElement } from '@angular/core';
+import { fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { SliderModule } from './slider.module';
 import { SliderDirective } from './slider';
+import { SliderModule } from './slider.module';
 
-const CONTAINER_WIDTH = 500,
-  MIN = 1,
-  MAX = 100,
-  STEP = 1,
-  VALUE = 0,
-  REALVALUE = 1;
+const CONTAINER_WIDTH = 500;
+const MIN = 1;
+const MAX = 100;
+const STEP = 1;
+const VALUE = 0;
 
 function spyTouchArgument(val: number) {
   return {
     touches: [{ pageX: val, identifier: 1 }],
     targetTouches: [{ pageX: val, identifier: 1 }],
-    preventDefault: function() {},
+    preventDefault() {},
   };
 }
 
@@ -61,7 +60,7 @@ describe('Component: Slider', () => {
       el = fixture.nativeElement;
 
       const directives = fixture.debugElement.queryAll(By.directive(SliderDirective));
-      directive = directives.map((de: DebugElement) => de.injector.get(SliderDirective) as SliderDirective)[0];
+      directive = directives.map((de: DebugElement) => de.injector.get<SliderDirective>(SliderDirective))[0];
 
       fixture.detectChanges();
 
@@ -86,7 +85,7 @@ describe('Component: Slider', () => {
       fixture.detectChanges();
       tick(10);
 
-      expect(el.querySelector('.weui-slider-box__value').textContent).toBe('' + val);
+      expect(el.querySelector('.weui-slider-box__value')!.textContent).toBe('' + val);
       expect(context._change).toHaveBeenCalled();
     }));
 

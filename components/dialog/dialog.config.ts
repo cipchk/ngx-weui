@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SkinType, ButtonType, InputType, InputData } from '../utils/types';
+import { ButtonType, InputData, InputType, SkinType } from 'ngx-weui/core';
 
 @Injectable()
 export class DialogConfig {
@@ -84,12 +84,12 @@ export class DialogConfig {
   /**
    * 自定义按钮组，当此属性存在时 `cancel` & `confirm` 参数将失效
    */
-  btns?: {
+  btns?: Array<{
     text: string;
     type: ButtonType;
     value: boolean | any;
     [key: string]: any;
-  }[];
+  }>;
 
   /**
    * 允许点击背景关闭，默认：`false`

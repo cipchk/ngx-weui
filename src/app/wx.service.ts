@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 import { JWeiXinService } from 'ngx-weui/jweixin';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 /**
  * 微信JS-SDK服务器
@@ -43,9 +43,9 @@ export class WXService {
         this.http
           .get('/wx-config')
           .pipe(
-            catchError((error: Response | any) => {
+            catchError(() => {
               reject('无法获取签名数据');
-              return Observable.throw('error');
+              return throwError('error');
             }),
           )
           .subscribe((ret: any) => {
@@ -60,27 +60,27 @@ export class WXService {
   }
 
   private _onMenuShareTimeline() {
-    wx.onMenuShareTimeline(Object.assign({}, WXService.DEFAULTSHARE, this.share));
+    wx.onMenuShareTimeline({ ...WXService.DEFAULTSHARE, ...this.share });
     return this;
   }
 
   private _onMenuShareAppMessage() {
-    wx.onMenuShareAppMessage(Object.assign({}, WXService.DEFAULTSHARE, this.share));
+    wx.onMenuShareAppMessage({ ...WXService.DEFAULTSHARE, ...this.share });
     return this;
   }
 
   private _onMenuShareQQ() {
-    wx.onMenuShareQQ(Object.assign({}, WXService.DEFAULTSHARE, this.share));
+    wx.onMenuShareQQ({ ...WXService.DEFAULTSHARE, ...this.share });
     return this;
   }
 
   private _onMenuShareWeibo() {
-    wx.onMenuShareWeibo(Object.assign({}, WXService.DEFAULTSHARE, this.share));
+    wx.onMenuShareWeibo({ ...WXService.DEFAULTSHARE, ...this.share });
     return this;
   }
 
   private _onMenuShareQZone() {
-    wx.onMenuShareQZone(Object.assign({}, WXService.DEFAULTSHARE, this.share));
+    wx.onMenuShareQZone({ ...WXService.DEFAULTSHARE, ...this.share });
     return this;
   }
 }

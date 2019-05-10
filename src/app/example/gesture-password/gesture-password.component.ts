@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import { ToastrService } from 'ngx-toastr';
 import { ERR } from 'ngx-gesture-password';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'example-gesture-password',
@@ -28,7 +28,7 @@ export class GesturePasswordComponent {
         num: 4,
         passwords: Array(16)
           .fill(0)
-          .map((i, index) => String.fromCharCode(index + 65)),
+          .map((_i, index) => String.fromCharCode(index + 65)),
       };
     }
   }

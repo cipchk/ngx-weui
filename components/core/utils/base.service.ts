@@ -1,12 +1,12 @@
+import { DOCUMENT } from '@angular/common';
 import {
-  ComponentRef,
-  ComponentFactoryResolver,
   ApplicationRef,
-  Injector,
+  ComponentFactoryResolver,
+  ComponentRef,
   EmbeddedViewRef,
   Inject,
+  Injector,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
 
 export abstract class BaseService {
   constructor(
@@ -16,7 +16,7 @@ export abstract class BaseService {
     @Inject(DOCUMENT) private doc: any,
   ) {}
 
-  protected list: ComponentRef<any>[] = [];
+  protected list: Array<ComponentRef<any>> = [];
 
   /**
    * 销毁
@@ -24,9 +24,9 @@ export abstract class BaseService {
    * @param component 下标（从0开始或组件引用对象），或不指定时，销毁最新一个
    */
   destroy(component?: number | ComponentRef<any>) {
-    if (typeof component === 'number') component = this.list[<number>component];
+    if (typeof component === 'number') component = this.list[component as number];
     if (!component) component = this.list.pop();
-    if (component) (<ComponentRef<any>>component).destroy();
+    if (component) (component as ComponentRef<any>).destroy();
   }
 
   /**
@@ -37,7 +37,7 @@ export abstract class BaseService {
   }
 
   /** 动态构建组件 */
-  protected build<T>(component: { new (...args: any[]): T }): ComponentRef<T> {
+  protected build<T>(component: new (...args: any[]) => T): ComponentRef<T> {
     const componentFactory = this.resolver.resolveComponentFactory(component);
     const componentRef = componentFactory.create(this.injector);
     this.list.push(componentRef);

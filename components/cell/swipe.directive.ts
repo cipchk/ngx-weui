@@ -1,4 +1,4 @@
-import { Directive, HostListener, ElementRef, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
 
 /**
  * 单元格滑块

@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs';
 
 @Component({
@@ -67,7 +67,7 @@ export class MaskComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     if (this.observer && this.observer instanceof Subscription) {
-      (<Subscription>this.observer).unsubscribe();
+      (this.observer as Subscription).unsubscribe();
     }
   }
 }

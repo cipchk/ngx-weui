@@ -1,5 +1,5 @@
-import { Component, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { Observable, Subscription, timer } from 'rxjs';
+import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { timer, Subscription } from 'rxjs';
 
 @Component({
   selector: 'example-progress',
@@ -14,7 +14,7 @@ export class DemoProgressComponent implements OnDestroy {
     g2: { value: 10, doing: false },
     g3: { value: 50, doing: false },
   };
-  subscription: Subscription = null;
+  subscription: Subscription | null = null;
 
   onUpload() {
     this.onCancelAll();
@@ -25,7 +25,7 @@ export class DemoProgressComponent implements OnDestroy {
       g3: { value: 50, doing: true },
     };
 
-    this.subscription = timer(0, 40).subscribe((res: any) => {
+    this.subscription = timer(0, 40).subscribe(() => {
       let endCount = 0;
       Object.keys(this.res).forEach((key: string) => {
         const item = this.res[key];

@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { PopupComponent } from 'ngx-weui/popup';
 
@@ -14,7 +14,7 @@ export class DemoPopupComponent {
   @ViewChild('subscribe') subPopup: PopupComponent;
 
   onSub() {
-    this.subPopup.show().subscribe((res: boolean) => {
+    this.subPopup.show().subscribe(() => {
       alert('click confirm!!!');
     });
   }

@@ -1,5 +1,5 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ButtonModule } from 'ngx-weui/button';
 
 import { PaginationComponent } from './pagination.component';

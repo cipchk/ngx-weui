@@ -25,7 +25,7 @@ export function isIOS(): boolean {
  */
 export function isImage(file: File) {
   if (!(file instanceof window.File)) return false;
-  const type = '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
+  const type = `|${file.type.slice(file.type.lastIndexOf('/') + 1)}|`;
   return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
 }
 

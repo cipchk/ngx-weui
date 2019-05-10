@@ -1,9 +1,9 @@
 import { Component, ViewChild } from '@angular/core';
+import { fakeAsync, inject, tick, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentFixture, TestBed, fakeAsync, tick, inject } from '@angular/core/testing';
 
-import { ToptipsModule, ToptipsComponent, ToptipsService } from '../toptips';
+import { ToptipsComponent, ToptipsModule, ToptipsService } from '../toptips';
 
 describe('Component: Toptips', () => {
   describe('[default]', () => {
@@ -24,14 +24,14 @@ describe('Component: Toptips', () => {
     }));
 
     it('should default values', () => {
-      expect(el.querySelector('.weui-toptips').textContent).toBe('content');
-      expect(el.querySelector('.weui-toptips').classList).toContain('weui-toptips_success');
+      expect(el.querySelector('.weui-toptips')!.textContent).toBe('content');
+      expect(el.querySelector('.weui-toptips')!.classList).toContain('weui-toptips_success');
     });
 
     it('should be open by onShow()', () => {
       context.toptips.onShow();
       fixture.detectChanges();
-      expect(el.querySelector('weui-toptips').attributes['hidden']).toBeUndefined();
+      expect(el.querySelector('weui-toptips')!.attributes.getNamedItem('hidden')).toBeNull();
     });
 
     it('should hide', fakeAsync(() => {
@@ -40,7 +40,7 @@ describe('Component: Toptips', () => {
       // 等待动画结束
       tick(200);
       fixture.detectChanges();
-      expect(el.querySelector('weui-toptips').attributes['hidden']).not.toBeUndefined();
+      expect(el.querySelector('weui-toptips')!.attributes.getNamedItem('hidden')).not.toBeNull();
       tick();
     }));
   });

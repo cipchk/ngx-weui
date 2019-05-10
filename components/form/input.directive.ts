@@ -1,6 +1,6 @@
-import { Directive, Input, ElementRef, OnInit, OnChanges, forwardRef } from '@angular/core';
-import { Validator, AbstractControl, NG_VALIDATORS, ValidatorFn, ValidationErrors } from '@angular/forms';
-import { findParent, add, remove } from '../utils/dom';
+import { forwardRef, Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
+import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator, ValidatorFn } from '@angular/forms';
+import { add, findParent, remove } from 'ngx-weui/core';
 
 /**
  * 文本框，指令是对文本框格式校验（邮箱、手机、身份证等）、视觉效果的增强而已
@@ -60,7 +60,7 @@ export class InputDirective implements OnInit, OnChanges, Validator {
   }
 
   private _createValidator(): void {
-    let regex: RegExp = null;
+    let regex: RegExp | null = null;
     if (this.inputRegex) {
       if (typeof this.inputRegex === 'string') {
         regex = new RegExp(`^${this.inputRegex}$`);

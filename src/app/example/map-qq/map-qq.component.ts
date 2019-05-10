@@ -1,8 +1,5 @@
-/* tslint:disable */
-import { Component, OnInit, ViewEncapsulation, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { AqmPanoramaComponent } from 'angular-qq-maps';
-
-declare const qq: any;
 
 @Component({
   selector: 'example-map-qq',
@@ -20,6 +17,4 @@ export class DemoMapQQComponent {
     zoom: 1,
   };
   @ViewChild('map') map: AqmPanoramaComponent;
-
-  constructor(private el: ElementRef) {}
 }

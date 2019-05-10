@@ -1,33 +1,23 @@
-import { Component, ViewChild, DebugElement } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { fakeAsync, inject, tick, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  ComponentFixture,
-  TestBed,
-  fakeAsync,
-  tick,
-  ComponentFixtureAutoDetect,
-  async,
-  inject,
-} from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 
-import { Subscription } from 'rxjs';
-
-import { ActionSheetModule, ActionSheetComponent, ActionSheetConfig, ActionSheetService } from '../actionsheet';
-import { isAndroid } from '../utils/browser';
-import * as browserModule from '../utils/browser';
+import { isAndroid } from 'ngx-weui/core';
+// tslint:disable-next-line: no-duplicate-imports
+import * as browserModule from 'ngx-weui/core';
+import { ActionSheetComponent, ActionSheetConfig, ActionSheetModule, ActionSheetService } from '../actionsheet';
 
 const MENUS: any[] = [{ text: 'menu1', value: 'value1', other: 1 }, { text: 'menu2', value: 'value2' }];
 
-const CONFIG: ActionSheetConfig = <ActionSheetConfig>{
+const CONFIG: ActionSheetConfig = {
   title: 'test title',
   skin: 'ios',
   cancel: '取消',
-};
+} as ActionSheetConfig;
 
 function getTitle(nativeEl: HTMLElement): Element {
-  return nativeEl.querySelector('.weui-actionsheet__title-text');
+  return nativeEl.querySelector('.weui-actionsheet__title-text')!;
 }
 
 function getItems(nativeEl: HTMLElement): NodeListOf<Element> {
@@ -35,14 +25,13 @@ function getItems(nativeEl: HTMLElement): NodeListOf<Element> {
 }
 
 function getAction(nativeEl: HTMLElement): Element {
-  return nativeEl.querySelector('.weui-actionsheet__action .weui-actionsheet__cell');
+  return nativeEl.querySelector('.weui-actionsheet__action .weui-actionsheet__cell')!;
 }
 
 describe('Component: ActionSheet', () => {
   describe('[default]', () => {
     let fixture: ComponentFixture<TestActionSheetComponent>;
     let context: TestActionSheetComponent;
-    let dl: DebugElement;
     let el: any;
 
     const html = `
@@ -63,7 +52,6 @@ describe('Component: ActionSheet', () => {
       });
       fixture = TestBed.createComponent(TestActionSheetComponent);
       context = fixture.componentInstance;
-      dl = fixture.debugElement;
       el = fixture.nativeElement;
       fixture.detectChanges();
       tick();
@@ -75,10 +63,10 @@ describe('Component: ActionSheet', () => {
       expect(getItems(el).length).toBe(2);
     }));
 
-    it('should auto style', (done: () => void) => {
-      context.config = Object.assign(context.config, { skin: 'auto' });
+    it('should auto style', done => {
+      context.config = { ...context.config, skin: 'auto' };
       fixture.detectChanges();
-      context.actioinSheet.show().subscribe(res => {
+      context.actioinSheet.show().subscribe(() => {
         fixture.detectChanges();
         if (isAndroid()) {
           expect((el as HTMLElement).querySelectorAll('.weui-skin_android').length).toBe(1);
@@ -87,7 +75,7 @@ describe('Component: ActionSheet', () => {
         }
         done();
       });
-      (<any>getItems(el)[0]).click();
+      (getItems(el)[0] as any).click();
     });
 
     describe('[Android] style', () => {
@@ -95,30 +83,30 @@ describe('Component: ActionSheet', () => {
         spyOn(browserModule, 'isAndroid').and.returnValue(true);
       });
 
-      it('should be inited', (done: () => void) => {
-        context.config = Object.assign(context.config, { skin: 'auto' });
+      it('should be inited', done => {
+        context.config = { ...context.config, skin: 'auto' };
         fixture.detectChanges();
-        context.actioinSheet.show().subscribe(res => {
+        context.actioinSheet.show().subscribe(() => {
           fixture.detectChanges();
           expect((el as HTMLElement).querySelectorAll('.weui-skin_android').length).toBe(1);
           done();
         });
-        (<any>getItems(el)[0]).click();
+        (getItems(el)[0] as any).click();
       });
     });
 
-    it('should be opened set actionsheet title', (done: () => void) => {
-      context.actioinSheet.show().subscribe(res => {
+    it('should be opened set actionsheet title', done => {
+      context.actioinSheet.show().subscribe(() => {
         fixture.detectChanges();
-        const str: string = 'test title';
+        const str = 'test title';
         expect(getTitle(el).textContent).toBe(str);
         done();
       });
-      (<any>getItems(el)[0]).click();
+      (getItems(el)[0] as any).click();
     });
 
-    it('should be opened set actionsheet items', (done: () => void) => {
-      context.actioinSheet.show().subscribe(res => {
+    it('should be opened set actionsheet items', done => {
+      context.actioinSheet.show().subscribe(() => {
         fixture.detectChanges();
         const items = getItems(el);
         expect(items.length).toBe(2);
@@ -126,33 +114,33 @@ describe('Component: ActionSheet', () => {
         expect(items[1].textContent).toBe('menu2');
         done();
       });
-      (<any>getItems(el)[0]).click();
+      (getItems(el)[0] as any).click();
     });
 
-    it('should be opened set actionsheet action', (done: () => void) => {
-      context.actioinSheet.show().subscribe(res => {
+    it('should be opened set actionsheet action', done => {
+      context.actioinSheet.show().subscribe(() => {
         fixture.detectChanges();
-        const str: string = '取消';
+        const str = '取消';
         expect(getAction(el).textContent).toBe(str);
         done();
       });
-      (<any>getItems(el)[0]).click();
+      (getItems(el)[0] as any).click();
     });
 
-    it('should be opened if android not title & action', (done: () => void) => {
+    it('should be opened if android not title & action', done => {
       context.actioinSheet.config.skin = 'android';
       fixture.detectChanges();
 
-      context.actioinSheet.show().subscribe(res => {
+      context.actioinSheet.show().subscribe(() => {
         fixture.detectChanges();
         expect(getTitle(el)).toBeNull();
         expect(getAction(el)).toBeNull();
         done();
       });
-      (<any>getItems(el)[0]).click();
+      (getItems(el)[0] as any).click();
     });
 
-    it('should choose item and get back a result', (done: () => void) => {
+    it('should choose item and get back a result', done => {
       fixture.detectChanges();
 
       context.actioinSheet.show().subscribe(res => {
@@ -162,10 +150,10 @@ describe('Component: ActionSheet', () => {
         expect(res.other).toBe(1);
         done();
       });
-      (<any>getItems(el)[0]).click();
+      (getItems(el)[0] as any).click();
     });
 
-    it('should click backdrop has closed', (done: () => void) => {
+    it('should click backdrop has closed', done => {
       context.actioinSheet.show();
       fixture.detectChanges();
       context.actioinSheet.close.subscribe(() => {
@@ -176,7 +164,7 @@ describe('Component: ActionSheet', () => {
     });
 
     it('should click backdrop not-allow closing', () => {
-      context.config = Object.assign(context.config, { backdrop: false });
+      context.config = { ...context.config, backdrop: false };
       context.actioinSheet.show();
       fixture.detectChanges();
       el.querySelector('.weui-mask').click();
@@ -187,8 +175,6 @@ describe('Component: ActionSheet', () => {
   describe('[service]', () => {
     let service: ActionSheetService;
     let fixture: any;
-    let context: TestActionSheetServiceComponent;
-    let dl: DebugElement;
     let el: any;
 
     beforeEach(fakeAsync(() => {
@@ -199,8 +185,6 @@ describe('Component: ActionSheet', () => {
       }).createComponent(TestActionSheetServiceComponent);
 
       fixture = TestBed.createComponent(TestActionSheetServiceComponent);
-      context = fixture.componentInstance;
-      dl = fixture.debugElement;
       el = fixture.nativeElement;
       fixture.detectChanges();
     }));
@@ -209,8 +193,8 @@ describe('Component: ActionSheet', () => {
       service = _s;
     }));
 
-    it('should be show', (done: () => void) => {
-      service.show(Object.assign([], MENUS)).subscribe(res => {
+    it('should be show', done => {
+      service.show({ ...[], ...MENUS }).subscribe(res => {
         fixture.detectChanges();
         expect(res.text).toBe('menu1');
         expect(res.value).toBe('value1');
@@ -221,11 +205,11 @@ describe('Component: ActionSheet', () => {
       });
 
       fixture.detectChanges();
-      (<any>getItems(el.nextSibling)[0]).click();
+      (getItems(el.nextSibling)[0] as any).click();
     });
 
     it('should be show if specify [config] param', () => {
-      service.show(Object.assign([], MENUS), Object.assign({}, CONFIG));
+      service.show({ ...[], ...MENUS }, { ...CONFIG });
       fixture.detectChanges();
       expect(el.nextSibling.nodeName).toBe('WEUI-ACTIONSHEET');
     });
@@ -246,9 +230,9 @@ class TestActionSheetServiceComponent {}
 class TestActionSheetComponent {
   @ViewChild(ActionSheetComponent) actioinSheet: ActionSheetComponent;
 
-  menus: any[] = Object.assign([], MENUS);
+  menus: any[] = { ...[], ...MENUS };
 
-  config: ActionSheetConfig = Object.assign({}, CONFIG);
+  config: ActionSheetConfig = { ...CONFIG };
 
   _close() {
     return true;

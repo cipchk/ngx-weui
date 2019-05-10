@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { InputDirective } from './input.directive';
-import { VCodeDirective } from './vcode.directive';
-import { TextareaDirective } from './textarea.directive';
 import { ChecklistDirective } from './check.directive';
+import { InputDirective } from './input.directive';
+import { TextareaDirective } from './textarea.directive';
+import { VCodeDirective } from './vcode.directive';
 
 @NgModule({
   imports: [CommonModule, FormsModule],

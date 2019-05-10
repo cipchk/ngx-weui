@@ -1,11 +1,11 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PickerComponent } from './picker.component';
-import { PickerGroupComponent } from './picker-group.component';
-import { DatePickerComponent } from './picker-date.component';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { CityPickerComponent } from './picker-city.component';
-import { PickerService } from './picker.service';
+import { DatePickerComponent } from './picker-date.component';
+import { PickerGroupComponent } from './picker-group.component';
+import { PickerComponent } from './picker.component';
 import { PickerConfig } from './picker.config';
+import { PickerService } from './picker.service';
 
 @NgModule({
   imports: [CommonModule],

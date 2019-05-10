@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
+import { BaseService } from 'ngx-weui/core';
 import { ActionSheetComponent } from './actionsheet.component';
 import { ActionSheetConfig } from './actionsheet.config';
-import { BaseService } from '../utils/base.service';
 
 @Injectable()
 export class ActionSheetService extends BaseService {
@@ -14,7 +14,7 @@ export class ActionSheetService extends BaseService {
    * @param config 配置性（可选）
    * @returns 可订阅来获取结果
    */
-  show(menus: { text?: string; [key: string]: any }[], config: ActionSheetConfig = {}): Observable<any> {
+  show(menus: Array<{ text?: string; [key: string]: any }>, config: ActionSheetConfig = {}): Observable<any> {
     const componentRef = this.build(ActionSheetComponent);
 
     componentRef.instance.menus = menus;

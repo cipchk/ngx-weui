@@ -1,6 +1,6 @@
-import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { StepperComponent } from './stepper.component';
 
 @NgModule({

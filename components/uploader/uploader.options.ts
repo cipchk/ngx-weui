@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
 
-import { ParsedResponseHeaders } from './interface';
 import { FileItem } from './file-item.class';
 import { FileLikeObject } from './file-like-object.class';
+import { ParsedResponseHeaders } from './interface';
 
 // tslint:disable-next-line:interface-over-type-literal
 export type FilterFunction = {

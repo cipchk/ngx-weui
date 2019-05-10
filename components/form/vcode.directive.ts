@@ -1,4 +1,4 @@
-import { Directive, Input, ElementRef, OnDestroy, OnInit } from '@angular/core';
+import { Directive, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 
 /**
@@ -25,6 +25,7 @@ export class VCodeDirective implements OnInit, OnDestroy {
   /**
    * 倒计时模板，使用 `${num}` 表示当前秒数
    */
+  // tslint:disable-next-line: no-invalid-template-strings
   @Input('weui-tpl') tpl: string = '${num} 秒';
 
   /**

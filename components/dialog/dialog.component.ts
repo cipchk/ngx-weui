@@ -1,7 +1,7 @@
-import { Component, OnDestroy, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs';
 
-import { isAndroid } from '../utils/browser';
+import { isAndroid } from 'ngx-weui/core';
 import { DialogConfig } from './dialog.config';
 
 /**
@@ -22,13 +22,11 @@ export class DialogComponent implements OnDestroy {
    */
   @Input()
   set config(value: DialogConfig) {
-    const config = Object.assign(
-      {
-        backdrop: false,
-      },
-      this.DEF,
-      value,
-    );
+    const config = {
+      backdrop: false,
+      ...this.DEF,
+      ...value,
+    };
 
     if (config.skin === 'auto') {
       config.skin = isAndroid() ? 'android' : 'ios';
@@ -39,14 +37,14 @@ export class DialogComponent implements OnDestroy {
       if (config.cancel) {
         config.btns.push({
           text: config.cancel,
-          type: config.cancelType,
+          type: config.cancelType!,
           value: false,
         });
       }
       if (config.confirm) {
         config.btns.push({
           text: config.confirm,
-          type: config.confirmType,
+          type: config.confirmType!,
           value: true,
         });
       }
@@ -68,16 +66,14 @@ export class DialogComponent implements OnDestroy {
         }
       }
 
-      config.inputOptions = Object.assign([], config.inputOptions);
-      config.inputAttributes = Object.assign(
-        {
-          maxlength: null,
-          min: 0,
-          max: 100,
-          step: 1,
-        },
-        config.inputAttributes,
-      );
+      config.inputOptions = { ...[], ...config.inputOptions };
+      config.inputAttributes = {
+        maxlength: null,
+        min: 0,
+        max: 100,
+        step: 1,
+        ...config.inputAttributes,
+      };
       // 默认值
       let defaultValue = config.inputValue;
       if (config.input === 'checkbox' && !Array.isArray(config.inputValue)) {
@@ -159,6 +155,7 @@ export class DialogComponent implements OnDestroy {
   }
 
   _keyup(event: KeyboardEvent) {
+    // tslint:disable-next-line: deprecation
     if (event.keyCode === 13) {
       this._onSelect();
     }
@@ -195,8 +192,8 @@ export class DialogComponent implements OnDestroy {
 
   _onSelect(menu?: any) {
     // 未指定时查找 `value===true` 的按钮
-    if (!menu && this.config.btns.length > 0) {
-      menu = this.config.btns.find(w => w.value === true);
+    if (!menu && this.config.btns!.length > 0) {
+      menu = this.config.btns!.find(w => w.value === true);
     }
     const ret = menu;
     if (menu.value === true && this._config.type === 'prompt') {
@@ -211,7 +208,7 @@ export class DialogComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     if (this.observer && this.observer instanceof Subscription) {
-      (<Subscription>this.observer).unsubscribe();
+      (this.observer as Subscription).unsubscribe();
     }
   }
 }

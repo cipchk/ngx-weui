@@ -1,5 +1,5 @@
-import { Directive, Input, OnChanges, SimpleChanges, ElementRef, OnInit } from '@angular/core';
-import { add, remove } from '../utils/dom';
+import { Directive, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { add, remove } from 'ngx-weui/core';
 
 /**
  * 文本域字数统计

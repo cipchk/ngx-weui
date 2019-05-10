@@ -1,9 +1,9 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 
 import { ActionSheetComponent } from './actionsheet.component';
-import { ActionSheetService } from './actionsheet.service';
 import { ActionSheetConfig } from './actionsheet.config';
+import { ActionSheetService } from './actionsheet.service';
 
 @NgModule({
   imports: [CommonModule],

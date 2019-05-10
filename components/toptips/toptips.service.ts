@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { BaseService } from '../utils/base.service';
-import { ToptipsType, ToptipsComponent } from './toptips.component';
+import { BaseService } from 'ngx-weui/core';
+import { ToptipsComponent, ToptipsType } from './toptips.component';
 
 @Injectable()
 export class ToptipsService extends BaseService {

@@ -1,18 +1,18 @@
 import {
-  Component,
   AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChildren,
+  ElementRef,
+  EventEmitter,
+  Input,
   OnChanges,
   OnDestroy,
-  SimpleChanges,
-  ChangeDetectionStrategy,
-  QueryList,
-  ContentChildren,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectorRef,
-  ElementRef,
   OnInit,
+  Output,
+  QueryList,
+  SimpleChanges,
 } from '@angular/core';
 import { SidebarComponent } from './sidebar.component';
 
@@ -38,6 +38,10 @@ export class SidebarContainerComponent implements AfterContentInit, OnChanges, O
 
   private orgOverflowX = '';
 
+  private get body(): HTMLBodyElement {
+    return document.querySelector('body')!;
+  }
+
   constructor(private _ref: ChangeDetectorRef, private _el: ElementRef) {}
 
   ngAfterContentInit(): void {
@@ -57,14 +61,13 @@ export class SidebarContainerComponent implements AfterContentInit, OnChanges, O
   }
 
   ngOnInit() {
-    const $body = document.querySelector('body');
-    this.orgOverflowX = $body.style.overflowX;
-    $body.style.overflowX = 'hidden';
+    this.orgOverflowX = this.body.style.overflowX!;
+    this.body.style.overflowX = 'hidden';
   }
 
   ngOnDestroy(): void {
     this._unsubscribe();
-    document.querySelector('body').style.overflowX = this.orgOverflowX;
+    this.body.style.overflowX = this.orgOverflowX;
   }
 
   _getStyles(): CSSStyleDeclaration {
@@ -75,14 +78,14 @@ export class SidebarContainerComponent implements AfterContentInit, OnChanges, O
         }
 
         if (sidebar.mode === 'slide') {
-          let transformStyle = null;
+          let transformStyle: string | null = null;
 
           if (sidebar.status) {
-            const isLeftOrTop: boolean = sidebar.position === 'left' || sidebar.position === 'top';
-            const isLeftOrRight: boolean = sidebar.position === 'left' || sidebar.position === 'right';
+            const isLeftOrTop = sidebar.position === 'left' || sidebar.position === 'top';
+            const isLeftOrRight = sidebar.position === 'left' || sidebar.position === 'right';
 
-            const transformDir: string = isLeftOrRight ? 'X' : 'Y';
-            const transformAmt: string = `${isLeftOrTop ? '' : '-'}${isLeftOrRight ? sidebar._width : sidebar._height}`;
+            const transformDir = isLeftOrRight ? 'X' : 'Y';
+            const transformAmt = `${isLeftOrTop ? '' : '-'}${isLeftOrRight ? sidebar._width : sidebar._height}`;
 
             transformStyle = `translate${transformDir}(${transformAmt}px)`;
           }
@@ -160,6 +163,7 @@ export class SidebarContainerComponent implements AfterContentInit, OnChanges, O
       let hasOpen = false;
 
       const _sidebars = this._sidebars.toArray();
+      // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < _sidebars.length; i++) {
         const sidebar: SidebarComponent = _sidebars[i];
 

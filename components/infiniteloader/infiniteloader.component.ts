@@ -1,15 +1,15 @@
 import {
   Component,
+  ElementRef,
+  EventEmitter,
   Input,
   OnChanges,
-  SimpleChanges,
-  EventEmitter,
-  Output,
-  ElementRef,
   OnDestroy,
   OnInit,
+  Output,
+  SimpleChanges,
 } from '@angular/core';
-import { Subscription, fromEvent } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 
 import { InfiniteLoaderConfig } from './infiniteloader.config';
 
@@ -72,7 +72,7 @@ export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
     const target = this.scrollEvent.target;
     const scrollPercent = Math.floor(((target.scrollTop + target.clientHeight) / target.scrollHeight) * 100);
 
-    if (scrollPercent > this.config.percent) {
+    if (scrollPercent > this.config.percent!) {
       this._loading = true;
       this.loadmore.emit(this);
     }
@@ -107,6 +107,6 @@ export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   private parseConfig() {
-    this.config = Object.assign({}, this.DEF, this.config);
+    this.config = { ...this.DEF, ...this.config };
   }
 }

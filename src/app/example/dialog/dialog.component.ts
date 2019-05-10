@@ -1,7 +1,7 @@
-import { Component, ViewEncapsulation, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
 
-import { SkinType, InputType } from 'ngx-weui';
-import { DialogService, DialogConfig, DialogComponent } from 'ngx-weui/dialog';
+import { InputType, SkinType } from 'ngx-weui';
+import { DialogComponent, DialogConfig, DialogService } from 'ngx-weui/dialog';
 import { ToastService } from 'ngx-weui/toast';
 
 @Component({
@@ -15,7 +15,7 @@ export class DemoDialogComponent implements OnDestroy {
   @ViewChild('android') androidAS: DialogComponent;
   @ViewChild('auto') autoAS: DialogComponent;
 
-  private DEFCONFIG: DialogConfig = <DialogConfig>{
+  private DEFCONFIG: DialogConfig = {
     title: '弹窗标题',
     content: '弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内',
     cancel: '辅助操作',
@@ -34,19 +34,22 @@ export class DemoDialogComponent implements OnDestroy {
       { text: '多乐士', value: 'donless' },
       { text: '处男', value: 'first' },
     ],
-  };
+  } as DialogConfig;
   config: DialogConfig = {};
 
   constructor(private srv: DialogService, private toastService: ToastService) {}
 
   onShow(type: SkinType, style: 1 | 2 | 3) {
-    this.config = Object.assign({}, this.DEFCONFIG, <DialogConfig>{
-      skin: type,
-      cancel: null,
-      confirm: null,
-      btns: null,
-      content: '弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内',
-    });
+    this.config = {
+      ...this.DEFCONFIG,
+      ...({
+        skin: type,
+        cancel: null,
+        confirm: null,
+        btns: null,
+        content: '弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内',
+      } as DialogConfig),
+    } as DialogConfig;
     switch (style) {
       case 1:
         this.config.cancel = '辅助操作';
@@ -64,7 +67,7 @@ export class DemoDialogComponent implements OnDestroy {
         break;
     }
     setTimeout(() => {
-      (<DialogComponent>this[`${type}AS`]).show().subscribe((res: any) => {
+      (this[`${type}AS`] as DialogComponent).show().subscribe((res: any) => {
         console.log('type', res);
       });
     }, 10);
@@ -72,11 +75,14 @@ export class DemoDialogComponent implements OnDestroy {
   }
 
   onShowBySrv(type: SkinType, backdrop: boolean = true) {
-    this.config = Object.assign({}, this.DEFCONFIG, <DialogConfig>{
-      skin: type,
-      backdrop: backdrop,
-      content: '弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内',
-    });
+    this.config = {
+      ...this.DEFCONFIG,
+      ...({
+        skin: type,
+        backdrop,
+        content: '弹窗内容，告知当前状态、信息和解决方法，描述文字尽量控制在三行内',
+      } as DialogConfig),
+    };
     this.srv.show(this.config).subscribe((res: any) => {
       console.log(res);
     });
@@ -84,12 +90,15 @@ export class DemoDialogComponent implements OnDestroy {
   }
 
   onShowOfHtml() {
-    this.config = Object.assign({}, this.DEFCONFIG, <DialogConfig>{
-      content: `
+    this.config = {
+      ...this.DEFCONFIG,
+      ...({
+        content: `
                 <p>这是一段HTML<strong>加粗</strong></p>
                 <p>这是一段HTML<strong>加粗</strong></p>
             `,
-    });
+      } as DialogConfig),
+    };
     this.srv.show(this.config).subscribe((res: any) => {
       console.log(res);
     });
@@ -99,23 +108,26 @@ export class DemoDialogComponent implements OnDestroy {
   promptValue: any;
   promptTypes: string[] = ['text', 'email', 'url', 'range', 'textarea', 'select', 'radio', 'checkbox'];
   onShowPrompt(inputType: InputType, useSrv: boolean = false) {
-    const cog = Object.assign({}, this.DEFCONFIG, <DialogConfig>{
-      skin: 'auto',
-      type: 'prompt',
-      confirm: '确认',
-      cancel: '取消',
-      input: inputType,
-      inputValue: undefined,
-      inputRegex: null,
-    });
+    const cog = {
+      ...this.DEFCONFIG,
+      ...({
+        skin: 'auto',
+        type: 'prompt',
+        confirm: '确认',
+        cancel: '取消',
+        input: inputType,
+        inputValue: undefined,
+        inputRegex: null,
+      } as DialogConfig),
+    } as DialogConfig;
     if (inputType === 'range') {
       cog.inputValue = 10;
     }
     if (inputType === 'select') {
-      cog.inputValue = cog.inputOptions[0];
+      cog.inputValue = cog.inputOptions![0];
     }
     if (inputType === 'checkbox') {
-      cog.inputValue = cog.inputOptions.slice(1, 3);
+      cog.inputValue = cog.inputOptions!.slice(1, 3);
     }
     if (useSrv) {
       setTimeout(() => {

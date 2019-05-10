@@ -1,13 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
+import { fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
-import { ChartG2Module, ChartG2Directive } from '../chart-g2';
+import { ChartG2Directive, ChartG2Module } from '../chart-g2';
 
 describe('Component: ChartG2', () => {
   let fixture: ComponentFixture<TestChartG2Component>;
   let context: TestChartG2Component;
-  let el: HTMLElement;
 
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
@@ -16,7 +15,6 @@ describe('Component: ChartG2', () => {
     });
     fixture = TestBed.createComponent(TestChartG2Component);
     context = fixture.componentInstance;
-    el = fixture.nativeElement;
     fixture.detectChanges();
     tick();
   }));

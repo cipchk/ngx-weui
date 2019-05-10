@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { inject, TestBed, ComponentFixture } from '@angular/core/testing';
+import { inject, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoaderService } from '../utils/loader.service';
+import { LoaderService } from 'ngx-weui/core';
 import { JWeiXinModule } from './jweixin.module';
 import { JWeiXinService } from './jweixin.service';
 
@@ -32,7 +32,7 @@ describe('jweixin: JWeiXinService', () => {
     service = loader;
   }));
 
-  it('#get', (done: () => void) => {
+  it('#get', done => {
     service.get().then(status => {
       expect(status).toBe(true);
       done();

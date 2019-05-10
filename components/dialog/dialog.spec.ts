@@ -1,13 +1,13 @@
-import { Component, ViewChild, DebugElement } from '@angular/core';
+import { Component, DebugElement, ViewChild } from '@angular/core';
+import { fakeAsync, inject, tick, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect, inject } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { DialogModule, DialogComponent, DialogConfig, DialogService } from '../dialog';
-import { isAndroid } from '../utils/browser';
+import { isAndroid } from 'ngx-weui/core';
+import { DialogComponent, DialogConfig, DialogModule, DialogService } from '../dialog';
 
-const CONFIG: DialogConfig = <DialogConfig>{
+const CONFIG: DialogConfig = {
   title: 'title',
   content: 'content',
   skin: 'ios',
@@ -16,7 +16,7 @@ const CONFIG: DialogConfig = <DialogConfig>{
   confirm: 'Confirm',
   confirmType: 'primary',
   backdrop: false,
-};
+} as DialogConfig;
 
 const BTNS: any[] = [
   { text: '否', type: 'default', value: 1 },
@@ -25,11 +25,11 @@ const BTNS: any[] = [
 ];
 
 function getTitle(nativeEl: HTMLElement): Element {
-  return nativeEl.querySelector('.weui-dialog__title');
+  return nativeEl.querySelector('.weui-dialog__title')!;
 }
 
 function getContent(nativeEl: HTMLElement): Element {
-  return nativeEl.querySelector('.weui-dialog__bd');
+  return nativeEl.querySelector('.weui-dialog__bd')!;
 }
 
 function getActions(nativeEl: HTMLElement): NodeListOf<Element> {
@@ -37,7 +37,7 @@ function getActions(nativeEl: HTMLElement): NodeListOf<Element> {
 }
 
 function getCog(cog: any) {
-  return Object.assign({}, CONFIG, cog);
+  return { ...CONFIG, ...cog };
 }
 
 describe('Component: Dialog', () => {
@@ -71,13 +71,13 @@ describe('Component: Dialog', () => {
     it('should init', () => {
       context.dialog.show();
       fixture.detectChanges();
-      expect(getTitle(el).textContent).toBe(CONFIG.title);
-      expect(getContent(el).textContent).toBe(CONFIG.content);
+      expect(getTitle(el).textContent).toBe(CONFIG.title!);
+      expect(getContent(el).textContent).toBe(CONFIG.content!);
       expect(getActions(el).length).toBe(2);
     });
 
     it('should auto style', () => {
-      context.config = Object.assign({}, context.config, { skin: 'auto' });
+      context.config = { ...context.config, skin: 'auto' };
       context.dialog.show();
       fixture.detectChanges();
       if (isAndroid()) {
@@ -90,13 +90,13 @@ describe('Component: Dialog', () => {
     it('should be opened set dialog title', () => {
       context.dialog.show();
       fixture.detectChanges();
-      expect(getTitle(el).textContent).toBe(CONFIG.title);
+      expect(getTitle(el).textContent).toBe(CONFIG.title!);
     });
 
     it('should be opened set dialog content', () => {
       context.dialog.show();
       fixture.detectChanges();
-      expect(getContent(el).textContent).toBe(CONFIG.content);
+      expect(getContent(el).textContent).toBe(CONFIG.content!);
     });
 
     it('should be opened set dialog android style', () => {
@@ -122,25 +122,25 @@ describe('Component: Dialog', () => {
       expect(dl.query(By.css('.weui-dialog__btn_primary'))).not.toBeNull();
     });
 
-    it('should close a dialog and get back a value [false] result', (done: () => void) => {
+    it('should close a dialog and get back a value [false] result', done => {
       context.dialog.show().subscribe(res => {
         expect(res.value).toBeFalsy();
         done();
       });
       fixture.detectChanges();
-      (<any>getActions(el)[0]).click();
+      (getActions(el)[0] as any).click();
     });
 
-    it('should close a dialog and get back a value [true] result', (done: () => void) => {
+    it('should close a dialog and get back a value [true] result', done => {
       context.dialog.show().subscribe(res => {
         expect(res.value).toBeTruthy();
         done();
       });
       fixture.detectChanges();
-      (<any>getActions(el)[1]).click();
+      (getActions(el)[1] as any).click();
     });
 
-    it('should close a dialog by click mask', (done: () => void) => {
+    it('should close a dialog by click mask', done => {
       context.config = getCog({ backdrop: true });
       context.dialog.show();
       fixture.detectChanges();
@@ -152,7 +152,7 @@ describe('Component: Dialog', () => {
     });
 
     it('should click backdrop not-allow closing', () => {
-      context.config = Object.assign(context.config, { backdrop: false });
+      context.config = { ...context.config, backdrop: false };
       context.dialog.show().subscribe();
       fixture.detectChanges();
       el.querySelector('.weui-mask').click();
@@ -208,8 +208,8 @@ describe('Component: Dialog', () => {
       { input: 'url', inputValue: 'https://cipchk.github.io/ngx-weui/' },
     ];
     for (const item of TYPES) {
-      it(`should be return ${item.input}`, (done: () => void) => {
-        context.config = Object.assign({}, CONFIG, item, { type: 'prompt' });
+      it(`should be return ${item.input}`, done => {
+        context.config = { ...CONFIG, ...item, type: 'prompt' };
         context.dialog.show().subscribe(res => {
           if (Array.isArray(res.result)) res.result = res.result[0];
           expect(res.result).toBe(item.result || item.inputValue);
@@ -222,24 +222,26 @@ describe('Component: Dialog', () => {
           fixture.detectChanges();
         }
         expect(dl.queryAll(By.css('.weui-dialog__prompt')).length).toBe(1);
-        (<any>getActions(el)[1]).click();
+        (getActions(el)[1] as any).click();
       });
     }
 
     it('should be regex error in text', () => {
       const ERROR = '格式不正确';
-      context.config = Object.assign({}, CONFIG, TYPES[0], {
+      context.config = {
+        ...CONFIG,
+        ...TYPES[0],
         type: 'prompt',
         inputRequired: true,
         inputValue: '123',
         inputRegex: /^[a-z]+$/,
         inputError: ERROR,
-      });
+      };
       console.log(context.config);
       context.dialog.show().subscribe();
       fixture.detectChanges();
       expect(dl.queryAll(By.css('.weui-dialog__prompt')).length).toBe(1);
-      (<any>getActions(el)[1]).click();
+      (getActions(el)[1] as any).click();
       fixture.detectChanges();
       const errorEl = dl.queryAll(By.css('.weui-dialog__error'));
       expect(errorEl.length).toBe(1);
@@ -248,17 +250,19 @@ describe('Component: Dialog', () => {
 
     it('should be required in checkbox', () => {
       const ERROR = '必填';
-      context.config = Object.assign({}, CONFIG, TYPES[0], {
+      context.config = {
+        ...CONFIG,
+        ...TYPES[0],
         type: 'prompt',
         inputRequired: true,
         inputValue: undefined,
         inputError: ERROR,
-      });
+      };
       console.log(context.config);
       context.dialog.show().subscribe();
       fixture.detectChanges();
       expect(dl.queryAll(By.css('.weui-dialog__prompt')).length).toBe(1);
-      (<any>getActions(el)[1]).click();
+      (getActions(el)[1] as any).click();
       fixture.detectChanges();
       const errorEl = dl.queryAll(By.css('.weui-dialog__error'));
       expect(errorEl.length).toBe(1);
@@ -267,18 +271,14 @@ describe('Component: Dialog', () => {
 
     it('should be auto focus and enter return', fakeAsync(() => {
       const VALUE = 'cipchk@qq.com';
-      context.config = Object.assign({}, CONFIG, {
-        type: 'prompt',
-        input: 'email',
-        inputValue: VALUE,
-      });
+      context.config = { ...CONFIG, type: 'prompt', input: 'email', inputValue: VALUE };
       context.dialog.show().subscribe(res => {
         expect(res.result).toBe(VALUE);
       });
       fixture.detectChanges();
       tick(300);
       // spy
-      context.dialog._keyup(<any>{ keyCode: 13 });
+      context.dialog._keyup({ keyCode: 13 } as any);
       fixture.detectChanges();
     }));
   });
@@ -286,8 +286,6 @@ describe('Component: Dialog', () => {
   describe('[service]', () => {
     let service: DialogService;
     let fixture: any;
-    let context: TestDialogServiceComponent;
-    let dl: DebugElement;
     let el: any;
 
     beforeEach(fakeAsync(() => {
@@ -298,8 +296,6 @@ describe('Component: Dialog', () => {
       }).createComponent(TestDialogServiceComponent);
 
       fixture = TestBed.createComponent(TestDialogServiceComponent);
-      context = fixture.componentInstance;
-      dl = fixture.debugElement;
       el = fixture.nativeElement;
       fixture.detectChanges();
     }));
@@ -308,15 +304,15 @@ describe('Component: Dialog', () => {
       service = _s;
     }));
 
-    it('should close a dialog and get back a value [true] result', (done: () => void) => {
-      service.show(Object.assign({}, CONFIG)).subscribe(res => {
+    it('should close a dialog and get back a value [true] result', done => {
+      service.show({ ...CONFIG }).subscribe(res => {
         fixture.detectChanges();
         expect(res.value).toBeTruthy();
         done();
       });
 
       fixture.detectChanges();
-      (<any>getActions(el.parentElement)[1]).click();
+      (getActions(el.parentElement)[1] as any).click();
     });
   });
 });
@@ -335,5 +331,5 @@ class TestDialogServiceComponent {}
 class TestDialogComponent {
   @ViewChild(DialogComponent) dialog: DialogComponent;
 
-  config: DialogConfig = Object.assign({}, CONFIG);
+  config: DialogConfig = { ...CONFIG };
 }

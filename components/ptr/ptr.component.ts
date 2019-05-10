@@ -1,13 +1,13 @@
 import {
   Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
   Input,
   OnChanges,
-  SimpleChanges,
-  EventEmitter,
-  Output,
-  HostListener,
-  ElementRef,
   OnInit,
+  Output,
+  SimpleChanges,
 } from '@angular/core';
 import { PTRConfig } from './ptr.config';
 
@@ -104,7 +104,7 @@ export class PTRComponent implements OnInit, OnChanges {
 
     let _pullPercent = this._pullPercent;
     let loading = false;
-    if (_pullPercent >= this.config.treshold) {
+    if (_pullPercent >= this.config.treshold!) {
       loading = true;
     } else {
       _pullPercent = 0;
@@ -130,6 +130,6 @@ export class PTRComponent implements OnInit, OnChanges {
   }
 
   private parseConfig() {
-    this.config = Object.assign({}, this.DEF, this.config);
+    this.config = { ...this.DEF, ...this.config };
   }
 }

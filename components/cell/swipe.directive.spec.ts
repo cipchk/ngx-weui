@@ -1,9 +1,9 @@
 import { Component, DebugElement } from '@angular/core';
+import { fakeAsync, tick, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect } from '@angular/core/testing';
 
-import { CellModule, SwipeDirective } from '../cell';
 import { By } from '@angular/platform-browser';
+import { CellModule, SwipeDirective } from '../cell';
 
 const WIDTH = 68;
 const html = `
@@ -47,9 +47,7 @@ function open(directive: SwipeDirective, el: any, width: number, shouldOpen: boo
 
 let fixture: ComponentFixture<TestSwipeComponent>;
 describe('Directive: Swipe', () => {
-  let context: any;
   let el: any;
-  let dl: DebugElement;
   let directives: SwipeDirective[];
 
   beforeEach(fakeAsync(() => {
@@ -62,12 +60,10 @@ describe('Directive: Swipe', () => {
       set: { template: html },
     });
     fixture = TestBed.createComponent(TestSwipeComponent);
-    context = fixture.componentInstance;
     el = fixture.nativeElement;
-    dl = fixture.debugElement;
 
     const list = fixture.debugElement.queryAll(By.directive(SwipeDirective));
-    directives = list.map((de: DebugElement) => de.injector.get(SwipeDirective) as SwipeDirective);
+    directives = list.map((de: DebugElement) => de.injector.get<SwipeDirective>(SwipeDirective));
 
     fixture.detectChanges();
     tick();
@@ -122,7 +118,7 @@ describe('Directive: Swipe(not body)', () => {
     });
     fixture = TestBed.createComponent(TestSwipeComponent);
     const list = fixture.debugElement.queryAll(By.directive(SwipeDirective));
-    directive = list.map((de: DebugElement) => de.injector.get(SwipeDirective) as SwipeDirective);
+    directive = list.map((de: DebugElement) => de.injector.get<SwipeDirective>(SwipeDirective));
 
     fixture.detectChanges();
     tick();

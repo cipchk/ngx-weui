@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, HostListener, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { PickerData } from './data';
 
 declare const window: any;
@@ -100,7 +100,7 @@ export class PickerGroupComponent implements OnChanges {
     } else {
       this.stop(0);
     }
-    this.startY = null;
+    this.startY = 0;
   }
 
   private stop(diff: number): void {

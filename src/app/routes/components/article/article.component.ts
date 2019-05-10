@@ -1,8 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MenuService } from '../../../core/menu.service';
-import { META } from '../meta';
 import { EXAMPLE } from '../examples';
+import { META } from '../meta';
 
 @Component({
   selector: 'app-article',
@@ -22,27 +22,23 @@ export class ArticleComponent implements OnInit {
 
   private genData(id: string) {
     const menu = { ...this.menuService.getItems('components').find(w => w.name.toLowerCase() === id) };
-    this.menu = Object.assign(
-      {
-        id: menu.example || menu.name.toLowerCase(),
-      },
-      menu,
-    );
+    this.menu = {
+      id: menu.example || menu.name.toLowerCase(),
+      ...menu,
+    };
     if (!this.menu.id) {
       this.router.navigateByUrl('/');
       return;
     }
-    this.item = Object.assign(
-      {
-        name: this.menu.id,
-        data: {},
-        meta: {
-          title: this.menu.name,
-          subtitle: '',
-        },
+    this.item = {
+      name: this.menu.id,
+      data: {},
+      meta: {
+        title: this.menu.name,
+        subtitle: '',
       },
-      META.find(w => w.name === (this.menu.api || id)),
-    );
+      ...META.find(w => w.name === (this.menu.api || id)),
+    };
 
     // examples
     const example = EXAMPLE[menu.example || this.menu.id];
@@ -51,7 +47,7 @@ export class ArticleComponent implements OnInit {
   }
 
   constructor(private router: Router, route: ActivatedRoute, private menuService: MenuService) {
-    route.params.subscribe(params => this.genData('' + params['id']));
+    route.params.subscribe(params => this.genData('' + params.id));
   }
 
   ngOnInit(): void {

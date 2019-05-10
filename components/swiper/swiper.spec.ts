@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
+import { fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
-import { SwiperModule, SwiperComponent } from '../swiper';
+import { SwiperComponent, SwiperModule } from '../swiper';
 
-const correct_html: string = `
+const correct_html = `
     <weui-swiper [options]="options">
         <div class="swiper-container">
             <div class="swiper-wrapper">
@@ -15,7 +15,7 @@ const correct_html: string = `
             <div class="swiper-pagination"></div>
         </div>
     </weui-swiper>`;
-const incorrect_html: string = `
+const incorrect_html = `
     <weui-swiper [options]="options">
         <div class="swiper-container123">
             <div class="swiper-wrapper">
@@ -57,7 +57,7 @@ describe('Component: Swiper', () => {
         direction: 'vertical',
       };
       fixture.detectChanges();
-      expect(el.querySelector('.swiper-container').classList).toContain('swiper-container-vertical');
+      expect(el.querySelector('.swiper-container')!.classList).toContain('swiper-container-vertical');
     });
   });
 

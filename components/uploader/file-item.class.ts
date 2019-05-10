@@ -1,9 +1,7 @@
 import { FileLikeObject } from './file-like-object.class';
-import { Uploader } from './uploader.class';
 import { ParsedResponseHeaders } from './interface';
+import { Uploader } from './uploader.class';
 import { UploaderOptions } from './uploader.options';
-
-declare const window: any;
 
 /**
  * 文件对象
@@ -82,7 +80,7 @@ export class FileItem {
   }
 
   setOptions(options: UploaderOptions) {
-    this.options = Object.assign({}, this.uploader.options, options);
+    this.options = { ...this.uploader.options, ...options };
   }
 
   /**
@@ -141,7 +139,7 @@ export class FileItem {
     this.isCancel = false;
     this.isError = false;
     this.progress = 100;
-    this.index = void 0;
+    this.index = 0;
 
     if (this.options.onUploadSuccess) this.options.onUploadSuccess(this, response, status, headers);
   }
@@ -154,7 +152,7 @@ export class FileItem {
     this.isCancel = false;
     this.isError = true;
     this.progress = 0;
-    this.index = void 0;
+    this.index = 0;
 
     if (this.options.onUploadError) this.options.onUploadError(this, response, status, headers);
   }
@@ -167,7 +165,7 @@ export class FileItem {
     if (this.options.onUploadComplete) this.options.onUploadComplete(this, response, status, headers);
   }
 
-  _onCancel(response: string, status: number, headers: ParsedResponseHeaders): any {
+  _onCancel(): any {
     this.isReady = false;
     this.isUploading = false;
     this.isUploaded = false;
@@ -175,7 +173,7 @@ export class FileItem {
     this.isCancel = true;
     this.isError = false;
     this.progress = 0;
-    this.index = void 0;
+    this.index = 0;
 
     if (this.options.onUploadCancel) this.options.onUploadCancel(this);
   }

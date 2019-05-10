@@ -1,6 +1,6 @@
-import { Component, Input, Output, EventEmitter, OnChanges } from '@angular/core';
-import { PaginationMode } from './pagination.type';
+import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
 import { PaginationConfig } from './pagination.config';
+import { PaginationMode } from './pagination.type';
 
 @Component({
   selector: 'weui-pagination',

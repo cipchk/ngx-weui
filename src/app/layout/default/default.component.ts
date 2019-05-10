@@ -1,5 +1,5 @@
-import { Router, ActivatedRoute, NavigationEnd, RouteConfigLoadStart } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router, RouteConfigLoadStart } from '@angular/router';
 
 import { MenuService } from '../../core/menu.service';
 
@@ -14,7 +14,7 @@ export class AppLayoutComponent implements OnInit {
   locale: string = 'en-US';
   isFetching = false;
 
-  constructor(public menuService: MenuService, private route: ActivatedRoute, private router: Router) {}
+  constructor(public menuService: MenuService, private router: Router) {}
 
   ngOnInit() {
     if (typeof Storage !== 'undefined') {

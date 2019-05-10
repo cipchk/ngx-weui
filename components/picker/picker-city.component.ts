@@ -1,4 +1,4 @@
-import { Component, Input, Output, forwardRef, EventEmitter, OnDestroy, ViewChild } from '@angular/core';
+import { forwardRef, Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PickerOptions } from './options';
 import { PickerComponent } from './picker.component';
@@ -34,7 +34,7 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
   @ViewChild(PickerComponent) _pickerInstance: PickerComponent;
 
   _value: string;
-  _groups: any[] = [];
+  _groups: any[] | null = [];
   _selected: number[] = [];
   private _tmpData: any;
 

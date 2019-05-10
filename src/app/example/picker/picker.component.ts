@@ -1,5 +1,5 @@
-import { Component, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { PickerData, PickerOptions, PickerService } from 'ngx-weui/picker';
+import { Component, OnDestroy, ViewEncapsulation } from '@angular/core';
+import { PickerService } from 'ngx-weui/picker';
 import { DATA } from './cn';
 
 @Component({
@@ -45,7 +45,7 @@ export class DemoPickerComponent implements OnDestroy {
 
   items: string[] = Array(6)
     .fill('')
-    .map((v: string, idx: number) => `Item${idx}`);
+    .map((_v: string, idx: number) => `Item${idx}`);
   itemGroup: any = [
     [
       {

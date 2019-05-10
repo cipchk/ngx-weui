@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { BaseService } from '../utils/base.service';
+import { BaseService } from 'ngx-weui/core';
 
-import { FORMAT_TYPE, DatePickerComponent, DatePickerType } from './picker-date.component';
 import { PickerData } from './data';
 import { PickerOptions } from './options';
-import { PickerComponent } from './picker.component';
 import { CityPickerComponent } from './picker-city.component';
+import { DatePickerComponent, DatePickerType, FORMAT_TYPE } from './picker-date.component';
+import { PickerComponent } from './picker.component';
 
 /**
  * 多列选择器Service，可直接通过Class构造选择器
@@ -24,14 +24,14 @@ export class PickerService extends BaseService {
    * @returns 务必订阅结果才会显示。
    */
   show(
-    data: PickerData[][] | String[],
+    data: PickerData[][] | string[],
     value?: any,
     defaultSelect?: number[],
     options?: PickerOptions,
   ): Observable<any> {
     const componentRef = this.build(PickerComponent);
     // 通过Service打开的强制设置为 `default` 以免出现 `input`
-    options = Object.assign({}, options, { type: 'default' });
+    options = { ...options, type: 'default' };
     componentRef.instance.options = options;
     if (defaultSelect) componentRef.instance.defaultSelect = defaultSelect;
     componentRef.instance.groups = data;
@@ -62,7 +62,7 @@ export class PickerService extends BaseService {
     const componentRef = this.build(CityPickerComponent);
     if (dataMap) componentRef.instance.dataMap = dataMap;
     // 通过Service打开的强制设置为 `default` 以免出现 `input`
-    options = Object.assign({}, options, { type: 'default' });
+    options = { ...options, type: 'default' };
     componentRef.instance.options = options;
     componentRef.instance.data = data;
     if (value) {
@@ -102,7 +102,7 @@ export class PickerService extends BaseService {
   ): Observable<any> {
     const componentRef = this.build(DatePickerComponent);
     // 通过Service打开的强制设置为 `default` 以免出现 `input`
-    options = Object.assign({}, options, { type: 'default' });
+    options = { ...options, type: 'default' };
     componentRef.instance.options = options;
     if (type) componentRef.instance.type = type;
     if (format) componentRef.instance.format = format;
@@ -119,7 +119,7 @@ export class PickerService extends BaseService {
       }, 100);
     });
     setTimeout(() => {
-      componentRef.instance.ngOnChanges(null);
+      componentRef.instance.ngOnChanges();
       componentRef.instance._triggerShow();
     }, 200);
     return componentRef.instance.change;

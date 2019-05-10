@@ -5,7 +5,7 @@ import { By } from '@angular/platform-browser';
 
 import { FormModule } from './form.module';
 
-const MAXLENGTH: number = 5;
+const MAXLENGTH = 5;
 
 describe('Directive: Textarea', () => {
   let fixture: ComponentFixture<TestInputComponent>;
@@ -41,7 +41,7 @@ describe('Directive: Textarea', () => {
     context.cn = 2;
     fixture.detectChanges();
     setValue('中国');
-    expect(counterEl.textContent.trim()).toBe(`4 / ${MAXLENGTH}`);
+    expect(counterEl!.textContent!.trim()).toBe(`4 / ${MAXLENGTH}`);
   });
 
   it('should 3 characters in chinese', () => {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BaseService } from '../utils/base.service';
+import { BaseService } from 'ngx-weui/core';
 import { ToastComponent } from './toast.component';
 
 @Injectable()

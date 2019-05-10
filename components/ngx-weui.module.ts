@@ -1,34 +1,34 @@
 import { NgModule } from '@angular/core';
 
-import { CellModule } from 'ngx-weui/cell';
-import { ButtonModule } from 'ngx-weui/button';
-import { FormModule } from 'ngx-weui/form';
-import { SliderModule } from 'ngx-weui/slider';
-import { UploaderModule } from 'ngx-weui/uploader';
+import { AccordionModule } from 'ngx-weui/accordion';
 import { ActionSheetModule } from 'ngx-weui/actionsheet';
+import { ButtonModule } from 'ngx-weui/button';
+import { CellModule } from 'ngx-weui/cell';
+import { ChartG2Module } from 'ngx-weui/chart-g2';
 import { DialogModule } from 'ngx-weui/dialog';
-import { LoadmoreModule } from 'ngx-weui/loadmore';
-import { ProgressModule } from 'ngx-weui/progress';
+import { FormModule } from 'ngx-weui/form';
 import { GalleryModule } from 'ngx-weui/gallery';
+import { InfiniteLoaderModule } from 'ngx-weui/infiniteloader';
+import { JWeiXinModule } from 'ngx-weui/jweixin';
+import { LoadmoreModule } from 'ngx-weui/loadmore';
+import { MaskModule } from 'ngx-weui/mask';
+import { PaginationModule } from 'ngx-weui/pagination';
 import { PickerModule } from 'ngx-weui/picker';
+import { PopupModule } from 'ngx-weui/popup';
+import { ProgressModule } from 'ngx-weui/progress';
+import { PTRModule } from 'ngx-weui/ptr';
+import { RatingModule } from 'ngx-weui/rating';
 import { SearchBarModule } from 'ngx-weui/searchbar';
+import { SidebarModule } from 'ngx-weui/sidebar';
+import { SliderModule } from 'ngx-weui/slider';
+import { StepperModule } from 'ngx-weui/stepper';
+import { SwiperModule } from 'ngx-weui/swiper';
 import { TabModule } from 'ngx-weui/tab';
 import { ToastModule } from 'ngx-weui/toast';
 import { ToptipsModule } from 'ngx-weui/toptips';
-import { PopupModule } from 'ngx-weui/popup';
-import { PTRModule } from 'ngx-weui/ptr';
-import { InfiniteLoaderModule } from 'ngx-weui/infiniteloader';
-import { SidebarModule } from 'ngx-weui/sidebar';
-import { SwiperModule } from 'ngx-weui/swiper';
-import { ChartG2Module } from 'ngx-weui/chart-g2';
-import { JWeiXinModule } from 'ngx-weui/jweixin';
-import { AccordionModule } from 'ngx-weui/accordion';
-import { MaskModule } from 'ngx-weui/mask';
-import { RatingModule } from 'ngx-weui/rating';
-import { StepperModule } from 'ngx-weui/stepper';
-import { PaginationModule } from 'ngx-weui/pagination';
+import { UploaderModule } from 'ngx-weui/uploader';
 
-export * from 'ngx-weui/utils';
+export * from 'ngx-weui/core';
 export * from 'ngx-weui/cell';
 export * from 'ngx-weui/button';
 export * from 'ngx-weui/form';
@@ -71,7 +71,6 @@ export * from 'ngx-weui/version';
     GalleryModule.forRoot(),
     PickerModule.forRoot(),
     SearchBarModule.forRoot(),
-    TabModule.forRoot(),
     ToastModule.forRoot(),
     ToptipsModule.forRoot(),
     PopupModule.forRoot(),

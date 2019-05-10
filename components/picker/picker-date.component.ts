@@ -1,17 +1,16 @@
+import { DatePipe } from '@angular/common';
 import {
-  Component,
-  Input,
-  Output,
   forwardRef,
+  Component,
   EventEmitter,
-  OnDestroy,
-  ViewChild,
+  Input,
   OnChanges,
-  SimpleChanges,
+  OnDestroy,
   OnInit,
+  Output,
+  ViewChild,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DatePipe } from '@angular/common';
 import { PickerOptions } from './options';
 import { PickerComponent } from './picker.component';
 
@@ -93,18 +92,16 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
    */
   @Input() type: DatePickerType = 'date';
 
-  private _format: any = Object.assign({}, FORMAT);
+  private _format: any = { ...FORMAT };
   /**
    * 日期格式化代码，实际是采用 DatePipe，所有代码内容和它一样
    */
   @Input()
   set format(v: FORMAT_TYPE) {
     if (typeof v === 'string') {
-      this._format = Object.assign(FORMAT, {
-        format: v,
-      });
+      this._format = { ...FORMAT, format: v };
     } else {
-      this._format = Object.assign(FORMAT, v);
+      this._format = { ...FORMAT, ...v };
     }
   }
 
@@ -136,41 +133,41 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
   }
 
   private genDateGroups() {
-    const year = this._value.getFullYear(),
-      month = this._value.getMonth() + 1,
-      day = this._value.getDate();
+    const year = this._value.getFullYear();
+    const month = this._value.getMonth() + 1;
+    const day = this._value.getDate();
 
     // year
-    let _selected = 0,
-      startYear = year - 10,
-      endYear = year + 10;
+    let _selected = 0;
+    let startYear = year - 10;
+    let endYear = year + 10;
     if (this.min) startYear = this.min.getFullYear();
     if (this.max) endYear = this.max.getFullYear();
     this._groups.push(
       Array(endYear - startYear + 1)
         .fill(0)
-        .map((v: number, idx: number) => {
-          const _v = startYear + idx;
-          if (_v === year) _selected = idx;
-          return { label: _v + this._format.yu, value: _v };
+        .map((_v: number, idx: number) => {
+          const val = startYear + idx;
+          if (val === year) _selected = idx;
+          return { label: val + this._format.yu, value: val };
         }),
     );
     this._selected.push(_selected);
 
     // month
     const cy = this._groups[0][_selected].value;
-    let startMonth = 1,
-      endMonth = 12;
+    let startMonth = 1;
+    let endMonth = 12;
     if (cy === startYear) startMonth = this.min.getMonth() + 1;
     if (cy === endYear) endMonth = this.max.getMonth() + 1;
     _selected = 0;
     this._groups.push(
       Array(endMonth - startMonth + 1)
         .fill(0)
-        .map((v: number, idx: number) => {
-          const _v = startMonth + idx;
-          if (_v === month) _selected = idx;
-          return { label: _v + this._format.Mu, value: _v };
+        .map((_v: number, idx: number) => {
+          const val = startMonth + idx;
+          if (val === month) _selected = idx;
+          return { label: val + this._format.Mu, value: val };
         }),
     );
     this._selected.push(_selected);
@@ -178,18 +175,18 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
     // day
     if (this.type !== 'date-ym') {
       const cm = this._groups[1][_selected].value;
-      let startDay = 1,
-        endDay = new Date(year, month, 0).getDate();
+      let startDay = 1;
+      let endDay = new Date(year, month, 0).getDate();
       if (cy === startYear && cm === startMonth) startDay = this.min.getDate();
       if (cy === endYear && cm === endMonth) endDay = this.max.getDate();
       _selected = 0;
       this._groups.push(
         Array(endDay - startDay + 1)
           .fill(0)
-          .map((v: number, idx: number) => {
-            const _v = startDay + idx;
-            if (_v === day) _selected = idx;
-            return { label: _v + this._format.du, value: _v };
+          .map((_v: number, idx: number) => {
+            const val = startDay + idx;
+            if (val === day) _selected = idx;
+            return { label: val + this._format.du, value: val };
           }),
       );
       this._selected.push(_selected);
@@ -197,17 +194,17 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
   }
 
   private genDateTimeGroups() {
-    const hours = this._value.getHours(),
-      minutes = this._value.getMinutes();
+    const hours = this._value.getHours();
+    const minutes = this._value.getMinutes();
     // hours
     let _selected = 0;
     this._groups.push(
       Array(24)
         .fill(0)
-        .map((v: number, idx: number) => {
-          const _v = idx;
-          if (_v === hours) _selected = idx;
-          return { label: _v + this._format.hu, value: _v };
+        .map((_v: number, idx: number) => {
+          const val = idx;
+          if (val === hours) _selected = idx;
+          return { label: val + this._format.hu, value: val };
         }),
     );
     this._selected.push(_selected);
@@ -217,10 +214,10 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
     this._groups.push(
       Array(60)
         .fill(0)
-        .map((v: number, idx: number) => {
-          const _v = idx;
-          if (_v === minutes) _selected = idx;
-          return { label: _v + this._format.mu, value: _v };
+        .map((_v: number, idx: number) => {
+          const val = idx;
+          if (val === minutes) _selected = idx;
+          return { label: val + this._format.mu, value: val };
         }),
     );
     this._selected.push(_selected);
@@ -257,11 +254,11 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
   }
 
   ngOnDestroy(): void {
-    this._groups = null;
+    this._groups.length = 0;
   }
 
   private getFormatDate(date: Date) {
-    let f: string = '';
+    let f = '';
     if (this._format && this._format.format) f = this._format.format;
     else {
       switch (this.type) {
@@ -315,7 +312,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
     this.genGroups();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.initFlag) this.genGroups();
   }
 
@@ -335,7 +332,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
   writeValue(value: Date): void {
     if (value) this.genGroups();
     this._value = value;
-    this._pickerInstance._text = value instanceof Date ? this.getFormatDate(value) : '';
+    this._pickerInstance._text = value instanceof Date ? this.getFormatDate(value)! : '';
   }
 
   private onChange: any = Function.prototype;

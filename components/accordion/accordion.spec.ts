@@ -1,8 +1,8 @@
-import { Component, DebugElement } from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AccordionModule } from './accordion.module';
 import { AccordionConfig } from './accordion.config';
+import { AccordionModule } from './accordion.module';
 
 const html = `
   <weui-accordion [collapsible]="collapsible" [activeFirst]="false">
@@ -45,15 +45,10 @@ function expectOpenPanels(nativeEl: HTMLElement, openPanelsDef: boolean[]): void
   }
 }
 
-function hasTitle(element: HTMLElement, str: string): boolean {
-  return element.textContent === str;
-}
-
 describe('Component: Accordion', () => {
   let fixture: ComponentFixture<TestAccordionComponent>;
   let context: TestAccordionComponent;
   let element: any;
-  let dl: DebugElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -66,7 +61,6 @@ describe('Component: Accordion', () => {
     fixture = TestBed.createComponent(TestAccordionComponent);
     context = fixture.componentInstance;
     element = fixture.nativeElement;
-    dl = fixture.debugElement;
     fixture.detectChanges();
   });
 
@@ -107,7 +101,6 @@ describe('Component: Accordion', () => {
 
 describe('Component: Accordion: Auto', () => {
   let fixture: ComponentFixture<TestAccordionComponent>;
-  let context: any;
   let element: any;
 
   beforeEach(() => {
@@ -119,7 +112,6 @@ describe('Component: Accordion: Auto', () => {
       set: { template: htmlAutoActiveFirst },
     });
     fixture = TestBed.createComponent(TestAccordionComponent);
-    context = fixture.componentInstance;
     element = fixture.nativeElement;
     fixture.detectChanges();
   });

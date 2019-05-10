@@ -1,13 +1,13 @@
 import {
-  Component,
   forwardRef,
-  OnDestroy,
-  OnChanges,
-  SimpleChanges,
-  Input,
+  Component,
   EventEmitter,
-  Output,
+  Input,
+  OnChanges,
+  OnDestroy,
   OnInit,
+  Output,
+  SimpleChanges,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PickerData } from './data';
@@ -46,18 +46,18 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnDestroy,
    * 支持string[]单列数组，单纯只是为了方便
    */
   @Input()
-  set groups(d: PickerData[][] | String[]) {
+  set groups(d: PickerData[][] | string[]) {
     if (!d) throw new Error('无效数据源');
     if (d.length > 0) {
       if (typeof d[0] === 'string') {
         d = [
-          (<string[]>d).map<PickerData>((v: string) => {
+          (d as string[]).map<PickerData>((v: string) => {
             return { label: v, value: v };
           }),
         ];
       }
     }
-    this._groups = <PickerData[][]>d;
+    this._groups = d as PickerData[][];
     this._selected = this._selected ? this._selected : Array(d.length).fill(0);
   }
 
@@ -108,18 +108,18 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnDestroy,
   }
 
   private parseOptions() {
-    this.options = Object.assign(
-      <PickerOptions>{
+    this.options = {
+      ...({
         type: 'form',
         cancel: '取消',
         confirm: '确定',
         backdrop: true,
         gruopCount: null,
         separator: ' ',
-      },
-      this.DEF,
-      this.options,
-    );
+      } as PickerOptions),
+      ...this.DEF,
+      ...this.options,
+    };
   }
 
   private getSelecteItem() {
@@ -131,8 +131,8 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnDestroy,
     return res;
   }
 
-  _setText(res: any[] = null) {
-    if (res === null) res = this.getSelecteItem();
+  _setText(res: any[] | null = null) {
+    if (res == null) res = this.getSelecteItem();
     if (res.length > 0) this._text = res.map((i: any) => i.label || i.value).join(this.options.separator);
 
     return this;
@@ -206,7 +206,7 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnDestroy,
     this.disabled = isDisabled;
   }
 
-  _onFocus($event: FocusEvent) {
+  _onFocus() {
     arguments[0].target.blur();
   }
 }

@@ -1,8 +1,8 @@
-import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { Component, DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UploaderModule, Uploader, UploaderFileDirective } from '../uploader';
 import { By } from '@angular/platform-browser';
+import { Uploader, UploaderFileDirective, UploaderModule } from '../uploader';
 
 const html = `<input type="file" accept="image/*" multiple [weui-uploader-file]="uploader">`;
 const URL = 'http://test.com';
@@ -24,7 +24,7 @@ describe('Component: Uploader', () => {
     fixture.detectChanges();
 
     directiveEl = fixture.debugElement.query(By.directive(UploaderFileDirective));
-    directive = directiveEl.injector.get(UploaderFileDirective) as UploaderFileDirective;
+    directive = directiveEl.injector.get<UploaderFileDirective>(UploaderFileDirective);
   });
 
   it('should be inited', () => {

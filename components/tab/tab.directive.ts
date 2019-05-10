@@ -1,4 +1,4 @@
-import { Directive, Input, HostBinding, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Directive, EventEmitter, HostBinding, Input, OnDestroy, Output } from '@angular/core';
 import { BarComponent } from './bar.component';
 
 @Directive({ selector: 'weui-tab, [weui-tab]' })

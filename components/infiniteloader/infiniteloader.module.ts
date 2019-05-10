@@ -1,5 +1,5 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { InfiniteLoaderComponent } from './infiniteloader.component';
 import { InfiniteLoaderConfig } from './infiniteloader.config';
 

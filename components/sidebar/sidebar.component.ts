@@ -1,21 +1,21 @@
+import { DOCUMENT } from '@angular/common';
 import {
+  ChangeDetectionStrategy,
   Component,
-  Input,
-  EventEmitter,
-  Output,
   ElementRef,
-  ViewChild,
-  SimpleChanges,
+  EventEmitter,
+  Inject,
+  Input,
   OnChanges,
   OnDestroy,
-  ChangeDetectionStrategy,
-  Inject,
+  Output,
   SimpleChange,
+  SimpleChanges,
+  ViewChild,
 } from '@angular/core';
-import { DOCUMENT } from '@angular/common';
+import { isIOS } from 'ngx-weui/core';
 import { Subscription } from 'rxjs';
-import { isIOS } from '../utils/browser';
-import { SidebarConfig, PositionType, ModeType } from './sidebar.config';
+import { ModeType, PositionType, SidebarConfig } from './sidebar.config';
 import { SidebarService } from './sidebar.service';
 
 /**
@@ -170,21 +170,18 @@ export class SidebarComponent implements OnChanges, OnDestroy {
   }
 
   _getStyle(): CSSStyleDeclaration {
-    let transformStyle: string = 'none';
+    let transformStyle = 'none';
     const marginStyle = {};
     const isSlideMode: boolean = this.mode === 'slide';
 
     if (!this.status || isSlideMode) {
       transformStyle = `translate${this.position === 'left' || this.position === 'right' ? 'X' : 'Y'}`;
       const isLeftOrTop: boolean = this.position === 'left' || this.position === 'top';
-      const translateAmt: string = `${isLeftOrTop ? '-' : ''}100%`;
+      const translateAmt = `${isLeftOrTop ? '-' : ''}100%`;
       transformStyle += `(${translateAmt})`;
     }
 
-    return Object.assign(marginStyle, {
-      webkitTransform: transformStyle,
-      transform: transformStyle,
-    }) as CSSStyleDeclaration;
+    return { ...marginStyle, webkitTransform: transformStyle, transform: transformStyle } as CSSStyleDeclaration;
   }
 
   private closeAnt() {

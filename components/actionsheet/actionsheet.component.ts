@@ -1,8 +1,8 @@
-import { Component, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { isAndroid } from '../utils/browser';
+import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import { isAndroid } from 'ngx-weui/core';
+import { Observable, Observer, Subscription } from 'rxjs';
 import { ActionSheetConfig } from './actionsheet.config';
-import { Observer, Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'weui-actionsheet',
@@ -28,7 +28,7 @@ export class ActionSheetComponent implements OnDestroy {
   /**
    * 菜单内容
    */
-  @Input() menus: { text?: string; [key: string]: any }[];
+  @Input() menus: Array<{ text?: string; [key: string]: any }>;
 
   /**
    * 关闭回调
@@ -53,14 +53,12 @@ export class ActionSheetComponent implements OnDestroy {
    * 显示，组件载入页面后并不会显示，显示调用 `show()` 并订阅结果。
    */
   show(): Observable<any> {
-    this.config = Object.assign(
-      {
-        backdrop: true,
-        skin: 'auto',
-      },
-      this.DEF,
-      this.config,
-    );
+    this.config = {
+      backdrop: true,
+      skin: 'auto',
+      ...this.DEF,
+      ...this.config,
+    };
     if (this.config.skin === 'auto') {
       this.config.skin = isAndroid() ? 'android' : 'ios';
     }
@@ -102,7 +100,7 @@ export class ActionSheetComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     if (this.observer && this.observer instanceof Subscription) {
-      (<Subscription>this.observer).unsubscribe();
+      (this.observer as Subscription).unsubscribe();
     }
   }
 }

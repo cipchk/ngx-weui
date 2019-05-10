@@ -1,4 +1,4 @@
-import { Component, Input, Inject, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, Input, OnDestroy, OnInit } from '@angular/core';
 import { AccordionComponent } from './accordion.component';
 
 @Component({

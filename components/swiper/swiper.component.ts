@@ -1,13 +1,13 @@
 import {
-  Component,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  OnDestroy,
-  ElementRef,
-  NgZone,
-  OnInit,
   AfterViewInit,
+  Component,
+  ElementRef,
+  Input,
+  NgZone,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
 } from '@angular/core';
 import { SwiperConfig } from './swiper.config';
 
@@ -33,7 +33,7 @@ export class SwiperComponent implements AfterViewInit, OnChanges, OnInit, OnDest
   swiper: any;
 
   private initOptions() {
-    this.options = Object.assign({}, this.DEF.options, this.options);
+    this.options = { ...this.DEF.options, ...this.options };
   }
 
   private containerEl: HTMLElement;
@@ -72,7 +72,7 @@ export class SwiperComponent implements AfterViewInit, OnChanges, OnInit, OnDest
   ngOnChanges(changes: SimpleChanges): void {
     if ('options' in changes) {
       this.initOptions();
-      if (!changes['options'].firstChange) {
+      if (!changes.options.firstChange) {
         this.init();
       }
     }

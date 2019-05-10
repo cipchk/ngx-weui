@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { LoaderService } from '../utils/loader.service';
+import { LoaderService } from 'ngx-weui/core';
 
 @Injectable()
 export class JWeiXinService {
@@ -11,7 +11,7 @@ export class JWeiXinService {
    * @param jweixinUrl 默认：//res.wx.qq.com/open/js/jweixin-1.2.0.js
    */
   get(jweixinUrl?: string): Promise<boolean> {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       this.load
         .loadScript(jweixinUrl || '//res.wx.qq.com/open/js/jweixin-1.2.0.js')
         .then(res => {

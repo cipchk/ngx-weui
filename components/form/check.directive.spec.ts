@@ -1,9 +1,9 @@
 import { Component, DebugElement } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect } from '@angular/core/testing';
+import { fakeAsync, tick, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { FormModule } from './form.module';
 import { ChecklistDirective } from './check.directive';
+import { FormModule } from './form.module';
 
 const DATALIST = ['A', 'B'];
 
@@ -74,6 +74,6 @@ describe('Directive: Checklist', () => {
 })
 class TestInputComponent {
   show: boolean = true;
-  list: string[] = Object.assign([], DATALIST);
+  list: string[] = { ...[], ...DATALIST };
   res: string[] = [];
 }

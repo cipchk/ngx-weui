@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { UploaderFileDirective } from './uploader.directive';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FileThumbDirective } from './file-thumb.directive';
 import { UploaderConfig } from './uploader.config';
+import { UploaderFileDirective } from './uploader.directive';
 
 @NgModule({
   imports: [CommonModule],

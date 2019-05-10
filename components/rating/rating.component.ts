@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, forwardRef, SimpleChanges, OnChanges } from '@angular/core';
+import { forwardRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { RatingConfig } from './rating.config';
 
@@ -29,27 +29,23 @@ export class RatingComponent implements ControlValueAccessor, OnChanges {
   constructor(private DEF: RatingConfig) {}
 
   _setConfig(cog: RatingConfig) {
-    const _c = Object.assign(
-      {
-        states: [],
-      },
-      this.DEF,
-      cog,
-    );
+    const _c = {
+      states: [],
+      ...this.DEF,
+      ...cog,
+    };
     this._class = _c.cls || '';
     const count = _c.states.length || _c.max;
     this._range = Array(count)
       .fill(0)
-      .map((v, i) => {
-        return Object.assign(
-          {
-            index: i,
-            on: _c.stateOn,
-            off: _c.stateOff,
-            title: _c.titles[i] || i + 1,
-          },
-          _c.states[i] || {},
-        );
+      .map((_v, i) => {
+        return {
+          index: i,
+          on: _c.stateOn,
+          off: _c.stateOff,
+          title: _c.titles![i] || i + 1,
+          ...(_c.states[i] || {}),
+        };
       });
   }
 
@@ -78,13 +74,14 @@ export class RatingComponent implements ControlValueAccessor, OnChanges {
   }
 
   private onChange: any = Function.prototype;
-  private onTouched: any = Function.prototype;
+  // private onTouched: any = Function.prototype;
 
-  public registerOnChange(fn: (_: any) => {}): void {
+  registerOnChange(fn: (_: any) => {}): void {
     this.onChange = fn;
   }
-  public registerOnTouched(fn: () => {}): void {
-    this.onTouched = fn;
+
+  registerOnTouched(_fn: () => {}): void {
+    // this.onTouched = fn;
   }
 
   setDisabledState(isDisabled: boolean): void {

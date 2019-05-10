@@ -1,4 +1,4 @@
-import { Component, Input, Output, ViewEncapsulation, EventEmitter, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 
 interface AccordionItem {
   disabled: boolean;

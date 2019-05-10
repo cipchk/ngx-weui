@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { CloseSidebarDirective } from './close.directive';
 import { SidebarContainerComponent } from './sidebar-container.component';
 import { SidebarComponent } from './sidebar.component';
-import { CloseSidebarDirective } from './close.directive';
-import { SidebarService } from './sidebar.service';
 import { SidebarConfig } from './sidebar.config';
+import { SidebarService } from './sidebar.service';
 
 @NgModule({
   imports: [CommonModule],

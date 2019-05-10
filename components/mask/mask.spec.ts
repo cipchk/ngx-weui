@@ -1,16 +1,15 @@
-import { By } from '@angular/platform-browser';
 import { Component, DebugElement, ViewChild } from '@angular/core';
+import { fakeAsync, tick, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
 
-import { MaskModule, MaskComponent } from '../mask';
+import { MaskComponent, MaskModule } from '../mask';
 
 const html = `<weui-mask [backdrop]="backdrop" (close)="close()"><weui-mask>`;
 
 describe('Component: Button', () => {
   let fixture: ComponentFixture<TestMaskComponent>;
   let context: TestMaskComponent;
-  let el: HTMLElement;
   let dl: DebugElement;
 
   beforeEach(fakeAsync(() => {
@@ -23,7 +22,6 @@ describe('Component: Button', () => {
     fixture = TestBed.createComponent(TestMaskComponent);
     context = fixture.componentInstance;
     spyOn(context, 'close');
-    el = fixture.nativeElement;
     dl = fixture.debugElement;
     fixture.detectChanges();
     tick();
@@ -49,7 +47,6 @@ describe('Component: Button', () => {
     context.backdrop = false;
     fixture.detectChanges();
     tick(10);
-    const maskEl = dl.queryAll(By.css('.weui-mask'))[0];
     context.mask.show().subscribe();
     fixture.detectChanges();
     tick(10);

@@ -1,6 +1,6 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { ModuleWithProviders, NgModule } from '@angular/core';
+import { LoaderService } from 'ngx-weui/core';
 import { JWeiXinService } from './jweixin.service';
-import { LoaderService } from '../utils/loader.service';
 
 @NgModule({
   providers: [JWeiXinService, LoaderService],

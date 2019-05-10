@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
 import { RatingComponent } from './rating.component';
-import { RatingModule } from './rating.module';
 import { RatingConfig } from './rating.config';
+import { RatingModule } from './rating.module';
 
 describe('Component: Rating', () => {
   describe('Init', () => {
@@ -17,7 +17,7 @@ describe('Component: Rating', () => {
         imports: [RatingModule.forRoot()],
       });
       fixture = TestBed.createComponent(RatingComponent);
-      fixture.componentInstance._setConfig(null);
+      fixture.componentInstance._setConfig(null!);
       context = fixture.debugElement.componentInstance;
 
       el = fixture.nativeElement;

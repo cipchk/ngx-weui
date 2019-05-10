@@ -1,8 +1,8 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ModuleWithProviders, NgModule } from '@angular/core';
 import { ToastComponent } from './toast.component';
-import { ToastService } from './toast.service';
 import { ToastConfig } from './toast.config';
+import { ToastService } from './toast.service';
 
 @NgModule({
   imports: [CommonModule],

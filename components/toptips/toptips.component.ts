@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 export type ToptipsType = 'default' | 'warn' | 'info' | 'primary' | 'success';
 

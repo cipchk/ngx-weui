@@ -1,22 +1,22 @@
 import { fakeAsync, tick } from '@angular/core/testing';
-import { Uploader } from './uploader.class';
 import * as sinon from 'sinon';
+import { Uploader } from './uploader.class';
 
 describe('Uploader: Class', () => {
-  let instance: Uploader = null;
-  let xhr: any, requests: any[];
+  let instance: Uploader;
+  let xhr: any;
+  let requests: any[];
 
   function addFiles(count: number = 1, ext: string = 'png', type: string = 'image/png') {
     for (let i = 0; i < count; i++) {
-      const textFileAsBlob = new Blob(['a' + i], { type: type });
+      const textFileAsBlob = new Blob(['a' + i], { type });
       const f = new File([textFileAsBlob], `${i + 1}.${ext}`);
       instance.addToQueue([f]);
     }
   }
 
   beforeEach(() => {
-    instance = null;
-    instance = new Uploader();
+    instance = new Uploader({});
     xhr = sinon.useFakeXMLHttpRequest();
     requests = [];
     xhr.onCreate = function(req) {

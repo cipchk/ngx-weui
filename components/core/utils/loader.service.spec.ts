@@ -1,6 +1,6 @@
-import { ReflectiveInjector } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
+import { Injector, StaticProvider } from '@angular/core';
 
+import { DOCUMENT } from '@angular/common';
 import { LoaderService } from './loader.service';
 
 class MockDocument {
@@ -13,12 +13,13 @@ describe('LoaderService', () => {
   let document: MockDocument;
 
   beforeEach(() => {
-    const injector = ReflectiveInjector.resolveAndCreate([
-      LoaderService,
-      { provide: DOCUMENT, useClass: MockDocument },
-    ]);
-    service = injector.get(LoaderService);
-    document = injector.get(DOCUMENT);
+    const providers = [
+      { provide: LoaderService, useClass: LoaderService, deps: [] },
+      { provide: DOCUMENT, useClass: MockDocument, deps: [] },
+    ] as StaticProvider[];
+    const injector = Injector.create({ providers });
+    service = injector.get<LoaderService>(LoaderService);
+    document = injector.get<MockDocument>(DOCUMENT);
   });
 
   it('should create script tag', () => {

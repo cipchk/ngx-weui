@@ -1,5 +1,5 @@
-import { Injectable, Inject } from '@angular/core';
-import { DOCUMENT } from '@angular/platform-browser';
+import { DOCUMENT } from '@angular/common';
+import { Inject, Injectable } from '@angular/core';
 
 @Injectable()
 export class LoaderService {
@@ -8,12 +8,12 @@ export class LoaderService {
   constructor(@Inject(DOCUMENT) private doc: any) {}
 
   load(paths: string | string[]): Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      const promises: Promise<any>[] = [];
+    return new Promise(resolve => {
+      const promises: Array<Promise<any>> = [];
 
       if (!Array.isArray(paths)) paths = [paths];
 
-      (<string[]>paths).forEach(path => {
+      (paths as string[]).forEach(path => {
         if (path.endsWith('.css')) {
           promises.push(this.loadCss(path));
         } else {
@@ -22,23 +22,23 @@ export class LoaderService {
       });
 
       Promise.all(promises)
-        .then(res => {
+        .then(() => {
           resolve(true);
         })
-        .catch(err => {
+        .catch(() => {
           resolve(false);
         });
     });
   }
 
   loadScript(path: string): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       if (this.list[path] === true) {
-        resolve(<any>{
-          path: path,
+        resolve({
+          path,
           loaded: true,
           status: 'Loaded',
-        });
+        } as any);
         return;
       }
 
@@ -50,30 +50,30 @@ export class LoaderService {
       node.charset = 'utf-8';
       node.defer = true;
       node.onload = () => {
-        resolve(<any>{
-          path: path,
+        resolve({
+          path,
           loaded: true,
           status: 'Loaded',
-        });
+        } as any);
       };
-      node.onerror = (error: any) =>
-        resolve(<any>{
-          path: path,
+      node.onerror = () =>
+        resolve({
+          path,
           loaded: false,
           status: 'Loaded',
-        });
+        } as any);
       this.doc.getElementsByTagName('head')[0].appendChild(node);
     });
   }
 
   loadCss(path: string): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       if (this.list[path] === true) {
-        resolve(<any>{
-          path: path,
+        resolve({
+          path,
           loaded: true,
           status: 'Loaded',
-        });
+        } as any);
         return;
       }
 
@@ -84,11 +84,11 @@ export class LoaderService {
       node.type = 'text/css';
       node.href = path;
       this.doc.getElementsByTagName('head')[0].appendChild(node);
-      resolve(<any>{
-        path: path,
+      resolve({
+        path,
         loaded: true,
         status: 'Loaded',
-      });
+      } as any);
     });
   }
 }

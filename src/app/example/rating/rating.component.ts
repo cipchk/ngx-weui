@@ -1,6 +1,5 @@
-import { Component, ViewEncapsulation, OnDestroy } from '@angular/core';
-
-import { RatingComponent, RatingConfig } from 'ngx-weui/rating';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { RatingConfig } from 'ngx-weui/rating';
 
 @Component({
   selector: 'example-rating',

@@ -1,5 +1,5 @@
-import { Component, Input, forwardRef, Output, EventEmitter, HostBinding, ViewChild, ElementRef } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { forwardRef, Component, ElementRef, EventEmitter, HostBinding, Input, Output, ViewChild } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 /**
  * Stepper 步进器，支持 `[(ngModel)]`
@@ -144,13 +144,14 @@ export class StepperComponent implements ControlValueAccessor {
   }
 
   private onChange: any = Function.prototype;
-  private onTouched: any = Function.prototype;
+  // private onTouched: any = Function.prototype;
 
-  public registerOnChange(fn: (_: any) => {}): void {
+  registerOnChange(fn: (_: any) => {}): void {
     this.onChange = fn;
   }
-  public registerOnTouched(fn: () => {}): void {
-    this.onTouched = fn;
+
+  registerOnTouched(_fn: () => {}): void {
+    // this.onTouched = fn;
   }
 
   setDisabledState(isDisabled: boolean): void {

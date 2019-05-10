@@ -3,9 +3,9 @@ import { SchematicsException, Tree } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
 import { addImportToModule } from './devkit-utils/ast-utils';
 import { InsertChange } from './devkit-utils/change';
-import { Project, getWorkspace } from './devkit-utils/config';
-import { findBootstrapModulePath, getAppModulePath } from './devkit-utils/ng-ast-utils';
-import { ModuleOptions, findModuleFromOptions as internalFindModule } from './devkit-utils/find-module';
+import { getWorkspace, Project } from './devkit-utils/config';
+import { findModuleFromOptions as internalFindModule } from './devkit-utils/find-module';
+import { getAppModulePath } from './devkit-utils/ng-ast-utils';
 
 /** Reads file given path and returns TypeScript source file. */
 export function getSourceFile(host: Tree, path: string): ts.SourceFile {
@@ -62,7 +62,7 @@ export function getIndexHtmlPath(host: Tree, project: Project): string {
 
 /** Get the root stylesheet file. */
 export function getStylesPath(host: Tree, project: Project): string {
-  const buildTarget = project.architect['build'];
+  const buildTarget = project.architect.build;
 
   if (buildTarget.options && buildTarget.options.styles && buildTarget.options.styles.length) {
     const styles = buildTarget.options.styles.map(s => (typeof s === 'string' ? s : s.input));

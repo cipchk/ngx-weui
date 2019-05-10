@@ -1,5 +1,5 @@
-let body = document.querySelector('body');
-let preloader = document.querySelector('.preloader');
+let body = document.querySelector('body')!;
+let preloader = document.querySelector('.preloader')!;
 
 body.style.overflow = 'hidden';
 
@@ -11,7 +11,7 @@ function remove() {
   preloader.className += ' preloader-hidden-add preloader-hidden-add-active';
 }
 
-(<any>window).appBootstrap = () => {
+(window as any).appBootstrap = () => {
   setTimeout(() => {
     remove();
     body.style.overflow = '';

@@ -1,6 +1,8 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
+    "baseUrl": "./",
+    "rootDir": "./",
     "target": "es5",
     "module": "es2015",
     "sourceMap": false,
@@ -9,11 +11,13 @@
     "experimentalDecorators": true,
     "declaration": true,
     "outDir": "../release",
-    "lib": ["es2015", "dom"]
+    "lib": ["es2015", "dom"],
+    "paths": {
+      "ngx-weui": ["./ngx-weui.module"],
+      "ngx-weui/*": ["./*"]
+    }
   },
-  "files": [
-    "./ngx-weui.module.ts"
-  ],
+  "files": ["./ngx-weui.module.ts"],
   "angularCompilerOptions": {
     "skipTemplateCodegen": true
   }

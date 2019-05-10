@@ -1,11 +1,11 @@
-import { Rule, chain, noop, Tree, SchematicContext } from '@angular-devkit/schematics';
+import { chain, noop, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-import { Schema } from './schema';
-import { addPackageToPackageJson } from '../utils/package';
-import { weuiVersion } from '../utils/lib-versions';
-import { getProjectFromWorkspace, getWorkspace } from '../utils/devkit-utils/config';
-import { addThemeToAppStyles } from './theming';
 import { addModuleImportToRootModule } from '../utils/ast';
+import { getProjectFromWorkspace, getWorkspace } from '../utils/devkit-utils/config';
+import { weuiVersion } from '../utils/lib-versions';
+import { addPackageToPackageJson } from '../utils/package';
+import { Schema } from './schema';
+import { addThemeToAppStyles } from './theming';
 
 export default function(options: Schema): Rule {
   return chain([

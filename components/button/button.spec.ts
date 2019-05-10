@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
+import { fakeAsync, tick, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { ComponentFixture, TestBed, fakeAsync, tick, ComponentFixtureAutoDetect } from '@angular/core/testing';
 
-import { ButtonModule, ButtonConfig, ButtonComponent } from '../button';
+import { ButtonComponent, ButtonModule } from '../button';
 
 const html = `
     <weui-button id="default"
@@ -21,7 +21,7 @@ describe('Component: Button', () => {
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TestButtonComponent],
-      imports: [ButtonModule.forRoot(), FormsModule],
+      imports: [ButtonModule, FormsModule],
       providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
     });
     TestBed.overrideComponent(TestButtonComponent, {
@@ -88,7 +88,4 @@ class TestButtonComponent extends ButtonComponent {
   mini = false;
   plain = false;
   disabled = false;
-  constructor(config: ButtonConfig) {
-    super(config);
-  }
 }

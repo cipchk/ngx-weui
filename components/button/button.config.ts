@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ButtonType } from '../utils/types';
+import { ButtonType } from 'ngx-weui/core';
 
 @Injectable({ providedIn: 'root' })
 export class ButtonConfig {

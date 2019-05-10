@@ -1,6 +1,4 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
-
-import { SidebarComponent } from 'ngx-weui/sidebar';
+import { Component, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'example-sidebar',

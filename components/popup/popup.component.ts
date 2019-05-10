@@ -1,5 +1,5 @@
-import { Component, OnDestroy, Output, Input, EventEmitter, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs';
 import { PopupConfig } from './popup.config';
 
@@ -39,7 +39,7 @@ export class PopupComponent implements OnInit, OnDestroy, OnChanges {
   constructor(private DEF: PopupConfig) {}
 
   private parseConfig() {
-    this.config = Object.assign({}, this.DEF, this.config);
+    this.config = { ...this.DEF, ...this.config };
   }
 
   ngOnInit() {
@@ -104,7 +104,7 @@ export class PopupComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnDestroy(): void {
     if (this.observer && this.observer instanceof Subscription) {
-      (<Subscription>this.observer).unsubscribe();
+      (this.observer as Subscription).unsubscribe();
     }
   }
 }

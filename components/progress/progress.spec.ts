@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
+import { fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { ProgressModule, ProgressComponent } from '../progress';
+import { ProgressComponent, ProgressModule } from '../progress';
 
 describe('Component: Progress', () => {
   let fixture: ComponentFixture<TestProgressComponent>;

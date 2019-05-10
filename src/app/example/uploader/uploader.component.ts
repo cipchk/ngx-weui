@@ -1,5 +1,5 @@
-import { Component, ViewEncapsulation, ViewChild, Input } from '@angular/core';
-import { UploaderOptions, FileItem, Uploader, UploaderHeaders } from 'ngx-weui';
+import { Component, Input, ViewEncapsulation } from '@angular/core';
+import { Uploader, UploaderOptions } from 'ngx-weui';
 
 @Component({
   selector: 'example-uploader',
@@ -13,7 +13,7 @@ export class DemoUploaderComponent {
 
   @Input() url: string = 'example';
 
-  uploader: Uploader = new Uploader(<UploaderOptions>{
+  uploader: Uploader = new Uploader({
     url: './upload.php',
     headers: [{ name: 'auth', value: 'test' }],
     params: {
@@ -31,48 +31,48 @@ export class DemoUploaderComponent {
     //         }, 1000 * 3);
     //     });
     // },
-    onFileQueued: function() {
+    onFileQueued() {
       console.log('onFileQueued', arguments);
     },
-    onFileDequeued: function() {
+    onFileDequeued() {
       console.log('onFileDequeued', arguments);
     },
-    onStart: function() {
+    onStart() {
       console.log('onStart', arguments);
     },
-    onCancel: function() {
+    onCancel() {
       console.log('onCancel', arguments);
     },
-    onFinished: function() {
+    onFinished() {
       console.log('onFinished', arguments);
     },
-    onUploadStart: function() {
+    onUploadStart() {
       console.log('onUploadStart', arguments);
     },
-    onUploadProgress: function() {
+    onUploadProgress() {
       console.log('onUploadProgress', arguments);
     },
-    onUploadSuccess: function() {
+    onUploadSuccess() {
       console.log('onUploadSuccess', arguments);
     },
-    onUploadError: function() {
+    onUploadError() {
       console.log('onUploadError', arguments);
     },
-    onUploadComplete: function() {
+    onUploadComplete() {
       console.log('onUploadComplete', arguments);
     },
-    onUploadCancel: function() {
+    onUploadCancel() {
       console.log('onUploadCancel', arguments);
     },
-    onError: function() {
+    onError() {
       console.log('onError', arguments);
     },
-  });
+  } as UploaderOptions);
 
   img: any;
   imgShow: boolean = false;
   onGallery(item: any) {
-    this.img = [{ file: item._file, item: item }];
+    this.img = [{ file: item._file, item }];
     this.imgShow = true;
   }
 

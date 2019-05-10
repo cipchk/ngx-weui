@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
+import { fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { PTRModule, PTRComponent, PTRConfig } from '../ptr';
+import { PTRComponent, PTRConfig, PTRModule } from '../ptr';
 
 function spyTouchArgument(val: number) {
   return {
     targetTouches: [{ pageY: val, identifier: 1 }],
-    preventDefault: function() {},
+    preventDefault() {},
   };
 }
 
@@ -43,7 +43,7 @@ describe('Component: PTR', () => {
     const labelText = 'test';
     comp.setLastUpdatedLabel(labelText);
     fixture.detectChanges();
-    expect(el.querySelector('.weui-ptr__label').textContent).toBe(labelText);
+    expect(el.querySelector('.weui-ptr__label')!.textContent).toBe(labelText);
   });
 
   it('should be set finished', fakeAsync(() => {
@@ -53,7 +53,7 @@ describe('Component: PTR', () => {
     tick(500);
     expect(comp._animating).toBe(false);
     fixture.detectChanges();
-    expect(el.querySelector('.weui-ptr__label').textContent).toBe(labelText);
+    expect(el.querySelector('.weui-ptr__label')!.textContent).toBe(labelText);
   }));
 
   it('should be re-setting config', () => {
@@ -109,7 +109,7 @@ class TestPTRComponent {
 
   items: any[] = Array(6)
     .fill({})
-    .map((v: any, idx: number) => {
+    .map((_v: any, idx: number) => {
       return `${idx}:${Math.random()}`;
     });
   onRefresh(ptr: PTRComponent) {

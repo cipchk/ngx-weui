@@ -1,8 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
+import { fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 
-import { SidebarModule, SidebarComponent } from '../sidebar';
+import { SidebarComponent, SidebarModule } from '../sidebar';
 
 describe('Component: Sidebar', () => {
   let fixture: ComponentFixture<TestSidebarComponent>;
@@ -36,23 +36,23 @@ describe('Component: Sidebar', () => {
   it('should set mode="over"', () => {
     context.mode = 'over';
     fixture.detectChanges();
-    expect(el.querySelector('.weui-sidebar').classList).toContain('weui-sidebar__over');
+    expect(el.querySelector('.weui-sidebar')!.classList).toContain('weui-sidebar__over');
   });
 
   for (const pos of ['left', 'right', 'top', 'bottom']) {
     it(`should set position="${pos}"`, () => {
       context.position = pos;
       fixture.detectChanges();
-      expect(el.querySelector('.weui-sidebar').classList).toContain(`weui-sidebar__${pos}`);
+      expect(el.querySelector('.weui-sidebar')!.classList).toContain(`weui-sidebar__${pos}`);
     });
   }
 
   it('should set ariaLabel', fakeAsync(() => {
-    const str: string = 'value';
+    const str = 'value';
     context.ariaLabel = str;
     fixture.detectChanges();
     tick(1000);
-    expect(el.querySelector('.weui-sidebar').attributes['aria-label'].value).toBe(str);
+    expect(el.querySelector('.weui-sidebar')!.attributes.getNamedItem('aria-label')!.value).toBe(str);
   }));
 
   it('should be opened and status=true', fakeAsync(() => {

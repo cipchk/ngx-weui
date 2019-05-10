@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { SkinType } from '../utils/types';
+import { SkinType } from 'ngx-weui/core';
 
 @Injectable()
 export class ActionSheetConfig {
