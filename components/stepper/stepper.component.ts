@@ -1,28 +1,25 @@
-import { forwardRef, Component, ElementRef, EventEmitter, HostBinding, Input, Output, ViewChild } from '@angular/core';
+import {
+  forwardRef,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostBinding,
+  Input,
+  Output,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { InputBoolean, InputNumber } from 'ngx-weui/core';
 
 /**
  * Stepper 步进器，支持 `[(ngModel)]`
  */
 @Component({
   selector: 'weui-stepper',
-  template: `
-    <span class="minus" [ngClass]="{ disabled: _disabledMinus }" (click)="_minus()"><em>-</em></span>
-    <div class="input">
-      <input
-        type="tel"
-        #inputNumber
-        [(ngModel)]="value"
-        (blur)="_blur()"
-        [disabled]="disabled"
-        [attr.min]="min"
-        [attr.max]="max"
-        [attr.step]="_step"
-        autocomplete="off"
-      />
-    </div>
-    <span class="plus" [ngClass]="{ disabled: _disabledPlus }" (click)="_plus()"><em>+</em></span>
-  `,
+  exportAs: 'weuiStepper',
+  templateUrl: './stepper.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -30,14 +27,18 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       multi: true,
     },
   ],
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class StepperComponent implements ControlValueAccessor {
   /** 最小值 */
-  @Input() min: number = -Infinity;
+  @Input() @InputNumber() min: number = -Infinity;
   /** 最大值 */
-  @Input() max: number = Infinity;
+  @Input() @InputNumber() max: number = Infinity;
   /** 禁用 */
   @Input()
+  @InputBoolean()
   @HostBinding('class.disabled')
   disabled: boolean = false;
   /** 变更时回调 */
@@ -47,10 +48,11 @@ export class StepperComponent implements ControlValueAccessor {
   _precisionStep = 0;
   _precisionFactor = 1;
 
-  @ViewChild('inputNumber') _inputNumber: ElementRef;
+  @ViewChild('inputNumber') private _inputNumber: ElementRef<HTMLInputElement>;
 
   /** 步长，可以为小数 */
   @Input()
+  @InputNumber()
   get step() {
     return this._step;
   }
@@ -127,7 +129,7 @@ export class StepperComponent implements ControlValueAccessor {
   _blur() {
     const el = this._inputNumber.nativeElement;
     this.value = +el.value;
-    el.value = this.value;
+    el.value = this.value.toString();
     this._checkDisabled()._notify();
   }
 

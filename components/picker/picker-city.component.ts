@@ -1,5 +1,16 @@
-import { forwardRef, Component, EventEmitter, Input, OnDestroy, Output, ViewChild } from '@angular/core';
+import {
+  forwardRef,
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { InputBoolean } from 'ngx-weui/core';
 import { PickerOptions } from './options';
 import { PickerComponent } from './picker.component';
 
@@ -8,6 +19,7 @@ import { PickerComponent } from './picker.component';
  */
 @Component({
   selector: 'weui-city-picker',
+  exportAs: 'weuiCityPicker',
   template: `
     <weui-picker
       [placeholder]="placeholder"
@@ -29,6 +41,9 @@ import { PickerComponent } from './picker.component';
       multi: true,
     },
   ],
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
   @ViewChild(PickerComponent) _pickerInstance: PickerComponent;
@@ -54,7 +69,7 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
   @Input() options: PickerOptions;
   /** 当options.type=='form'时，占位符文本 */
   @Input() placeholder: string;
-  @Input() disabled: boolean;
+  @Input() @InputBoolean() disabled: boolean;
   /**
    * 确认后回调当前选择数据（包括已选面板所有数据）
    *

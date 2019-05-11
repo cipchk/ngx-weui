@@ -14,10 +14,11 @@ describe('Component: Rating', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [RatingModule.forRoot()],
+        imports: [RatingModule],
       });
       fixture = TestBed.createComponent(RatingComponent);
-      fixture.componentInstance._setConfig(null!);
+      // tslint:disable-next-line: no-string-literal
+      fixture.componentInstance['setConfig'](null!);
       context = fixture.debugElement.componentInstance;
 
       el = fixture.nativeElement;
@@ -40,7 +41,8 @@ describe('Component: Rating', () => {
     });
 
     it('should working with changed value', () => {
-      context._setConfig({
+      // tslint:disable-next-line: no-string-literal
+      context['setConfig']({
         max: 3,
         titles: ['one', 'two'],
         stateOff: 'fa-circle',
@@ -69,7 +71,7 @@ describe('Component: Rating', () => {
     beforeEach(fakeAsync(() => {
       TestBed.configureTestingModule({
         declarations: [TestRatingComponent],
-        imports: [RatingModule.forRoot(), FormsModule],
+        imports: [RatingModule, FormsModule],
       });
       TestBed.overrideComponent(TestRatingComponent, {
         set: { template: tpl },

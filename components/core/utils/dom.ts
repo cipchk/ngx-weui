@@ -37,6 +37,7 @@ export function add(
  * 移除
  */
 export function remove(el: any, selector: string) {
+  if (!el) return;
   const ret = el.querySelector(selector);
   if (ret) {
     el.removeChild(ret);

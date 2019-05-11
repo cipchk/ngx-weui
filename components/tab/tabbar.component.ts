@@ -1,4 +1,4 @@
-import { forwardRef, Component } from '@angular/core';
+import { forwardRef, ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
 import { BarComponent } from './bar.component';
 
 /**
@@ -6,10 +6,14 @@ import { BarComponent } from './bar.component';
  */
 @Component({
   selector: 'weui-tabbar',
+  exportAs: 'weuiTabbar',
   templateUrl: './tabbar.component.html',
   providers: [{ provide: BarComponent, useExisting: forwardRef(() => TabbarComponent) }],
   host: {
     '[class.weui-tab]': 'true',
   },
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class TabbarComponent extends BarComponent {}

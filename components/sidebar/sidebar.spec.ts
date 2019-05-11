@@ -12,7 +12,7 @@ describe('Component: Sidebar', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestSidebarComponent],
-      imports: [SidebarModule.forRoot(), NoopAnimationsModule],
+      imports: [SidebarModule, NoopAnimationsModule],
     });
     fixture = TestBed.createComponent(TestSidebarComponent);
     context = fixture.componentInstance;

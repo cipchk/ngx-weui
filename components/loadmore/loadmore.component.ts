@@ -1,20 +1,13 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { LoadmoreConfig } from './loadmore.config';
 
 @Component({
   selector: 'weui-loadmore',
-  template: `
-    <div
-      class="weui-loadmore"
-      [ngClass]="{
-        'weui-loadmore_line': type !== 'loading',
-        'weui-loadmore_dot': type === 'dot'
-      }"
-    >
-      <i class="weui-loading" *ngIf="type === 'loading'"></i>
-      <span class="weui-loadmore__tips">{{ type === 'dot' ? '' : type === 'line' ? lineText : loadingText }}</span>
-    </div>
-  `,
+  exportAs: 'weuiLoadmore',
+  templateUrl: './loadmore.component.html',
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class LoadmoreComponent {
   /**

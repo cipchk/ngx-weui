@@ -118,6 +118,7 @@ export class InputDirective implements OnInit, OnChanges, Validator {
   }
 
   validate(c: AbstractControl): ValidationErrors | null {
+    if (!this.parentEl) return null;
     const ret = this._validator(c);
     if (ret === null) {
       this.parentEl.classList.remove('weui-cell_warn');

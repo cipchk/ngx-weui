@@ -257,7 +257,6 @@ describe('Component: Dialog', () => {
         inputValue: undefined,
         inputError: ERROR,
       };
-      console.log(context.config);
       context.dialog.show().subscribe();
       fixture.detectChanges();
       expect(dl.queryAll(By.css('.weui-dialog__prompt')).length).toBe(1);

@@ -18,15 +18,7 @@ import { InfiniteLoaderConfig } from './infiniteloader.config';
 @Component({
   selector: 'weui-infiniteloader',
   exportAs: 'weuiInfiniteloader',
-  template: `
-    <div class="weui-infiniteloader__content">
-      <ng-content></ng-content>
-      <div *ngIf="_loading || _finished">
-        <div *ngIf="_loading" [innerHTML]="config.loading"></div>
-        <div *ngIf="_finished" [innerHTML]="config.finished"></div>
-      </div>
-    </div>
-  `,
+  templateUrl: './infiniteloader.component.html',
   host: {
     '[class.weui-infiniteloader]': 'true',
     '[style.height]': 'config.height',

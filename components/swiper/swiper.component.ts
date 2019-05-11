@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   Input,
@@ -8,6 +9,7 @@ import {
   OnDestroy,
   OnInit,
   SimpleChanges,
+  ViewEncapsulation,
 } from '@angular/core';
 import { SwiperConfig } from './swiper.config';
 
@@ -15,9 +17,13 @@ declare const Swiper: any;
 
 @Component({
   selector: 'weui-swiper',
+  exportAs: 'weuiSwiper',
   template: `
     <ng-content></ng-content>
   `,
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class SwiperComponent implements AfterViewInit, OnChanges, OnInit, OnDestroy {
   /**

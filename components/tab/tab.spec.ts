@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TabModule } from '../tab';
+import { TabModule } from './tab.module';
 
 const TABS: any[] = [
   {
@@ -21,8 +21,8 @@ const TABS: any[] = [
   { heading: 'tab3', content: 'tab3 content', active: false, disabled: true },
   { heading: 'tab4', content: 'tab4 content', active: false, removable: true },
 ];
-const navbar_html = `tabs: {{tabs | json}}
-<weui-navbar>
+const navbar_html = `
+  <weui-navbar>
     <weui-tab *ngFor="let item of tabs"
               [heading]="item.heading"
               [disabled]="item.disabled"
@@ -32,7 +32,7 @@ const navbar_html = `tabs: {{tabs | json}}
               (select)="_select($event)"
               (deselect)="_deselect($event)"
               (removed)="_removed($event)">{{item.content}}</weui-tab>
-</weui-navbar>
+  </weui-navbar>
 `;
 const tabbar_html = `
 <weui-tabbar>

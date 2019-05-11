@@ -1,32 +1,47 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
+import { InputBoolean, InputNumber } from 'ngx-weui/core';
 import { PaginationConfig } from './pagination.config';
 import { PaginationMode } from './pagination.type';
 
 @Component({
   selector: 'weui-pagination',
+  exportAs: 'weuiPagination',
   templateUrl: './pagination.component.html',
   host: {
     class: 'weui-pagination',
   },
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class PaginationComponent implements OnChanges {
   _ptArr: number[] = [];
+  _prevDisabled = false;
+  _nextDisabled = false;
   /**
    * 形态，可选 `button`,`pointer`，默认：`button`
    */
   @Input() mode: PaginationMode;
   /** 当前索引 */
-  @Input() current: number = 0;
+  @Input() @InputNumber() current: number = 0;
   /** 数据总数 */
-  @Input() total: number = 0;
+  @Input() @InputNumber() total: number = 0;
   /**
    * 是否隐藏数值，默认：`false`
    */
-  @Input() simple: boolean;
+  @Input() @InputBoolean() simple: boolean;
   /**
    * 小号按钮，默认：`true`
    */
-  @Input() mini: boolean = true;
+  @Input() @InputBoolean() mini: boolean = true;
   /**
    * 上一页文本（支持HTML），默认：`上一页`
    */
@@ -50,8 +65,6 @@ export class PaginationComponent implements OnChanges {
     this._checkDisabled();
   }
 
-  _prevDisabled = false;
-  _nextDisabled = false;
   _checkDisabled() {
     if (this.mode === 'pointer') return;
     this._prevDisabled = this.current <= 1;

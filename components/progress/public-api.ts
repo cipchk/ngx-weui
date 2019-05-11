@@ -1,2 +1,2 @@
-export { ProgressComponent } from './progress.component';
-export { ProgressModule } from './progress.module';
+export * from './progress.component';
+export * from './progress.module';

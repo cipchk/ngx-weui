@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BaseService } from 'ngx-weui/core';
 import { ToastComponent } from './toast.component';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ToastService extends BaseService {
   /**
    * 构建toast并显示

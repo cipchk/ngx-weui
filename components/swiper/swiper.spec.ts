@@ -36,7 +36,7 @@ describe('Component: Swiper', () => {
     beforeEach(fakeAsync(() => {
       TestBed.configureTestingModule({
         declarations: [TestSwiperComponent],
-        imports: [SwiperModule.forRoot(), NoopAnimationsModule],
+        imports: [SwiperModule, NoopAnimationsModule],
       });
       TestBed.overrideComponent(TestSwiperComponent, {
         set: { template: correct_html },
@@ -66,7 +66,7 @@ describe('Component: Swiper', () => {
       try {
         TestBed.configureTestingModule({
           declarations: [TestSwiperComponent],
-          imports: [SwiperModule.forRoot(), NoopAnimationsModule],
+          imports: [SwiperModule, NoopAnimationsModule],
         });
         TestBed.overrideComponent(TestSwiperComponent, {
           set: { template: incorrect_html },

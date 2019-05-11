@@ -1,0 +1,8 @@
+<div class="weui-progress">
+  <div class="weui-progress__bar">
+    <div class="weui-progress__inner-bar" [style.width]="_value + '%'"></div>
+  </div>
+  <a href="#" class="weui-progress__opr" *ngIf="canCancel" (click)="_onCancel()">
+    <i class="weui-icon-cancel"></i>
+  </a>
+</div>

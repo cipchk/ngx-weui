@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
 import {
   forwardRef,
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -9,8 +10,10 @@ import {
   OnInit,
   Output,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { InputBoolean } from 'ngx-weui/core';
 import { PickerOptions } from './options';
 import { PickerComponent } from './picker.component';
 
@@ -41,6 +44,7 @@ export type FORMAT_TYPE =
  */
 @Component({
   selector: 'weui-date-picker',
+  exportAs: 'weuiDatePicker',
   template: `
     <weui-picker
       [placeholder]="placeholder"
@@ -63,6 +67,9 @@ export type FORMAT_TYPE =
       multi: true,
     },
   ],
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDestroy, OnChanges {
   @ViewChild(PickerComponent) _pickerInstance: PickerComponent;
@@ -109,7 +116,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
   @Input() options: PickerOptions;
   /** 当options.type=='form'时，占位符文本 */
   @Input() placeholder: string;
-  @Input() disabled: boolean;
+  @Input() @InputBoolean() disabled: boolean;
   /** 确认后回调 */
   @Output() readonly change = new EventEmitter<any>();
   /** 列变更时回调 */

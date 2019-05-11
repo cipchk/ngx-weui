@@ -13,7 +13,7 @@ describe('Component: file-thumb', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestFileThumbComponent],
-      imports: [UploaderModule.forRoot()],
+      imports: [UploaderModule],
     });
     TestBed.overrideComponent(TestFileThumbComponent, {
       set: { template: html },

@@ -1,11 +1,27 @@
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewEncapsulation,
+} from '@angular/core';
+import { InputNumber } from 'ngx-weui/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { SearchBarConfig } from './searchbar.config';
 
 @Component({
   selector: 'weui-searchbar',
+  exportAs: 'weuiSearchbar',
   templateUrl: './searchbar.component.html',
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class SearchBarComponent implements OnInit, OnDestroy {
   _q: string = '';
@@ -25,7 +41,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   /**
    * 去抖时长（单位：ms），默认：`300`
    */
-  @Input() debounceTime: number;
+  @Input() @InputNumber() debounceTime: number;
   /** 搜索回调 */
   @Output() readonly search = new EventEmitter<string>();
   /** 取消回调 */
@@ -36,7 +52,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   @Output() readonly submit = new EventEmitter<string>();
 
   _focus: boolean = false;
-  @ViewChild('term') _term: ElementRef;
+  @ViewChild('term') private _term: ElementRef<HTMLInputElement>;
 
   private _sub: Subscription;
   private _subject = new Subject<string>();

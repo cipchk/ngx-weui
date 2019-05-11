@@ -59,25 +59,6 @@ export * from 'ngx-weui/pagination';
 export * from 'ngx-weui/version';
 
 @NgModule({
-  imports: [
-    UploaderModule.forRoot(),
-    LoadmoreModule.forRoot(),
-    ProgressModule.forRoot(),
-    GalleryModule.forRoot(),
-    PickerModule.forRoot(),
-    SearchBarModule.forRoot(),
-    ToastModule.forRoot(),
-    ToptipsModule.forRoot(),
-    PopupModule.forRoot(),
-    PTRModule.forRoot(),
-    InfiniteLoaderModule.forRoot(),
-    SidebarModule.forRoot(),
-    SwiperModule.forRoot(),
-    JWeiXinModule.forRoot(),
-    RatingModule.forRoot(),
-    StepperModule.forRoot(),
-    PaginationModule.forRoot(),
-  ],
   exports: [
     CellModule,
     ButtonModule,

@@ -13,7 +13,9 @@ import {
   Output,
   QueryList,
   SimpleChanges,
+  ViewEncapsulation,
 } from '@angular/core';
+import { InputBoolean } from 'ngx-weui/core';
 import { SidebarComponent } from './sidebar.component';
 
 /**
@@ -21,19 +23,16 @@ import { SidebarComponent } from './sidebar.component';
  */
 @Component({
   selector: 'weui-sidebar-container',
-  template: `
-    <ng-content select="weui-sidebar"></ng-content>
-    <div *ngIf="_showBackdrop" aria-hidden="true" class="weui-mask" (click)="_onBackdropClicked($event)"></div>
-    <div class="weui-sidebar__content" [ngStyle]="_getStyles()">
-      <ng-content></ng-content>
-    </div>
-  `,
+  exportAs: 'weuiSidebarContainer',
+  templateUrl: './sidebar-container.component.html',
+  preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class SidebarContainerComponent implements AfterContentInit, OnChanges, OnInit, OnDestroy {
   @ContentChildren(SidebarComponent) _sidebars: QueryList<SidebarComponent>;
 
-  @Input() _showBackdrop: boolean = false;
+  @Input() @InputBoolean() _showBackdrop: boolean = false;
   @Output() readonly _showBackdropChange = new EventEmitter<boolean>();
 
   private orgOverflowX = '';

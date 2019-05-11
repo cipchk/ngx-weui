@@ -1,12 +1,4 @@
-import { ModuleWithProviders, NgModule } from '@angular/core';
-import { LoaderService } from 'ngx-weui/core';
-import { JWeiXinService } from './jweixin.service';
+import { NgModule } from '@angular/core';
 
-@NgModule({
-  providers: [JWeiXinService, LoaderService],
-})
-export class JWeiXinModule {
-  static forRoot(): ModuleWithProviders {
-    return { ngModule: JWeiXinModule, providers: [] };
-  }
-}
+@NgModule({})
+export class JWeiXinModule {}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PTRConfig {
   /**
    * 是否使用默认icon样式，默认：`false`

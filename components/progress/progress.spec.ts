@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
-import { ProgressComponent, ProgressModule } from '../progress';
+import { ProgressComponent, ProgressModule } from '.';
 
 describe('Component: Progress', () => {
   let fixture: ComponentFixture<TestProgressComponent>;
@@ -14,7 +13,7 @@ describe('Component: Progress', () => {
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TestProgressComponent],
-      imports: [ProgressModule.forRoot(), FormsModule],
+      imports: [ProgressModule],
     });
     fixture = TestBed.createComponent(TestProgressComponent);
     context = fixture.componentInstance;

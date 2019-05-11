@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ModuleWithProviders, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StepperComponent } from './stepper.component';
 
@@ -8,8 +8,4 @@ import { StepperComponent } from './stepper.component';
   declarations: [StepperComponent],
   exports: [StepperComponent],
 })
-export class StepperModule {
-  static forRoot(): ModuleWithProviders {
-    return { ngModule: StepperModule, providers: [] };
-  }
-}
+export class StepperModule {}

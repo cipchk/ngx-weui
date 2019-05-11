@@ -20,7 +20,7 @@ describe('jweixin: JWeiXinService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [EmptyTestComponent],
-      imports: [JWeiXinModule.forRoot()],
+      imports: [JWeiXinModule],
       providers: [JWeiXinService, { provide: LoaderService, useClass: MockLoaderService }],
     });
 

@@ -15,7 +15,7 @@ describe('Component: Uploader', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestUploaderDirectiveComponent],
-      imports: [UploaderModule.forRoot()],
+      imports: [UploaderModule],
     });
     TestBed.overrideComponent(TestUploaderDirectiveComponent, {
       set: { template: html },

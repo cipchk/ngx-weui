@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
-import { SliderDirective } from './slider';
+import { SliderDirective } from './slider.directive';
 import { SliderModule } from './slider.module';
 
 const CONTAINER_WIDTH = 500;

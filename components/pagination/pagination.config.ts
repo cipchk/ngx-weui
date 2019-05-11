@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { PaginationMode } from './pagination.type';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PaginationConfig {
   /**
    * 形态，可选 `button`,`pointer`，默认：`button`

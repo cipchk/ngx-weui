@@ -14,7 +14,7 @@ describe('Component: Toast', () => {
     beforeEach(fakeAsync(() => {
       TestBed.configureTestingModule({
         declarations: [TestToastComponent],
-        imports: [ToastModule.forRoot(), NoopAnimationsModule],
+        imports: [ToastModule, NoopAnimationsModule],
       });
       fixture = TestBed.createComponent(TestToastComponent);
       context = fixture.componentInstance;
@@ -52,7 +52,7 @@ describe('Component: Toast', () => {
 
     beforeEach(fakeAsync(() => {
       TestBed.configureTestingModule({
-        imports: [ToastModule.forRoot(), FormsModule, NoopAnimationsModule],
+        imports: [ToastModule, FormsModule, NoopAnimationsModule],
         declarations: [TestToastServiceComponent],
         providers: [ToastService],
       }).createComponent(TestToastServiceComponent);

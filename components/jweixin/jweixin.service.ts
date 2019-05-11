@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { LoaderService } from 'ngx-weui/core';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class JWeiXinService {
   constructor(private load: LoaderService) {}
 

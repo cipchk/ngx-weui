@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class InfiniteLoaderConfig {
   /**
    * 容器高度，默认：`100vh`

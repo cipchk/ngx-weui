@@ -21,7 +21,7 @@ describe('Component: PTR', () => {
   beforeEach(fakeAsync(() => {
     TestBed.configureTestingModule({
       declarations: [TestPTRComponent],
-      imports: [PTRModule.forRoot(), NoopAnimationsModule],
+      imports: [PTRModule, NoopAnimationsModule],
     });
     fixture = TestBed.createComponent(TestPTRComponent);
     context = fixture.componentInstance;

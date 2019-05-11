@@ -1,4 +1,4 @@
-import { Component, OnDestroy } from '@angular/core';
+import { ChangeDetectorRef, Component, OnDestroy } from '@angular/core';
 import { TabDirective } from './tab.directive';
 
 @Component({
@@ -8,6 +8,8 @@ import { TabDirective } from './tab.directive';
 export class BarComponent implements OnDestroy {
   tabs: TabDirective[] = [];
   protected isDestroyed: boolean;
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   add(tab: TabDirective) {
     this.tabs.push(tab);
@@ -32,6 +34,10 @@ export class BarComponent implements OnDestroy {
   setActive(tab: TabDirective) {
     tab.active = true;
     tab.select.emit(tab);
+  }
+
+  detectChanges() {
+    this.cdr.detectChanges();
   }
 
   protected getClosestTabIndex(index: number): number {

@@ -1,4 +1,15 @@
-import { Component, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+  ViewEncapsulation,
+} from '@angular/core';
+import { InputNumber } from 'ngx-weui/core';
 import { PickerData } from './data';
 
 declare const window: any;
@@ -11,20 +22,24 @@ const getWindowHeight = (): number => {
  */
 @Component({
   selector: 'weui-picker-group',
+  exportAs: 'weuiPickerGroup',
   templateUrl: './picker-group.component.html',
   host: {
     '[class.weui-picker__group]': 'true',
   },
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class PickerGroupComponent implements OnChanges {
   /** 数据列表 */
   @Input() items: PickerData[];
 
   /** 当前默认位置 */
-  @Input() defaultIndex: number = -1;
+  @Input() @InputNumber() defaultIndex: number = -1;
 
   /** 多列中的位置 */
-  @Input() groupIndex: number;
+  @Input() @InputNumber() groupIndex: number;
 
   /** 变更回调 */
   @Output() readonly change = new EventEmitter<any>();

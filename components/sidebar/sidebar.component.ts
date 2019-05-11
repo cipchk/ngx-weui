@@ -12,8 +12,9 @@ import {
   SimpleChange,
   SimpleChanges,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import { isIOS } from 'ngx-weui/core';
+import { isIOS, InputBoolean } from 'ngx-weui/core';
 import { Subscription } from 'rxjs';
 import { ModeType, PositionType, SidebarConfig } from './sidebar.config';
 import { SidebarService } from './sidebar.service';
@@ -23,29 +24,17 @@ import { SidebarService } from './sidebar.service';
  */
 @Component({
   selector: 'weui-sidebar',
-  template: `
-    <aside
-      #sidebar
-      role="complementary"
-      [attr.aria-hidden]="!status"
-      [attr.aria-label]="ariaLabel"
-      class="weui-sidebar weui-sidebar__{{ status ? 'opened' : 'closed' }} weui-sidebar__{{ position }} weui-sidebar__{{
-        mode
-      }}"
-      [class.weui-sidebar__inert]="!status"
-      [ngClass]="sidebarClass"
-      [ngStyle]="_getStyle()"
-    >
-      <ng-content></ng-content>
-    </aside>
-  `,
+  exportAs: 'weuiSidebar',
+  templateUrl: './sidebar.component.html',
+  preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class SidebarComponent implements OnChanges, OnDestroy {
   /**
    * 状态，true表示打开，false表示关闭
    */
-  @Input() status: boolean = false;
+  @Input() @InputBoolean() status: boolean = false;
   @Output() readonly statusChange = new EventEmitter<boolean>();
   /**
    * 位置方向，默认：`left`
@@ -62,7 +51,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
   /**
    * 允许点击背景关闭，默认：`true`
    */
-  @Input() backdrop: boolean = true;
+  @Input() @InputBoolean() backdrop: boolean = true;
   /**
    * 自定义CLSS
    */
@@ -87,7 +76,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
 
   @Output() readonly _rerender = new EventEmitter<null>();
 
-  @ViewChild('sidebar') _elSidebar: ElementRef;
+  @ViewChild('sidebar') private _elSidebar: ElementRef<HTMLElement>;
 
   private _openSub: Subscription;
   private _closeSub: Subscription;
@@ -216,7 +205,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
   }
 
   private _onClickOutside(e: Event): void {
-    if (this._onClickOutsideAttached && this._elSidebar && !this._elSidebar.nativeElement.contains(e.target)) {
+    if (this._onClickOutsideAttached && this._elSidebar && !this._elSidebar.nativeElement.contains(e.target as any)) {
       this.close();
     }
   }

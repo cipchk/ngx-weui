@@ -32,14 +32,14 @@ export class TextareaDirective implements OnInit, OnChanges {
   private _value: string;
   private _count: any;
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef<HTMLElement>) {}
 
   ngOnInit() {
     this.init();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ('maxlength' in changes) {
+    if (changes.maxlength) {
       this.init()._onChange(this._value);
     }
   }

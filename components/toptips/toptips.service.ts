@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BaseService } from 'ngx-weui/core';
 import { ToptipsComponent, ToptipsType } from './toptips.component';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ToptipsService extends BaseService {
   /**
    * 构建一个Toptips并显示

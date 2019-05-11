@@ -1,15 +1,29 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
+import { InputNumber } from 'ngx-weui/core';
 
 export type ToptipsType = 'default' | 'warn' | 'info' | 'primary' | 'success';
 
 @Component({
   selector: 'weui-toptips',
+  exportAs: 'weuiToptips',
   template: `
     <div class="weui-toptips" style="display:block" [ngClass]="_classMap">{{ text }}<ng-content></ng-content></div>
   `,
   host: {
     '[hidden]': '!_showd',
   },
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class ToptipsComponent implements OnInit, OnDestroy {
   /**
@@ -19,7 +33,7 @@ export class ToptipsComponent implements OnInit, OnDestroy {
   /**
    * 显示时长后自动关闭（单位：ms），默认：`2000`
    */
-  @Input() time: number = 2000;
+  @Input() @InputNumber() time: number = 2000;
   /**
    * 隐藏后回调
    */

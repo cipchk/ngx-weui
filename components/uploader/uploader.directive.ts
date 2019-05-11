@@ -4,6 +4,7 @@ import { UploaderOptions } from './uploader.options';
 
 @Directive({
   selector: '[weui-uploader-file]',
+  exportAs: 'weuiUploaderFile',
 })
 export class UploaderFileDirective {
   /**

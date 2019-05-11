@@ -1,10 +1,22 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  Output,
+  SimpleChanges,
+  ViewEncapsulation,
+} from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs';
 import { PopupConfig } from './popup.config';
 
 @Component({
   selector: 'weui-popup',
+  exportAs: 'weuiPopup',
   templateUrl: './popup.component.html',
   animations: [
     trigger('visibility', [
@@ -16,6 +28,9 @@ import { PopupConfig } from './popup.config';
   host: {
     '[hidden]': '!shown',
   },
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class PopupComponent implements OnInit, OnDestroy, OnChanges {
   /**

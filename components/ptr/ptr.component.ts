@@ -1,4 +1,6 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -8,15 +10,21 @@ import {
   OnInit,
   Output,
   SimpleChanges,
+  ViewEncapsulation,
 } from '@angular/core';
+import { InputBoolean } from 'ngx-weui/core';
 import { PTRConfig } from './ptr.config';
 
 @Component({
   selector: 'weui-ptr',
+  exportAs: 'weuiPtr',
   templateUrl: './ptr.component.html',
   host: {
     '[class.weui-ptr]': 'true',
   },
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class PTRComponent implements OnInit, OnChanges {
   private ogY: number = 0;
@@ -31,13 +39,13 @@ export class PTRComponent implements OnInit, OnChanges {
   /** 配置项 */
   @Input() config: PTRConfig;
   /** 是否禁止 */
-  @Input() disabled: boolean = false;
+  @Input() @InputBoolean() disabled: boolean = false;
   /** 下拉滚动时回调，返回一个0-100%的参数 */
   @Output() readonly scroll = new EventEmitter<number>();
   /** 刷新回调 */
   @Output() readonly refresh = new EventEmitter<PTRComponent>();
 
-  constructor(private el: ElementRef, private DEF: PTRConfig) {}
+  constructor(private el: ElementRef, private DEF: PTRConfig, private cdr: ChangeDetectorRef) {}
 
   /**
    * 设置最后更新标签
@@ -46,6 +54,7 @@ export class PTRComponent implements OnInit, OnChanges {
    */
   setLastUpdatedLabel(label: string) {
     this._lastLabel = label;
+    this.cdr.detectChanges();
   }
 
   /**
@@ -57,11 +66,13 @@ export class PTRComponent implements OnInit, OnChanges {
     this._pullPercent = 0;
     this.loading = false;
     this._animating = true;
+    this.cdr.detectChanges();
 
     if (!this.touching) {
       setTimeout(() => {
         this._animating = false;
         if (lastUpdatedLabel) this.setLastUpdatedLabel(lastUpdatedLabel);
+        this.cdr.detectChanges();
       }, 350);
     }
   }
@@ -117,6 +128,7 @@ export class PTRComponent implements OnInit, OnChanges {
     this._pullPercent = _pullPercent;
     this.loading = loading;
     if (loading) this.refresh.emit(this);
+    this.cdr.detectChanges();
   }
 
   ngOnInit() {

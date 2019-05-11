@@ -1,9 +1,22 @@
-import { forwardRef, Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import {
+  forwardRef,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+  ViewEncapsulation,
+} from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { InputBoolean } from 'ngx-weui/core';
 import { RatingConfig } from './rating.config';
 
 @Component({
   selector: 'weui-rating',
+  exportAs: 'weuiRating',
   templateUrl: './rating.component.html',
   providers: [
     {
@@ -12,12 +25,15 @@ import { RatingConfig } from './rating.config';
       multi: true,
     },
   ],
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class RatingComponent implements ControlValueAccessor, OnChanges {
   /** 配置项 */
   @Input() config: RatingConfig;
   /** 是否只读模式，默认：`false` */
-  @Input() readonly: boolean = false;
+  @Input() @InputBoolean() readonly: boolean = false;
   /** 选中后回调，参数：选中值 */
   @Output() readonly selected = new EventEmitter<number>();
 
@@ -26,9 +42,9 @@ export class RatingComponent implements ControlValueAccessor, OnChanges {
   _preValue: number;
   _class: string = '';
 
-  constructor(private DEF: RatingConfig) {}
+  constructor(private DEF: RatingConfig, private cdr: ChangeDetectorRef) {}
 
-  _setConfig(cog: RatingConfig) {
+  private setConfig(cog: RatingConfig) {
     const _c = {
       states: [],
       ...this.DEF,
@@ -47,11 +63,12 @@ export class RatingComponent implements ControlValueAccessor, OnChanges {
           ...(_c.states[i] || {}),
         };
       });
+    this.cdr.detectChanges();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.config) {
-      this._setConfig(changes.config.currentValue);
+      this.setConfig(changes.config.currentValue);
     }
   }
 
@@ -60,17 +77,20 @@ export class RatingComponent implements ControlValueAccessor, OnChanges {
       this.writeValue(value);
       this.onChange(value);
     }
+    this.cdr.detectChanges();
   }
 
   writeValue(_value: any): void {
     if (_value % 1 !== _value) {
       this._value = Math.round(_value);
       this._preValue = _value;
+      this.cdr.detectChanges();
       return;
     }
 
     this._preValue = _value;
     this._value = _value;
+    this.cdr.detectChanges();
   }
 
   private onChange: any = Function.prototype;

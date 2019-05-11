@@ -1,5 +1,6 @@
 import {
   forwardRef,
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   Input,
@@ -8,14 +9,17 @@ import {
   OnInit,
   Output,
   SimpleChanges,
+  ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { InputBoolean } from 'ngx-weui/core';
 import { PickerData } from './data';
 import { PickerOptions } from './options';
 import { PickerConfig } from './picker.config';
 
 @Component({
   selector: 'weui-picker',
+  exportAs: 'weuiPicker',
   templateUrl: './picker.component.html',
   providers: [
     {
@@ -24,6 +28,9 @@ import { PickerConfig } from './picker.config';
       multi: true,
     },
   ],
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class PickerComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
   /** 配置项 */
@@ -65,7 +72,7 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnDestroy,
 
   /** 当 `options.type==='form'` 时，占位符文本 */
   @Input() placeholder: string;
-  @Input() disabled: boolean = false;
+  @Input() @InputBoolean() disabled: boolean = false;
   /**
    * 确认后回调当前选择数据（包括已选面板所有数据）
    *
@@ -109,17 +116,15 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnDestroy,
 
   private parseOptions() {
     this.options = {
-      ...({
-        type: 'form',
-        cancel: '取消',
-        confirm: '确定',
-        backdrop: true,
-        gruopCount: null,
-        separator: ' ',
-      } as PickerOptions),
+      type: 'form',
+      cancel: '取消',
+      confirm: '确定',
+      backdrop: true,
+      gruopCount: null,
+      separator: ' ',
       ...this.DEF,
       ...this.options,
-    };
+    } as PickerOptions;
   }
 
   private getSelecteItem() {

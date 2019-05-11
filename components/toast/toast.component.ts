@@ -1,18 +1,25 @@
-import { Component, EventEmitter, Input, OnDestroy, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
+import { InputNumber } from 'ngx-weui/core';
 import { ToastConfig } from './toast.config';
 
 @Component({
   selector: 'weui-toast',
-  template: `
-    <div class="weui-mask_transparent"></div>
-    <div class="weui-toast">
-      <i class="{{ icon }} weui-icon_toast"></i>
-      <p class="weui-toast__content">{{ text }}</p>
-    </div>
-  `,
+  exportAs: 'weuiToast',
+  templateUrl: './toast.component.html',
   host: {
     '[hidden]': '!_showd',
   },
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class ToastComponent implements OnDestroy {
   /**
@@ -33,7 +40,7 @@ export class ToastComponent implements OnDestroy {
   /**
    * 显示时长后自动关闭（单位：ms），0 表示永久，默认：`2000`
    */
-  @Input() time: number = 2000;
+  @Input() @InputNumber() time: number = 2000;
   /**
    * 隐藏后回调
    */

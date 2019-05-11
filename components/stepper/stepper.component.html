@@ -1,0 +1,15 @@
+<span class="minus" [ngClass]="{ disabled: _disabledMinus }" (click)="_minus()"><em>-</em></span>
+<div class="input">
+  <input
+    type="tel"
+    #inputNumber
+    [(ngModel)]="value"
+    (blur)="_blur()"
+    [disabled]="disabled"
+    [attr.min]="min"
+    [attr.max]="max"
+    [attr.step]="_step"
+    autocomplete="off"
+  />
+</div>
+<span class="plus" [ngClass]="{ disabled: _disabledPlus }" (click)="_plus()"><em>+</em></span>

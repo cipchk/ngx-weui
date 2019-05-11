@@ -14,7 +14,7 @@ describe('Component: Toptips', () => {
     beforeEach(fakeAsync(() => {
       TestBed.configureTestingModule({
         declarations: [TestToptipsComponent],
-        imports: [ToptipsModule.forRoot(), NoopAnimationsModule],
+        imports: [ToptipsModule, NoopAnimationsModule],
       });
       fixture = TestBed.createComponent(TestToptipsComponent);
       context = fixture.componentInstance;
@@ -52,7 +52,7 @@ describe('Component: Toptips', () => {
 
     beforeEach(fakeAsync(() => {
       TestBed.configureTestingModule({
-        imports: [ToptipsModule.forRoot(), FormsModule, NoopAnimationsModule],
+        imports: [ToptipsModule, FormsModule, NoopAnimationsModule],
         declarations: [TestToptipsServiceComponent],
         providers: [ToptipsService],
       }).createComponent(TestToptipsServiceComponent);
