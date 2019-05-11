@@ -1,13 +1,4 @@
-import {
-  ChangeDetectorRef,
-  Directive,
-  EventEmitter,
-  HostBinding,
-  Input,
-  OnChanges,
-  OnDestroy,
-  Output,
-} from '@angular/core';
+import { Directive, EventEmitter, HostBinding, Input, OnChanges, OnDestroy, Output } from '@angular/core';
 import { InputBoolean } from 'ngx-weui/core';
 import { BarComponent } from './bar.component';
 
