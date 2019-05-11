@@ -1,6 +1,15 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { genImageUrl } from 'ngx-weui/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  Output,
+  SimpleChanges,
+  ViewEncapsulation,
+} from '@angular/core';
+import { genImageUrl, InputBoolean } from 'ngx-weui/core';
 
 /**
  * 数据对象
@@ -26,6 +35,7 @@ export interface GalleryItem {
 
 @Component({
   selector: 'weui-gallery',
+  exportAs: 'weuiGallery',
   templateUrl: './gallery.component.html',
   animations: [
     trigger('visibility', [
@@ -34,6 +44,9 @@ export interface GalleryItem {
       transition('hide <=> show', [animate(200)]),
     ]),
   ],
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class GalleryComponent implements OnChanges {
   _imgs: any[];
@@ -48,7 +61,7 @@ export class GalleryComponent implements OnChanges {
   /**
    * 是否允许删除，默认：`true`
    */
-  @Input() canDelete: boolean = true;
+  @Input() @InputBoolean() canDelete: boolean = true;
 
   /**
    * 删除回调
@@ -63,8 +76,9 @@ export class GalleryComponent implements OnChanges {
   /**
    * 标记是否显示，支持双向绑定
    */
-  @Input() show: boolean = false;
+  @Input() @InputBoolean() show: boolean = false;
   @Output() readonly showChange = new EventEmitter<boolean>();
+
   _showd: boolean = false;
   get _visibility(): string {
     return this.show ? 'show' : 'hide';

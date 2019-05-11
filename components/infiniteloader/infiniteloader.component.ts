@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   EventEmitter,
@@ -8,6 +9,7 @@ import {
   OnInit,
   Output,
   SimpleChanges,
+  ViewEncapsulation,
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 
@@ -15,6 +17,7 @@ import { InfiniteLoaderConfig } from './infiniteloader.config';
 
 @Component({
   selector: 'weui-infiniteloader',
+  exportAs: 'weuiInfiniteloader',
   template: `
     <div class="weui-infiniteloader__content">
       <ng-content></ng-content>
@@ -28,6 +31,9 @@ import { InfiniteLoaderConfig } from './infiniteloader.config';
     '[class.weui-infiniteloader]': 'true',
     '[style.height]': 'config.height',
   },
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
   private didScroll = false;
