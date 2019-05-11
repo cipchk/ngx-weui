@@ -13,7 +13,12 @@
       </article>
     </weui-infiniteloader>
   </weui-tab>
-  <weui-tab heading="通讯录" [icon]="'<img src=./assets/images/icon_tabbar.png>'" (select)="onSelect()">
+  <weui-tab
+    heading="通讯录"
+    [icon]="'<img src=./assets/images/icon_tabbar.png>'"
+    [activeIcon]="'<img src=./assets/images/momentloader.png>'"
+    (select)="onSelect()"
+  >
     <article class="weui-article">
       <h1>通讯录</h1>
       <p>Select Time: {{ time }}</p>

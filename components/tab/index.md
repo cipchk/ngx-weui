@@ -12,6 +12,7 @@ module: TabModule
 heading | 选项卡名称 | `string` | -
 disabled | 是否禁用 | `boolean` | -
 icon | icon图标，支持HTML | `string` | -
+activeIcon | 激活时icon图标，支持HTML | `string` | -
 badge | 徽章内容，支持数字或圆点 | `number,'dot'` | -
 active | 是否激活 | `boolean` | -
 select | 当tab激活时触发 | `EventEmitter<TabDirective>` | -

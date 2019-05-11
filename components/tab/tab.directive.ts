@@ -1,14 +1,16 @@
-import { Directive, EventEmitter, HostBinding, Input, OnDestroy, Output } from '@angular/core';
+import { Directive, EventEmitter, HostBinding, Input, OnChanges, OnDestroy, Output } from '@angular/core';
 import { BarComponent } from './bar.component';
 
 @Directive({ selector: 'weui-tab, [weui-tab]' })
-export class TabDirective implements OnDestroy {
+export class TabDirective implements OnDestroy, OnChanges {
   /** 选项卡名称 */
   @Input() heading: string;
   /** 是否禁用 */
   @Input() disabled: boolean;
   /** icon图标，支持HTML */
   @Input() icon: string;
+  /** 激活时icon图标，支持HTML */
+  @Input() activeIcon: string;
   /** 徽章内容，支持数字或圆点 */
   @Input() badge: number | 'dot';
 
@@ -47,6 +49,12 @@ export class TabDirective implements OnDestroy {
   constructor(tab: BarComponent) {
     this._tabComp = tab;
     this._tabComp.add(this);
+  }
+
+  ngOnChanges(): void {
+    if (!this.activeIcon) {
+      this.activeIcon = this.icon;
+    }
   }
 
   ngOnDestroy(): void {

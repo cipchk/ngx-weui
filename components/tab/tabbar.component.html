@@ -7,7 +7,7 @@
     (click)="setActive(item)"
   >
     <div style="display: inline-block;position: relative;">
-      <div class="weui-tabbar__icon" [innerHTML]="item.icon"></div>
+      <div class="weui-tabbar__icon" [innerHTML]="item.active ? item.activeIcon : item.icon"></div>
       <span
         class="weui-badge"
         style="position: absolute;top: -2px;right: -13px;"
