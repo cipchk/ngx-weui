@@ -106,7 +106,7 @@ describe('Component: Accordion: Auto', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestAccordionComponent],
-      imports: [AccordionModule.forRoot()],
+      imports: [AccordionModule],
     });
     TestBed.overrideComponent(TestAccordionComponent, {
       set: { template: htmlAutoActiveFirst },
