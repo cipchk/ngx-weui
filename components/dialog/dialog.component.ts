@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -30,6 +31,9 @@ import { DialogConfig } from './dialog.config';
 })
 export class DialogComponent implements OnDestroy {
   private _config: DialogConfig;
+  private observer: Observer<any>;
+  _shown: boolean = false;
+
   /**
    * 对话框配置项
    */
@@ -121,11 +125,7 @@ export class DialogComponent implements OnDestroy {
    */
   @Output() readonly close = new EventEmitter<DialogComponent>();
 
-  private observer: Observer<any>;
-
-  _shown: boolean = false;
-
-  constructor(private DEF: DialogConfig) {}
+  constructor(private DEF: DialogConfig, private cdr: ChangeDetectorRef) {}
 
   @ViewChild('container') container: any;
   _prompError: boolean = false;
@@ -180,9 +180,9 @@ export class DialogComponent implements OnDestroy {
    * @returns 当 `type==='prompt'` 时会多一 `result` 属性表示结果值
    */
   show(): Observable<any> {
-    console.log(this.config.inputOptions);
     this._shown = true;
     this._prompError = false;
+    this.cdr.detectChanges();
     // 模拟动画结束后回调
     setTimeout(() => {
       this.open.emit(this);
@@ -201,6 +201,7 @@ export class DialogComponent implements OnDestroy {
     if (is_backdrop === true && this.config.backdrop === false) return false;
 
     this._shown = false;
+    this.cdr.detectChanges();
     this.close.emit(this);
   }
 

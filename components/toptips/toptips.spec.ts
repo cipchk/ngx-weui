@@ -24,8 +24,8 @@ describe('Component: Toptips', () => {
     }));
 
     it('should default values', () => {
-      expect(el.querySelector('.weui-toptips')!.textContent).toBe('content');
-      expect(el.querySelector('.weui-toptips')!.classList).toContain('weui-toptips_success');
+      expect(el.querySelector('.weui-toptips')!.textContent!.trim()).toBe('content');
+      expect(el.querySelector('.weui-toptips')!.classList).toContain('weui-toptips__success');
     });
 
     it('should be open by onShow()', () => {

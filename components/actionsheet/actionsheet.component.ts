@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -32,6 +33,13 @@ import { ActionSheetConfig } from './actionsheet.config';
   encapsulation: ViewEncapsulation.None,
 })
 export class ActionSheetComponent implements OnDestroy {
+  private observer: Observer<any>;
+  private destroied = false;
+  _shown = false;
+  /**
+   * 动画状态码
+   */
+  _shownAnt = false;
   /**
    * 配置项
    */
@@ -47,19 +55,16 @@ export class ActionSheetComponent implements OnDestroy {
    */
   @Output() readonly close = new EventEmitter();
 
-  _shown: boolean = false;
-  /**
-   * 动画状态码
-   */
-  _shownAnt = false;
-
-  private observer: Observer<any>;
-
   get _visibility(): string {
     return this._shownAnt ? 'show' : 'hide';
   }
 
-  constructor(private DEF: ActionSheetConfig) {}
+  constructor(private DEF: ActionSheetConfig, private cdr: ChangeDetectorRef) {}
+
+  private detectChanges() {
+    if (this.destroied) return;
+    this.cdr.detectChanges();
+  }
 
   /**
    * 显示，组件载入页面后并不会显示，显示调用 `show()` 并订阅结果。
@@ -77,6 +82,7 @@ export class ActionSheetComponent implements OnDestroy {
     this._shown = true;
     setTimeout(() => {
       this._shownAnt = true;
+      this.detectChanges();
     }, 10);
     return Observable.create((observer: Observer<any>) => {
       this.observer = observer;
@@ -92,6 +98,7 @@ export class ActionSheetComponent implements OnDestroy {
     if (is_backdrop === true && this.config.backdrop === false) return false;
 
     this._shownAnt = false;
+    this.detectChanges();
     setTimeout(
       () => {
         this._shown = false;
@@ -111,6 +118,7 @@ export class ActionSheetComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.destroied = true;
     if (this.observer && this.observer instanceof Subscription) {
       (this.observer as Subscription).unsubscribe();
     }

@@ -1,6 +1,7 @@
 import {
   forwardRef,
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -32,6 +33,14 @@ import { InputBoolean, InputNumber } from 'ngx-weui/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class StepperComponent implements ControlValueAccessor {
+  private _value: number;
+  private onChange: any = Function.prototype;
+  // private onTouched: any = Function.prototype;
+  _step: number = 1;
+  _precisionStep = 0;
+  _precisionFactor = 1;
+  _disabledMinus: boolean = false;
+  _disabledPlus: boolean = false;
   /** 最小值 */
   @Input() @InputNumber() min: number = -Infinity;
   /** 最大值 */
@@ -43,10 +52,6 @@ export class StepperComponent implements ControlValueAccessor {
   disabled: boolean = false;
   /** 变更时回调 */
   @Output() readonly change = new EventEmitter<number>();
-
-  _step: number = 1;
-  _precisionStep = 0;
-  _precisionFactor = 1;
 
   @ViewChild('inputNumber') private _inputNumber: ElementRef<HTMLInputElement>;
 
@@ -69,8 +74,6 @@ export class StepperComponent implements ControlValueAccessor {
     this._precisionFactor = Math.pow(10, this._precisionStep);
   }
 
-  private _value: number;
-
   get value() {
     return this._value;
   }
@@ -89,10 +92,11 @@ export class StepperComponent implements ControlValueAccessor {
       this._value = value;
       this._checkDisabled();
     }
+    this.cdr.detectChanges();
   }
 
-  _disabledMinus: boolean = false;
-  _disabledPlus: boolean = false;
+  constructor(private cdr: ChangeDetectorRef) {}
+
   _checkDisabled(): this {
     this._disabledPlus = this.disabled || !(this.value + this.step <= this.max);
     this._disabledMinus = this.disabled || !(this.value - this.step >= this.min);
@@ -144,9 +148,6 @@ export class StepperComponent implements ControlValueAccessor {
     this.value = value;
     this._checkDisabled();
   }
-
-  private onChange: any = Function.prototype;
-  // private onTouched: any = Function.prototype;
 
   registerOnChange(fn: (_: any) => {}): void {
     this.onChange = fn;

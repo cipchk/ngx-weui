@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { fakeAsync, tick, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { UpdateHostClassService } from 'ngx-weui/core';
 
 import { ButtonComponent, ButtonModule } from '../button';
 
@@ -22,7 +23,7 @@ describe('Component: Button', () => {
     TestBed.configureTestingModule({
       declarations: [TestButtonComponent],
       imports: [ButtonModule, FormsModule],
-      providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
+      providers: [UpdateHostClassService, { provide: ComponentFixtureAutoDetect, useValue: true }],
     });
     TestBed.overrideComponent(TestButtonComponent, {
       set: { template: html },

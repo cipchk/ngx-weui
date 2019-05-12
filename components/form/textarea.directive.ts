@@ -23,10 +23,9 @@ export class TextareaDirective implements OnInit, OnChanges {
    * 中文部分应该算多少个字符，使用 `/[^\x00-\xff]/g` 正则表达式统计中文部分（默认：1个字符）
    */
   @Input('weui-cn')
-  @InputNumber()
   set cn(value: number) {
     this._cn = value;
-    this.fillStr = new Array(value).fill('*').join('');
+    this.fillStr = new Array(+value).fill('*').join('');
   }
 
   private _value: string;
@@ -57,7 +56,7 @@ export class TextareaDirective implements OnInit, OnChanges {
     return this;
   }
 
-  _onChange(value: any) {
+  _onChange(value: string) {
     if (!this._count) return;
 
     value = value || '';
