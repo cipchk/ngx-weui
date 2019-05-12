@@ -11,5 +11,5 @@
   <button weui-button [weui-type]="'default'" (click)="onShowBySrv('primary')">Primary Toptip</button>
 
   <!--将对话框组件放在底部-->
-  <weui-toptips #toptips></weui-toptips>
+  <weui-toptips #toptips [text]="text" [type]="type"></weui-toptips>
 </Page>

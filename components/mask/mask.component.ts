@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -19,6 +20,9 @@ import { Observable, Observer, Subscription } from 'rxjs';
   encapsulation: ViewEncapsulation.None,
 })
 export class MaskComponent implements OnDestroy {
+  private observer: Observer<void>;
+  _shown: boolean = false;
+
   /**
    * 点击是否允许关闭（默认：`false`）
    */
@@ -51,8 +55,7 @@ export class MaskComponent implements OnDestroy {
    */
   @Output() readonly close = new EventEmitter();
 
-  private observer: Observer<void>;
-  _shown: boolean = false;
+  constructor(private cdr: ChangeDetectorRef) {}
 
   /**
    * 显示，并返回一个Observable
@@ -60,6 +63,7 @@ export class MaskComponent implements OnDestroy {
   show(): Observable<void> {
     setTimeout(() => {
       this._shown = true;
+      this.cdr.detectChanges();
     });
     return Observable.create((observer: Observer<void>) => {
       this.observer = observer;
@@ -75,6 +79,7 @@ export class MaskComponent implements OnDestroy {
     if (is_backdrop === true && this.backdrop === false) return false;
 
     this._shown = false;
+    this.cdr.detectChanges();
     this.close.emit();
   }
 

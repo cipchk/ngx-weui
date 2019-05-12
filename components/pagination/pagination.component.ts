@@ -17,6 +17,7 @@ import { PaginationMode } from './pagination.type';
   templateUrl: './pagination.component.html',
   host: {
     class: 'weui-pagination',
+    '[class.weui-pagination__non-mini]': '!mini',
   },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,

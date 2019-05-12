@@ -1,11 +1,13 @@
-.weui-pagination {
+@weui-pagination-prefix: ~'.weui-pagination';
+
+@{weui-pagination-prefix} {
   display: flex;
   align-items: center;
-  text-align: left;
   overflow-y: hidden;
+  text-align: left;
   &__item {
-    box-sizing: border-box;
     flex: 1;
+    box-sizing: border-box;
     min-width: 10px;
     margin-left: 8px;
     &:first-child {
@@ -34,13 +36,18 @@
       width: @pagination-dot-wh;
       height: @pagination-dot-wh;
       margin-right: 5px;
-      border-radius: 50%;
       background: @pagination-dot-bg;
+      border-radius: 50%;
     }
     &-active {
       > span {
         background: @pagination-dot-active-bg;
       }
+    }
+  }
+  &__non-mini {
+    .weui-btn {
+      width: auto;
     }
   }
 }

@@ -1,6 +1,7 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
@@ -33,6 +34,10 @@ import { PopupConfig } from './popup.config';
   encapsulation: ViewEncapsulation.None,
 })
 export class PopupComponent implements OnInit, OnDestroy, OnChanges {
+  private observer: Observer<boolean>;
+  shown: boolean = false;
+  _shownAnt = false;
+
   /**
    * 配置项
    */
@@ -42,16 +47,11 @@ export class PopupComponent implements OnInit, OnDestroy, OnChanges {
   /** 确认回调 */
   @Output() readonly confirm = new EventEmitter();
 
-  shown: boolean = false;
-  _shownAnt = false;
-
-  private observer: Observer<boolean>;
-
   get _visibility(): string {
     return this._shownAnt ? 'show' : 'hide';
   }
 
-  constructor(private DEF: PopupConfig) {}
+  constructor(private DEF: PopupConfig, private cdr: ChangeDetectorRef) {}
 
   private parseConfig() {
     this.config = { ...this.DEF, ...this.config };
@@ -72,6 +72,7 @@ export class PopupComponent implements OnInit, OnDestroy, OnChanges {
     this.shown = true;
     setTimeout(() => {
       this._shownAnt = true;
+      this.cdr.detectChanges();
     }, 10);
     return Observable.create((observer: Observer<boolean>) => {
       this.observer = observer;
@@ -87,6 +88,7 @@ export class PopupComponent implements OnInit, OnDestroy, OnChanges {
     if (is_backdrop === true && this.config.backdrop === false) return false;
 
     this._shownAnt = false;
+    this.cdr.detectChanges();
     setTimeout(() => {
       this.shown = false;
     }, 300);

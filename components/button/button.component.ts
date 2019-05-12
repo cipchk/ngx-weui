@@ -5,10 +5,9 @@ import {
   Input,
   OnChanges,
   OnInit,
-  Renderer2,
   ViewEncapsulation,
 } from '@angular/core';
-import { updateHostClass, ButtonType, InputBoolean } from 'ngx-weui/core';
+import { ButtonType, InputBoolean, UpdateHostClassService } from 'ngx-weui/core';
 import { ButtonConfig } from './button.config';
 
 @Component({
@@ -18,6 +17,7 @@ import { ButtonConfig } from './button.config';
     '[attr.disabled]': 'disabled ? "disabled" : null',
   },
   template: '<i class="weui-loading" *ngIf="loading"></i><ng-content></ng-content>',
+  providers: [UpdateHostClassService],
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
@@ -44,7 +44,7 @@ export class ButtonComponent implements OnInit, OnChanges {
   @Input('weui-plain') @InputBoolean() plain: boolean = false;
 
   /**
-   * 单元格按钮
+   * 行按钮
    */
   @Input('weui-cell') @InputBoolean() cell: boolean = false;
 
@@ -58,15 +58,15 @@ export class ButtonComponent implements OnInit, OnChanges {
    */
   @Input() @InputBoolean() disabled: boolean = false;
 
-  constructor(_config: ButtonConfig, private el: ElementRef, private renderer: Renderer2) {
+  constructor(_config: ButtonConfig, private el: ElementRef, private uhcs: UpdateHostClassService) {
     Object.assign(this, _config);
   }
 
   private setClassMap(): void {
     const prefixCls = 'weui-btn';
-    const { el, renderer, type, plain, cell, disabled, block, mini, loading } = this;
+    const { uhcs, el, type, plain, cell, disabled, block, mini, loading } = this;
     const median = plain ? 'plain' : cell ? 'cell' : '';
-    updateHostClass(el.nativeElement, renderer, {
+    uhcs.updateHostClass(el.nativeElement, {
       [`${prefixCls}`]: !cell,
       [`${prefixCls}_cell`]: cell,
       [`${prefixCls}_disabled`]: !plain && disabled,

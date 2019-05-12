@@ -1,3 +1,6 @@
+// base color
+@weuiColorDefault: #b2b2b2;
+@weuiColorInfo: #586c94;
 // dialog
 @dialog-error-font-size: 14px;
 @dialog-error-color: #f50;
@@ -18,9 +21,10 @@
 @stepper-color: rgb(134, 134, 134);
 @stepper-font-size: 20px;
 // toptips
-@toptips-bg-default: #b2b2b2;
-@toptips-bg-info: #586c94;
-@toptips-bg-primary: #1aad19;
+@toptips-bg-default: @weuiColorDefault;
+@toptips-bg-warn: @weuiColorWarn;
+@toptips-bg-info: @weuiColorInfo;
+@toptips-bg-primary: @weuiColorPrimary;
 // fixed
 @gutter: 8px;
 @preserve-white-spaces-enabled: true;

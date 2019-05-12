@@ -1,6 +1,6 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 
-import { ToptipsComponent, ToptipsService } from 'ngx-weui/toptips';
+import { ToptipsComponent, ToptipsService, ToptipsType } from 'ngx-weui/toptips';
 
 @Component({
   selector: 'example-toptips',
@@ -10,19 +10,21 @@ import { ToptipsComponent, ToptipsService } from 'ngx-weui/toptips';
 })
 export class DemoToptipsComponent {
   @ViewChild('toptips') toptips: ToptipsComponent;
+  text = '';
+  type: ToptipsType;
   constructor(private srv: ToptipsService) {}
 
-  onShow(type: 'warn' | 'info' | 'primary') {
-    this.toptips.type = type;
+  onShow(type: ToptipsType) {
+    this.type = type;
     switch (type) {
       case 'warn':
-        this.toptips.text = ' Oops, something is wrong! ';
+        this.text = ' Oops, something is wrong! ';
         break;
       case 'primary':
-        this.toptips.text = ' Success submited! ';
+        this.text = ' Success submited! ';
         break;
       case 'info':
-        this.toptips.text = ' Thanks for coming! ';
+        this.text = ' Thanks for coming! ';
         break;
     }
     this.toptips.onShow();
