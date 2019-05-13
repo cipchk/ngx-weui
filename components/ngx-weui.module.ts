@@ -56,7 +56,8 @@ export * from 'ngx-weui/mask';
 export * from 'ngx-weui/rating';
 export * from 'ngx-weui/stepper';
 export * from 'ngx-weui/pagination';
-export * from 'ngx-weui/version';
+
+export * from './version';
 
 @NgModule({
   exports: [

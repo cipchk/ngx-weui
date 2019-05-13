@@ -1,20 +1,16 @@
 {
   "name": "ngx-weui",
-  "version": "7.0.0",
-  "description": "weui for angular",
+  "version": "7.1.0-rc.1",
+  "description": "WeUI for angular",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cipchk/ngx-weui.git"
   },
   "keywords": [
     "ngx-weui",
-    "ng2-weui",
-    "ngx weui",
-    "ng2 weui",
     "angular weui",
-    "angular2 weui",
-    "angular4 weui",
-    "weui"
+    "weui",
+    "weui 2"
   ],
   "author": "cipchk <cipchk>",
   "license": "MIT",
@@ -31,7 +27,8 @@
     "site:build:netlify": "npm run site:init && ng build --prod --build-optimizer --base-href /",
     "site:gh": "npm run site:build && gh-pages -d ./dist",
     "build": "bash scripts/build/build.sh",
-    "release": "npm run build && cd publish && npm publish --access public"
+    "release": "npm run build && cd publish && npm publish --access public",
+    "release:next": "npm run build && cd publish && npm publish --access public --tag next"
   },
   "dependencies": {
     "@angular/animations": "~7.2.0",

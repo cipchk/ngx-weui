@@ -1,7 +1,7 @@
 import { SchematicsException, Tree } from '@angular-devkit/schematics';
 import { getStylesPath } from '../utils/ast';
 import { InsertChange } from '../utils/devkit-utils/change';
-import { getProjectFromWorkspace, getWorkspace, Project, Workspace } from '../utils/devkit-utils/config';
+import { getProjectFromWorkspace, getWorkspace, Project } from '../utils/devkit-utils/config';
 import { createCustomTheme } from './custom-theme';
 import { Schema } from './schema';
 
