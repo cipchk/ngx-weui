@@ -1,7 +1,7 @@
 {
   "name": "ngx-weui",
   "version": "0.0.0-PLACEHOLDER",
-  "description": "weui for angular",
+  "description": "WeUI for angular",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cipchk/ngx-weui.git"
@@ -18,7 +18,8 @@
     "angular weui",
     "angular2 weui",
     "angular4 weui",
-    "weui"
+    "weui",
+    "weui 2"
   ],
   "author": "cipchk <cipchk>",
   "license": "MIT",

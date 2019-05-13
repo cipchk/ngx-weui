@@ -21,7 +21,7 @@ ngx-weui
 ## Version
 
 - WeUI 1.x using `7.0.x`
-- WeUI 2.x using `7.1.x`
+- WeUI 2.x using `7.1.0-rc.x` (in next version)
 
 ## Table of Contents
 
@@ -58,7 +58,9 @@ cd demo
 3. add `ngx-weui`
 
 ```bash
-ng add ngx-weui
+ng add ngx-weui@next
+# Using WeUI 1.x
+# ng add ngx-weui
 ```
 
 > please refer to more [details](https://github.com/cipchk/ngx-weui/blob/master/docs/how.md).
