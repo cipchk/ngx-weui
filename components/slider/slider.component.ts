@@ -1,41 +1,52 @@
 import {
   forwardRef,
-  Directive,
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
   ElementRef,
   EventEmitter,
   Input,
   OnChanges,
   OnDestroy,
-  OnInit,
   Output,
+  ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputBoolean, InputNumber } from 'ngx-weui/core';
 
-/**
- * 滑块指令，支持[(ngModel)]
- */
-@Directive({
-  selector: '[weui-slider]',
+@Component({
+  selector: 'weui-slider, [weui-slider]',
   exportAs: 'weuiSlider',
+  templateUrl: './slider.component.html',
+  host: {
+    '[class.weui-slider-box]': 'showValue',
+    '[class.weui-slider]': '!showValue',
+    '[class.weui-slider__disabled]': '!enabled',
+  },
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SliderDirective),
+      useExisting: forwardRef(() => SliderComponent),
       multi: true,
     },
   ],
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
-export class SliderDirective implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
-  private _state: any = null;
-
-  private _value: number = 0;
-
+export class SliderComponent implements ControlValueAccessor, AfterViewInit, OnDestroy, OnChanges {
+  private el: HTMLElement;
+  private state: any = null;
   private isInit: boolean = false;
-  private trackEl: any;
-  private handlerEl: any;
-  onTouchStart: any;
-  onTouchMove: any;
+  private trackEl: HTMLElement;
+  private handlerEl: HTMLElement;
+  private onChange: (val: number) => void;
+  private onTouched: () => void;
+  private onTouchStart: any;
+  private onTouchMove: any;
+
+  value: number = 0;
 
   /**
    * 允许的最小值，默认：`0`
@@ -56,18 +67,21 @@ export class SliderDirective implements ControlValueAccessor, OnInit, OnDestroy,
    * 是否可用
    */
   @Input('weui-enabled') @InputBoolean() enabled: boolean = true;
+
+  @Input('weui-show-value') @InputBoolean() showValue: boolean = true;
   /**
    * 值改变时触发
    */
   @Output('weui-change') readonly change = new EventEmitter<number>();
 
-  constructor(private el: ElementRef) {}
+  constructor(el: ElementRef<HTMLElement>, private cdr: ChangeDetectorRef) {
+    this.el = el.nativeElement;
+  }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.isInit = true;
-    this.trackEl = this.el.nativeElement.querySelector('.weui-slider__track');
-    this.handlerEl = this.el.nativeElement.querySelector('.weui-slider__handler');
-    if (this.trackEl === null || this.handlerEl === null) throw new Error('失效DOM结构');
+    this.trackEl = this.el.querySelector('.weui-slider__track')! as HTMLElement;
+    this.handlerEl = this.el.querySelector('.weui-slider__handler')! as HTMLElement;
 
     this.onTouchStart = this.startHandle.bind(this);
     this.onTouchMove = this.moveHandle.bind(this);
@@ -81,11 +95,10 @@ export class SliderDirective implements ControlValueAccessor, OnInit, OnDestroy,
   }
 
   private refresh() {
-    const el = this.el.nativeElement;
-    this._state = {
+    this.state = {
       enabled: this.enabled,
-      left: el.getBoundingClientRect().left,
-      size: el.querySelector('.weui-slider__inner').offsetWidth,
+      left: this.el.getBoundingClientRect().left,
+      size: (this.el.querySelector('.weui-slider__inner')! as HTMLElement).offsetWidth!,
       percentage: [0, 0, 0],
       x: 0,
     };
@@ -93,51 +106,51 @@ export class SliderDirective implements ControlValueAccessor, OnInit, OnDestroy,
     this.min = +this.min;
     this.step = +this.step;
 
-    this.setValue(this._value);
+    this.setValue(this.value);
     this.layout();
   }
 
   private setValue(value: number) {
     if (this.max > this.min) {
-      this._state.percentage = [
+      this.state.percentage = [
         // tslint:disable-next-line: binary-expression-operand-order
         (100 * (value - this.min)) / (this.max - this.min),
         0,
         (this.step * 100) / (this.max - this.min),
       ];
     } else {
-      this._state.percentage = [0, 0, 100];
+      this.state.percentage = [0, 0, 100];
     }
   }
 
   private layout() {
-    this.trackEl.style.width = this._state.percentage[0] + '%';
-    this.handlerEl.style.left = this._state.percentage[0] + '%';
+    this.trackEl.style.width = this.state.percentage[0] + '%';
+    this.handlerEl.style.left = this.state.percentage[0] + '%';
   }
 
-  private startHandle($event: any) {
-    if (this._state === null) this.refresh();
+  private startHandle($event: TouchEvent) {
+    if (this.state === null) this.refresh();
 
-    this._state.x = ($event.touches[0] || $event.changedTouches[0]).pageX;
+    this.state.x = ($event.touches[0] || $event.changedTouches[0]).pageX;
   }
 
-  private moveHandle($event: any) {
-    if (!this._state.enabled) return false;
+  private moveHandle($event: TouchEvent) {
+    if (!this.state.enabled) return false;
 
     const pageX = ($event.touches[0] || $event.changedTouches[0]).pageX;
 
-    const xDiff = pageX - this._state.x;
+    const xDiff = pageX - this.state.x;
     if (xDiff >= 15 || xDiff <= 15) {
-      this._state.percentage[0] = this.getPercentage(pageX);
+      this.state.percentage[0] = this.getPercentage(pageX);
       this.layout();
-      this.calculateValue(this._state.percentage[0]);
+      this.calculateValue(this.state.percentage[0]);
     }
   }
 
   private getPercentage(pageX: number): number {
-    const distanceToSlide = pageX - this._state.left;
-    let percentage = (distanceToSlide / this._state.size) * 100;
-    percentage = Math.round(percentage / this._state.percentage[2]) * this._state.percentage[2];
+    const distanceToSlide = pageX - this.state.left;
+    let percentage = (distanceToSlide / this.state.size) * 100;
+    percentage = Math.round(percentage / this.state.percentage[2]) * this.state.percentage[2];
     return Math.max(0, Math.min(100, percentage));
   }
 
@@ -148,31 +161,29 @@ export class SliderDirective implements ControlValueAccessor, OnInit, OnDestroy,
     if (value < this.min) value = this.min;
     else if (value > this.max) value = this.max;
 
-    this._value = value;
-    this.onChange(this._value);
+    this.value = value;
+    this.onChange(this.value);
     this.onTouched();
-    this.change.emit(this._value);
+    this.change.emit(this.value);
   }
 
   ngOnChanges(): void {
     if (this.isInit) this.refresh();
   }
 
-  writeValue(value: any): void {
+  writeValue(value: number): void {
     if (value) {
-      this._value = +value;
+      this.value = +value;
       this.refresh();
-      this.calculateValue(this._state.percentage[0]);
+      this.calculateValue(this.state.percentage[0]);
     }
+    this.cdr.detectChanges();
   }
 
-  private onChange: any = Function.prototype;
-  private onTouched: any = Function.prototype;
-
-  public registerOnChange(fn: (_: any) => {}): void {
+  registerOnChange(fn: (_: number) => void): void {
     this.onChange = fn;
   }
-  public registerOnTouched(fn: () => {}): void {
+  registerOnTouched(fn: () => void): void {
     this.onTouched = fn;
   }
 

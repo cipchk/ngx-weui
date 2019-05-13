@@ -345,10 +345,10 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
   private onChange: any = Function.prototype;
   private onTouched: any = Function.prototype;
 
-  public registerOnChange(fn: (_: any) => {}): void {
+  registerOnChange(fn: (_: any) => {}): void {
     this.onChange = fn;
   }
-  public registerOnTouched(fn: () => {}): void {
+  registerOnTouched(fn: () => {}): void {
     this.onTouched = fn;
   }
 

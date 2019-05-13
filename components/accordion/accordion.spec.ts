@@ -123,14 +123,14 @@ describe('Component: Accordion: Auto', () => {
 
 @Component({ template: '' })
 class TestAccordionComponent {
-  public collapsible: boolean = true;
-  public panels: any[] = [
+  collapsible: boolean = true;
+  panels: any[] = [
     { title: 'title1', content: 'content1', active: false, disabled: false },
     { title: 'title2', content: 'content2', active: false, disabled: false },
     { title: 'title3', content: 'content3', active: false, disabled: false },
   ];
 
-  public constructor(config: AccordionConfig) {
+  constructor(config: AccordionConfig) {
     Object.assign(this, config);
   }
 }

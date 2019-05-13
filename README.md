@@ -16,7 +16,7 @@ ngx-weui
 
 </div>
 
-[![](https://cdn-images-1.medium.com/max/1600/1*F0D9tWK6p5Kk3dKZcSYuZA.png)](https://cipchk.github.io/ngx-weui/)
+[![](https://cdn-images-1.medium.com/max/1600/1*ceWDQUy3-MQgEchW6SuSRA.png)](https://cipchk.github.io/ngx-weui/)
 
 ## Version
 
