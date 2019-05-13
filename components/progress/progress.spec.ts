@@ -1,18 +1,8 @@
-import { Subscription } from 'rxjs';
-import { Component, ViewChild, DebugElement } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import {
-  ComponentFixture,
-  TestBed,
-  fakeAsync,
-  tick,
-  async,
-  inject,
-} from '@angular/core/testing';
+import { Component } from '@angular/core';
+import { fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 
-import { ProgressModule, ProgressComponent } from '../progress';
+import { ProgressComponent, ProgressModule } from '.';
 
 describe('Component: Progress', () => {
   let fixture: ComponentFixture<TestProgressComponent>;
@@ -20,23 +10,19 @@ describe('Component: Progress', () => {
   let comp: ProgressComponent;
   let barEl: HTMLElement;
 
-  beforeEach(
-    fakeAsync(() => {
-      TestBed.configureTestingModule({
-        declarations: [TestProgressComponent],
-        imports: [ProgressModule.forRoot(), FormsModule],
-      });
-      fixture = TestBed.createComponent(TestProgressComponent);
-      context = fixture.componentInstance;
-      spyOn(context, 'cancel');
-      fixture.detectChanges();
-      comp = fixture.debugElement.query(By.css('weui-progress'))
-        .componentInstance as ProgressComponent;
-      barEl = fixture.debugElement.query(By.css('.weui-progress__inner-bar'))
-        .nativeElement as HTMLElement;
-      tick();
-    }),
-  );
+  beforeEach(fakeAsync(() => {
+    TestBed.configureTestingModule({
+      declarations: [TestProgressComponent],
+      imports: [ProgressModule],
+    });
+    fixture = TestBed.createComponent(TestProgressComponent);
+    context = fixture.componentInstance;
+    spyOn(context, 'cancel');
+    fixture.detectChanges();
+    comp = fixture.debugElement.query(By.css('weui-progress')).componentInstance as ProgressComponent;
+    barEl = fixture.debugElement.query(By.css('.weui-progress__inner-bar')).nativeElement as HTMLElement;
+    tick();
+  }));
 
   it('should define default values', () => {
     expect(comp._value).toBe(0);
@@ -62,14 +48,17 @@ describe('Component: Progress', () => {
   });
 
   it('should be cancel', () => {
-    (fixture.debugElement.query(By.css('.weui-progress__opr'))
-      .nativeElement as HTMLLinkElement).click();
+    (fixture.debugElement.query(By.css('.weui-progress__opr')).nativeElement as HTMLLinkElement).click();
     fixture.detectChanges();
     expect(context.cancel).toHaveBeenCalled();
   });
 });
 
-@Component({ template: `<weui-progress (cancel)="cancel()"></weui-progress>` })
+@Component({
+  template: `
+    <weui-progress (cancel)="cancel()"></weui-progress>
+  `,
+})
 class TestProgressComponent {
   cancel() {}
 }

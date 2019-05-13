@@ -1,36 +1,18 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PickerComponent } from './picker.component';
-import { PickerGroupComponent } from './picker-group.component';
-import { DatePickerComponent } from './picker-date.component';
+import { NgModule } from '@angular/core';
 import { CityPickerComponent } from './picker-city.component';
+import { DatePickerComponent } from './picker-date.component';
+import { PickerGroupComponent } from './picker-group.component';
+import { PickerComponent } from './picker.component';
 import { PickerService } from './picker.service';
-import { PickerConfig } from './picker.config';
+
+const COMPONENTS = [PickerComponent, PickerGroupComponent, DatePickerComponent, CityPickerComponent];
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [
-    PickerComponent,
-    PickerGroupComponent,
-    DatePickerComponent,
-    CityPickerComponent,
-  ],
-  exports: [
-    PickerComponent,
-    PickerGroupComponent,
-    DatePickerComponent,
-    CityPickerComponent,
-  ],
+  declarations: COMPONENTS,
+  exports: COMPONENTS,
   providers: [PickerService],
-  entryComponents: [
-    PickerComponent,
-    PickerGroupComponent,
-    DatePickerComponent,
-    CityPickerComponent,
-  ],
+  entryComponents: COMPONENTS,
 })
-export class PickerModule {
-  static forRoot(): ModuleWithProviders {
-    return { ngModule: PickerModule, providers: [PickerConfig] };
-  }
-}
+export class PickerModule {}

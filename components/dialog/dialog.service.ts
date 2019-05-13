@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { BaseService } from 'ngx-weui/core';
 import { Observable } from 'rxjs';
-import { BaseService } from '../utils/base.service';
 import { DialogComponent } from './dialog.component';
 import { DialogConfig } from './dialog.config';
 
@@ -17,9 +17,7 @@ export class DialogService extends BaseService {
 
     componentRef.instance.config = data;
     componentRef.instance.close.subscribe(() => {
-      setTimeout(() => {
-        this.destroy(componentRef);
-      }, 300);
+      setTimeout(() => this.destroy(componentRef), 300);
     });
     return componentRef.instance.show();
   }

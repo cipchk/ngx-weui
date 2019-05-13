@@ -1,12 +1,11 @@
-import {normalize} from '@angular-devkit/core';
-import {SchematicsException, Tree} from '@angular-devkit/schematics';
+import { normalize } from '@angular-devkit/core';
+import { SchematicsException, Tree } from '@angular-devkit/schematics';
 import * as ts from 'typescript';
-import {addImportToModule} from './devkit-utils/ast-utils';
-import {InsertChange} from './devkit-utils/change';
-import {Project, getWorkspace} from './devkit-utils/config';
-import {findBootstrapModulePath, getAppModulePath} from './devkit-utils/ng-ast-utils';
-import {ModuleOptions, findModuleFromOptions as internalFindModule} from './devkit-utils/find-module';
-
+import { addImportToModule } from './devkit-utils/ast-utils';
+import { InsertChange } from './devkit-utils/change';
+import { getWorkspace, Project } from './devkit-utils/config';
+import { findModuleFromOptions as internalFindModule } from './devkit-utils/find-module';
+import { getAppModulePath } from './devkit-utils/ng-ast-utils';
 
 /** Reads file given path and returns TypeScript source file. */
 export function getSourceFile(host: Tree, path: string): ts.SourceFile {
@@ -31,8 +30,7 @@ export function addModuleImportToRootModule(host: Tree, moduleName: string, src:
  * @param moduleName name of module to import
  * @param src src location to import
  */
-export function addModuleImportToModule(
-    host: Tree, modulePath: string, moduleName: string, src: string) {
+export function addModuleImportToModule(host: Tree, modulePath: string, moduleName: string, src: string) {
   const moduleSource = getSourceFile(host, modulePath);
 
   if (!moduleSource) {
@@ -42,7 +40,7 @@ export function addModuleImportToModule(
   const changes = addImportToModule(moduleSource, modulePath, moduleName, src);
   const recorder = host.beginUpdate(modulePath);
 
-  changes.forEach((change) => {
+  changes.forEach(change => {
     if (change instanceof InsertChange) {
       recorder.insertLeft(change.pos, change.toAdd);
     }
@@ -64,10 +62,10 @@ export function getIndexHtmlPath(host: Tree, project: Project): string {
 
 /** Get the root stylesheet file. */
 export function getStylesPath(host: Tree, project: Project): string {
-  const buildTarget = project.architect['build'];
+  const buildTarget = project.architect.build;
 
   if (buildTarget.options && buildTarget.options.styles && buildTarget.options.styles.length) {
-    const styles = buildTarget.options.styles.map(s => typeof s === 'string' ? s : s.input);
+    const styles = buildTarget.options.styles.map(s => (typeof s === 'string' ? s : s.input));
 
     // First, see if any of the assets is called "styles.(le|sc|c)ss", which is the default
     // "main" style sheet.

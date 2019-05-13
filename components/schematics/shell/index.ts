@@ -1,20 +1,11 @@
-import {
-  Rule,
-  chain,
-  noop,
-  Tree,
-  SchematicContext,
-} from '@angular-devkit/schematics';
+import { chain, noop, Rule, SchematicContext, Tree } from '@angular-devkit/schematics';
 import { NodePackageInstallTask } from '@angular-devkit/schematics/tasks';
-import { Schema } from './schema';
-import { addPackageToPackageJson } from '../utils/package';
-import { weuiVersion } from '../utils/lib-versions';
-import {
-  getProjectFromWorkspace,
-  getWorkspace,
-} from '../utils/devkit-utils/config';
-import { addThemeToAppStyles } from './theming';
 import { addModuleImportToRootModule } from '../utils/ast';
+import { getProjectFromWorkspace, getWorkspace } from '../utils/devkit-utils/config';
+import { weuiVersion } from '../utils/lib-versions';
+import { addPackageToPackageJson } from '../utils/package';
+import { Schema } from './schema';
+import { addThemeToAppStyles } from './theming';
 
 export default function(options: Schema): Rule {
   return chain([
@@ -39,12 +30,7 @@ function addWeUIRootConfig(options: Schema) {
     const workspace = getWorkspace(host);
     const project = getProjectFromWorkspace(workspace, options.project);
 
-    addModuleImportToRootModule(
-      host,
-      'WeUiModule.forRoot()',
-      'ngx-weui',
-      project,
-    );
+    addModuleImportToRootModule(host, 'WeUiModule.forRoot()', 'ngx-weui', project);
 
     return host;
   };
@@ -56,12 +42,7 @@ function addAnimationRootConfig(options: Schema) {
     const workspace = getWorkspace(host);
     const project = getProjectFromWorkspace(workspace, options.project);
 
-    addModuleImportToRootModule(
-      host,
-      'BrowserAnimationsModule',
-      '@angular/platform-browser/animations',
-      project,
-    );
+    addModuleImportToRootModule(host, 'BrowserAnimationsModule', '@angular/platform-browser/animations', project);
 
     return host;
   };

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { ButtonType } from '../utils/types';
+import { ButtonType } from 'ngx-weui/core';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ButtonConfig {
   /**
    * 操作场景：primary、default、warn

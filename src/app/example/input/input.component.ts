@@ -1,5 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
-import { Observable, timer } from 'rxjs';
+import { timer, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -26,11 +26,12 @@ export class InputComponent {
   }
 
   onAddCheckbox() {
+    // tslint:disable-next-line: binary-expression-operand-order
     this.checkbox.push(String.fromCharCode(65 + this.checkbox.length));
   }
 
   onSendCode(): Observable<boolean> {
-    return timer(1000).pipe(map((v, i) => true));
+    return timer(1000).pipe(map(() => true));
   }
 
   onSave() {

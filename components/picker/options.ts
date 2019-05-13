@@ -1,6 +1,3 @@
-import { Observable } from 'rxjs';
-import { PickerData } from './data';
-
 export interface PickerOptions {
   /**
    * 类型

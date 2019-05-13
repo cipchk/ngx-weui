@@ -1,13 +1,15 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  Input,
   EventEmitter,
-  Output,
-  OnDestroy,
   HostListener,
+  Input,
   OnChanges,
+  Output,
   SimpleChanges,
+  ViewEncapsulation,
 } from '@angular/core';
+import { InputNumber } from 'ngx-weui/core';
 import { PickerData } from './data';
 
 declare const window: any;
@@ -20,34 +22,27 @@ const getWindowHeight = (): number => {
  */
 @Component({
   selector: 'weui-picker-group',
-  template: `
-    <ng-content></ng-content>
-    <div class="weui-picker__mask"></div>
-    <div class="weui-picker__indicator"></div>
-    <div class="weui-picker__content" [ngStyle]="{
-      'transform': 'translate(0,' + _distance + 'px)',
-      'transition': _animating ? 'transform .3s' : 'none'
-    }">
-      <div class="weui-picker__item" *ngFor="let item of items"
-        [ngClass]="{'weui-picker__item_disabled': item.disabled}">{{item.label || item.value}}</div>
-    </div>
-  `,
+  exportAs: 'weuiPickerGroup',
+  templateUrl: './picker-group.component.html',
   host: {
     '[class.weui-picker__group]': 'true',
   },
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
-export class PickerGroupComponent implements OnDestroy, OnChanges {
+export class PickerGroupComponent implements OnChanges {
   /** 数据列表 */
   @Input() items: PickerData[];
 
   /** 当前默认位置 */
-  @Input() defaultIndex: number = -1;
+  @Input() @InputNumber() defaultIndex: number = -1;
 
   /** 多列中的位置 */
-  @Input() groupIndex: number;
+  @Input() @InputNumber() groupIndex: number;
 
   /** 变更回调 */
-  @Output() change = new EventEmitter<any>();
+  @Output() readonly change = new EventEmitter<any>();
 
   private defaults: any = {
     offset: 3, // 列表初始化时的偏移量（列表初始化时，选项是聚焦在中间的，通过offset强制往上挪3项，以达到初始选项是为顶部的那项）
@@ -66,13 +61,8 @@ export class PickerGroupComponent implements OnDestroy, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if ('defaultIndex' in changes) {
-      if (
-        this.defaultIndex < 0 ||
-        (this.items && this.defaultIndex >= this.items.length)
-      )
-        this.defaultIndex = 0;
-      this._distance =
-        (this.defaults.offset - this.defaultIndex) * this.defaults.rowHeight;
+      if (this.defaultIndex < 0 || (this.items && this.defaultIndex >= this.items.length)) this.defaultIndex = 0;
+      this._distance = (this.defaults.offset - this.defaultIndex) * this.defaults.rowHeight;
     }
   }
 
@@ -125,7 +115,7 @@ export class PickerGroupComponent implements OnDestroy, OnChanges {
     } else {
       this.stop(0);
     }
-    this.startY = null;
+    this.startY = 0;
   }
 
   private stop(diff: number): void {
@@ -134,11 +124,7 @@ export class PickerGroupComponent implements OnDestroy, OnChanges {
     // 移动到最接近的那一行
     dist = Math.round(dist / this.defaults.rowHeight) * this.defaults.rowHeight;
     const max = this._getMax(this.defaults.offset, this.defaults.rowHeight);
-    const min = this._getMin(
-      this.defaults.offset,
-      this.defaults.rowHeight,
-      this.items.length,
-    );
+    const min = this._getMin(this.defaults.offset, this.defaults.rowHeight, this.items.length);
 
     // 不要超过最大值或者最小值
     dist = Math.max(Math.min(dist, max), min);
@@ -168,6 +154,4 @@ export class PickerGroupComponent implements OnDestroy, OnChanges {
   private _getMin(offset: number, rowHeight: number, length: number): number {
     return -(rowHeight * (length - offset - 1));
   }
-
-  ngOnDestroy(): void { }
 }

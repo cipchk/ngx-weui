@@ -12,7 +12,7 @@ module: ToptipsModule
 ----|------|-----|------
 text | 文本 | `string` | -
 time | 显示时长后自动关闭（单位：ms），0 表示永久 | `number` | `2000`
-type | 类型 | `default,warn,info,primary,success` | -
+type | 类型 | `default,warn,info,primary,success` | `primary`
 hide | 隐藏后回调 | `EventEmitter` | -
 
 ### ToptipsService

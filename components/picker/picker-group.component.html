@@ -1,0 +1,14 @@
+<ng-content></ng-content>
+<div class="weui-picker__mask"></div>
+<div class="weui-picker__indicator"></div>
+<div
+  class="weui-picker__content"
+  [ngStyle]="{
+    transform: 'translate(0,' + _distance + 'px)',
+    transition: _animating ? 'transform .3s' : 'none'
+  }"
+>
+  <div class="weui-picker__item" *ngFor="let item of items" [ngClass]="{ 'weui-picker__item_disabled': item.disabled }">
+    {{ item.label || item.value }}
+  </div>
+</div>

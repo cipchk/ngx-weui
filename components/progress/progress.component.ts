@@ -1,17 +1,21 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
+import { InputBoolean, InputNumber } from 'ngx-weui/core';
 
 @Component({
   selector: 'weui-progress',
-  template: `
-    <div class="weui-progress">
-      <div class="weui-progress__bar">
-        <div class="weui-progress__inner-bar" [style.width]="_value + '%'"></div>
-      </div>
-      <a href="#" class="weui-progress__opr" *ngIf="canCancel" (click)="_onCancel()">
-        <i class="weui-icon-cancel"></i>
-      </a>
-    </div>
-  `,
+  exportAs: 'weuiProgress',
+  templateUrl: './progress.component.html',
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class ProgressComponent {
   _value: number = 0;
@@ -19,19 +23,23 @@ export class ProgressComponent {
    * 默认进度值，取值范围：0-100（单位：%）
    */
   @Input()
+  @InputNumber()
   set value(d: number) {
     this._value = Math.max(0, Math.min(100, d));
+    this.cdr.detectChanges();
   }
 
   /**
    * 是否允许取消，默认：`true`
    */
-  @Input() canCancel: boolean = true;
+  @Input() @InputBoolean() canCancel: boolean = true;
 
   /**
    * 取消回调
    */
-  @Output() cancel = new EventEmitter();
+  @Output() readonly cancel = new EventEmitter();
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   _onCancel() {
     if (this.canCancel) this.cancel.emit();

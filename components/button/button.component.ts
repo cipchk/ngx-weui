@@ -1,35 +1,28 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  Directive,
-  EventEmitter,
+  ElementRef,
   Input,
+  OnChanges,
   OnInit,
-  Output,
-  HostBinding,
+  ViewEncapsulation,
 } from '@angular/core';
+import { ButtonType, InputBoolean, UpdateHostClassService } from 'ngx-weui/core';
 import { ButtonConfig } from './button.config';
-import { ButtonType } from '../utils/types';
-import { toBoolean } from '../utils/boolean-property';
 
 @Component({
-  selector: 'weui-button, button[weui-button], a[weui-button]',
+  selector: 'weui-button, [weui-button]',
+  exportAs: 'weuiButton',
   host: {
-    class: 'weui-btn',
-    '[class.weui-btn_primary]': '!plain && type==="primary"',
-    '[class.weui-btn_default]': '!plain && type==="default"',
-    '[class.weui-btn_warn]': '!plain && type==="warn"',
-    '[class.weui-btn_plain-primary]': 'plain && type==="primary"',
-    '[class.weui-btn_plain-default]': 'plain && type==="default"',
-    '[class.weui-btn_plain-warn]': 'plain && type==="warn"',
-    '[class.weui-btn_disabled]': '!plain && disabled',
-    '[class.weui-btn_plain-disabled]': 'plain && disabled',
     '[attr.disabled]': 'disabled ? "disabled" : null',
   },
-  exportAs: 'weuiButton',
-  template:
-    '<i class="weui-loading" *ngIf="loading"></i><ng-content></ng-content>'
+  template: '<i class="weui-loading" *ngIf="loading"></i><ng-content></ng-content>',
+  providers: [UpdateHostClassService],
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
-export class ButtonComponent {
+export class ButtonComponent implements OnInit, OnChanges {
   /**
    * 操作场景：primary、default、warn，默认：`primary`
    */
@@ -38,54 +31,59 @@ export class ButtonComponent {
   /**
    * 是否加载状态
    */
-  @HostBinding('class.weui-btn_loading')
-  @Input('weui-loading')
-  get loading(): boolean {
-    return this._loading;
-  }
-  set loading(value) {
-    this._loading = toBoolean(value);
-  }
-  private _loading: boolean = false;
+  @Input('weui-loading') @InputBoolean() loading: boolean = false;
 
   /**
    * 是否小号
    */
-  @HostBinding('class.weui-btn_mini')
-  @Input('weui-mini')
-  get mini(): boolean {
-    return this._mini;
-  }
-  set mini(value) {
-    this._mini = toBoolean(value);
-  }
-  private _mini: boolean = false;
+  @Input('weui-mini') @InputBoolean() mini: boolean = false;
 
   /**
    * 镂空按钮
    */
-  @Input('weui-plain')
-  get plain(): boolean {
-    return this._plain;
-  }
-  set plain(value) {
-    this._plain = toBoolean(value);
-  }
-  private _plain: boolean = false;
+  @Input('weui-plain') @InputBoolean() plain: boolean = false;
+
+  /**
+   * 行按钮
+   */
+  @Input('weui-cell') @InputBoolean() cell: boolean = false;
+
+  /**
+   * Block 按钮
+   */
+  @Input('weui-block') @InputBoolean() block: boolean = false;
 
   /**
    * 禁用状态
    */
-  @Input()
-  get disabled(): boolean {
-    return this._disabled;
-  }
-  set disabled(value) {
-    this._disabled = toBoolean(value);
-  }
-  private _disabled: boolean = false;
+  @Input() @InputBoolean() disabled: boolean = false;
 
-  constructor(_config: ButtonConfig) {
+  constructor(_config: ButtonConfig, private el: ElementRef, private uhcs: UpdateHostClassService) {
     Object.assign(this, _config);
+  }
+
+  private setClassMap(): void {
+    const prefixCls = 'weui-btn';
+    const { uhcs, el, type, plain, cell, disabled, block, mini, loading } = this;
+    const median = plain ? 'plain' : cell ? 'cell' : '';
+    uhcs.updateHostClass(el.nativeElement, {
+      [`${prefixCls}`]: !cell,
+      [`${prefixCls}_cell`]: cell,
+      [`${prefixCls}_disabled`]: !plain && disabled,
+      [`${prefixCls}_block`]: block,
+      [`${prefixCls}_mini`]: mini,
+      [`${prefixCls}_${median}-${type}`]: median,
+      [`${prefixCls}_${type}`]: !median,
+      [`${prefixCls}_loading`]: loading,
+      [`${prefixCls}_plain-disabled`]: plain && disabled,
+    });
+  }
+
+  ngOnInit(): void {
+    this.setClassMap();
+  }
+
+  ngOnChanges(): void {
+    this.setClassMap();
   }
 }

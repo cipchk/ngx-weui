@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { LoadmoreComponent } from './loadmore.component';
-import { LoadmoreConfig } from './loadmore.config';
 
 @NgModule({
   imports: [CommonModule],
@@ -9,8 +8,4 @@ import { LoadmoreConfig } from './loadmore.config';
   exports: [LoadmoreComponent],
   entryComponents: [LoadmoreComponent],
 })
-export class LoadmoreModule {
-  static forRoot(): ModuleWithProviders {
-    return { ngModule: LoadmoreModule, providers: [LoadmoreConfig] };
-  }
-}
+export class LoadmoreModule {}

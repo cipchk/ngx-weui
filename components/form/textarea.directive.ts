@@ -1,18 +1,12 @@
-import {
-  Directive,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  ElementRef,
-  OnInit,
-} from '@angular/core';
-import { add, remove } from '../utils/dom';
+import { Directive, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { add, remove, InputNumber } from 'ngx-weui/core';
 
 /**
  * 文本域字数统计
  */
 @Directive({
   selector: '[weui-textarea]',
+  exportAs: 'weuiTextarea',
   host: {
     '(input)': '_onChange($event.target?.value)',
   },
@@ -23,7 +17,7 @@ export class TextareaDirective implements OnInit, OnChanges {
   /**
    * 最大长度，0表示不受限
    */
-  @Input() maxlength: number = 0;
+  @Input() @InputNumber() maxlength: number = 0;
 
   /**
    * 中文部分应该算多少个字符，使用 `/[^\x00-\xff]/g` 正则表达式统计中文部分（默认：1个字符）
@@ -31,20 +25,20 @@ export class TextareaDirective implements OnInit, OnChanges {
   @Input('weui-cn')
   set cn(value: number) {
     this._cn = value;
-    this.fillStr = new Array(value).fill('*').join('');
+    this.fillStr = new Array(+value).fill('*').join('');
   }
 
   private _value: string;
   private _count: any;
 
-  constructor(private el: ElementRef) { }
+  constructor(private el: ElementRef<HTMLElement>) {}
 
   ngOnInit() {
     this.init();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ('maxlength' in changes) {
+    if (changes.maxlength) {
       this.init()._onChange(this._value);
     }
   }
@@ -62,7 +56,7 @@ export class TextareaDirective implements OnInit, OnChanges {
     return this;
   }
 
-  _onChange(value: any) {
+  _onChange(value: string) {
     if (!this._count) return;
 
     value = value || '';

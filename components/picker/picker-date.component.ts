@@ -1,19 +1,19 @@
+import { DatePipe } from '@angular/common';
 import {
-  Component,
-  Input,
-  Output,
   forwardRef,
+  ChangeDetectionStrategy,
+  Component,
   EventEmitter,
-  OnDestroy,
-  ViewChild,
-  LOCALE_ID,
+  Input,
   OnChanges,
-  SimpleChanges,
-  ElementRef,
+  OnDestroy,
   OnInit,
+  Output,
+  ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DatePipe } from '@angular/common';
+import { InputBoolean } from 'ngx-weui/core';
 import { PickerOptions } from './options';
 import { PickerComponent } from './picker.component';
 
@@ -31,27 +31,33 @@ export type DatePickerType = 'date-ym' | 'date' | 'datetime' | 'time';
 export type FORMAT_TYPE =
   | string
   | {
-    format: string;
-    yu?: string;
-    Mu?: string;
-    du?: string;
-    hu?: string;
-    mu?: string;
-  };
+      format: string;
+      yu?: string;
+      Mu?: string;
+      du?: string;
+      hu?: string;
+      mu?: string;
+    };
 
 /**
  * 日期时间选择器
  */
 @Component({
   selector: 'weui-date-picker',
+  exportAs: 'weuiDatePicker',
   template: `
-  <weui-picker [placeholder]="placeholder"
-      [groups]="_groups" [defaultSelect]="_selected" [disabled]="disabled" [options]="options"
+    <weui-picker
+      [placeholder]="placeholder"
+      [groups]="_groups"
+      [defaultSelect]="_selected"
+      [disabled]="disabled"
+      [options]="options"
       (show)="_onShow()"
       (hide)="_onHide()"
       (change)="_onCityChange($event)"
       (groupChange)="_onCityGroupChange($event)"
-      (cancel)="_onCityCancelChange()"></weui-picker>
+      (cancel)="_onCityCancelChange()"
+    ></weui-picker>
   `,
   providers: [
     DatePipe,
@@ -61,9 +67,11 @@ export type FORMAT_TYPE =
       multi: true,
     },
   ],
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
-export class DatePickerComponent
-  implements OnInit, ControlValueAccessor, OnDestroy, OnChanges {
+export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDestroy, OnChanges {
   @ViewChild(PickerComponent) _pickerInstance: PickerComponent;
 
   _value: Date;
@@ -91,18 +99,16 @@ export class DatePickerComponent
    */
   @Input() type: DatePickerType = 'date';
 
-  private _format: any = Object.assign({}, FORMAT);
+  private _format: any = { ...FORMAT };
   /**
    * 日期格式化代码，实际是采用 DatePipe，所有代码内容和它一样
    */
   @Input()
   set format(v: FORMAT_TYPE) {
     if (typeof v === 'string') {
-      this._format = Object.assign(FORMAT, {
-        format: v,
-      });
+      this._format = { ...FORMAT, format: v };
     } else {
-      this._format = Object.assign(FORMAT, v);
+      this._format = { ...FORMAT, ...v };
     }
   }
 
@@ -110,19 +116,19 @@ export class DatePickerComponent
   @Input() options: PickerOptions;
   /** 当options.type=='form'时，占位符文本 */
   @Input() placeholder: string;
-  @Input() disabled: boolean;
+  @Input() @InputBoolean() disabled: boolean;
   /** 确认后回调 */
-  @Output() change = new EventEmitter<any>();
+  @Output() readonly change = new EventEmitter<any>();
   /** 列变更时回调 */
-  @Output() groupChange = new EventEmitter<any>();
+  @Output() readonly groupChange = new EventEmitter<any>();
   /** 取消后回调 */
-  @Output() cancel = new EventEmitter<any>();
+  @Output() readonly cancel = new EventEmitter<any>();
   /** 显示时回调 */
-  @Output() show = new EventEmitter<any>();
+  @Output() readonly show = new EventEmitter<any>();
   /** 隐藏后回调 */
-  @Output() hide = new EventEmitter<any>();
+  @Output() readonly hide = new EventEmitter<any>();
 
-  constructor(private el: ElementRef, private datePipe: DatePipe) { }
+  constructor(private datePipe: DatePipe) {}
 
   // todo: 太粗暴，需要优化代码
   private genGroups() {
@@ -134,41 +140,41 @@ export class DatePickerComponent
   }
 
   private genDateGroups() {
-    const year = this._value.getFullYear(),
-      month = this._value.getMonth() + 1,
-      day = this._value.getDate();
+    const year = this._value.getFullYear();
+    const month = this._value.getMonth() + 1;
+    const day = this._value.getDate();
 
     // year
-    let _selected = 0,
-      startYear = year - 10,
-      endYear = year + 10;
+    let _selected = 0;
+    let startYear = year - 10;
+    let endYear = year + 10;
     if (this.min) startYear = this.min.getFullYear();
     if (this.max) endYear = this.max.getFullYear();
     this._groups.push(
       Array(endYear - startYear + 1)
         .fill(0)
-        .map((v: number, idx: number) => {
-          const _v = startYear + idx;
-          if (_v === year) _selected = idx;
-          return { label: _v + this._format.yu, value: _v };
+        .map((_v: number, idx: number) => {
+          const val = startYear + idx;
+          if (val === year) _selected = idx;
+          return { label: val + this._format.yu, value: val };
         }),
     );
     this._selected.push(_selected);
 
     // month
     const cy = this._groups[0][_selected].value;
-    let startMonth = 1,
-      endMonth = 12;
+    let startMonth = 1;
+    let endMonth = 12;
     if (cy === startYear) startMonth = this.min.getMonth() + 1;
     if (cy === endYear) endMonth = this.max.getMonth() + 1;
     _selected = 0;
     this._groups.push(
       Array(endMonth - startMonth + 1)
         .fill(0)
-        .map((v: number, idx: number) => {
-          const _v = startMonth + idx;
-          if (_v === month) _selected = idx;
-          return { label: _v + this._format.Mu, value: _v };
+        .map((_v: number, idx: number) => {
+          const val = startMonth + idx;
+          if (val === month) _selected = idx;
+          return { label: val + this._format.Mu, value: val };
         }),
     );
     this._selected.push(_selected);
@@ -176,18 +182,18 @@ export class DatePickerComponent
     // day
     if (this.type !== 'date-ym') {
       const cm = this._groups[1][_selected].value;
-      let startDay = 1,
-        endDay = new Date(year, month, 0).getDate();
+      let startDay = 1;
+      let endDay = new Date(year, month, 0).getDate();
       if (cy === startYear && cm === startMonth) startDay = this.min.getDate();
       if (cy === endYear && cm === endMonth) endDay = this.max.getDate();
       _selected = 0;
       this._groups.push(
         Array(endDay - startDay + 1)
           .fill(0)
-          .map((v: number, idx: number) => {
-            const _v = startDay + idx;
-            if (_v === day) _selected = idx;
-            return { label: _v + this._format.du, value: _v };
+          .map((_v: number, idx: number) => {
+            const val = startDay + idx;
+            if (val === day) _selected = idx;
+            return { label: val + this._format.du, value: val };
           }),
       );
       this._selected.push(_selected);
@@ -195,17 +201,17 @@ export class DatePickerComponent
   }
 
   private genDateTimeGroups() {
-    const hours = this._value.getHours(),
-      minutes = this._value.getMinutes();
+    const hours = this._value.getHours();
+    const minutes = this._value.getMinutes();
     // hours
     let _selected = 0;
     this._groups.push(
       Array(24)
         .fill(0)
-        .map((v: number, idx: number) => {
-          const _v = idx;
-          if (_v === hours) _selected = idx;
-          return { label: _v + this._format.hu, value: _v };
+        .map((_v: number, idx: number) => {
+          const val = idx;
+          if (val === hours) _selected = idx;
+          return { label: val + this._format.hu, value: val };
         }),
     );
     this._selected.push(_selected);
@@ -215,10 +221,10 @@ export class DatePickerComponent
     this._groups.push(
       Array(60)
         .fill(0)
-        .map((v: number, idx: number) => {
-          const _v = idx;
-          if (_v === minutes) _selected = idx;
-          return { label: _v + this._format.mu, value: _v };
+        .map((_v: number, idx: number) => {
+          const val = idx;
+          if (val === minutes) _selected = idx;
+          return { label: val + this._format.mu, value: val };
         }),
     );
     this._selected.push(_selected);
@@ -255,11 +261,11 @@ export class DatePickerComponent
   }
 
   ngOnDestroy(): void {
-    this._groups = null;
+    this._groups.length = 0;
   }
 
   private getFormatDate(date: Date) {
-    let f: string = '';
+    let f = '';
     if (this._format && this._format.format) f = this._format.format;
     else {
       switch (this.type) {
@@ -313,7 +319,7 @@ export class DatePickerComponent
     this.genGroups();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.initFlag) this.genGroups();
   }
 
@@ -333,17 +339,16 @@ export class DatePickerComponent
   writeValue(value: Date): void {
     if (value) this.genGroups();
     this._value = value;
-    this._pickerInstance._text =
-      value instanceof Date ? this.getFormatDate(value) : '';
+    this._pickerInstance._text = value instanceof Date ? this.getFormatDate(value)! : '';
   }
 
   private onChange: any = Function.prototype;
   private onTouched: any = Function.prototype;
 
-  public registerOnChange(fn: (_: any) => {}): void {
+  registerOnChange(fn: (_: any) => {}): void {
     this.onChange = fn;
   }
-  public registerOnTouched(fn: () => {}): void {
+  registerOnTouched(fn: () => {}): void {
     this.onTouched = fn;
   }
 

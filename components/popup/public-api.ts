@@ -1,3 +1,3 @@
-export { PopupComponent } from './popup.component';
-export { PopupConfig } from './popup.config';
-export { PopupModule } from './popup.module';
+export * from './popup.component';
+export * from './popup.config';
+export * from './popup.module';

@@ -1,0 +1,14 @@
+<aside
+  #sidebar
+  role="complementary"
+  [attr.aria-hidden]="!status"
+  [attr.aria-label]="ariaLabel"
+  class="weui-sidebar weui-sidebar__{{ status ? 'opened' : 'closed' }} weui-sidebar__{{ position }} weui-sidebar__{{
+    mode
+  }}"
+  [class.weui-sidebar__inert]="!status"
+  [ngClass]="sidebarClass"
+  [ngStyle]="_getStyle()"
+>
+  <ng-content></ng-content>
+</aside>

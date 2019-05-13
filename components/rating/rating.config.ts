@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class RatingConfig {
   /**
    * 图标数量（默认：5个）
@@ -25,7 +25,7 @@ export class RatingConfig {
   /**
    * 自定义图标，当存在时 `max`、`stateOff`、`stateOn` 失效
    */
-  states?: { on: string; off: string }[] = [];
+  states?: Array<{ on: string; off: string }> = [];
 
   /**
    * 图标 `title` 属性值，默认以 `1` 开始的索引值

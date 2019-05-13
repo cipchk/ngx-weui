@@ -1,28 +1,13 @@
-import {
-  Directive,
-  Input,
-  Renderer,
-  ElementRef,
-  OnInit,
-  OnChanges,
-  SimpleChanges,
-  forwardRef,
-} from '@angular/core';
-import {
-  Validator,
-  AbstractControl,
-  Validators,
-  NG_VALIDATORS,
-  ValidatorFn,
-  ValidationErrors,
-} from '@angular/forms';
-import { findParent, add, remove } from '../utils/dom';
+import { forwardRef, Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
+import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator, ValidatorFn } from '@angular/forms';
+import { add, findParent, remove, InputBoolean } from 'ngx-weui/core';
 
 /**
  * 文本框，指令是对文本框格式校验（邮箱、手机、身份证等）、视觉效果的增强而已
  */
 @Directive({
   selector: '[weui-input]',
+  exportAs: 'weuiInput',
   providers: [
     {
       provide: NG_VALIDATORS,
@@ -34,7 +19,6 @@ import { findParent, add, remove } from '../utils/dom';
 export class InputDirective implements OnInit, OnChanges, Validator {
   private parentEl: any;
   private ftEl: any;
-  private pattern: RegExp;
   private _validator: ValidatorFn;
   private _onChange: () => void;
 
@@ -57,7 +41,7 @@ export class InputDirective implements OnInit, OnChanges, Validator {
   /**
    * 是否自动清除内容中的空格
    */
-  @Input('weui-cleaner') cleaner: boolean = false;
+  @Input('weui-cleaner') @InputBoolean() cleaner: boolean = false;
 
   constructor(private el: ElementRef) {}
 
@@ -65,19 +49,19 @@ export class InputDirective implements OnInit, OnChanges, Validator {
     this.parentEl = findParent(this.el.nativeElement, '.weui-cell');
     if (!this.parentEl) {
       console.error('父DOM结构至少必须包含一个.weui-cell');
-      return ;
+      return;
     }
     // 检查是否有 weui-cell__ft
     this.ftEl = add(this.parentEl);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this._createValidator();
     if (this._onChange) this._onChange();
   }
 
   private _createValidator(): void {
-    let regex: RegExp = null;
+    let regex: RegExp | null = null;
     if (this.inputRegex) {
       if (typeof this.inputRegex === 'string') {
         regex = new RegExp(`^${this.inputRegex}$`);
@@ -117,8 +101,7 @@ export class InputDirective implements OnInit, OnChanges, Validator {
     this._validator = (control: AbstractControl): ValidationErrors | null => {
       let value: string = control.value;
       if (value == null || value.length === 0) {
-        if (this.required !== undefined)
-          return { icon: this.required, type: 'required', actualValue: value };
+        if (this.required !== undefined) return { icon: this.required, type: 'required', actualValue: value };
 
         return null;
       }
@@ -126,9 +109,7 @@ export class InputDirective implements OnInit, OnChanges, Validator {
         value = value.replace(/ /g, '');
         control.setValue(value, { emitEvent: false });
       }
-      return regex === null || regex.test(value)
-        ? null
-        : { icon: 'warn', type: 'regex', actualValue: value };
+      return regex === null || regex.test(value) ? null : { icon: 'warn', type: 'regex', actualValue: value };
     };
   }
 
@@ -137,6 +118,7 @@ export class InputDirective implements OnInit, OnChanges, Validator {
   }
 
   validate(c: AbstractControl): ValidationErrors | null {
+    if (!this.parentEl) return null;
     const ret = this._validator(c);
     if (ret === null) {
       this.parentEl.classList.remove('weui-cell_warn');

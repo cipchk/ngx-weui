@@ -1,0 +1,13 @@
+<span
+  class="weui-rating__container{{ _class ? ' ' + _class : '' }}"
+  tabindex="0"
+  role="slider"
+  aria-valuemin="0"
+  [attr.aria-valuemax]="_range.length"
+  [attr.aria-valuenow]="_value"
+>
+  <ng-template ngFor let-r [ngForOf]="_range" let-index="index">
+    <span class="weui-rating__sr-only">({{ index < _value ? '*' : ' ' }})</span>
+    <i (click)="_rate(index + 1)" [ngClass]="index < _value ? r.on : r.off" [title]="r.title"></i>
+  </ng-template>
+</span>

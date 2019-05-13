@@ -1,46 +1,26 @@
 import {
-  Component,
   forwardRef,
-  OnDestroy,
-  OnChanges,
-  SimpleChanges,
-  Input,
+  ChangeDetectionStrategy,
+  Component,
   EventEmitter,
-  Output,
-  ElementRef,
+  Input,
+  OnChanges,
+  OnDestroy,
   OnInit,
+  Output,
+  SimpleChanges,
+  ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Observable, Subscription } from 'rxjs';
+import { InputBoolean } from 'ngx-weui/core';
 import { PickerData } from './data';
 import { PickerOptions } from './options';
 import { PickerConfig } from './picker.config';
 
 @Component({
   selector: 'weui-picker',
-  template: `
-    <input type="text" class="weui-input" value="{{_text}}" placeholder="{{placeholder}}"
-      readonly="readonly" (focus)="_onFocus($event)"
-      (click)="_onShow()" [disabled]="disabled" *ngIf="options.type==='form'">
-    <div [hidden]="!_showP">
-      <div class="weui-mask" (click)="_onHide(false)"
-        [ngClass]="{'weui-animate-fade-in': _shown, 'weui-animate-fade-out': !_shown}"></div>
-      <div class="weui-picker"
-          [ngClass]="{'weui-animate-slide-up': _shown, 'weui-animate-slide-down': !_shown}">
-        <div class="weui-picker__hd">
-          <a href="#" class="weui-picker__action" (click)="_onCancel()">{{options.cancel}}</a>
-          <a href="#" class="weui-picker__action" (click)="_onConfirm()">{{options.confirm}}</a>
-        </div>
-        <div class="weui-picker__bd">
-          <weui-picker-group tappable
-            *ngFor="let items of _groups; let i = index;"
-            [items]="items"
-            [defaultIndex]="_selected[i]"
-            groupIndex="{{i}}" (change)="_onGroupChange($event, i)"></weui-picker-group>
-        </div>
-      </div>
-    </div>
-  `,
+  exportAs: 'weuiPicker',
+  templateUrl: './picker.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -48,9 +28,11 @@ import { PickerConfig } from './picker.config';
       multi: true,
     },
   ],
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
-export class PickerComponent
-  implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
+export class PickerComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
   /** 配置项 */
   @Input() options: PickerOptions;
 
@@ -71,18 +53,18 @@ export class PickerComponent
    * 支持string[]单列数组，单纯只是为了方便
    */
   @Input()
-  set groups(d: PickerData[][] | String[]) {
+  set groups(d: PickerData[][] | string[]) {
     if (!d) throw new Error('无效数据源');
     if (d.length > 0) {
       if (typeof d[0] === 'string') {
         d = [
-          (<string[]>d).map<PickerData>((v: string) => {
+          (d as string[]).map<PickerData>((v: string) => {
             return { label: v, value: v };
           }),
         ];
       }
     }
-    this._groups = <PickerData[][]>d;
+    this._groups = d as PickerData[][];
     this._selected = this._selected ? this._selected : Array(d.length).fill(0);
   }
 
@@ -90,23 +72,23 @@ export class PickerComponent
 
   /** 当 `options.type==='form'` 时，占位符文本 */
   @Input() placeholder: string;
-  @Input() disabled: boolean = false;
+  @Input() @InputBoolean() disabled: boolean = false;
   /**
    * 确认后回调当前选择数据（包括已选面板所有数据）
    *
    * `{ value: '10000', items: [ {}, {}, {} ] }`
    */
-  @Output() change = new EventEmitter<any>();
+  @Output() readonly change = new EventEmitter<any>();
   /** 列变更时回调 */
-  @Output() groupChange = new EventEmitter<any>();
+  @Output() readonly groupChange = new EventEmitter<any>();
   /** 取消后回调 */
-  @Output() cancel = new EventEmitter();
+  @Output() readonly cancel = new EventEmitter();
   /** 显示时回调 */
-  @Output() show = new EventEmitter();
+  @Output() readonly show = new EventEmitter();
   /** 隐藏后回调 */
-  @Output() hide = new EventEmitter();
+  @Output() readonly hide = new EventEmitter();
 
-  constructor(private el: ElementRef, private DEF: PickerConfig) { }
+  constructor(private DEF: PickerConfig) {}
 
   ngOnInit() {
     if (!this.options) this.parseOptions();
@@ -133,18 +115,16 @@ export class PickerComponent
   }
 
   private parseOptions() {
-    this.options = Object.assign(
-      <PickerOptions>{
-        type: 'form',
-        cancel: '取消',
-        confirm: '确定',
-        backdrop: true,
-        gruopCount: null,
-        separator: ' ',
-      },
-      this.DEF,
-      this.options,
-    );
+    this.options = {
+      type: 'form',
+      cancel: '取消',
+      confirm: '确定',
+      backdrop: true,
+      gruopCount: null,
+      separator: ' ',
+      ...this.DEF,
+      ...this.options,
+    } as PickerOptions;
   }
 
   private getSelecteItem() {
@@ -156,12 +136,9 @@ export class PickerComponent
     return res;
   }
 
-  _setText(res: any[] = null) {
-    if (res === null) res = this.getSelecteItem();
-    if (res.length > 0)
-      this._text = res
-        .map((i: any) => i.label || i.value)
-        .join(this.options.separator);
+  _setText(res: any[] | null = null) {
+    if (res == null) res = this.getSelecteItem();
+    if (res.length > 0) this._text = res.map((i: any) => i.label || i.value).join(this.options.separator);
 
     return this;
   }
@@ -209,7 +186,7 @@ export class PickerComponent
     }
   }
 
-  ngOnDestroy(): void { }
+  ngOnDestroy(): void {}
 
   writeValue(value: any): void {
     if (!value) this._text = '';
@@ -223,10 +200,10 @@ export class PickerComponent
   private onChange: any = Function.prototype;
   private onTouched: any = Function.prototype;
 
-  public registerOnChange(fn: (_: any) => {}): void {
+  registerOnChange(fn: (_: any) => {}): void {
     this.onChange = fn;
   }
-  public registerOnTouched(fn: () => {}): void {
+  registerOnTouched(fn: () => {}): void {
     this.onTouched = fn;
   }
 
@@ -234,7 +211,7 @@ export class PickerComponent
     this.disabled = isDisabled;
   }
 
-  _onFocus($event: FocusEvent) {
+  _onFocus() {
     arguments[0].target.blur();
   }
 }

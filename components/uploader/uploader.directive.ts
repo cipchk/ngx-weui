@@ -1,9 +1,10 @@
-import { Directive, Input, ElementRef, HostListener } from '@angular/core';
-import { UploaderOptions } from './uploader.options';
+import { Directive, ElementRef, HostListener, Input } from '@angular/core';
 import { Uploader } from './uploader.class';
+import { UploaderOptions } from './uploader.options';
 
 @Directive({
   selector: '[weui-uploader-file]',
+  exportAs: 'weuiUploaderFile',
 })
 export class UploaderFileDirective {
   /**

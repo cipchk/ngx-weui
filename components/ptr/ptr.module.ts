@@ -1,7 +1,6 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { PTRComponent } from './ptr.component';
-import { PTRConfig } from './ptr.config';
 
 @NgModule({
   imports: [CommonModule],
@@ -9,8 +8,4 @@ import { PTRConfig } from './ptr.config';
   exports: [PTRComponent],
   entryComponents: [PTRComponent],
 })
-export class PTRModule {
-  static forRoot(): ModuleWithProviders {
-    return { ngModule: PTRModule, providers: [PTRConfig] };
-  }
-}
+export class PTRModule {}

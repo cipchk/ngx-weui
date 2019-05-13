@@ -1,7 +1,6 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { PopupComponent } from './popup.component';
-import { PopupConfig } from './popup.config';
 
 @NgModule({
   imports: [CommonModule],
@@ -9,8 +8,4 @@ import { PopupConfig } from './popup.config';
   exports: [PopupComponent],
   entryComponents: [PopupComponent],
 })
-export class PopupModule {
-  static forRoot(): ModuleWithProviders {
-    return { ngModule: PopupModule, providers: [PopupConfig] };
-  }
-}
+export class PopupModule {}

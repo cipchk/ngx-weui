@@ -1,187 +1,247 @@
 <Page [ngClass]="'input'" [title]="'Input'" [subTitle]="'表单输入'" [spacing]="false">
-
-    <form #f="ngForm" (ngSubmit)="onSave()">
-        <div class="weui-cells__title">单选列表项</div>
-        <div class="weui-cells weui-cells_radio">
-            <label class="weui-cell weui-check__label" for="radio-{{i.id}}" *ngFor="let i of radio">
-                <div class="weui-cell__bd">
-                    <p>{{i.name}}</p>
-                </div>
-                <div class="weui-cell__ft">
-                    <input type="radio" class="weui-check" [(ngModel)]="res.radio" name="radio1" [value]="i" id="radio-{{i.id}}">
-                    <span class="weui-icon-checked"></span>
-                </div>
-            </label>
-            <a href="javascript:void(0);" (click)="radio.push({ id: radio[radio.length - 1].id + 1, name: 'new radio' })" class="weui-cell weui-cell_link">
-                <div class="weui-cell__bd">添加更多</div>
-            </a>
+  <form #f="ngForm" (ngSubmit)="onSave()">
+    <div class="weui-cells__title">单选列表项</div>
+    <div class="weui-cells weui-cells_radio">
+      <label class="weui-cell weui-check__label" for="radio-{{ i.id }}" *ngFor="let i of radio">
+        <div class="weui-cell__bd">
+          <p>{{ i.name }}</p>
         </div>
-        <div class="weui-cells__title">复选列表项</div>
-        <div class="weui-cells weui-cells_checkbox">
-            <label class="weui-cell weui-check__label" for="checkbox-{{i}}"
-                *ngFor="let i of checkbox; let index = index">
-                <div class="weui-cell__hd">
-                    <input type="checkbox" class="weui-check"
-                        [weui-checklist]="res.checkbox" name="radio1" [weui-value]="i" id="checkbox-{{i}}">
-                    <i class="weui-icon-checked"></i>
-                </div>
-                <div class="weui-cell__bd">
-                    <p>{{i}}</p>
-                </div>
-            </label>
-            <a href="javascript:void(0);" class="weui-cell weui-cell_link"
-                (click)="onAddCheckbox()">
-                <div class="weui-cell__bd">添加更多</div>
-            </a>
+        <div class="weui-cell__ft">
+          <input
+            type="radio"
+            class="weui-check"
+            [(ngModel)]="res.radio"
+            name="radio1"
+            [value]="i"
+            id="radio-{{ i.id }}"
+          />
+          <span class="weui-icon-checked"></span>
         </div>
-        <div class="weui-cells weui-cells_form">
-            <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label">qq</label></div>
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="tel" [(ngModel)]="res.qq" name="qq" placeholder="请输入qq号"
-                        weui-input="qq" weui-required>
-                </div>
-            </div>
-            <div class="weui-cell weui-cell_vcode">
-                <div class="weui-cell__hd">
-                    <label class="weui-label">手机号</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="tel" [(ngModel)]="res.mobile" name="mobile" placeholder="请输入手机号"
-                        weui-input="mobile" weui-required>
-                </div>
-                <div class="weui-cell__ft">
-                    <button class="weui-vcode-btn"
-                        [weui-vcode]="onSendCode"
-                        weui-seconds="10"
-                        weui-tpl="${num}s"
-                        weui-error="重新发送">获取验证码</button>
-                </div>
-            </div>
-            <div class="weui-cell">
-                <div class="weui-cell__hd"><label for="" class="weui-label">日期</label></div>
-                <div class="weui-cell__bd">
-                    <input class="weui-input" [(ngModel)]="res.date" name="date" type="date" value="">
-                </div>
-            </div>
-            <div class="weui-cell">
-                <div class="weui-cell__hd"><label for="" class="weui-label">时间</label></div>
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="datetime-local" [(ngModel)]="res.time" name="time" value="" placeholder="">
-                </div>
-            </div>
-            <div class="weui-cell weui-cell_vcode">
-                <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" placeholder="请输入验证码"
-                        [(ngModel)]="res.vcode" name="vcode"
-                        weui-input="number">
-                </div>
-                <div class="weui-cell__ft">
-                    <img class="weui-vcode-img" src="./assets/images/vcode.jpg">
-                </div>
-            </div>
+      </label>
+      <a
+        href="javascript:void(0);"
+        (click)="radio.push({ id: radio[radio.length - 1].id + 1, name: 'new radio' })"
+        class="weui-cell weui-cell_link"
+      >
+        <div class="weui-cell__bd">添加更多</div>
+      </a>
+    </div>
+    <div class="weui-cells__title">复选列表项</div>
+    <div class="weui-cells weui-cells_checkbox">
+      <label class="weui-cell weui-check__label" for="checkbox-{{ i }}" *ngFor="let i of checkbox; let index = index">
+        <div class="weui-cell__hd">
+          <input
+            type="checkbox"
+            class="weui-check"
+            [weui-checklist]="res.checkbox"
+            name="radio1"
+            [weui-value]="i"
+            id="checkbox-{{ i }}"
+          />
+          <i class="weui-icon-checked"></i>
         </div>
-        <div class="weui-cells__tips">底部说明文字底部说明文字</div>
-        <div class="weui-cells__title">表单报错</div>
-        <div class="weui-cells weui-cells_form">
-            <div class="weui-cell weui-cell_warn">
-                <div class="weui-cell__hd"><label for="" class="weui-label">卡号</label></div>
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="tel" value="weui input error" placeholder="请输入卡号"
-                        [(ngModel)]="res.no" name="no"
-                        weui-input="number" weui-requied weui-regex="[0-9]*">
-                </div>
-            </div>
+        <div class="weui-cell__bd">
+          <p>{{ i }}</p>
         </div>
-        <div class="weui-cells__title">开关</div>
-        <div class="weui-cells weui-cells_form">
-            <div class="weui-cell weui-cell_switch">
-                <div class="weui-cell__bd">标题文字</div>
-                <div class="weui-cell__ft">
-                    <input class="weui-switch" type="checkbox" [(ngModel)]="res.cho1" name="cho1">
-                </div>
-            </div>
-            <div class="weui-cell weui-cell_switch">
-                <div class="weui-cell__bd">兼容IE Edge的版本</div>
-                <div class="weui-cell__ft">
-                    <label for="switchCP" class="weui-switch-cp">
-                        <input id="switchCP" class="weui-switch-cp__input" type="checkbox" [(ngModel)]="res.cho2" name="cho2">
-                        <div class="weui-switch-cp__box"></div>
-                    </label>
-                </div>
-            </div>
+      </label>
+      <a href="javascript:void(0);" class="weui-cell weui-cell_link" (click)="onAddCheckbox()">
+        <div class="weui-cell__bd">添加更多</div>
+      </a>
+    </div>
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label class="weui-label">qq</label></div>
+        <div class="weui-cell__bd">
+          <input
+            class="weui-input"
+            type="tel"
+            [(ngModel)]="res.qq"
+            name="qq"
+            placeholder="请输入qq号"
+            weui-input="qq"
+            weui-required
+          />
         </div>
-        <div class="weui-cells__title">文本框</div>
-        <div class="weui-cells">
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" placeholder="请输入文本" [(ngModel)]="res.txt" name="txt">
-                </div>
-            </div>
+      </div>
+      <div class="weui-cell weui-cell_vcode">
+        <div class="weui-cell__hd">
+          <label class="weui-label">手机号</label>
         </div>
-        <div class="weui-cells__title">文本域</div>
-        <div class="weui-cells weui-cells_form">
-            <div class="weui-cell">
-                <div class="weui-cell__bd">
-                    <textarea class="weui-textarea" placeholder="中文算2个字符" rows="3" [(ngModel)]="res.txta" name="txta"
-                        weui-textarea weui-cn="2" maxlength="20"></textarea>
-                </div>
-            </div>
+        <div class="weui-cell__bd">
+          <input
+            class="weui-input"
+            type="tel"
+            [(ngModel)]="res.mobile"
+            name="mobile"
+            placeholder="请输入手机号"
+            weui-input="mobile"
+            weui-required
+          />
         </div>
-        <div class="weui-cells__title">选择</div>
-        <div class="weui-cells">
-            <div class="weui-cell weui-cell_select weui-cell_select-before">
-                <div class="weui-cell__hd">
-                    <select class="weui-select" name="select2" [(ngModel)]="res.worldpost" name="worldpost">
-                        <option value="1">+86</option>
-                        <option value="2">+80</option>
-                        <option value="3">+84</option>
-                        <option value="4">+87</option>
-                    </select>
-                </div>
-                <div class="weui-cell__bd">
-                    <input class="weui-input" type="tel" placeholder="请输入号码"
-                        [(ngModel)]="res.tel" name="tel"
-                        weui-input="tel">
-                </div>
-            </div>
+        <div class="weui-cell__ft">
+          <button
+            class="weui-vcode-btn"
+            [weui-vcode]="onSendCode"
+            weui-seconds="10"
+            weui-tpl="${num}s"
+            weui-error="重新发送"
+          >
+            获取验证码
+          </button>
         </div>
-        <div class="weui-cells__title">选择</div>
-        <div class="weui-cells">
-            <div class="weui-cell weui-cell_select">
-                <div class="weui-cell__bd">
-                    <select class="weui-select" name="select1" [(ngModel)]="res.contact" name="contact">
-                        <option value="1">微信号</option>
-                        <option value="2">QQ号</option>
-                        <option value="3">Email</option>
-                    </select>
-                </div>
-            </div>
-            <div class="weui-cell weui-cell_select weui-cell_select-after">
-                <div class="weui-cell__hd">
-                    <label for="" class="weui-label">国家/地区</label>
-                </div>
-                <div class="weui-cell__bd">
-                    <select class="weui-select" name="select2" [(ngModel)]="res.country" name="country">
-                        <option value="1">中国</option>
-                        <option value="2">美国</option>
-                        <option value="3">英国</option>
-                    </select>
-                </div>
-            </div>
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label for="" class="weui-label">日期</label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" [(ngModel)]="res.date" name="date" type="date" value="" />
         </div>
-        <label for="weuiAgree" class="weui-agree">
-            <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox" [(ngModel)]="res.agree" name="agree">
-            <span class="weui-agree__text">
-                阅读并同意<a href="javascript:void(0);">《相关条款》</a>
-            </span>
-        </label>
-        <div class="weui-btn-area">
-            <button class="weui-btn weui-btn_primary"
-                [disabled]="!f.form.valid || !f.form.dirty"
-                [ngClass]="{'weui-btn_disabled': !f.form.valid || !f.form.dirty}">确定</button>
+      </div>
+      <div class="weui-cell">
+        <div class="weui-cell__hd"><label for="" class="weui-label">时间</label></div>
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="datetime-local" [(ngModel)]="res.time" name="time" value="" placeholder="" />
         </div>
-    </form>
-    {{res | json}}
+      </div>
+      <div class="weui-cell weui-cell_vcode">
+        <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
+        <div class="weui-cell__bd">
+          <input
+            class="weui-input"
+            type="text"
+            placeholder="请输入验证码"
+            [(ngModel)]="res.vcode"
+            name="vcode"
+            weui-input="number"
+          />
+        </div>
+        <div class="weui-cell__ft">
+          <img class="weui-vcode-img" src="./assets/images/vcode.jpg" />
+        </div>
+      </div>
+    </div>
+    <div class="weui-cells__tips">底部说明文字底部说明文字</div>
+    <div class="weui-cells__title">表单报错</div>
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell weui-cell_warn">
+        <div class="weui-cell__hd"><label for="" class="weui-label">卡号</label></div>
+        <div class="weui-cell__bd">
+          <input
+            class="weui-input"
+            type="tel"
+            value="weui input error"
+            placeholder="请输入卡号"
+            [(ngModel)]="res.no"
+            name="no"
+            weui-input="number"
+            weui-requied
+            weui-regex="[0-9]*"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="weui-cells__title">开关</div>
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">标题文字</div>
+        <div class="weui-cell__ft">
+          <input class="weui-switch" type="checkbox" [(ngModel)]="res.cho1" name="cho1" />
+        </div>
+      </div>
+      <div class="weui-cell weui-cell_switch">
+        <div class="weui-cell__bd">兼容IE Edge的版本</div>
+        <div class="weui-cell__ft">
+          <label for="switchCP" class="weui-switch-cp">
+            <input id="switchCP" class="weui-switch-cp__input" type="checkbox" [(ngModel)]="res.cho2" name="cho2" />
+            <div class="weui-switch-cp__box"></div>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="weui-cells__title">文本框</div>
+    <div class="weui-cells">
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <input class="weui-input" type="text" placeholder="请输入文本" [(ngModel)]="res.txt" name="txt" />
+        </div>
+      </div>
+    </div>
+    <div class="weui-cells__title">文本域</div>
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <textarea
+            class="weui-textarea"
+            placeholder="中文算2个字符"
+            rows="3"
+            [(ngModel)]="res.txta"
+            name="txta"
+            weui-textarea
+            weui-cn="2"
+            maxlength="20"
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="weui-cells__title">选择</div>
+    <div class="weui-cells">
+      <div class="weui-cell weui-cell_select weui-cell_select-before">
+        <div class="weui-cell__hd">
+          <select class="weui-select" name="select2" [(ngModel)]="res.worldpost" name="worldpost">
+            <option value="1">+86</option>
+            <option value="2">+80</option>
+            <option value="3">+84</option>
+            <option value="4">+87</option>
+          </select>
+        </div>
+        <div class="weui-cell__bd">
+          <input
+            class="weui-input"
+            type="tel"
+            placeholder="请输入号码"
+            [(ngModel)]="res.tel"
+            name="tel"
+            weui-input="tel"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="weui-cells__title">选择</div>
+    <div class="weui-cells">
+      <div class="weui-cell weui-cell_select">
+        <div class="weui-cell__bd">
+          <select class="weui-select" name="select1" [(ngModel)]="res.contact" name="contact">
+            <option value="1">微信号</option>
+            <option value="2">QQ号</option>
+            <option value="3">Email</option>
+          </select>
+        </div>
+      </div>
+      <div class="weui-cell weui-cell_select weui-cell_select-after">
+        <div class="weui-cell__hd">
+          <label for="" class="weui-label">国家/地区</label>
+        </div>
+        <div class="weui-cell__bd">
+          <select class="weui-select" name="select2" [(ngModel)]="res.country" name="country">
+            <option value="1">中国</option>
+            <option value="2">美国</option>
+            <option value="3">英国</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <label for="weuiAgree" class="weui-agree">
+      <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox" [(ngModel)]="res.agree" name="agree" />
+      <span class="weui-agree__text"> 阅读并同意<a href="javascript:void(0);">《相关条款》</a> </span>
+    </label>
+    <div class="weui-btn-area">
+      <button
+        class="weui-btn weui-btn_primary"
+        [disabled]="!f.form.valid || !f.form.dirty"
+        [ngClass]="{ 'weui-btn_disabled': !f.form.valid || !f.form.dirty }"
+      >
+        确定
+      </button>
+    </div>
+  </form>
+  {{ res | json }}
 </Page>

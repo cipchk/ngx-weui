@@ -1,5 +1,5 @@
-import { Component, ViewEncapsulation, OnDestroy, OnInit } from '@angular/core';
-import { Observable, timer } from 'rxjs';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { timer } from 'rxjs';
 
 import { PTRComponent } from 'ngx-weui/ptr';
 
@@ -26,7 +26,7 @@ export class DemoPTRComponent implements OnInit {
   private genData() {
     this.items = Array(6)
       .fill({})
-      .map((v: any, idx: number) => {
+      .map((_v: any, idx: number) => {
         return `${idx}:${Math.random()}`;
       });
   }

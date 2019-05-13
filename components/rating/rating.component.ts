@@ -1,26 +1,23 @@
 import {
+  forwardRef,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   EventEmitter,
   Input,
-  Output,
-  forwardRef,
-  SimpleChanges,
   OnChanges,
+  Output,
+  SimpleChanges,
+  ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { InputBoolean } from 'ngx-weui/core';
 import { RatingConfig } from './rating.config';
 
 @Component({
   selector: 'weui-rating',
-  template: `
-  <span class="weui-rating__container{{_class ? ' ' + _class : ''}}" tabindex="0"
-      role="slider" aria-valuemin="0" [attr.aria-valuemax]="_range.length" [attr.aria-valuenow]="_value">
-    <ng-template ngFor let-r [ngForOf]="_range" let-index="index">
-      <span class="weui-rating__sr-only">({{ index < _value ? '*' : ' ' }})</span>
-      <i (click)="_rate(index + 1)" [ngClass]="index < _value ? r.on : r.off" [title]="r.title" ></i>
-    </ng-template>
-  </span>
-  `,
+  exportAs: 'weuiRating',
+  templateUrl: './rating.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -28,50 +25,50 @@ import { RatingConfig } from './rating.config';
       multi: true,
     },
   ],
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class RatingComponent implements ControlValueAccessor, OnChanges {
   /** 配置项 */
   @Input() config: RatingConfig;
   /** 是否只读模式，默认：`false` */
-  @Input() readonly: boolean = false;
+  @Input() @InputBoolean() readonly: boolean = false;
   /** 选中后回调，参数：选中值 */
-  @Output() selected = new EventEmitter<number>();
+  @Output() readonly selected = new EventEmitter<number>();
 
   _range: any[];
   _value: number;
   _preValue: number;
   _class: string = '';
 
-  constructor(private DEF: RatingConfig) { }
+  constructor(private DEF: RatingConfig, private cdr: ChangeDetectorRef) {}
 
-  _setConfig(cog: RatingConfig) {
-    const _c = Object.assign(
-      {
-        states: [],
-      },
-      this.DEF,
-      cog,
-    );
+  private setConfig(cog: RatingConfig) {
+    const _c = {
+      states: [],
+      ...this.DEF,
+      ...cog,
+    };
     this._class = _c.cls || '';
     const count = _c.states.length || _c.max;
     this._range = Array(count)
       .fill(0)
-      .map((v, i) => {
-        return Object.assign(
-          {
-            index: i,
-            on: _c.stateOn,
-            off: _c.stateOff,
-            title: _c.titles[i] || i + 1,
-          },
-          _c.states[i] || {},
-        );
+      .map((_v, i) => {
+        return {
+          index: i,
+          on: _c.stateOn,
+          off: _c.stateOff,
+          title: _c.titles![i] || i + 1,
+          ...(_c.states[i] || {}),
+        };
       });
+    this.cdr.detectChanges();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.config) {
-      this._setConfig(changes.config.currentValue);
+      this.setConfig(changes.config.currentValue);
     }
   }
 
@@ -80,27 +77,31 @@ export class RatingComponent implements ControlValueAccessor, OnChanges {
       this.writeValue(value);
       this.onChange(value);
     }
+    this.cdr.detectChanges();
   }
 
   writeValue(_value: any): void {
     if (_value % 1 !== _value) {
       this._value = Math.round(_value);
       this._preValue = _value;
+      this.cdr.detectChanges();
       return;
     }
 
     this._preValue = _value;
     this._value = _value;
+    this.cdr.detectChanges();
   }
 
   private onChange: any = Function.prototype;
-  private onTouched: any = Function.prototype;
+  // private onTouched: any = Function.prototype;
 
-  public registerOnChange(fn: (_: any) => {}): void {
+  registerOnChange(fn: (_: any) => {}): void {
     this.onChange = fn;
   }
-  public registerOnTouched(fn: () => {}): void {
-    this.onTouched = fn;
+
+  registerOnTouched(_fn: () => {}): void {
+    // this.onTouched = fn;
   }
 
   setDisabledState(isDisabled: boolean): void {

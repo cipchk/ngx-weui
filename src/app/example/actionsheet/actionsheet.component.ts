@@ -1,50 +1,45 @@
-import { Component, ViewEncapsulation, ViewChild, OnDestroy } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { SkinType } from 'ngx-weui';
-import { ActionSheetService, ActionSheetConfig, ActionSheetComponent } from "ngx-weui/actionsheet";
+import { ActionSheetComponent, ActionSheetConfig, ActionSheetService } from 'ngx-weui/actionsheet';
 
 @Component({
-    selector: 'example-actionsheet',
-    templateUrl: './actionsheet.component.html',
-    styleUrls: [ './actionsheet.component.scss' ],
-    encapsulation: ViewEncapsulation.None
+  selector: 'example-actionsheet',
+  templateUrl: './actionsheet.component.html',
+  styleUrls: ['./actionsheet.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class DemoActionSheetComponent {
+  @ViewChild('ios') iosAS: ActionSheetComponent;
+  @ViewChild('android') androidAS: ActionSheetComponent;
+  @ViewChild('auto') autoAS: ActionSheetComponent;
 
-    @ViewChild('ios') iosAS: ActionSheetComponent;
-    @ViewChild('android') androidAS: ActionSheetComponent;
-    @ViewChild('auto') autoAS: ActionSheetComponent;
+  menus: any[] = [{ text: '菜单一', value: 'test', other: 1 }, { text: '菜单三', value: 'test' }];
+  config: ActionSheetConfig = {
+    title: '这是一段标题',
+  } as ActionSheetConfig;
 
-    menus: any[] = [
-            { text: '菜单一', value: 'test', other: 1 },
-            { text: '菜单三', value: 'test' }
-        ];
-    config: ActionSheetConfig = <ActionSheetConfig>{
-        title: '这是一段标题'
-    };
+  constructor(private srv: ActionSheetService) {}
 
-    constructor(private srv: ActionSheetService) { }
+  onShow(type: SkinType) {
+    this.config.skin = type;
+    this.config = { ...this.config };
+    setTimeout(() => {
+      (this[`${type}AS`] as ActionSheetComponent).show().subscribe((res: any) => {
+        console.log('type', res);
+      });
+    }, 10);
+  }
 
-    onShow(type: SkinType) {
-        this.config.skin = type;
-        this.config = Object.assign({}, this.config);
-        setTimeout(() => {
-            (<ActionSheetComponent>this[`${type}AS`]).show().subscribe((res: any) => {
-                console.log('type', res);
-            });
-        }, 10);
-    }
+  onShowBySrv(type: SkinType, backdrop: boolean = true) {
+    this.config.skin = type;
+    this.config.backdrop = backdrop;
+    this.srv.show(this.menus, this.config).subscribe((res: any) => {
+      console.log(res);
+    });
+  }
 
-    onShowBySrv(type: SkinType, backdrop: boolean = true) {
-        this.config.skin = type;
-        this.config.backdrop = backdrop;
-        this.srv.show(this.menus, this.config).subscribe((res: any) => {
-            console.log(res);
-        });
-    }
-
-    ngOnDestroy() {
-        this.srv.destroyAll();
-    }
-
+  ngOnDestroy() {
+    this.srv.destroyAll();
+  }
 }

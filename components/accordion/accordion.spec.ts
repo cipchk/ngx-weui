@@ -1,9 +1,8 @@
-import { Component, DebugElement } from '@angular/core';
+import { Component } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
 
-import { AccordionModule } from './accordion.module';
 import { AccordionConfig } from './accordion.config';
+import { AccordionModule } from './accordion.module';
 
 const html = `
   <weui-accordion [collapsible]="collapsible" [activeFirst]="false">
@@ -33,10 +32,7 @@ function getPanels(element: HTMLElement): Element[] {
   return Array.from(element.querySelectorAll('weui-accordion-panel'));
 }
 
-function expectOpenPanels(
-  nativeEl: HTMLElement,
-  openPanelsDef: boolean[],
-): void {
+function expectOpenPanels(nativeEl: HTMLElement, openPanelsDef: boolean[]): void {
   const panels = getPanels(nativeEl);
   expect(panels.length).toBe(openPanelsDef.length);
   for (let i = 0; i < panels.length; i++) {
@@ -49,20 +45,15 @@ function expectOpenPanels(
   }
 }
 
-function hasTitle(element: HTMLElement, str: string): boolean {
-  return element.textContent === str;
-}
-
 describe('Component: Accordion', () => {
   let fixture: ComponentFixture<TestAccordionComponent>;
   let context: TestAccordionComponent;
   let element: any;
-  let dl: DebugElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestAccordionComponent],
-      imports: [AccordionModule.forRoot()],
+      imports: [AccordionModule],
     });
     TestBed.overrideComponent(TestAccordionComponent, {
       set: { template: html },
@@ -70,7 +61,6 @@ describe('Component: Accordion', () => {
     fixture = TestBed.createComponent(TestAccordionComponent);
     context = fixture.componentInstance;
     element = fixture.nativeElement;
-    dl = fixture.debugElement;
     fixture.detectChanges();
   });
 
@@ -86,9 +76,7 @@ describe('Component: Accordion', () => {
 
   it('should toggle panel via click header', () => {
     const panels = getPanels(element);
-    ((panels[1] as HTMLDivElement).querySelector(
-      '[role="tab"]',
-    ) as HTMLDivElement).click();
+    ((panels[1] as HTMLDivElement).querySelector('[role="tab"]') as HTMLDivElement).click();
     fixture.detectChanges();
     expectOpenPanels(element, [false, true, false]);
   });
@@ -106,28 +94,24 @@ describe('Component: Accordion', () => {
     fixture.detectChanges();
     expectOpenPanels(element, [false, false, false]);
     const panels = getPanels(element);
-    ((panels[1] as HTMLDivElement).querySelector(
-      '[role="tab"]',
-    ) as HTMLDivElement).click();
+    ((panels[1] as HTMLDivElement).querySelector('[role="tab"]') as HTMLDivElement).click();
     expectOpenPanels(element, [false, false, false]);
   });
 });
 
 describe('Component: Accordion: Auto', () => {
   let fixture: ComponentFixture<TestAccordionComponent>;
-  let context: any;
   let element: any;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestAccordionComponent],
-      imports: [AccordionModule.forRoot()],
+      imports: [AccordionModule],
     });
     TestBed.overrideComponent(TestAccordionComponent, {
       set: { template: htmlAutoActiveFirst },
     });
     fixture = TestBed.createComponent(TestAccordionComponent);
-    context = fixture.componentInstance;
     element = fixture.nativeElement;
     fixture.detectChanges();
   });
@@ -139,14 +123,14 @@ describe('Component: Accordion: Auto', () => {
 
 @Component({ template: '' })
 class TestAccordionComponent {
-  public collapsible: boolean = true;
-  public panels: any[] = [
+  collapsible: boolean = true;
+  panels: any[] = [
     { title: 'title1', content: 'content1', active: false, disabled: false },
     { title: 'title2', content: 'content2', active: false, disabled: false },
     { title: 'title3', content: 'content3', active: false, disabled: false },
   ];
 
-  public constructor(config: AccordionConfig) {
+  constructor(config: AccordionConfig) {
     Object.assign(this, config);
   }
 }

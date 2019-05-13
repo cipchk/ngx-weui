@@ -1,28 +1,28 @@
 <Page [ngClass]="'dialog'" [title]="'Dialog'" [subTitle]="'对话框'">
+  <div class="weui-cells__title">使用组件形式</div>
+  <button weui-button weui-type="default" (click)="onShow('ios', 1)">iOS Dialog样式一</button>
+  <button weui-button weui-type="default" (click)="onShow('ios', 2)">iOS Dialog样式二</button>
+  <button weui-button weui-type="default" (click)="onShow('ios', 3)">iOS Dialog样式三</button>
+  <button weui-button weui-type="default" (click)="onShow('android', 1)">Android Dialog样式一</button>
+  <button weui-button weui-type="default" (click)="onShow('android', 2)">Android Dialog样式二</button>
+  <button weui-button weui-type="default" (click)="onShow('android', 3)">Android Dialog样式三</button>
+  <button weui-button weui-type="default" (click)="onShow('auto', 1)">Auto Dialog样式一</button>
+  <button weui-button weui-type="default" (click)="onShow('auto', 2)">Auto Dialog样式二</button>
+  <button weui-button weui-type="default" (click)="onShow('auto', 3)">Auto Dialog样式三</button>
+  <div class="weui-cells__title">使用组件Prompt形式</div>
+  <button weui-button weui-type="default" *ngFor="let i of promptTypes" (click)="onShowPrompt(i)">{{ i }}框</button>
+  <div class="weui-cells__title">使用Service形式</div>
+  <button weui-button weui-type="default" (click)="onShowBySrv('ios', false)">iOS Dialog</button>
+  <button weui-button weui-type="default" (click)="onShowBySrv('android', false)">Android Dialog</button>
+  <button weui-button weui-type="default" (click)="onShowBySrv('auto', true)">自动形式（且点背景可关闭）</button>
+  <button weui-button weui-type="default" (click)="onShowOfHtml()">内容为HTML</button>
+  <div class="weui-cells__title">使用Service Prompt形式</div>
+  <button weui-button weui-type="default" *ngFor="let i of promptTypes" (click)="onShowPrompt(i, true)">
+    {{ i }}框
+  </button>
 
-    <div class="weui-cells__title">使用组件形式</div>
-    <button weui-button weui-type="default" (click)="onShow('ios', 1)">iOS Dialog样式一</button>
-    <button weui-button weui-type="default" (click)="onShow('ios', 2)">iOS Dialog样式二</button>
-    <button weui-button weui-type="default" (click)="onShow('ios', 3)">iOS Dialog样式三</button>
-    <button weui-button weui-type="default" (click)="onShow('android', 1)">Android Dialog样式一</button>
-    <button weui-button weui-type="default" (click)="onShow('android', 2)">Android Dialog样式二</button>
-    <button weui-button weui-type="default" (click)="onShow('android', 3)">Android Dialog样式三</button>
-    <button weui-button weui-type="default" (click)="onShow('auto', 1)">Auto Dialog样式一</button>
-    <button weui-button weui-type="default" (click)="onShow('auto', 2)">Auto Dialog样式二</button>
-    <button weui-button weui-type="default" (click)="onShow('auto', 3)">Auto Dialog样式三</button>
-    <div class="weui-cells__title">使用组件Prompt形式</div>
-    <button weui-button weui-type="default" *ngFor="let i of promptTypes" (click)="onShowPrompt(i)">{{i}}框</button>
-    <div class="weui-cells__title">使用Service形式</div>
-    <button weui-button weui-type="default" (click)="onShowBySrv('ios', false)">iOS Dialog</button>
-    <button weui-button weui-type="default" (click)="onShowBySrv('android', false)">Android Dialog</button>
-    <button weui-button weui-type="default" (click)="onShowBySrv('auto', true)">自动形式（且点背景可关闭）</button>
-    <button weui-button weui-type="default" (click)="onShowOfHtml()">内容为HTML</button>
-    <div class="weui-cells__title">使用Service Prompt形式</div>
-    <button weui-button weui-type="default" *ngFor="let i of promptTypes" (click)="onShowPrompt(i, true)">{{i}}框</button>
-
-    <!--忽必将对话框组件放在底部-->
-    <weui-dialog #ios [config]="config"></weui-dialog>
-    <weui-dialog #android [config]="config"></weui-dialog>
-    <weui-dialog #auto [config]="config"></weui-dialog>
-
+  <!--忽必将对话框组件放在底部-->
+  <weui-dialog #ios [config]="config"></weui-dialog>
+  <weui-dialog #android [config]="config"></weui-dialog>
+  <weui-dialog #auto [config]="config"></weui-dialog>
 </Page>

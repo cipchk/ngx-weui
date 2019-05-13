@@ -31,7 +31,7 @@ npm install g2-mobile --save-dev
 **使用示例：**
 
 ```html
-<canvas weui-chart-g2 #c1="chart-g2" style="width:100%;height:200px;"></canvas>
+<canvas weui-chart-g2 #c1="weuiChartG2" style="width:100%;height:200px;"></canvas>
 ```
 
 ```typescript

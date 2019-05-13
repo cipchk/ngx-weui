@@ -1,37 +1,24 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  OnDestroy,
-  Output,
-  Input,
   EventEmitter,
+  Input,
   OnChanges,
-  SimpleChanges,
+  OnDestroy,
   OnInit,
+  Output,
+  SimpleChanges,
+  ViewEncapsulation,
 } from '@angular/core';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { Observable, Observer, Subscription } from 'rxjs';
 import { PopupConfig } from './popup.config';
 
 @Component({
   selector: 'weui-popup',
-  template: `
-    <div class="weui-mask" [@visibility]="_visibility" (click)="hide(true)"></div>
-    <div class="weui-popup" [ngClass]="{'weui-popup_toggle': _shownAnt}">
-      <div class="weui-popup__hd" *ngIf="!config.is_full">
-        <a href="#" class="weui-popup__action" (click)="_onCancel()">{{config.cancel}}</a>
-        <a href="#" class="weui-popup__action" (click)="_onConfirm()">{{config.confirm}}</a>
-      </div>
-      <div [ngClass]="{'weui-popup_full': config.is_full }">
-        <ng-content></ng-content>
-      </div>
-    </div>
-  `,
+  exportAs: 'weuiPopup',
+  templateUrl: './popup.component.html',
   animations: [
     trigger('visibility', [
       state('show', style({ opacity: 1 })),
@@ -42,30 +29,32 @@ import { PopupConfig } from './popup.config';
   host: {
     '[hidden]': '!shown',
   },
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class PopupComponent implements OnInit, OnDestroy, OnChanges {
+  private observer: Observer<boolean>;
+  shown: boolean = false;
+  _shownAnt = false;
+
   /**
    * 配置项
    */
   @Input() config: PopupConfig;
   /** 取消回调 */
-  @Output() cancel = new EventEmitter();
+  @Output() readonly cancel = new EventEmitter();
   /** 确认回调 */
-  @Output() confirm = new EventEmitter();
-
-  private shown: boolean = false;
-  _shownAnt = false;
-
-  private observer: Observer<boolean>;
+  @Output() readonly confirm = new EventEmitter();
 
   get _visibility(): string {
     return this._shownAnt ? 'show' : 'hide';
   }
 
-  constructor(private DEF: PopupConfig) {}
+  constructor(private DEF: PopupConfig, private cdr: ChangeDetectorRef) {}
 
   private parseConfig() {
-    this.config = Object.assign({}, this.DEF, this.config);
+    this.config = { ...this.DEF, ...this.config };
   }
 
   ngOnInit() {
@@ -73,7 +62,7 @@ export class PopupComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ('config' in changes) this.parseConfig();
+    if (changes.config) this.parseConfig();
   }
 
   /**
@@ -83,6 +72,7 @@ export class PopupComponent implements OnInit, OnDestroy, OnChanges {
     this.shown = true;
     setTimeout(() => {
       this._shownAnt = true;
+      this.cdr.detectChanges();
     }, 10);
     return Observable.create((observer: Observer<boolean>) => {
       this.observer = observer;
@@ -98,6 +88,7 @@ export class PopupComponent implements OnInit, OnDestroy, OnChanges {
     if (is_backdrop === true && this.config.backdrop === false) return false;
 
     this._shownAnt = false;
+    this.cdr.detectChanges();
     setTimeout(() => {
       this.shown = false;
     }, 300);
@@ -130,7 +121,7 @@ export class PopupComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnDestroy(): void {
     if (this.observer && this.observer instanceof Subscription) {
-      (<Subscription>this.observer).unsubscribe();
+      (this.observer as Subscription).unsubscribe();
     }
   }
 }

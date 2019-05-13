@@ -1,19 +1,13 @@
-import { NgModule, Component } from '@angular/core';
-import {
-  inject,
-  TestBed,
-  ComponentFixtureAutoDetect,
-  ComponentFixture,
-} from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
+import { Component } from '@angular/core';
+import { inject, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoaderService } from '../utils/loader.service';
+import { LoaderService } from 'ngx-weui/core';
 import { JWeiXinModule } from './jweixin.module';
 import { JWeiXinService } from './jweixin.service';
 
 class MockLoaderService {
   loadScript() {
-    return new Promise((resolve, reject) => {
+    return new Promise(resolve => {
       resolve({ loaded: true });
     });
   }
@@ -21,31 +15,24 @@ class MockLoaderService {
 
 describe('jweixin: JWeiXinService', () => {
   let fixture: ComponentFixture<EmptyTestComponent>;
-  let el: HTMLElement;
   let service: JWeiXinService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [EmptyTestComponent],
-      imports: [JWeiXinModule.forRoot()],
-      providers: [
-        JWeiXinService,
-        { provide: LoaderService, useClass: MockLoaderService },
-      ],
+      imports: [JWeiXinModule],
+      providers: [JWeiXinService, { provide: LoaderService, useClass: MockLoaderService }],
     });
 
     fixture = TestBed.createComponent(EmptyTestComponent);
-    el = fixture.nativeElement;
     fixture.detectChanges();
   });
 
-  beforeEach(
-    inject([JWeiXinService], (loader: JWeiXinService) => {
-      service = loader;
-    }),
-  );
+  beforeEach(inject([JWeiXinService], (loader: JWeiXinService) => {
+    service = loader;
+  }));
 
-  it('#get', (done: () => void) => {
+  it('#get', done => {
     service.get().then(status => {
       expect(status).toBe(true);
       done();

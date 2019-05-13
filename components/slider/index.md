@@ -10,6 +10,7 @@ module: SliderModule
 
 参数 | 说明 | 类型 | 默认值
 ----|------|-----|------
+weui-show-value | 是否显示文本 | `boolean` | `true`
 weui-min | 允许的最小值 | `number` | `0`
 weui-max | 允许的最大值 | `number` | `100`
 weui-step | 步长 | `number` | `1`

@@ -1,13 +1,16 @@
 import {
-  Component,
-  Input,
-  Output,
   forwardRef,
+  ChangeDetectionStrategy,
+  Component,
   EventEmitter,
+  Input,
   OnDestroy,
+  Output,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { InputBoolean } from 'ngx-weui/core';
 import { PickerOptions } from './options';
 import { PickerComponent } from './picker.component';
 
@@ -16,14 +19,20 @@ import { PickerComponent } from './picker.component';
  */
 @Component({
   selector: 'weui-city-picker',
+  exportAs: 'weuiCityPicker',
   template: `
-    <weui-picker [placeholder]="placeholder"
-      [groups]="_groups" [defaultSelect]="_selected" [disabled]="disabled" [options]="options"
+    <weui-picker
+      [placeholder]="placeholder"
+      [groups]="_groups"
+      [defaultSelect]="_selected"
+      [disabled]="disabled"
+      [options]="options"
       (show)="_onShow()"
       (hide)="_onHide()"
       (change)="_onCityChange($event)"
       (groupChange)="_onCityGroupChange($event)"
-      (cancel)="_onCityCancelChange()"></weui-picker>
+      (cancel)="_onCityCancelChange()"
+    ></weui-picker>
   `,
   providers: [
     {
@@ -32,12 +41,15 @@ import { PickerComponent } from './picker.component';
       multi: true,
     },
   ],
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
   @ViewChild(PickerComponent) _pickerInstance: PickerComponent;
 
   _value: string;
-  _groups: any[] = [];
+  _groups: any[] | null = [];
   _selected: number[] = [];
   private _tmpData: any;
 
@@ -57,34 +69,28 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
   @Input() options: PickerOptions;
   /** 当options.type=='form'时，占位符文本 */
   @Input() placeholder: string;
-  @Input() disabled: boolean;
+  @Input() @InputBoolean() disabled: boolean;
   /**
    * 确认后回调当前选择数据（包括已选面板所有数据）
    *
    * `{ value: '10000', items: [ {}, {}, {} ] }`
    */
-  @Output() change = new EventEmitter<any>();
+  @Output() readonly change = new EventEmitter<any>();
   /** 列变更时回调 */
-  @Output() groupChange = new EventEmitter<any>();
+  @Output() readonly groupChange = new EventEmitter<any>();
   /** 取消后回调 */
-  @Output() cancel = new EventEmitter<any>();
+  @Output() readonly cancel = new EventEmitter<any>();
   /** 显示时回调 */
-  @Output() show = new EventEmitter<any>();
+  @Output() readonly show = new EventEmitter<any>();
   /** 隐藏后回调 */
-  @Output() hide = new EventEmitter<any>();
+  @Output() readonly hide = new EventEmitter<any>();
 
   ngOnDestroy(): void {
     this._tmpData = null;
     this._groups = null;
   }
 
-  private parseData(
-    data: any,
-    subKey: any,
-    selected: any[] = [],
-    group: any[] = [],
-    newselected: any[] = [],
-  ): any {
+  private parseData(data: any, subKey: any, selected: any[] = [], group: any[] = [], newselected: any[] = []): any {
     let _selected = 0;
 
     if (Array.isArray(selected) && selected.length > 0) {
@@ -121,12 +127,7 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
   /**
    * 将值转换成位置
    */
-  private valueToSelect(
-    data: any,
-    subKey: any,
-    dept: number = 1,
-    newSelected: any[] = [],
-  ): any {
+  private valueToSelect(data: any, subKey: any, dept: number = 1, newSelected: any[] = []): any {
     const code = (this._value.substr(0, dept * 2) + '0000').substr(0, 6);
     let _selected = data.findIndex((w: any) => w[this.dataMap.value] === code);
     if (_selected <= -1) {
@@ -155,8 +156,7 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
 
   _onCityGroupChange(res: any) {
     this._selected[res.groupIndex] = res.index;
-    if (res.groupIndex !== 2)
-      this.parseData(this._tmpData, this.dataMap.items, this._selected);
+    if (res.groupIndex !== 2) this.parseData(this._tmpData, this.dataMap.items, this._selected);
 
     this.groupChange.emit(res);
   }
@@ -193,10 +193,10 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
   private onChange: any = Function.prototype;
   private onTouched: any = Function.prototype;
 
-  public registerOnChange(fn: (_: any) => {}): void {
+  registerOnChange(fn: (_: any) => {}): void {
     this.onChange = fn;
   }
-  public registerOnTouched(fn: () => {}): void {
+  registerOnTouched(fn: () => {}): void {
     this.onTouched = fn;
   }
 

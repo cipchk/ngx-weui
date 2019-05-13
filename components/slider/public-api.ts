@@ -1,2 +1,2 @@
-export { SliderDirective } from './slider';
+export { SliderComponent as SliderDirective } from './slider.component';
 export { SliderModule } from './slider.module';

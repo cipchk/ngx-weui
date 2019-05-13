@@ -1,15 +1,10 @@
 import { Component } from '@angular/core';
-import {
-  ComponentFixture,
-  TestBed,
-  fakeAsync,
-  tick,
-} from '@angular/core/testing';
+import { fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
 import { RatingComponent } from './rating.component';
-import { RatingModule } from './rating.module';
 import { RatingConfig } from './rating.config';
+import { RatingModule } from './rating.module';
 
 describe('Component: Rating', () => {
   describe('Init', () => {
@@ -19,10 +14,11 @@ describe('Component: Rating', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [RatingModule.forRoot()],
+        imports: [RatingModule],
       });
       fixture = TestBed.createComponent(RatingComponent);
-      fixture.componentInstance._setConfig(null);
+      // tslint:disable-next-line: no-string-literal
+      fixture.componentInstance['setConfig'](null!);
       context = fixture.debugElement.componentInstance;
 
       el = fixture.nativeElement;
@@ -45,7 +41,8 @@ describe('Component: Rating', () => {
     });
 
     it('should working with changed value', () => {
-      context._setConfig({
+      // tslint:disable-next-line: no-string-literal
+      context['setConfig']({
         max: 3,
         titles: ['one', 'two'],
         stateOff: 'fa-circle',
@@ -71,75 +68,67 @@ describe('Component: Rating', () => {
     let context: TestRatingComponent;
     let element: HTMLElement;
 
-    beforeEach(
-      fakeAsync(() => {
-        TestBed.configureTestingModule({
-          declarations: [TestRatingComponent],
-          imports: [RatingModule.forRoot(), FormsModule],
-        });
-        TestBed.overrideComponent(TestRatingComponent, {
-          set: { template: tpl },
-        });
-        fixture = TestBed.createComponent(TestRatingComponent);
-        context = fixture.debugElement.componentInstance;
-        element = fixture.nativeElement;
-        fixture.detectChanges();
-      }),
-    );
+    beforeEach(fakeAsync(() => {
+      TestBed.configureTestingModule({
+        declarations: [TestRatingComponent],
+        imports: [RatingModule, FormsModule],
+      });
+      TestBed.overrideComponent(TestRatingComponent, {
+        set: { template: tpl },
+      });
+      fixture = TestBed.createComponent(TestRatingComponent);
+      context = fixture.debugElement.componentInstance;
+      element = fixture.nativeElement;
+      fixture.detectChanges();
+    }));
 
-    it(
-      'check simple click',
-      fakeAsync(() => {
-        const items = element.querySelectorAll('.weui-rating__sr-only');
-        const icons = element.querySelectorAll('i');
+    it('check simple click', fakeAsync(() => {
+      const items = element.querySelectorAll('.weui-rating__sr-only');
+      const icons = element.querySelectorAll('i');
 
-        expect(items[0].innerHTML).toEqual('( )');
-        expect(icons[0].classList).toContain('weui-icon-circle');
-        expect(icons[0].classList).not.toContain('weui-icon-download');
+      expect(items[0].innerHTML).toEqual('( )');
+      expect(icons[0].classList).toContain('weui-icon-circle');
+      expect(icons[0].classList).not.toContain('weui-icon-download');
 
-        icons[1].click();
-        tick(200);
-        fixture.detectChanges();
+      icons[1].click();
+      tick(200);
+      fixture.detectChanges();
 
-        expect(items[0].innerHTML).toEqual('(*)');
-        expect(icons[0].classList).not.toContain('weui-icon-circle');
-        expect(icons[0].classList).toContain('weui-icon-download');
-      }),
-    );
+      expect(items[0].innerHTML).toEqual('(*)');
+      expect(icons[0].classList).not.toContain('weui-icon-circle');
+      expect(icons[0].classList).toContain('weui-icon-download');
+    }));
 
-    it(
-      'check disabling',
-      fakeAsync(() => {
-        const items = element.querySelectorAll('.weui-rating__sr-only');
-        const icons = element.querySelectorAll('i');
+    it('check disabling', fakeAsync(() => {
+      const items = element.querySelectorAll('.weui-rating__sr-only');
+      const icons = element.querySelectorAll('i');
 
-        expect(items[0].innerHTML).toEqual('( )');
-        expect(icons[0].classList).toContain('weui-icon-circle');
-        expect(icons[0].classList).not.toContain('weui-icon-download');
+      expect(items[0].innerHTML).toEqual('( )');
+      expect(icons[0].classList).toContain('weui-icon-circle');
+      expect(icons[0].classList).not.toContain('weui-icon-download');
 
-        context.readonly = true;
-        fixture.detectChanges();
+      context.readonly = true;
+      fixture.detectChanges();
 
-        icons[1].click();
-        tick(200);
-        fixture.detectChanges();
+      icons[1].click();
+      tick(200);
+      fixture.detectChanges();
 
-        expect(items[0].innerHTML).toEqual('( )');
-        expect(icons[0].classList).toContain('weui-icon-circle');
-        expect(icons[0].classList).not.toContain('weui-icon-download');
+      expect(items[0].innerHTML).toEqual('( )');
+      expect(icons[0].classList).toContain('weui-icon-circle');
+      expect(icons[0].classList).not.toContain('weui-icon-download');
 
-        context.readonly = false;
-        fixture.detectChanges();
+      context.readonly = false;
+      fixture.detectChanges();
 
-        icons[1].click();
-        tick(200);
-        fixture.detectChanges();
+      icons[1].click();
+      tick(200);
+      fixture.detectChanges();
 
-        expect(items[0].innerHTML).toEqual('(*)');
-        expect(icons[0].classList).not.toContain('weui-icon-circle');
-        expect(icons[0].classList).toContain('weui-icon-download');
-      }),
-    );
+      expect(items[0].innerHTML).toEqual('(*)');
+      expect(icons[0].classList).not.toContain('weui-icon-circle');
+      expect(icons[0].classList).toContain('weui-icon-download');
+    }));
   });
 });
 

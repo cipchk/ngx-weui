@@ -4,7 +4,7 @@ export type PositionType = 'left' | 'right' | 'top' | 'bottom';
 
 export type ModeType = 'over' | 'slide';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SidebarConfig {
   /**
    * 位置方向，默认：`left`

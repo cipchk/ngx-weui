@@ -1,22 +1,15 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import {
+  ChangeDetectionStrategy,
   Component,
-  HostListener,
-  ElementRef,
-  HostBinding,
+  EventEmitter,
   Input,
   OnChanges,
-  SimpleChanges,
-  EventEmitter,
   Output,
+  SimpleChanges,
+  ViewEncapsulation,
 } from '@angular/core';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
-import { isImage, genImageUrl } from '../utils/browser';
+import { genImageUrl, InputBoolean } from 'ngx-weui/core';
 
 /**
  * 数据对象
@@ -42,25 +35,8 @@ export interface GalleryItem {
 
 @Component({
   selector: 'weui-gallery',
-  template: `
-    <div *ngIf="_imgs" class="weui-galleries">
-      <ng-template ngFor let-item [ngForOf]="_imgs">
-        <div class="weui-gallery"
-          [ngStyle]="{'display': _showd ? 'block' : 'none'}"
-          [@visibility]="_visibility"
-          (@visibility.start)="_antStart($event)"
-          (@visibility.done)="_antDone($event)"
-          (click)="_onHide()">
-          <span class="weui-gallery__img" [ngStyle]="{ 'background-image': 'url(' + item?.url + ')'}"></span>
-          <div class="weui-gallery__opr" *ngIf="canDelete">
-            <a href="#" class="weui-gallery__del" (click)="_onDel(item)">
-              <i class="weui-icon-delete weui-icon_gallery-delete"></i>
-            </a>
-          </div>
-        </div>
-      </ng-template>
-    </div>
-  `,
+  exportAs: 'weuiGallery',
+  templateUrl: './gallery.component.html',
   animations: [
     trigger('visibility', [
       state('show', style({ opacity: 1 })),
@@ -68,6 +44,9 @@ export interface GalleryItem {
       transition('hide <=> show', [animate(200)]),
     ]),
   ],
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class GalleryComponent implements OnChanges {
   _imgs: any[];
@@ -82,23 +61,24 @@ export class GalleryComponent implements OnChanges {
   /**
    * 是否允许删除，默认：`true`
    */
-  @Input() canDelete: boolean = true;
+  @Input() @InputBoolean() canDelete: boolean = true;
 
   /**
    * 删除回调
    */
-  @Output() delete = new EventEmitter<any>();
+  @Output() readonly delete = new EventEmitter<any>();
 
   /**
    * 隐藏回调
    */
-  @Output() hide = new EventEmitter<any>();
+  @Output() readonly hide = new EventEmitter<any>();
 
   /**
    * 标记是否显示，支持双向绑定
    */
-  @Input() show: boolean = false;
-  @Output() showChange = new EventEmitter<boolean>();
+  @Input() @InputBoolean() show: boolean = false;
+  @Output() readonly showChange = new EventEmitter<boolean>();
+
   _showd: boolean = false;
   get _visibility(): string {
     return this.show ? 'show' : 'hide';
@@ -127,37 +107,37 @@ export class GalleryComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ('imgs' in changes) this.parseImgs();
+    if (changes.imgs) this.parseImgs();
   }
 
   private parseImgs() {
-    let imgs = this.imgs;
+    let imgs = this.imgs as any;
     if (Array.isArray(imgs)) {
       if (imgs.length > 0) {
         if (typeof imgs[0] === 'string') {
-          imgs = (<string[]>imgs).map((url: string) => {
-            return { url: url };
+          imgs = (imgs as string[]).map((url: string) => {
+            return { url };
           });
         } else {
-          imgs = (<GalleryItem[]>imgs).map((item: GalleryItem) => {
+          imgs = (imgs as GalleryItem[]).map((item: GalleryItem) => {
             if (item.file) item.url = genImageUrl(item.file);
             return item;
           });
         }
       }
     } else {
-      if (typeof imgs === 'string') imgs = [{ url: imgs }];
-      else {
+      if (typeof imgs === 'string') {
+        imgs = [{ url: imgs }];
+      } else {
         const imgUrl = genImageUrl(imgs);
-        if (imgUrl) imgs = [{ url: imgUrl }];
+        if (imgUrl) {
+          imgs = [{ url: imgUrl }];
+        }
       }
     }
 
     // todo: 永远只返回一个
     // 针对未来可能直接上下个
-    this._imgs = Object.assign(
-      [],
-      imgs && (<any[]>imgs).length > 0 ? imgs.slice(0, 1) : [],
-    );
+    this._imgs = imgs && (imgs as any[]).length > 0 ? imgs.slice(0, 1) : [];
   }
 }

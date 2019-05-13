@@ -1,14 +1,9 @@
-import { Tree, SchematicsException } from '@angular-devkit/schematics';
-import { Schema } from './schema';
+import { SchematicsException, Tree } from '@angular-devkit/schematics';
 import { getStylesPath } from '../utils/ast';
 import { InsertChange } from '../utils/devkit-utils/change';
-import {
-  getProjectFromWorkspace,
-  getWorkspace,
-  Project,
-  Workspace,
-} from '../utils/devkit-utils/config';
+import { getProjectFromWorkspace, getWorkspace, Project, Workspace } from '../utils/devkit-utils/config';
 import { createCustomTheme } from './custom-theme';
+import { Schema } from './schema';
 
 export function addThemeToAppStyles(options: Schema): (host: Tree) => Tree {
   return function(host: Tree): Tree {
@@ -25,11 +20,7 @@ export function addThemeToAppStyles(options: Schema): (host: Tree) => Tree {
     }
     const buffer = host.read(stylesPath);
     if (buffer) {
-      const insertion = new InsertChange(
-        stylesPath,
-        0,
-        createCustomTheme(project),
-      );
+      const insertion = new InsertChange(stylesPath, 0, createCustomTheme(project));
       const recorder = host.beginUpdate(stylesPath);
       recorder.insertLeft(insertion.pos, insertion.toAdd);
       host.commitUpdate(recorder);
@@ -58,9 +49,9 @@ function isProjectUsingDefaultConfig(project: Project) {
 
   return (
     project.architect &&
-    project.architect['build'] &&
-    project.architect['build']['builder'] === defaultBuilder &&
-    project.architect['test'] &&
-    project.architect['build']['builder'] === defaultBuilder
+    project.architect.build &&
+    project.architect.build.builder === defaultBuilder &&
+    project.architect.test &&
+    project.architect.build.builder === defaultBuilder
   );
 }

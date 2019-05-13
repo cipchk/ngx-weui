@@ -1,19 +1,21 @@
 import {
-  Component,
   AfterContentInit,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ContentChildren,
+  ElementRef,
+  EventEmitter,
+  Input,
   OnChanges,
   OnDestroy,
-  SimpleChanges,
-  ChangeDetectionStrategy,
-  QueryList,
-  ContentChildren,
-  Input,
-  Output,
-  EventEmitter,
-  ChangeDetectorRef,
-  ElementRef,
   OnInit,
+  Output,
+  QueryList,
+  SimpleChanges,
+  ViewEncapsulation,
 } from '@angular/core';
+import { InputBoolean } from 'ngx-weui/core';
 import { SidebarComponent } from './sidebar.component';
 
 /**
@@ -21,25 +23,25 @@ import { SidebarComponent } from './sidebar.component';
  */
 @Component({
   selector: 'weui-sidebar-container',
-  template: `
-  <ng-content select="weui-sidebar"></ng-content>
-  <div *ngIf="_showBackdrop" aria-hidden="true" class="weui-mask" (click)="_onBackdropClicked($event)"></div>
-  <div class="weui-sidebar__content" [ngStyle]="_getStyles()">
-    <ng-content></ng-content>
-  </div>
-  `,
+  exportAs: 'weuiSidebarContainer',
+  templateUrl: './sidebar-container.component.html',
+  preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
-export class SidebarContainerComponent
-  implements AfterContentInit, OnChanges, OnInit, OnDestroy {
+export class SidebarContainerComponent implements AfterContentInit, OnChanges, OnInit, OnDestroy {
   @ContentChildren(SidebarComponent) _sidebars: QueryList<SidebarComponent>;
 
-  @Input() _showBackdrop: boolean = false;
-  @Output() _showBackdropChange = new EventEmitter<boolean>();
+  @Input() @InputBoolean() _showBackdrop: boolean = false;
+  @Output() readonly _showBackdropChange = new EventEmitter<boolean>();
 
   private orgOverflowX = '';
 
-  constructor(private _ref: ChangeDetectorRef, private _el: ElementRef) { }
+  private get body(): HTMLBodyElement {
+    return document.querySelector('body')!;
+  }
+
+  constructor(private _ref: ChangeDetectorRef, private _el: ElementRef) {}
 
   ngAfterContentInit(): void {
     this._onToggle();
@@ -52,20 +54,19 @@ export class SidebarContainerComponent
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if ('_showBackdrop' in changes) {
-      this._showBackdropChange.emit(changes['_showBackdrop'].currentValue);
+    if (changes._showBackdrop) {
+      this._showBackdropChange.emit(changes._showBackdrop.currentValue);
     }
   }
 
   ngOnInit() {
-    const $body = document.querySelector('body');
-    this.orgOverflowX = $body.style.overflowX;
-    $body.style.overflowX = 'hidden';
+    this.orgOverflowX = this.body.style.overflowX!;
+    this.body.style.overflowX = 'hidden';
   }
 
   ngOnDestroy(): void {
     this._unsubscribe();
-    document.querySelector('body').style.overflowX = this.orgOverflowX;
+    this.body.style.overflowX = this.orgOverflowX;
   }
 
   _getStyles(): CSSStyleDeclaration {
@@ -76,18 +77,14 @@ export class SidebarContainerComponent
         }
 
         if (sidebar.mode === 'slide') {
-          let transformStyle = null;
+          let transformStyle: string | null = null;
 
           if (sidebar.status) {
-            const isLeftOrTop: boolean =
-              sidebar.position === 'left' || sidebar.position === 'top';
-            const isLeftOrRight: boolean =
-              sidebar.position === 'left' || sidebar.position === 'right';
+            const isLeftOrTop = sidebar.position === 'left' || sidebar.position === 'top';
+            const isLeftOrRight = sidebar.position === 'left' || sidebar.position === 'right';
 
-            const transformDir: string = isLeftOrRight ? 'X' : 'Y';
-            const transformAmt: string = `${isLeftOrTop ? '' : '-'}${
-              isLeftOrRight ? sidebar._width : sidebar._height
-              }`;
+            const transformDir = isLeftOrRight ? 'X' : 'Y';
+            const transformAmt = `${isLeftOrTop ? '' : '-'}${isLeftOrRight ? sidebar._width : sidebar._height}`;
 
             transformStyle = `translate${transformDir}(${transformAmt}px)`;
           }
@@ -165,6 +162,7 @@ export class SidebarContainerComponent
       let hasOpen = false;
 
       const _sidebars = this._sidebars.toArray();
+      // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < _sidebars.length; i++) {
         const sidebar: SidebarComponent = _sidebars[i];
 

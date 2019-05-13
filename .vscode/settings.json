@@ -1,13 +1,25 @@
 // Place your settings in this file to overwrite default and user settings.
 {
-  "javascript.implicitProjectConfig.checkJs": true,
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
     "**/node_modules/*/**": true,
     "**/dist/*/**": true,
-    "**/coverage/*/**": true,
-    "**/tools/*/**": true
+    "**/coverage/*/**": true
   },
-  "tslint.autoFixOnSave": true
+  "html.format.wrapAttributes": "force-aligned",
+  "html.format.wrapLineLength": 100,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+  },
+  "[markdown]": {
+    "editor.formatOnSave": false
+  },
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "prettier.stylelintIntegration": true
 }

@@ -1,5 +1,8 @@
 .page.button .button-sp-area {
-    margin: 0 auto;
+  margin: 15px auto;
+  padding: 15px;
+  text-align: center;
+  &.cell {
     padding: 15px 0;
-    width: 60%;
+  }
 }

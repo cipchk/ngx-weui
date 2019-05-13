@@ -1,0 +1,10 @@
+<div class="weui-mask" [@visibility]="_visibility" (click)="hide(true)"></div>
+<div class="weui-popup" [ngClass]="{ 'weui-popup_toggle': _shownAnt }">
+  <div class="weui-popup__hd" *ngIf="!config.is_full">
+    <a href="#" class="weui-popup__action" (click)="_onCancel()">{{ config.cancel }}</a>
+    <a href="#" class="weui-popup__action" (click)="_onConfirm()">{{ config.confirm }}</a>
+  </div>
+  <div [ngClass]="{ 'weui-popup_full': config.is_full }">
+    <ng-content></ng-content>
+  </div>
+</div>

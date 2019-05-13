@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { ProgressComponent } from './progress.component';
 
 @NgModule({
@@ -8,8 +8,4 @@ import { ProgressComponent } from './progress.component';
   exports: [ProgressComponent],
   entryComponents: [ProgressComponent],
 })
-export class ProgressModule {
-  static forRoot(): ModuleWithProviders {
-    return { ngModule: ProgressModule, providers: [] };
-  }
-}
+export class ProgressModule {}

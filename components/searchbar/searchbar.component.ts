@@ -1,41 +1,27 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  HostListener,
   ElementRef,
-  HostBinding,
-  Input,
-  OnChanges,
-  SimpleChanges,
-  Output,
   EventEmitter,
-  ViewChild,
+  Input,
   OnDestroy,
   OnInit,
+  Output,
+  ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
-import { SearchBarConfig } from './searchbar.config';
+import { InputNumber } from 'ngx-weui/core';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { SearchBarConfig } from './searchbar.config';
 
 @Component({
-selector: 'weui-searchbar',
-template: `
-  <div class="weui-search-bar" [ngClass]="{'weui-search-bar_focusing': _focus}">
-    <form class="weui-search-bar__form" (ngSubmit)="_onSubmit($event)">
-      <div class="weui-search-bar__box">
-        <i class="weui-icon-search"></i>
-        <input #term type="search" autocomplete="off" name="q" class="weui-search-bar__input"
-          [placeholder]="placeholder" [(ngModel)]="_q" (ngModelChange)="_onSearch()"
-          (focus)="_focus=true" (blur)="_onBlur()" />
-        <a href="javascript:" class="weui-icon-clear" (click)="_onClear()"></a>
-      </div>
-      <label class="weui-search-bar__label" (click)="_doFocus()">
-        <i class="weui-icon-search"></i>
-        <span>{{placeholder}}</span>
-      </label>
-    </form>
-    <a href="javascript:" class="weui-search-bar__cancel-btn" (click)="_onCancel()">{{cancelText}}</a>
-  </div>
-  `,
+  selector: 'weui-searchbar',
+  exportAs: 'weuiSearchbar',
+  templateUrl: './searchbar.component.html',
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class SearchBarComponent implements OnInit, OnDestroy {
   _q: string = '';
@@ -55,18 +41,18 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   /**
    * 去抖时长（单位：ms），默认：`300`
    */
-  @Input() debounceTime: number;
+  @Input() @InputNumber() debounceTime: number;
   /** 搜索回调 */
-  @Output() search = new EventEmitter<string>();
+  @Output() readonly search = new EventEmitter<string>();
   /** 取消回调 */
-  @Output() cancel = new EventEmitter();
+  @Output() readonly cancel = new EventEmitter();
   /** 清空回调 */
-  @Output() clear = new EventEmitter();
+  @Output() readonly clear = new EventEmitter();
   /** 提交回调（指的是键盘回车后） */
-  @Output() submit = new EventEmitter<string>();
+  @Output() readonly submit = new EventEmitter<string>();
 
   _focus: boolean = false;
-  @ViewChild('term') _term: ElementRef;
+  @ViewChild('term') private _term: ElementRef<HTMLInputElement>;
 
   private _sub: Subscription;
   private _subject = new Subject<string>();
@@ -77,7 +63,10 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this._sub = this._subject
-      .pipe(debounceTime(this.debounceTime), distinctUntilChanged())
+      .pipe(
+        debounceTime(this.debounceTime),
+        distinctUntilChanged(),
+      )
       .subscribe((q: string) => {
         this.search.emit(q);
       });

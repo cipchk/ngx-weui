@@ -1,23 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
+import { CloseSidebarDirective } from './close.directive';
 import { SidebarContainerComponent } from './sidebar-container.component';
 import { SidebarComponent } from './sidebar.component';
-import { CloseSidebarDirective } from './close.directive';
 import { SidebarService } from './sidebar.service';
-import { SidebarConfig } from './sidebar.config';
+
+const COMPONENTS = [SidebarContainerComponent, SidebarComponent, CloseSidebarDirective];
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [
-    SidebarContainerComponent,
-    SidebarComponent,
-    CloseSidebarDirective,
-  ],
-  exports: [SidebarContainerComponent, SidebarComponent, CloseSidebarDirective],
+  declarations: COMPONENTS,
+  exports: COMPONENTS,
   providers: [SidebarService],
 })
-export class SidebarModule {
-  static forRoot(): ModuleWithProviders {
-    return { ngModule: SidebarModule, providers: [SidebarConfig] };
-  }
-}
+export class SidebarModule {}

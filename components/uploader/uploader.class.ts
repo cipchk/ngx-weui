@@ -1,17 +1,17 @@
-import { Optional, Inject } from '@angular/core';
-import { UploaderOptions, FilterFunction } from './uploader.options';
+import { Inject, Optional } from '@angular/core';
 import { FileItem } from './file-item.class';
-import { UploaderConfig } from './uploader.config';
 import { FileLikeObject } from './file-like-object.class';
 import { FileType } from './file-type.class';
 import { ParsedResponseHeaders } from './interface';
+import { UploaderConfig } from './uploader.config';
+import { FilterFunction, UploaderOptions } from './uploader.options';
 
 /**
  * 内置HTML5上传组件
  */
 export class Uploader {
   private _options: UploaderOptions;
-  private _queue: Array<FileItem> = [];
+  private _queue: FileItem[] = [];
   private _progress: number = 0;
   private _isUploading: boolean = false;
   private _nextIndex: number = 0;
@@ -67,7 +67,7 @@ export class Uploader {
    * Creates an instance of Uploader.
    */
   constructor(
-    options?: UploaderOptions,
+    options: UploaderOptions,
     @Inject(UploaderConfig)
     @Optional()
     private globalConfig?: UploaderConfig,
@@ -82,53 +82,52 @@ export class Uploader {
    * @param includeOldQueue 是否包括已存在队列中的文件
    */
   setOptions(options: UploaderOptions, includeOldQueue: boolean = true) {
-    this._options = Object.assign(
-      {
-        filters: [],
-        disableMultipart: false,
-        method: 'POST',
-        alias: 'file',
-        withCredentials: true,
-        auto: false,
-        limit: -1,
-        size: -1,
-        removeAfterUpload: false,
-      },
-      this.globalConfig,
-      this._options,
-      options,
-    );
+    this._options = {
+      filters: [],
+      disableMultipart: false,
+      method: 'POST',
+      alias: 'file',
+      withCredentials: true,
+      auto: false,
+      limit: -1,
+      size: -1,
+      removeAfterUpload: false,
+      ...this.globalConfig,
+      ...this._options,
+      ...options,
+    } as UploaderOptions;
 
     // 数量
     if (this._options.limit !== -1)
-      this._options.filters.unshift({
+      this._options.filters!.unshift({
         name: 'queueLimit',
         fn: this._queueLimitFilter,
       });
 
     // 大小
     if (this._options.size !== -1)
-      this._options.filters.unshift({
+      this._options.filters!.unshift({
         name: 'fileSize',
         fn: this._fileSizeFilter,
       });
 
     // 类型
     if (this._options.types)
-      this._options.filters.unshift({
+      this._options.filters!.unshift({
         name: 'fileType',
         fn: this._fileTypeFilter,
       });
 
     // mime类型
     if (this._options.mimes)
-      this._options.filters.unshift({
+      this._options.filters!.unshift({
         name: 'mimeType',
         fn: this._mimeTypeFilter,
       });
 
     // 对已经存在的队列重置所有配置信息
     if (includeOldQueue) {
+      // tslint:disable-next-line: prefer-for-of
       for (let i = 0; i < this._queue.length; i++) {
         this._queue[i].setOptions(this._options);
       }
@@ -136,34 +135,22 @@ export class Uploader {
   }
 
   private _queueLimitFilter(): boolean {
-    return (
-      this._options.limit === undefined ||
-      this._queue.length < this._options.limit
-    );
+    return this._options.limit === undefined || this._queue.length < this._options.limit;
   }
 
-  private _fileSizeFilter(item: FileLikeObject): boolean {
-    return !(this._options.size && item.size > this._options.size);
+  private _fileSizeFilter(item?: FileLikeObject, _options?: UploaderOptions): boolean {
+    return !(this._options.size && item!.size > this._options.size);
   }
 
-  private _mimeTypeFilter(item: FileLikeObject): boolean {
-    return !(
-      this._options.mimes && this._options.mimes.indexOf(item.type) === -1
-    );
+  private _mimeTypeFilter(item?: FileLikeObject, _options?: UploaderOptions): boolean {
+    return !(this._options.mimes && this._options.mimes.indexOf(item!.type) === -1);
   }
 
-  private _fileTypeFilter(item: FileLikeObject): boolean {
-    return !(
-      this._options.types &&
-      this._options.types.indexOf(FileType.getMimeClass(item)) === -1
-    );
+  private _fileTypeFilter(item?: FileLikeObject, _options?: UploaderOptions): boolean {
+    return !(this._options.types && this._options.types.indexOf(FileType.getMimeClass(item!)) === -1);
   }
 
-  private _isValidFile(
-    file: FileLikeObject,
-    filters: FilterFunction[],
-    options: UploaderOptions,
-  ): boolean {
+  private _isValidFile(file: FileLikeObject, filters: FilterFunction[], options: UploaderOptions): boolean {
     this._failFilterIndex = -1;
     return !filters.length
       ? true
@@ -175,15 +162,13 @@ export class Uploader {
 
   /** 过滤器，如果未指定采用内置 */
   private _getFilters(filters: FilterFunction[] | string): FilterFunction[] {
-    if (!filters) return this._options.filters;
+    if (!filters) return this._options.filters!;
     if (Array.isArray(filters)) return filters;
     if (typeof filters === 'string') {
-      const names = filters.match(/[^\s,]+/g);
-      return this._options.filters.filter(
-        (filter: any) => names.indexOf(filter.name) !== -1,
-      );
+      const names = filters.match(/[^\s,]+/g)!;
+      return this._options.filters!.filter((filter: any) => names.indexOf(filter.name) !== -1);
     }
-    return this._options.filters;
+    return this._options.filters!;
   }
 
   private _getIndexOfItem(value: any): number {
@@ -209,14 +194,10 @@ export class Uploader {
    * @param options 强制重新指定新 `options` 内容
    * @param filters 强制重新指定新 `filters` 内容
    */
-  addToQueue(
-    files: File[],
-    options?: UploaderOptions,
-    filters?: FilterFunction[] | string,
-  ) {
+  addToQueue(files: File[], options?: UploaderOptions, filters?: FilterFunction[] | string) {
     const list: File[] = [];
     for (const file of files) list.push(file);
-    const arrayOfFilters = this._getFilters(filters);
+    const arrayOfFilters = this._getFilters(filters!);
     const count = this._queue.length;
     const addedFileItems: FileItem[] = [];
     if (!options) {
@@ -224,14 +205,14 @@ export class Uploader {
     }
     list.map((some: File) => {
       const temp = new FileLikeObject(some);
-      if (this._isValidFile(temp, arrayOfFilters, options)) {
-        const fileItem = new FileItem(this, some, options);
+      if (this._isValidFile(temp, arrayOfFilters, options!)) {
+        const fileItem = new FileItem(this, some, options!);
         addedFileItems.push(fileItem);
         this._queue.push(fileItem);
         if (this._options.onFileQueued) this._options.onFileQueued(fileItem);
       } else {
         const filter = arrayOfFilters[this._failFilterIndex];
-        if (this._options.onError) this._options.onError(temp, filter, options);
+        if (this._options.onError) this._options.onError(temp, filter, options!);
       }
     });
 
@@ -239,7 +220,7 @@ export class Uploader {
       this._progress = this._getTotalProgress();
     }
 
-    if (this.options.auto) {
+    if (this.options!.auto) {
       this.uploadAll();
     }
   }
@@ -249,7 +230,7 @@ export class Uploader {
    *
    * @param value FileItem对象或下标
    */
-  removeFromQueue(value: FileItem | Number): void {
+  removeFromQueue(value: FileItem | number): void {
     const index = this._getIndexOfItem(value);
     const item = this._queue[index];
     if (item.isUploading) {
@@ -293,8 +274,8 @@ export class Uploader {
     const item = this._queue[index];
     if (item && item.isUploading) {
       if (item.options.abortTransport) {
-        this._onCancelItem(item, null, null, null);
-        this._onCompleteItem(item, null, null, null);
+        this._onCancelItem(item);
+        this._onCompleteItem(item, null!, null!, null!);
         item.options.abortTransport(item);
       } else {
         if (item._xhr) item._xhr.abort();
@@ -306,9 +287,7 @@ export class Uploader {
    * 上传队列中所有未上传的文件
    */
   uploadAll(): void {
-    const items = this.getNotUploadedItems().filter(
-      (item: FileItem) => !item.isUploading,
-    );
+    const items = this.getNotUploadedItems().filter((item: FileItem) => !item.isUploading);
     if (!items.length) {
       return;
     }
@@ -337,12 +316,10 @@ export class Uploader {
 
     // 自实现
     if (item.options.uploadTransport) {
-      item.options.uploadTransport
-        .apply(this, [item])
-        .subscribe((response: any) => {
-          this._onSuccessItem(item, response, 0, null);
-          this._onCompleteItem(item, response, 0, null);
-        });
+      item.options.uploadTransport.apply(this, [item]).subscribe((response: any) => {
+        this._onSuccessItem(item, response, 0, null!);
+        this._onCompleteItem(item, response, 0, null!);
+      });
       return this;
     }
 
@@ -355,7 +332,7 @@ export class Uploader {
       sendable = new FormData();
 
       Object.keys(this._options.params || {}).forEach((key: string) =>
-        sendable.append(key, this._options.params[key]),
+        sendable.append(key, this._options.params![key]),
       );
 
       sendable.append(item.options.alias, item._file, item.file.name);
@@ -364,16 +341,14 @@ export class Uploader {
     }
 
     xhr.upload.onprogress = (event: any) => {
-      const progress = Math.round(
-        event.lengthComputable ? event.loaded * 100 / event.total : 0,
-      );
+      const progress = Math.round(event.lengthComputable ? (event.loaded * 100) / event.total : 0);
       this._onProgressItem(item, progress);
     };
     xhr.onload = () => {
       const headers = this._parseHeaders(xhr.getAllResponseHeaders());
       const response = this._transformResponse(xhr.response, headers);
       const gist = this._isSuccessCode(xhr.status) ? 'Success' : 'Error';
-      const method = '_on' + gist + 'Item';
+      const method = `_on${gist}Item`;
       (this as any)[method](item, response, xhr.status, headers);
       this._onCompleteItem(item, response, xhr.status, headers);
     };
@@ -386,11 +361,11 @@ export class Uploader {
     xhr.onabort = () => {
       const headers = this._parseHeaders(xhr.getAllResponseHeaders());
       const response = this._transformResponse(xhr.response, headers);
-      this._onCancelItem(item, response, xhr.status, headers);
+      this._onCancelItem(item);
       this._onCompleteItem(item, response, xhr.status, headers);
     };
-    xhr.open(item.options.method, item.options.url, true);
-    xhr.withCredentials = item.options.withCredentials;
+    xhr.open(item.options.method!, item.options.url!, true);
+    xhr.withCredentials = item.options.withCredentials!;
     if (item.options.headers && item.options.headers.length > 0) {
       for (const header of item.options.headers) {
         xhr.setRequestHeader(header.name, header.value);
@@ -405,11 +380,9 @@ export class Uploader {
       return value;
     }
     const notUploaded = this.getNotUploadedItems().length;
-    const uploaded = notUploaded
-      ? this._queue.length - notUploaded
-      : this._queue.length;
+    const uploaded = notUploaded ? this._queue.length - notUploaded : this._queue.length;
     const ratio = 100 / this._queue.length;
-    const current = value * ratio / 100;
+    const current = (value * ratio) / 100;
     return Math.round(uploaded * ratio + current);
   }
 
@@ -429,16 +402,13 @@ export class Uploader {
         .toLowerCase();
       val = line.slice(i + 1).trim();
       if (key) {
-        parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
+        parsed[key] = parsed[key] ? `${parsed[key]}, ${val}` : val;
       }
     });
     return parsed;
   }
 
-  private _transformResponse(
-    response: string,
-    headers: ParsedResponseHeaders,
-  ): string {
+  private _transformResponse(response: string, _headers: ParsedResponseHeaders): string {
     return response;
   }
 
@@ -452,39 +422,19 @@ export class Uploader {
     item._onProgress(progress);
   }
 
-  _onErrorItem(
-    item: FileItem,
-    response: string,
-    status: number,
-    headers: ParsedResponseHeaders,
-  ): void {
+  _onErrorItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): void {
     item._onError(response, status, headers);
   }
 
-  private _onSuccessItem(
-    item: FileItem,
-    response: string,
-    status: number,
-    headers: ParsedResponseHeaders,
-  ): void {
+  private _onSuccessItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): void {
     item._onSuccess(response, status, headers);
   }
 
-  private _onCancelItem(
-    item: FileItem,
-    response: string,
-    status: number,
-    headers: ParsedResponseHeaders,
-  ): void {
-    item._onCancel(response, status, headers);
+  private _onCancelItem(item: FileItem): void {
+    item._onCancel();
   }
 
-  _onCompleteItem(
-    item: FileItem,
-    response: string,
-    status: number,
-    headers: ParsedResponseHeaders,
-  ): void {
+  _onCompleteItem(item: FileItem, response: string, status: number, headers: ParsedResponseHeaders): void {
     item._onComplete(response, status, headers);
     const nextItem = this.getReadyItems[0];
     this._isUploading = false;

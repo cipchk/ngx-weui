@@ -1,0 +1,23 @@
+<div
+  class="weui-ptr__loader"
+  [ngStyle]="{
+    'height.px': config.height,
+    'margin-top.px': -config.height! + _pullPercent / (100 / config.height!),
+    transition: _animating ? 'all .5s' : 'none'
+  }"
+>
+  <div style="flex: 1 1 0%; padding: 5px;" *ngIf="!config.customIcon">
+    <span
+      [innerHTML]="_pullPercent !== 100 ? config.pullIcon : loading ? config.loadingIcon : config.successIcon"
+      class="weui-ptr__icon"
+      style="display:inline-block"
+      [ngStyle]="{
+        transform: 'rotate(' + -(_pullPercent !== 100 ? _pullPercent * 1.8 : 0) + 'deg)',
+        color: _pullPercent !== 100 ? '#5f5f5f' : '#1AAD19'
+      }"
+    ></span>
+    <p *ngIf="_lastLabel" class="weui-ptr__label">{{ _lastLabel }}</p>
+  </div>
+  <ng-content select="[loader]"></ng-content>
+</div>
+<div class="weui-ptr__content"><ng-content></ng-content></div>

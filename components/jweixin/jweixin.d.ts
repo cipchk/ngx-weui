@@ -107,10 +107,7 @@ export interface ICheckJsApi extends CallbackBase {
   /** 需要检测的JS接口列表，所有JS接口列表见附录2 */
   jsApiList: ApiMethod[];
   /** 以键值对的形式返回，可用的api值true，不可用为false */
-  success(res: {
-    checkResult: { [api: string]: boolean };
-    errMsg: string;
-  }): void;
+  success(res: { checkResult: { [api: string]: boolean }; errMsg: string }): void;
 }
 
 /** 判断当前客户端版本是否支持指定JS接口 */
@@ -133,9 +130,7 @@ export interface onMenuShareTimelineParam extends onMenuShareBase {
 }
 
 /** 获取“分享到朋友圈”按钮点击状态及自定义分享内容接口 */
-export declare function onMenuShareTimeline(
-  params: onMenuShareTimelineParam,
-): void;
+export declare function onMenuShareTimeline(params: onMenuShareTimelineParam): void;
 
 export interface onMenuShareAppMessageParam extends onMenuShareTimelineParam {
   /** 分享描述 */
@@ -147,9 +142,7 @@ export interface onMenuShareAppMessageParam extends onMenuShareTimelineParam {
 }
 
 /** 获取“分享给朋友”按钮点击状态及自定义分享内容接口 */
-export declare function onMenuShareAppMessage(
-  params: onMenuShareAppMessageParam,
-): void;
+export declare function onMenuShareAppMessage(params: onMenuShareAppMessageParam): void;
 
 export interface onMenuShareQQParam extends onMenuShareTimelineParam {
   /** 分享描述 */
@@ -186,11 +179,7 @@ export interface chooseImageParam extends CallbackBase {
   /** 可以指定来源是相册还是相机，默认二者都有 */
   sourceType?: ImageSourceType[];
   /** 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片 */
-  success(res: {
-    sourceType: string;
-    localIds: string[];
-    errMsg: string;
-  }): void;
+  success(res: { sourceType: string; localIds: string[]; errMsg: string }): void;
 }
 
 /** 拍照或从手机相册中选图接口 */
@@ -398,9 +387,7 @@ export interface startSearchBeaconsParam extends CallbackBase {
  * 开启查找周边ibeacon设备接口
  * 注：这里成功的回调是 `complete`
  */
-export declare function startSearchBeacons(
-  params: startSearchBeaconsParam,
-): void;
+export declare function startSearchBeacons(params: startSearchBeaconsParam): void;
 
 export interface stopSearchBeaconsParam extends CallbackBase {
   /** 关闭查找完成后的回调函数 */
@@ -472,9 +459,7 @@ export interface openProductSpecificViewParam extends CallbackBase {
 }
 
 /** 跳转微信商品页接口 */
-export declare function openProductSpecificView(
-  params: openProductSpecificViewParam,
-): void;
+export declare function openProductSpecificView(params: openProductSpecificViewParam): void;
 
 export interface chooseCardParam extends CallbackBase {
   /** 门店ID。shopID用于筛选出拉起带有指定location_list(shopID)的卡券列表，非必填。 */

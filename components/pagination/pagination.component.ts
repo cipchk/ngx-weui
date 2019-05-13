@@ -1,52 +1,48 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  Input,
-  Output,
   EventEmitter,
+  Input,
   OnChanges,
-  SimpleChanges,
+  Output,
+  ViewEncapsulation,
 } from '@angular/core';
-import { PaginationMode } from './pagination.type';
+import { InputBoolean, InputNumber } from 'ngx-weui/core';
 import { PaginationConfig } from './pagination.config';
+import { PaginationMode } from './pagination.type';
 
 @Component({
   selector: 'weui-pagination',
-  template: `
-  <ng-template [ngIf]="mode==='button'">
-    <div class="weui-pagination__item weui-pagination__prev">
-      <a weui-button (click)="_goto(-1)" weui-plain [weui-mini]="mini" weui-type="default" [disabled]="_prevDisabled" [innerHTML]="prevText"></a>
-    </div>
-    <div class="weui-pagination__item weui-pagination__num" *ngIf="!simple">{{current}}/{{total}}</div>
-    <div class="weui-pagination__item weui-pagination__next">
-      <a weui-button (click)="_goto(1)" weui-plain [weui-mini]="mini" weui-type="default" [disabled]="_nextDisabled" [innerHTML]="nextText"></a>
-    </div>
-  </ng-template>
-  <div class="weui-pagination__item weui-pagination__num" *ngIf="mode==='pointer'">
-    <div *ngFor="let i of _ptArr" class="weui-pagination__dot" [class.weui-pagination__dot-active]="current === i"><span></span></div>
-  </div>
-  `,
+  exportAs: 'weuiPagination',
+  templateUrl: './pagination.component.html',
   host: {
     class: 'weui-pagination',
+    '[class.weui-pagination__non-mini]': '!mini',
   },
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class PaginationComponent implements OnChanges {
   _ptArr: number[] = [];
+  _prevDisabled = false;
+  _nextDisabled = false;
   /**
    * 形态，可选 `button`,`pointer`，默认：`button`
    */
   @Input() mode: PaginationMode;
   /** 当前索引 */
-  @Input() current: number = 0;
+  @Input() @InputNumber() current: number = 0;
   /** 数据总数 */
-  @Input() total: number = 0;
+  @Input() @InputNumber() total: number = 0;
   /**
    * 是否隐藏数值，默认：`false`
    */
-  @Input() simple: boolean;
+  @Input() @InputBoolean() simple: boolean;
   /**
    * 小号按钮，默认：`true`
    */
-  @Input() mini: boolean = true;
+  @Input() @InputBoolean() mini: boolean = true;
   /**
    * 上一页文本（支持HTML），默认：`上一页`
    */
@@ -56,13 +52,13 @@ export class PaginationComponent implements OnChanges {
    */
   @Input() nextText: string;
   /** 分页触发的回调函数 */
-  @Output() change = new EventEmitter<number>();
+  @Output() readonly change = new EventEmitter<number>();
 
   constructor(cog: PaginationConfig) {
     Object.assign(this, cog);
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if (this.mode === 'pointer')
       this._ptArr = Array(this.total)
         .fill(1)
@@ -70,8 +66,6 @@ export class PaginationComponent implements OnChanges {
     this._checkDisabled();
   }
 
-  _prevDisabled = false;
-  _nextDisabled = false;
   _checkDisabled() {
     if (this.mode === 'pointer') return;
     this._prevDisabled = this.current <= 1;

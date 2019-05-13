@@ -1,23 +1,38 @@
 import {
+  ChangeDetectionStrategy,
   Component,
-  Input,
+  ElementRef,
   EventEmitter,
-  Output,
-  OnInit,
+  Input,
+  OnChanges,
   OnDestroy,
+  OnInit,
+  Output,
+  ViewEncapsulation,
 } from '@angular/core';
+import { InputNumber, UpdateHostClassService } from 'ngx-weui/core';
 
 export type ToptipsType = 'default' | 'warn' | 'info' | 'primary' | 'success';
 
 @Component({
   selector: 'weui-toptips',
+  exportAs: 'weuiToptips',
   template: `
-    <div class="weui-toptips" style="display:block" [ngClass]="_classMap">{{text}}<ng-content></ng-content></div>`,
+    {{ text }}<ng-content></ng-content>
+  `,
   host: {
     '[hidden]': '!_showd',
+    '[style.display]': '_showd ? "block" : "none"',
   },
+  providers: [UpdateHostClassService],
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
-export class ToptipsComponent implements OnInit, OnDestroy {
+export class ToptipsComponent implements OnInit, OnChanges, OnDestroy {
+  private timer: any;
+  _showd: boolean = false;
+
   /**
    * 文本
    */
@@ -25,43 +40,41 @@ export class ToptipsComponent implements OnInit, OnDestroy {
   /**
    * 显示时长后自动关闭（单位：ms），默认：`2000`
    */
-  @Input() time: number = 2000;
-  /**
-   * 隐藏后回调
-   */
-  @Output() hide = new EventEmitter();
+  @Input() @InputNumber() time: number = 2000;
 
-  _type: ToptipsType;
   /**
    * 类型
    */
-  @Input()
-  set type(_type: ToptipsType) {
-    this._type = _type;
-    this.setClassMap();
+  @Input() type: ToptipsType = 'primary';
+  /**
+   * 隐藏后回调
+   */
+  @Output() readonly hide = new EventEmitter();
+
+  constructor(private el: ElementRef, private uhcs: UpdateHostClassService) {}
+
+  private setClassMap(): void {
+    const prefixCls = 'weui-toptips';
+    const { uhcs, el, type } = this;
+    uhcs.updateHostClass(el.nativeElement, {
+      [`${prefixCls}`]: true,
+      [`${prefixCls}__${type}`]: true,
+    });
   }
 
   ngOnInit() {
     this.setClassMap();
   }
 
-  _classMap: any = {};
-  private setClassMap(): void {
-    this._classMap = {
-      [`weui-toptips_${this._type}`]: true,
-    };
+  ngOnChanges(): void {
+    this.setClassMap();
   }
-
-  _showd: boolean = false;
-  private timer: any;
 
   onShow() {
     this.destroy();
 
     this._showd = true;
-    this.timer = setTimeout(() => {
-      this.onHide();
-    }, this.time);
+    this.timer = setTimeout(() => this.onHide(), this.time);
     return this;
   }
 

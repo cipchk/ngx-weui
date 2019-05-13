@@ -1,9 +1,8 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 
 import { ActionSheetComponent } from './actionsheet.component';
 import { ActionSheetService } from './actionsheet.service';
-import { ActionSheetConfig } from './actionsheet.config';
 
 @NgModule({
   imports: [CommonModule],
@@ -12,8 +11,4 @@ import { ActionSheetConfig } from './actionsheet.config';
   providers: [ActionSheetService],
   entryComponents: [ActionSheetComponent],
 })
-export class ActionSheetModule {
-  static forRoot(): ModuleWithProviders {
-    return { ngModule: ActionSheetModule, providers: [ActionSheetConfig] };
-  }
-}
+export class ActionSheetModule {}

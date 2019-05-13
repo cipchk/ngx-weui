@@ -1,32 +1,26 @@
 import {
-  Component,
-  Input,
   forwardRef,
-  Output,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
   EventEmitter,
   HostBinding,
+  Input,
+  Output,
   ViewChild,
-  ElementRef,
+  ViewEncapsulation,
 } from '@angular/core';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { InputBoolean, InputNumber } from 'ngx-weui/core';
 
 /**
  * Stepper 步进器，支持 `[(ngModel)]`
  */
 @Component({
   selector: 'weui-stepper',
-  template: `
-  <span class="minus" [ngClass]="{'disabled':_disabledMinus}" (click)="_minus()"><em>-</em></span>
-  <div class="input">
-    <input type="tel" #inputNumber [(ngModel)]="value" (blur)="_blur()"
-      [disabled]="disabled"
-      [attr.min]="min"
-      [attr.max]="max"
-      [attr.step]="_step"
-      autocomplete="off">
-  </div>
-  <span class="plus" [ngClass]="{'disabled':_disabledPlus}" (click)="_plus()"><em>+</em></span>
-  `,
+  exportAs: 'weuiStepper',
+  templateUrl: './stepper.component.html',
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -34,27 +28,36 @@ import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
       multi: true,
     },
   ],
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class StepperComponent implements ControlValueAccessor {
-  /** 最小值 */
-  @Input() min: number = -Infinity;
-  /** 最大值 */
-  @Input() max: number = Infinity;
-  /** 禁用 */
-  @Input()
-  @HostBinding('class.disabled')
-  disabled: boolean = false;
-  /** 变更时回调 */
-  @Output() change = new EventEmitter<number>();
-
+  private _value: number;
+  private onChange: any = Function.prototype;
+  // private onTouched: any = Function.prototype;
   _step: number = 1;
   _precisionStep = 0;
   _precisionFactor = 1;
+  _disabledMinus: boolean = false;
+  _disabledPlus: boolean = false;
+  /** 最小值 */
+  @Input() @InputNumber() min: number = -Infinity;
+  /** 最大值 */
+  @Input() @InputNumber() max: number = Infinity;
+  /** 禁用 */
+  @Input()
+  @InputBoolean()
+  @HostBinding('class.disabled')
+  disabled: boolean = false;
+  /** 变更时回调 */
+  @Output() readonly change = new EventEmitter<number>();
 
-  @ViewChild('inputNumber') _inputNumber: ElementRef;
+  @ViewChild('inputNumber') private _inputNumber: ElementRef<HTMLInputElement>;
 
   /** 步长，可以为小数 */
   @Input()
+  @InputNumber()
   get step() {
     return this._step;
   }
@@ -63,18 +66,13 @@ export class StepperComponent implements ControlValueAccessor {
 
     const stepString = value.toString();
     if (stepString.indexOf('e-') >= 0) {
-      this._precisionStep = parseInt(
-        stepString.slice(stepString.indexOf('e-')),
-        10,
-      );
+      this._precisionStep = parseInt(stepString.slice(stepString.indexOf('e-')), 10);
     }
     if (stepString.indexOf('.') >= 0) {
       this._precisionStep = stepString.length - stepString.indexOf('.') - 1;
     }
     this._precisionFactor = Math.pow(10, this._precisionStep);
   }
-
-  private _value: number;
 
   get value() {
     return this._value;
@@ -94,14 +92,14 @@ export class StepperComponent implements ControlValueAccessor {
       this._value = value;
       this._checkDisabled();
     }
+    this.cdr.detectChanges();
   }
 
-  _disabledMinus: boolean = false;
-  _disabledPlus: boolean = false;
+  constructor(private cdr: ChangeDetectorRef) {}
+
   _checkDisabled(): this {
     this._disabledPlus = this.disabled || !(this.value + this.step <= this.max);
-    this._disabledMinus =
-      this.disabled || !(this.value - this.step >= this.min);
+    this._disabledMinus = this.disabled || !(this.value - this.step >= this.min);
     return this;
   }
 
@@ -116,8 +114,7 @@ export class StepperComponent implements ControlValueAccessor {
 
     if (this._disabledPlus) return;
     this.value = this._toPrecisionAsStep(
-      (this._precisionFactor * this.value + this._precisionFactor * this.step) /
-      this._precisionFactor,
+      (this._precisionFactor * this.value + this._precisionFactor * this.step) / this._precisionFactor,
     );
     this._checkDisabled()._notify();
   }
@@ -128,8 +125,7 @@ export class StepperComponent implements ControlValueAccessor {
 
     if (this._disabledMinus) return;
     this.value = this._toPrecisionAsStep(
-      (this._precisionFactor * this.value - this._precisionFactor * this.step) /
-      this._precisionFactor,
+      (this._precisionFactor * this.value - this._precisionFactor * this.step) / this._precisionFactor,
     );
     this._checkDisabled()._notify();
   }
@@ -137,7 +133,7 @@ export class StepperComponent implements ControlValueAccessor {
   _blur() {
     const el = this._inputNumber.nativeElement;
     this.value = +el.value;
-    el.value = this.value;
+    el.value = this.value.toString();
     this._checkDisabled()._notify();
   }
 
@@ -153,14 +149,12 @@ export class StepperComponent implements ControlValueAccessor {
     this._checkDisabled();
   }
 
-  private onChange: any = Function.prototype;
-  private onTouched: any = Function.prototype;
-
-  public registerOnChange(fn: (_: any) => {}): void {
+  registerOnChange(fn: (_: any) => {}): void {
     this.onChange = fn;
   }
-  public registerOnTouched(fn: () => {}): void {
-    this.onTouched = fn;
+
+  registerOnTouched(_fn: () => {}): void {
+    // this.onTouched = fn;
   }
 
   setDisabledState(isDisabled: boolean): void {

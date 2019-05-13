@@ -1,0 +1,10 @@
+**/*.md
+**/*.svg
+**/test.ts
+_nginx/
+_screenshot/
+node_modules/
+coverage/
+dist/
+package.json
+src/templates/

@@ -2,6 +2,7 @@ import { Directive, Input } from '@angular/core';
 
 @Directive({
   selector: '[weui-checklist]',
+  exportAs: 'weuiChecklist',
   host: {
     '(change)': '_change($event)',
     '[checked]': 'checked',

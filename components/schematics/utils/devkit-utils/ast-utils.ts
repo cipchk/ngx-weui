@@ -9,7 +9,6 @@ import * as ts from 'typescript';
 import { Change, InsertChange } from './change';
 import { insertImport } from './route-utils';
 
-
 /**
  * Find all nodes from the AST in the subtree of node of SyntaxKind kind.
  * @param node
@@ -44,7 +43,6 @@ export function findNodes(node: ts.Node, kind: ts.SyntaxKind, max = Infinity): t
 
   return arr;
 }
-
 
 /**
  * Get all the nodes from a source.
@@ -83,7 +81,6 @@ export function findNode(node: ts.Node, kind: ts.SyntaxKind, text: string): ts.N
   return foundNode;
 }
 
-
 /**
  * Helper for sorting nodes.
  * @return function to sort nodes in increasing order of position in sourceFile
@@ -91,7 +88,6 @@ export function findNode(node: ts.Node, kind: ts.SyntaxKind, text: string): ts.N
 function nodesByPosition(first: ts.Node, second: ts.Node): number {
   return first.getStart() - second.getStart();
 }
-
 
 /**
  * Insert `toInsert` after the last occurence of `ts.SyntaxKind[nodes[i].kind]`
@@ -106,17 +102,21 @@ function nodesByPosition(first: ts.Node, second: ts.Node): number {
  * @return Change instance
  * @throw Error if toInsert is first occurence but fall back is not set
  */
-export function insertAfterLastOccurrence(nodes: ts.Node[],
-                                          toInsert: string,
-                                          file: string,
-                                          fallbackPos: number,
-                                          syntaxKind?: ts.SyntaxKind): Change {
+export function insertAfterLastOccurrence(
+  nodes: ts.Node[],
+  toInsert: string,
+  file: string,
+  fallbackPos: number,
+  syntaxKind?: ts.SyntaxKind,
+): Change {
   let lastItem = nodes.sort(nodesByPosition).pop();
   if (!lastItem) {
     throw new Error();
   }
   if (syntaxKind) {
-    lastItem = findNodes(lastItem, syntaxKind).sort(nodesByPosition).pop();
+    lastItem = findNodes(lastItem, syntaxKind)
+      .sort(nodesByPosition)
+      .pop();
   }
   if (!lastItem && fallbackPos == undefined) {
     throw new Error(`tried to insert ${toInsert} as first occurence with no fallback position`);
@@ -125,7 +125,6 @@ export function insertAfterLastOccurrence(nodes: ts.Node[],
 
   return new InsertChange(file, lastItemPosition, toInsert);
 }
-
 
 export function getContentOfKeyLiteral(_source: ts.SourceFile, node: ts.Node): string | null {
   if (node.kind == ts.SyntaxKind.Identifier) {
@@ -137,9 +136,7 @@ export function getContentOfKeyLiteral(_source: ts.SourceFile, node: ts.Node): s
   }
 }
 
-
-function _angularImportsFromNode(node: ts.ImportDeclaration,
-                                 _sourceFile: ts.SourceFile): {[name: string]: string} {
+function _angularImportsFromNode(node: ts.ImportDeclaration, _sourceFile: ts.SourceFile): { [name: string]: string } {
   const ms = node.moduleSpecifier;
   let modulePath: string;
   switch (ms.kind) {
@@ -170,8 +167,8 @@ function _angularImportsFromNode(node: ts.ImportDeclaration,
         const namedImports = nb as ts.NamedImports;
 
         return namedImports.elements
-          .map((is: ts.ImportSpecifier) => is.propertyName ? is.propertyName.text : is.name.text)
-          .reduce((acc: {[name: string]: string}, curr: string) => {
+          .map((is: ts.ImportSpecifier) => (is.propertyName ? is.propertyName.text : is.name.text))
+          .reduce((acc: { [name: string]: string }, curr: string) => {
             acc[curr] = modulePath;
 
             return acc;
@@ -186,13 +183,10 @@ function _angularImportsFromNode(node: ts.ImportDeclaration,
   }
 }
 
-
-export function getDecoratorMetadata(source: ts.SourceFile, identifier: string,
-                                     module: string): ts.Node[] {
-  const angularImports: {[name: string]: string}
-    = findNodes(source, ts.SyntaxKind.ImportDeclaration)
+export function getDecoratorMetadata(source: ts.SourceFile, identifier: string, module: string): ts.Node[] {
+  const angularImports: { [name: string]: string } = findNodes(source, ts.SyntaxKind.ImportDeclaration)
     .map((node: ts.ImportDeclaration) => _angularImportsFromNode(node, source))
-    .reduce((acc: {[name: string]: string}, current: {[name: string]: string}) => {
+    .reduce((acc: { [name: string]: string }, current: { [name: string]: string }) => {
       for (const key of Object.keys(current)) {
         acc[key] = current[key];
       }
@@ -202,16 +196,16 @@ export function getDecoratorMetadata(source: ts.SourceFile, identifier: string,
 
   return getSourceNodes(source)
     .filter(node => {
-      return node.kind == ts.SyntaxKind.Decorator
-        && (node as ts.Decorator).expression.kind == ts.SyntaxKind.CallExpression;
+      return (
+        node.kind == ts.SyntaxKind.Decorator && (node as ts.Decorator).expression.kind == ts.SyntaxKind.CallExpression
+      );
     })
     .map(node => (node as ts.Decorator).expression as ts.CallExpression)
     .filter(expr => {
       if (expr.expression.kind == ts.SyntaxKind.Identifier) {
         const id = expr.expression as ts.Identifier;
 
-        return id.getFullText(source) == identifier
-          && angularImports[id.getFullText(source)] === module;
+        return id.getFullText(source) == identifier && angularImports[id.getFullText(source)] === module;
       } else if (expr.expression.kind == ts.SyntaxKind.PropertyAccessExpression) {
         // This covers foo.NgModule when importing * as foo.
         const paExpr = expr.expression as ts.PropertyAccessExpression;
@@ -223,17 +217,16 @@ export function getDecoratorMetadata(source: ts.SourceFile, identifier: string,
         const id = paExpr.name.text;
         const moduleId = (paExpr.expression as ts.Identifier).getText(source);
 
-        return id === identifier && (angularImports[moduleId + '.'] === module);
+        return id === identifier && angularImports[moduleId + '.'] === module;
       }
 
       return false;
     })
-    .filter(expr => expr.arguments[0]
-                 && expr.arguments[0].kind == ts.SyntaxKind.ObjectLiteralExpression)
+    .filter(expr => expr.arguments[0] && expr.arguments[0].kind == ts.SyntaxKind.ObjectLiteralExpression)
     .map(expr => expr.arguments[0] as ts.ObjectLiteralExpression);
 }
 
-function findClassDeclarationParent(node: ts.Node): ts.ClassDeclaration|undefined {
+function findClassDeclarationParent(node: ts.Node): ts.ClassDeclaration | undefined {
   if (ts.isClassDeclaration(node)) {
     return node;
   }
@@ -247,7 +240,7 @@ function findClassDeclarationParent(node: ts.Node): ts.ClassDeclaration|undefine
  * @param source source file containing one or more @NgModule
  * @returns the name of the first @NgModule, or `undefined` if none is found
  */
-export function getFirstNgModuleName(source: ts.SourceFile): string|undefined {
+export function getFirstNgModuleName(source: ts.SourceFile): string | undefined {
   // First, find the @NgModule decorators.
   const ngModulesMetadata = getDecoratorMetadata(source, 'NgModule', '@angular/core');
   if (ngModulesMetadata.length === 0) {
@@ -273,7 +266,7 @@ export function addSymbolToNgModuleMetadata(
   importPath: string | null = null,
 ): Change[] {
   const nodes = getDecoratorMetadata(source, 'NgModule', '@angular/core');
-  let node: any = nodes[0];  // tslint:disable-line:no-any
+  let node: any = nodes[0]; // tslint:disable-line:no-any
 
   // Find the decorator declaration.
   if (!node) {
@@ -281,8 +274,7 @@ export function addSymbolToNgModuleMetadata(
   }
 
   // Get all the children property assignment of object literals.
-  const matchingProperties: ts.ObjectLiteralElement[] =
-    (node as ts.ObjectLiteralExpression).properties
+  const matchingProperties: ts.ObjectLiteralElement[] = (node as ts.ObjectLiteralExpression).properties
     .filter(prop => prop.kind == ts.SyntaxKind.PropertyAssignment)
     // Filter out every fields that's not "metadataField". Also handles string literals
     // (but not expressions).
@@ -353,7 +345,7 @@ export function addSymbolToNgModuleMetadata(
   }
 
   if (Array.isArray(node)) {
-    const nodeArray = node as {} as Array<ts.Node>;
+    const nodeArray = (node as {}) as ts.Node[];
     const symbolsArray = nodeArray.map(node => node.getText());
     if (symbolsArray.includes(symbolName)) {
       return [];
@@ -409,69 +401,81 @@ export function addSymbolToNgModuleMetadata(
  * Custom function to insert a declaration (component, pipe, directive)
  * into NgModule declarations. It also imports the component.
  */
-export function addDeclarationToModule(source: ts.SourceFile,
-                                       modulePath: string, classifiedName: string,
-                                       importPath: string): Change[] {
-  return addSymbolToNgModuleMetadata(
-    source, modulePath, 'declarations', classifiedName, importPath);
+export function addDeclarationToModule(
+  source: ts.SourceFile,
+  modulePath: string,
+  classifiedName: string,
+  importPath: string,
+): Change[] {
+  return addSymbolToNgModuleMetadata(source, modulePath, 'declarations', classifiedName, importPath);
 }
 
 /**
  * Custom function to insert an NgModule into NgModule imports. It also imports the module.
  */
-export function addImportToModule(source: ts.SourceFile,
-                                  modulePath: string, classifiedName: string,
-                                  importPath: string): Change[] {
-
+export function addImportToModule(
+  source: ts.SourceFile,
+  modulePath: string,
+  classifiedName: string,
+  importPath: string,
+): Change[] {
   return addSymbolToNgModuleMetadata(source, modulePath, 'imports', classifiedName, importPath);
 }
 
 /**
  * Custom function to insert a provider into NgModule. It also imports it.
  */
-export function addProviderToModule(source: ts.SourceFile,
-                                    modulePath: string, classifiedName: string,
-                                    importPath: string): Change[] {
+export function addProviderToModule(
+  source: ts.SourceFile,
+  modulePath: string,
+  classifiedName: string,
+  importPath: string,
+): Change[] {
   return addSymbolToNgModuleMetadata(source, modulePath, 'providers', classifiedName, importPath);
 }
 
 /**
  * Custom function to insert an export into NgModule. It also imports it.
  */
-export function addExportToModule(source: ts.SourceFile,
-                                  modulePath: string, classifiedName: string,
-                                  importPath: string): Change[] {
+export function addExportToModule(
+  source: ts.SourceFile,
+  modulePath: string,
+  classifiedName: string,
+  importPath: string,
+): Change[] {
   return addSymbolToNgModuleMetadata(source, modulePath, 'exports', classifiedName, importPath);
 }
 
 /**
  * Custom function to insert an export into NgModule. It also imports it.
  */
-export function addBootstrapToModule(source: ts.SourceFile,
-                                     modulePath: string, classifiedName: string,
-                                     importPath: string): Change[] {
+export function addBootstrapToModule(
+  source: ts.SourceFile,
+  modulePath: string,
+  classifiedName: string,
+  importPath: string,
+): Change[] {
   return addSymbolToNgModuleMetadata(source, modulePath, 'bootstrap', classifiedName, importPath);
 }
 
 /**
  * Determine if an import already exists.
  */
-export function isImported(source: ts.SourceFile,
-                           classifiedName: string,
-                           importPath: string): boolean {
+export function isImported(source: ts.SourceFile, classifiedName: string, importPath: string): boolean {
   const allNodes = getSourceNodes(source);
   const matchingNodes = allNodes
     .filter(node => node.kind === ts.SyntaxKind.ImportDeclaration)
     .filter((imp: ts.ImportDeclaration) => imp.moduleSpecifier.kind === ts.SyntaxKind.StringLiteral)
     .filter((imp: ts.ImportDeclaration) => {
-      return (<ts.StringLiteral> imp.moduleSpecifier).text === importPath;
+      return (imp.moduleSpecifier as ts.StringLiteral).text === importPath;
     })
     .filter((imp: ts.ImportDeclaration) => {
       if (!imp.importClause) {
         return false;
       }
-      const nodes = findNodes(imp.importClause, ts.SyntaxKind.ImportSpecifier)
-        .filter(n => n.getText() === classifiedName);
+      const nodes = findNodes(imp.importClause, ts.SyntaxKind.ImportSpecifier).filter(
+        n => n.getText() === classifiedName,
+      );
 
       return nodes.length > 0;
     });

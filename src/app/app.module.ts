@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
 
-import { WeUiModule } from 'ngx-weui';
 import { ToastrModule } from 'ngx-toastr';
 import { AqmModule } from 'angular-qq-maps';
 
@@ -23,17 +22,12 @@ import { AppComponent } from './app.component';
     SharedModule,
     RoutesModule,
     LayoutModule,
-    WeUiModule.forRoot(),
     ToastrModule.forRoot(),
     AqmModule.forRoot({
-      apiKey: 'I3TBZ-QTN3J-MWPFI-FERMS-IBOCQ-LBBWY'
-    })
+      apiKey: 'I3TBZ-QTN3J-MWPFI-FERMS-IBOCQ-LBBWY',
+    }),
   ],
-  declarations: [
-    AppComponent
-  ],
-  bootstrap: [AppComponent]
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
 })
-
-export class AppModule {
-}
+export class AppModule {}

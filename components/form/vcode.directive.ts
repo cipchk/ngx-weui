@@ -1,13 +1,13 @@
-import { Directive, Input, ElementRef, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subscription } from 'rxjs';
-
-import { findParent, add, remove } from '../utils/dom';
+import { Directive, ElementRef, Input, OnDestroy, OnInit } from '@angular/core';
+import { InputNumber } from 'ngx-weui/core';
+import { Observable } from 'rxjs';
 
 /**
  * 获取验证码
  */
 @Directive({
   selector: '[weui-vcode]',
+  exportAs: 'weuiVcode',
   host: {
     '(click)': '_onClick()',
     '[disabled]': '_disabled',
@@ -22,11 +22,12 @@ export class VCodeDirective implements OnInit, OnDestroy {
   /**
    * 时长（单位：秒），默认：`60`
    */
-  @Input('weui-seconds') seconds: number = 60;
+  @Input('weui-seconds') @InputNumber() seconds: number = 60;
 
   /**
    * 倒计时模板，使用 `${num}` 表示当前秒数
    */
+  // tslint:disable-next-line: no-invalid-template-strings
   @Input('weui-tpl') tpl: string = '${num} 秒';
 
   /**
@@ -41,8 +42,7 @@ export class VCodeDirective implements OnInit, OnDestroy {
   constructor(private el: ElementRef) {}
 
   ngOnInit() {
-    if (typeof this.onSend !== 'function')
-      console.error('weui-vcode必须传递一个返回值为 `Observable<boolean>` 函数');
+    if (typeof this.onSend !== 'function') console.error('weui-vcode必须传递一个返回值为 `Observable<boolean>` 函数');
     this._cur = this.el.nativeElement.innerHTML;
   }
 
@@ -71,10 +71,7 @@ export class VCodeDirective implements OnInit, OnDestroy {
   }
 
   private setText(num: number): void {
-    this.el.nativeElement.innerHTML = this.tpl.replace(
-      /\${num}/,
-      num.toString(),
-    );
+    this.el.nativeElement.innerHTML = this.tpl.replace(/\${num}/, num.toString());
   }
 
   private destroy() {

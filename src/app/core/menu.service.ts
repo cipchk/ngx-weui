@@ -26,13 +26,11 @@ export class MenuService {
       items: [
         {
           name: 'ActionSheet',
-          icon:
-            '//cipchk.github.io/ngx-weui/assets/images/icon_nav_actionSheet.png',
+          icon: '//cipchk.github.io/ngx-weui/assets/images/icon_nav_actionSheet.png',
         },
         {
           name: 'Accordion',
-          icon:
-            '//cipchk.github.io/ngx-weui/assets/images/icon_nav_actionSheet.png',
+          icon: '//cipchk.github.io/ngx-weui/assets/images/icon_nav_actionSheet.png',
         },
         {
           name: 'Button',
@@ -40,8 +38,7 @@ export class MenuService {
         },
         {
           name: 'Article',
-          icon:
-            '//cipchk.github.io/ngx-weui/assets/images/icon_nav_article.png',
+          icon: '//cipchk.github.io/ngx-weui/assets/images/icon_nav_article.png',
         },
         {
           name: 'Badge',
@@ -157,8 +154,7 @@ export class MenuService {
         },
         {
           name: 'Progress',
-          icon:
-            '//cipchk.github.io/ngx-weui/assets/images/icon_nav_progress.png',
+          icon: '//cipchk.github.io/ngx-weui/assets/images/icon_nav_progress.png',
         },
         {
           name: 'PullToRefresh',
@@ -168,8 +164,7 @@ export class MenuService {
         },
         {
           name: 'SearchBar',
-          icon:
-            '//cipchk.github.io/ngx-weui/assets/images/icon_nav_search_bar.png',
+          icon: '//cipchk.github.io/ngx-weui/assets/images/icon_nav_search_bar.png',
         },
         {
           name: 'Slider',
@@ -264,7 +259,7 @@ export class MenuService {
     docMenu.items = META.sort((a: any, b: any) => a.meta.order - b.meta.order).map(i => {
       return {
         id: i.name,
-        name: i.meta.title
+        name: i.meta.title,
       };
     });
   }

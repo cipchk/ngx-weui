@@ -1,38 +1,10 @@
-import { Component, ViewChild, DebugElement } from '@angular/core';
-import {
-  FormsModule,
-  FormBuilder,
-  FormGroup,
-  FormControl,
-  ReactiveFormsModule,
-} from '@angular/forms';
-import {
-  ComponentFixture,
-  TestBed,
-  fakeAsync,
-  tick,
-  ComponentFixtureAutoDetect,
-  async,
-  inject,
-} from '@angular/core/testing';
+import { Component, DebugElement } from '@angular/core';
+import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
+import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 
 import { FormModule } from './form.module';
 import { InputDirective } from './input.directive';
-
-const HTML = `
-<div class="weui-cell">
-    <div class="weui-cell__hd"><label class="weui-label">test</label></div>
-    <div class="weui-cell__bd">
-        <input [(ngModel)]="val" name="val"
-            [weui-input]="type"
-            [weui-required]="required"
-            [weui-regex]="regex"
-            [weui-cleaner]="cleaner">
-    </div>
-    <div class="weui-cell__ft"></div>
-</div>
-`;
 
 const HTML_FORM = `
 <div class="weui-cell">
@@ -66,7 +38,7 @@ describe('Directive: Input', () => {
   function genModule(html: string) {
     TestBed.configureTestingModule({
       declarations: [TestInputComponent],
-      imports: [FormModule.forRoot(), FormsModule, ReactiveFormsModule],
+      imports: [FormModule, FormsModule, ReactiveFormsModule],
       providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
     });
 
@@ -75,13 +47,10 @@ describe('Directive: Input', () => {
     });
     fixture = TestBed.createComponent(TestInputComponent);
     context = fixture.componentInstance;
-    inputEl = fixture.debugElement.query(By.css('input'))
-      .nativeElement as HTMLInputElement;
+    inputEl = fixture.debugElement.query(By.css('input')).nativeElement as HTMLInputElement;
 
     const inputs = fixture.debugElement.queryAll(By.directive(InputDirective));
-    directive = inputs.map(
-      (de: DebugElement) => de.injector.get(InputDirective) as InputDirective,
-    )[0];
+    directive = inputs.map((de: DebugElement) => de.injector.get<InputDirective>(InputDirective))[0];
 
     fixture.detectChanges();
   }
@@ -89,9 +58,7 @@ describe('Directive: Input', () => {
   function expectValidator(val: string, validStatus: boolean) {
     context.control.setValue(val);
     fixture.detectChanges();
-    expect(inputEl.classList).toContain(
-      validStatus ? 'ng-valid' : 'ng-invalid',
-    );
+    expect(inputEl.classList).toContain(validStatus ? 'ng-valid' : 'ng-invalid');
   }
 
   describe('[default]', () => {
@@ -170,7 +137,7 @@ describe('Directive: Input', () => {
     spyOn(console, 'error');
     TestBed.configureTestingModule({
       declarations: [TestInputComponent],
-      imports: [FormModule.forRoot(), FormsModule, ReactiveFormsModule],
+      imports: [FormModule, FormsModule, ReactiveFormsModule],
       providers: [{ provide: ComponentFixtureAutoDetect, useValue: true }],
     });
 
@@ -185,9 +152,9 @@ describe('Directive: Input', () => {
 @Component({ template: `` })
 class TestInputComponent {
   val: string = '';
-  type: string = 'mobile';
-  required: 'info' | 'warn' | 'waiting' = 'warn';
-  regex: RegExp | string = null;
+  type: string | undefined = 'mobile';
+  required: 'info' | 'warn' | 'waiting' | undefined = 'warn';
+  regex: RegExp | string | null = null;
   cleaner: boolean = false;
 
   control = new FormControl();

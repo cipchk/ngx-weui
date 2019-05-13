@@ -1,13 +1,8 @@
-import {
-  TestBed,
-  ComponentFixture,
-  fakeAsync,
-  tick,
-} from '@angular/core/testing';
-import { Component, DebugElement, enableProdMode } from '@angular/core';
+import { Component, DebugElement } from '@angular/core';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { UploaderModule, Uploader, UploaderFileDirective } from '../uploader';
 import { By } from '@angular/platform-browser';
+import { Uploader, UploaderFileDirective, UploaderModule } from '../uploader';
 
 const html = `<input type="file" accept="image/*" multiple [weui-uploader-file]="uploader">`;
 const URL = 'http://test.com';
@@ -20,7 +15,7 @@ describe('Component: Uploader', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestUploaderDirectiveComponent],
-      imports: [UploaderModule.forRoot()],
+      imports: [UploaderModule],
     });
     TestBed.overrideComponent(TestUploaderDirectiveComponent, {
       set: { template: html },
@@ -28,12 +23,8 @@ describe('Component: Uploader', () => {
     fixture = TestBed.createComponent(TestUploaderDirectiveComponent);
     fixture.detectChanges();
 
-    directiveEl = fixture.debugElement.query(
-      By.directive(UploaderFileDirective),
-    );
-    directive = directiveEl.injector.get(
-      UploaderFileDirective,
-    ) as UploaderFileDirective;
+    directiveEl = fixture.debugElement.query(By.directive(UploaderFileDirective));
+    directive = directiveEl.injector.get<UploaderFileDirective>(UploaderFileDirective);
   });
 
   it('should be inited', () => {
@@ -57,25 +48,18 @@ describe('Component: Uploader', () => {
   it('should handle event', () => {
     spyOn(directive.uploader, 'addToQueue');
     directive._onChange();
-    const args = [
-      (directiveEl.nativeElement as HTMLInputElement).files,
-      directive._options,
-    ];
+    const args = [(directiveEl.nativeElement as HTMLInputElement).files, directive._options];
     expect(directive.uploader.addToQueue).toHaveBeenCalledWith(...args);
   });
 
   describe('CLASS', () => {
     const file1 = new File(
-      [
-        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkWK1WDwAC1gFS81OXVgAAAABJRU5ErkJggg==',
-      ],
+      ['iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkWK1WDwAC1gFS81OXVgAAAABJRU5ErkJggg=='],
       'file1.png',
       { type: 'image/png' },
     );
     const file2 = new File(
-      [
-        'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkWK1WDwAC1gFS81OXVgAAAABJRU5ErkJggg==',
-      ],
+      ['iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkWK1WDwAC1gFS81OXVgAAAABJRU5ErkJggg=='],
       'file2.png',
       { type: 'image/png' },
     );

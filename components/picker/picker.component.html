@@ -1,0 +1,34 @@
+<input
+  type="text"
+  class="weui-input"
+  value="{{ _text }}"
+  placeholder="{{ placeholder }}"
+  readonly="readonly"
+  (focus)="_onFocus($event)"
+  (click)="_onShow()"
+  [disabled]="disabled"
+  *ngIf="options.type === 'form'"
+/>
+<div [hidden]="!_showP">
+  <div
+    class="weui-mask"
+    (click)="_onHide(false)"
+    [ngClass]="{ 'weui-animate-fade-in': _shown, 'weui-animate-fade-out': !_shown }"
+  ></div>
+  <div class="weui-picker" [ngClass]="{ 'weui-animate-slide-up': _shown, 'weui-animate-slide-down': !_shown }">
+    <div class="weui-picker__hd">
+      <a href="#" class="weui-picker__action" (click)="_onCancel()">{{ options.cancel }}</a>
+      <a href="#" class="weui-picker__action" (click)="_onConfirm()">{{ options.confirm }}</a>
+    </div>
+    <div class="weui-picker__bd">
+      <weui-picker-group
+        tappable
+        *ngFor="let items of _groups; let i = index"
+        [items]="items"
+        [defaultIndex]="_selected[i]"
+        groupIndex="{{ i }}"
+        (change)="_onGroupChange($event, i)"
+      ></weui-picker-group>
+    </div>
+  </div>
+</div>

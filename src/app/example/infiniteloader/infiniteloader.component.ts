@@ -1,5 +1,5 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
-import { Observable, timer } from 'rxjs';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { timer } from 'rxjs';
 
 import { InfiniteLoaderComponent } from 'ngx-weui/infiniteloader';
 
@@ -15,7 +15,7 @@ export class DemoInfiniteLoaderComponent {
 
   items: any[] = Array(20)
     .fill(0)
-    .map((v: any, i: number) => i);
+    .map((_v: any, i: number) => i);
   onLoadMore(comp: InfiniteLoaderComponent) {
     this.restartBtn = false;
     timer(1500).subscribe(() => {

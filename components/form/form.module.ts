@@ -1,28 +1,16 @@
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { InputDirective } from './input.directive';
-import { VCodeDirective } from './vcode.directive';
-import { TextareaDirective } from './textarea.directive';
 import { ChecklistDirective } from './check.directive';
+import { InputDirective } from './input.directive';
+import { TextareaDirective } from './textarea.directive';
+import { VCodeDirective } from './vcode.directive';
+
+const COMPONENTS = [InputDirective, VCodeDirective, TextareaDirective, ChecklistDirective];
 
 @NgModule({
   imports: [CommonModule, FormsModule],
-  declarations: [
-    InputDirective,
-    VCodeDirective,
-    TextareaDirective,
-    ChecklistDirective,
-  ],
-  exports: [
-    InputDirective,
-    VCodeDirective,
-    TextareaDirective,
-    ChecklistDirective,
-  ],
+  declarations: COMPONENTS,
+  exports: COMPONENTS,
 })
-export class FormModule {
-  static forRoot(): ModuleWithProviders {
-    return { ngModule: FormModule, providers: [] };
-  }
-}
+export class FormModule {}

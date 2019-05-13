@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { BaseService } from '../utils/base.service';
+import { BaseService } from 'ngx-weui/core';
 import { ToastComponent } from './toast.component';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ToastService extends BaseService {
   /**
    * 构建toast并显示
@@ -12,12 +12,7 @@ export class ToastService extends BaseService {
    * @param [icon] icon图标Class名（可选）
    * @param [type] 类型（可选）
    */
-  show(
-    text?: string,
-    time?: number,
-    icon?: string,
-    type?: 'success' | 'loading',
-  ): ToastComponent {
+  show(text?: string, time?: number, icon?: string, type?: 'success' | 'loading'): ToastComponent {
     const componentRef = this.build(ToastComponent);
 
     if (type) componentRef.instance.type = type;

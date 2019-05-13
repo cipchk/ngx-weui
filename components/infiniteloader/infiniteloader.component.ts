@@ -1,33 +1,31 @@
 import {
+  ChangeDetectionStrategy,
   Component,
+  ElementRef,
+  EventEmitter,
   Input,
   OnChanges,
-  SimpleChanges,
-  EventEmitter,
-  Output,
-  ElementRef,
   OnDestroy,
   OnInit,
+  Output,
+  SimpleChanges,
+  ViewEncapsulation,
 } from '@angular/core';
-import { Subscription, fromEvent } from 'rxjs';
+import { fromEvent, Subscription } from 'rxjs';
 
 import { InfiniteLoaderConfig } from './infiniteloader.config';
 
 @Component({
   selector: 'weui-infiniteloader',
-  template: `
-        <div class="weui-infiniteloader__content">
-            <ng-content></ng-content>
-            <div *ngIf="_loading || _finished">
-                <div *ngIf="_loading" [innerHTML]="config.loading"></div>
-                <div *ngIf="_finished" [innerHTML]="config.finished"></div>
-            </div>
-        </div>
-    `,
+  exportAs: 'weuiInfiniteloader',
+  templateUrl: './infiniteloader.component.html',
   host: {
     '[class.weui-infiniteloader]': 'true',
     '[style.height]': 'config.height',
   },
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
   private didScroll = false;
@@ -46,12 +44,9 @@ export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
   /**
    * 加载更多回调
    */
-  @Output() loadmore = new EventEmitter<InfiniteLoaderComponent>();
+  @Output() readonly loadmore = new EventEmitter<InfiniteLoaderComponent>();
 
-  constructor(
-    private el: ElementRef,
-    private DEF: InfiniteLoaderConfig,
-  ) { }
+  constructor(private el: ElementRef, private DEF: InfiniteLoaderConfig) {}
 
   /** 设置本次加载完成 */
   resolveLoading() {
@@ -73,11 +68,9 @@ export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
   _onScroll() {
     if (this._loading || this._finished) return;
     const target = this.scrollEvent.target;
-    const scrollPercent = Math.floor(
-      (target.scrollTop + target.clientHeight) / target.scrollHeight * 100,
-    );
+    const scrollPercent = Math.floor(((target.scrollTop + target.clientHeight) / target.scrollHeight) * 100);
 
-    if (scrollPercent > this.config.percent) {
+    if (scrollPercent > this.config.percent!) {
       this._loading = true;
       this.loadmore.emit(this);
     }
@@ -112,6 +105,6 @@ export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   private parseConfig() {
-    this.config = Object.assign({}, this.DEF, this.config);
+    this.config = { ...this.DEF, ...this.config };
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class LoadmoreConfig {
   /**
    * 类型，默认：`loading`

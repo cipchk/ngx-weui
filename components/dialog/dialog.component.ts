@@ -1,14 +1,17 @@
 import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
-  OnDestroy,
-  Input,
-  Output,
   EventEmitter,
+  Input,
+  OnDestroy,
+  Output,
   ViewChild,
+  ViewEncapsulation,
 } from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs';
 
-import { isAndroid } from '../utils/browser';
+import { isAndroid } from 'ngx-weui/core';
 import { DialogConfig } from './dialog.config';
 
 /**
@@ -20,22 +23,27 @@ import { DialogConfig } from './dialog.config';
  */
 @Component({
   selector: 'weui-dialog',
+  exportAs: 'weuiDialog',
   templateUrl: './dialog.component.html',
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
 })
 export class DialogComponent implements OnDestroy {
   private _config: DialogConfig;
+  private observer: Observer<any>;
+  _shown: boolean = false;
+
   /**
    * 对话框配置项
    */
   @Input()
   set config(value: DialogConfig) {
-    const config = Object.assign(
-      {
-        backdrop: false,
-      },
-      this.DEF,
-      value,
-    );
+    const config = {
+      backdrop: false,
+      ...this.DEF,
+      ...value,
+    };
 
     if (config.skin === 'auto') {
       config.skin = isAndroid() ? 'android' : 'ios';
@@ -46,14 +54,14 @@ export class DialogComponent implements OnDestroy {
       if (config.cancel) {
         config.btns.push({
           text: config.cancel,
-          type: config.cancelType,
+          type: config.cancelType!,
           value: false,
         });
       }
       if (config.confirm) {
         config.btns.push({
           text: config.confirm,
-          type: config.confirmType,
+          type: config.confirmType!,
           value: true,
         });
       }
@@ -75,21 +83,18 @@ export class DialogComponent implements OnDestroy {
         }
       }
 
-      config.inputOptions = Object.assign([], config.inputOptions);
-      config.inputAttributes = Object.assign(
-        {
-          maxlength: null,
-          min: 0,
-          max: 100,
-          step: 1,
-        },
-        config.inputAttributes,
-      );
+      config.inputOptions = (config.inputOptions || [])!.slice(0);
+      config.inputAttributes = {
+        maxlength: null,
+        min: 0,
+        max: 100,
+        step: 1,
+        ...config.inputAttributes,
+      };
       // 默认值
       let defaultValue = config.inputValue;
       if (config.input === 'checkbox' && !Array.isArray(config.inputValue)) {
-        defaultValue =
-          typeof defaultValue !== 'undefined' ? [defaultValue] : [];
+        defaultValue = typeof defaultValue !== 'undefined' ? [defaultValue] : [];
       }
       config.inputValue = defaultValue || '';
 
@@ -113,18 +118,14 @@ export class DialogComponent implements OnDestroy {
   /**
    * 打开动画结束后回调（唯一参数：对话框实例对象）
    */
-  @Output() open = new EventEmitter<DialogComponent>();
+  @Output() readonly open = new EventEmitter<DialogComponent>();
 
   /**
    * 关闭动画开始时回调（唯一参数：对话框实例对象）
    */
-  @Output() close = new EventEmitter<DialogComponent>();
+  @Output() readonly close = new EventEmitter<DialogComponent>();
 
-  private observer: Observer<any>;
-
-  _shown: boolean = false;
-
-  constructor(private DEF: DialogConfig) { }
+  constructor(private DEF: DialogConfig, private cdr: ChangeDetectorRef) {}
 
   @ViewChild('container') container: any;
   _prompError: boolean = false;
@@ -142,10 +143,7 @@ export class DialogComponent implements OnDestroy {
       }
     }
 
-    if (
-      this.config.inputRegex &&
-      !this.config.inputRegex.test(this._promptData.toString())
-    ) {
+    if (this.config.inputRegex && !this.config.inputRegex.test(this._promptData.toString())) {
       this._prompError = true;
       return false;
     }
@@ -170,6 +168,7 @@ export class DialogComponent implements OnDestroy {
   }
 
   _keyup(event: KeyboardEvent) {
+    // tslint:disable-next-line: deprecation
     if (event.keyCode === 13) {
       this._onSelect();
     }
@@ -183,6 +182,7 @@ export class DialogComponent implements OnDestroy {
   show(): Observable<any> {
     this._shown = true;
     this._prompError = false;
+    this.cdr.detectChanges();
     // 模拟动画结束后回调
     setTimeout(() => {
       this.open.emit(this);
@@ -201,13 +201,14 @@ export class DialogComponent implements OnDestroy {
     if (is_backdrop === true && this.config.backdrop === false) return false;
 
     this._shown = false;
+    this.cdr.detectChanges();
     this.close.emit(this);
   }
 
   _onSelect(menu?: any) {
     // 未指定时查找 `value===true` 的按钮
-    if (!menu && this.config.btns.length > 0) {
-      menu = this.config.btns.find(w => w.value === true);
+    if (!menu && this.config.btns!.length > 0) {
+      menu = this.config.btns!.find(w => w.value === true);
     }
     const ret = menu;
     if (menu.value === true && this._config.type === 'prompt') {
@@ -222,7 +223,7 @@ export class DialogComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     if (this.observer && this.observer instanceof Subscription) {
-      (<Subscription>this.observer).unsubscribe();
+      (this.observer as Subscription).unsubscribe();
     }
   }
 }

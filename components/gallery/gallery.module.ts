@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { NgModule, ModuleWithProviders } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { GalleryComponent } from './gallery.component';
 
@@ -9,8 +9,4 @@ import { GalleryComponent } from './gallery.component';
   exports: [GalleryComponent],
   entryComponents: [GalleryComponent],
 })
-export class GalleryModule {
-  static forRoot(): ModuleWithProviders {
-    return { ngModule: GalleryModule, providers: [] };
-  }
-}
+export class GalleryModule {}
