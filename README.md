@@ -16,7 +16,12 @@ ngx-weui
 
 </div>
 
-[![](https://cdn-images-1.medium.com/max/3840/1*DzVxlbQups8aAEhFRuZ6dQ.png)](https://cipchk.github.io/ngx-weui/)
+[![](https://cdn-images-1.medium.com/max/1600/1*F0D9tWK6p5Kk3dKZcSYuZA.png)](https://cipchk.github.io/ngx-weui/)
+
+## Version
+
+- WeUI 1.x using `7.0.x`
+- WeUI 2.x using `7.1.x`
 
 ## Table of Contents
 
@@ -40,8 +45,6 @@ ngx-weui
 
 ```bash
 npm install -g @angular/cli
-# Optional: Set default use of yarn to install dependencies
-# ng config -g cli.packageManager yarn
 ```
 
 2. New a empty angular project
