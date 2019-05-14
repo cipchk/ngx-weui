@@ -27,6 +27,7 @@
     "site:build:netlify": "npm run site:init && ng build --prod --build-optimizer --base-href /",
     "site:gh": "npm run site:build && gh-pages -d ./dist",
     "build": "bash scripts/build/build.sh",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s --pkg package.json",
     "release": "npm run build && cd publish && npm publish --access public",
     "release:next": "npm run build && cd publish && npm publish --access public --tag next"
   },
@@ -93,6 +94,7 @@
     "stylelint-order": "^3.0.0",
     "gh-pages": "^2.0.1",
     "tslint-config-prettier": "^1.18.0",
-    "tslint-language-service": "^0.9.9"
+    "tslint-language-service": "^0.9.9",
+    "conventional-changelog-cli": "^2.0.5"
   }
 }
