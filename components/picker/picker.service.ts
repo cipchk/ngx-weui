@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-
+import { DOCUMENT } from '@angular/common';
+import { ApplicationRef, ComponentFactoryResolver, Inject, Injectable, Injector } from '@angular/core';
 import { BaseService } from 'ngx-weui/core';
-
+import { Observable } from 'rxjs';
 import { PickerData } from './data';
 import { PickerOptions } from './options';
 import { CityPickerComponent } from './picker-city.component';
@@ -12,8 +11,17 @@ import { PickerComponent } from './picker.component';
 /**
  * 多列选择器Service，可直接通过Class构造选择器
  */
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class PickerService extends BaseService {
+  constructor(
+    resolver: ComponentFactoryResolver,
+    applicationRef: ApplicationRef,
+    injector: Injector,
+    @Inject(DOCUMENT) doc: any,
+  ) {
+    super(resolver, applicationRef, injector, doc);
+  }
+
   /**
    * 构建一个多列选择器并显示
    *
