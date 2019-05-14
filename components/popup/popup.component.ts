@@ -5,11 +5,8 @@ import {
   Component,
   EventEmitter,
   Input,
-  OnChanges,
   OnDestroy,
-  OnInit,
   Output,
-  SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
 import { Observable, Observer, Subscription } from 'rxjs';
@@ -33,36 +30,28 @@ import { PopupConfig } from './popup.config';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class PopupComponent implements OnInit, OnDestroy, OnChanges {
+export class PopupComponent implements OnDestroy {
   private observer: Observer<boolean>;
   shown: boolean = false;
   _shownAnt = false;
 
-  /**
-   * 配置项
-   */
-  @Input() config: PopupConfig;
-  /** 取消回调 */
+  private _config: PopupConfig;
+  @Input()
+  set config(val: PopupConfig) {
+    this._config = { ...this.DEF, ...val };
+  }
+  get config() {
+    return this._config;
+  }
   @Output() readonly cancel = new EventEmitter();
-  /** 确认回调 */
   @Output() readonly confirm = new EventEmitter();
 
   get _visibility(): string {
     return this._shownAnt ? 'show' : 'hide';
   }
 
-  constructor(private DEF: PopupConfig, private cdr: ChangeDetectorRef) {}
-
-  private parseConfig() {
-    this.config = { ...this.DEF, ...this.config };
-  }
-
-  ngOnInit() {
-    this.parseConfig();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.config) this.parseConfig();
+  constructor(private DEF: PopupConfig, private cdr: ChangeDetectorRef) {
+    this.config = { ...DEF };
   }
 
   /**
@@ -121,7 +110,7 @@ export class PopupComponent implements OnInit, OnDestroy, OnChanges {
 
   ngOnDestroy(): void {
     if (this.observer && this.observer instanceof Subscription) {
-      (this.observer as Subscription).unsubscribe();
+      this.observer.unsubscribe();
     }
   }
 }

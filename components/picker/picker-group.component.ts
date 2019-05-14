@@ -6,6 +6,7 @@ import {
   Input,
   OnChanges,
   Output,
+  SimpleChange,
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
@@ -34,13 +35,10 @@ const getWindowHeight = (): number => {
 export class PickerGroupComponent implements OnChanges {
   /** 数据列表 */
   @Input() items: PickerData[];
-
   /** 当前默认位置 */
   @Input() @InputNumber() defaultIndex: number = -1;
-
   /** 多列中的位置 */
   @Input() @InputNumber() groupIndex: number;
-
   /** 变更回调 */
   @Output() readonly change = new EventEmitter<any>();
 
@@ -59,9 +57,11 @@ export class PickerGroupComponent implements OnChanges {
   _animating: boolean = false;
   _distance = 0;
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if ('defaultIndex' in changes) {
-      if (this.defaultIndex < 0 || (this.items && this.defaultIndex >= this.items.length)) this.defaultIndex = 0;
+  ngOnChanges(changes: { [P in keyof this]?: SimpleChange } & SimpleChanges): void {
+    if (changes.defaultIndex) {
+      if (this.defaultIndex < 0 || (this.items && this.defaultIndex >= this.items.length)) {
+        this.defaultIndex = 0;
+      }
       this._distance = (this.defaults.offset - this.defaultIndex) * this.defaults.rowHeight;
     }
   }

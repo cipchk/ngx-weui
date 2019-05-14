@@ -8,6 +8,7 @@ import {
   OnChanges,
   OnDestroy,
   OnInit,
+  SimpleChange,
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
@@ -75,8 +76,8 @@ export class SwiperComponent implements AfterViewInit, OnChanges, OnInit, OnDest
     this.init();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if ('options' in changes) {
+  ngOnChanges(changes: { [P in keyof this]?: SimpleChange } & SimpleChanges): void {
+    if (changes.options) {
       this.initOptions();
       if (!changes.options.firstChange) {
         this.init();
