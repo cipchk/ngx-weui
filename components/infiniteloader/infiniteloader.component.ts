@@ -4,15 +4,12 @@ import {
   ElementRef,
   EventEmitter,
   Input,
-  OnChanges,
   OnDestroy,
   OnInit,
   Output,
-  SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
-
 import { InfiniteLoaderConfig } from './infiniteloader.config';
 
 @Component({
@@ -27,7 +24,7 @@ import { InfiniteLoaderConfig } from './infiniteloader.config';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
+export class InfiniteLoaderComponent implements OnInit, OnDestroy {
   private didScroll = false;
   private scrollEvent: any = null;
   private scrollTime: any = null;
@@ -36,17 +33,20 @@ export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
   _loading: boolean = false;
   _finished: boolean = false;
 
-  /**
-   * 配置项
-   */
-  @Input() config: InfiniteLoaderConfig;
+  private _config: InfiniteLoaderConfig;
+  @Input()
+  set config(val: InfiniteLoaderConfig) {
+    this._config = { ...this.DEF, ...val };
+  }
+  get config(): InfiniteLoaderConfig {
+    return this._config;
+  }
 
-  /**
-   * 加载更多回调
-   */
   @Output() readonly loadmore = new EventEmitter<InfiniteLoaderComponent>();
 
-  constructor(private el: ElementRef, private DEF: InfiniteLoaderConfig) {}
+  constructor(private el: ElementRef<HTMLElement>, private DEF: InfiniteLoaderConfig) {
+    this.config = { ...DEF };
+  }
 
   /** 设置本次加载完成 */
   resolveLoading() {
@@ -77,8 +77,6 @@ export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.parseConfig();
-
     this.scrollTime = setInterval(() => {
       if (this.didScroll) {
         this.didScroll = false;
@@ -87,7 +85,7 @@ export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
     }, this.config.throttle);
 
     this.disposeScroller = fromEvent(
-      this.el.nativeElement.querySelector('.weui-infiniteloader__content'),
+      this.el.nativeElement.querySelector('.weui-infiniteloader__content')!,
       'scroll',
     ).subscribe(($event: any) => {
       this.scrollEvent = $event;
@@ -95,16 +93,8 @@ export class InfiniteLoaderComponent implements OnChanges, OnInit, OnDestroy {
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if ('config' in changes) this.parseConfig();
-  }
-
   ngOnDestroy(): void {
     if (this.scrollTime) clearTimeout(this.scrollTime);
     if (this.disposeScroller) this.disposeScroller.unsubscribe();
-  }
-
-  private parseConfig() {
-    this.config = { ...this.DEF, ...this.config };
   }
 }

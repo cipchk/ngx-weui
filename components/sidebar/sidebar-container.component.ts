@@ -12,6 +12,7 @@ import {
   OnInit,
   Output,
   QueryList,
+  SimpleChange,
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
@@ -53,7 +54,7 @@ export class SidebarContainerComponent implements AfterContentInit, OnChanges, O
     });
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: { [P in keyof this]?: SimpleChange } & SimpleChanges): void {
     if (changes._showBackdrop) {
       this._showBackdropChange.emit(changes._showBackdrop.currentValue);
     }

@@ -5,9 +5,9 @@ import {
   EventEmitter,
   Input,
   OnChanges,
-  OnDestroy,
   OnInit,
   Output,
+  SimpleChange,
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
@@ -32,7 +32,7 @@ import { PickerConfig } from './picker.config';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class PickerComponent implements ControlValueAccessor, OnInit, OnDestroy, OnChanges {
+export class PickerComponent implements ControlValueAccessor, OnInit, OnChanges {
   /** 配置项 */
   @Input() options: PickerOptions;
 
@@ -180,13 +180,11 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnDestroy,
     return false;
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if ('options' in changes) {
+  ngOnChanges(changes: { [P in keyof this]?: SimpleChange } & SimpleChanges): void {
+    if (changes.options) {
       this.parseOptions();
     }
   }
-
-  ngOnDestroy(): void {}
 
   writeValue(value: any): void {
     if (!value) this._text = '';

@@ -7,6 +7,7 @@ import {
   Input,
   OnChanges,
   Output,
+  SimpleChange,
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
@@ -66,7 +67,7 @@ export class RatingComponent implements ControlValueAccessor, OnChanges {
     this.cdr.detectChanges();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: { [P in keyof this]?: SimpleChange } & SimpleChanges): void {
     if (changes.config) {
       this.setConfig(changes.config.currentValue);
     }

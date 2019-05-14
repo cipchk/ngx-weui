@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, Input, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 import { add, remove, InputNumber } from 'ngx-weui/core';
 
 /**
@@ -37,7 +37,7 @@ export class TextareaDirective implements OnInit, OnChanges {
     this.init();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(changes: { [P in keyof this]?: SimpleChange } & SimpleChanges): void {
     if (changes.maxlength) {
       this.init()._onChange(this._value);
     }

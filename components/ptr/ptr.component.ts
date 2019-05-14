@@ -6,10 +6,8 @@ import {
   EventEmitter,
   HostListener,
   Input,
-  OnChanges,
   OnInit,
   Output,
-  SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
 import { InputBoolean } from 'ngx-weui/core';
@@ -26,7 +24,7 @@ import { PTRConfig } from './ptr.config';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class PTRComponent implements OnInit, OnChanges {
+export class PTRComponent implements OnInit {
   private ogY: number = 0;
   private loading: boolean = false;
   private touching: boolean = false;
@@ -36,8 +34,15 @@ export class PTRComponent implements OnInit, OnChanges {
   _animating: boolean = false;
   _pullPercent: number = 0;
   _lastLabel: string;
-  /** 配置项 */
-  @Input() config: PTRConfig;
+
+  private _config: PTRConfig;
+  @Input()
+  set config(val: PTRConfig) {
+    this._config = { ...this.DEF, ...val };
+  }
+  get config() {
+    return this._config;
+  }
   /** 是否禁止 */
   @Input() @InputBoolean() disabled: boolean = false;
   /** 下拉滚动时回调，返回一个0-100%的参数 */
@@ -45,7 +50,9 @@ export class PTRComponent implements OnInit, OnChanges {
   /** 刷新回调 */
   @Output() readonly refresh = new EventEmitter<PTRComponent>();
 
-  constructor(private el: ElementRef, private DEF: PTRConfig, private cdr: ChangeDetectorRef) {}
+  constructor(private el: ElementRef<HTMLElement>, private DEF: PTRConfig, private cdr: ChangeDetectorRef) {
+    this.config = { ...DEF };
+  }
 
   /**
    * 设置最后更新标签
@@ -132,15 +139,6 @@ export class PTRComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    this.parseConfig();
-    this.contentEl = this.el.nativeElement.querySelector('.weui-ptr__content');
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.config) this.parseConfig();
-  }
-
-  private parseConfig() {
-    this.config = { ...this.DEF, ...this.config };
+    this.contentEl = this.el.nativeElement.querySelector('.weui-ptr__content')! as HTMLElement;
   }
 }
