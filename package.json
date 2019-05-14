@@ -28,8 +28,8 @@
     "site:gh": "npm run site:build && gh-pages -d ./dist",
     "build": "bash scripts/build/build.sh",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s --pkg package.json",
-    "release": "npm run build && cd publish && npm publish --access public",
-    "release:next": "npm run build && cd publish && npm publish --access public --tag next"
+    "release": "npm run changelog && npm run build && cd publish && npm publish --access public",
+    "release:next": "npm run changelog && npm run build && cd publish && npm publish --access public --tag next"
   },
   "dependencies": {
     "@angular/animations": "~7.2.0",
