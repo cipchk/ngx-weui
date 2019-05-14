@@ -1,14 +1,5 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  SimpleChanges,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
 import { genImageUrl, InputBoolean } from 'ngx-weui/core';
 
 /**
@@ -48,7 +39,7 @@ export interface GalleryItem {
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class GalleryComponent implements OnChanges {
+export class GalleryComponent {
   _imgs: any[];
 
   /**
@@ -56,7 +47,10 @@ export class GalleryComponent implements OnChanges {
    *
    * - 虽然支持传递数组，但并不支持在打开后切换图片。
    */
-  @Input() imgs: string | File | string[] | GalleryItem[];
+  @Input()
+  set imgs(val: string | File | string[] | GalleryItem[]) {
+    this.parseImgs(val);
+  }
 
   /**
    * 是否允许删除，默认：`true`
@@ -106,12 +100,7 @@ export class GalleryComponent implements OnChanges {
     this.hide.emit();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes.imgs) this.parseImgs();
-  }
-
-  private parseImgs() {
-    let imgs = this.imgs as any;
+  private parseImgs(imgs: any) {
     if (Array.isArray(imgs)) {
       if (imgs.length > 0) {
         if (typeof imgs[0] === 'string') {
