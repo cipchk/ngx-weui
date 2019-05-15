@@ -1,4 +1,4 @@
-import { Directive, ElementRef, HostListener, Input, OnInit } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit } from '@angular/core';
 import { InputNumber } from 'ngx-weui/core';
 
 /**
@@ -7,6 +7,12 @@ import { InputNumber } from 'ngx-weui/core';
 @Directive({
   selector: '[weui-swipe]',
   exportAs: 'weuiSwipe',
+  host: {
+    '(touchstart)': 'onTouchStart($event)',
+    '(touchmove)': 'onTouchMove($event)',
+    '(touchend)': 'onTouchEnd($event)',
+    '(touchcancel)': 'onTouchEnd($event)',
+  },
 })
 export class SwipeDirective implements OnInit {
   private curX: number = 0;
@@ -18,13 +24,14 @@ export class SwipeDirective implements OnInit {
    */
   @Input('weui-width') @InputNumber() width: number = 68;
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef<HTMLElement>) {}
 
   ngOnInit() {
     const el = this.el.nativeElement;
     this.swipeEl = el.querySelector('.weui-cell__bd');
-    if (!this.swipeEl) this.width = 0;
-    else {
+    if (!this.swipeEl) {
+      this.width = 0;
+    } else {
       this.setPos(0);
       this.swipeEl.style.transition = 'transform .3s';
     }
@@ -34,15 +41,16 @@ export class SwipeDirective implements OnInit {
     this.swipeEl.style.transform = `translateX(-${x}px)`;
   }
 
-  @HostListener('touchstart', ['$event'])
-  onTouchStart($event: any) {
-    this.curX = ($event.touches[0] || $event.changedTouches[0]).pageX;
+  private getTouch(ev: TouchEvent): Touch {
+    return ev.touches[0] || ev.changedTouches[0];
   }
 
-  @HostListener('touchmove', ['$event'])
-  onTouchMove($event: any) {
-    const touch = $event.touches[0] || $event.changedTouches[0];
-    let newX = this.curX - touch.pageX;
+  onTouchStart($event: TouchEvent) {
+    this.curX = this.getTouch($event).pageX;
+  }
+
+  onTouchMove($event: TouchEvent) {
+    let newX = this.curX - this.getTouch($event).pageX;
     if (this.opend) {
       newX = newX > 0 ? this.width : this.width - Math.abs(newX);
     } else {
@@ -52,11 +60,8 @@ export class SwipeDirective implements OnInit {
     this.setPos(newX <= 0 ? 0 : newX);
   }
 
-  @HostListener('touchend', ['$event'])
-  @HostListener('touchcancel', ['$event'])
-  onTouchEnd($event: any) {
-    const touch = $event.touches[0] || $event.changedTouches[0];
-    let newX = Math.abs(this.curX - touch.pageX);
+  onTouchEnd($event: TouchEvent) {
+    let newX = Math.abs(this.curX - this.getTouch($event).pageX);
     if (newX === 0) return;
     if (this.opend) newX = this.width - newX;
     // 当移动超过一半都视为打开

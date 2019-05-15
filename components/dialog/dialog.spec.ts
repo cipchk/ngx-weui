@@ -48,10 +48,10 @@ describe('Component: Dialog', () => {
     let el: any;
 
     const html = `
-            <weui-dialog [config]="config"></weui-dialog>
-        `;
+      <weui-dialog [config]="config"></weui-dialog>
+    `;
 
-    beforeEach(fakeAsync(() => {
+    beforeEach(() => {
       TestBed.configureTestingModule({
         declarations: [TestDialogComponent],
         imports: [DialogModule, FormsModule, NoopAnimationsModule],
@@ -65,8 +65,7 @@ describe('Component: Dialog', () => {
       dl = fixture.debugElement;
       el = fixture.nativeElement;
       fixture.detectChanges();
-      tick();
-    }));
+    });
 
     it('should init', () => {
       context.dialog.show();
@@ -167,10 +166,10 @@ describe('Component: Dialog', () => {
     let el: any;
 
     const html = `
-            <weui-dialog [config]="config"></weui-dialog>
-        `;
+      <weui-dialog [config]="config"></weui-dialog>
+    `;
 
-    beforeEach(fakeAsync(() => {
+    beforeEach(() => {
       TestBed.configureTestingModule({
         declarations: [TestDialogComponent],
         imports: [DialogModule, FormsModule, NoopAnimationsModule],
@@ -184,8 +183,7 @@ describe('Component: Dialog', () => {
       dl = fixture.debugElement;
       el = fixture.nativeElement;
       fixture.detectChanges();
-      tick();
-    }));
+    });
 
     const TYPES: any[] = [
       {
