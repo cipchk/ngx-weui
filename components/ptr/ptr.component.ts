@@ -4,7 +4,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  HostListener,
   Input,
   OnInit,
   Output,
@@ -18,6 +17,10 @@ import { PTRConfig } from './ptr.config';
   exportAs: 'weuiPtr',
   templateUrl: './ptr.component.html',
   host: {
+    '(touchstart)': 'onTouchStart($event)',
+    '(touchmove)': 'onTouchMove($event)',
+    '(touchend)': 'onTouchEnd()',
+    '(touchcancel)': 'onTouchEnd()',
     '[class.weui-ptr]': 'true',
   },
   preserveWhitespaces: false,
@@ -84,8 +87,7 @@ export class PTRComponent implements OnInit {
     }
   }
 
-  @HostListener('touchstart', ['$event'])
-  onTouchStart($event: any) {
+  onTouchStart($event: TouchEvent) {
     if (this.disabled || this.touching || this.loading) return;
     this.touching = true;
     this.touchId = $event.targetTouches[0].identifier;
@@ -95,8 +97,7 @@ export class PTRComponent implements OnInit {
     this._animating = false;
   }
 
-  @HostListener('touchmove', ['$event'])
-  onTouchMove($event: any) {
+  onTouchMove($event: TouchEvent) {
     if (this.disabled || !this.touching || this.loading) return;
     if ($event.targetTouches[0].identifier !== this.touchId) return;
 
@@ -114,8 +115,6 @@ export class PTRComponent implements OnInit {
     this.scroll.emit(this._pullPercent);
   }
 
-  @HostListener('touchend')
-  @HostListener('touchcancel')
   onTouchEnd() {
     if (this.disabled || !this.touching || this.loading) return;
 

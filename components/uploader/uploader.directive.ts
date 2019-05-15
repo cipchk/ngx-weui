@@ -1,10 +1,13 @@
-import { Directive, ElementRef, HostListener, Input } from '@angular/core';
+import { Directive, ElementRef, Input } from '@angular/core';
 import { Uploader } from './uploader.class';
 import { UploaderOptions } from './uploader.options';
 
 @Directive({
   selector: '[weui-uploader-file]',
   exportAs: 'weuiUploaderFile',
+  host: {
+    '(change)': '_onChange',
+  },
 })
 export class UploaderFileDirective {
   /**
@@ -22,8 +25,7 @@ export class UploaderFileDirective {
     return !!this.element.nativeElement.attributes.multiple;
   }
 
-  @HostListener('change')
-  _onChange(): any {
+  _onChange(): void {
     const files = this.element.nativeElement.files;
     this.uploader.addToQueue(files, this._options);
     if (this._isEmptyAfterSelection) {
