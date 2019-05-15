@@ -38,51 +38,51 @@ describe('Component: Button', () => {
 
   describe('weui style', () => {
     it('should work weui-style', () => {
-      expect(el.querySelector('#default').classList).toContain('weui-btn');
-      expect(el.querySelector('#default').classList).toContain('weui-btn_primary');
+      expect(el.querySelector('#default')!.classList).toContain('weui-btn');
+      expect(el.querySelector('#default')!.classList).toContain('weui-btn_primary');
       context.type = 'default';
       fixture.detectChanges();
-      expect(el.querySelector('#default').classList).toContain('weui-btn_default');
+      expect(el.querySelector('#default')!.classList).toContain('weui-btn_default');
       context.type = 'warn';
       fixture.detectChanges();
-      expect(el.querySelector('#default').classList).toContain('weui-btn_warn');
+      expect(el.querySelector('#default')!.classList).toContain('weui-btn_warn');
     });
     it('with cell, should be not weui-btn, muse be use weui-btn_cell', () => {
       context.cell = true;
       fixture.detectChanges();
-      expect(el.querySelector('#default').classList).toContain('weui-btn_cell');
-      expect(el.querySelector('#default').classList).not.toContain('weui-btn');
+      expect(el.querySelector('#default')!.classList).toContain('weui-btn_cell');
+      expect(el.querySelector('#default')!.classList).not.toContain('weui-btn');
     });
     it('with block', () => {
       context.block = true;
       fixture.detectChanges();
-      expect(el.querySelector('#default').classList).toContain('weui-btn_block');
+      expect(el.querySelector('#default')!.classList).toContain('weui-btn_block');
     });
   });
 
   it('should have class loading by loading=true', () => {
     context.loading = true;
     fixture.detectChanges();
-    expect(el.querySelector('#default').classList).toContain('weui-btn_loading');
+    expect(el.querySelector('#default')!.classList).toContain('weui-btn_loading');
     expect(el.querySelector('.weui-loading')).not.toBeNull();
   });
 
   it('should have class plain by plain=true', () => {
     context.plain = true;
     fixture.detectChanges();
-    expect(el.querySelector('#default').classList).toContain('weui-btn_plain-primary');
+    expect(el.querySelector('#default')!.classList).toContain('weui-btn_plain-primary');
   });
 
   it('should have class mini by mini=true', () => {
     context.mini = true;
     fixture.detectChanges();
-    expect(el.querySelector('#default').classList).toContain('weui-btn_mini');
+    expect(el.querySelector('#default')!.classList).toContain('weui-btn_mini');
   });
 
   it('should have class disabled by disabled=true', () => {
     context.disabled = true;
     fixture.detectChanges();
-    expect(el.querySelector('#default').classList).toContain('weui-btn_disabled');
+    expect(el.querySelector('#default')!.classList).toContain('weui-btn_disabled');
   });
 });
 
