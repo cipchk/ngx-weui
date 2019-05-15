@@ -1,10 +1,13 @@
-import { Directive, EventEmitter, HostBinding, Input, OnChanges, OnDestroy, Output } from '@angular/core';
+import { Directive, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core';
 import { InputBoolean } from 'ngx-weui/core';
 import { BarComponent } from './bar.component';
 
 @Directive({
   selector: 'weui-tab, [weui-tab]',
   exportAs: 'weuiTab',
+  host: {
+    '[class.active]': 'active',
+  },
 })
 export class TabDirective implements OnDestroy, OnChanges {
   /** 选项卡名称 */
@@ -28,7 +31,6 @@ export class TabDirective implements OnDestroy, OnChanges {
   /**
    * 激活
    */
-  @HostBinding('class.active')
   @Input()
   @InputBoolean()
   get active(): boolean {

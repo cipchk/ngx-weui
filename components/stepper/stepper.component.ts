@@ -5,7 +5,6 @@ import {
   Component,
   ElementRef,
   EventEmitter,
-  HostBinding,
   Input,
   Output,
   ViewChild,
@@ -21,6 +20,9 @@ import { InputBoolean, InputNumber } from 'ngx-weui/core';
   selector: 'weui-stepper',
   exportAs: 'weuiStepper',
   templateUrl: './stepper.component.html',
+  host: {
+    '[class.disabled]': 'disabled',
+  },
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -46,10 +48,7 @@ export class StepperComponent implements ControlValueAccessor {
   /** 最大值 */
   @Input() @InputNumber() max: number = Infinity;
   /** 禁用 */
-  @Input()
-  @InputBoolean()
-  @HostBinding('class.disabled')
-  disabled: boolean = false;
+  @Input() @InputBoolean() disabled: boolean = false;
   /** 变更时回调 */
   @Output() readonly change = new EventEmitter<number>();
 
