@@ -1,8 +1,6 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "./",
-    "rootDir": "./",
     "target": "es5",
     "module": "es2015",
     "sourceMap": false,
@@ -12,6 +10,8 @@
     "declaration": true,
     "outDir": "../release",
     "lib": ["es2015", "dom"],
+    "rootDir": ".",
+    "baseUrl": ".",
     "paths": {
       "ngx-weui": ["./ngx-weui.module"],
       "ngx-weui/*": ["./*"]

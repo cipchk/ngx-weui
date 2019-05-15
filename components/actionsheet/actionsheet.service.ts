@@ -27,7 +27,7 @@ export class ActionSheetService extends BaseService {
     const componentRef = this.build(ActionSheetComponent);
 
     componentRef.instance.menus = menus;
-    if (config) componentRef.instance.config = config;
+    componentRef.instance.config = config;
     componentRef.instance.close.subscribe(() => {
       setTimeout(() => {
         this.destroy(componentRef);

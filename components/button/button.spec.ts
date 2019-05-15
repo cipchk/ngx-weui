@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { fakeAsync, tick, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
+import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { UpdateHostClassService } from 'ngx-weui/core';
+import { ButtonType, UpdateHostClassService } from 'ngx-weui/core';
 
 import { ButtonComponent, ButtonModule } from '../button';
 
@@ -11,15 +11,17 @@ const html = `
         [weui-loading]="loading"
         [weui-mini]="mini"
         [weui-plain]="plain"
+        [weui-cell]="cell"
+        [weui-block]="block"
         [disabled]="disabled">default<weui-button>
 `;
 
 describe('Component: Button', () => {
   let fixture: ComponentFixture<TestButtonComponent>;
-  let context: any;
-  let el: any;
+  let context: TestButtonComponent;
+  let el: HTMLElement;
 
-  beforeEach(fakeAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestButtonComponent],
       imports: [ButtonModule, FormsModule],
@@ -30,53 +32,57 @@ describe('Component: Button', () => {
     });
     fixture = TestBed.createComponent(TestButtonComponent);
     context = fixture.debugElement.componentInstance;
-    el = fixture.nativeElement;
+    el = fixture.nativeElement as HTMLElement;
     fixture.detectChanges();
-    tick();
-  }));
+  });
 
-  describe('default', () => {
-    it('should work weui-style', fakeAsync(() => {
+  describe('weui style', () => {
+    it('should work weui-style', () => {
       expect(el.querySelector('#default').classList).toContain('weui-btn');
       expect(el.querySelector('#default').classList).toContain('weui-btn_primary');
       context.type = 'default';
       fixture.detectChanges();
-      tick();
       expect(el.querySelector('#default').classList).toContain('weui-btn_default');
       context.type = 'warn';
       fixture.detectChanges();
-      tick();
       expect(el.querySelector('#default').classList).toContain('weui-btn_warn');
-    }));
-
-    it('should have class loading by loading=true', fakeAsync(() => {
-      context.loading = true;
+    });
+    it('with cell, should be not weui-btn, muse be use weui-btn_cell', () => {
+      context.cell = true;
       fixture.detectChanges();
-      tick();
-      expect(el.querySelector('#default').classList).toContain('weui-btn_loading');
-      expect(el.querySelector('.weui-loading')).not.toBeNull();
-    }));
-
-    it('should have class plain by plain=true', fakeAsync(() => {
-      context.plain = true;
+      expect(el.querySelector('#default').classList).toContain('weui-btn_cell');
+      expect(el.querySelector('#default').classList).not.toContain('weui-btn');
+    });
+    it('with block', () => {
+      context.block = true;
       fixture.detectChanges();
-      tick();
-      expect(el.querySelector('#default').classList).toContain('weui-btn_plain-primary');
-    }));
+      expect(el.querySelector('#default').classList).toContain('weui-btn_block');
+    });
+  });
 
-    it('should have class mini by mini=true', fakeAsync(() => {
-      context.mini = true;
-      fixture.detectChanges();
-      tick();
-      expect(el.querySelector('#default').classList).toContain('weui-btn_mini');
-    }));
+  it('should have class loading by loading=true', () => {
+    context.loading = true;
+    fixture.detectChanges();
+    expect(el.querySelector('#default').classList).toContain('weui-btn_loading');
+    expect(el.querySelector('.weui-loading')).not.toBeNull();
+  });
 
-    it('should have class disabled by disabled=true', fakeAsync(() => {
-      context.disabled = true;
-      fixture.detectChanges();
-      tick();
-      expect(el.querySelector('#default').classList).toContain('weui-btn_disabled');
-    }));
+  it('should have class plain by plain=true', () => {
+    context.plain = true;
+    fixture.detectChanges();
+    expect(el.querySelector('#default').classList).toContain('weui-btn_plain-primary');
+  });
+
+  it('should have class mini by mini=true', () => {
+    context.mini = true;
+    fixture.detectChanges();
+    expect(el.querySelector('#default').classList).toContain('weui-btn_mini');
+  });
+
+  it('should have class disabled by disabled=true', () => {
+    context.disabled = true;
+    fixture.detectChanges();
+    expect(el.querySelector('#default').classList).toContain('weui-btn_disabled');
   });
 });
 
@@ -85,8 +91,11 @@ describe('Component: Button', () => {
   template: ``,
 })
 class TestButtonComponent extends ButtonComponent {
+  type: ButtonType = 'primary';
   loading = false;
   mini = false;
   plain = false;
   disabled = false;
+  cell = false;
+  block = false;
 }
