@@ -6,7 +6,7 @@ import { UploaderOptions } from './uploader.options';
   selector: '[weui-uploader-file]',
   exportAs: 'weuiUploaderFile',
   host: {
-    '(change)': '_onChange',
+    '(change)': '_onChange()',
   },
 })
 export class UploaderFileDirective {

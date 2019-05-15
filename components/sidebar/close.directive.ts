@@ -8,7 +8,7 @@ import { SidebarService } from './sidebar.service';
   selector: '[closeSidebar]',
   exportAs: 'weuiCloseSidebar',
   host: {
-    '(click)': '_onClick',
+    '(click)': '_onClick()',
   },
 })
 export class CloseSidebarDirective {

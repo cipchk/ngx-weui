@@ -5,11 +5,11 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 import { PTRComponent, PTRConfig, PTRModule } from '../ptr';
 
-function spyTouchArgument(val: number) {
+function spyTouchArgument(val: number): TouchEvent {
   return {
     targetTouches: [{ pageY: val, identifier: 1 }],
     preventDefault() {},
-  };
+  } as any;
 }
 
 describe('Component: PTR', () => {
