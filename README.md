@@ -21,7 +21,7 @@ ngx-weui
 ## Version
 
 - WeUI 1.x using `7.0.x`
-- WeUI 2.x using `7.1.0-rc.x` (in next version)
+- WeUI 2.x using `7.1.x` (in next version)
 
 ## Table of Contents
 
