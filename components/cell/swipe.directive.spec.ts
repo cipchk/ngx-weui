@@ -1,5 +1,5 @@
 import { Component, DebugElement } from '@angular/core';
-import { fakeAsync, tick, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
+import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 
 import { By } from '@angular/platform-browser';
@@ -8,29 +8,32 @@ import { CellModule, SwipeDirective } from '../cell';
 const WIDTH = 68;
 const html = `
 <div class="weui-cell weui-cell_swiped" weui-swipe [weui-width]="width">
-    <div class="weui-cell__bd">
-        <div class="weui-cell">
-            <div class="weui-cell__bd">
-                <p>标题文字</p>
-            </div>
-            <div class="weui-cell__ft">向左滑动试试</div>
-        </div>
+  <div class="weui-cell__bd">
+    <div class="weui-cell">
+      <div class="weui-cell__bd">
+        <p>标题文字</p>
+      </div>
+      <div class="weui-cell__ft">向左滑动试试</div>
     </div>
-    <div class="weui-cell__ft">
-        <a class="weui-swiped-btn weui-swiped-btn_warn" href="javascript:">删除</a>
-    </div>
+  </div>
+  <div class="weui-cell__ft">
+    <a class="weui-swiped-btn weui-swiped-btn_warn" href="javascript:">删除</a>
+  </div>
 </div>
 `;
 const htmlNotBody = `
-        <div class="weui-cell weui-cell_swiped" weui-swipe [weui-width]="width">
-            <div class="weui-cell__ft">
-                <a class="weui-swiped-btn weui-swiped-btn_warn" href="javascript:">删除</a>
-            </div>
-        </div>
+  <div class="weui-cell weui-cell_swiped" weui-swipe [weui-width]="width">
+    <div class="weui-cell__ft">
+      <a class="weui-swiped-btn weui-swiped-btn_warn" href="javascript:">删除</a>
+    </div>
+  </div>
 `;
 
-function spyPageX(val: number) {
-  return { touches: [{ pageX: val }] };
+function spyPageX(val: number): TouchEvent {
+  if (val === 0) {
+    return { touches: [], changedTouches: [{ pageX: val }] } as any;
+  }
+  return { touches: [{ pageX: val }] } as any;
 }
 
 function open(directive: SwipeDirective, el: any, width: number, shouldOpen: boolean) {
@@ -47,10 +50,10 @@ function open(directive: SwipeDirective, el: any, width: number, shouldOpen: boo
 
 let fixture: ComponentFixture<TestSwipeComponent>;
 describe('Directive: Swipe', () => {
-  let el: any;
+  let el: HTMLElement;
   let directives: SwipeDirective[];
 
-  beforeEach(fakeAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestSwipeComponent],
       imports: [CellModule, FormsModule],
@@ -66,13 +69,16 @@ describe('Directive: Swipe', () => {
     directives = list.map((de: DebugElement) => de.injector.get<SwipeDirective>(SwipeDirective));
 
     fixture.detectChanges();
-    tick();
-  }));
+  });
 
-  it('should init', fakeAsync(() => {
+  function getCellBe(): HTMLElement {
+    return el.querySelector('.weui-cell__bd')! as HTMLElement;
+  }
+
+  it('should init', () => {
     expect(directives.length).toBe(1);
-    expect(el.querySelector('.weui-cell__bd').style.transform).toBe('translateX(0px)');
-  }));
+    expect(getCellBe().style.transform).toBe('translateX(0px)');
+  });
 
   for (const moveWidth of [10, WIDTH - 10]) {
     const hasOpened = moveWidth > 10;
@@ -91,7 +97,7 @@ describe('Directive: Swipe', () => {
       directives[0].onTouchMove(spyPageX(-moveWidth));
       directives[0].onTouchEnd(spyPageX(-moveWidth));
       fixture.detectChanges();
-      expect(el.querySelector('.weui-cell__bd').style.transform).toBe(`translateX(${hasOpened ? '-' + WIDTH : '0'}px)`);
+      expect(getCellBe().style.transform).toBe(`translateX(${hasOpened ? '-' + WIDTH : '0'}px)`);
     });
   }
 
@@ -100,14 +106,14 @@ describe('Directive: Swipe', () => {
     directives[0].onTouchMove(spyPageX(0));
     directives[0].onTouchEnd(spyPageX(0));
     fixture.detectChanges();
-    expect(el.querySelector('.weui-cell__bd').style.transform).toBe(`translateX(0px)`);
+    expect(getCellBe().style.transform).toBe(`translateX(0px)`);
   });
 });
 
 describe('Directive: Swipe(not body)', () => {
   let directive: SwipeDirective[];
 
-  beforeEach(fakeAsync(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [TestSwipeComponent],
       imports: [CellModule, FormsModule],
@@ -121,13 +127,12 @@ describe('Directive: Swipe(not body)', () => {
     directive = list.map((de: DebugElement) => de.injector.get<SwipeDirective>(SwipeDirective));
 
     fixture.detectChanges();
-    tick();
-  }));
+  });
 
-  it('should init', fakeAsync(() => {
+  it('should init', () => {
     expect(directive.length).toBe(1);
     expect(directive[0].width).toBe(0);
-  }));
+  });
 });
 
 @Component({

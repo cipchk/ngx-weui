@@ -29,19 +29,17 @@ export class StringTemplateOutletDirective {
       if (!this.defaultViewRef) {
         this.viewContainer.clear();
         this.inputViewRef = null;
-        if (this.defaultTemplate) {
-          this.defaultViewRef = this.viewContainer.createEmbeddedView(this.defaultTemplate);
-        }
+        this.defaultViewRef = this.viewContainer.createEmbeddedView(this.defaultTemplate);
       }
     } else {
-      /** use input template when input is templateRef **/
-      if (!this.inputViewRef) {
-        this.viewContainer.clear();
-        this.defaultViewRef = null;
-        if (this.inputTemplate) {
-          this.inputViewRef = this.viewContainer.createEmbeddedView(this.inputTemplate);
-        }
+      // clear previous view if any.
+      if (this.inputViewRef) {
+        this.inputViewRef = null;
       }
+      /** use input template when input is templateRef **/
+      this.viewContainer.clear();
+      this.defaultViewRef = null;
+      this.inputViewRef = this.viewContainer.createEmbeddedView(this.inputTemplate!);
     }
   }
 }

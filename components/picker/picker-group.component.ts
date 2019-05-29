@@ -2,7 +2,6 @@ import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
-  HostListener,
   Input,
   OnChanges,
   Output,
@@ -26,6 +25,9 @@ const getWindowHeight = (): number => {
   exportAs: 'weuiPickerGroup',
   templateUrl: './picker-group.component.html',
   host: {
+    '(touchstart)': 'onTouchStart($event)',
+    '(touchmove)': 'onTouchMove($event)',
+    '(touchend)': 'onTouchEnd($event)',
     '[class.weui-picker__group]': 'true',
   },
   preserveWhitespaces: false,
@@ -66,7 +68,6 @@ export class PickerGroupComponent implements OnChanges {
     }
   }
 
-  @HostListener('touchstart', ['$event'])
   onTouchStart(e: TouchEvent): void {
     if (this.items.length <= 1) return;
 
@@ -74,7 +75,6 @@ export class PickerGroupComponent implements OnChanges {
     this.startTime = +new Date();
   }
 
-  @HostListener('touchmove', ['$event'])
   onTouchMove(e: TouchEvent): void {
     if (this.items.length <= 1) return;
 
@@ -94,7 +94,6 @@ export class PickerGroupComponent implements OnChanges {
     e.preventDefault();
   }
 
-  @HostListener('touchend', ['$event'])
   onTouchEnd(event: TouchEvent): void {
     if (!this.startY) return;
     this.endY = event.changedTouches[0].pageY;
