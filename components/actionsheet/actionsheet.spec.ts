@@ -225,7 +225,7 @@ describe('Component: ActionSheet', () => {
 class TestActionSheetServiceComponent {}
 
 @Component({
-  selector: 'test-actionsheet',
+  selector: 'app-actionsheet',
   template: '',
 })
 class TestActionSheetComponent {

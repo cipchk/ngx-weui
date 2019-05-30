@@ -321,7 +321,7 @@ describe('Component: Dialog', () => {
 class TestDialogServiceComponent {}
 
 @Component({
-  selector: 'test-dialog',
+  selector: 'app-dialog',
   template: '',
 })
 class TestDialogComponent {

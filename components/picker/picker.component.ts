@@ -33,6 +33,11 @@ import { PickerConfig } from './picker.config';
   encapsulation: ViewEncapsulation.None,
 })
 export class PickerComponent implements ControlValueAccessor, OnInit, OnChanges {
+  private onChange: any = Function.prototype;
+  private onTouched: any = Function.prototype;
+  _showP: boolean = false;
+  _shown: boolean = false;
+
   /** 配置项 */
   @Input() options: PickerOptions;
 
@@ -94,8 +99,6 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnChanges 
     if (!this.options) this.parseOptions();
   }
 
-  _showP: boolean = false;
-  _shown: boolean = false;
   _onHide(fh: boolean) {
     if (!fh && !this.options.backdrop) return false;
     this._shown = false;
@@ -194,9 +197,6 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnChanges 
       this._setDefault()._setText();
     }
   }
-
-  private onChange: any = Function.prototype;
-  private onTouched: any = Function.prototype;
 
   registerOnChange(fn: (_: any) => {}): void {
     this.onChange = fn;

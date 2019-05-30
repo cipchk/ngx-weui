@@ -72,6 +72,9 @@ export type FORMAT_TYPE =
   encapsulation: ViewEncapsulation.None,
 })
 export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDestroy, OnChanges {
+  private initFlag = false;
+  private onChange: any = Function.prototype;
+  private onTouched: any = Function.prototype;
   @ViewChild(PickerComponent, { static: true }) _pickerInstance: PickerComponent;
 
   _value: Date;
@@ -313,7 +316,6 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
     this.cancel.emit();
   }
 
-  private initFlag = false;
   ngOnInit(): void {
     this.initFlag = true;
     this.genGroups();
@@ -341,9 +343,6 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
     this._value = value;
     this._pickerInstance._text = value instanceof Date ? this.getFormatDate(value)! : '';
   }
-
-  private onChange: any = Function.prototype;
-  private onTouched: any = Function.prototype;
 
   registerOnChange(fn: (_: any) => {}): void {
     this.onChange = fn;

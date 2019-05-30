@@ -65,7 +65,7 @@ export class MaskComponent implements OnDestroy {
       this._shown = true;
       this.cdr.detectChanges();
     });
-    return Observable.create((observer: Observer<void>) => {
+    return new Observable((observer: Observer<void>) => {
       this.observer = observer;
     });
   }

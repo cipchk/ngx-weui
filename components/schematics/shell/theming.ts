@@ -6,6 +6,7 @@ import { createCustomTheme } from './custom-theme';
 import { Schema } from './schema';
 
 export function addThemeToAppStyles(options: Schema): (host: Tree) => Tree {
+  // tslint:disable-next-line: only-arrow-functions
   return function(host: Tree): Tree {
     const workspace = getWorkspace(host);
     const project = getProjectFromWorkspace(workspace, options.project);

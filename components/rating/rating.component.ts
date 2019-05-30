@@ -31,17 +31,19 @@ import { RatingConfig } from './rating.config';
   encapsulation: ViewEncapsulation.None,
 })
 export class RatingComponent implements ControlValueAccessor, OnChanges {
+  private onChange: any = Function.prototype;
+  // private onTouched: any = Function.prototype;
+  _range: any[];
+  _value: number;
+  _preValue: number;
+  _class: string = '';
+
   /** 配置项 */
   @Input() config: RatingConfig;
   /** 是否只读模式，默认：`false` */
   @Input() @InputBoolean() readonly: boolean = false;
   /** 选中后回调，参数：选中值 */
   @Output() readonly selected = new EventEmitter<number>();
-
-  _range: any[];
-  _value: number;
-  _preValue: number;
-  _class: string = '';
 
   constructor(private DEF: RatingConfig, private cdr: ChangeDetectorRef) {}
 
@@ -93,9 +95,6 @@ export class RatingComponent implements ControlValueAccessor, OnChanges {
     this._value = _value;
     this.cdr.detectChanges();
   }
-
-  private onChange: any = Function.prototype;
-  // private onTouched: any = Function.prototype;
 
   registerOnChange(fn: (_: any) => {}): void {
     this.onChange = fn;

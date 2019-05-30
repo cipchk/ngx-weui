@@ -86,7 +86,7 @@ describe('Component: Toast', () => {
 class TestToastServiceComponent {}
 
 @Component({
-  selector: 'test-component',
+  selector: 'app-component',
   template: `
     <weui-toast [type]="type" [time]="100"></weui-toast>
   `,

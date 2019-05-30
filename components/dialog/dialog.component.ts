@@ -187,7 +187,7 @@ export class DialogComponent implements OnDestroy {
     setTimeout(() => {
       this.open.emit(this);
     }, 300);
-    return Observable.create((observer: Observer<any>) => {
+    return new Observable((observer: Observer<any>) => {
       this.observer = observer;
     });
   }

@@ -5,6 +5,7 @@ import { SidebarService } from './sidebar.service';
  * 关闭侧边栏指令
  */
 @Directive({
+  // tslint:disable-next-line: directive-selector
   selector: '[closeSidebar]',
   exportAs: 'weuiCloseSidebar',
   host: {

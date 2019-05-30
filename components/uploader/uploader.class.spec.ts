@@ -19,7 +19,7 @@ describe('Uploader: Class', () => {
     instance = new Uploader({});
     xhr = sinon.useFakeXMLHttpRequest();
     requests = [];
-    xhr.onCreate = function(req) {
+    xhr.onCreate = req => {
       requests.push(req);
     };
   });

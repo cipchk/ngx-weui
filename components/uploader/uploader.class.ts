@@ -78,7 +78,6 @@ export class Uploader {
   /**
    * 重置选项
    *
-   * @param options
    * @param includeOldQueue 是否包括已存在队列中的文件
    */
   setOptions(options: UploaderOptions, includeOldQueue: boolean = true) {

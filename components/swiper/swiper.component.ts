@@ -27,6 +27,7 @@ declare const Swiper: any;
   encapsulation: ViewEncapsulation.None,
 })
 export class SwiperComponent implements AfterViewInit, OnChanges, OnInit, OnDestroy {
+  private containerEl: HTMLElement;
   /**
    * 等同于swiper[参数项](http://idangero.us/swiper/api/)
    */
@@ -43,7 +44,6 @@ export class SwiperComponent implements AfterViewInit, OnChanges, OnInit, OnDest
     this.options = { ...this.DEF.options, ...this.options };
   }
 
-  private containerEl: HTMLElement;
   private init() {
     this.destroy();
 

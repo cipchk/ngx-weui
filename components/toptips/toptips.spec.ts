@@ -86,7 +86,7 @@ describe('Component: Toptips', () => {
 class TestToptipsServiceComponent {}
 
 @Component({
-  selector: 'test-component',
+  selector: 'app-component',
   template: `
     <weui-toptips [type]="type" [time]="100" [text]="text"></weui-toptips>
   `,

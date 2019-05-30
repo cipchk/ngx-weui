@@ -87,7 +87,7 @@ describe('Component: Button', () => {
 });
 
 @Component({
-  selector: 'test-button',
+  selector: 'app-button',
   template: ``,
 })
 class TestButtonComponent extends ButtonComponent {
