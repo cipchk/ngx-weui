@@ -9,8 +9,6 @@ import { IssueComponent } from './issue/issue.component';
 @NgModule({
   imports: [SharedModule, RouterModule.forRoot(routes, { useHash: true })],
   declarations: [DocsStartComponent, IssueComponent],
-  providers: [],
-  entryComponents: [],
   exports: [RouterModule],
 })
 export class RoutesModule {}
