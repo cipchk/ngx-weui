@@ -92,7 +92,7 @@ class TestToptipsServiceComponent {}
   `,
 })
 class TestToptipsComponent {
-  @ViewChild(ToptipsComponent) toptips: ToptipsComponent;
+  @ViewChild(ToptipsComponent, { static: true }) toptips: ToptipsComponent;
 
   type: string = 'success';
   text: string = 'content';

@@ -40,5 +40,5 @@ describe('Component: ChartG2', () => {
 class TestChartG2Component {
   margin = 0;
 
-  @ViewChild('c1') c1: ChartG2Directive;
+  @ViewChild('c1', { static: true }) c1: ChartG2Directive;
 }

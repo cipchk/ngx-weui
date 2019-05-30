@@ -16,5 +16,5 @@ export class DemoMapQQComponent {
     },
     zoom: 1,
   };
-  @ViewChild('map') map: AqmPanoramaComponent;
+  @ViewChild('map', { static: true }) map: AqmPanoramaComponent;
 }

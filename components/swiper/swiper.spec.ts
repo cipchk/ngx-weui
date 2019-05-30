@@ -83,7 +83,7 @@ describe('Component: Swiper', () => {
 
 @Component({ template: `` })
 class TestSwiperComponent {
-  @ViewChild(SwiperComponent) comp: SwiperComponent;
+  @ViewChild(SwiperComponent, { static: true }) comp: SwiperComponent;
 
   options: any = {
     direction: 'horizontal',

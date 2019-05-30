@@ -46,7 +46,7 @@ import { PickerComponent } from './picker.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
-  @ViewChild(PickerComponent) _pickerInstance: PickerComponent;
+  @ViewChild(PickerComponent, { static: true }) _pickerInstance: PickerComponent;
 
   _value: string;
   _groups: any[] | null = [];

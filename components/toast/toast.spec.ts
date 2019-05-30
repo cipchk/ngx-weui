@@ -92,7 +92,7 @@ class TestToastServiceComponent {}
   `,
 })
 class TestToastComponent {
-  @ViewChild(ToastComponent) toast: ToastComponent;
+  @ViewChild(ToastComponent, { static: true }) toast: ToastComponent;
 
   type: string = 'success';
 }

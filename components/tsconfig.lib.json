@@ -15,7 +15,7 @@
     "outDir": "../release",
     "alwaysStrict": true,
     "strictFunctionTypes": true,
-    "lib": ["es2015", "dom"]
+    "lib": ["es2018", "dom"]
   },
   "angularCompilerOptions": {
     "annotateForClosureCompiler": true,

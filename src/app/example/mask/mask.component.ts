@@ -9,9 +9,9 @@ import { MaskComponent } from 'ngx-weui/mask';
 export class DemoMaskComponent {
   loading = false;
 
-  @ViewChild('mask') mask: MaskComponent;
+  @ViewChild('mask', { static: true }) mask: MaskComponent;
 
-  @ViewChild('maskContent') maskContent: MaskComponent;
+  @ViewChild('maskContent', { static: true }) maskContent: MaskComponent;
 
   onShow(isNormal: boolean = false) {
     this.mask.show().subscribe(() => {

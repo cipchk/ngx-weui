@@ -10,9 +10,9 @@ import { ActionSheetComponent, ActionSheetConfig, ActionSheetService } from 'ngx
   encapsulation: ViewEncapsulation.None,
 })
 export class DemoActionSheetComponent {
-  @ViewChild('ios') iosAS: ActionSheetComponent;
-  @ViewChild('android') androidAS: ActionSheetComponent;
-  @ViewChild('auto') autoAS: ActionSheetComponent;
+  @ViewChild('ios', { static: true }) iosAS: ActionSheetComponent;
+  @ViewChild('android', { static: true }) androidAS: ActionSheetComponent;
+  @ViewChild('auto', { static: true }) autoAS: ActionSheetComponent;
 
   menus: any[] = [{ text: '菜单一', value: 'test', other: 1 }, { text: '菜单三', value: 'test' }];
   config: ActionSheetConfig = {

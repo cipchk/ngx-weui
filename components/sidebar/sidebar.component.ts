@@ -76,7 +76,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
 
   @Output() readonly _rerender = new EventEmitter<null>();
 
-  @ViewChild('sidebar') private _elSidebar: ElementRef<HTMLElement>;
+  @ViewChild('sidebar', { static: true }) private _elSidebar: ElementRef<HTMLElement>;
 
   private _openSub: Subscription;
   private _closeSub: Subscription;

@@ -325,7 +325,7 @@ class TestDialogServiceComponent {}
   template: '',
 })
 class TestDialogComponent {
-  @ViewChild(DialogComponent) dialog: DialogComponent;
+  @ViewChild(DialogComponent, { static: true }) dialog: DialogComponent;
 
   config: DialogConfig = { ...CONFIG };
 }

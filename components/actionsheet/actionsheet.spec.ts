@@ -229,7 +229,7 @@ class TestActionSheetServiceComponent {}
   template: '',
 })
 class TestActionSheetComponent {
-  @ViewChild(ActionSheetComponent) actioinSheet: ActionSheetComponent;
+  @ViewChild(ActionSheetComponent, { static: true }) actioinSheet: ActionSheetComponent;
 
   menus: any[] = [...MENUS];
 

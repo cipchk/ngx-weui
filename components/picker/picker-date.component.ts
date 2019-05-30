@@ -72,7 +72,7 @@ export type FORMAT_TYPE =
   encapsulation: ViewEncapsulation.None,
 })
 export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDestroy, OnChanges {
-  @ViewChild(PickerComponent) _pickerInstance: PickerComponent;
+  @ViewChild(PickerComponent, { static: true }) _pickerInstance: PickerComponent;
 
   _value: Date;
   _groups: any[] = [];

@@ -9,7 +9,7 @@ import { ToptipsComponent, ToptipsService, ToptipsType } from 'ngx-weui/toptips'
   encapsulation: ViewEncapsulation.None,
 })
 export class DemoToptipsComponent {
-  @ViewChild('toptips') toptips: ToptipsComponent;
+  @ViewChild('toptips', { static: true }) toptips: ToptipsComponent;
   text = '';
   type: ToptipsType;
   constructor(private srv: ToptipsService) {}

@@ -4,21 +4,12 @@
     "sourceMap": false,
     "outDir": "../out-tsc/app",
     "baseUrl": "./",
-    "module": "es2015",
+    "module": "esnext",
     "types": [],
     "paths": {
-      "ngx-weui": [
-        "../components/ngx-weui.module"
-      ],
-      "ngx-weui/*": [
-        "../components/*"
-      ]
+      "ngx-weui": ["../components/ngx-weui.module"],
+      "ngx-weui/*": ["../components/*"]
     }
   },
-  "exclude": [
-    "test.ts",
-    "**/*.spec.ts",
-    "../packages/cli/**/*",
-    "./templates/**/*"
-  ]
+  "exclude": ["test.ts", "**/*.spec.ts", "../packages/cli/**/*", "./templates/**/*"]
 }

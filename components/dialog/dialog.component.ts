@@ -127,7 +127,7 @@ export class DialogComponent implements OnDestroy {
 
   constructor(private DEF: DialogConfig, private cdr: ChangeDetectorRef) {}
 
-  @ViewChild('container') container: any;
+  @ViewChild('container', { static: true }) container: any;
   _prompError: boolean = false;
   _promptData: any;
 
