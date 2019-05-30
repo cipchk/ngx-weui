@@ -1,11 +1,16 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "baseUrl": "./",
-    "rootDir": "./",
-    "paths": {
-      "ngx-weui": ["../components/ngx-weui.module"],
-      "ngx-weui/*": ["../components/*"]
-    }
-  }
+    "outDir": "./out-tsc/app",
+    "types": []
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    "test.ts",
+    "**/*.spec.ts",
+    "../packages/cli/**/*",
+    "./templates/**/*"
+  ]
 }
