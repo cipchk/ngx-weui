@@ -58,7 +58,7 @@ cd demo
 3. add `ngx-weui`
 
 ```bash
-ng add ngx-weui@next
+ng add ngx-weui
 # Using WeUI 1.x
 # ng add ngx-weui
 ```
