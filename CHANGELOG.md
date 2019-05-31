@@ -1,3 +1,7 @@
+# [8.0.0](https://github.com/cipchk/ngx-weui/compare/7.1.0-rc.2...8.0.0) (2019-05-31)
+
+
+
 # [7.1.0](https://github.com/cipchk/ngx-weui/compare/7.1.0-rc.2...7.1.0) (2019-05-29)
 
 
