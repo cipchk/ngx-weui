@@ -133,7 +133,7 @@ describe('Component: Sidebar', () => {
   `,
 })
 class TestSidebarComponent {
-  @ViewChild('sidebar') sidebar: SidebarComponent;
+  @ViewChild('sidebar', { static: true }) sidebar: SidebarComponent;
 
   _showBackdrop = false;
   status: boolean = false;

@@ -35,7 +35,7 @@ npm install g2-mobile --save-dev
 ```
 
 ```typescript
-@ViewChild('c1') c1: ChartG2Directive;
+@ViewChild('c1', { static: true }) c1: ChartG2Directive;
 renderC1() {
     const chart = this.c1.chart;
     chart.source([

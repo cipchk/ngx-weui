@@ -46,12 +46,20 @@ import { PickerComponent } from './picker.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
-  @ViewChild(PickerComponent) _pickerInstance: PickerComponent;
-
+  private _tmpData: any;
+  private onChange: any = Function.prototype;
+  private onTouched: any = Function.prototype;
   _value: string;
   _groups: any[] | null = [];
   _selected: number[] = [];
-  private _tmpData: any;
+
+  /** 城市数据，可以参考示例中的数据格式 */
+  @Input()
+  set data(d: any) {
+    this._tmpData = d;
+    this.parseData(this._tmpData, this.dataMap.items, this._selected);
+  }
+  @ViewChild(PickerComponent, { static: true }) _pickerInstance: PickerComponent;
 
   @Input()
   dataMap: { label: string; value: string; items: string } = {
@@ -59,12 +67,6 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
     value: 'code',
     items: 'sub',
   };
-  /** 城市数据，可以参考示例中的数据格式 */
-  @Input()
-  set data(d: any) {
-    this._tmpData = d;
-    this.parseData(this._tmpData, this.dataMap.items, this._selected);
-  }
   /** 配置项 */
   @Input() options: PickerOptions;
   /** 当options.type=='form'时，占位符文本 */
@@ -189,9 +191,6 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
       this.parseData(this._tmpData, this.dataMap.items, this._selected);
     }
   }
-
-  private onChange: any = Function.prototype;
-  private onTouched: any = Function.prototype;
 
   registerOnChange(fn: (_: any) => {}): void {
     this.onChange = fn;

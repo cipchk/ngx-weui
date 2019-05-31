@@ -63,7 +63,7 @@ export class PopupComponent implements OnDestroy {
       this._shownAnt = true;
       this.cdr.detectChanges();
     }, 10);
-    return Observable.create((observer: Observer<boolean>) => {
+    return new Observable((observer: Observer<boolean>) => {
       this.observer = observer;
     });
   }

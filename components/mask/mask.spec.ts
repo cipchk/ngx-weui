@@ -58,7 +58,7 @@ describe('Component: Button', () => {
 
 @Component({ template: `` })
 class TestMaskComponent {
-  @ViewChild(MaskComponent) mask: MaskComponent;
+  @ViewChild(MaskComponent, { static: true }) mask: MaskComponent;
 
   backdrop = true;
   close() {}

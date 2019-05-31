@@ -9,9 +9,9 @@ import { PopupComponent } from 'ngx-weui/popup';
   encapsulation: ViewEncapsulation.None,
 })
 export class DemoPopupComponent {
-  @ViewChild('simple') simplePopup: PopupComponent;
-  @ViewChild('full') fullPopup: PopupComponent;
-  @ViewChild('subscribe') subPopup: PopupComponent;
+  @ViewChild('simple', { static: true }) simplePopup: PopupComponent;
+  @ViewChild('full', { static: true }) fullPopup: PopupComponent;
+  @ViewChild('subscribe', { static: true }) subPopup: PopupComponent;
 
   onSub() {
     this.subPopup.show().subscribe(() => {

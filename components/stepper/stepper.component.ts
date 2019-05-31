@@ -52,7 +52,7 @@ export class StepperComponent implements ControlValueAccessor {
   /** 变更时回调 */
   @Output() readonly change = new EventEmitter<number>();
 
-  @ViewChild('inputNumber') private _inputNumber: ElementRef<HTMLInputElement>;
+  @ViewChild('inputNumber', { static: true }) private _inputNumber: ElementRef<HTMLInputElement>;
 
   /** 步长，可以为小数 */
   @Input()

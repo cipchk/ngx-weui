@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 
 import { ToastComponent, ToastService } from 'ngx-weui/toast';
 
@@ -9,12 +9,12 @@ import { ToastComponent, ToastService } from 'ngx-weui/toast';
   encapsulation: ViewEncapsulation.None,
 })
 export class DemoToastComponent {
-  @ViewChild('success') successToast: ToastComponent;
-  @ViewChild('loading') loadingToast: ToastComponent;
+  @ViewChild('success', { static: true }) successToast: ToastComponent;
+  @ViewChild('loading', { static: true }) loadingToast: ToastComponent;
   constructor(private srv: ToastService) {}
 
   onShow(type: 'success' | 'loading') {
-    (<ToastComponent>this[`${type}Toast`]).onShow();
+    (this[`${type}Toast`] as ToastComponent).onShow();
   }
 
   onShowBySrv(type: 'success' | 'loading', forceHide: boolean = false) {

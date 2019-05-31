@@ -1,6 +1,7 @@
 import { Directive, EmbeddedViewRef, Input, TemplateRef, ViewContainerRef } from '@angular/core';
 
 @Directive({
+  // tslint:disable-next-line: directive-selector
   selector: '[stringTemplateOutlet]',
   exportAs: 'stringTemplateOutlet',
 })
@@ -25,7 +26,7 @@ export class StringTemplateOutletDirective {
 
   updateView(): void {
     if (!this.isTemplate) {
-      /** use default template when input is string **/
+      // use default template when input is string
       if (!this.defaultViewRef) {
         this.viewContainer.clear();
         this.inputViewRef = null;
@@ -36,7 +37,7 @@ export class StringTemplateOutletDirective {
       if (this.inputViewRef) {
         this.inputViewRef = null;
       }
-      /** use input template when input is templateRef **/
+      // use input template when input is templateRef
       this.viewContainer.clear();
       this.defaultViewRef = null;
       this.inputViewRef = this.viewContainer.createEmbeddedView(this.inputTemplate!);

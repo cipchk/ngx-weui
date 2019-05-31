@@ -84,7 +84,7 @@ export class ActionSheetComponent implements OnDestroy {
       this._shownAnt = true;
       this.detectChanges();
     }, 10);
-    return Observable.create((observer: Observer<any>) => {
+    return new Observable((observer: Observer<any>) => {
       this.observer = observer;
     });
   }

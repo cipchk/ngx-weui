@@ -9,7 +9,7 @@ import { ChartG2Directive } from 'ngx-weui/chart-g2';
   encapsulation: ViewEncapsulation.None,
 })
 export class DemoChartG2Component {
-  @ViewChild('c1') c1: ChartG2Directive;
+  @ViewChild('c1', { static: true }) c1: ChartG2Directive;
   renderC1() {
     const chart = this.c1.chart;
     chart.source([{ tem: 10, city: 'tokyo' }, { tem: 4, city: 'newYork' }, { tem: 3, city: 'berlin' }]);
@@ -20,7 +20,7 @@ export class DemoChartG2Component {
     chart.render();
   }
 
-  @ViewChild('c2') c2: ChartG2Directive;
+  @ViewChild('c2', { static: true }) c2: ChartG2Directive;
   renderC2() {
     const data = [
       { time: '周一', tem: 10, city: 'beijing' },
@@ -83,7 +83,7 @@ export class DemoChartG2Component {
     this.c2.chart.render();
   }
 
-  @ViewChild('c3') c3: ChartG2Directive;
+  @ViewChild('c3', { static: true }) c3: ChartG2Directive;
   renderC3() {
     this.c3.GM.Global.pixelRatio = 2; // 双精度
     const Shape = this.c3.GM.Shape;

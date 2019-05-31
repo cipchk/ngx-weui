@@ -225,11 +225,11 @@ describe('Component: ActionSheet', () => {
 class TestActionSheetServiceComponent {}
 
 @Component({
-  selector: 'test-actionsheet',
+  selector: 'app-actionsheet',
   template: '',
 })
 class TestActionSheetComponent {
-  @ViewChild(ActionSheetComponent) actioinSheet: ActionSheetComponent;
+  @ViewChild(ActionSheetComponent, { static: true }) actioinSheet: ActionSheetComponent;
 
   menus: any[] = [...MENUS];
 

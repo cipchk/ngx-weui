@@ -4,19 +4,32 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
+    "module": "esnext",
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
-    "target": "es5",
-    "typeRoots": ["../../node_modules/@types/!(node)"],
-    "lib": ["es2017", "dom"],
+    "importHelpers": true,
+    "target": "es2015",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "allowSyntheticDefaultImports": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "noImplicitAny": false,
     "noImplicitThis": true,
     "skipLibCheck": true,
     "strictFunctionTypes": true,
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "rootDir": "./",
+    "baseUrl": "./",
+    "paths": {
+      "ngx-weui": ["./components/ngx-weui.module"],
+      "ngx-weui/*": ["./components/*"]
+    }
   }
 }

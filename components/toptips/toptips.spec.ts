@@ -86,13 +86,13 @@ describe('Component: Toptips', () => {
 class TestToptipsServiceComponent {}
 
 @Component({
-  selector: 'test-component',
+  selector: 'app-component',
   template: `
     <weui-toptips [type]="type" [time]="100" [text]="text"></weui-toptips>
   `,
 })
 class TestToptipsComponent {
-  @ViewChild(ToptipsComponent) toptips: ToptipsComponent;
+  @ViewChild(ToptipsComponent, { static: true }) toptips: ToptipsComponent;
 
   type: string = 'success';
   text: string = 'content';

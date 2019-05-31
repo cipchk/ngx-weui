@@ -127,7 +127,7 @@ export class DialogComponent implements OnDestroy {
 
   constructor(private DEF: DialogConfig, private cdr: ChangeDetectorRef) {}
 
-  @ViewChild('container') container: any;
+  @ViewChild('container', { static: true }) container: any;
   _prompError: boolean = false;
   _promptData: any;
 
@@ -187,7 +187,7 @@ export class DialogComponent implements OnDestroy {
     setTimeout(() => {
       this.open.emit(this);
     }, 300);
-    return Observable.create((observer: Observer<any>) => {
+    return new Observable((observer: Observer<any>) => {
       this.observer = observer;
     });
   }

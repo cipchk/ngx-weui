@@ -52,7 +52,7 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   @Output() readonly submit = new EventEmitter<string>();
 
   _focus: boolean = false;
-  @ViewChild('term') private _term: ElementRef<HTMLInputElement>;
+  @ViewChild('term', { static: true }) private _term: ElementRef<HTMLInputElement>;
 
   private _sub: Subscription;
   private _subject = new Subject<string>();

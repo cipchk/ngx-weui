@@ -321,11 +321,11 @@ describe('Component: Dialog', () => {
 class TestDialogServiceComponent {}
 
 @Component({
-  selector: 'test-dialog',
+  selector: 'app-dialog',
   template: '',
 })
 class TestDialogComponent {
-  @ViewChild(DialogComponent) dialog: DialogComponent;
+  @ViewChild(DialogComponent, { static: true }) dialog: DialogComponent;
 
   config: DialogConfig = { ...CONFIG };
 }

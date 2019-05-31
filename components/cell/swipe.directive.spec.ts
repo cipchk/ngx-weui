@@ -136,7 +136,7 @@ describe('Directive: Swipe(not body)', () => {
 });
 
 @Component({
-  selector: 'test-swipe',
+  selector: 'app-swipe',
   template: '',
 })
 class TestSwipeComponent {

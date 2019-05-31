@@ -86,13 +86,13 @@ describe('Component: Toast', () => {
 class TestToastServiceComponent {}
 
 @Component({
-  selector: 'test-component',
+  selector: 'app-component',
   template: `
     <weui-toast [type]="type" [time]="100"></weui-toast>
   `,
 })
 class TestToastComponent {
-  @ViewChild(ToastComponent) toast: ToastComponent;
+  @ViewChild(ToastComponent, { static: true }) toast: ToastComponent;
 
   type: string = 'success';
 }

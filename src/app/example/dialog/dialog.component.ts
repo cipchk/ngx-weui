@@ -11,9 +11,9 @@ import { ToastService } from 'ngx-weui/toast';
   encapsulation: ViewEncapsulation.None,
 })
 export class DemoDialogComponent implements OnDestroy {
-  @ViewChild('ios') iosAS: DialogComponent;
-  @ViewChild('android') androidAS: DialogComponent;
-  @ViewChild('auto') autoAS: DialogComponent;
+  @ViewChild('ios', { static: true }) iosAS: DialogComponent;
+  @ViewChild('android', { static: true }) androidAS: DialogComponent;
+  @ViewChild('auto', { static: true }) autoAS: DialogComponent;
 
   private DEFCONFIG: DialogConfig = {
     title: '弹窗标题',

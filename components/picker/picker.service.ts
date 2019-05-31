@@ -62,7 +62,6 @@ export class PickerService extends BaseService {
    *
    * @param data 城市数据，可以参考示例中的数据格式
    * @param [value] 默认值，即城市编号
-   * @param [dataMap]
    * @param options 配置项
    * @returns 务必订阅结果才会显示。
    */
