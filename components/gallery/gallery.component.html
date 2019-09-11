@@ -4,8 +4,8 @@
       class="weui-gallery"
       [ngStyle]="{ display: _showd ? 'block' : 'none' }"
       [@visibility]="_visibility"
-      (@visibility.start)="_antStart($event)"
-      (@visibility.done)="_antDone($event)"
+      (@visibility.start)="_antStart()"
+      (@visibility.done)="_antDone()"
       (click)="_onHide()"
     >
       <span class="weui-gallery__img" [ngStyle]="{ 'background-image': 'url(' + item?.url + ')' }"></span>

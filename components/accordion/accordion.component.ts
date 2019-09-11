@@ -10,7 +10,7 @@ import { AccordionConfig } from './accordion.config';
     <ng-content></ng-content>
   `,
   host: {
-    '[attr.aria-multiselectable]': 'closeOthers',
+    '[attr.aria-multiselectable]': 'collapsible',
   },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,

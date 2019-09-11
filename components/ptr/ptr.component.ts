@@ -29,11 +29,11 @@ import { PTRConfig } from './ptr.config';
 })
 export class PTRComponent implements OnInit {
   private ogY: number = 0;
-  private loading: boolean = false;
   private touching: boolean = false;
   private touchId: any;
   private initScrollTop: number = 0;
   private contentEl: HTMLElement;
+  loading: boolean = false;
   _animating: boolean = false;
   _pullPercent: number = 0;
   _lastLabel: string;
