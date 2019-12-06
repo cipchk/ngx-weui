@@ -22,12 +22,12 @@
             ],
             "styles": [
               "node_modules/font-awesome/css/font-awesome.css",
-              "node_modules/swiper/dist/css/swiper.css",
+              "node_modules/swiper/css/swiper.css",
               "node_modules/ngx-toastr/toastr.css",
               "src/styles.less"
             ],
             "scripts": [
-              "node_modules/swiper/dist/js/swiper.js",
+              "node_modules/swiper/js/swiper.js",
               "node_modules/g2-mobile/index.js"
             ]
           },
@@ -63,8 +63,8 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [],
-            "exclude": []
+            "tsConfig": ["src/tsconfig.json"],
+            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -92,6 +92,13 @@
               "node_modules/swiper/dist/js/swiper.js",
               "node_modules/g2-mobile/index.js"
             ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["components/tsconfig.lib.json"],
+            "exclude": ["**/node_modules/**"]
           }
         }
       }

@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation, AfterViewInit } from '@angular/core';
 
 import { ChartG2Directive } from 'ngx-weui/chart-g2';
 
@@ -8,7 +8,7 @@ import { ChartG2Directive } from 'ngx-weui/chart-g2';
   styleUrls: ['./chart-g2.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class DemoChartG2Component {
+export class DemoChartG2Component implements AfterViewInit {
   @ViewChild('c1', { static: true }) c1: ChartG2Directive;
   renderC1() {
     const chart = this.c1.chart;

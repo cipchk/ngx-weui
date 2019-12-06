@@ -59,7 +59,8 @@ export class ArticleComponent implements OnInit {
       const elements = document.querySelectorAll(
         'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code',
       );
-      for (let i = 0, element; (element = elements[i++]); ) {
+      // tslint:disable-next-line:no-conditional-assignment
+      for (let i = 0, element; (element = elements[i++]);) {
         hljs.highlightBlock(element);
       }
     }, 250);

@@ -1,31 +1,38 @@
 {
-  "extends": "tslint:recommended",
+  "extends": [
+    "tslint:latest",
+    "tslint-config-prettier"
+  ],
+  "rulesDirectory": [
+    "codelyzer"
+  ],
   "rules": {
+    // Angular parts
     "array-type": false,
     "arrow-parens": false,
     "deprecation": {
       "severity": "warn"
     },
-    "component-class-suffix": true,
+    "component-class-suffix": [true, "Component", "Widget"],
     "contextual-lifecycle": true,
     "directive-class-suffix": true,
     "directive-selector": [
-      true,
+      false,
       "attribute",
-      ["app", "weui"],
-      "kebab-case"
+      "app",
+      "camelCase"
     ],
     "component-selector": [
-      true,
+      false,
       "element",
-      ["app", "weui"],
+      "app",
       "kebab-case"
     ],
     "import-blacklist": [
       true,
       "rxjs/Rx"
     ],
-    "interface-name": false,
+    "interface-name": [true, "never-prefix"],
     "max-classes-per-file": false,
     "max-line-length": [
       false,
@@ -33,7 +40,7 @@
     ],
     "member-access": false,
     "member-ordering": [
-      true,
+      false,
       {
         "order": [
           "static-field",
@@ -85,17 +92,22 @@
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
+    // Custom parts
     "curly": false,
+    "variable-name": false,
+    "no-submodule-imports": false,
+    "no-implicit-dependencies": false,
+    "no-object-literal-type-assertion": false,
     "no-bitwise": false,
-    "variable-name": false
+    "no-this-assignment": false,
+    "prefer-conditional-expression": false
   },
   "linterOptions": {
     "exclude": [
       "components/schematics/**/files/**/*",
-      "components/schematics/utils/devkit-utils/**/*"
+      "components/schematics/utils/devkit-utils/**/*",
+      "src/app/routes/components/examples.ts",
+      "src/app/routes/components/meta.ts"
     ]
-  },
-  "rulesDirectory": [
-    "codelyzer"
-  ]
+  }
 }

@@ -266,7 +266,7 @@ export class MenuService {
 
   getItems(linkId: string): any[] {
     for (const item of this.menus) {
-      if (item.link === linkId) return Object.assign([], item.items);
+      if (item.link === linkId) return { ...[], ...item.items };
     }
     return [];
   }
