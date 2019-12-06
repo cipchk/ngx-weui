@@ -37,7 +37,7 @@ export class ArticleComponent implements OnInit {
         title: this.menu.name,
         subtitle: '',
       },
-      ...META.find(w => w.name === (this.menu.api || id)),
+      ...(META as any[]).find(w => w.name === (this.menu.api || id)),
     };
 
     // examples
