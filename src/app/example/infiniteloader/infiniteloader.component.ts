@@ -10,7 +10,7 @@ import { InfiniteLoaderComponent } from 'ngx-weui/infiniteloader';
   encapsulation: ViewEncapsulation.None,
 })
 export class DemoInfiniteLoaderComponent {
-  @ViewChild(InfiniteLoaderComponent, { static: true }) il;
+  @ViewChild(InfiniteLoaderComponent, { static: true }) il: InfiniteLoaderComponent;
   restartBtn = false;
 
   items: any[] = Array(20)
