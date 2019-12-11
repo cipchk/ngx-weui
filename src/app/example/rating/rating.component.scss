@@ -1,15 +1,18 @@
 .rating {
-  > i {
+  >i {
     display: inline-block;
+
     &::before {
       font-style: normal;
     }
   }
+
   .off {
     &::before {
       content: '☆';
     }
   }
+
   .on {
     &::before {
       content: '★';

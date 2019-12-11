@@ -11,7 +11,8 @@ import { ToastComponent, ToastService } from 'ngx-weui/toast';
 export class DemoToastComponent {
   @ViewChild('success', { static: true }) successToast: ToastComponent;
   @ViewChild('loading', { static: true }) loadingToast: ToastComponent;
-  constructor(private srv: ToastService) {}
+
+  constructor(private srv: ToastService) { }
 
   onShow(type: 'success' | 'loading') {
     (this[`${type}Toast`] as ToastComponent).onShow();

@@ -1,14 +1,6 @@
 <weui-sidebar-container>
-  <weui-sidebar
-    [(status)]="_status"
-    [mode]="mode"
-    [position]="position"
-    [backdrop]="backdrop"
-    (openStart)="openStart()"
-    (opened)="opened()"
-    (closeStart)="closeStart()"
-    (closed)="closed()"
-  >
+  <weui-sidebar [(status)]="_status" [mode]="mode" [position]="position" [backdrop]="backdrop" (openStart)="openStart()"
+    (opened)="opened()" (closeStart)="closeStart()" (closed)="closed()">
     <div class="weui-article">
       <p>这是侧边栏内容</p>
       <weui-button weui-type="default" (click)="toggleOpened()">关闭</weui-button>

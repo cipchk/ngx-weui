@@ -3,13 +3,16 @@
   overflow: hidden;
   background-color: #fff;
   border-radius: 2px;
+
   .heading {
     padding: 20px;
     cursor: pointer;
   }
+
   .weui-cells {
     margin-top: 0;
   }
+
   .weui-accordion-content {
     transition: max-height 0.5s ease-in;
   }

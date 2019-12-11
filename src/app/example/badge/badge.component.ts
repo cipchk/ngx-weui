@@ -6,4 +6,4 @@ import { Component, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./badge.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class BadgeComponent {}
+export class BadgeComponent { }

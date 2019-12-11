@@ -3,12 +3,5 @@
   "singleQuote": true,
   "semi": true,
   "trailingComma": "all",
-  "overrides": [
-    {
-      "files": ".prettierrc",
-      "options": {
-        "parser": "json"
-      }
-    }
-  ]
+  "proseWrap": "never"
 }

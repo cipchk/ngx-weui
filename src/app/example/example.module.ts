@@ -100,4 +100,4 @@ const COMPONENTS = [
   entryComponents: [PageComponent],
   exports: COMPONENTS,
 })
-export class ExampleCoreModule {}
+export class ExampleCoreModule { }

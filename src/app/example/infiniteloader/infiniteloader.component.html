@@ -1,11 +1,6 @@
 <weui-infiniteloader (loadmore)="onLoadMore($event)" #comp>
-  <Page
-    [ngClass]="'infiniteloader'"
-    [title]="'Infinite Loader'"
-    [subTitle]="'滚动加载'"
-    [spacing]="false"
-    [noBottom]="true"
-  >
+  <Page [ngClass]="'infiniteloader'" [title]="'Infinite Loader'" [subTitle]="'滚动加载'" [spacing]="false"
+    [noBottom]="true">
     <div class="weui-cells__title">List with 50 Max</div>
     <div class="weui-cells">
       <a *ngFor="let i of items" class="weui-cell weui-cell_access" href="javascript:;">

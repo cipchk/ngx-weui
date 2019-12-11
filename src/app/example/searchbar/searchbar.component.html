@@ -1,10 +1,6 @@
 <Page [ngClass]="'searchbar'" [title]="'SearchBar'" [subTitle]="'搜索栏'" [spacing]="false" [ftBottom]="true">
-  <weui-searchbar
-    (search)="onSearch($event)"
-    (cancel)="onCancel()"
-    (clear)="onClear()"
-    (submit)="onSubmit($event)"
-  ></weui-searchbar>
+  <weui-searchbar (search)="onSearch($event)" (cancel)="onCancel()" (clear)="onClear()" (submit)="onSubmit($event)">
+  </weui-searchbar>
 
   <div class="weui-panel" style="margin-top: 0px;" *ngIf="value">
     <div class="weui-panel__hd">查询淘宝【{{ value }}】</div>

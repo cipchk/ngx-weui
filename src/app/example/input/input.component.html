@@ -7,22 +7,12 @@
           <p>{{ i.name }}</p>
         </div>
         <div class="weui-cell__ft">
-          <input
-            type="radio"
-            class="weui-check"
-            [(ngModel)]="res.radio"
-            name="radio1"
-            [value]="i"
-            id="radio-{{ i.id }}"
-          />
+          <input type="radio" class="weui-check" [(ngModel)]="res.radio" name="radio1" [value]="i"
+            id="radio-{{ i.id }}" />
           <span class="weui-icon-checked"></span>
         </div>
       </label>
-      <a
-        href="javascript:void(0);"
-        (click)="radio.push({ id: radio[radio.length - 1].id + 1, name: 'new radio' })"
-        class="weui-cell weui-cell_link"
-      >
+      <a href="javascript:void(0);" (click)="radioAdd()" class="weui-cell weui-cell_link">
         <div class="weui-cell__bd">添加更多</div>
       </a>
     </div>
@@ -30,14 +20,8 @@
     <div class="weui-cells weui-cells_checkbox">
       <label class="weui-cell weui-check__label" for="checkbox-{{ i }}" *ngFor="let i of checkbox; let index = index">
         <div class="weui-cell__hd">
-          <input
-            type="checkbox"
-            class="weui-check"
-            [weui-checklist]="res.checkbox"
-            name="radio1"
-            [weui-value]="i"
-            id="checkbox-{{ i }}"
-          />
+          <input type="checkbox" class="weui-check" [weui-checklist]="res.checkbox" name="radio1" [weui-value]="i"
+            id="checkbox-{{ i }}" />
           <i class="weui-icon-checked"></i>
         </div>
         <div class="weui-cell__bd">
@@ -52,15 +36,8 @@
       <div class="weui-cell">
         <div class="weui-cell__hd"><label class="weui-label">qq</label></div>
         <div class="weui-cell__bd">
-          <input
-            class="weui-input"
-            type="tel"
-            [(ngModel)]="res.qq"
-            name="qq"
-            placeholder="请输入qq号"
-            weui-input="qq"
-            weui-required
-          />
+          <input class="weui-input" type="tel" [(ngModel)]="res.qq" name="qq" placeholder="请输入qq号" weui-input="qq"
+            weui-required />
         </div>
       </div>
       <div class="weui-cell weui-cell_vcode">
@@ -68,24 +45,12 @@
           <label class="weui-label">手机号</label>
         </div>
         <div class="weui-cell__bd">
-          <input
-            class="weui-input"
-            type="tel"
-            [(ngModel)]="res.mobile"
-            name="mobile"
-            placeholder="请输入手机号"
-            weui-input="mobile"
-            weui-required
-          />
+          <input class="weui-input" type="tel" [(ngModel)]="res.mobile" name="mobile" placeholder="请输入手机号"
+            weui-input="mobile" weui-required />
         </div>
         <div class="weui-cell__ft">
-          <button
-            class="weui-vcode-btn"
-            [weui-vcode]="onSendCode"
-            weui-seconds="10"
-            weui-tpl="${num}s"
-            weui-error="重新发送"
-          >
+          <button class="weui-vcode-btn" [weui-vcode]="onSendCode" weui-seconds="10" weui-tpl="${num}s"
+            weui-error="重新发送">
             获取验证码
           </button>
         </div>
@@ -105,14 +70,8 @@
       <div class="weui-cell weui-cell_vcode">
         <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
         <div class="weui-cell__bd">
-          <input
-            class="weui-input"
-            type="text"
-            placeholder="请输入验证码"
-            [(ngModel)]="res.vcode"
-            name="vcode"
-            weui-input="number"
-          />
+          <input class="weui-input" type="text" placeholder="请输入验证码" [(ngModel)]="res.vcode" name="vcode"
+            weui-input="number" />
         </div>
         <div class="weui-cell__ft">
           <img class="weui-vcode-img" src="./assets/images/vcode.jpg" />
@@ -123,19 +82,10 @@
     <div class="weui-cells__title">表单报错</div>
     <div class="weui-cells weui-cells_form">
       <div class="weui-cell weui-cell_warn">
-        <div class="weui-cell__hd"><label for="" class="weui-label">卡号</label></div>
+        <div class="weui-cell__hd"><label class="weui-label">卡号</label></div>
         <div class="weui-cell__bd">
-          <input
-            class="weui-input"
-            type="tel"
-            value="weui input error"
-            placeholder="请输入卡号"
-            [(ngModel)]="res.no"
-            name="no"
-            weui-input="number"
-            weui-requied
-            weui-regex="[0-9]*"
-          />
+          <input class="weui-input" type="tel" value="weui input error" placeholder="请输入卡号" [(ngModel)]="res.no"
+            name="no" weui-input="number" weui-requied weui-regex="[0-9]*" />
         </div>
       </div>
     </div>
@@ -169,16 +119,8 @@
     <div class="weui-cells weui-cells_form">
       <div class="weui-cell">
         <div class="weui-cell__bd">
-          <textarea
-            class="weui-textarea"
-            placeholder="中文算2个字符"
-            rows="3"
-            [(ngModel)]="res.txta"
-            name="txta"
-            weui-textarea
-            weui-cn="2"
-            maxlength="20"
-          ></textarea>
+          <textarea class="weui-textarea" placeholder="中文算2个字符" rows="3" [(ngModel)]="res.txta" name="txta"
+            weui-textarea weui-cn="2" maxlength="20"></textarea>
         </div>
       </div>
     </div>
@@ -194,14 +136,7 @@
           </select>
         </div>
         <div class="weui-cell__bd">
-          <input
-            class="weui-input"
-            type="tel"
-            placeholder="请输入号码"
-            [(ngModel)]="res.tel"
-            name="tel"
-            weui-input="tel"
-          />
+          <input class="weui-input" type="tel" placeholder="请输入号码" [(ngModel)]="res.tel" name="tel" weui-input="tel" />
         </div>
       </div>
     </div>
@@ -234,11 +169,8 @@
       <span class="weui-agree__text"> 阅读并同意<a href="javascript:void(0);">《相关条款》</a> </span>
     </label>
     <div class="weui-btn-area">
-      <button
-        class="weui-btn weui-btn_primary"
-        [disabled]="!f.form.valid || !f.form.dirty"
-        [ngClass]="{ 'weui-btn_disabled': !f.form.valid || !f.form.dirty }"
-      >
+      <button class="weui-btn weui-btn_primary" [disabled]="!f.form.valid || !f.form.dirty"
+        [ngClass]="{ 'weui-btn_disabled': !f.form.valid || !f.form.dirty }">
         确定
       </button>
     </div>

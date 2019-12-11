@@ -8,10 +8,21 @@ import { Uploader, UploaderOptions } from 'ngx-weui';
   encapsulation: ViewEncapsulation.None,
 })
 export class DemoUploaderComponent {
-  subTitle: string = `
-    上传组件，一般配合<a class="link" href="#/example/gallery">组件Gallery</a>来使用。`;
+  subTitle: string;
+  private _url: string;
 
-  @Input() url: string = 'example';
+  @Input()
+  set url(v: string) {
+    this.subTitle = `上传组件，一般配合<a class="link" href="#/${v}/gallery">组件Gallery</a>来使用。`;
+    this._url = v;
+  }
+  get url() {
+    return this._url;
+  }
+
+  constructor() {
+    this.url = 'example';
+  }
 
   uploader: Uploader = new Uploader({
     url: './upload.php',

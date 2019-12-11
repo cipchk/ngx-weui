@@ -14,6 +14,7 @@ export class DemoLoadmoreComponent {
   onChange() {
     this.first = false;
     this.type = 'loading';
+
     setTimeout(() => {
       this.type = 'line';
     }, 1000);
