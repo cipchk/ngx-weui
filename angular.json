@@ -89,7 +89,7 @@
             "polyfills": "components/polyfills.ts",
             "tsConfig": "components/tsconfig.spec.json",
             "scripts": [
-              "node_modules/swiper/dist/js/swiper.js",
+              "node_modules/swiper/js/swiper.js",
               "node_modules/g2-mobile/index.js"
             ]
           }
