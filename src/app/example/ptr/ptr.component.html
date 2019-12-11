@@ -1,6 +1,6 @@
 <Page [ngClass]="'ptr'" [title]="'Pull To Refresh'" [subTitle]="'下拉刷新'" [spacing]="false">
   <div style="padding: 20px;">
-    <button weui-button [weui-mini]="'mini'" (click)="disabled = !disabled">{{ disabled ? '启用' : '禁止' }}</button>
+    <button weui-button weui-mini (click)="disabled = !disabled">{{ disabled ? '启用' : '禁止' }}</button>
   </div>
 
   <weui-ptr (refresh)="onRefresh($event)" [disabled]="disabled" style="height: 200px; background: rgb(255, 255, 255);">
@@ -14,11 +14,8 @@
   </weui-ptr>
 
   <div class="weui-cells__title">自定义Loaders样式</div>
-  <weui-ptr
-    (refresh)="onRefresh($event)"
-    [config]="{ customIcon: true }"
-    style="height: 200px; background: rgb(255, 255, 255);"
-  >
+  <weui-ptr (refresh)="onRefresh($event)" [config]="{ customIcon: true }"
+    style="height: 200px; background: rgb(255, 255, 255);">
     <div loader style="width:100%;">
       <div style="flex: 1 1 0%; padding: 5px;">
         <div class="weui-ptr__icon">

@@ -1,4 +1,5 @@
 import { Component, ViewEncapsulation } from '@angular/core';
+import { ModeType, PositionType } from 'ngx-weui/sidebar';
 
 @Component({
   selector: 'example-sidebar',
@@ -8,8 +9,8 @@ import { Component, ViewEncapsulation } from '@angular/core';
 })
 export class DemoSidebarComponent {
   _status: boolean = false;
-  mode: string = 'slide';
-  position: string = 'left';
+  mode: ModeType = 'slide';
+  position: PositionType = 'left';
   backdrop: boolean = true;
 
   toggleOpened(): void {

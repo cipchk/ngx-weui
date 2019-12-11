@@ -29,10 +29,8 @@
     <a href="javascript:;" weui-button weui-cell weui-type="default">普通行按钮</a>
     <a href="javascript:;" weui-button weui-cell>强调行按钮</a>
     <a href="javascript:;" weui-button weui-cell>
-      <img
-        weui-button-icon
-        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII="
-      />
+      <img weui-button-icon
+        src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" />
       强调行按钮
     </a>
     <a href="javascript:;" weui-button weui-cell weui-type="warn">警告行按钮</a>
@@ -46,21 +44,15 @@
     <button weui-button [weui-plain]="true">按钮</button>
     <button weui-button [weui-plain]="true" disabled>按钮</button>
 
-    <button weui-button [weui-mini]="'mini'" (click)="mini = !mini">按钮</button>
-    <button weui-button [weui-mini]="'mini'" (click)="mini = !mini" weui-type="default" style="margin-left: 8px;">
+    <button weui-button weui-mini (click)="mini = !mini">按钮</button>
+    <button weui-button weui-mini (click)="mini = !mini" weui-type="default" style="margin-left: 8px;">
       按钮
     </button>
-    <button weui-button [weui-mini]="'mini'" (click)="mini = !mini" [weui-type]="'warn'" style="margin-left: 8px;">
+    <button weui-button weui-mini (click)="mini = !mini" [weui-type]="'warn'" style="margin-left: 8px;">
       按钮
     </button>
-    <button
-      weui-button
-      weui-mini="mini"
-      (click)="mini = !mini"
-      [weui-type]="'warn'"
-      [weui-loading]="loading"
-      style="margin-left: 8px;"
-    >
+    <button weui-button weui-mini="mini" (click)="mini = !mini" [weui-type]="'warn'" [weui-loading]="loading"
+      style="margin-left: 8px;">
       按钮
     </button>
   </div>

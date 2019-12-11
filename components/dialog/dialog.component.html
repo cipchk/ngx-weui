@@ -1,13 +1,9 @@
 <div class="weui-mask" [ngClass]="{ 'weui-mask__in': _shown }" (click)="hide(true)"></div>
-<div
-  class="weui-dialog"
-  [ngClass]="{
+<div class="weui-dialog" [ngClass]="{
     'weui-dialog__in': _shown,
     'weui-skin_android': config.skin === 'android',
     'weui-dialog__prompt': config.type === 'prompt'
-  }"
-  #container
->
+  }" #container>
   <div class="weui-dialog__hd" *ngIf="config.title">
     <strong class="weui-dialog__title">{{ config.title }}</strong>
   </div>
@@ -16,16 +12,9 @@
     <ng-container [ngSwitch]="config.input">
       <div *ngSwitchCase="'textarea'" class="weui-cell" [ngClass]="{ 'weui-cell_warn': _prompError }">
         <div class="weui-cell__bd">
-          <textarea
-            class="weui-textarea"
-            placeholder="{{ config.inputPlaceholder }}"
-            [(ngModel)]="_promptData"
-            name="_promptData"
-            (ngModelChange)="_chanage()"
-            weui-textarea
-            weui-cn="{{ config.inputAttributes.cn }}"
-            [maxlength]="config.inputAttributes.maxlength"
-          ></textarea>
+          <textarea class="weui-textarea" placeholder="{{ config.inputPlaceholder }}" [(ngModel)]="_promptData"
+            name="_promptData" (ngModelChange)="_chanage()" weui-textarea [weui-cn]="config.inputAttributes.cn"
+            [maxlength]="config.inputAttributes.maxlength"></textarea>
         </div>
       </div>
       <div *ngSwitchCase="'select'" class="weui-cell weui-cell_select">
@@ -41,13 +30,8 @@
             <p>{{ i.text }}</p>
           </div>
           <div class="weui-cell__ft">
-            <input
-              type="radio"
-              (click)="_promptData = i"
-              [checked]="i == _promptData"
-              (change)="_chanage()"
-              class="weui-check"
-            />
+            <input type="radio" (click)="_promptData = i" [checked]="i == _promptData" (change)="_chanage()"
+              class="weui-check" />
             <span class="weui-icon-checked"></span>
           </div>
         </label>
@@ -55,14 +39,8 @@
       <div *ngSwitchCase="'checkbox'" class="weui-cells_checkbox">
         <label class="weui-cell weui-check__label" *ngFor="let i of config.inputOptions">
           <div class="weui-cell__hd">
-            <input
-              type="checkbox"
-              class="weui-check"
-              (change)="_chanage()"
-              [weui-checklist]="_promptData"
-              [weui-value]="i"
-              name="_promptData"
-            />
+            <input type="checkbox" class="weui-check" (change)="_chanage()" [weui-checklist]="_promptData"
+              [weui-value]="i" name="_promptData" />
             <i class="weui-icon-checked"></i>
           </div>
           <div class="weui-cell__bd">
@@ -70,16 +48,9 @@
           </div>
         </label>
       </div>
-      <div
-        *ngSwitchCase="'range'"
-        class="weui-slider-box"
-        [(ngModel)]="_promptData"
-        name="_promptData"
-        weui-slider
-        weui-min="{{ config.inputAttributes.min }}"
-        weui-max="{{ config.inputAttributes.max }}"
-        weui-step="{{ config.inputAttributes.step }}"
-      >
+      <div *ngSwitchCase="'range'" class="weui-slider-box" [(ngModel)]="_promptData" name="_promptData" weui-slider
+        [weui-min]="config.inputAttributes.min" [weui-max]="config.inputAttributes.max"
+        [weui-step]="config.inputAttributes.step">
         <div class="weui-slider">
           <div class="weui-slider__inner">
             <div class="weui-slider__track"></div>
@@ -90,16 +61,9 @@
       </div>
       <div *ngSwitchDefault class="weui-cell" [ngClass]="{ 'weui-cell_warn': _prompError }">
         <div class="weui-cell__bd">
-          <input
-            type="{{ config.input }}"
-            class="weui-input"
-            placeholder="{{ config.inputPlaceholder }}"
-            [(ngModel)]="_promptData"
-            name="_promptData"
-            [maxlength]="config.inputAttributes.maxlength"
-            (ngModelChange)="_chanage()"
-            (keyup)="_keyup($event)"
-          />
+          <input type="{{ config.input }}" class="weui-input" placeholder="{{ config.inputPlaceholder }}"
+            [(ngModel)]="_promptData" name="_promptData" [maxlength]="config.inputAttributes.maxlength"
+            (ngModelChange)="_chanage()" (keyup)="_keyup($event)" />
         </div>
         <div class="weui-cell__ft">
           <i class="weui-icon-warn" *ngIf="_prompError"></i>
@@ -109,12 +73,7 @@
   </div>
   <div class="weui-dialog__error" *ngIf="_prompError">{{ config.inputError }}</div>
   <div class="weui-dialog__ft">
-    <a
-      href="#"
-      *ngFor="let item of config.btns"
-      class="weui-dialog__btn weui-dialog__btn_{{ item.type }}"
-      (click)="_onSelect(item)"
-      >{{ item.text }}</a
-    >
+    <a href="#" *ngFor="let item of config.btns" class="weui-dialog__btn weui-dialog__btn_{{ item.type }}"
+      (click)="_onSelect(item)">{{ item.text }}</a>
   </div>
 </div>

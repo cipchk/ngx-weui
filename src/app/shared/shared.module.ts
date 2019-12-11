@@ -21,4 +21,4 @@ const THIDS = [CountdownModule, ToastrModule, GesturePasswordModule, AqmModule];
   declarations: COMPONENTS,
   exports: [CommonModule, FormsModule, RouterModule, ReactiveFormsModule, WeUiModule, ...THIDS, ...COMPONENTS],
 })
-export class SharedModule {}
+export class SharedModule { }

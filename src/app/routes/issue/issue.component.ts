@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
         placeholder="选择时间"
         [(ngModel)]="time"
         type="datetime"
-        [format]="{ hu: '', mu: '' }"
+        [format]="format"
         name="date2"
       ></weui-date-picker>
       <p>result: {{ time }}</p>
@@ -19,6 +19,7 @@ import { Component } from '@angular/core';
 })
 export class IssueComponent {
   time: any;
+  format: any = { hu: '', mu: '' };
 
   clear() {
     this.time = null;

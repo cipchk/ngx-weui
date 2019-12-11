@@ -14,4 +14,4 @@ const routes: Routes = [{ path: '', redirectTo: 'how' }, { path: ':id', componen
   imports: [SharedModule, RouterModule.forChild(routes)],
   declarations: [...COMPONENTS],
 })
-export class DocsModule {}
+export class DocsModule { }

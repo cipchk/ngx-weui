@@ -15,4 +15,4 @@ export const routes = [{ path: '', component: HomeComponent }, { path: ':id', co
   declarations: [HomeComponent, ExampleContainerComponent],
   providers: [MenuService],
 })
-export class ExampleModule {}
+export class ExampleModule { }
