@@ -31,5 +31,9 @@
       "ngx-weui": ["./components/ngx-weui.module"],
       "ngx-weui/*": ["./components/*"]
     }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
   }
 }
