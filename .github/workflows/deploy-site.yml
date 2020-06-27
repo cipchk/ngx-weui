@@ -29,6 +29,7 @@ jobs:
         run: |
           npm run site:build
           cp ./dist/index.html ./dist/404.html
+          ls ./dist
 
       - name: deploy-to-gh-pages
         uses: peaceiris/actions-gh-pages@v2
