@@ -1,7 +1,7 @@
 const fetch = require('node-fetch');
 
-const REPO = 'cipchk';
-const TOKEN = process.env.ACCESS_TOKEN;
+const REPO = 'cipchk/ngx-weui';
+const TOKEN = process.env.PERSONAL_TOKEN;
 const PR = process.env.PR;
 const REPLACE_MARK = '<!-- PREVIEW_UPDATE_COMMENT -->';
 
@@ -30,8 +30,6 @@ async function withGithub(url, json, method) {
 
 (async function run() {
   const comments = await withGithub(`https://api.github.com/repos/${REPO}/issues/${PR}/comments`);
-  console.log(`https://api.github.com/repos/${REPO}/issues/${PR}/comments`);
-  console.log(comments);
 
   // Find my comment
   const updateComment = comments.find(({ body }) => body.includes(REPLACE_MARK));

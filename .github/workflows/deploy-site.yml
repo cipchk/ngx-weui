@@ -16,42 +16,35 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: install
-        run: yarn
+        run: npm install
 
       - name: comment_on_github
         run: |
           node ./scripts/ci/github-comment.js "[Preview Preparing...](https://github.com/cipchk/ngx-weui/pull/${PR}/checks)"
         env:
           PR: ${{ steps.findPr.outputs.number }}
-          ACCESS_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       # - name: build
       #   run: |
       #     npm run site:build
       #     cp ./dist/index.html ./dist/404.html
 
-      # - name: deploy-to-gh-pages
-      #   uses: peaceiris/actions-gh-pages@v2
-      #   env:
-      #     PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-      #     PUBLISH_BRANCH: gh-pages
-      #     PUBLISH_DIR: ./dist
-      #   with:
-      #     emptyCommits: false
-
-      - name: surge-env
-        uses: actions/setup-node@v1
+      - name: deploy-to-surge
+        uses: yohix/deploy-surge@v1.0.0
         with:
-          node-version: 12
-      - name: sureg-install
-        run: yarn global add surge
-      - name: surge-deploy
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+          DOMAIN_NAME: 'https://preview-${PR}-ngx-weui.surge.sh'
+          BUILD_DIRECTORY: ./docs
+        env:
+          PR: ${{ steps.findPr.outputs.number }}
+
+      - name: comment_on_github
         run: |
-          surge ./docs 'https://preview-${PR}-ngx-weui.surge.sh' --token ${{ secrets.SURGE_TOKEN }}
           node ./scripts/ci/github-comment.js "[Preview is ready!](https://preview-${PR}-ngx-weui.surge.sh)"
         env:
           PR: ${{ steps.findPr.outputs.number }}
-          ACCESS_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
       # - uses: actions/checkout@v1
       # - uses: pixta-dev/repository-mirroring-action@v1
       #   with:
