@@ -35,7 +35,7 @@ jobs:
       #     include: '\.html$'
 
       - name: deploy-to-surge
-        uses: yohix/deploy-surge@v1
+        uses: yg/deploy-surge@v1.0.0
         with:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
           DOMAIN_NAME: https://ngx-weui.surge.sh
