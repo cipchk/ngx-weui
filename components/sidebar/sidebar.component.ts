@@ -14,7 +14,7 @@ import {
   ViewChild,
   ViewEncapsulation,
 } from '@angular/core';
-import { isIOS, InputBoolean } from 'ngx-weui/core';
+import { InputBoolean, isIOS } from 'ngx-weui/core';
 import { Subscription } from 'rxjs';
 import { ModeType, PositionType, SidebarConfig } from './sidebar.config';
 import { SidebarService } from './sidebar.service';

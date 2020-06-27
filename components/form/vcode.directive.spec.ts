@@ -1,9 +1,8 @@
 import { Component, DebugElement } from '@angular/core';
-import { fakeAsync, tick, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
+import { ComponentFixture, ComponentFixtureAutoDetect, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-import { of, Observable } from 'rxjs';
-
+import { Observable, of } from 'rxjs';
 import { FormModule } from './form.module';
 import { VCodeDirective } from './vcode.directive';
 

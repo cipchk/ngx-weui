@@ -23,10 +23,7 @@ export function site() {
           for (const key in attrs) {
             let value = attrs[key];
             if (key === 'src' && ~value.indexOf(' | ')) {
-              const imgWH = value
-                .split(' | ')[1]
-                .trim()
-                .split('=');
+              const imgWH = value.split(' | ')[1].trim().split('=');
               for (let i = 0; i < imgWH.length; i += 2) {
                 ret.push(`${imgWH[i]}=${imgWH[i + 1]}`);
               }

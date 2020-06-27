@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
-import { fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-
 import { RatingComponent } from './rating.component';
 import { RatingConfig } from './rating.config';
 import { RatingModule } from './rating.module';

@@ -6,9 +6,7 @@ import { AccordionConfig } from './accordion.config';
 @Component({
   selector: 'weui-accordion',
   exportAs: 'weuiAccordion',
-  template: `
-    <ng-content></ng-content>
-  `,
+  template: ` <ng-content></ng-content> `,
   host: {
     '[attr.aria-multiselectable]': 'collapsible',
   },

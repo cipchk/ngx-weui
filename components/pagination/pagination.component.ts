@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  Output,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output, ViewEncapsulation } from '@angular/core';
 import { InputBoolean, InputNumber } from 'ngx-weui/core';
 import { PaginationConfig } from './pagination.config';
 import { PaginationMode } from './pagination.type';
@@ -72,9 +64,9 @@ export class PaginationComponent implements OnChanges {
     this._nextDisabled = this.current >= this.total;
   }
 
-  _goto(value: number) {
-    if (value === -1 && this._prevDisabled) return false;
-    if (value === 1 && this._nextDisabled) return false;
+  _goto(value: number): void {
+    if (value === -1 && this._prevDisabled) return;
+    if (value === 1 && this._nextDisabled) return;
 
     this.current += value;
     this._checkDisabled();

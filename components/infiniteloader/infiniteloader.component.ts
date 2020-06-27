@@ -1,5 +1,6 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -8,7 +9,6 @@ import {
   OnInit,
   Output,
   ViewEncapsulation,
-  ChangeDetectorRef,
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { InfiniteLoaderConfig } from './infiniteloader.config';
@@ -92,13 +92,12 @@ export class InfiniteLoaderComponent implements OnInit, OnDestroy {
       }
     }, this.config.throttle);
 
-    this.disposeScroller = fromEvent(
-      this.el.nativeElement.querySelector('.weui-infiniteloader__content')!,
-      'scroll',
-    ).subscribe(($event: any) => {
-      this.scrollEvent = $event;
-      this.didScroll = true;
-    });
+    this.disposeScroller = fromEvent(this.el.nativeElement.querySelector('.weui-infiniteloader__content')!, 'scroll').subscribe(
+      ($event: any) => {
+        this.scrollEvent = $event;
+        this.didScroll = true;
+      },
+    );
   }
 
   ngOnDestroy(): void {

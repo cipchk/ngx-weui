@@ -1,4 +1,4 @@
-import { forwardRef, ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, forwardRef, ViewEncapsulation } from '@angular/core';
 import { BarComponent } from './bar.component';
 
 /**

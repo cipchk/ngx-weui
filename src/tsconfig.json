@@ -2,21 +2,10 @@
   "extends": "../tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [],
+    "resolveJsonModule": true,
+    "esModuleInterop": true
   },
-  "files": [
-    "main.ts",
-    "polyfills.ts"
-  ],
-  "include": [
-    "**/*.ts"
-  ],
-  "exclude": [
-    "test.ts",
-    "**/*.spec.ts",
-    "./templates/**/*"
-  ],
-  "angularCompilerOptions": {
-    "enableIvy": true
-  }
+  "files": ["main.ts", "polyfills.ts", "typings.d.ts"],
+  "exclude": ["test.ts", "**/*.spec.ts", "templates/*.ts"]
 }

@@ -1,9 +1,9 @@
 import { DatePipe } from '@angular/common';
 import {
-  forwardRef,
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  forwardRef,
   Input,
   OnChanges,
   OnDestroy,

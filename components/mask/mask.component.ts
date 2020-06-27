@@ -75,8 +75,10 @@ export class MaskComponent implements OnDestroy {
    *
    * @param is_backdrop 是否手动点击关闭（默认：false）
    */
-  hide(is_backdrop: boolean = false) {
-    if (is_backdrop === true && this.backdrop === false) return false;
+  hide(is_backdrop: boolean = false): void {
+    if (is_backdrop === true && this.backdrop === false) {
+      return;
+    }
 
     this._shown = false;
     this.cdr.detectChanges();

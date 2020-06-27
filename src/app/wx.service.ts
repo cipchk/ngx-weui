@@ -15,7 +15,7 @@ export class WXService {
     link: '',
     imgUrl: '',
   };
-  constructor(private wxService: JWeiXinService, private http: HttpClient) { }
+  constructor(private wxService: JWeiXinService, private http: HttpClient) {}
 
   private share: any;
   config(shareData: any): Promise<boolean> {
@@ -28,11 +28,7 @@ export class WXService {
         }
 
         wx.ready(() => {
-          this._onMenuShareTimeline()
-            ._onMenuShareAppMessage()
-            ._onMenuShareQQ()
-            ._onMenuShareQZone()
-            ._onMenuShareWeibo();
+          this._onMenuShareTimeline()._onMenuShareAppMessage()._onMenuShareQQ()._onMenuShareQZone()._onMenuShareWeibo();
 
           resolve();
         });

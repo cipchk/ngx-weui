@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
 import { ChartG2Directive, ChartG2Module } from '../chart-g2';
 
 describe('Component: ChartG2', () => {
@@ -33,9 +32,7 @@ describe('Component: ChartG2', () => {
 });
 
 @Component({
-  template: `
-    <canvas weui-chart-g2 [margin]="margin" #c1="weuiChartG2" style="width:100%;height:200px;"></canvas>
-  `,
+  template: ` <canvas weui-chart-g2 [margin]="margin" #c1="weuiChartG2" style="width:100%;height:200px;"></canvas> `,
 })
 class TestChartG2Component {
   margin = 0;

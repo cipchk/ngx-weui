@@ -1,7 +1,6 @@
 import { Component, DebugElement } from '@angular/core';
-import { fakeAsync, tick, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
+import { ComponentFixture, ComponentFixtureAutoDetect, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
 import { ChecklistDirective } from './check.directive';
 import { FormModule } from './form.module';
 
@@ -55,14 +54,7 @@ describe('Directive: Checklist', () => {
     <div class="weui-cells weui-cells_checkbox" *ngIf="show">
       <label class="weui-cell weui-check__label" for="checkbox-{{ i }}" *ngFor="let i of list; let index = index">
         <div class="weui-cell__hd">
-          <input
-            type="checkbox"
-            class="weui-check"
-            [weui-checklist]="res"
-            name="radio1"
-            [weui-value]="i"
-            id="checkbox-{{ i }}"
-          />
+          <input type="checkbox" class="weui-check" [weui-checklist]="res" name="radio1" [weui-value]="i" id="checkbox-{{ i }}" />
           <i class="weui-icon-checked"></i>
         </div>
         <div class="weui-cell__bd">

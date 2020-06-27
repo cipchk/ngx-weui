@@ -61,7 +61,7 @@ export class ActionSheetComponent implements OnDestroy {
 
   constructor(private DEF: ActionSheetConfig, private cdr: ChangeDetectorRef) {}
 
-  private detectChanges() {
+  private detectChanges(): void {
     if (this.destroied) return;
     this.cdr.detectChanges();
   }
@@ -94,8 +94,10 @@ export class ActionSheetComponent implements OnDestroy {
    *
    * @param is_backdrop 是否从背景上点击
    */
-  hide(is_backdrop?: boolean) {
-    if (is_backdrop === true && this.config.backdrop === false) return false;
+  hide(is_backdrop?: boolean): void {
+    if (is_backdrop === true && this.config.backdrop === false) {
+      return;
+    }
 
     this._shownAnt = false;
     this.detectChanges();
@@ -111,7 +113,7 @@ export class ActionSheetComponent implements OnDestroy {
   /**
    * 选择动作
    */
-  _onSelect(menu: { text?: string; [key: string]: any }) {
+  _onSelect(menu: { text?: string; [key: string]: any }): void {
     this.observer.next(menu);
     this.observer.complete();
     this.hide();

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { TabModule } from './tab.module';
 
 const TABS: any[] = [
@@ -169,9 +168,7 @@ describe('Component: Tabs', () => {
     });
 
     it('should set tab badge dot value', () => {
-      expect((getItemsByTabbar(el)[1] as HTMLElement).querySelector('.weui-badge')!.classList).toContain(
-        'weui-badge_dot',
-      );
+      expect((getItemsByTabbar(el)[1] as HTMLElement).querySelector('.weui-badge')!.classList).toContain('weui-badge_dot');
     });
   });
 });

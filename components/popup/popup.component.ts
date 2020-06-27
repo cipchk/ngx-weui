@@ -73,8 +73,8 @@ export class PopupComponent implements OnDestroy {
    *
    * @param [is_backdrop] 是否从背景上点击(可选)
    */
-  hide(is_backdrop?: boolean) {
-    if (is_backdrop === true && this.config.backdrop === false) return false;
+  hide(is_backdrop?: boolean): void {
+    if (is_backdrop === true && this.config.backdrop === false) return;
 
     this._shownAnt = false;
     this.cdr.detectChanges();
@@ -84,11 +84,11 @@ export class PopupComponent implements OnDestroy {
   }
 
   /** 关闭，等同 `hide()` 效果 */
-  close() {
+  close(): void {
     this.hide(false);
   }
 
-  _onCancel() {
+  _onCancel(): boolean {
     this.cancel.emit();
     this.hide(false);
     if (this.observer) {
@@ -98,7 +98,7 @@ export class PopupComponent implements OnDestroy {
     return false;
   }
 
-  _onConfirm() {
+  _onConfirm(): boolean {
     this.confirm.emit();
     this.hide(false);
     if (this.observer) {

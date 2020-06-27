@@ -1,8 +1,8 @@
 import {
-  forwardRef,
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  forwardRef,
   Input,
   OnChanges,
   OnInit,

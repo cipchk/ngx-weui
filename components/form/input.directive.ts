@@ -1,6 +1,6 @@
-import { forwardRef, Directive, ElementRef, Input, OnChanges, OnInit } from '@angular/core';
+import { Directive, ElementRef, forwardRef, Input, OnChanges, OnInit } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, ValidationErrors, Validator, ValidatorFn } from '@angular/forms';
-import { add, findParent, remove, InputBoolean } from 'ngx-weui/core';
+import { add, findParent, InputBoolean, remove } from 'ngx-weui/core';
 
 /**
  * 文本框，指令是对文本框格式校验（邮箱、手机、身份证等）、视觉效果的增强而已

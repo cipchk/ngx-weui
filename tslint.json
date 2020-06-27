@@ -11,9 +11,9 @@
     "array-type": false,
     "arrow-parens": false,
     "deprecation": {
-      "severity": "warn"
+      "severity": "warning"
     },
-    "component-class-suffix": [true, "Component", "Widget"],
+    "component-class-suffix": [true, "Component"],
     "contextual-lifecycle": true,
     "directive-class-suffix": true,
     "directive-selector": [
@@ -30,9 +30,10 @@
     ],
     "import-blacklist": [
       true,
-      "rxjs/Rx"
+      "rxjs/Rx",
+      "ngx-weui"
     ],
-    "interface-name": [true, "never-prefix"],
+    "interface-name": false,
     "max-classes-per-file": false,
     "max-line-length": [
       false,
@@ -40,7 +41,7 @@
     ],
     "member-access": false,
     "member-ordering": [
-      false,
+      true,
       {
         "order": [
           "static-field",
@@ -67,26 +68,29 @@
     "no-non-null-assertion": false,
     "no-redundant-jsdoc": true,
     "no-switch-case-fall-through": true,
-    "no-use-before-declare": false,
     "no-var-requires": false,
     "object-literal-key-quotes": [
       false,
       "as-needed"
     ],
     "object-literal-sort-keys": false,
-    "ordered-imports": false,
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "case-insensitive",
+        "named-imports-order": "case-insensitive"
+      }
+    ],
     "quotemark": [
       false,
       "single"
     ],
     "trailing-comma": false,
     "no-conflicting-lifecycle": true,
-    "no-host-metadata-property": false,
-    "no-input-rename": false,
     "no-inputs-metadata-property": true,
     "no-output-native": false,
     "no-output-on-prefix": true,
-    "no-output-rename": false,
+    "no-output-rename": true,
     "no-outputs-metadata-property": true,
     "template-banana-in-box": true,
     "template-no-negated-async": true,
@@ -100,14 +104,15 @@
     "no-object-literal-type-assertion": false,
     "no-bitwise": false,
     "no-this-assignment": false,
-    "prefer-conditional-expression": false
+    "prefer-conditional-expression": false,
+    "no-duplicate-imports": true,
+    "no-import-side-effect": true,
+    "no-shadowed-variable": true,
+    "no-sparse-arrays": true
   },
   "linterOptions": {
     "exclude": [
-      "components/schematics/**/files/**/*",
-      "components/schematics/utils/devkit-utils/**/*",
-      "src/app/routes/components/examples.ts",
-      "src/app/routes/components/meta.ts"
+      "./components/schematics/**/*"
     ]
   }
 }

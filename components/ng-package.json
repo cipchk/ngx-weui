@@ -3,10 +3,8 @@
   "dest": "../publish",
   "deleteDestPath": true,
   "lib": {
-    "entryFile": "./ngx-weui.module.ts",
-    "umdModuleIds": {
-      "ngx-weui/version": "ngx-weui/version"
-    }
+    "flatModuleFile": "ngx-weui",
+    "entryFile": "public_api.ts"
   },
   "whitelistedNonPeerDependencies": ["tslib", "weui"]
 }

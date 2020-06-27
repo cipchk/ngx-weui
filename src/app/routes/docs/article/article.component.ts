@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { META } from '../meta';
 
+declare var hljs: any;
+
 @Component({
   selector: 'app-docs-article',
   templateUrl: './article.component.html',
@@ -42,7 +44,7 @@ export class DocsArticleComponent implements OnInit {
         'code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code',
       );
       // tslint:disable-next-line: no-conditional-assignment
-      for (let i = 0, element; (element = elements[i++]);) {
+      for (let i = 0, element; (element = elements[i++]); ) {
         hljs.highlightBlock(element);
       }
     }, 250);

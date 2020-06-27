@@ -1,6 +1,5 @@
 import { Component, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
-
-import { InputType, SkinType } from 'ngx-weui';
+import { InputType, SkinType } from 'ngx-weui/core';
 import { DialogComponent, DialogConfig, DialogService } from 'ngx-weui/dialog';
 import { ToastService } from 'ngx-weui/toast';
 
@@ -11,6 +10,7 @@ import { ToastService } from 'ngx-weui/toast';
   encapsulation: ViewEncapsulation.None,
 })
 export class DemoDialogComponent implements OnDestroy {
+  constructor(private srv: DialogService, private toastService: ToastService) {}
   @ViewChild('ios', { static: true }) iosAS: DialogComponent;
   @ViewChild('android', { static: true }) androidAS: DialogComponent;
   @ViewChild('auto', { static: true }) autoAS: DialogComponent;
@@ -37,7 +37,8 @@ export class DemoDialogComponent implements OnDestroy {
   } as DialogConfig;
   config: DialogConfig = {};
 
-  constructor(private srv: DialogService, private toastService: ToastService) { }
+  promptValue: any;
+  promptTypes: string[] = ['text', 'email', 'url', 'range', 'textarea', 'select', 'radio', 'checkbox'];
 
   onShow(type: SkinType, style: 1 | 2 | 3) {
     this.config = {
@@ -67,7 +68,7 @@ export class DemoDialogComponent implements OnDestroy {
         break;
     }
     setTimeout(() => {
-      (this[`${type}AS`] as DialogComponent).show().subscribe((res: any) => {
+      ((this as any)[`${type}AS`] as DialogComponent).show().subscribe((res: any) => {
         console.log('type', res);
       });
     }, 10);
@@ -105,8 +106,6 @@ export class DemoDialogComponent implements OnDestroy {
     return false;
   }
 
-  promptValue: any;
-  promptTypes: string[] = ['text', 'email', 'url', 'range', 'textarea', 'select', 'radio', 'checkbox'];
   onShowPrompt(inputType: InputType, useSrv: boolean = false) {
     const cog = {
       ...this.DEFCONFIG,

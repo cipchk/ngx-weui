@@ -5,6 +5,7 @@ import { ActionSheetModule } from 'ngx-weui/actionsheet';
 import { ButtonModule } from 'ngx-weui/button';
 import { CellModule } from 'ngx-weui/cell';
 import { ChartG2Module } from 'ngx-weui/chart-g2';
+import { warnDeprecation } from 'ngx-weui/core';
 import { DialogModule } from 'ngx-weui/dialog';
 import { FormModule } from 'ngx-weui/form';
 import { GalleryModule } from 'ngx-weui/gallery';
@@ -28,66 +29,44 @@ import { ToastModule } from 'ngx-weui/toast';
 import { ToptipsModule } from 'ngx-weui/toptips';
 import { UploaderModule } from 'ngx-weui/uploader';
 
-export * from 'ngx-weui/core';
-export * from 'ngx-weui/cell';
-export * from 'ngx-weui/button';
-export * from 'ngx-weui/form';
-export * from 'ngx-weui/slider';
-export * from 'ngx-weui/uploader';
-export * from 'ngx-weui/actionsheet';
-export * from 'ngx-weui/dialog';
-export * from 'ngx-weui/loadmore';
-export * from 'ngx-weui/progress';
-export * from 'ngx-weui/gallery';
-export * from 'ngx-weui/picker';
-export * from 'ngx-weui/searchbar';
-export * from 'ngx-weui/tab';
-export * from 'ngx-weui/toast';
-export * from 'ngx-weui/toptips';
-export * from 'ngx-weui/popup';
-export * from 'ngx-weui/ptr';
-export * from 'ngx-weui/infiniteloader';
-export * from 'ngx-weui/sidebar';
-export * from 'ngx-weui/swiper';
-export * from 'ngx-weui/chart-g2';
-export * from 'ngx-weui/jweixin';
-export * from 'ngx-weui/accordion';
-export * from 'ngx-weui/mask';
-export * from 'ngx-weui/rating';
-export * from 'ngx-weui/stepper';
-export * from 'ngx-weui/pagination';
+const MODULES = [
+  CellModule,
+  ButtonModule,
+  FormModule,
+  SliderModule,
+  UploaderModule,
+  ActionSheetModule,
+  DialogModule,
+  LoadmoreModule,
+  ProgressModule,
+  GalleryModule,
+  PickerModule,
+  SearchBarModule,
+  TabModule,
+  ToastModule,
+  ToptipsModule,
+  PopupModule,
+  PTRModule,
+  InfiniteLoaderModule,
+  SidebarModule,
+  SwiperModule,
+  ChartG2Module,
+  JWeiXinModule,
+  AccordionModule,
+  MaskModule,
+  RatingModule,
+  StepperModule,
+  PaginationModule,
+];
 
-export * from './version';
-
-@NgModule({
-  exports: [
-    CellModule,
-    ButtonModule,
-    FormModule,
-    SliderModule,
-    UploaderModule,
-    ActionSheetModule,
-    DialogModule,
-    LoadmoreModule,
-    ProgressModule,
-    GalleryModule,
-    PickerModule,
-    SearchBarModule,
-    TabModule,
-    ToastModule,
-    ToptipsModule,
-    PopupModule,
-    PTRModule,
-    InfiniteLoaderModule,
-    SidebarModule,
-    SwiperModule,
-    ChartG2Module,
-    JWeiXinModule,
-    AccordionModule,
-    MaskModule,
-    RatingModule,
-    StepperModule,
-    PaginationModule,
-  ],
-})
-export class WeUiModule {}
+/**
+ * @deprecated Use secondary entry eg: `import { ButtonModule } from 'ngx-weui/button';`.
+ */
+@NgModule({ exports: MODULES })
+export class WeUiModule {
+  constructor() {
+    warnDeprecation(
+      "The `WeUiModule` has been deprecated and will be removed in 10.0.0. Please use secondary entry instead.\ne.g. `import { ButtonModule } from 'ngx-weui/button';`",
+    );
+  }
+}
