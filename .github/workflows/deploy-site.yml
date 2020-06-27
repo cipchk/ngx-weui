@@ -44,10 +44,8 @@ jobs:
         uses: yohix/deploy-surge@v1.0.0
         with:
           SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-          DOMAIN_NAME: 'https://preview-${PR}-ngx-weui.surge.sh'
+          DOMAIN_NAME: 'https://preview-${{ steps.findPr.outputs.number }}-ngx-weui.surge.sh'
           BUILD_DIRECTORY: ./dist
-        env:
-          PR: ${{ steps.findPr.outputs.number }}
 
       - name: comment_on_github
         run: |
