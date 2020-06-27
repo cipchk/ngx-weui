@@ -40,6 +40,9 @@ jobs:
       #     emptyCommits: false
 
       - name: deploy-to-surge
+        uses: actions/setup-node@v1
+        with:
+          node-version: 12
         run: |
           yarn global add surge
           surge ./docs 'https://preview-${PR}-ngx-weui.surge.sh' --token ${{ secrets.SURGE_TOKEN }}
