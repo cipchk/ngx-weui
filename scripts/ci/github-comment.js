@@ -30,6 +30,7 @@ async function withGithub(url, json, method) {
 
 (async function run() {
   const comments = await withGithub(`https://api.github.com/repos/${REPO}/issues/${PR}/comments`);
+  console.log(`https://api.github.com/repos/${REPO}/issues/${PR}/comments`);
   console.log(comments);
 
   // Find my comment

@@ -23,7 +23,7 @@ jobs:
           node ./scripts/ci/github-comment.js "[Preview Preparing...](https://github.com/cipchk/ngx-weui/pull/${PR}/checks)"
         env:
           PR: ${{ steps.findPr.outputs.number }}
-          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
 
       # - name: build
       #   run: |
@@ -39,17 +39,19 @@ jobs:
       #   with:
       #     emptyCommits: false
 
-      - name: deploy-to-surge
+      - name: surge-env
         uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: yarn global add surge
-      - run: |
+      - name: sureg-install
+        run: yarn global add surge
+      - name: surge-deploy
+        run: |
           surge ./docs 'https://preview-${PR}-ngx-weui.surge.sh' --token ${{ secrets.SURGE_TOKEN }}
           node ./scripts/ci/github-comment.js "[Preview is ready!](https://preview-${PR}-ngx-weui.surge.sh)"
         env:
           PR: ${{ steps.findPr.outputs.number }}
-          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ACCESS_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
       # - uses: actions/checkout@v1
       # - uses: pixta-dev/repository-mirroring-action@v1
       #   with:
