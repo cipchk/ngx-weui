@@ -3,7 +3,7 @@ name: Deploy
 on: push
 
 jobs:
-  website:
+  doc:
     # if: "startsWith(github.event.commits[0].message, 'release')"
     runs-on: ubuntu-latest
     steps:
