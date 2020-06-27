@@ -54,6 +54,14 @@ jobs:
           DOMAIN_NAME: 'https://preview-${{ steps.findPr.outputs.number }}-ngx-weui.surge.sh'
           BUILD_DIRECTORY: ./dist
 
+      - name: deploy-to-surge-release
+        if: "startsWith(github.event.commits[0].message, 'release')"
+        uses: yohix/deploy-surge@v1.0.0
+        with:
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+          DOMAIN_NAME: 'https://ngx-weui.surge.sh'
+          BUILD_DIRECTORY: ./dist
+
       - name: comment_on_github
         run: |
           node ./scripts/ci/github-comment.js "[Preview is ready!](https://preview-${PR}-ngx-weui.surge.sh)"
