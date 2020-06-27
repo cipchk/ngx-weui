@@ -27,7 +27,7 @@ jobs:
 
       - name: build
         run: |
-          npm run site:build
+          npm run site:init && ng build --prod --base-href /ngx-weui/
           cp ./dist/index.html ./dist/404.html
           ls ./dist
 
@@ -39,6 +39,13 @@ jobs:
           PUBLISH_DIR: ./dist
         with:
           emptyCommits: false
+
+      - name: deploy-to-surge-pre
+        uses: jacobtomlinson/gha-find-replace@master
+        with:
+          find: '/ngx-weui/'
+          replace: '/'
+          include: '\.html$'
 
       - name: deploy-to-surge
         uses: yohix/deploy-surge@v1.0.0
