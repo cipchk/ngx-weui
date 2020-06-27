@@ -43,8 +43,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 12
-        run: |
-          yarn global add surge
+      - run: yarn global add surge
+      - run: |
           surge ./docs 'https://preview-${PR}-ngx-weui.surge.sh' --token ${{ secrets.SURGE_TOKEN }}
           node ./scripts/ci/github-comment.js "[Preview is ready!](https://preview-${PR}-ngx-weui.surge.sh)"
         env:
