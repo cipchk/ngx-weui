@@ -10,39 +10,45 @@ jobs:
       - name: checkout
         uses: actions/checkout@master
 
-      - name: install
-        run: npm install
-
-      - name: build
-        run: |
-          npm run site:build
-          cp ./dist/index.html ./dist/404.html
-
-      - name: deploy-to-gh-pages
-        uses: peaceiris/actions-gh-pages@v2
-        env:
-          PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: ./dist
+      - uses: jwalton/gh-find-current-pr@v1
+        id: findPr
         with:
-          emptyCommits: false
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
-      # - name: deploy-to-surge-pre
-      #   uses: jacobtomlinson/gha-find-replace@master
+      - name: install
+        run: yarn
+
+      - name: comment_on_github
+        run: |
+          node ./scripts/ci/github-comment.js "[Preview Preparing...](https://github.com/cipchk/ngx-weui/pull/${PR}/checks)"
+        env:
+          PR: ${{ steps.findPr.outputs.number }}
+          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # - name: build
+      #   run: |
+      #     npm run site:build
+      #     cp ./dist/index.html ./dist/404.html
+
+      # - name: deploy-to-gh-pages
+      #   uses: peaceiris/actions-gh-pages@v2
+      #   env:
+      #     PERSONAL_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
+      #     PUBLISH_BRANCH: gh-pages
+      #     PUBLISH_DIR: ./dist
       #   with:
-      #     find: '/delon/'
-      #     replace: '/'
-      #     include: '\.html$'
+      #     emptyCommits: false
 
       - name: deploy-to-surge
-        uses: yg/deploy-surge@v1.0.0
-        with:
-          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-          DOMAIN_NAME: https://ngx-weui.surge.sh
-          BUILD_DIRECTORY: ./dist
-
-      - uses: actions/checkout@v1
-      - uses: pixta-dev/repository-mirroring-action@v1
-        with:
-          target_repo_url: git@gitee.com:cipchk/ngx-weui.git
-          ssh_private_key: ${{ secrets.GITEE_SSH_PRIVATE_KEY }}
+        run: |
+          yarn global add surge
+          surge ./docs 'https://preview-${PR}-ngx-weui.surge.sh' --token ${{ secrets.SURGE_TOKEN }}
+          node ./scripts/ci/github-comment.js "[Preview is ready!](https://preview-${PR}-ngx-weui.surge.sh)"
+        env:
+          PR: ${{ steps.findPr.outputs.number }}
+          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - uses: actions/checkout@v1
+      # - uses: pixta-dev/repository-mirroring-action@v1
+      #   with:
+      #     target_repo_url: git@gitee.com:cipchk/ngx-weui.git
+      #     ssh_private_key: ${{ secrets.GITEE_SSH_PRIVATE_KEY }}
