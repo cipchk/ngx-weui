@@ -209,7 +209,7 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnChanges 
     this.disabled = isDisabled;
   }
 
-  _onFocus() {
-    arguments[0].target.blur();
+  _onFocus(ev: Event): void {
+    (ev.target! as HTMLElement).blur();
   }
 }

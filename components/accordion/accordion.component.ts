@@ -39,20 +39,20 @@ export class AccordionComponent {
     Object.assign(this, config);
   }
 
-  _add(item: AccordionPanelComponent) {
+  _add(item: AccordionPanelComponent): void {
     this.panels.push(item);
     if (this.panels.length === 1 && this.activeFirst) item.active = true;
   }
 
-  _remove(item: AccordionPanelComponent) {
+  _remove(item: AccordionPanelComponent): void {
     this.panels.splice(this.panels.indexOf(item), 1);
   }
 
-  _index(item: AccordionPanelComponent) {
+  _index(item: AccordionPanelComponent): number {
     return this.panels.indexOf(item);
   }
 
-  _closeOthers(cur: AccordionPanelComponent) {
+  _closeOthers(cur: AccordionPanelComponent): void {
     if (this.collapsible) return;
 
     this.panels.forEach(panel => {

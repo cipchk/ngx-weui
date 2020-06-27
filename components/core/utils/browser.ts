@@ -3,14 +3,15 @@ import { ɵgetDOM as getDOM } from '@angular/platform-browser';
 declare const window: any;
 
 /**
+ * 是否服务端渲染
+ */
+export const isSSR = !(typeof document === 'object' && !!document);
+
+/**
  * 检查是否安卓系统
  */
 export function isAndroid() {
-  return /android (\d+)/.test(
-    getDOM()
-      .getUserAgent()
-      .toLowerCase(),
-  );
+  return /android (\d+)/.test(getDOM().getUserAgent().toLowerCase());
 }
 
 /**

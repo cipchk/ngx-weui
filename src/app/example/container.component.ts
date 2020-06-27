@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'component-container',
   template: `
-    <div [ngSwitch]="menu.example || menu.id" style="height:100%">
+    <ng-container [ngSwitch]="menu.example || menu.id">
       <example-accordion *ngSwitchCase="'accordion'"></example-accordion>
       <example-button *ngSwitchCase="'button'"></example-button>
       <example-input *ngSwitchCase="'input'"></example-input>
@@ -46,7 +46,7 @@ import { Component, Input } from '@angular/core';
       <example-rating *ngSwitchCase="'rating'"></example-rating>
       <example-stepper *ngSwitchCase="'stepper'"></example-stepper>
       <example-pagination *ngSwitchCase="'pagination'"></example-pagination>
-    </div>
+    </ng-container>
   `,
 })
 export class ContainerComponent {

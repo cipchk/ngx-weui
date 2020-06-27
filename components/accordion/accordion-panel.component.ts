@@ -41,15 +41,15 @@ export class AccordionPanelComponent implements OnInit, OnDestroy {
 
   constructor(@Inject(AccordionComponent) protected accordion: AccordionComponent) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.accordion._add(this);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.accordion._remove(this);
   }
 
-  _toggle() {
+  _toggle(): void {
     if (!this.disabled) {
       this.active = !this.active;
       this.accordion.select.emit(this.accordion._index(this));

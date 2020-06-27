@@ -21,7 +21,7 @@
   "scripts": {
     "lint": "tslint -p tsconfig.json -c tslint.json 'components/**/*.ts'",
     "test": "ng test --no-progress --browsers=ChromeHeadlessCI --code-coverage --no-watch",
-    "site": "npm run site:init && ng serve --port 0 --open",
+    "site": "npm run site:init && ng serve -o",
     "site:init": "node scripts/site/main init",
     "site:build": "npm run site:init && ng build --prod",
     "build": "bash scripts/build/build.sh",

@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
   selector: 'app-root',
   template: `
     <router-outlet></router-outlet>
+    <theme-btn></theme-btn>
   `,
 })
-export class AppComponent { }
+export class AppComponent {}

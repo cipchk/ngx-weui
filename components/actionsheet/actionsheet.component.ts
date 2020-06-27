@@ -12,6 +12,7 @@ import {
 import { isAndroid } from 'ngx-weui/core';
 import { Observable, Observer, Subscription } from 'rxjs';
 import { ActionSheetConfig } from './actionsheet.config';
+import { ActionSheetMenuItem } from './actionsheet.types';
 
 @Component({
   selector: 'weui-actionsheet',
@@ -48,7 +49,7 @@ export class ActionSheetComponent implements OnDestroy {
   /**
    * 菜单内容
    */
-  @Input() menus: Array<{ text?: string; [key: string]: any }> = [];
+  @Input() menus: ActionSheetMenuItem[] = [];
 
   /**
    * 关闭回调
@@ -69,7 +70,7 @@ export class ActionSheetComponent implements OnDestroy {
   /**
    * 显示，组件载入页面后并不会显示，显示调用 `show()` 并订阅结果。
    */
-  show(): Observable<any> {
+  show(): Observable<ActionSheetMenuItem> {
     this.config = {
       backdrop: true,
       skin: 'auto',
@@ -84,7 +85,7 @@ export class ActionSheetComponent implements OnDestroy {
       this._shownAnt = true;
       this.detectChanges();
     }, 10);
-    return new Observable((observer: Observer<any>) => {
+    return new Observable((observer: Observer<ActionSheetMenuItem>) => {
       this.observer = observer;
     });
   }

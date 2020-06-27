@@ -5,8 +5,11 @@ weui-accordion {
 
 .weui-accordion-content {
   max-height: 0;
-}
-
-.weui-accordion-content-active {
-  max-height: inherit;
+  // overflow: hidden;
+  &-active {
+    max-height: inherit;
+    // .weui-accordion-content {
+    //   overflow: initial;
+    // }
+  }
 }

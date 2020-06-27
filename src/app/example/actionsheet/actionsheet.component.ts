@@ -1,5 +1,5 @@
 import { Component, OnDestroy, ViewChild, ViewEncapsulation } from '@angular/core';
-import { ActionSheetComponent, ActionSheetConfig, ActionSheetService } from 'ngx-weui/actionsheet';
+import { ActionSheetComponent, ActionSheetConfig, ActionSheetMenuItem, ActionSheetService } from 'ngx-weui/actionsheet';
 import { SkinType } from 'ngx-weui/core';
 
 @Component({
@@ -13,7 +13,7 @@ export class DemoActionSheetComponent implements OnDestroy {
   @ViewChild('android', { static: true }) androidAS: ActionSheetComponent;
   @ViewChild('auto', { static: true }) autoAS: ActionSheetComponent;
 
-  menus: any[] = [
+  menus: ActionSheetMenuItem[] = [
     { text: '菜单一', value: 'test', other: 1 },
     { text: '菜单三', value: 'test' },
   ];

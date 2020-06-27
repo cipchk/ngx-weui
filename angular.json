@@ -97,7 +97,8 @@
             "scripts": [
               "node_modules/swiper/js/swiper.js",
               "node_modules/g2-mobile/index.js"
-            ]
+            ],
+            "codeCoverageExclude": ["components/schematics/**"]
           }
         },
         "lint": {
