@@ -37,7 +37,7 @@ export class DemoDialogComponent implements OnDestroy {
   } as DialogConfig;
   config: DialogConfig = {};
 
-  constructor(private srv: DialogService, private toastService: ToastService) {}
+  constructor(private srv: DialogService, private toastService: ToastService) { }
 
   onShow(type: SkinType, style: 1 | 2 | 3) {
     this.config = {

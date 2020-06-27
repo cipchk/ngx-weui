@@ -37,4 +37,8 @@ export class InputComponent {
   onSave() {
     alert('请求数据：' + JSON.stringify(this.res));
   }
+
+  radioAdd() {
+    this.radio.push({ id: this.radio[this.radio.length - 1].id + 1, name: 'new radio' });
+  }
 }

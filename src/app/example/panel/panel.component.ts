@@ -6,4 +6,4 @@ import { Component, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./panel.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class PanelComponent {}
+export class PanelComponent { }

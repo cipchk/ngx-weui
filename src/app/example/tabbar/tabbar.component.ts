@@ -10,14 +10,18 @@ import { timer } from 'rxjs';
 })
 export class DemoTabbarComponent {
   time: number;
-  onSelect() {
+  icon = `<img src=./assets/images/icon_tabbar.png>`;
+  activeIcon = `<img src=./assets/images/momentloader.png>`;
+
+  onSelect(): void {
     this.time = new Date().getTime();
   }
 
   items: any[] = Array(20)
     .fill(0)
     .map((_v: any, i: number) => i);
-  onLoadMore(comp: InfiniteLoaderComponent) {
+
+  onLoadMore(comp: InfiniteLoaderComponent): void {
     timer(1500).subscribe(() => {
       this.items.push(
         ...Array(10)

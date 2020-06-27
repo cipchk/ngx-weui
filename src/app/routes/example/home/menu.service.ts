@@ -239,8 +239,8 @@ export class MenuService {
   ];
 
   getMenu(id: string) {
-    for (let mi of this.menus) {
-      const item = mi.items.find(w => w.id === id);
+    for (const mi of this.menus) {
+      const item = mi.items.find((w: { id: string; }) => w.id === id);
       if (item) return item;
     }
   }

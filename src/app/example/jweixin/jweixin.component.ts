@@ -1,4 +1,4 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import { Component, ViewEncapsulation, OnInit } from '@angular/core';
 import { WXService } from '../../wx.service';
 
 @Component({
@@ -8,8 +8,8 @@ import { WXService } from '../../wx.service';
   encapsulation: ViewEncapsulation.None,
   providers: [WXService],
 })
-export class JWeiXinComponent {
-  constructor(private wxService: WXService) {}
+export class JWeiXinComponent implements OnInit {
+  constructor(private wxService: WXService) { }
 
   status: string;
   ngOnInit() {

@@ -18,6 +18,8 @@ export class DemoAccordionComponent implements OnInit {
 
   list: AccordionItem[] = [];
 
+  index: number = 0;
+
   ngOnInit() {
     new Array(3).fill(0).forEach(() => this.add());
   }
@@ -35,7 +37,6 @@ export class DemoAccordionComponent implements OnInit {
     if (this.list.length > 1) this.list.pop();
   }
 
-  index: number = 0;
   select(index: number) {
     this.index = index;
   }

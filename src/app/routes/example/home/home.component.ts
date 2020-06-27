@@ -8,7 +8,7 @@ import { MenuService } from './menu.service';
 export class HomeComponent {
   title: string = `<img src="./assets/images/logo.png" alt="weui" height="21px" />`;
 
-  constructor(public menuService: MenuService) {}
+  constructor(public menuService: MenuService) { }
 
   onSelecte(index: number) {
     this.menuService.menus.forEach((item, idx) => {

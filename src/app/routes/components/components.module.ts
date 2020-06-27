@@ -21,4 +21,4 @@ const routes: Routes = [{ path: '', redirectTo: 'button' }, { path: ':id', compo
   ],
   declarations: [...COMPONENTS],
 })
-export class ComponentsModule {}
+export class ComponentsModule { }

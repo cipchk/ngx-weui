@@ -4,7 +4,7 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class TaobaoService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   search(term: string) {
     const params = new URLSearchParams();

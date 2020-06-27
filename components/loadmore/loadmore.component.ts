@@ -1,6 +1,8 @@
 import { ChangeDetectionStrategy, Component, Input, ViewEncapsulation } from '@angular/core';
 import { LoadmoreConfig } from './loadmore.config';
 
+export type LoadmoreType = 'loading' | 'line' | 'dot';
+
 @Component({
   selector: 'weui-loadmore',
   exportAs: 'weuiLoadmore',
@@ -13,7 +15,7 @@ export class LoadmoreComponent {
   /**
    * 类型，默认：`loading`
    */
-  @Input() type: 'loading' | 'line' | 'dot' = 'loading';
+  @Input() type: LoadmoreType = 'loading';
 
   /**
    * 当 `type==='loading'` 时显示的文本，默认：`正在加载`

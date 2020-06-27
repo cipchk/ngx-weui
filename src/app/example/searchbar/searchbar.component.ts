@@ -12,7 +12,7 @@ import { TaobaoService } from './tb.service';
 export class DemoSearchBarComponent {
   items: Observable<string[]>;
   value: string;
-  constructor(private tbService: TaobaoService) {}
+  constructor(private tbService: TaobaoService) { }
 
   onSearch(term: string) {
     this.value = term;

@@ -1,4 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, ViewEncapsulation, OnDestroy } from '@angular/core';
 
 import { SkinType } from 'ngx-weui';
 import { ActionSheetComponent, ActionSheetConfig, ActionSheetService } from 'ngx-weui/actionsheet';
@@ -9,7 +9,7 @@ import { ActionSheetComponent, ActionSheetConfig, ActionSheetService } from 'ngx
   styleUrls: ['./actionsheet.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class DemoActionSheetComponent {
+export class DemoActionSheetComponent implements OnDestroy {
   @ViewChild('ios', { static: true }) iosAS: ActionSheetComponent;
   @ViewChild('android', { static: true }) androidAS: ActionSheetComponent;
   @ViewChild('auto', { static: true }) autoAS: ActionSheetComponent;
@@ -19,7 +19,7 @@ export class DemoActionSheetComponent {
     title: '这是一段标题',
   } as ActionSheetConfig;
 
-  constructor(private srv: ActionSheetService) {}
+  constructor(private srv: ActionSheetService) { }
 
   onShow(type: SkinType) {
     this.config.skin = type;

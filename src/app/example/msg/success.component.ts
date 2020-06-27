@@ -28,4 +28,4 @@ import { Component, ViewEncapsulation } from '@angular/core';
   `,
   encapsulation: ViewEncapsulation.None,
 })
-export class DemoMsgSuccessComponent {}
+export class DemoMsgSuccessComponent { }

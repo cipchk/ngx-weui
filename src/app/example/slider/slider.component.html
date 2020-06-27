@@ -2,15 +2,8 @@
   <p>res1: {{ res1 }}</p>
   <weui-slider [(ngModel)]="res1" name="res1" weui-show-value="false"></weui-slider>
   <br />
-  <weui-slider
-    [(ngModel)]="res2"
-    name="res2"
-    weui-min="0"
-    weui-max="20"
-    weui-step="2"
-    [weui-enabled]="switchState"
-    (weui-change)="onChange($event)"
-  >
+  <weui-slider [(ngModel)]="res2" name="res2" weui-min="0" weui-max="20" weui-step="2" [weui-enabled]="switchState"
+    (weui-change)="onChange($event)">
   </weui-slider>
 
   <div class="weui-btn-area">

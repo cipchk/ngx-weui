@@ -8,7 +8,7 @@ import { MenuService } from '../../core/menu.service';
   templateUrl: './docs-nav.component.html',
 })
 export class DocsNavComponent implements OnInit {
-  constructor(private router: Router, private menuService: MenuService) {}
+  constructor(private router: Router, private menuService: MenuService) { }
 
   navList: any[];
   private _data: any[];

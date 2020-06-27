@@ -12,7 +12,7 @@ export class DemoToptipsComponent {
   @ViewChild('toptips', { static: true }) toptips: ToptipsComponent;
   text = '';
   type: ToptipsType;
-  constructor(private srv: ToptipsService) {}
+  constructor(private srv: ToptipsService) { }
 
   onShow(type: ToptipsType) {
     this.type = type;

@@ -6,4 +6,4 @@ import { Component, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./preview.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class PreviewComponent {}
+export class PreviewComponent { }

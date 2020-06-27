@@ -23,7 +23,7 @@ import { PickerComponent } from './picker.component';
   template: `
     <weui-picker
       [placeholder]="placeholder"
-      [groups]="_groups"
+      [groups]="_groups!"
       [defaultSelect]="_selected"
       [disabled]="disabled"
       [options]="options"

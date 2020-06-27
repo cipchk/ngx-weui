@@ -137,6 +137,10 @@ export class PTRComponent implements OnInit {
     this.cdr.detectChanges();
   }
 
+  get icon(): string {
+    return this._pullPercent !== 100 ? this.config.pullIcon! : this.loading ? this.config.loadingIcon! : this.config.successIcon!;
+  }
+
   ngOnInit() {
     this.contentEl = this.el.nativeElement.querySelector('.weui-ptr__content')! as HTMLElement;
   }

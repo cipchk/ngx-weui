@@ -8,6 +8,7 @@ import {
   OnInit,
   Output,
   ViewEncapsulation,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { fromEvent, Subscription } from 'rxjs';
 import { InfiniteLoaderConfig } from './infiniteloader.config';
@@ -44,7 +45,7 @@ export class InfiniteLoaderComponent implements OnInit, OnDestroy {
 
   @Output() readonly loadmore = new EventEmitter<InfiniteLoaderComponent>();
 
-  constructor(private el: ElementRef<HTMLElement>, private DEF: InfiniteLoaderConfig) {
+  constructor(private el: ElementRef<HTMLElement>, private DEF: InfiniteLoaderConfig, private cdr: ChangeDetectorRef) {
     this.config = { ...DEF };
   }
 
@@ -52,20 +53,26 @@ export class InfiniteLoaderComponent implements OnInit, OnDestroy {
   resolveLoading() {
     this._loading = false;
     this._finished = false;
+    this.cdr.detectChanges();
   }
 
   /** 设置结束 */
   setFinished() {
     this._loading = false;
     this._finished = true;
+    this.cdr.detectChanges();
   }
 
   /** 设置重新开始 */
   restart() {
     this._finished = false;
+    this.cdr.detectChanges();
   }
 
-  _onScroll() {
+  /**
+   * 触发滚动
+   */
+  scroll() {
     if (this._loading || this._finished) return;
     const target = this.scrollEvent.target;
     const scrollPercent = Math.floor(((target.scrollTop + target.clientHeight) / target.scrollHeight) * 100);
@@ -73,6 +80,7 @@ export class InfiniteLoaderComponent implements OnInit, OnDestroy {
     if (scrollPercent > this.config.percent!) {
       this._loading = true;
       this.loadmore.emit(this);
+      this.cdr.detectChanges();
     }
   }
 
@@ -80,7 +88,7 @@ export class InfiniteLoaderComponent implements OnInit, OnDestroy {
     this.scrollTime = setInterval(() => {
       if (this.didScroll) {
         this.didScroll = false;
-        this._onScroll();
+        this.scroll();
       }
     }, this.config.throttle);
 

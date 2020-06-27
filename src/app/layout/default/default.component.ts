@@ -14,7 +14,7 @@ export class AppLayoutComponent implements OnInit {
   locale: string = 'en-US';
   isFetching = false;
 
-  constructor(public menuService: MenuService, private router: Router) {}
+  constructor(public menuService: MenuService, private router: Router) { }
 
   ngOnInit() {
     if (typeof Storage !== 'undefined') {

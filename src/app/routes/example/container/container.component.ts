@@ -9,7 +9,7 @@ import { MenuService } from '../home/menu.service';
   `,
 })
 export class ExampleContainerComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private menuService: MenuService) {}
+  constructor(private route: ActivatedRoute, private menuService: MenuService) { }
 
   menu: any;
   ngOnInit() {

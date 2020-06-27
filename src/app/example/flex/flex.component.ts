@@ -6,4 +6,4 @@ import { Component, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./flex.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class FlexComponent {}
+export class FlexComponent { }

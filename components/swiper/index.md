@@ -16,10 +16,10 @@ npm install --save-dev @types/swiper
 
 ```json
 "styles": [
-    "./node_modules/swiper/dist/css/swiper.css"
+    "./node_modules/swiper/css/swiper.css"
 ],
 "scripts": [
-    "./node_modules/swiper/dist/js/swiper.js"
+    "./node_modules/swiper/js/swiper.js"
 ]
 ```
 

@@ -266,6 +266,7 @@ export class MenuService {
 
   getItems(linkId: string): any[] {
     for (const item of this.menus) {
+      // tslint:disable-next-line:prefer-object-spread
       if (item.link === linkId) return Object.assign([], item.items);
     }
     return [];

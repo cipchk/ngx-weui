@@ -18,7 +18,7 @@ export class DemoPickerComponent implements OnDestroy {
     date: new Date(),
   };
 
-  constructor(private srv: PickerService) {}
+  constructor(private srv: PickerService) { }
 
   cityChange(item: any) {
     console.log(item);
@@ -82,6 +82,7 @@ export class DemoPickerComponent implements OnDestroy {
   }
 
   mData: any;
+  dateFormat: any = { hu: '', mu: '' };
 
   onMItemChange(data: any) {
     console.log('onMItemChange', data);

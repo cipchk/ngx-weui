@@ -11,4 +11,4 @@ import { IssueComponent } from './issue/issue.component';
   declarations: [DocsStartComponent, IssueComponent],
   exports: [RouterModule],
 })
-export class RoutesModule {}
+export class RoutesModule { }

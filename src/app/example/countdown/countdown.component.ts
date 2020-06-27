@@ -6,4 +6,4 @@ import { Component, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./countdown.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class CountdownComponent {}
+export class CountdownComponent { }

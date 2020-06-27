@@ -15,7 +15,7 @@ export class GesturePasswordComponent {
   options: any;
   switchState: boolean = true;
 
-  constructor(private _ns: ToastrService) {}
+  constructor(private _ns: ToastrService) { }
 
   onChangeOptions() {
     if (this.options) {

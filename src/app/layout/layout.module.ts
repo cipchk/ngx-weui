@@ -11,4 +11,4 @@ const COMPONENTS = [AppLayoutComponent];
   declarations: [...COMPONENTS],
   exports: [...COMPONENTS],
 })
-export class LayoutModule {}
+export class LayoutModule { }

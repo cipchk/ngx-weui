@@ -15,7 +15,7 @@ export class WXService {
     link: '',
     imgUrl: '',
   };
-  constructor(private wxService: JWeiXinService, private http: HttpClient) {}
+  constructor(private wxService: JWeiXinService, private http: HttpClient) { }
 
   private share: any;
   config(shareData: any): Promise<boolean> {

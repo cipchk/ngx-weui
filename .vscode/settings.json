@@ -7,13 +7,10 @@
     "**/dist/*/**": true,
     "**/coverage/*/**": true
   },
-  "html.format.wrapAttributes": "force-aligned",
-  "html.format.wrapLineLength": 100,
-  "editor.tabSize": 2,
-  "editor.insertSpaces": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
+    "source.fixAll.tslint": true
   },
   "[markdown]": {
     "editor.formatOnSave": false
@@ -21,5 +18,15 @@
   "[javascript]": {
     "editor.formatOnSave": false
   },
-  "prettier.stylelintIntegration": true
+  "[json]": {
+    "editor.formatOnSave": false
+  },
+  "[jsonc]": {
+    "editor.formatOnSave": false
+  },
+  "files.associations": {
+    "*.json": "jsonc",
+    ".prettierrc": "json",
+    ".stylelintrc": "json"
+  }
 }

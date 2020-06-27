@@ -6,4 +6,4 @@ import { Component, ViewEncapsulation } from '@angular/core';
   styleUrls: ['./grid.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class GridComponent {}
+export class GridComponent { }
