@@ -3,11 +3,9 @@ import { ComponentFixture, ComponentFixtureAutoDetect, fakeAsync, inject, TestBe
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { isAndroid } from 'ngx-weui/core';
-// tslint:disable-next-line: no-duplicate-imports
-import * as browserModule from 'ngx-weui/core';
-import { ActionSheetComponent, ActionSheetConfig, ActionSheetModule, ActionSheetService } from '../actionsheet';
+import { ActionSheetComponent, ActionSheetConfig, ActionSheetMenuItem, ActionSheetModule, ActionSheetService } from './index';
 
-const MENUS: any[] = [
+const MENUS: ActionSheetMenuItem[] = [
   { text: 'menu1', value: 'value1', other: 1 },
   { text: 'menu2', value: 'value2' },
 ];
@@ -81,21 +79,17 @@ describe('Component: ActionSheet', () => {
       (getItems(el)[0] as any).click();
     });
 
-    xdescribe('[Android] style', () => {
-      beforeEach(() => {
-        spyOn(browserModule, 'isAndroid').and.returnValue(true);
-      });
-
-      it('should be inited', done => {
-        context.config = { ...context.config, skin: 'auto' };
+    it('should be android when set auto and isAndroid is true', done => {
+      document.querySelector('body')?.setAttribute('data-platform', 'android');
+      context.config = { ...context.config, skin: 'auto' };
+      fixture.detectChanges();
+      context.actioinSheet.show().subscribe(() => {
         fixture.detectChanges();
-        context.actioinSheet.show().subscribe(() => {
-          fixture.detectChanges();
-          expect((el as HTMLElement).querySelectorAll('.weui-skin_android').length).toBe(1);
-          done();
-        });
-        (getItems(el)[0] as any).click();
+        expect((el as HTMLElement).querySelectorAll('.weui-skin_android').length).toBe(1);
+        document.querySelector('body')?.removeAttribute('data-platform');
+        done();
       });
+      (getItems(el)[0] as any).click();
     });
 
     it('should be opened set actionsheet title', done => {
@@ -113,8 +107,8 @@ describe('Component: ActionSheet', () => {
         fixture.detectChanges();
         const items = getItems(el);
         expect(items.length).toBe(2);
-        expect(items[0].textContent).toBe('menu1');
-        expect(items[1].textContent).toBe('menu2');
+        expect(items[0].textContent?.trim()).toBe('menu1');
+        expect(items[1].textContent?.trim()).toBe('menu2');
         done();
       });
       (getItems(el)[0] as any).click();

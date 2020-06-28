@@ -6,6 +6,8 @@ import { Uploader, UploaderFileDirective, UploaderModule } from '../uploader';
 
 const html = `<input type="file" accept="image/*" multiple [weui-uploader-file]="uploader">`;
 const URL = 'http://test.com';
+const FILECONTENT = [`iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAHggJ/PchI7wAAAABJRU5ErkJggg==`];
+const FILE = new File(FILECONTENT, '');
 
 describe('Component: Uploader', () => {
   let fixture: ComponentFixture<TestUploaderDirectiveComponent>;
@@ -33,10 +35,8 @@ describe('Component: Uploader', () => {
     expect(directive).toBeDefined();
     expect(directive.uploader).toBe(fixture.componentInstance.uploader);
 
-    const options = directive._options;
+    const options = directive.uploader.options;
     expect(options.url).toBe(URL);
-
-    expect(directive._isEmptyAfterSelection).toBe(true);
   });
 
   it('should be trigger event', () => {
@@ -45,11 +45,9 @@ describe('Component: Uploader', () => {
     expect(directive._onChange).toHaveBeenCalled();
   });
 
-  xit('should handle event', () => {
-    spyOn(directive.uploader, 'addToQueue');
-    directive._onChange();
-    // const args = [(directiveEl.nativeElement as HTMLInputElement).files, directive._options];
-    // expect(directive.uploader.addToQueue).toHaveBeenCalledWith(...args);
+  it('should upload a file', () => {
+    directive._onChange({ target: { files: [FILE], attributes: {} } } as any);
+    expect(directive.uploader.queue.length).toBe(1);
   });
 
   describe('CLASS', () => {
