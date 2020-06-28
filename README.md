@@ -36,8 +36,8 @@ NGX-WEUI
 
 ## Usage & Demo
 
-- [Documentation](https://cipchk.github.io/ngx-weui/)
-- [Live Demo](https://cipchk.github.io/ngx-weui/)
+- [Documentation](https://cipchk.github.io/ngx-weui/) [国内镜像](https://cipchk.gitee.io/ngx-weui/)
+- [Live Demo](https://cipchk.github.io/ngx-weui/) [国内镜像](https://cipchk.gitee.io/ngx-weui/)
 - [Stackblitz](https://stackblitz.com/edit/ngx-weui)
 
 ## Create project

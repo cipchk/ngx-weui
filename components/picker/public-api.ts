@@ -1,5 +1,5 @@
 export * from './options';
-export * from './data';
+export * from './picker.types';
 export * from './picker.config';
 export * from './picker-group.component';
 export * from './picker.component';

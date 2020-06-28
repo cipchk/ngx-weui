@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/cipchk/ngx-weui#readme",
   "scripts": {
-    "lint": "tslint -p tsconfig.json -c tslint.json 'components/**/*.ts'",
+    "lint": "bash scripts/ci/lint.sh -ts -less",
     "test": "ng test --no-progress --browsers=ChromeHeadlessCI --code-coverage --no-watch",
     "site": "npm run site:init && ng serve -o",
     "site:init": "node scripts/site/main init",

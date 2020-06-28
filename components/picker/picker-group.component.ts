@@ -1,7 +1,9 @@
+import { DOCUMENT } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  Inject,
   Input,
   OnChanges,
   Output,
@@ -10,12 +12,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { InputNumber } from 'ngx-weui/core';
-import { PickerData } from './data';
-
-declare const window: any;
-const getWindowHeight = (): number => {
-  return window.innerHeight;
-};
+import { PickerData } from './picker.types';
 
 /**
  * 多列选择器组
@@ -25,10 +22,10 @@ const getWindowHeight = (): number => {
   exportAs: 'weuiPickerGroup',
   templateUrl: './picker-group.component.html',
   host: {
+    '[class.weui-picker__group]': 'true',
     '(touchstart)': 'onTouchStart($event)',
     '(touchmove)': 'onTouchMove($event)',
     '(touchend)': 'onTouchEnd($event)',
-    '[class.weui-picker__group]': 'true',
   },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -58,6 +55,12 @@ export class PickerGroupComponent implements OnChanges {
   private speed: number; // 手滑动的速度 (用途：速度乘以惯性滑动的时间, 例如 300ms, 计算出应该滑动的距离)
   _animating: boolean = false;
   _distance = 0;
+
+  private _getWin(): Window {
+    return this.doc.defaultView || window;
+  }
+
+  constructor(@Inject(DOCUMENT) private doc: Document) {}
 
   ngOnChanges(changes: { [P in keyof this]?: SimpleChange } & SimpleChanges): void {
     if (changes.defaultIndex) {
@@ -106,7 +109,7 @@ export class PickerGroupComponent implements OnChanges {
      */
     const _speed = Math.abs(this.speed);
     if (_speed >= 5) {
-      const windowY = getWindowHeight() - this.defaults.bodyHeight / 2;
+      const windowY = this._getWin().innerHeight - this.defaults.bodyHeight / 2;
       this.stop(windowY - this.endY);
     } else if (_speed >= 1) {
       const diff = this.speed * this.defaults.inertiaTime; // 滑行 150ms,这里直接影响“灵敏度”
