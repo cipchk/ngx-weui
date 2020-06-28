@@ -7,7 +7,7 @@ import { addPackageToPackageJson } from '../utils/package';
 import { Schema } from './schema';
 import { addThemeToAppStyles } from './theming';
 
-export default function(options: Schema): Rule {
+export default function (options: Schema): Rule {
   return chain([
     options && options.skipPackageJson ? noop() : addWeUIToPackageJson(),
     addThemeToAppStyles(options),
@@ -31,7 +31,7 @@ function addWeUIRootConfig(options: Schema) {
     const workspace = getWorkspace(host);
     const project = getProjectFromWorkspace(workspace, options.project);
 
-    addModuleImportToRootModule(host, 'WeUiModule', 'ngx-weui', project);
+    addModuleImportToRootModule(host, 'ButtonModule', 'ngx-weui/button', project);
 
     return host;
   };
@@ -50,19 +50,16 @@ function addAnimationRootConfig(options: Schema) {
 }
 
 const appHTML = `<div style="text-align:center; padding: 8px;">
-<h1>
-  ngx-weui
-</h1>
-<p>
-  ngx-weui 是 WeUI 的 Angular 版本，
-  WeUI
-  是一套同微信原生视觉体验一致的基础样式库，由微信官方设计团队为微信内网页和微信小程序量身设计，令用户的使用感知更加统一。
-</p>
-<p>
-</p>
-<div style="margin-top: 16px;">
-  <button weui-button>Button</button>
-</div>
+  <h1>
+    NGX-WEUI
+  </h1>
+  <p>
+    <a href="https://github.com/weui/weui" target="_blank">WeUI</a> for angular,
+    A UI library by WeChat official design team, includes the most useful widgets/modules in mobile web applications.
+  </p>
+  <div style="margin-top: 16px;">
+    <button weui-button>Button</button>
+  </div>
 </div>
 `;
 
