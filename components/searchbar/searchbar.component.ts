@@ -29,10 +29,6 @@ import { SearchBarConfig } from './searchbar.config';
 })
 export class SearchBarComponent implements OnInit, OnDestroy {
   _q: string = '';
-  @Input()
-  set value(_value: string) {
-    this._q = _value;
-  }
   /**
    * 占位符，默认：`搜索`
    */
@@ -60,6 +56,10 @@ export class SearchBarComponent implements OnInit, OnDestroy {
 
   private _sub: Subscription;
   private _subject = new Subject<string>();
+  @Input()
+  set value(_value: string) {
+    this._q = _value;
+  }
 
   constructor(DEF: SearchBarConfig) {
     Object.assign(this, DEF);
@@ -76,7 +76,9 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   }
 
   _onBlur(): void {
-    if (this._q === '') this._focus = false;
+    if (this._q === '') {
+      this._focus = false;
+    }
   }
 
   _onSearch(): void {
@@ -107,6 +109,8 @@ export class SearchBarComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this._sub) this._sub.unsubscribe();
+    if (this._sub) {
+      this._sub.unsubscribe();
+    }
   }
 }

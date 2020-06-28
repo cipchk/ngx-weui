@@ -84,6 +84,16 @@ export class SidebarComponent implements OnChanges, OnDestroy {
   private _onClickOutsideAttached: boolean = false;
   private _anting = false;
 
+  /** 获取侧边栏容器高度 */
+  get _height(): number {
+    return this._elSidebar.nativeElement ? this._elSidebar.nativeElement.offsetHeight : 0;
+  }
+
+  /** 获取侧边栏容器宽度 */
+  get _width(): number {
+    return this._elSidebar.nativeElement ? this._elSidebar.nativeElement.offsetWidth : 0;
+  }
+
   constructor(private _sidebarService: SidebarService, config: SidebarConfig, @Inject(DOCUMENT) private doc: any) {
     Object.assign(this, config);
 
@@ -107,7 +117,9 @@ export class SidebarComponent implements OnChanges, OnDestroy {
       } else {
         this.close();
       }
-      if (changes.status.firstChange) this._anting = false;
+      if (changes.status.firstChange) {
+        this._anting = false;
+      }
     }
     if (changes.mode) {
       this.modeChange.emit(changes.mode.currentValue);
@@ -120,7 +132,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
     }
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this._destroyCloseListeners();
 
     if (this._openSub) {
@@ -132,7 +144,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
   }
 
   /** 打开侧边栏 */
-  open() {
+  open(): void {
     this._anting = true;
     this.status = true;
     this.statusChange.emit(true);
@@ -143,7 +155,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
   }
 
   /** 关闭侧边栏 */
-  close() {
+  close(): void {
     this._anting = true;
     this.status = false;
     this.statusChange.emit(false);
@@ -154,7 +166,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
   }
 
   /** 手动触发容器的重新渲染 */
-  _triggerRerender() {
+  _triggerRerender(): void {
     this._rerender.emit();
   }
 
@@ -173,7 +185,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
     return { ...marginStyle, webkitTransform: transformStyle, transform: transformStyle } as CSSStyleDeclaration;
   }
 
-  private closeAnt() {
+  private closeAnt(): void {
     setTimeout(() => {
       this._anting = false;
       if (this.status) {
@@ -197,7 +209,7 @@ export class SidebarComponent implements OnChanges, OnDestroy {
     }
   }
 
-  private _destroyCloseListeners() {
+  private _destroyCloseListeners(): void {
     if (this._onClickOutsideAttached) {
       this.doc.removeEventListener(this._clickEvent, this._onClickOutside, false);
       this._onClickOutsideAttached = false;
@@ -208,15 +220,5 @@ export class SidebarComponent implements OnChanges, OnDestroy {
     if (this._onClickOutsideAttached && this._elSidebar && !this._elSidebar.nativeElement.contains(e.target as any)) {
       this.close();
     }
-  }
-
-  /** 获取侧边栏容器高度 */
-  get _height(): number {
-    return this._elSidebar.nativeElement ? this._elSidebar.nativeElement.offsetHeight : 0;
-  }
-
-  /** 获取侧边栏容器宽度 */
-  get _width(): number {
-    return this._elSidebar.nativeElement ? this._elSidebar.nativeElement.offsetWidth : 0;
   }
 }

@@ -35,6 +35,20 @@ export class DialogComponent implements OnDestroy {
   _shown: boolean = false;
 
   /**
+   * 打开动画结束后回调（唯一参数：对话框实例对象）
+   */
+  @Output() readonly open = new EventEmitter<DialogComponent>();
+
+  /**
+   * 关闭动画开始时回调（唯一参数：对话框实例对象）
+   */
+  @Output() readonly close = new EventEmitter<DialogComponent>();
+
+  @ViewChild('container', { static: true }) container: any;
+  _prompError: boolean = false;
+  _promptData: any;
+
+  /**
    * 对话框配置项
    */
   @Input()
@@ -74,11 +88,15 @@ export class DialogComponent implements OnDestroy {
         switch (config.input) {
           case 'email':
             config.inputRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            if (!config.inputError) config.inputError = '邮箱格式不正确';
+            if (!config.inputError) {
+              config.inputError = '邮箱格式不正确';
+            }
             break;
           case 'url':
             config.inputRegex = /^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/;
-            if (!config.inputError) config.inputError = '网址格式不正确';
+            if (!config.inputError) {
+              config.inputError = '网址格式不正确';
+            }
             break;
         }
       }
@@ -115,21 +133,7 @@ export class DialogComponent implements OnDestroy {
     return this._config;
   }
 
-  /**
-   * 打开动画结束后回调（唯一参数：对话框实例对象）
-   */
-  @Output() readonly open = new EventEmitter<DialogComponent>();
-
-  /**
-   * 关闭动画开始时回调（唯一参数：对话框实例对象）
-   */
-  @Output() readonly close = new EventEmitter<DialogComponent>();
-
   constructor(private DEF: DialogConfig, private cdr: ChangeDetectorRef) {}
-
-  @ViewChild('container', { static: true }) container: any;
-  _prompError: boolean = false;
-  _promptData: any;
 
   private promptCheck(): boolean {
     if (this.config.inputRequired === true) {
@@ -160,7 +164,9 @@ export class DialogComponent implements OnDestroy {
     } else {
       firstFormEl = containerEl.querySelector('.weui-dialog__btn_primary');
     }
-    if (firstFormEl) firstFormEl.focus();
+    if (firstFormEl) {
+      firstFormEl.focus();
+    }
   }
 
   _chanage(): void {

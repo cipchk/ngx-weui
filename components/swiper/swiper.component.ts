@@ -19,9 +19,7 @@ declare const Swiper: any;
 @Component({
   selector: 'weui-swiper',
   exportAs: 'weuiSwiper',
-  template: `
-    <ng-content></ng-content>
-  `,
+  template: ` <ng-content></ng-content> `,
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
@@ -33,18 +31,18 @@ export class SwiperComponent implements AfterViewInit, OnChanges, OnInit, OnDest
    */
   @Input() options: any;
 
-  constructor(private el: ElementRef, private zone: NgZone, private DEF: SwiperConfig) {}
-
   /**
    * Swiper 实例对象，可以通过 `@ViewChild` 访问到它
    */
   swiper: any;
 
-  private initOptions() {
+  constructor(private el: ElementRef, private zone: NgZone, private DEF: SwiperConfig) {}
+
+  private initOptions(): void {
     this.options = { ...this.DEF.options, ...this.options };
   }
 
-  private init() {
+  private init(): void {
     this.destroy();
 
     this.zone.runOutsideAngular(() => {
@@ -52,7 +50,7 @@ export class SwiperComponent implements AfterViewInit, OnChanges, OnInit, OnDest
     });
   }
 
-  private destroy() {
+  private destroy(): void {
     if (this.containerEl) {
       ['horizontal', 'vertical'].forEach(v => {
         this.containerEl.classList.remove('swiper-container-' + v);
@@ -66,13 +64,17 @@ export class SwiperComponent implements AfterViewInit, OnChanges, OnInit, OnDest
     }
   }
 
-  ngOnInit() {
-    if (!this.options) this.initOptions();
+  ngOnInit(): void {
+    if (!this.options) {
+      this.initOptions();
+    }
     this.containerEl = this.el.nativeElement.querySelector('.swiper-container');
-    if (!this.containerEl) throw new Error('组件内容的HTML跟swiper所需要的DOM结构必须完全一样。');
+    if (!this.containerEl) {
+      throw new Error('组件内容的HTML跟swiper所需要的DOM结构必须完全一样。');
+    }
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.init();
   }
 

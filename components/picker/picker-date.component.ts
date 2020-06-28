@@ -104,17 +104,6 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
   @Input() type: DatePickerType = 'date';
 
   private _format: any = { ...FORMAT };
-  /**
-   * 日期格式化代码，实际是采用 DatePipe，所有代码内容和它一样
-   */
-  @Input()
-  set format(v: FORMAT_TYPE) {
-    if (typeof v === 'string') {
-      this._format = { ...FORMAT, format: v };
-    } else {
-      this._format = { ...FORMAT, ...v };
-    }
-  }
 
   /** 配置项 */
   @Input() options: PickerOptions;
@@ -132,19 +121,36 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
   @Output() readonly show = new EventEmitter<any>();
   /** 隐藏后回调 */
   @Output() readonly hide = new EventEmitter<any>();
+  /**
+   * 日期格式化代码，实际是采用 DatePipe，所有代码内容和它一样
+   */
+  @Input()
+  set format(v: FORMAT_TYPE) {
+    if (typeof v === 'string') {
+      this._format = { ...FORMAT, format: v };
+    } else {
+      this._format = { ...FORMAT, ...v };
+    }
+  }
 
   constructor(private datePipe: DatePipe) {}
 
   // todo: 太粗暴，需要优化代码
-  private genGroups() {
-    if (!this._value) this._value = new Date();
+  private genGroups(): void {
+    if (!this._value) {
+      this._value = new Date();
+    }
     this._groups = [];
     this._selected = [];
-    if (~this.type.indexOf('date')) this.genDateGroups();
-    if (~this.type.indexOf('time')) this.genDateTimeGroups();
+    if (~this.type.indexOf('date')) {
+      this.genDateGroups();
+    }
+    if (~this.type.indexOf('time')) {
+      this.genDateTimeGroups();
+    }
   }
 
-  private genDateGroups() {
+  private genDateGroups(): void {
     const year = this._value.getFullYear();
     const month = this._value.getMonth() + 1;
     const day = this._value.getDate();
@@ -153,14 +159,20 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
     let _selected = 0;
     let startYear = year - 10;
     let endYear = year + 10;
-    if (this.min) startYear = this.min.getFullYear();
-    if (this.max) endYear = this.max.getFullYear();
+    if (this.min) {
+      startYear = this.min.getFullYear();
+    }
+    if (this.max) {
+      endYear = this.max.getFullYear();
+    }
     this._groups.push(
       Array(endYear - startYear + 1)
         .fill(0)
         .map((_v: number, idx: number) => {
           const val = startYear + idx;
-          if (val === year) _selected = idx;
+          if (val === year) {
+            _selected = idx;
+          }
           return { label: val + this._format.yu, value: val };
         }),
     );
@@ -170,15 +182,21 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
     const cy = this._groups[0][_selected].value;
     let startMonth = 1;
     let endMonth = 12;
-    if (cy === startYear) startMonth = this.min.getMonth() + 1;
-    if (cy === endYear) endMonth = this.max.getMonth() + 1;
+    if (cy === startYear) {
+      startMonth = this.min.getMonth() + 1;
+    }
+    if (cy === endYear) {
+      endMonth = this.max.getMonth() + 1;
+    }
     _selected = 0;
     this._groups.push(
       Array(endMonth - startMonth + 1)
         .fill(0)
         .map((_v: number, idx: number) => {
           const val = startMonth + idx;
-          if (val === month) _selected = idx;
+          if (val === month) {
+            _selected = idx;
+          }
           return { label: val + this._format.Mu, value: val };
         }),
     );
@@ -189,15 +207,21 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
       const cm = this._groups[1][_selected].value;
       let startDay = 1;
       let endDay = new Date(year, month, 0).getDate();
-      if (cy === startYear && cm === startMonth) startDay = this.min.getDate();
-      if (cy === endYear && cm === endMonth) endDay = this.max.getDate();
+      if (cy === startYear && cm === startMonth) {
+        startDay = this.min.getDate();
+      }
+      if (cy === endYear && cm === endMonth) {
+        endDay = this.max.getDate();
+      }
       _selected = 0;
       this._groups.push(
         Array(endDay - startDay + 1)
           .fill(0)
           .map((_v: number, idx: number) => {
             const val = startDay + idx;
-            if (val === day) _selected = idx;
+            if (val === day) {
+              _selected = idx;
+            }
             return { label: val + this._format.du, value: val };
           }),
       );
@@ -205,7 +229,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
     }
   }
 
-  private genDateTimeGroups() {
+  private genDateTimeGroups(): void {
     const hours = this._value.getHours();
     const minutes = this._value.getMinutes();
     // hours
@@ -215,7 +239,9 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
         .fill(0)
         .map((_v: number, idx: number) => {
           const val = idx;
-          if (val === hours) _selected = idx;
+          if (val === hours) {
+            _selected = idx;
+          }
           return { label: val + this._format.hu, value: val };
         }),
     );
@@ -228,7 +254,9 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
         .fill(0)
         .map((_v: number, idx: number) => {
           const val = idx;
-          if (val === minutes) _selected = idx;
+          if (val === minutes) {
+            _selected = idx;
+          }
           return { label: val + this._format.mu, value: val };
         }),
     );
@@ -236,7 +264,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
   }
 
   // 根据selected
-  private genValueBySelected() {
+  private genValueBySelected(): this {
     if (this.type === 'time') {
       const now = new Date();
       this._value = new Date(
@@ -269,10 +297,11 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
     this._groups.length = 0;
   }
 
-  private getFormatDate(date: Date) {
+  private getFormatDate(date: Date): string | null {
     let f = '';
-    if (this._format && this._format.format) f = this._format.format;
-    else {
+    if (this._format && this._format.format) {
+      f = this._format.format;
+    } else {
       switch (this.type) {
         case 'date-ym':
           f = 'yyyy-MM';
@@ -291,7 +320,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
     return this.datePipe.transform(date, f);
   }
 
-  _onCityChange(data: any) {
+  _onCityChange(data: any): void {
     this.genValueBySelected();
     const retVal = new Date(this._value.getTime());
     this.onChange(retVal);
@@ -305,7 +334,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
     this.change.emit(data);
   }
 
-  _onCityGroupChange(res: any) {
+  _onCityGroupChange(res: any): void {
     this._selected[res.groupIndex] = res.index;
     if (res.groupIndex !== this._groups.length - 1) {
       this.genValueBySelected().genGroups();
@@ -314,7 +343,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
     this.groupChange.emit(res);
   }
 
-  _onCityCancelChange() {
+  _onCityCancelChange(): void {
     this.cancel.emit();
   }
 
@@ -324,24 +353,28 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
   }
 
   ngOnChanges(): void {
-    if (this.initFlag) this.genGroups();
+    if (this.initFlag) {
+      this.genGroups();
+    }
   }
 
   /** 服务于Service，并无实际意义 */
-  _triggerShow() {
+  _triggerShow(): void {
     this._pickerInstance._onShow();
   }
 
-  _onShow() {
+  _onShow(): void {
     this.show.emit();
   }
 
-  _onHide() {
+  _onHide(): void {
     this.hide.emit();
   }
 
   writeValue(value: Date): void {
-    if (value) this.genGroups();
+    if (value) {
+      this.genGroups();
+    }
     this._value = value;
     this._pickerInstance._text = value instanceof Date ? this.getFormatDate(value)! : '';
   }

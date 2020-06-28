@@ -59,7 +59,7 @@ function getContents(nativeEl: HTMLElement): NodeListOf<Element> {
   return nativeEl.querySelectorAll('weui-tab');
 }
 
-function expectActiveTabs(nativeEl: HTMLElement, action: boolean[]) {
+function expectActiveTabs(nativeEl: HTMLElement, action: boolean[]): void {
   const items = getItems(nativeEl);
   const contents = getContents(nativeEl);
 

@@ -7,7 +7,7 @@ describe('Uploader: Class', () => {
   let xhr: any;
   let requests: any[];
 
-  function addFiles(count: number = 1, ext: string = 'png', type: string = 'image/png') {
+  function addFiles(count: number = 1, ext: string = 'png', type: string = 'image/png'): void {
     for (let i = 0; i < count; i++) {
       const textFileAsBlob = new Blob(['a' + i], { type });
       const f = new File([textFileAsBlob], `${i + 1}.${ext}`);

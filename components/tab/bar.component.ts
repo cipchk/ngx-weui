@@ -11,7 +11,7 @@ export class BarComponent implements OnDestroy {
 
   constructor(private cdr: ChangeDetectorRef) {}
 
-  add(tab: TabDirective) {
+  add(tab: TabDirective): void {
     this.tabs.push(tab);
     tab.active = this.tabs.length === 1 && tab.active !== false;
   }
@@ -31,12 +31,12 @@ export class BarComponent implements OnDestroy {
     this.tabs.splice(index, 1);
   }
 
-  setActive(tab: TabDirective) {
+  setActive(tab: TabDirective): void {
     tab.active = true;
     tab.select.emit(tab);
   }
 
-  detectChanges() {
+  detectChanges(): void {
     this.cdr.detectChanges();
   }
 

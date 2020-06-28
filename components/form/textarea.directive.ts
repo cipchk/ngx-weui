@@ -19,6 +19,9 @@ export class TextareaDirective implements OnInit, OnChanges {
    */
   @Input() @InputNumber() maxlength: number = 0;
 
+  private _value: string;
+  private _count: any;
+
   /**
    * 中文部分应该算多少个字符，使用 `/[^\x00-\xff]/g` 正则表达式统计中文部分（默认：1个字符）
    */
@@ -28,12 +31,9 @@ export class TextareaDirective implements OnInit, OnChanges {
     this.fillStr = new Array(+value).fill('*').join('');
   }
 
-  private _value: string;
-  private _count: any;
-
   constructor(private el: ElementRef<HTMLElement>) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.init();
   }
 
@@ -43,7 +43,7 @@ export class TextareaDirective implements OnInit, OnChanges {
     }
   }
 
-  private init() {
+  private init(): this {
     const clsName = `weui-textarea-counter`;
     const pel = this.el.nativeElement.parentElement;
     this.maxlength = +this.maxlength;
@@ -56,8 +56,10 @@ export class TextareaDirective implements OnInit, OnChanges {
     return this;
   }
 
-  _onChange(value: string) {
-    if (!this._count) return;
+  _onChange(value: string): void {
+    if (!this._count) {
+      return;
+    }
 
     value = value || '';
     if (this._cn > 1) {

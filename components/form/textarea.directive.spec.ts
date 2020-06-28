@@ -13,7 +13,7 @@ describe('Directive: Textarea', () => {
   let inputEl: HTMLInputElement;
   let counterEl: HTMLElement;
 
-  function setValue(value: string) {
+  function setValue(value: string): void {
     inputEl.value = value;
     inputEl.dispatchEvent(new Event('input'));
   }
@@ -63,14 +63,7 @@ describe('Directive: Textarea', () => {
     <div class="weui-cells weui-cells_form">
       <div class="weui-cell">
         <div class="weui-cell__bd">
-          <textarea
-            class="weui-textarea"
-            [(ngModel)]="val"
-            name="val"
-            weui-textarea
-            [weui-cn]="cn"
-            [maxlength]="maxlength"
-          ></textarea>
+          <textarea class="weui-textarea" [(ngModel)]="val" name="val" weui-textarea [weui-cn]="cn" [maxlength]="maxlength"></textarea>
           <div class="weui-textarea-counter"></div>
         </div>
       </div>

@@ -53,13 +53,6 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
   _value: string;
   _groups: any[] | null = [];
   _selected: number[] = [];
-
-  /** 城市数据，可以参考示例中的数据格式 */
-  @Input()
-  set data(d: any) {
-    this._tmpData = d;
-    this.parseData(this._tmpData, this.dataMap.items, this._selected);
-  }
   @ViewChild(PickerComponent, { static: true }) _pickerInstance: PickerComponent;
 
   @Input()
@@ -88,6 +81,13 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
   @Output() readonly show = new EventEmitter<any>();
   /** 隐藏后回调 */
   @Output() readonly hide = new EventEmitter<any>();
+
+  /** 城市数据，可以参考示例中的数据格式 */
+  @Input()
+  set data(d: any) {
+    this._tmpData = d;
+    this.parseData(this._tmpData, this.dataMap.items, this._selected);
+  }
 
   ngOnDestroy(): void {
     this._tmpData = null;
@@ -151,34 +151,36 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
     }
   }
 
-  _onCityChange(data: any) {
+  _onCityChange(data: any): void {
     this.onChange(data.value);
     this.onTouched();
 
     this.change.emit(data);
   }
 
-  _onCityGroupChange(res: any) {
+  _onCityGroupChange(res: any): void {
     this._selected[res.groupIndex] = res.index;
-    if (res.groupIndex !== 2) this.parseData(this._tmpData, this.dataMap.items, this._selected);
+    if (res.groupIndex !== 2) {
+      this.parseData(this._tmpData, this.dataMap.items, this._selected);
+    }
 
     this.groupChange.emit(res);
   }
 
-  _onCityCancelChange() {
+  _onCityCancelChange(): void {
     this.cancel.emit();
   }
 
   /** 服务于Service，并无实际意义 */
-  _triggerShow() {
+  _triggerShow(): void {
     this._pickerInstance._onShow();
   }
 
-  _onShow() {
+  _onShow(): void {
     this.show.emit();
   }
 
-  _onHide() {
+  _onHide(): void {
     this.hide.emit();
   }
 

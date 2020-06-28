@@ -5,7 +5,7 @@ import { JWeiXinModule } from './jweixin.module';
 import { JWeiXinService } from './jweixin.service';
 
 class MockLoaderService {
-  loadScript() {
+  loadScript(): Promise<{ loaded: boolean }> {
     return new Promise(resolve => {
       resolve({ loaded: true });
     });

@@ -72,14 +72,12 @@ export class FileItem {
   constructor(uploader: Uploader, file: File, options: UploaderOptions) {
     this.uploader = uploader;
     this.setOptions(options);
-    this.id = Math.random()
-      .toString(36)
-      .substring(7);
+    this.id = Math.random().toString(36).substring(7);
     this.file = new FileLikeObject(file);
     this._file = file;
   }
 
-  setOptions(options: UploaderOptions) {
+  setOptions(options: UploaderOptions): void {
     this.options = { ...this.uploader.options, ...options };
   }
 
@@ -123,15 +121,19 @@ export class FileItem {
     this.isError = false;
     this.progress = 0;
 
-    if (this.options.onUploadStart) this.options.onUploadStart(this);
+    if (this.options.onUploadStart) {
+      this.options.onUploadStart(this);
+    }
   }
 
   _onProgress(progress: number): any {
     this.progress = progress;
-    if (this.options.onUploadProgress) this.options.onUploadProgress(this, progress, this.uploader.progress);
+    if (this.options.onUploadProgress) {
+      this.options.onUploadProgress(this, progress, this.uploader.progress);
+    }
   }
 
-  _onSuccess(response: string, status: number, headers: ParsedResponseHeaders) {
+  _onSuccess(response: string, status: number, headers: ParsedResponseHeaders): void {
     this.isReady = false;
     this.isUploading = false;
     this.isUploaded = true;
@@ -141,10 +143,12 @@ export class FileItem {
     this.progress = 100;
     this.index = 0;
 
-    if (this.options.onUploadSuccess) this.options.onUploadSuccess(this, response, status, headers);
+    if (this.options.onUploadSuccess) {
+      this.options.onUploadSuccess(this, response, status, headers);
+    }
   }
 
-  _onError(response: string, status: number, headers: ParsedResponseHeaders) {
+  _onError(response: string, status: number, headers: ParsedResponseHeaders): void {
     this.isReady = false;
     this.isUploading = false;
     this.isUploaded = true;
@@ -154,7 +158,9 @@ export class FileItem {
     this.progress = 0;
     this.index = 0;
 
-    if (this.options.onUploadError) this.options.onUploadError(this, response, status, headers);
+    if (this.options.onUploadError) {
+      this.options.onUploadError(this, response, status, headers);
+    }
   }
 
   _onComplete(response: string, status: number, headers: ParsedResponseHeaders): void {
@@ -162,7 +168,9 @@ export class FileItem {
       this.remove();
     }
 
-    if (this.options.onUploadComplete) this.options.onUploadComplete(this, response, status, headers);
+    if (this.options.onUploadComplete) {
+      this.options.onUploadComplete(this, response, status, headers);
+    }
   }
 
   _onCancel(): any {
@@ -175,6 +183,8 @@ export class FileItem {
     this.progress = 0;
     this.index = 0;
 
-    if (this.options.onUploadCancel) this.options.onUploadCancel(this);
+    if (this.options.onUploadCancel) {
+      this.options.onUploadCancel(this);
+    }
   }
 }

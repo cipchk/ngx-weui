@@ -5,12 +5,7 @@ import { ToastComponent } from './toast.component';
 
 @Injectable({ providedIn: 'root' })
 export class ToastService extends BaseService {
-  constructor(
-    resolver: ComponentFactoryResolver,
-    applicationRef: ApplicationRef,
-    injector: Injector,
-    @Inject(DOCUMENT) doc: any,
-  ) {
+  constructor(resolver: ComponentFactoryResolver, applicationRef: ApplicationRef, injector: Injector, @Inject(DOCUMENT) doc: any) {
     super(resolver, applicationRef, injector, doc);
   }
   /**
@@ -24,10 +19,18 @@ export class ToastService extends BaseService {
   show(text?: string, time?: number, icon?: string, type?: 'success' | 'loading'): ToastComponent {
     const componentRef = this.build(ToastComponent);
 
-    if (type) componentRef.instance.type = type;
-    if (text) componentRef.instance.text = text;
-    if (icon) componentRef.instance.icon = icon;
-    if (typeof time === 'number') componentRef.instance.time = time;
+    if (type) {
+      componentRef.instance.type = type;
+    }
+    if (text) {
+      componentRef.instance.text = text;
+    }
+    if (icon) {
+      componentRef.instance.icon = icon;
+    }
+    if (typeof time === 'number') {
+      componentRef.instance.time = time;
+    }
     componentRef.instance.hide.subscribe(() => {
       setTimeout(() => {
         componentRef.destroy();
@@ -39,7 +42,7 @@ export class ToastService extends BaseService {
   /**
    * 关闭最新toast
    */
-  hide() {
+  hide(): void {
     this.destroy();
   }
 

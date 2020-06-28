@@ -1,14 +1,8 @@
 import { DOCUMENT } from '@angular/common';
-import {
-  ApplicationRef,
-  ComponentFactoryResolver,
-  ComponentRef,
-  EmbeddedViewRef,
-  Inject,
-  Injector,
-} from '@angular/core';
+import { ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Inject, Injector } from '@angular/core';
 
 export abstract class BaseService {
+  protected list: Array<ComponentRef<any>> = [];
   constructor(
     private resolver: ComponentFactoryResolver,
     private applicationRef: ApplicationRef,
@@ -16,24 +10,30 @@ export abstract class BaseService {
     @Inject(DOCUMENT) private doc: any,
   ) {}
 
-  protected list: Array<ComponentRef<any>> = [];
-
   /**
    * 销毁
    *
    * @param component 下标（从0开始或组件引用对象），或不指定时，销毁最新一个
    */
-  destroy(component?: number | ComponentRef<any>) {
-    if (typeof component === 'number') component = this.list[component as number];
-    if (!component) component = this.list.pop();
-    if (component) (component as ComponentRef<any>).destroy();
+  destroy(component?: number | ComponentRef<any>): void {
+    if (typeof component === 'number') {
+      component = this.list[component as number];
+    }
+    if (!component) {
+      component = this.list.pop();
+    }
+    if (component) {
+      (component as ComponentRef<any>).destroy();
+    }
   }
 
   /**
    * 销毁所有
    */
-  destroyAll() {
-    for (const component of this.list) this.destroy(component);
+  destroyAll(): void {
+    for (const component of this.list) {
+      this.destroy(component);
+    }
   }
 
   /** 动态构建组件 */

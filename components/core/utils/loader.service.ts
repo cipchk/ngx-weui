@@ -11,7 +11,9 @@ export class LoaderService {
     return new Promise(resolve => {
       const promises: Array<Promise<any>> = [];
 
-      if (!Array.isArray(paths)) paths = [paths];
+      if (!Array.isArray(paths)) {
+        paths = [paths];
+      }
 
       (paths as string[]).forEach(path => {
         if (path.endsWith('.css')) {

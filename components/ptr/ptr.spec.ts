@@ -7,7 +7,7 @@ import { PTRComponent, PTRConfig, PTRModule } from '../ptr';
 function spyTouchArgument(val: number): TouchEvent {
   return {
     targetTouches: [{ pageY: val, identifier: 1 }],
-    preventDefault() {},
+    preventDefault(): void {},
   } as any;
 }
 
@@ -111,10 +111,10 @@ class TestPTRComponent {
     .map((_v: any, idx: number) => {
       return `${idx}:${Math.random()}`;
     });
-  onRefresh(ptr: PTRComponent) {
+  onRefresh(ptr: PTRComponent): PTRComponent {
     return ptr;
   }
-  onScroll(percent: number) {
+  onScroll(percent: number): number {
     return percent;
   }
 }

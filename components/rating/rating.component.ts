@@ -47,7 +47,7 @@ export class RatingComponent implements ControlValueAccessor, OnChanges {
 
   constructor(private DEF: RatingConfig, private cdr: ChangeDetectorRef) {}
 
-  private setConfig(cog: RatingConfig) {
+  private setConfig(cog: RatingConfig): void {
     const _c: any = {
       states: [],
       ...this.DEF,

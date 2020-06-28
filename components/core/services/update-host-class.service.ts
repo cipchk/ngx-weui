@@ -5,6 +5,10 @@ export class UpdateHostClassService {
   private classMap = {};
   private renderer: Renderer2;
 
+  constructor(rendererFactory2: RendererFactory2) {
+    this.renderer = rendererFactory2.createRenderer(null, null);
+  }
+
   updateHostClass(el: HTMLElement, classMap: object): void {
     this.removeClass(el, this.classMap, this.renderer);
     this.classMap = { ...classMap };
@@ -25,9 +29,5 @@ export class UpdateHostClassService {
         renderer.addClass(el, i);
       }
     }
-  }
-
-  constructor(rendererFactory2: RendererFactory2) {
-    this.renderer = rendererFactory2.createRenderer(null, null);
   }
 }

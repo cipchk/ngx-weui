@@ -51,22 +51,29 @@ export class PaginationComponent implements OnChanges {
   }
 
   ngOnChanges(): void {
-    if (this.mode === 'pointer')
+    if (this.mode === 'pointer') {
       this._ptArr = Array(this.total)
         .fill(1)
         .map((v, i) => v + i);
+    }
     this._checkDisabled();
   }
 
-  _checkDisabled() {
-    if (this.mode === 'pointer') return;
+  _checkDisabled(): void {
+    if (this.mode === 'pointer') {
+      return;
+    }
     this._prevDisabled = this.current <= 1;
     this._nextDisabled = this.current >= this.total;
   }
 
   _goto(value: number): void {
-    if (value === -1 && this._prevDisabled) return;
-    if (value === 1 && this._nextDisabled) return;
+    if (value === -1 && this._prevDisabled) {
+      return;
+    }
+    if (value === 1 && this._nextDisabled) {
+      return;
+    }
 
     this.current += value;
     this._checkDisabled();

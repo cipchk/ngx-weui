@@ -17,9 +17,7 @@ export type ToptipsType = 'default' | 'warn' | 'info' | 'primary' | 'success';
 @Component({
   selector: 'weui-toptips',
   exportAs: 'weuiToptips',
-  template: `
-    {{ text }}<ng-content></ng-content>
-  `,
+  template: ` {{ text }}<ng-content></ng-content> `,
   host: {
     '[hidden]': '!_showd',
     '[style.display]': '_showd ? "block" : "none"',
@@ -62,7 +60,7 @@ export class ToptipsComponent implements OnInit, OnChanges, OnDestroy {
     });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.setClassMap();
   }
 
@@ -70,7 +68,7 @@ export class ToptipsComponent implements OnInit, OnChanges, OnDestroy {
     this.setClassMap();
   }
 
-  onShow() {
+  onShow(): this {
     this.destroy();
 
     this._showd = true;
@@ -78,12 +76,12 @@ export class ToptipsComponent implements OnInit, OnChanges, OnDestroy {
     return this;
   }
 
-  onHide() {
+  onHide(): void {
     this._showd = false;
     this.hide.emit();
   }
 
-  private destroy() {
+  private destroy(): void {
     if (this.timer) {
       clearTimeout(this.timer);
       this.timer = null;

@@ -22,12 +22,14 @@ export function add(
   tagName: string = 'div',
   className: string = 'weui-cell__ft',
   cssText: string = '',
-) {
-  let ret = el.querySelector(selector);
+): HTMLElement {
+  let ret = el.querySelector(selector) as HTMLElement;
   if (!ret) {
     ret = document.createElement(tagName);
     ret.className = className;
-    if (cssText) ret.style.cssText = cssText;
+    if (cssText) {
+      ret.style.cssText = cssText;
+    }
     el.appendChild(ret);
   }
   return ret;
@@ -36,8 +38,10 @@ export function add(
 /**
  * 移除
  */
-export function remove(el: any, selector: string) {
-  if (!el) return;
+export function remove(el: any, selector: string): void {
+  if (!el) {
+    return;
+  }
   const ret = el.querySelector(selector);
   if (ret) {
     el.removeChild(ret);

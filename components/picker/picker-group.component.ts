@@ -56,11 +56,11 @@ export class PickerGroupComponent implements OnChanges {
   _animating: boolean = false;
   _distance = 0;
 
+  constructor(@Inject(DOCUMENT) private doc: Document) {}
+
   private _getWin(): Window {
     return this.doc.defaultView || window;
   }
-
-  constructor(@Inject(DOCUMENT) private doc: Document) {}
 
   ngOnChanges(changes: { [P in keyof this]?: SimpleChange } & SimpleChanges): void {
     if (changes.defaultIndex) {
@@ -72,14 +72,18 @@ export class PickerGroupComponent implements OnChanges {
   }
 
   onTouchStart(e: TouchEvent): void {
-    if (this.items.length <= 1) return;
+    if (this.items.length <= 1) {
+      return;
+    }
 
     this.startY = e.changedTouches[0].pageY;
     this.startTime = +new Date();
   }
 
   onTouchMove(e: TouchEvent): void {
-    if (this.items.length <= 1) return;
+    if (this.items.length <= 1) {
+      return;
+    }
 
     const endTime = +new Date();
     this.endY = e.changedTouches[0].pageY;
@@ -98,7 +102,9 @@ export class PickerGroupComponent implements OnChanges {
   }
 
   onTouchEnd(event: TouchEvent): void {
-    if (!this.startY) return;
+    if (!this.startY) {
+      return;
+    }
     this.endY = event.changedTouches[0].pageY;
 
     /**

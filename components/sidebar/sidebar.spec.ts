@@ -142,8 +142,8 @@ class TestSidebarComponent {
   sidebarClass: string = '';
   ariaLabel: string = '';
 
-  _openStart() {}
-  _opened() {}
-  _closeStart() {}
-  _closed() {}
+  _openStart(): void {}
+  _opened(): void {}
+  _closeStart(): void {}
+  _closed(): void {}
 }

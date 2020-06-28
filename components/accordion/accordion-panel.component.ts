@@ -36,7 +36,9 @@ export class AccordionPanelComponent implements OnInit, OnDestroy {
 
   set active(value: boolean) {
     this._active = value;
-    if (value) this.accordion._closeOthers(this);
+    if (value) {
+      this.accordion._closeOthers(this);
+    }
   }
 
   constructor(@Inject(AccordionComponent) protected accordion: AccordionComponent) {}
