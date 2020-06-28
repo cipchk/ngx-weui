@@ -2,21 +2,20 @@ weui-ptr {
   display: block;
   overflow: hidden;
   .weui-icon-download {
-    color: #999;
+    color: @ptr-icon-color;
   }
 }
 
 .weui-ptr {
   overflow: hidden;
   &__loader {
-    pointer-events: none;
-    font-weight: 700;
-    text-align: center;
+    display: flex;
+    align-content: stretch;
+    align-items: center;
     width: 100%;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    align-content: stretch;
+    text-align: center;
+    pointer-events: none;
   }
   &__content {
     height: 100%;

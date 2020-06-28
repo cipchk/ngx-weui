@@ -38,17 +38,17 @@ export class StepperComponent implements ControlValueAccessor {
   private _value: number;
   private onChange: any = Function.prototype;
   // private onTouched: any = Function.prototype;
-  _step: number = 1;
+  _step = 1;
   _precisionStep = 0;
   _precisionFactor = 1;
-  _disabledMinus: boolean = false;
-  _disabledPlus: boolean = false;
+  _disabledMinus = false;
+  _disabledPlus = false;
   /** 最小值 */
-  @Input() @InputNumber() min: number = -Infinity;
+  @Input() @InputNumber() min = -Infinity;
   /** 最大值 */
-  @Input() @InputNumber() max: number = Infinity;
+  @Input() @InputNumber() max = Infinity;
   /** 禁用 */
-  @Input() @InputBoolean() disabled: boolean = false;
+  @Input() @InputBoolean() disabled = false;
   /** 变更时回调 */
   @Output() readonly change = new EventEmitter<number>();
 
@@ -89,8 +89,8 @@ export class StepperComponent implements ControlValueAccessor {
       this.onChange(this.min);
     } else {
       this._value = value;
-      this._checkDisabled();
     }
+    this._checkDisabled();
     this.cdr.detectChanges();
   }
 
