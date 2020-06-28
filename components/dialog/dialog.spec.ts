@@ -35,7 +35,7 @@ function getActions(nativeEl: HTMLElement): NodeListOf<Element> {
   return nativeEl.querySelectorAll('.weui-dialog__ft .weui-dialog__btn');
 }
 
-function getCog(cog: any) {
+function getCog(cog: any): any {
   return { ...CONFIG, ...cog };
 }
 
@@ -208,7 +208,9 @@ describe('Component: Dialog', () => {
       it(`should be return ${item.input}`, done => {
         context.config = { ...CONFIG, ...item, type: 'prompt' };
         context.dialog.show().subscribe(res => {
-          if (Array.isArray(res.result)) res.result = res.result[0];
+          if (Array.isArray(res.result)) {
+            res.result = res.result[0];
+          }
           expect(res.result).toBe(item.result || item.inputValue);
           done();
         });

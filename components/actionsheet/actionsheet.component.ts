@@ -63,7 +63,9 @@ export class ActionSheetComponent implements OnDestroy {
   constructor(private DEF: ActionSheetConfig, private cdr: ChangeDetectorRef) {}
 
   private detectChanges(): void {
-    if (this.destroied) return;
+    if (this.destroied) {
+      return;
+    }
     this.cdr.detectChanges();
   }
 

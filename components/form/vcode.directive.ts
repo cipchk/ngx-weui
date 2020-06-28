@@ -41,12 +41,14 @@ export class VCodeDirective implements OnInit, OnDestroy {
 
   constructor(private el: ElementRef) {}
 
-  ngOnInit() {
-    if (typeof this.onSend !== 'function') console.error('weui-vcode必须传递一个返回值为 `Observable<boolean>` 函数');
+  ngOnInit(): void {
+    if (typeof this.onSend !== 'function') {
+      console.error('weui-vcode必须传递一个返回值为 `Observable<boolean>` 函数');
+    }
     this._cur = this.el.nativeElement.innerHTML;
   }
 
-  _onClick() {
+  _onClick(): void {
     this._disabled = true;
     this.onSend().subscribe(res => {
       res ? this.tick() : this.err();
@@ -66,7 +68,9 @@ export class VCodeDirective implements OnInit, OnDestroy {
         this._disabled = false;
         this.el.nativeElement.innerHTML = this._cur;
         this.destroy();
-      } else this.setText(count);
+      } else {
+        this.setText(count);
+      }
     }, 1000);
   }
 
@@ -74,7 +78,7 @@ export class VCodeDirective implements OnInit, OnDestroy {
     this.el.nativeElement.innerHTML = this.tpl.replace(/\${num}/, num.toString());
   }
 
-  private destroy() {
+  private destroy(): void {
     if (this._t) {
       clearInterval(this._t);
       this._t = null;

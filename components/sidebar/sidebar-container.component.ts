@@ -60,7 +60,7 @@ export class SidebarContainerComponent implements AfterContentInit, OnChanges, O
     }
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.orgOverflowX = this.body.style.overflowX!;
     this.body.style.overflowX = 'hidden';
   }
@@ -100,7 +100,7 @@ export class SidebarContainerComponent implements AfterContentInit, OnChanges, O
     } as CSSStyleDeclaration;
   }
 
-  _onBackdropClicked($event: any) {
+  _onBackdropClicked($event: Event): boolean {
     $event.preventDefault();
     $event.stopPropagation();
     this._sidebars.forEach((sidebar: SidebarComponent) => {
@@ -111,7 +111,7 @@ export class SidebarContainerComponent implements AfterContentInit, OnChanges, O
     return false;
   }
 
-  private _subscribe() {
+  private _subscribe(): void {
     if (this._sidebars) {
       this._sidebars.forEach((sidebar: SidebarComponent) => {
         if (!sidebar) {
@@ -132,7 +132,7 @@ export class SidebarContainerComponent implements AfterContentInit, OnChanges, O
     }
   }
 
-  private _unsubscribe() {
+  private _unsubscribe(): void {
     if (this._sidebars) {
       this._sidebars.forEach((sidebar: SidebarComponent) => {
         if (!sidebar) {
@@ -154,11 +154,11 @@ export class SidebarContainerComponent implements AfterContentInit, OnChanges, O
   }
 
   /** 状态变更时重新计算样式 */
-  private _markForCheck() {
+  private _markForCheck(): void {
     this._ref.markForCheck();
   }
 
-  private _onToggle() {
+  private _onToggle(): void {
     if (this._sidebars) {
       let hasOpen = false;
 

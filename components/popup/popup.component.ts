@@ -36,15 +36,15 @@ export class PopupComponent implements OnDestroy {
   _shownAnt = false;
 
   private _config: PopupConfig;
+  @Output() readonly cancel = new EventEmitter();
+  @Output() readonly confirm = new EventEmitter();
   @Input()
   set config(val: PopupConfig) {
     this._config = { ...this.DEF, ...val };
   }
-  get config() {
+  get config(): PopupConfig {
     return this._config;
   }
-  @Output() readonly cancel = new EventEmitter();
-  @Output() readonly confirm = new EventEmitter();
 
   get _visibility(): string {
     return this._shownAnt ? 'show' : 'hide';
@@ -74,7 +74,9 @@ export class PopupComponent implements OnDestroy {
    * @param [is_backdrop] 是否从背景上点击(可选)
    */
   hide(is_backdrop?: boolean): void {
-    if (is_backdrop === true && this.config.backdrop === false) return;
+    if (is_backdrop === true && this.config.backdrop === false) {
+      return;
+    }
 
     this._shownAnt = false;
     this.cdr.detectChanges();

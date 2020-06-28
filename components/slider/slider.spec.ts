@@ -12,11 +12,11 @@ const MAX = 100;
 const STEP = 1;
 const VALUE = 0;
 
-function spyTouchArgument(val: number) {
+function spyTouchArgument(val: number): any {
   return {
     touches: [{ pageX: val, identifier: 1 }],
     targetTouches: [{ pageX: val, identifier: 1 }],
-    preventDefault() {},
+    preventDefault(): void {},
   };
 }
 
@@ -118,5 +118,5 @@ class TestSliderComponent {
   step: number = STEP;
   enabled: boolean = true;
   showValue = true;
-  _change() {}
+  _change(): void {}
 }

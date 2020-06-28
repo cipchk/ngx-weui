@@ -1,20 +1,17 @@
-import {
-  Directive,
-  ElementRef,
-  Input,
-  NgZone,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChange,
-  SimpleChanges,
-} from '@angular/core';
+import { Directive, ElementRef, Input, NgZone, OnChanges, OnDestroy, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
 
 declare const GM: any;
 
 @Directive({ selector: 'canvas[weui-chart-g2]', exportAs: 'weuiChartG2' })
 export class ChartG2Directive implements OnInit, OnDestroy, OnChanges {
   _chart: any;
+
+  /**
+   * 画布内部的边距，可以是数组 [top, right, bottom, left] 也可以是一个数字。
+   */
+  @Input() margin: number[] | number;
+
+  private initFlag: boolean = false;
 
   /**
    * chart实例对象
@@ -29,25 +26,20 @@ export class ChartG2Directive implements OnInit, OnDestroy, OnChanges {
   get GM(): any {
     return GM;
   }
-
-  /**
-   * 画布内部的边距，可以是数组 [top, right, bottom, left] 也可以是一个数字。
-   */
-  @Input() margin: number[] | number;
-
-  private initFlag: boolean = false;
   constructor(private el: ElementRef, private zone: NgZone) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.initFlag = true;
     this.buildChart();
   }
 
-  private buildChart() {
+  private buildChart(): void {
     const object: any = {
       el: this.el.nativeElement,
     };
-    if (this.margin) object.margin = this.margin;
+    if (this.margin) {
+      object.margin = this.margin;
+    }
 
     this.zone.runOutsideAngular(() => {
       this._chart = new GM.Chart(object);

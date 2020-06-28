@@ -57,7 +57,7 @@ export class StepperComponent implements ControlValueAccessor {
   /** 步长，可以为小数 */
   @Input()
   @InputNumber()
-  get step() {
+  get step(): number {
     return this._step;
   }
   set step(value: number) {
@@ -73,11 +73,13 @@ export class StepperComponent implements ControlValueAccessor {
     this._precisionFactor = Math.pow(10, this._precisionStep);
   }
 
-  get value() {
+  get value(): number {
     return this._value;
   }
   set value(value: number) {
-    if (isNaN(value) || value === this.value) return;
+    if (isNaN(value) || value === this.value) {
+      return;
+    }
 
     value = +value;
 
@@ -102,37 +104,45 @@ export class StepperComponent implements ControlValueAccessor {
     return this;
   }
 
-  _notify() {
+  _notify(): void {
     this.change.emit(this.value);
     this.onChange(this.value);
   }
 
-  _plus() {
-    if (this.value === undefined) this.value = this.max || 0;
+  _plus(): void {
+    if (this.value === undefined) {
+      this.value = this.max || 0;
+    }
     this._checkDisabled();
 
-    if (this._disabledPlus) return;
+    if (this._disabledPlus) {
+      return;
+    }
     this.value = this._toPrecisionAsStep((this._precisionFactor * this.value + this._precisionFactor * this.step) / this._precisionFactor);
     this._checkDisabled()._notify();
   }
 
-  _minus() {
-    if (this.value === undefined) this.value = this.min || 0;
+  _minus(): void {
+    if (this.value === undefined) {
+      this.value = this.min || 0;
+    }
     this._checkDisabled();
 
-    if (this._disabledMinus) return;
+    if (this._disabledMinus) {
+      return;
+    }
     this.value = this._toPrecisionAsStep((this._precisionFactor * this.value - this._precisionFactor * this.step) / this._precisionFactor);
     this._checkDisabled()._notify();
   }
 
-  _blur() {
+  _blur(): void {
     const el = this._inputNumber.nativeElement;
     this.value = +el.value;
     el.value = this.value.toString();
     this._checkDisabled()._notify();
   }
 
-  _toPrecisionAsStep(num: any) {
+  _toPrecisionAsStep(num: any): number {
     if (isNaN(num) || num === '') {
       return num;
     }

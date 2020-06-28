@@ -130,7 +130,9 @@ export class SliderComponent implements ControlValueAccessor, AfterViewInit, OnD
   }
 
   private startHandle($event: TouchEvent): void {
-    if (this.state === null) this.refresh();
+    if (this.state === null) {
+      this.refresh();
+    }
 
     this.state.x = ($event.touches[0] || $event.changedTouches[0]).pageX;
   }
@@ -161,8 +163,11 @@ export class SliderComponent implements ControlValueAccessor, AfterViewInit, OnD
     const rawValue = (percentage / 100) * (this.max - this.min);
     // adjustment = this.min
     let value = this.min + Math.round(rawValue / this.step) * this.step;
-    if (value < this.min) value = this.min;
-    else if (value > this.max) value = this.max;
+    if (value < this.min) {
+      value = this.min;
+    } else if (value > this.max) {
+      value = this.max;
+    }
 
     this.value = value;
     this.onChange(this.value);
@@ -171,7 +176,9 @@ export class SliderComponent implements ControlValueAccessor, AfterViewInit, OnD
   }
 
   ngOnChanges(): void {
-    if (this.isInit) this.refresh();
+    if (this.isInit) {
+      this.refresh();
+    }
   }
 
   writeValue(value: number): void {

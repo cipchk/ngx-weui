@@ -5,12 +5,7 @@ import { ToptipsComponent, ToptipsType } from './toptips.component';
 
 @Injectable({ providedIn: 'root' })
 export class ToptipsService extends BaseService {
-  constructor(
-    resolver: ComponentFactoryResolver,
-    applicationRef: ApplicationRef,
-    injector: Injector,
-    @Inject(DOCUMENT) doc: any,
-  ) {
+  constructor(resolver: ComponentFactoryResolver, applicationRef: ApplicationRef, injector: Injector, @Inject(DOCUMENT) doc: any) {
     super(resolver, applicationRef, injector, doc);
   }
 
@@ -24,8 +19,12 @@ export class ToptipsService extends BaseService {
   show(text: string, type: ToptipsType, time: number = 2000): ToptipsComponent {
     const componentRef = this.build(ToptipsComponent);
 
-    if (type) componentRef.instance.type = type;
-    if (text) componentRef.instance.text = text;
+    if (type) {
+      componentRef.instance.type = type;
+    }
+    if (text) {
+      componentRef.instance.text = text;
+    }
     componentRef.instance.time = time;
     componentRef.instance.hide.subscribe(() => {
       setTimeout(() => {

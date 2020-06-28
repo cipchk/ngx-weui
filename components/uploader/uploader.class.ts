@@ -59,8 +59,11 @@ export class Uploader {
     return this._queue.filter((item: FileItem) => item.isUploaded).length;
   }
 
-  _getNextIndex(): number {
-    return ++this._nextIndex;
+  /** 获取待上传文件 */
+  get getReadyItems(): FileItem[] {
+    return this._queue
+      .filter((item: FileItem) => item.isReady && !item.isUploading)
+      .sort((item1: any, item2: any) => item1.index - item2.index);
   }
 
   /**
@@ -75,12 +78,16 @@ export class Uploader {
     this.setOptions(options);
   }
 
+  _getNextIndex(): number {
+    return ++this._nextIndex;
+  }
+
   /**
    * 重置选项
    *
    * @param includeOldQueue 是否包括已存在队列中的文件
    */
-  setOptions(options: UploaderOptions, includeOldQueue: boolean = true) {
+  setOptions(options: UploaderOptions, includeOldQueue: boolean = true): void {
     this._options = {
       filters: [],
       disableMultipart: false,
@@ -97,32 +104,36 @@ export class Uploader {
     } as UploaderOptions;
 
     // 数量
-    if (this._options.limit !== -1)
+    if (this._options.limit !== -1) {
       this._options.filters!.unshift({
         name: 'queueLimit',
         fn: this._queueLimitFilter,
       });
+    }
 
     // 大小
-    if (this._options.size !== -1)
+    if (this._options.size !== -1) {
       this._options.filters!.unshift({
         name: 'fileSize',
         fn: this._fileSizeFilter,
       });
+    }
 
     // 类型
-    if (this._options.types)
+    if (this._options.types) {
       this._options.filters!.unshift({
         name: 'fileType',
         fn: this._fileTypeFilter,
       });
+    }
 
     // mime类型
-    if (this._options.mimes)
+    if (this._options.mimes) {
       this._options.filters!.unshift({
         name: 'mimeType',
         fn: this._mimeTypeFilter,
       });
+    }
 
     // 对已经存在的队列重置所有配置信息
     if (includeOldQueue) {
@@ -161,8 +172,12 @@ export class Uploader {
 
   /** 过滤器，如果未指定采用内置 */
   private _getFilters(filters: FilterFunction[] | string): FilterFunction[] {
-    if (!filters) return this._options.filters!;
-    if (Array.isArray(filters)) return filters;
+    if (!filters) {
+      return this._options.filters!;
+    }
+    if (Array.isArray(filters)) {
+      return filters;
+    }
     if (typeof filters === 'string') {
       const names = filters.match(/[^\s,]+/g)!;
       return this._options.filters!.filter((filter: any) => names.indexOf(filter.name) !== -1);
@@ -179,13 +194,6 @@ export class Uploader {
     return this._queue.filter((item: FileItem) => !item.isUploaded);
   }
 
-  /** 获取待上传文件 */
-  get getReadyItems(): FileItem[] {
-    return this._queue
-      .filter((item: FileItem) => item.isReady && !item.isUploading)
-      .sort((item1: any, item2: any) => item1.index - item2.index);
-  }
-
   /**
    * 将文件放入队列中
    *
@@ -193,7 +201,7 @@ export class Uploader {
    * @param options 强制重新指定新 `options` 内容
    * @param filters 强制重新指定新 `filters` 内容
    */
-  addToQueue(files: File[], options?: UploaderOptions, filters?: FilterFunction[] | string) {
+  addToQueue(files: File[], options?: UploaderOptions, filters?: FilterFunction[] | string): void {
     const list: File[] = [];
     for (const file of files) {
       list.push(file);
@@ -211,10 +219,14 @@ export class Uploader {
         fileItem.index = index;
         addedFileItems.push(fileItem);
         this._queue.push(fileItem);
-        if (this._options.onFileQueued) this._options.onFileQueued(fileItem);
+        if (this._options.onFileQueued) {
+          this._options.onFileQueued(fileItem);
+        }
       } else {
         const filter = arrayOfFilters[this._failFilterIndex];
-        if (this._options.onError) this._options.onError(temp, filter, options!);
+        if (this._options.onError) {
+          this._options.onError(temp, filter, options!);
+        }
       }
     });
 
@@ -240,7 +252,9 @@ export class Uploader {
     }
     this._queue.splice(index, 1);
     this._progress = this._getTotalProgress();
-    if (this._options.onFileDequeued) this._options.onFileDequeued(item);
+    if (this._options.onFileDequeued) {
+      this._options.onFileDequeued(item);
+    }
   }
 
   /**
@@ -251,7 +265,9 @@ export class Uploader {
       this._queue[0].remove();
     }
     this._progress = 0;
-    if (this._options.onFileDequeued) this._options.onFileDequeued();
+    if (this._options.onFileDequeued) {
+      this._options.onFileDequeued();
+    }
   }
 
   /**
@@ -280,7 +296,9 @@ export class Uploader {
         this._onCompleteItem(item, null!, null!, null!);
         item.options.abortTransport(item);
       } else {
-        if (item._xhr) item._xhr.abort();
+        if (item._xhr) {
+          item._xhr.abort();
+        }
       }
     }
   }
@@ -295,7 +313,9 @@ export class Uploader {
     }
     items.map((item: FileItem) => item._prepareToUploading());
 
-    if (this._options.onStart) this._options.onStart(items[0]);
+    if (this._options.onStart) {
+      this._options.onStart(items[0]);
+    }
     items[0].upload();
   }
 
@@ -306,7 +326,9 @@ export class Uploader {
     const items = this.getNotUploadedItems();
     items.map((item: FileItem) => item.cancel());
 
-    if (this._options.onCancel) this._options.onCancel();
+    if (this._options.onCancel) {
+      this._options.onCancel();
+    }
   }
 
   _destroy(): void {
@@ -440,6 +462,8 @@ export class Uploader {
       return;
     }
     this._progress = this._getTotalProgress();
-    if (this._options.onFinished) this._options.onFinished();
+    if (this._options.onFinished) {
+      this._options.onFinished();
+    }
   }
 }

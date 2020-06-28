@@ -43,16 +43,6 @@ export class GalleryComponent {
   _imgs: any[];
 
   /**
-   * 图片数据
-   *
-   * - 虽然支持传递数组，但并不支持在打开后切换图片。
-   */
-  @Input()
-  set imgs(val: string | File | string[] | GalleryItem[]) {
-    this.parseImgs(val);
-  }
-
-  /**
    * 是否允许删除，默认：`true`
    */
   @Input() @InputBoolean() canDelete: boolean = true;
@@ -74,19 +64,31 @@ export class GalleryComponent {
   @Output() readonly showChange = new EventEmitter<boolean>();
 
   _showd: boolean = false;
+
+  /**
+   * 图片数据
+   *
+   * - 虽然支持传递数组，但并不支持在打开后切换图片。
+   */
+  @Input()
+  set imgs(val: string | File | string[] | GalleryItem[]) {
+    this.parseImgs(val);
+  }
   get _visibility(): string {
     return this.show ? 'show' : 'hide';
   }
 
-  _antStart() {
-    if (this.show) this._showd = this.show;
+  _antStart(): void {
+    if (this.show) {
+      this._showd = this.show;
+    }
   }
 
-  _antDone() {
+  _antDone(): void {
     this._showd = this.show;
   }
 
-  _onDel(item: any) {
+  _onDel(item: any): boolean {
     if (this.canDelete) {
       this.delete.emit(item);
       this._onHide();
@@ -94,13 +96,13 @@ export class GalleryComponent {
     return false;
   }
 
-  _onHide() {
+  _onHide(): void {
     this.show = false;
     this.showChange.emit(this.show);
     this.hide.emit();
   }
 
-  private parseImgs(imgs: any) {
+  private parseImgs(imgs: any): void {
     if (Array.isArray(imgs)) {
       if (imgs.length > 0) {
         if (typeof imgs[0] === 'string') {
@@ -109,7 +111,9 @@ export class GalleryComponent {
           });
         } else {
           imgs = (imgs as GalleryItem[]).map((item: GalleryItem) => {
-            if (item.file) item.url = genImageUrl(item.file);
+            if (item.file) {
+              item.url = genImageUrl(item.file);
+            }
             return item;
           });
         }

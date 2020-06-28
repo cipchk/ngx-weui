@@ -34,7 +34,7 @@ describe('Directive: Input', () => {
   let directive: InputDirective;
   let inputEl: HTMLInputElement;
 
-  function genModule(html: string) {
+  function genModule(html: string): void {
     TestBed.configureTestingModule({
       declarations: [TestInputComponent],
       imports: [FormModule, FormsModule, ReactiveFormsModule],
@@ -54,7 +54,7 @@ describe('Directive: Input', () => {
     fixture.detectChanges();
   }
 
-  function expectValidator(val: string, validStatus: boolean) {
+  function expectValidator(val: string, validStatus: boolean): void {
     context.control.setValue(val);
     fixture.detectChanges();
     expect(inputEl.classList).toContain(validStatus ? 'ng-valid' : 'ng-invalid');

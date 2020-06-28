@@ -39,19 +39,23 @@ export class PTRComponent implements OnInit {
   _lastLabel: string;
 
   private _config: PTRConfig;
-  @Input()
-  set config(val: PTRConfig) {
-    this._config = { ...this.DEF, ...val };
-  }
-  get config() {
-    return this._config;
-  }
   /** 是否禁止 */
   @Input() @InputBoolean() disabled: boolean = false;
   /** 下拉滚动时回调，返回一个0-100%的参数 */
   @Output() readonly scroll = new EventEmitter<number>();
   /** 刷新回调 */
   @Output() readonly refresh = new EventEmitter<PTRComponent>();
+  @Input()
+  set config(val: PTRConfig) {
+    this._config = { ...this.DEF, ...val };
+  }
+  get config(): PTRConfig {
+    return this._config;
+  }
+
+  get icon(): string {
+    return this._pullPercent !== 100 ? this.config.pullIcon! : this.loading ? this.config.loadingIcon! : this.config.successIcon!;
+  }
 
   constructor(private el: ElementRef<HTMLElement>, private DEF: PTRConfig, private cdr: ChangeDetectorRef) {
     this.config = { ...DEF };
@@ -62,7 +66,7 @@ export class PTRComponent implements OnInit {
    *
    * @param label 标签内容（支持HTML）
    */
-  setLastUpdatedLabel(label: string) {
+  setLastUpdatedLabel(label: string): void {
     this._lastLabel = label;
     this.cdr.detectChanges();
   }
@@ -72,7 +76,7 @@ export class PTRComponent implements OnInit {
    *
    * @param [lastUpdatedLabel] label 标签内容（支持HTML）
    */
-  setFinished(lastUpdatedLabel?: string) {
+  setFinished(lastUpdatedLabel?: string): void {
     this._pullPercent = 0;
     this.loading = false;
     this._animating = true;
@@ -81,32 +85,43 @@ export class PTRComponent implements OnInit {
     if (!this.touching) {
       setTimeout(() => {
         this._animating = false;
-        if (lastUpdatedLabel) this.setLastUpdatedLabel(lastUpdatedLabel);
+        if (lastUpdatedLabel) {
+          this.setLastUpdatedLabel(lastUpdatedLabel);
+        }
         this.cdr.detectChanges();
       }, 350);
     }
   }
 
-  onTouchStart($event: TouchEvent) {
-    if (this.disabled || this.touching || this.loading) return;
+  onTouchStart($event: TouchEvent): void {
+    if (this.disabled || this.touching || this.loading) {
+      return;
+    }
     this.touching = true;
     this.touchId = $event.targetTouches[0].identifier;
-    this.ogY =
-      this._pullPercent === 0 ? $event.targetTouches[0].pageY : $event.targetTouches[0].pageY - this._pullPercent;
+    this.ogY = this._pullPercent === 0 ? $event.targetTouches[0].pageY : $event.targetTouches[0].pageY - this._pullPercent;
     this.initScrollTop = this.contentEl.scrollTop;
     this._animating = false;
   }
 
-  onTouchMove($event: TouchEvent) {
-    if (this.disabled || !this.touching || this.loading) return;
-    if ($event.targetTouches[0].identifier !== this.touchId) return;
+  onTouchMove($event: TouchEvent): void {
+    if (this.disabled || !this.touching || this.loading) {
+      return;
+    }
+    if ($event.targetTouches[0].identifier !== this.touchId) {
+      return;
+    }
 
     const pageY = $event.targetTouches[0].pageY;
     const diffY = pageY - this.ogY;
     // if it's scroll
-    if (diffY < 0) return;
+    if (diffY < 0) {
+      return;
+    }
     // if it's not at top
-    if (this.contentEl.scrollTop > 0) return;
+    if (this.contentEl.scrollTop > 0) {
+      return;
+    }
 
     $event.preventDefault();
 
@@ -115,8 +130,10 @@ export class PTRComponent implements OnInit {
     this.scroll.emit(this._pullPercent);
   }
 
-  onTouchEnd() {
-    if (this.disabled || !this.touching || this.loading) return;
+  onTouchEnd(): void {
+    if (this.disabled || !this.touching || this.loading) {
+      return;
+    }
 
     let _pullPercent = this._pullPercent;
     let loading = false;
@@ -133,15 +150,13 @@ export class PTRComponent implements OnInit {
     this._animating = loading;
     this._pullPercent = _pullPercent;
     this.loading = loading;
-    if (loading) this.refresh.emit(this);
+    if (loading) {
+      this.refresh.emit(this);
+    }
     this.cdr.detectChanges();
   }
 
-  get icon(): string {
-    return this._pullPercent !== 100 ? this.config.pullIcon! : this.loading ? this.config.loadingIcon! : this.config.successIcon!;
-  }
-
-  ngOnInit() {
+  ngOnInit(): void {
     this.contentEl = this.el.nativeElement.querySelector('.weui-ptr__content')! as HTMLElement;
   }
 }

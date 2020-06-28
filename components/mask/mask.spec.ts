@@ -60,5 +60,5 @@ class TestMaskComponent {
   @ViewChild(MaskComponent, { static: true }) mask: MaskComponent;
 
   backdrop = true;
-  close() {}
+  close(): void {}
 }

@@ -62,5 +62,5 @@ describe('Component: Progress', () => {
   template: ` <weui-progress (cancel)="cancel()"></weui-progress> `,
 })
 class TestProgressComponent {
-  cancel() {}
+  cancel(): void {}
 }

@@ -9,7 +9,7 @@ export interface PickerData {
   /**
    * 值
    */
-  value: string;
+  value: any;
 
   /**
    * 是否禁用

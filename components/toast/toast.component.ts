@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  Output,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnDestroy, Output, ViewEncapsulation } from '@angular/core';
 import { InputNumber } from 'ngx-weui/core';
 import { ToastConfig } from './toast.config';
 
@@ -22,13 +14,6 @@ import { ToastConfig } from './toast.config';
   encapsulation: ViewEncapsulation.None,
 })
 export class ToastComponent implements OnDestroy {
-  /**
-   * 类型
-   */
-  @Input()
-  set type(_t: 'success' | 'loading') {
-    Object.assign(this, this.DEF[_t]);
-  }
   /**
    * 文本
    */
@@ -46,14 +31,21 @@ export class ToastComponent implements OnDestroy {
    */
   @Output() readonly hide = new EventEmitter();
 
+  _showd: boolean = false;
+  private timer: any;
+  /**
+   * 类型
+   */
+  @Input()
+  set type(_t: 'success' | 'loading') {
+    Object.assign(this, this.DEF[_t]);
+  }
+
   constructor(private DEF: ToastConfig) {
     this.type = 'success';
   }
 
-  _showd: boolean = false;
-  private timer: any;
-
-  onShow() {
+  onShow(): this {
     this._showd = true;
     if (this.time > 0) {
       this.timer = setTimeout(() => {
@@ -63,7 +55,7 @@ export class ToastComponent implements OnDestroy {
     return this;
   }
 
-  onHide() {
+  onHide(): void {
     this._showd = false;
     this.hide.emit();
   }

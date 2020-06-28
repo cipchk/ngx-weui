@@ -2,23 +2,18 @@ import { DOCUMENT } from '@angular/common';
 import { ApplicationRef, ComponentFactoryResolver, Inject, Injectable, Injector } from '@angular/core';
 import { BaseService } from 'ngx-weui/core';
 import { Observable } from 'rxjs';
-import { PickerData } from './data';
 import { PickerOptions } from './options';
 import { CityPickerComponent } from './picker-city.component';
 import { DatePickerComponent, DatePickerType, FORMAT_TYPE } from './picker-date.component';
 import { PickerComponent } from './picker.component';
+import { PickerData } from './picker.types';
 
 /**
  * 多列选择器Service，可直接通过Class构造选择器
  */
 @Injectable({ providedIn: 'root' })
 export class PickerService extends BaseService {
-  constructor(
-    resolver: ComponentFactoryResolver,
-    applicationRef: ApplicationRef,
-    injector: Injector,
-    @Inject(DOCUMENT) doc: any,
-  ) {
+  constructor(resolver: ComponentFactoryResolver, applicationRef: ApplicationRef, injector: Injector, @Inject(DOCUMENT) doc: any) {
     super(resolver, applicationRef, injector, doc);
   }
 
@@ -31,17 +26,14 @@ export class PickerService extends BaseService {
    * @param options 配置项
    * @returns 务必订阅结果才会显示。
    */
-  show(
-    data: PickerData[][] | string[],
-    value?: any,
-    defaultSelect?: number[],
-    options?: PickerOptions,
-  ): Observable<any> {
+  show(data: PickerData[][] | string[], value?: any, defaultSelect?: number[], options?: PickerOptions): Observable<any> {
     const componentRef = this.build(PickerComponent);
     // 通过Service打开的强制设置为 `default` 以免出现 `input`
     options = { ...options, type: 'default' };
     componentRef.instance.options = options;
-    if (defaultSelect) componentRef.instance.defaultSelect = defaultSelect;
+    if (defaultSelect) {
+      componentRef.instance.defaultSelect = defaultSelect;
+    }
     componentRef.instance.groups = data;
     if (value) {
       setTimeout(() => {
@@ -67,7 +59,9 @@ export class PickerService extends BaseService {
    */
   showCity(data: any, value?: string, dataMap?: any, options?: PickerOptions): Observable<any> {
     const componentRef = this.build(CityPickerComponent);
-    if (dataMap) componentRef.instance.dataMap = dataMap;
+    if (dataMap) {
+      componentRef.instance.dataMap = dataMap;
+    }
     // 通过Service打开的强制设置为 `default` 以免出现 `input`
     options = { ...options, type: 'default' };
     componentRef.instance.options = options;
@@ -111,10 +105,18 @@ export class PickerService extends BaseService {
     // 通过Service打开的强制设置为 `default` 以免出现 `input`
     options = { ...options, type: 'default' };
     componentRef.instance.options = options;
-    if (type) componentRef.instance.type = type;
-    if (format) componentRef.instance.format = format;
-    if (min) componentRef.instance.min = min;
-    if (max) componentRef.instance.max = max;
+    if (type) {
+      componentRef.instance.type = type;
+    }
+    if (format) {
+      componentRef.instance.format = format;
+    }
+    if (min) {
+      componentRef.instance.min = min;
+    }
+    if (max) {
+      componentRef.instance.max = max;
+    }
     if (value) {
       setTimeout(() => {
         componentRef.instance.writeValue(value);

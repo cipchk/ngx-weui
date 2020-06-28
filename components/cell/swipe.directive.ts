@@ -26,7 +26,7 @@ export class SwipeDirective implements OnInit {
 
   constructor(private el: ElementRef<HTMLElement>) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     const el = this.el.nativeElement;
     this.swipeEl = el.querySelector('.weui-cell__bd');
     if (!this.swipeEl) {
@@ -37,7 +37,7 @@ export class SwipeDirective implements OnInit {
     }
   }
 
-  private setPos(x: number) {
+  private setPos(x: number): void {
     this.swipeEl.style.transform = `translateX(-${x}px)`;
   }
 
@@ -45,11 +45,11 @@ export class SwipeDirective implements OnInit {
     return ev.touches[0] || ev.changedTouches[0];
   }
 
-  onTouchStart($event: TouchEvent) {
+  onTouchStart($event: TouchEvent): void {
     this.curX = this.getTouch($event).pageX;
   }
 
-  onTouchMove($event: TouchEvent) {
+  onTouchMove($event: TouchEvent): void {
     let newX = this.curX - this.getTouch($event).pageX;
     if (this.opend) {
       newX = newX > 0 ? this.width : this.width - Math.abs(newX);
@@ -60,10 +60,14 @@ export class SwipeDirective implements OnInit {
     this.setPos(newX <= 0 ? 0 : newX);
   }
 
-  onTouchEnd($event: TouchEvent) {
+  onTouchEnd($event: TouchEvent): void {
     let newX = Math.abs(this.curX - this.getTouch($event).pageX);
-    if (newX === 0) return;
-    if (this.opend) newX = this.width - newX;
+    if (newX === 0) {
+      return;
+    }
+    if (this.opend) {
+      newX = this.width - newX;
+    }
     // 当移动超过一半都视为打开
     if (newX > 0 && newX > +this.width / 2) {
       this.opend = true;

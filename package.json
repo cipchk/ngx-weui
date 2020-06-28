@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/cipchk/ngx-weui#readme",
   "scripts": {
-    "lint": "tslint -p tsconfig.json -c tslint.json 'components/**/*.ts'",
+    "lint": "bash scripts/ci/lint.sh -ts -less",
     "test": "ng test --no-progress --browsers=ChromeHeadlessCI --code-coverage --no-watch",
     "site": "npm run site:init && ng serve -o",
     "site:init": "node scripts/site/main init",
@@ -93,6 +93,15 @@
     "conventional-changelog-cli": "^2.0.34",
     "karma-junit-reporter": "^2.0.1",
     "karma-spec-reporter": "0.0.32",
-    "karma-viewport": "^1.0.6"
+    "karma-viewport": "^1.0.6",
+    "husky": "^4.2.3",
+    "@commitlint/cli": "^9.0.0",
+    "@commitlint/config-angular": "^9.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
   }
 }

@@ -36,6 +36,9 @@ export class InfiniteLoaderComponent implements OnInit, OnDestroy {
   _restart = false;
 
   private _config: InfiniteLoaderConfig;
+
+  @Output() readonly loadmore = new EventEmitter<InfiniteLoaderComponent>();
+
   @Input()
   set config(val: InfiniteLoaderConfig) {
     this._config = { ...this.DEF, ...val };
@@ -43,8 +46,6 @@ export class InfiniteLoaderComponent implements OnInit, OnDestroy {
   get config(): InfiniteLoaderConfig {
     return this._config;
   }
-
-  @Output() readonly loadmore = new EventEmitter<InfiniteLoaderComponent>();
 
   constructor(private el: ElementRef<HTMLElement>, private DEF: InfiniteLoaderConfig, private cdr: ChangeDetectorRef) {
     this.config = { ...DEF };
@@ -109,7 +110,11 @@ export class InfiniteLoaderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.scrollTime) clearTimeout(this.scrollTime);
-    if (this.disposeScroller) this.disposeScroller.unsubscribe();
+    if (this.scrollTime) {
+      clearTimeout(this.scrollTime);
+    }
+    if (this.disposeScroller) {
+      this.disposeScroller.unsubscribe();
+    }
   }
 }

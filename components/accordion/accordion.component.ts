@@ -41,7 +41,9 @@ export class AccordionComponent {
 
   _add(item: AccordionPanelComponent): void {
     this.panels.push(item);
-    if (this.panels.length === 1 && this.activeFirst) item.active = true;
+    if (this.panels.length === 1 && this.activeFirst) {
+      item.active = true;
+    }
   }
 
   _remove(item: AccordionPanelComponent): void {
@@ -53,10 +55,14 @@ export class AccordionComponent {
   }
 
   _closeOthers(cur: AccordionPanelComponent): void {
-    if (this.collapsible) return;
+    if (this.collapsible) {
+      return;
+    }
 
     this.panels.forEach(panel => {
-      if (!panel.disabled && panel !== cur) panel.active = false;
+      if (!panel.disabled && panel !== cur) {
+        panel.active = false;
+      }
     });
   }
 }

@@ -229,7 +229,7 @@ class TestActionSheetComponent {
 
   config: ActionSheetConfig = { ...CONFIG };
 
-  _close() {
+  _close(): boolean {
     return true;
   }
 }

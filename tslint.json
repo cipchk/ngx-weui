@@ -46,6 +46,7 @@
         "order": [
           "static-field",
           "instance-field",
+          "constructor",
           "static-method",
           "instance-method"
         ]
@@ -97,8 +98,7 @@
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
     // Custom parts
-    "curly": false,
-    "variable-name": false,
+    "curly": true,
     "no-submodule-imports": false,
     "no-implicit-dependencies": false,
     "no-object-literal-type-assertion": false,
@@ -108,7 +108,22 @@
     "no-duplicate-imports": true,
     "no-import-side-effect": true,
     "no-shadowed-variable": true,
-    "no-sparse-arrays": true
+    "no-sparse-arrays": true,
+    "typedef": [true, "call-signature", "parameter", "property-declaration"],
+    "typedef-whitespace": [
+      true,
+      {
+        "call-signature": "nospace",
+        "index-signature": "nospace",
+        "parameter": "nospace",
+        "property-declaration": "nospace",
+        "variable-declaration": "nospace"
+      }
+    ],
+    "unified-signatures": true,
+    "use-isnan": true,
+    "no-unused-expression": false,
+    "variable-name": [true, "ban-keywords", "allow-leading-underscore"]
   },
   "linterOptions": {
     "exclude": [

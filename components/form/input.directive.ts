@@ -45,7 +45,7 @@ export class InputDirective implements OnInit, OnChanges, Validator {
 
   constructor(private el: ElementRef) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.parentEl = findParent(this.el.nativeElement, '.weui-cell');
     if (!this.parentEl) {
       console.error('父DOM结构至少必须包含一个.weui-cell');
@@ -57,7 +57,9 @@ export class InputDirective implements OnInit, OnChanges, Validator {
 
   ngOnChanges(): void {
     this._createValidator();
-    if (this._onChange) this._onChange();
+    if (this._onChange) {
+      this._onChange();
+    }
   }
 
   private _createValidator(): void {
@@ -101,7 +103,9 @@ export class InputDirective implements OnInit, OnChanges, Validator {
     this._validator = (control: AbstractControl): ValidationErrors | null => {
       let value: string = control.value;
       if (value == null || value.length === 0) {
-        if (this.required !== undefined) return { icon: this.required, type: 'required', actualValue: value };
+        if (this.required !== undefined) {
+          return { icon: this.required, type: 'required', actualValue: value };
+        }
 
         return null;
       }
@@ -118,7 +122,9 @@ export class InputDirective implements OnInit, OnChanges, Validator {
   }
 
   validate(c: AbstractControl): ValidationErrors | null {
-    if (!this.parentEl) return null;
+    if (!this.parentEl) {
+      return null;
+    }
     const ret = this._validator(c);
     if (ret === null) {
       this.parentEl.classList.remove('weui-cell_warn');
