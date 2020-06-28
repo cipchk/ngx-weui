@@ -1,9 +1,25 @@
 # [9.0.0](https://github.com/cipchk/ngx-weui/compare/8.0.0...9.0.0) (2020-06-28)
 
+`9.0.0` 主要是同步更新 WeUI 的 `2.3` 以上版本（受限于 [#858](https://github.com/Tencent/weui/issues/858) 可能与官网看到的暗黑主题色有出入），新增 `dark` 模式。
+
+更多关于样子优化细节，请参考 WeUI 的 [变更日志](https://github.com/Tencent/weui/edit/master/CHANGELOG.md)。
+
+### 暗黑模式
+
+默认为暗黑系（不清楚 TX 怎么想的），可在 `body` 添加属性 `data-weui-theme` 来控制，值为`light`、`dark`，例如：
+
+```html
+<body data-weui-theme="light">
+```
 
 ### Bug Fixes
 
-* **infiniteloader:** fix unchanging detection ([#157](https://github.com/cipchk/ngx-weui/issues/157)) ([5c512ea](https://github.com/cipchk/ngx-weui/commit/5c512ea60524aa7219f29b52e6b1dacc0fd8e77f))
+* 修复多列选择器在 `2.3` 下的适配
+* 修复上传组件 `FileItem.index` 始终为 `0`
+* 修复日期组件选择后出现 `Cannot read property 'target' of undefined`
+* 修复滚动加载组件未重置滚动位置，导致重复加载数据
+* 修复滚动加载设置完全完毕依然持续 `loadin` 效果
 
+### Breaking Changes
 
-
+* **weui-button** 移除 `plain` 属性，可直接使用默认来代替
