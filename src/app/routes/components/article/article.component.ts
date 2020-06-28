@@ -9,6 +9,9 @@ declare var hljs: any;
 @Component({
   selector: 'app-article',
   templateUrl: './article.component.html',
+  host: {
+    '[class.container]': `true`,
+  },
   styles: [
     `
       :host {
