@@ -50,6 +50,13 @@ describe('Component: Uploader', () => {
     expect(directive.uploader.queue.length).toBe(1);
   });
 
+  it('should be clean input value when upload multiple file', () => {
+    const mockEv = { target: { value: '1', files: [FILE], attributes: { multiple: true } } };
+    directive._onChange(mockEv as any);
+    expect(directive.uploader.queue.length).toBe(1);
+    expect(mockEv.target.value).toBe('');
+  });
+
   describe('CLASS', () => {
     const file1 = new File(
       ['iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkWK1WDwAC1gFS81OXVgAAAABJRU5ErkJggg=='],

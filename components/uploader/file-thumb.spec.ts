@@ -33,7 +33,16 @@ describe('Component: file-thumb', () => {
     expect(divEl.style.backgroundImage).toContain('blob:');
   });
 
-  it('should invalid image', () => {
+  it('should empty file', () => {
+    expect(directives.length).toBe(1);
+    const divEl = fixture.debugElement.query(By.css('.test')).nativeElement as HTMLDivElement;
+    expect(divEl).not.toBeNull();
+    expect(divEl.style.backgroundImage).toBe('');
+  });
+
+  it('should invalid file', () => {
+    fixture.componentInstance.file = new File([''], 'test.png', { type: '' });
+    fixture.detectChanges();
     expect(directives.length).toBe(1);
     const divEl = fixture.debugElement.query(By.css('.test')).nativeElement as HTMLDivElement;
     expect(divEl).not.toBeNull();
