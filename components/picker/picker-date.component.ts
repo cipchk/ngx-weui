@@ -51,6 +51,7 @@ export type FORMAT_TYPE =
       [groups]="_groups"
       [defaultSelect]="_selected"
       [disabled]="disabled"
+      [title]="title"
       [options]="options"
       (show)="_onShow()"
       (hide)="_onHide()"
@@ -119,6 +120,7 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
   @Input() options: PickerOptions;
   /** 当options.type=='form'时，占位符文本 */
   @Input() placeholder: string;
+  @Input() title: string;
   @Input() @InputBoolean() disabled: boolean;
   /** 确认后回调 */
   @Output() readonly change = new EventEmitter<any>();

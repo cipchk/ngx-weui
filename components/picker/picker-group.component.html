@@ -4,8 +4,8 @@
 <div
   class="weui-picker__content"
   [ngStyle]="{
-    transform: 'translate(0,' + _distance + 'px)',
-    transition: _animating ? 'transform .3s' : 'none'
+    transform: 'translate3d(0,' + _distance + 'px, 0px)',
+    transition: _animating ? 'all 0.3s ease 0s' : 'none'
   }"
 >
   <div class="weui-picker__item" *ngFor="let item of items" [ngClass]="{ 'weui-picker__item_disabled': item.disabled }">

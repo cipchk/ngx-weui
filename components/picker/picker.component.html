@@ -11,20 +11,29 @@
 />
 <div [hidden]="!_showP">
   <div class="weui-mask" (click)="_onHide(false)" [ngClass]="{ 'weui-animate-fade-in': _shown, 'weui-animate-fade-out': !_shown }"></div>
-  <div class="weui-picker" [ngClass]="{ 'weui-animate-slide-up': _shown, 'weui-animate-slide-down': !_shown }">
-    <div class="weui-picker__hd">
-      <a href="#" class="weui-picker__action" (click)="_onCancel()">{{ options.cancel }}</a>
-      <a href="#" class="weui-picker__action" (click)="_onConfirm()">{{ options.confirm }}</a>
+  <div class="weui-half-screen-dialog weui-picker" [ngClass]="{ 'weui-animate-slide-up': _shown, 'weui-animate-slide-down': !_shown }">
+    <div class="weui-half-screen-dialog__hd">
+      <div class="weui-half-screen-dialog__hd__side">
+        <button (click)="_onCancel()" class="weui-icon-btn weui-icon-btn_close weui-picker__btn">{{ options.cancel }}</button>
+      </div>
+      <div *ngIf="title" class="weui-half-screen-dialog__hd__main">
+        <strong class="weui-half-screen-dialog__title">{{ title }}</strong>
+      </div>
     </div>
-    <div class="weui-picker__bd">
-      <weui-picker-group
-        tappable
-        *ngFor="let items of _groups; let i = index"
-        [items]="items"
-        [defaultIndex]="_selected[i]"
-        [groupIndex]="i"
-        (change)="_onGroupChange($event, i)"
-      ></weui-picker-group>
+    <div class="weui-half-screen-dialog__bd">
+      <div class="weui-picker__bd">
+        <weui-picker-group
+          tappable
+          *ngFor="let items of _groups; let i = index"
+          [items]="items"
+          [defaultIndex]="_selected[i]"
+          [groupIndex]="i"
+          (change)="_onGroupChange($event, i)"
+        ></weui-picker-group>
+      </div>
+    </div>
+    <div class="weui-half-screen-dialog__ft">
+      <a class="weui-btn weui-btn_primary weui-picker__btn" (click)="_onConfirm()">{{ options.confirm }}</a>
     </div>
   </div>
 </div>

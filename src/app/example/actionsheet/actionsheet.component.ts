@@ -16,6 +16,7 @@ export class DemoActionSheetComponent implements OnDestroy {
   menus: ActionSheetMenuItem[] = [
     { text: '菜单一', value: 'test', other: 1 },
     { text: '菜单三', value: 'test' },
+    { text: '负向菜单', type: 'warn' },
   ];
   config: ActionSheetConfig = {
     title: '这是一段标题',

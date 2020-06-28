@@ -44,10 +44,10 @@ export class PickerGroupComponent implements OnChanges {
   /** 变更回调 */
   @Output() readonly change = new EventEmitter<any>();
 
-  private defaults: any = {
-    offset: 3, // 列表初始化时的偏移量（列表初始化时，选项是聚焦在中间的，通过offset强制往上挪3项，以达到初始选项是为顶部的那项）
-    rowHeight: 34, // 列表每一行的高度
-    bodyHeight: 7 * 34, // picker的高度，用于辅助点击滚动的计算
+  private defaults = {
+    offset: 2, // 列表初始化时的偏移量（列表初始化时，选项是聚焦在中间的，通过offset强制往上挪3项，以达到初始选项是为顶部的那项）
+    rowHeight: 48, // 列表每一行的高度
+    bodyHeight: 5 * 48, // picker的高度，用于辅助点击滚动的计算
     inertiaTime: 150, // 惯性滑动的保持时间，此值直接影响“灵敏度” (单位：ms)
     slideDuration: 300, // 惯性滑动的动画时间，表现为最终可视化的效果
   };
@@ -119,21 +119,22 @@ export class PickerGroupComponent implements OnChanges {
 
   private stop(diff: number): void {
     let dist = this._distance + diff;
+    const defaults = this.defaults;
 
     // 移动到最接近的那一行
-    dist = Math.round(dist / this.defaults.rowHeight) * this.defaults.rowHeight;
-    const max = this._getMax(this.defaults.offset, this.defaults.rowHeight);
-    const min = this._getMin(this.defaults.offset, this.defaults.rowHeight, this.items.length);
+    dist = Math.round(dist / defaults.rowHeight) * defaults.rowHeight;
+    const max = this._getMax(defaults.offset, defaults.rowHeight);
+    const min = this._getMin(defaults.offset, defaults.rowHeight, this.items.length);
 
     // 不要超过最大值或者最小值
     dist = Math.max(Math.min(dist, max), min);
 
     // 如果是 disabled 的就跳过
-    let index = this.defaults.offset - dist / this.defaults.rowHeight;
+    let index = defaults.offset - dist / defaults.rowHeight;
     while (!!this.items[index] && this.items[index].disabled) {
       diff > 0 ? ++index : --index;
     }
-    dist = (this.defaults.offset - index) * this.defaults.rowHeight;
+    dist = (defaults.offset - index) * defaults.rowHeight;
 
     this._animating = true;
     this._distance = dist; // px

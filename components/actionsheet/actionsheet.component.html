@@ -4,9 +4,11 @@
     <p class="weui-actionsheet__title-text">{{ config.title }}</p>
   </div>
   <div class="weui-actionsheet__menu">
-    <div class="weui-actionsheet__cell" *ngFor="let item of menus" (click)="_onSelect(item)">{{ item.text }}</div>
+    <div class="weui-actionsheet__cell" *ngFor="let item of menus" (click)="_onSelect(item)" [class.weui-actionsheet__cell_warn]="item.type === 'warn'">
+      {{ item.text }}
+    </div>
   </div>
-  <div class="weui-actionsheet__action" *ngIf="config.skin === 'ios' && config.cancel">
+  <div class="weui-actionsheet__action" style="color: var(--weui-FG-0);" *ngIf="config.skin === 'ios' && config.cancel">
     <div class="weui-actionsheet__cell" (click)="hide()">{{ config.cancel }}</div>
   </div>
 </div>
