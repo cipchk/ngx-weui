@@ -20,8 +20,9 @@ NGX-WEUI
 
 ## Version
 
-- WeUI 1.x using `7.0.x`
-- WeUI 2.x using `8.0.x` & Angular 8
+- WeUI `1.x` using `7.0.x`
+- WeUI `<= 2.2` using `8.x` & Angular 8
+- WeUI `>= 2.3` using `9.x` & Angular 9, Support dark & light theme
 
 ## Table of Contents
 
