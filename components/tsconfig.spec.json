@@ -1,18 +1,26 @@
 {
   "extends": "../tsconfig.json",
   "compilerOptions": {
-    "outDir": "../out-tsc/spec",
-    "module": "commonjs",
-    "esModuleInterop": true,
+    "baseUrl": "./",
+    "rootDir": "./",
     "target": "es5",
-    "types": ["jasmine"],
-    "rootDir": ".",
-    "baseUrl": ".",
+    "types": [
+      "jasmine",
+      "node"
+    ],
     "paths": {
-      "ngx-weui": ["./ngx-weui.module"],
       "ngx-weui/*": ["./*"]
-    }
+    },
+    "esModuleInterop": true,
+    "noImplicitThis": false
   },
-  "files": ["test.ts", "polyfills.ts"],
-  "include": ["**/*.spec.ts", "**/*.d.ts"]
+  "files": [
+    "test.ts",
+    "polyfills.ts"
+  ],
+  "include": [
+    "**/*.spec.ts",
+    "**/*.d.ts"
+  ],
+  "exclude": [ ]
 }

@@ -1,8 +1,9 @@
 .page.flex .placeholder {
   height: 2.3em;
   margin: 5px;
-  color: #cfcfcf;
+  padding: 0 10px;
+  color: var(--weui-FG-1);
   line-height: 2.3em;
   text-align: center;
-  background-color: #ebebeb;
+  background-color: var(--weui-BG-1);
 }

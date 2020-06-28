@@ -46,7 +46,7 @@ rm -rf ${DIST}
 mkdir -p ${DIST}
 
 # build
-$(npm bin)/ng build ngx-weui-lib
+node --max_old_space_size=4096 ${PWD}/scripts/build/packing
 
 # license banner
 LICENSE_BANNER=${SOURCE}/license-banner.txt

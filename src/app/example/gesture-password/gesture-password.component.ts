@@ -1,28 +1,27 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
-import { ERR } from 'ngx-gesture-password';
+import { ERR, Options } from 'ngx-gesture-password';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'example-gesture-password',
   templateUrl: './gesture-password.component.html',
-  styleUrls: ['./gesture-password.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class GesturePasswordComponent {
   pwd: string = '1236';
   type: string = 'check';
-  options: any;
+  options: Options | null;
   switchState: boolean = true;
 
-  constructor(private _ns: ToastrService) { }
+  constructor(private _ns: ToastrService) {}
 
   onChangeOptions() {
     if (this.options) {
       this.options = null;
     } else {
       this.options = {
-        bgColor: '#292b38',
+        bgColor: 'var(--weui-BG-1)',
         focusColor: '#5aa5fe',
         fgColor: '#878aa1',
         num: 4,
@@ -31,6 +30,7 @@ export class GesturePasswordComponent {
           .map((_i, index) => String.fromCharCode(index + 65)),
       };
     }
+    console.log(this.options);
   }
 
   onError(data: any) {

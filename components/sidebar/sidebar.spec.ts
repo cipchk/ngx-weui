@@ -1,7 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
-import { fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
 import { SidebarComponent, SidebarModule } from '../sidebar';
 
 describe('Component: Sidebar', () => {

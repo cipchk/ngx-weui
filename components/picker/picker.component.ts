@@ -1,8 +1,8 @@
 import {
-  forwardRef,
   ChangeDetectionStrategy,
   Component,
   EventEmitter,
+  forwardRef,
   Input,
   OnChanges,
   OnInit,
@@ -77,6 +77,7 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnChanges 
 
   /** 当 `options.type==='form'` 时，占位符文本 */
   @Input() placeholder: string;
+  @Input() title: string;
   @Input() @InputBoolean() disabled: boolean = false;
   /**
    * 确认后回调当前选择数据（包括已选面板所有数据）
@@ -209,7 +210,7 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnChanges 
     this.disabled = isDisabled;
   }
 
-  _onFocus() {
-    arguments[0].target.blur();
+  _onFocus(ev: Event): void {
+    (ev.target! as HTMLElement).blur();
   }
 }

@@ -13,7 +13,7 @@ module: JWeiXinModule
 > `ngx-weui` 允许你单独使用这份声明文件，而无须任何模块的导入。
 
 > ```typescript
-> import * as wx from 'ngx-weui/jweixin/wx';
+> import * as wx from 'ngx-weui/jweixin/jweixin';
 
 > wx.config({
 

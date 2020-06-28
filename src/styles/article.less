@@ -1,15 +1,11 @@
 .App__preview {
-  flex: 5;
-  background-color: #eee;
   display: flex;
+  flex: 5;
   width: 100%;
   height: 100%;
 }
 
 @media (max-width: 1024px) {
-  .App__preview {
-    display: none;
-  }
   .Resizer {
     display: none;
   }
@@ -20,17 +16,17 @@
 
 .App__detail {
   height: 100%;
-  border-left: 1px solid #bcbab6;
+  border-left: 1px solid var(--weui-DIALOG-LINE-COLOR);
 }
 
 .App__mobileview {
+  position: relative;
   width: 375px;
   height: 667px;
+  overflow-x: hidden;
+  overflow-y: scroll;
   background: rgba(255, 255, 255, 1);
   border-radius: 5px;
-  position: relative;
-  overflow-y: scroll;
-  overflow-x: hidden;
 }
 
 .App__mobileview::-webkit-scrollbar,
@@ -43,25 +39,25 @@
 }
 
 .App__preview--none {
-  font-size: 1.5em;
   color: rgba(0, 0, 0, 0.25);
+  font-size: 1.5em;
   text-align: center;
 }
 
 .App__preview--none .fa {
-  opacity: 0.3;
   margin: 10px auto;
+  opacity: 0.3;
 }
 
 .flex-center {
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 .weui-article {
   .docs-example-source {
-    background: rgba(0, 0, 0, 0.05);
-    padding: 10px;
     height: 600px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.05);
   }
 }

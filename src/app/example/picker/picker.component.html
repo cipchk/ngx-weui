@@ -7,8 +7,15 @@
           <label class="weui-label">* City</label>
         </div>
         <div class="weui-cell__bd">
-          <weui-city-picker required placeholder="Pick a City" [(ngModel)]="res.city" name="city" [data]="cityData"
-            (change)="cityChange($event)"></weui-city-picker>
+          <weui-city-picker
+            required
+            placeholder="Pick a City"
+            title="City"
+            [(ngModel)]="res.city"
+            name="city"
+            [data]="cityData"
+            (change)="cityChange($event)"
+          ></weui-city-picker>
         </div>
       </div>
     </div>
@@ -18,8 +25,7 @@
           <label class="weui-label">YearMonth</label>
         </div>
         <div class="weui-cell__bd">
-          <weui-date-picker placeholder="Pick a Year&Month" [min]="DT.min" [max]="DT.max" type="date-ym"
-            [(ngModel)]="res.ym" name="date-ym"></weui-date-picker>
+          <weui-date-picker placeholder="Pick a Year&Month" [min]="DT.min" [max]="DT.max" type="date-ym" [(ngModel)]="res.ym" name="date-ym"></weui-date-picker>
         </div>
       </div>
     </div>
@@ -29,8 +35,7 @@
           <label class="weui-label">Date</label>
         </div>
         <div class="weui-cell__bd">
-          <weui-date-picker placeholder="Pick a Date" [min]="DT.min" [max]="DT.max" [(ngModel)]="res.date" name="date">
-          </weui-date-picker>
+          <weui-date-picker placeholder="Pick a Date" [min]="DT.min" [max]="DT.max" [(ngModel)]="res.date" name="date"> </weui-date-picker>
         </div>
       </div>
     </div>
@@ -40,8 +45,7 @@
           <label class="weui-label">DateTime</label>
         </div>
         <div class="weui-cell__bd">
-          <weui-date-picker placeholder="Pick a DateTime" type="datetime" [format]="dateFormat" [(ngModel)]="res.date2"
-            name="date2"></weui-date-picker>
+          <weui-date-picker placeholder="Pick a DateTime" type="datetime" [format]="dateFormat" [(ngModel)]="res.date2" name="date2"></weui-date-picker>
         </div>
       </div>
     </div>
@@ -51,8 +55,7 @@
           <label class="weui-label">Time</label>
         </div>
         <div class="weui-cell__bd">
-          <weui-date-picker placeholder="Pick a Time" type="time" [(ngModel)]="res.date3" name="date2">
-          </weui-date-picker>
+          <weui-date-picker placeholder="Pick a Time" type="time" [(ngModel)]="res.date3" name="date2"> </weui-date-picker>
         </div>
       </div>
     </div>
@@ -62,8 +65,7 @@
           <label class="weui-label">*Direct Picker</label>
         </div>
         <div class="weui-cell__bd">
-          <weui-picker placeholder="Pick a item" required [groups]="items" [(ngModel)]="res.item" name="item">
-          </weui-picker>
+          <weui-picker placeholder="Pick a item" required [groups]="items" [(ngModel)]="res.item" name="item"> </weui-picker>
         </div>
       </div>
     </div>
@@ -73,8 +75,13 @@
           <label class="weui-label">Direct Picker</label>
         </div>
         <div class="weui-cell__bd">
-          <weui-picker placeholder="Pick a item" [(ngModel)]="res.mitem" name="mitem" [groups]="itemGroup"
-            [options]="{ cancel: 'Cancel', confirm: 'Confirm', backdrop: false }"></weui-picker>
+          <weui-picker
+            placeholder="Pick a item"
+            [(ngModel)]="res.mitem"
+            name="mitem"
+            [groups]="itemGroup"
+            [options]="{ cancel: 'Cancel', confirm: 'Confirm', backdrop: false }"
+          ></weui-picker>
         </div>
       </div>
     </div>

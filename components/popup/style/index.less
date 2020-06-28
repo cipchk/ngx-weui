@@ -1,12 +1,12 @@
 .weui-popup {
   position: fixed;
-  left: 0;
   bottom: 0;
-  transform: translateY(100%);
-  backface-visibility: hidden;
+  left: 0;
   z-index: 5000;
   width: 100%;
   background-color: @popup-bg;
+  transform: translateY(100%);
+  backface-visibility: hidden;
   transition: transform 0.3s;
   &_full {
     height: 100vh;
@@ -16,22 +16,22 @@
     transform: translate(0);
   }
   &__hd {
+    position: relative;
     display: flex;
     padding: @popup-head-padding;
-    background-color: @popup-head-bg;
-    position: relative;
     text-align: center;
-    &:after {
-      content: ' ';
+    background-color: @popup-head-bg;
+    &::after {
       position: absolute;
-      left: 0;
-      bottom: 0;
       right: 0;
+      bottom: 0;
+      left: 0;
       height: 1px;
-      border-bottom: 1px solid @popup-head-border-bottom-color;
       color: @popup-head-color;
-      transform-origin: 0 100%;
+      border-bottom: 1px solid @popup-head-border-bottom-color;
       transform: scaleY(0.5);
+      transform-origin: 0 100%;
+      content: ' ';
     }
   }
   &__action {

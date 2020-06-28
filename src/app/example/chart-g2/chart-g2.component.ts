@@ -1,5 +1,4 @@
-import { Component, ViewChild, ViewEncapsulation, AfterViewInit } from '@angular/core';
-
+import { AfterViewInit, Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ChartG2Directive } from 'ngx-weui/chart-g2';
 
 @Component({
@@ -10,17 +9,20 @@ import { ChartG2Directive } from 'ngx-weui/chart-g2';
 })
 export class DemoChartG2Component implements AfterViewInit {
   @ViewChild('c1', { static: true }) c1: ChartG2Directive;
-  renderC1() {
-    const chart = this.c1.chart;
-    chart.source([{ tem: 10, city: 'tokyo' }, { tem: 4, city: 'newYork' }, { tem: 3, city: 'berlin' }]);
-    chart
-      .interval()
-      .position('city*tem')
-      .color('city');
-    chart.render();
-  }
 
   @ViewChild('c2', { static: true }) c2: ChartG2Directive;
+
+  @ViewChild('c3', { static: true }) c3: ChartG2Directive;
+  renderC1() {
+    const chart = this.c1.chart;
+    chart.source([
+      { tem: 10, city: 'tokyo' },
+      { tem: 4, city: 'newYork' },
+      { tem: 3, city: 'berlin' },
+    ]);
+    chart.interval().position('city*tem').color('city');
+    chart.render();
+  }
   renderC2() {
     const data = [
       { time: '周一', tem: 10, city: 'beijing' },
@@ -57,7 +59,7 @@ export class DemoChartG2Component implements AfterViewInit {
 
     const Util = this.c2.GM.Util;
     this.c2.chart.axis('time', {
-      label(_text, index, total) {
+      label(_text: string, index: number, total: number) {
         const cfg = Util.mix({}, label);
         // 第一个点左对齐，最后一个点右对齐，其余居中，只有一个点时左对齐
         if (index === 0) {
@@ -75,15 +77,9 @@ export class DemoChartG2Component implements AfterViewInit {
       },
     });
     this.c2.chart.source(data, defs);
-    this.c2.chart
-      .line()
-      .position('time*tem')
-      .color('city')
-      .shape('smooth');
+    this.c2.chart.line().position('time*tem').color('city').shape('smooth');
     this.c2.chart.render();
   }
-
-  @ViewChild('c3', { static: true }) c3: ChartG2Directive;
   renderC3() {
     this.c3.GM.Global.pixelRatio = 2; // 双精度
     const Shape = this.c3.GM.Shape;
@@ -91,12 +87,15 @@ export class DemoChartG2Component implements AfterViewInit {
     const data = [{ pointer: '当前收益', value: 5, length: 2, y: 1.05 }];
     // 自定义绘制数据的的形状
     Shape.registShape('point', 'dashBoard', {
-      getShapePoints(cfg) {
+      getShapePoints(cfg: any) {
         const x = cfg.x;
         const y = cfg.y;
-        return [{ x, y }, { x, y: 0.5 }];
+        return [
+          { x, y },
+          { x, y: 0.5 },
+        ];
       },
-      drawShape(cfg, canvas) {
+      drawShape(cfg: any, canvas: any) {
         let point1 = cfg.points[0];
         let point2 = cfg.points[1];
         point1 = this.parsePoint(point1);
@@ -177,12 +176,7 @@ export class DemoChartG2Component implements AfterViewInit {
       font: '18px Arial',
       textAlign: 'center',
     });
-    chart
-      .point()
-      .position('value*y')
-      .size('length')
-      .color('#18b7d6')
-      .shape('dashBoard');
+    chart.point().position('value*y').size('length').color('#18b7d6').shape('dashBoard');
     chart.render();
   }
 

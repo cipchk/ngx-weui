@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-
-import { ProgressComponent, ProgressModule } from '.';
+import { ProgressComponent } from './progress.component';
+import { ProgressModule } from './progress.module';
 
 describe('Component: Progress', () => {
   let fixture: ComponentFixture<TestProgressComponent>;
@@ -30,7 +30,11 @@ describe('Component: Progress', () => {
   });
 
   it('should value between 0 and 100', () => {
-    const VALUES = [{ v: 50, r: 50 }, { v: 101, r: 100 }, { v: -10, r: 0 }];
+    const VALUES = [
+      { v: 50, r: 50 },
+      { v: 101, r: 100 },
+      { v: -10, r: 0 },
+    ];
     for (const item of VALUES) {
       comp.value = item.v;
       expect(comp._value).toBe(item.r);
@@ -55,9 +59,7 @@ describe('Component: Progress', () => {
 });
 
 @Component({
-  template: `
-    <weui-progress (cancel)="cancel()"></weui-progress>
-  `,
+  template: ` <weui-progress (cancel)="cancel()"></weui-progress> `,
 })
 class TestProgressComponent {
   cancel() {}

@@ -15,6 +15,5 @@ weui-type | 操作场景 | `primary、default、warn` | `primary`
 weui-loading | 是否加载状态 | `boolean` | `false`
 weui-mini | 是否小号 | `boolean` | `false`
 weui-cell | 行按钮 | `boolean` | `false`
-weui-plain | 镂空按钮 | `boolean` | `false`
 weui-block | Block 按钮 | `boolean` | `false`
 disabled | 禁用状态 | `boolean` | `false`

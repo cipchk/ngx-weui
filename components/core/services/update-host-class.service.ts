@@ -19,7 +19,7 @@ export class UpdateHostClassService {
     }
   }
 
-  private addClass(el: HTMLElement, classMap: {}, renderer: Renderer2): void {
+  private addClass(el: HTMLElement, classMap: { [key: string]: any }, renderer: Renderer2): void {
     for (const i in classMap) {
       if (classMap.hasOwnProperty(i) && classMap[i]) {
         renderer.addClass(el, i);

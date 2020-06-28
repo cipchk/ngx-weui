@@ -1,6 +1,6 @@
 
 <h1 align="center">
-ngx-weui
+NGX-WEUI
 </h1>
 
 <div align="center">
@@ -59,8 +59,6 @@ cd demo
 
 ```bash
 ng add ngx-weui
-# Using WeUI 1.x
-# ng add ngx-weui
 ```
 
 > please refer to more [details](https://github.com/cipchk/ngx-weui/blob/master/docs/how.md).

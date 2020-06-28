@@ -19,7 +19,7 @@ describe('Uploader: Class', () => {
     instance = new Uploader({});
     xhr = sinon.useFakeXMLHttpRequest();
     requests = [];
-    xhr.onCreate = req => {
+    xhr.onCreate = (req: any) => {
       requests.push(req);
     };
   });
@@ -29,7 +29,7 @@ describe('Uploader: Class', () => {
   });
 
   it('#setOptions should be set alias,auto,size,limit,types', () => {
-    const args = {
+    const args: any = {
       alias: 'image',
       auto: true,
       size: 10,
@@ -39,7 +39,7 @@ describe('Uploader: Class', () => {
     instance.setOptions(args);
     // tslint:disable-next-line:forin
     for (const k in args) {
-      expect(instance.options[k]).toBe(args[k], `参数${k}值应该是：${args[k]}`);
+      expect((instance.options as any)[k]).toBe(args[k], `参数${k}值应该是：${args[k]}`);
     }
   });
 

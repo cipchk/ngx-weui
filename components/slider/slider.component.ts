@@ -1,11 +1,11 @@
 import {
-  forwardRef,
   AfterViewInit,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
+  forwardRef,
   Input,
   OnChanges,
   OnDestroy,
@@ -72,13 +72,14 @@ export class SliderComponent implements ControlValueAccessor, AfterViewInit, OnD
   /**
    * 值改变时触发
    */
+  // tslint:disable-next-line: no-output-rename
   @Output('weui-change') readonly change = new EventEmitter<number>();
 
   constructor(el: ElementRef<HTMLElement>, private cdr: ChangeDetectorRef) {
     this.el = el.nativeElement;
   }
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.isInit = true;
     this.trackEl = this.el.querySelector('.weui-slider__track')! as HTMLElement;
     this.handlerEl = this.el.querySelector('.weui-slider__handler')! as HTMLElement;
@@ -94,7 +95,7 @@ export class SliderComponent implements ControlValueAccessor, AfterViewInit, OnD
     this.handlerEl.removeEventListener('touchmove', this.onTouchMove, false);
   }
 
-  private refresh() {
+  private refresh(): void {
     this.state = {
       enabled: this.enabled,
       left: this.el.getBoundingClientRect().left,
@@ -110,7 +111,7 @@ export class SliderComponent implements ControlValueAccessor, AfterViewInit, OnD
     this.layout();
   }
 
-  private setValue(value: number) {
+  private setValue(value: number): void {
     if (this.max > this.min) {
       this.state.percentage = [
         // tslint:disable-next-line: binary-expression-operand-order
@@ -123,19 +124,21 @@ export class SliderComponent implements ControlValueAccessor, AfterViewInit, OnD
     }
   }
 
-  private layout() {
+  private layout(): void {
     this.trackEl.style.width = this.state.percentage[0] + '%';
     this.handlerEl.style.left = this.state.percentage[0] + '%';
   }
 
-  private startHandle($event: TouchEvent) {
+  private startHandle($event: TouchEvent): void {
     if (this.state === null) this.refresh();
 
     this.state.x = ($event.touches[0] || $event.changedTouches[0]).pageX;
   }
 
-  private moveHandle($event: TouchEvent) {
-    if (!this.state.enabled) return false;
+  private moveHandle($event: TouchEvent): void {
+    if (!this.state.enabled) {
+      return;
+    }
 
     const pageX = ($event.touches[0] || $event.changedTouches[0]).pageX;
 
@@ -154,7 +157,7 @@ export class SliderComponent implements ControlValueAccessor, AfterViewInit, OnD
     return Math.max(0, Math.min(100, percentage));
   }
 
-  private calculateValue(percentage: number) {
+  private calculateValue(percentage: number): void {
     const rawValue = (percentage / 100) * (this.max - this.min);
     // adjustment = this.min
     let value = this.min + Math.round(rawValue / this.step) * this.step;

@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { fakeAsync, tick, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
 import { PTRComponent, PTRConfig, PTRModule } from '../ptr';
 
 function spyTouchArgument(val: number): TouchEvent {

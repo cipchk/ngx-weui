@@ -1,41 +1,4 @@
-// cli v6 bug，暂不支持 `~weui` 写法，相关ISSUES
-// - [#10717](https://github.com/angular/angular-cli/issues/10717)
-// - [#10721](https://github.com/angular/angular-cli/issues/10721)
-// @import '~weui/src/style/weui.less';
-@import '../node_modules/weui/src/style/weui.less';
-
+@import '~weui/src/style/weui.less';
 @import '../components/index';
-
 // @weuiBtnPrimaryBg: #f50;
-
-@font-face {
-    font-family: 'iconfont';
-    /* project id 403086 */
-    src: url('//at.alicdn.com/t/font_403086_9vgi8ei22pflmcxr.eot');
-    src: url('//at.alicdn.com/t/font_403086_9vgi8ei22pflmcxr.eot?#iefix') format('embedded-opentype'), url('//at.alicdn.com/t/font_403086_9vgi8ei22pflmcxr.woff') format('woff'), url('//at.alicdn.com/t/font_403086_9vgi8ei22pflmcxr.ttf') format('truetype'), url('//at.alicdn.com/t/font_403086_9vgi8ei22pflmcxr.svg#iconfont') format('svg');
-}
-
-.iconfont {
-    font-family: "iconfont" !important;
-    font-size: 16px;
-    font-style: normal;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.icon-left:before {
-    content: "\e628";
-}
-
-.icon-right:before {
-    content: "\e642";
-}
-
-@import './styles/layout.less';
-@import './styles/article.less';
-@import './styles/start.less';
-@import './styles/solarized-light.less';
-@import './styles/doc-viewer.less';
-@import './styles/example-home.less';
-@import './styles/split.less';
-@import './styles/other.less';
+@import './styles/index.less';

@@ -1,12 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  ElementRef,
-  Input,
-  OnChanges,
-  OnInit,
-  ViewEncapsulation,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
 import { ButtonType, InputBoolean, UpdateHostClassService } from 'ngx-weui/core';
 import { ButtonConfig } from './button.config';
 
@@ -39,11 +31,6 @@ export class ButtonComponent implements OnInit, OnChanges {
   @Input('weui-mini') @InputBoolean() mini: boolean = false;
 
   /**
-   * 镂空按钮
-   */
-  @Input('weui-plain') @InputBoolean() plain: boolean = false;
-
-  /**
    * 行按钮
    */
   @Input('weui-cell') @InputBoolean() cell: boolean = false;
@@ -64,18 +51,17 @@ export class ButtonComponent implements OnInit, OnChanges {
 
   private setClassMap(): void {
     const prefixCls = 'weui-btn';
-    const { uhcs, el, type, plain, cell, disabled, block, mini, loading } = this;
-    const median = plain ? 'plain' : cell ? 'cell' : '';
+    const { uhcs, el, type, cell, disabled, block, mini, loading } = this;
+    const median = cell ? 'cell' : '';
     uhcs.updateHostClass(el.nativeElement, {
       [`${prefixCls}`]: !cell,
       [`${prefixCls}_cell`]: cell,
-      [`${prefixCls}_disabled`]: !plain && disabled,
+      [`${prefixCls}_disabled`]: disabled,
       [`${prefixCls}_block`]: block,
       [`${prefixCls}_mini`]: mini,
       [`${prefixCls}_${median}-${type}`]: median,
       [`${prefixCls}_${type}`]: !median,
       [`${prefixCls}_loading`]: loading,
-      [`${prefixCls}_plain-disabled`]: plain && disabled,
     });
   }
 

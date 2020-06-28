@@ -4,12 +4,13 @@ import { MenuService } from '../home/menu.service';
 
 @Component({
   selector: 'example-container',
-  template: `
-    <component-container *ngIf="menu" [menu]="menu" [url]="'example'"></component-container>
-  `,
+  template: ` <component-container *ngIf="menu" [menu]="menu" [url]="'example'"></component-container> `,
+  host: {
+    '[class.container]': `true`,
+  },
 })
 export class ExampleContainerComponent implements OnInit {
-  constructor(private route: ActivatedRoute, private menuService: MenuService) { }
+  constructor(private route: ActivatedRoute, private menuService: MenuService) {}
 
   menu: any;
   ngOnInit() {

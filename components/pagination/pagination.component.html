@@ -1,26 +1,10 @@
 <ng-template [ngIf]="mode === 'button'">
   <div class="weui-pagination__item weui-pagination__prev">
-    <a
-      weui-button
-      (click)="_goto(-1)"
-      weui-plain
-      [weui-mini]="mini"
-      weui-type="default"
-      [disabled]="_prevDisabled"
-      [innerHTML]="prevText"
-    ></a>
+    <a weui-button (click)="_goto(-1)" [weui-mini]="mini" weui-type="default" [disabled]="_prevDisabled" [innerHTML]="prevText"></a>
   </div>
   <div class="weui-pagination__item weui-pagination__num" *ngIf="!simple">{{ current }}/{{ total }}</div>
   <div class="weui-pagination__item weui-pagination__next">
-    <a
-      weui-button
-      (click)="_goto(1)"
-      weui-plain
-      [weui-mini]="mini"
-      weui-type="default"
-      [disabled]="_nextDisabled"
-      [innerHTML]="nextText"
-    ></a>
+    <a weui-button (click)="_goto(1)" [weui-mini]="mini" weui-type="default" [disabled]="_nextDisabled" [innerHTML]="nextText"></a>
   </div>
 </ng-template>
 <div class="weui-pagination__item weui-pagination__num" *ngIf="mode === 'pointer'">

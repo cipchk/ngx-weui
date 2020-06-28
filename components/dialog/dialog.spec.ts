@@ -1,9 +1,8 @@
 import { Component, DebugElement, ViewChild } from '@angular/core';
-import { fakeAsync, inject, tick, ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
+import { ComponentFixture, ComponentFixtureAutoDetect, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
 import { isAndroid } from 'ngx-weui/core';
 import { DialogComponent, DialogConfig, DialogModule, DialogService } from '../dialog';
 
@@ -314,9 +313,7 @@ describe('Component: Dialog', () => {
 });
 
 @Component({
-  template: `
-    <h1>Test Service</h1>
-  `,
+  template: ` <h1>Test Service</h1> `,
 })
 class TestDialogServiceComponent {}
 

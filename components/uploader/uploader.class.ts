@@ -195,17 +195,20 @@ export class Uploader {
    */
   addToQueue(files: File[], options?: UploaderOptions, filters?: FilterFunction[] | string) {
     const list: File[] = [];
-    for (const file of files) list.push(file);
+    for (const file of files) {
+      list.push(file);
+    }
     const arrayOfFilters = this._getFilters(filters!);
     const count = this._queue.length;
     const addedFileItems: FileItem[] = [];
     if (!options) {
       options = this._options;
     }
-    list.map((some: File) => {
+    list.forEach((some, index) => {
       const temp = new FileLikeObject(some);
       if (this._isValidFile(temp, arrayOfFilters, options!)) {
         const fileItem = new FileItem(this, some, options!);
+        fileItem.index = index;
         addedFileItems.push(fileItem);
         this._queue.push(fileItem);
         if (this._options.onFileQueued) this._options.onFileQueued(fileItem);
@@ -330,9 +333,7 @@ export class Uploader {
     if (!this._options.disableMultipart) {
       sendable = new FormData();
 
-      Object.keys(this._options.params || {}).forEach((key: string) =>
-        sendable.append(key, this._options.params![key]),
-      );
+      Object.keys(this._options.params || {}).forEach((key: string) => sendable.append(key, this._options.params![key]));
 
       sendable.append(item.options.alias, item._file, item.file.name);
     } else {
@@ -395,10 +396,7 @@ export class Uploader {
     }
     headers.split('\n').map((line: any) => {
       i = line.indexOf(':');
-      key = line
-        .slice(0, i)
-        .trim()
-        .toLowerCase();
+      key = line.slice(0, i).trim().toLowerCase();
       val = line.slice(i + 1).trim();
       if (key) {
         parsed[key] = parsed[key] ? `${parsed[key]}, ${val}` : val;

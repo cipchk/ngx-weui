@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { META } from '../routes/docs/meta';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class MenuService {
   menus: any[] = [
     {

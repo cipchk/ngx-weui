@@ -152,7 +152,7 @@ export class DialogComponent implements OnDestroy {
     return true;
   }
 
-  private setFocus() {
+  private setFocus(): void {
     const containerEl = this.container.nativeElement;
     let firstFormEl: any = null;
     if (this.config.type === 'prompt') {
@@ -163,11 +163,11 @@ export class DialogComponent implements OnDestroy {
     if (firstFormEl) firstFormEl.focus();
   }
 
-  _chanage() {
+  _chanage(): void {
     this.promptCheck();
   }
 
-  _keyup(event: KeyboardEvent) {
+  _keyup(event: KeyboardEvent): void {
     // tslint:disable-next-line: deprecation
     if (event.keyCode === 13) {
       this._onSelect();
@@ -197,22 +197,26 @@ export class DialogComponent implements OnDestroy {
    *
    * @param is_backdrop 是否从背景上点击
    */
-  hide(is_backdrop: boolean = false) {
-    if (is_backdrop === true && this.config.backdrop === false) return false;
+  hide(is_backdrop: boolean = false): void {
+    if (is_backdrop === true && this.config.backdrop === false) {
+      return;
+    }
 
     this._shown = false;
     this.cdr.detectChanges();
     this.close.emit(this);
   }
 
-  _onSelect(menu?: any) {
+  _onSelect(menu?: any): boolean {
     // 未指定时查找 `value===true` 的按钮
     if (!menu && this.config.btns!.length > 0) {
       menu = this.config.btns!.find(w => w.value === true);
     }
     const ret = menu;
     if (menu.value === true && this._config.type === 'prompt') {
-      if (!this.promptCheck()) return false;
+      if (!this.promptCheck()) {
+        return false;
+      }
       ret.result = this._promptData;
     }
     this.observer.next(ret);

@@ -4,6 +4,7 @@
 npm-debug.log
 package-lock.json
 yarn.lock
+junit
 
 # misc
 /coverage

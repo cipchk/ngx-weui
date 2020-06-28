@@ -1,8 +1,7 @@
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/core/testing';
-import { FormsModule, FormControl, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
-
 import { FormModule } from './form.module';
 import { InputDirective } from './input.directive';
 

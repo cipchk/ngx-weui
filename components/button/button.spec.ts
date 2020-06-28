@@ -10,7 +10,6 @@ const html = `
         [weui-type]="type"
         [weui-loading]="loading"
         [weui-mini]="mini"
-        [weui-plain]="plain"
         [weui-cell]="cell"
         [weui-block]="block"
         [disabled]="disabled">default<weui-button>
@@ -67,12 +66,6 @@ describe('Component: Button', () => {
     expect(el.querySelector('.weui-loading')).not.toBeNull();
   });
 
-  it('should have class plain by plain=true', () => {
-    context.plain = true;
-    fixture.detectChanges();
-    expect(el.querySelector('#default')!.classList).toContain('weui-btn_plain-primary');
-  });
-
   it('should have class mini by mini=true', () => {
     context.mini = true;
     fixture.detectChanges();
@@ -94,7 +87,6 @@ class TestButtonComponent extends ButtonComponent {
   type: ButtonType = 'primary';
   loading = false;
   mini = false;
-  plain = false;
   disabled = false;
   cell = false;
   block = false;

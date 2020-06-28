@@ -1,9 +1,9 @@
 import {
-  forwardRef,
   ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
   EventEmitter,
+  forwardRef,
   Input,
   OnChanges,
   Output,
@@ -48,7 +48,7 @@ export class RatingComponent implements ControlValueAccessor, OnChanges {
   constructor(private DEF: RatingConfig, private cdr: ChangeDetectorRef) {}
 
   private setConfig(cog: RatingConfig) {
-    const _c = {
+    const _c: any = {
       states: [],
       ...this.DEF,
       ...cog,

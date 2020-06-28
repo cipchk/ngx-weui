@@ -1,16 +1,14 @@
+import { HttpClientJsonpModule, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { HttpClientModule, HttpClientJsonpModule } from '@angular/common/http';
-
-import { ToastrModule } from 'ngx-toastr';
 import { AqmModule } from 'angular-qq-maps';
+import { ToastrModule } from 'ngx-toastr';
 
-import { SharedModule } from './shared/shared.module';
+import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { RoutesModule } from './routes/routes.module';
-import { CoreModule } from './core/core.module';
-import { AppComponent } from './app.component';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   imports: [
@@ -18,7 +16,6 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     HttpClientModule,
     HttpClientJsonpModule,
-    CoreModule,
     SharedModule,
     RoutesModule,
     LayoutModule,
@@ -30,4 +27,4 @@ import { AppComponent } from './app.component';
   declarations: [AppComponent],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

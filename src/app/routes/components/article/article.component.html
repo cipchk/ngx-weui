@@ -2,7 +2,7 @@
   <div class="area area-left">
     <div class="App__preview background--canvas flex-center">
       <div class="App__mobileview">
-        <component-container [menu]="menu" [url]="'components'"></component-container>
+        <component-container [menu]="menu" [url]="'components'" class="container"></component-container>
       </div>
     </div>
   </div>
@@ -20,9 +20,11 @@
             <ng-container *ngIf="item.meta.module">
               <p>引用方式：</p>
               <pre
-                class="typescript hljs"><span class="hljs-section">import</span> &#123; <span class="hljs-attribute">{{item.meta.module}}</span> &#125; from <span class="hljs-string">'ngx-weui'</span>;</pre>
+                class="typescript hljs"
+              ><span class="hljs-section">import</span> &#123; <span class="hljs-attribute">{{item.meta.module}}</span> &#125; from <span class="hljs-string">'ngx-weui'</span>;</pre>
               <p *ngIf="item.meta.config">
-                模块允许对<code>{{ item.meta.config }}</code><a routerLink="/docs/config">全局配置</a>。
+                模块允许对<code>{{ item.meta.config }}</code
+                ><a routerLink="/docs/config">全局配置</a>。
               </p>
             </ng-container>
             <div class="api-container" *ngIf="item.data.api" [innerHTML]="item.data.api"></div>

@@ -19,16 +19,16 @@ import { NgModule } from '@angular/core';
 import { WeUiModule, ButtonConfig } from 'ngx-weui';
 
 export function buttonConfig() {
-    return Object.assign(new ButtonConfig(), { type: 'warn' });
+  return Object.assign(new ButtonConfig(), { type: 'warn' });
 }
 
 @NgModule({
     imports: [
-        WeUiModule.forRoot()
+      WeUiModule.forRoot()
     ],
     providers: [
-        // 重置默认按钮样式为：warn
-        { provide: ButtonConfig, useFactory: buttonConfig }
+      // 重置默认按钮样式为：warn
+      { provide: ButtonConfig, useFactory: buttonConfig }
     ]
 })
 ```

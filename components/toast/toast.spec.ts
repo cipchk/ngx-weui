@@ -1,8 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { fakeAsync, inject, tick, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-
 import { ToastComponent, ToastModule, ToastService } from '../toast';
 
 describe('Component: Toast', () => {
@@ -79,17 +78,13 @@ describe('Component: Toast', () => {
 });
 
 @Component({
-  template: `
-    <h1>Test Service</h1>
-  `,
+  template: ` <h1>Test Service</h1> `,
 })
 class TestToastServiceComponent {}
 
 @Component({
   selector: 'app-component',
-  template: `
-    <weui-toast [type]="type" [time]="100"></weui-toast>
-  `,
+  template: ` <weui-toast [type]="type" [time]="100"></weui-toast> `,
 })
 class TestToastComponent {
   @ViewChild(ToastComponent, { static: true }) toast: ToastComponent;

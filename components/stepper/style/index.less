@@ -3,33 +3,33 @@ weui-stepper {
   align-items: center;
   justify-content: center;
   > span {
-    border: 1px solid @stepper-color;
-    border-radius: 5px;
+    width: @stepper-wh;
     height: @stepper-wh;
     line-height: @stepper-wh;
-    width: @stepper-wh;
     text-align: center;
+    border: 1px solid @stepper-color;
+    border-radius: 5px;
     em {
       font-size: @stepper-font-size;
     }
   }
   > .input {
     display: inline-block;
-    height: @stepper-wh;
     width: @stepper-input-width;
+    height: @stepper-wh;
   }
   input {
-    border: none;
-    width: 100%;
     display: inline-block;
-    color: #000;
+    width: 100%;
+    color: var(--weui-FG-0);
+    font-size: 16px;
     text-align: center;
     vertical-align: middle;
-    font-size: 16px;
+    background-color: var(--weui-BG-2);
+    border: none;
     &[disabled] {
-      opacity: 1;
-      color: #000;
       background: none;
+      opacity: 1;
     }
     &:focus {
       outline: none;

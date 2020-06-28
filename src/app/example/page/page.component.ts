@@ -9,14 +9,15 @@ import { Component, Input, ViewEncapsulation } from '@angular/core';
     </div>
     <div class="page__bd" [ngClass]="{ page__bd_spacing: spacing }"><ng-content></ng-content></div>
     <div class="page__ft" [ngClass]="{ j_bottom: ftBottom }" *ngIf="!noBottom">
-      <a href="#" routerLink="/"><img src="./assets/images/icon_footer.png"/></a>
+      <a href="#" routerLink="/"><img src="./assets/images/icon_footer.png" /></a>
       <ng-content select="[footer]"></ng-content>
     </div>
   `,
   host: {
-    class: 'page',
+    '[class.page]': `true`,
+    '[class.js_show]': `true`,
   },
-  styleUrls: ['./page.component.scss'],
+  styleUrls: ['./page.component.less'],
   encapsulation: ViewEncapsulation.None,
 })
 export class PageComponent {

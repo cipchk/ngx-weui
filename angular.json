@@ -87,13 +87,6 @@
       "projectType": "library",
       "prefix": "",
       "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "components/tsconfig.lib.json",
-            "project": "components/ng-package.json"
-          }
-        },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
@@ -104,7 +97,8 @@
             "scripts": [
               "node_modules/swiper/js/swiper.js",
               "node_modules/g2-mobile/index.js"
-            ]
+            ],
+            "codeCoverageExclude": ["components/schematics/**"]
           }
         },
         "lint": {
@@ -117,14 +111,5 @@
       }
     }
   },
-  "defaultProject": "ngx-weui-doc",
-  "schematics": {
-    "@schematics/angular:component": {
-      "prefix": "",
-      "styleext": "less"
-    },
-    "@schematics/angular:directive": {
-      "prefix": ""
-    }
-  }
+  "defaultProject": "ngx-weui-doc"
 }
