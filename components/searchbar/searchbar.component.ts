@@ -19,6 +19,10 @@ import { SearchBarConfig } from './searchbar.config';
   selector: 'weui-searchbar',
   exportAs: 'weuiSearchbar',
   templateUrl: './searchbar.component.html',
+  host: {
+    '[class.weui-search-bar]': `true`,
+    '[class.weui-search-bar_focusing]': `_focus`,
+  },
   preserveWhitespaces: false,
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
@@ -61,44 +65,39 @@ export class SearchBarComponent implements OnInit, OnDestroy {
     Object.assign(this, DEF);
   }
 
-  ngOnInit() {
-    this._sub = this._subject
-      .pipe(
-        debounceTime(this.debounceTime),
-        distinctUntilChanged(),
-      )
-      .subscribe((q: string) => {
-        this.search.emit(q);
-      });
+  ngOnInit(): void {
+    this._sub = this._subject.pipe(debounceTime(this.debounceTime), distinctUntilChanged()).subscribe((q: string) => {
+      this.search.emit(q);
+    });
   }
 
-  _doFocus() {
+  _doFocus(): void {
     this._term.nativeElement.focus();
   }
 
-  _onBlur() {
+  _onBlur(): void {
     if (this._q === '') this._focus = false;
   }
 
-  _onSearch() {
+  _onSearch(): void {
     this._subject.next(this._q);
   }
 
-  _onCancel() {
+  _onCancel(): void {
     this._q = '';
     this._onBlur();
     this._subject.next('');
     this.cancel.emit();
   }
 
-  _onClear() {
+  _onClear(): void {
     this._q = '';
     this._doFocus();
     this._subject.next('');
     this.clear.emit();
   }
 
-  _onSubmit(e: any) {
+  _onSubmit(e: any): boolean {
     e.preventDefault();
     e.stopPropagation();
 
