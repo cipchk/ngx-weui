@@ -1,10 +1,7 @@
 import { Component, DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { By } from '@angular/platform-browser';
 import { FileThumbDirective, UploaderModule } from '../uploader';
-
-const html = `<div weui-thumb [weui-thumb]="file"></div>`;
 
 describe('Component: file-thumb', () => {
   let fixture: ComponentFixture<TestFileThumbComponent>;
@@ -15,15 +12,12 @@ describe('Component: file-thumb', () => {
       declarations: [TestFileThumbComponent],
       imports: [UploaderModule],
     });
-    TestBed.overrideComponent(TestFileThumbComponent, {
-      set: { template: html },
-    });
     fixture = TestBed.createComponent(TestFileThumbComponent);
     fixture.detectChanges();
 
     directives = fixture.debugElement
       .queryAll(By.directive(FileThumbDirective))
-      .map((de: DebugElement) => de.injector.get<FileThumbDirective>(FileThumbDirective));
+      .map((de: DebugElement) => de.injector.get(FileThumbDirective));
   });
 
   it('should be init', () => {
@@ -34,20 +28,20 @@ describe('Component: file-thumb', () => {
     );
     fixture.detectChanges();
     expect(directives.length).toBe(1);
-    const divEl = fixture.debugElement.query(By.css('[weui-thumb]')).nativeElement as HTMLDivElement;
+    const divEl = fixture.debugElement.query(By.css('.test')).nativeElement as HTMLDivElement;
     expect(divEl).not.toBeNull();
     expect(divEl.style.backgroundImage).toContain('blob:');
   });
 
   it('should invalid image', () => {
     expect(directives.length).toBe(1);
-    const divEl = fixture.debugElement.query(By.css('[weui-thumb]')).nativeElement as HTMLDivElement;
+    const divEl = fixture.debugElement.query(By.css('.test')).nativeElement as HTMLDivElement;
     expect(divEl).not.toBeNull();
     expect(divEl.style.backgroundImage).toBe('');
   });
 });
 
-@Component({ template: `` })
+@Component({ template: `<div class="test" [weui-thumb]="file"></div>` })
 class TestFileThumbComponent {
   file: File;
 }

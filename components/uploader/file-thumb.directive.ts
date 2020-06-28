@@ -11,11 +11,16 @@ export class FileThumbDirective implements OnChanges {
    */
   @Input('weui-thumb') file: File;
 
-  constructor(private el: ElementRef) {}
+  constructor(private el: ElementRef<HTMLElement>) {}
 
-  private render() {
+  private render(): void {
+    if (!this.file) {
+      return;
+    }
     const url = genImageUrl(this.file);
-    if (!url) return;
+    if (!url) {
+      return;
+    }
 
     this.el.nativeElement.style.backgroundImage = `url(${url})`;
   }
