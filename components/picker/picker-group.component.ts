@@ -56,7 +56,7 @@ export class PickerGroupComponent implements OnChanges {
   _animating: boolean = false;
   _distance = 0;
 
-  constructor(@Inject(DOCUMENT) private doc: Document) {}
+  constructor(@Inject(DOCUMENT) private doc: any) {}
 
   private _getWin(): Window {
     return this.doc.defaultView || window;
