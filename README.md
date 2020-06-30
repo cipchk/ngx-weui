@@ -22,7 +22,7 @@ NGX-WEUI
 
 - WeUI `1.x` using `7.0.x`
 - WeUI `<= 2.2` using `8.x` & Angular 8
-- WeUI `>= 2.3` using `9.x` & Angular 9, Support dark & light theme
+- WeUI `>= 2.3` using `9.x` & Angular 9, 10, Support dark & light theme
 
 ## Table of Contents
 
@@ -36,9 +36,9 @@ NGX-WEUI
 
 ## Usage & Demo
 
-- [Documentation](https://cipchk.github.io/ngx-weui/) [国内镜像](https://cipchk.gitee.io/ngx-weui/)
-- [Live Demo](https://cipchk.github.io/ngx-weui/) [国内镜像](https://cipchk.gitee.io/ngx-weui/)
-- [Stackblitz](https://stackblitz.com/edit/ngx-weui)
+- [Documentation](https://cipchk.github.io/ngx-weui/) - [国内镜像](https://cipchk.gitee.io/ngx-weui/)
+- [Live Demo](https://cipchk.github.io/ngx-weui/) - [国内镜像](https://cipchk.gitee.io/ngx-weui/)
+- [Stackblitz](https://stackblitz.com/edit/ngx-weui), [Codesandbox](https://codesandbox.io/s/ngx-weui-wki41?file=/src/app/app.component.ts)
 
 ## Create project
 

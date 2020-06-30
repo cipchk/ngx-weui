@@ -20,11 +20,11 @@ export class DemoAccordionComponent implements OnInit {
 
   index: number = 0;
 
-  ngOnInit() {
+  ngOnInit(): void {
     new Array(3).fill(0).forEach(() => this.add());
   }
 
-  add() {
+  add(): void {
     this.list.push({
       disabled: false,
       active: false,
@@ -33,11 +33,13 @@ export class DemoAccordionComponent implements OnInit {
     });
   }
 
-  remove() {
-    if (this.list.length > 1) this.list.pop();
+  remove(): void {
+    if (this.list.length > 1) {
+      this.list.pop();
+    }
   }
 
-  select(index: number) {
+  select(index: number): void {
     this.index = index;
   }
 }

@@ -18,11 +18,11 @@ export class AccordionComponent {
   /**
    * 是否可折叠，`true` 表示同时所有都允许展开，`false` 表示同时只允许一个展开，默认：`false`
    */
-  @Input() @InputBoolean() collapsible: boolean = false;
+  @Input() @InputBoolean() collapsible = false;
   /**
    * 自动展开第一次，默认：`true`
    */
-  @Input() @InputBoolean() activeFirst: boolean = true;
+  @Input() @InputBoolean() activeFirst = true;
   /**
    * 动画类型，`none` 无动画，`slide` 滑动，默认：`slide`
    */

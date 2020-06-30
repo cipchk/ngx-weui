@@ -13,13 +13,8 @@
     "frontend",
     "ngx-weui",
     "ng2-weui",
-    "ngx weui",
-    "ng2 weui",
     "angular weui",
-    "angular2 weui",
-    "angular4 weui",
-    "weui",
-    "weui 2"
+    "weui"
   ],
   "author": "cipchk <cipchk>",
   "license": "MIT",

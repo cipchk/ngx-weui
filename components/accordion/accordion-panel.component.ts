@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Host, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { InputBoolean } from 'ngx-weui/core';
 import { AccordionComponent } from './accordion.component';
 
@@ -41,7 +41,7 @@ export class AccordionPanelComponent implements OnInit, OnDestroy {
     }
   }
 
-  constructor(@Inject(AccordionComponent) protected accordion: AccordionComponent) {}
+  constructor(@Host() protected accordion: AccordionComponent) {}
 
   ngOnInit(): void {
     this.accordion._add(this);
