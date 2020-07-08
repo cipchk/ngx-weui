@@ -9,7 +9,7 @@
   [disabled]="disabled"
   *ngIf="options.type === 'form'"
 />
-<div [hidden]="!_showP">
+<div [ngClass]="options.className" [hidden]="!_showP">
   <div class="weui-mask" (click)="_onHide(false)" [ngClass]="{ 'weui-animate-fade-in': _shown, 'weui-animate-fade-out': !_shown }"></div>
   <div class="weui-half-screen-dialog weui-picker" [ngClass]="{ 'weui-animate-slide-up': _shown, 'weui-animate-slide-down': !_shown }">
     <div class="weui-half-screen-dialog__hd">
@@ -25,6 +25,7 @@
         <weui-picker-group
           tappable
           *ngFor="let items of _groups; let i = index"
+          [attr.data-index]="i"
           [items]="items"
           [defaultIndex]="_selected[i]"
           [groupIndex]="i"
