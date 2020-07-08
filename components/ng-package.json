@@ -6,5 +6,5 @@
     "flatModuleFile": "ngx-weui",
     "entryFile": "public_api.ts"
   },
-  "whitelistedNonPeerDependencies": ["tslib", "angular"]
+  "whitelistedNonPeerDependencies": ["tslib", "angular", "weui"]
 }
