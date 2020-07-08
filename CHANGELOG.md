@@ -1,3 +1,12 @@
+# [9.1.0](https://github.com/cipchk/ngx-weui/compare/9.0.0...9.1.0) (2020-07-08)
+
+
+### Features
+
+* **module:picker:** add `className` property of options ([#164](https://github.com/cipchk/ngx-weui/issues/164)) ([e4e6f0e](https://github.com/cipchk/ngx-weui/commit/e4e6f0e5490944b3a22d6fe8db6019ba22b74e0b))
+
+
+
 # [9.0.0](https://github.com/cipchk/ngx-weui/compare/8.0.0...9.0.0) (2020-06-28)
 
 `9.0.0` 主要是同步更新 WeUI 的 `2.3` 以上版本（受限于 [#858](https://github.com/Tencent/weui/issues/858) 可能与官网看到的暗黑主题色有出入），新增 `dark` 模式。
