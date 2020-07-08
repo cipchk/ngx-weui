@@ -34,7 +34,7 @@ import { ActionSheetMenuItem } from './actionsheet.types';
   encapsulation: ViewEncapsulation.None,
 })
 export class ActionSheetComponent implements OnDestroy {
-  private observer: Observer<any>;
+  private observer: Observer<ActionSheetMenuItem>;
   private destroied = false;
   _shown = false;
   /**
@@ -116,7 +116,7 @@ export class ActionSheetComponent implements OnDestroy {
   /**
    * 选择动作
    */
-  _onSelect(menu: { text?: string; [key: string]: any }): void {
+  _onSelect(menu: ActionSheetMenuItem): void {
     this.observer.next(menu);
     this.observer.complete();
     this.hide();

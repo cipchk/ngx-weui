@@ -48,7 +48,7 @@ function expectOpenPanels(nativeEl: HTMLElement, openPanelsDef: boolean[]): void
 describe('Component: Accordion', () => {
   let fixture: ComponentFixture<TestAccordionComponent>;
   let context: TestAccordionComponent;
-  let element: any;
+  let element: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -101,7 +101,7 @@ describe('Component: Accordion', () => {
 
 describe('Component: Accordion: Auto', () => {
   let fixture: ComponentFixture<TestAccordionComponent>;
-  let element: any;
+  let element: HTMLElement;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -124,7 +124,7 @@ describe('Component: Accordion: Auto', () => {
 @Component({ template: '' })
 class TestAccordionComponent {
   collapsible: boolean = true;
-  panels: any[] = [
+  panels = [
     { title: 'title1', content: 'content1', active: false, disabled: false },
     { title: 'title2', content: 'content2', active: false, disabled: false },
     { title: 'title3', content: 'content3', active: false, disabled: false },

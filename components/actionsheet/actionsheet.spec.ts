@@ -32,7 +32,7 @@ describe('Component: ActionSheet', () => {
   describe('[default]', () => {
     let fixture: ComponentFixture<TestActionSheetComponent>;
     let context: TestActionSheetComponent;
-    let el: any;
+    let el: HTMLDivElement;
 
     const html = `
             <weui-actionsheet
@@ -76,7 +76,7 @@ describe('Component: ActionSheet', () => {
         }
         done();
       });
-      (getItems(el)[0] as any).click();
+      (getItems(el)[0] as HTMLElement).click();
     });
 
     it('should be android when set auto and isAndroid is true', done => {
@@ -89,7 +89,7 @@ describe('Component: ActionSheet', () => {
         document.querySelector('body')?.removeAttribute('data-platform');
         done();
       });
-      (getItems(el)[0] as any).click();
+      (getItems(el)[0] as HTMLElement).click();
     });
 
     it('should be opened set actionsheet title', done => {
@@ -99,7 +99,7 @@ describe('Component: ActionSheet', () => {
         expect(getTitle(el).textContent).toBe(str);
         done();
       });
-      (getItems(el)[0] as any).click();
+      (getItems(el)[0] as HTMLElement).click();
     });
 
     it('should be opened set actionsheet items', done => {
@@ -111,7 +111,7 @@ describe('Component: ActionSheet', () => {
         expect(items[1].textContent?.trim()).toBe('menu2');
         done();
       });
-      (getItems(el)[0] as any).click();
+      (getItems(el)[0] as HTMLElement).click();
     });
 
     it('should be opened set actionsheet action', done => {
@@ -121,7 +121,7 @@ describe('Component: ActionSheet', () => {
         expect(getAction(el).textContent).toBe(str);
         done();
       });
-      (getItems(el)[0] as any).click();
+      (getItems(el)[0] as HTMLElement).click();
     });
 
     it('should be opened if android not title & action', done => {
@@ -134,7 +134,7 @@ describe('Component: ActionSheet', () => {
         expect(getAction(el)).toBeNull();
         done();
       });
-      (getItems(el)[0] as any).click();
+      (getItems(el)[0] as HTMLElement).click();
     });
 
     it('should choose item and get back a result', done => {
@@ -147,7 +147,7 @@ describe('Component: ActionSheet', () => {
         expect(res.other).toBe(1);
         done();
       });
-      (getItems(el)[0] as any).click();
+      (getItems(el)[0] as HTMLElement).click();
     });
 
     it('should click backdrop has closed', done => {
@@ -157,22 +157,22 @@ describe('Component: ActionSheet', () => {
         expect(true).toBeTruthy();
         done();
       });
-      el.querySelector('.weui-mask').click();
+      (el.querySelector('.weui-mask') as HTMLElement).click();
     });
 
     it('should click backdrop not-allow closing', () => {
       context.config = { ...context.config, backdrop: false };
       context.actioinSheet.show();
       fixture.detectChanges();
-      el.querySelector('.weui-mask').click();
+      (el.querySelector('.weui-mask') as HTMLElement).click();
       expect(context.actioinSheet._shown).toBe(true);
     });
   });
 
   describe('[service]', () => {
     let service: ActionSheetService;
-    let fixture: any;
-    let el: any;
+    let fixture: ComponentFixture<TestActionSheetServiceComponent>;
+    let el: HTMLDivElement;
 
     beforeEach(fakeAsync(() => {
       TestBed.configureTestingModule({
@@ -202,13 +202,13 @@ describe('Component: ActionSheet', () => {
       });
 
       fixture.detectChanges();
-      (getItems(el.nextSibling)[0] as any).click();
+      (getItems(el.nextSibling as HTMLElement)[0] as HTMLElement).click();
     });
 
     it('should be show if specify [config] param', () => {
       service.show([...MENUS], { ...CONFIG });
       fixture.detectChanges();
-      expect(el.nextSibling.nodeName).toBe('WEUI-ACTIONSHEET');
+      expect((el.nextSibling as HTMLElement).nodeName).toBe('WEUI-ACTIONSHEET');
     });
   });
 });
@@ -225,7 +225,7 @@ class TestActionSheetServiceComponent {}
 class TestActionSheetComponent {
   @ViewChild(ActionSheetComponent, { static: true }) actioinSheet: ActionSheetComponent;
 
-  menus: any[] = [...MENUS];
+  menus = [...MENUS];
 
   config: ActionSheetConfig = { ...CONFIG };
 

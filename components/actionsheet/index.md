@@ -12,7 +12,7 @@ module: ActionSheetModule
 参数 | 说明 | 类型 | 默认值
 ----|------|-----|------
 config | 配置项 | `ActionSheetConfig` | -
-menus | 菜单内容  | `{ text?: string, [key: string]: any }[]` | -
+menus | 菜单内容  | `{ text?: string }[]` | -
 close | 关闭回调 | `EventEmitter` | -
 
 ### ActionSheetConfig
@@ -28,5 +28,5 @@ backdrop | 允许点击背景关闭  | `boolean` | `true`
 
 方法 | 说明 | 返回值
 ----|------|------
-show | 创建一个弹出式菜单并显示 | `Observable<any>`
+show | 创建一个弹出式菜单并显示 | `Observable<ActionSheetMenuItem>`
 

@@ -3,6 +3,7 @@ import { ComponentFixture, ComponentFixtureAutoDetect, TestBed } from '@angular/
 import { FormsModule } from '@angular/forms';
 
 import { By } from '@angular/platform-browser';
+import { NwSafeAny } from 'ngx-weui/core';
 import { CellModule, SwipeDirective } from '../cell';
 
 const WIDTH = 68;
@@ -31,19 +32,21 @@ const htmlNotBody = `
 
 function spyPageX(val: number): TouchEvent {
   if (val === 0) {
-    return { touches: [], changedTouches: [{ pageX: val }] } as any;
+    return { touches: [], changedTouches: [{ pageX: val }] } as NwSafeAny;
   }
-  return { touches: [{ pageX: val }] } as any;
+  return { touches: [{ pageX: val }] } as NwSafeAny;
 }
 
-function open(directive: SwipeDirective, el: any, width: number, shouldOpen: boolean): void {
+function open(directive: SwipeDirective, el: HTMLElement, width: number, shouldOpen: boolean): void {
   directive.onTouchStart(spyPageX(0));
   directive.onTouchMove(spyPageX(-width));
   fixture.detectChanges();
-  expect(el.querySelector('.weui-cell__bd').style.transform).toBe(`translateX(-${width}px)`);
+  expect((el.querySelector('.weui-cell__bd') as HTMLElement).style.transform).toBe(`translateX(-${width}px)`);
   directive.onTouchEnd(spyPageX(-width));
   fixture.detectChanges();
-  expect(el.querySelector('.weui-cell__bd').style.transform).toBe(`translateX(${shouldOpen ? '-' + directive.width : '0'}px)`);
+  expect((el.querySelector('.weui-cell__bd') as HTMLElement).style.transform).toBe(
+    `translateX(${shouldOpen ? '-' + directive.width : '0'}px)`,
+  );
 }
 
 let fixture: ComponentFixture<TestSwipeComponent>;

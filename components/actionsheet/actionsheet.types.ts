@@ -1,9 +1,14 @@
+import { NwSafeAny } from 'ngx-weui/core';
+
 export interface ActionSheetMenuItem {
   text: string;
-  value?: any;
+
+  value?: NwSafeAny;
+
   /**
    * - `warn` 表示负向菜单
    */
   type?: 'warn';
-  [key: string]: any;
+
+  [key: string]: NwSafeAny;
 }
