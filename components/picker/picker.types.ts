@@ -134,3 +134,9 @@ export interface PickerDateTimeConfig extends PickerBaseConfig {
    */
   max?: Date;
 }
+
+export interface PickerGroupChange {
+  item: PickerData;
+  index: number;
+  groupIndex: number;
+}

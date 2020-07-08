@@ -33,11 +33,9 @@ import { PickerData, PickerOptions } from './picker.types';
 export class PickerComponent extends PickerBaseComponent implements ControlValueAccessor, OnInit, OnChanges {
   _showP: boolean = false;
   _shown: boolean = false;
-
   _value: any;
   _selected: any[];
   _groups: PickerData[][];
-
   _text: string = '';
 
   /**

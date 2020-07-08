@@ -1,9 +1,9 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { InputBoolean } from 'ngx-weui/core';
 import { PickerConfig } from './picker.config';
-import { PickerOptions } from './picker.types';
+import { PickerGroupChange, PickerOptions } from './picker.types';
 
-@Component({})
+@Component({ template: `` })
 export class PickerBaseComponent {
   /** 配置项 */
   @Input() options: PickerOptions;
@@ -12,7 +12,7 @@ export class PickerBaseComponent {
   @Input() title: string;
   @Input() @InputBoolean() disabled: boolean;
   /** 列变更时回调 */
-  @Output() readonly groupChange = new EventEmitter<any>();
+  @Output() readonly groupChange = new EventEmitter<PickerGroupChange>();
   /** 取消后回调 */
   @Output() readonly cancel = new EventEmitter();
   /** 显示时回调 */
