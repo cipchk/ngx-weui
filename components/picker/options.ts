@@ -26,4 +26,9 @@ export interface PickerOptions {
    * 允许点击背景关闭，默认：`true`
    */
   backdrop?: boolean;
+
+  /**
+   * 类名
+   */
+  className?: string;
 }
