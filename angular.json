@@ -14,7 +14,7 @@
             "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "tsConfig": "src/tsconfig.json",
+            "tsConfig": "src/tsconfig.app.json",
             "polyfills": "src/polyfills.ts",
             "aot": false,
             "assets": [
@@ -71,13 +71,6 @@
             "production": {
               "browserTarget": "ngx-weui-doc:build:production"
             }
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": ["src/tsconfig.json"],
-            "exclude": ["**/node_modules/**"]
           }
         }
       }

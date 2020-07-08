@@ -13,7 +13,6 @@ import { EditButtonComponent } from './edit-button/edit-button.component';
 import { ThemeBtnComponent } from './theme-btn/theme-btn.component';
 
 const COMPONENTS = [DocsNavComponent, EditButtonComponent, ThemeBtnComponent];
-
 const THIDS = [CountdownModule, ToastrModule, GesturePasswordModule, AqmModule];
 
 @NgModule({

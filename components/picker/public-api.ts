@@ -1,4 +1,3 @@
-export * from './options';
 export * from './picker.types';
 export * from './picker.config';
 export * from './picker-group.component';

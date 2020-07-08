@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output, ViewEncapsulation } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Host, Input, OnDestroy, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { AnimateType, InputBoolean } from 'ngx-weui/core';
-import { AccordionPanelComponent } from './accordion-panel.component';
 import { AccordionConfig } from './accordion.config';
 
 @Component({
@@ -64,5 +63,62 @@ export class AccordionComponent {
         panel.active = false;
       }
     });
+  }
+}
+
+@Component({
+  selector: 'weui-accordion-panel',
+  exportAs: 'weuiAccordionPanel',
+  template: `
+    <div role="tab" (click)="_toggle()"><ng-content select="[heading]"></ng-content></div>
+    <div role="tabpanel" class="weui-accordion-content"><ng-content></ng-content></div>
+  `,
+  host: {
+    '[class.weui-accordion-panel-disabled]': 'disabled',
+    '[class.weui-accordion-active]': 'active',
+  },
+  preserveWhitespaces: false,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  encapsulation: ViewEncapsulation.None,
+})
+export class AccordionPanelComponent implements OnInit, OnDestroy {
+  /**
+   * 是否禁止
+   */
+  @Input() @InputBoolean() disabled: boolean = false;
+
+  private _active: boolean = false;
+
+  /**
+   * 是否展开
+   */
+  @Input()
+  @InputBoolean()
+  get active(): boolean {
+    return this._active;
+  }
+
+  set active(value: boolean) {
+    this._active = value;
+    if (value) {
+      this.accordion._closeOthers(this);
+    }
+  }
+
+  constructor(@Host() protected accordion: AccordionComponent) {}
+
+  ngOnInit(): void {
+    this.accordion._add(this);
+  }
+
+  ngOnDestroy(): void {
+    this.accordion._remove(this);
+  }
+
+  _toggle(): void {
+    if (!this.disabled) {
+      this.active = !this.active;
+      this.accordion.select.emit(this.accordion._index(this));
+    }
   }
 }

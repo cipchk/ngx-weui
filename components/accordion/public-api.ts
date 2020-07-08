@@ -1,4 +1,3 @@
-export { AccordionPanelComponent } from './accordion-panel.component';
-export { AccordionComponent } from './accordion.component';
-export { AccordionConfig } from './accordion.config';
-export { AccordionModule } from './accordion.module';
+export * from './accordion.component';
+export * from './accordion.config';
+export * from './accordion.module';

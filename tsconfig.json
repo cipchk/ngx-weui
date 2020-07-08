@@ -1,33 +1,38 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "rootDir": ".",
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "declaration": false,
-    "emitDecoratorMetadata": true,
     "downlevelIteration": true,
     "experimentalDecorators": true,
-    "allowSyntheticDefaultImports": true,
-    "module": "esnext",
     "moduleResolution": "node",
+    "importHelpers": true,
     "target": "es2015",
+    "module": "es2020",
     "lib": ["es2018", "dom"],
-    "baseUrl": "./",
+    "rootDir": ".",
     "paths": {
+      "ngx-weui": ["./components/ngx-weui.module"],
       "ngx-weui/*": ["./components/*"]
     },
+    "emitDecoratorMetadata": true,
+    "allowSyntheticDefaultImports": true,
     "noUnusedParameters": true,
     "noUnusedLocals": true,
     "strictFunctionTypes": true,
     "strictNullChecks": true,
     "skipLibCheck": true,
-    "importHelpers": true,
     "noImplicitAny": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noFallthroughCasesInSwitch": true,
     "types": ["jasmine"]
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp"],
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
 }

@@ -1,5 +1,5 @@
-export { ActionSheetService } from './actionsheet.service';
-export { ActionSheetComponent } from './actionsheet.component';
-export { ActionSheetConfig } from './actionsheet.config';
-export { ActionSheetModule } from './actionsheet.module';
+export * from './actionsheet.service';
+export * from './actionsheet.component';
+export * from './actionsheet.config';
+export * from './actionsheet.module';
 export * from './actionsheet.types';

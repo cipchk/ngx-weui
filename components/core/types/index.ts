@@ -1,1 +1,1 @@
-export type NwSafeAny = any;
+export * from './safe-any';

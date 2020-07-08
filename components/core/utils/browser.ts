@@ -1,6 +1,7 @@
 import { ɵgetDOM as getDOM } from '@angular/platform-browser';
+import { NwSafeAny } from '../types';
 
-declare const window: any;
+declare const window: NwSafeAny;
 
 /**
  * 是否服务端渲染

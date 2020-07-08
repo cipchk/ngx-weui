@@ -1,1 +1,1 @@
-export * from './public-api';
+export * from './update-host-class.service';

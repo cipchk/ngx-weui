@@ -18,30 +18,9 @@ export class DemoPickerComponent implements OnDestroy {
     date: new Date(),
   };
 
-  constructor(private srv: PickerService) { }
-
-  cityChange(item: any) {
-    console.log(item);
-  }
-
-  onSave() {
-    alert('请求数据：' + JSON.stringify(this.res));
-    return false;
-  }
-
   cityStatus: boolean = false;
   cityOptions: any = {};
   cityData: any = DATA;
-
-  onCityChange(data: any) {
-    console.log('onCityChange', data);
-  }
-  onCityGroupChange(data: any) {
-    console.log('onCityGroupChange', data);
-  }
-  onCityCancel() {
-    console.log('onCityCancel');
-  }
 
   items: string[] = Array(6)
     .fill('')
@@ -71,66 +50,87 @@ export class DemoPickerComponent implements OnDestroy {
       },
     ],
   ];
-  onItemChange(data: any) {
-    console.log('onItemChange', data);
-  }
-  onItemGroupChange(data: any) {
-    console.log('onItemGroupChange', data);
-  }
-  onItemCancel() {
-    console.log('onItemCancel');
-  }
 
   mData: any;
   dateFormat: any = { hu: '', mu: '' };
 
-  onMItemChange(data: any) {
-    console.log('onMItemChange', data);
-  }
-  onMItemGroupChange(data: any) {
-    console.log('onMItemGroupChange', data);
-  }
-  onMItemCancel() {
-    console.log('onMItemCancel');
+  srvRes: any = '';
+
+  constructor(private srv: PickerService) {}
+
+  cityChange(item: any): void {
+    console.log(item);
   }
 
-  srvRes: any = '';
-  onShowBySrv(type: string) {
+  onSave(): void {
+    alert('请求数据：' + JSON.stringify(this.res));
+    return;
+  }
+
+  onCityChange(data: any): void {
+    console.log('onCityChange', data);
+  }
+  onCityGroupChange(data: any): void {
+    console.log('onCityGroupChange', data);
+  }
+  onCityCancel(): void {
+    console.log('onCityCancel');
+  }
+  onItemChange(data: any): void {
+    console.log('onItemChange', data);
+  }
+  onItemGroupChange(data: any): void {
+    console.log('onItemGroupChange', data);
+  }
+  onItemCancel(): void {
+    console.log('onItemCancel');
+  }
+
+  onMItemChange(data: any): void {
+    console.log('onMItemChange', data);
+  }
+  onMItemGroupChange(data: any): void {
+    console.log('onMItemGroupChange', data);
+  }
+  onMItemCancel(): void {
+    console.log('onMItemCancel');
+  }
+  onShowBySrv(type: string): void {
     switch (type) {
       case 'city':
-        this.srv.showCity(this.cityData).subscribe((res: any) => {
+        this.srv.city({ data: this.cityData, title: `This is title` }).subscribe((res: any) => {
           this.srvRes = res.value;
         });
         break;
       case 'date-ym':
-        this.srv.showDateTime(type).subscribe((res: any) => {
+        this.srv.dateTime({ type }).subscribe((res: any) => {
           this.srvRes = res.value;
         });
         break;
       case 'date':
-        this.srv.showDateTime(type).subscribe((res: any) => {
+        this.srv.dateTime({ type }).subscribe((res: any) => {
           this.srvRes = res.value;
         });
         break;
       case 'datetime':
-        this.srv.showDateTime(type).subscribe((res: any) => {
+        this.srv.dateTime({ type }).subscribe((res: any) => {
           this.srvRes = res.value;
         });
         break;
       case 'time':
-        this.srv.showDateTime(type).subscribe((res: any) => {
+        this.srv.dateTime({ type }).subscribe((res: any) => {
           this.srvRes = res.value;
         });
         break;
       case 'data':
-        this.srv.show(this.items, 'Item3').subscribe((res: any) => {
+        this.srv.create({ data: this.items, value: 'Item3' }).subscribe((res: any) => {
           this.srvRes = res.value;
         });
         break;
     }
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.srv.destroyAll();
   }
 }

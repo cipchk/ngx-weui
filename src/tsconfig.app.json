@@ -6,6 +6,8 @@
     "resolveJsonModule": true,
     "esModuleInterop": true
   },
-  "files": ["main.ts", "polyfills.ts", "typings.d.ts"],
-  "exclude": ["test.ts", "**/*.spec.ts", "templates/*.ts"]
+  "files": ["main.ts", "polyfills.ts"],
+  "include": [
+    "**/*.d.ts"
+  ]
 }

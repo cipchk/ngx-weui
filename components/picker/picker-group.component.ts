@@ -11,12 +11,9 @@ import {
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
-import { InputNumber } from 'ngx-weui/core';
-import { PickerData } from './picker.types';
+import { InputNumber, NwSafeAny } from 'ngx-weui/core';
+import { PickerData, PickerGroupChange } from './picker.types';
 
-/**
- * 多列选择器组
- */
 @Component({
   selector: 'weui-picker-group',
   exportAs: 'weuiPickerGroup',
@@ -39,7 +36,7 @@ export class PickerGroupComponent implements OnChanges {
   /** 多列中的位置 */
   @Input() @InputNumber() groupIndex: number;
   /** 变更回调 */
-  @Output() readonly change = new EventEmitter<any>();
+  @Output() readonly change = new EventEmitter<PickerGroupChange>();
 
   private defaults = {
     offset: 2, // 列表初始化时的偏移量（列表初始化时，选项是聚焦在中间的，通过offset强制往上挪3项，以达到初始选项是为顶部的那项）
@@ -56,7 +53,7 @@ export class PickerGroupComponent implements OnChanges {
   _animating: boolean = false;
   _distance = 0;
 
-  constructor(@Inject(DOCUMENT) private doc: any) {}
+  constructor(@Inject(DOCUMENT) private doc: NwSafeAny) {}
 
   private _getWin(): Window {
     return this.doc.defaultView || window;
@@ -153,7 +150,7 @@ export class PickerGroupComponent implements OnChanges {
   }
 
   private onChange(item: PickerData, index: number = 0): void {
-    this.change.emit({ item, index });
+    this.change.emit({ item, index, groupIndex: this.groupIndex });
   }
 
   private _getMax(offset: number, rowHeight: number): number {

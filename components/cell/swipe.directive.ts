@@ -17,7 +17,7 @@ import { InputNumber } from 'ngx-weui/core';
 export class SwipeDirective implements OnInit {
   private curX: number = 0;
   private opend: boolean = false;
-  private swipeEl: any;
+  private swipeEl: HTMLElement;
 
   /**
    * 右边滑动宽度（单位：px），默认：`68`
@@ -28,7 +28,7 @@ export class SwipeDirective implements OnInit {
 
   ngOnInit(): void {
     const el = this.el.nativeElement;
-    this.swipeEl = el.querySelector('.weui-cell__bd');
+    this.swipeEl = el.querySelector('.weui-cell__bd') as HTMLElement;
     if (!this.swipeEl) {
       this.width = 0;
     } else {

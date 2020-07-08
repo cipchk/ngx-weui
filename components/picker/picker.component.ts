@@ -12,10 +12,9 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { InputBoolean } from 'ngx-weui/core';
-import { PickerOptions } from './options';
-import { PickerConfig } from './picker.config';
-import { PickerData } from './picker.types';
+import { NwSafeAny } from 'ngx-weui/core';
+import { PickerBaseComponent } from './picker-base.component';
+import { PickerChangeData, PickerData, PickerGroupChange, PickerOptions } from './picker.types';
 
 @Component({
   selector: 'weui-picker',
@@ -32,37 +31,18 @@ import { PickerData } from './picker.types';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class PickerComponent implements ControlValueAccessor, OnInit, OnChanges {
+export class PickerComponent extends PickerBaseComponent implements ControlValueAccessor, OnInit, OnChanges {
   _showP: boolean = false;
   _shown: boolean = false;
-
-  /** 配置项 */
-  @Input() options: PickerOptions;
-
-  _value: any;
-  _selected: any[];
+  _value: NwSafeAny;
+  _selected: number[];
   _groups: PickerData[][];
-
   _text: string = '';
 
-  /** 当 `options.type==='form'` 时，占位符文本 */
-  @Input() placeholder: string;
-  @Input() title: string;
-  @Input() @InputBoolean() disabled: boolean = false;
   /**
    * 确认后回调当前选择数据（包括已选面板所有数据）
-   *
-   * `{ value: '10000', items: [ {}, {}, {} ] }`
    */
-  @Output() readonly change = new EventEmitter<any>();
-  /** 列变更时回调 */
-  @Output() readonly groupChange = new EventEmitter<any>();
-  /** 取消后回调 */
-  @Output() readonly cancel = new EventEmitter();
-  /** 显示时回调 */
-  @Output() readonly show = new EventEmitter();
-  /** 隐藏后回调 */
-  @Output() readonly hide = new EventEmitter();
+  @Output() readonly change = new EventEmitter<PickerChangeData>();
 
   /**
    * 当前默认位置，数组的长度必须等同于 groups 长度
@@ -96,15 +76,11 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnChanges 
     this._selected = this._selected ? this._selected : Array(d.length).fill(0);
   }
 
-  constructor(private DEF: PickerConfig) {}
-
-  private onChange = (_: any) => {};
+  private onChange = (_: NwSafeAny) => {};
   private onTouched = () => {};
 
   ngOnInit(): void {
-    if (!this.options) {
-      this.parseOptions();
-    }
+    this.parseOptions();
   }
 
   _onHide(fh: boolean): this {
@@ -143,7 +119,7 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnChanges 
   }
 
   private getSelecteItem(): PickerData[] {
-    const res: any[] = [];
+    const res: PickerData[] = [];
     this._groups.forEach((items: PickerData[], idx: number) => {
       const item = items[this._selected[idx]];
       if (item) {
@@ -153,12 +129,12 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnChanges 
     return res;
   }
 
-  _setText(res: any[] | null = null): this {
+  _setText(res: PickerData[] | null = null): this {
     if (res == null) {
       res = this.getSelecteItem();
     }
     if (res.length > 0) {
-      this._text = res.map((i: any) => i.label || i.value).join(this.options.separator);
+      this._text = res.map((i: PickerData) => i.label || i.value).join(this.options.separator);
     }
 
     return this;
@@ -177,7 +153,7 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnChanges 
     return this;
   }
 
-  _onGroupChange(data: any, groupIndex: number): void {
+  _onGroupChange(data: PickerGroupChange, groupIndex: number): void {
     this._selected[groupIndex] = data.index;
     this.groupChange.emit({ item: data.item, index: data.index, groupIndex });
   }
@@ -209,7 +185,7 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnChanges 
     }
   }
 
-  writeValue(value: any): void {
+  writeValue(value: NwSafeAny): void {
     if (!value) {
       this._text = '';
     }
@@ -218,9 +194,10 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnChanges 
       // todo：当ngModel传递一个未列表中的值的情况 & 多列时数据对应问题
       this._setDefault()._setText();
     }
+    this.cdr.detectChanges();
   }
 
-  registerOnChange(fn: (_: any) => {}): void {
+  registerOnChange(fn: (_: NwSafeAny) => {}): void {
     this.onChange = fn;
   }
   registerOnTouched(fn: () => {}): void {
