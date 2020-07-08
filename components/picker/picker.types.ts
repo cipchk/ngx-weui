@@ -1,3 +1,5 @@
+import { NwSafeAny } from 'ngx-weui/core';
+
 export interface PickerOptions {
   /**
    * 类型
@@ -33,8 +35,19 @@ export interface PickerOptions {
   className?: string;
 }
 
+export interface PickerChangeData {
+  value: NwSafeAny;
+  items: PickerData[];
+}
+
+export interface PickerDateChangeData {
+  value: Date;
+  formatValue: string;
+  items: PickerData[];
+}
+
 export interface PickerData {
-  [key: string]: any;
+  [key: string]: NwSafeAny;
 
   /**
    * 显示文本
@@ -44,7 +57,7 @@ export interface PickerData {
   /**
    * 值
    */
-  value: any;
+  value: NwSafeAny;
 
   /**
    * 是否禁用
@@ -52,37 +65,31 @@ export interface PickerData {
   disabled?: boolean;
 }
 
-export const FORMAT: any = {
-  format: null,
-  yu: '年',
-  Mu: '月',
-  du: '日',
-  hu: '时',
-  mu: '分',
+export type PickerDateType = 'date-ym' | 'date' | 'datetime' | 'time';
+
+export type PickerDateFormatType = {
+  format: string | null;
+  yu?: string;
+  Mu?: string;
+  du?: string;
+  hu?: string;
+  mu?: string;
 };
 
-export type DatePickerType = 'date-ym' | 'date' | 'datetime' | 'time';
-
-export type FORMAT_TYPE =
-  | string
-  | {
-      format: string;
-      yu?: string;
-      Mu?: string;
-      du?: string;
-      hu?: string;
-      mu?: string;
-    };
+export type PickerDateFormatFullType = string | PickerDateFormatType;
 
 export interface PickerBaseConfig {
+  /**
+   * 标题
+   */
   title?: string;
-  options?: PickerOptions;
-  placeholder?: string;
   /**
    * 配置项
    */
+  options?: PickerOptions;
+  placeholder?: string;
   disabled?: boolean;
-  value?: any;
+  value?: NwSafeAny;
 }
 
 export interface PickerCreateConfig extends PickerBaseConfig {
@@ -93,44 +100,73 @@ export interface PickerCreateConfig extends PickerBaseConfig {
   /**
    * 默认值（限单列时会根据值自动解析，而对多列使用defaultSelect自行解析）
    */
-  value?: any;
+  value?: NwSafeAny;
   /**
    * 当前默认位置，数组的长度必须等同于 groups 长度
    */
   defaultSelect?: number[];
 }
 
+export interface PickerCityDataMap {
+  /**
+   * 标签映射键值，默认：`name`
+   */
+  label: string;
+  /**
+   * 值映射键值，默认：`code`
+   */
+  value: string;
+  /**
+   * 子项列表映射键值，默认：`sub`
+   */
+  items: string;
+}
+
+export interface PickerCityData {
+  [key: string]: NwSafeAny;
+  name: string;
+  code: string;
+  sub?: PickerCityData[];
+}
+
 export interface PickerCityConfig extends PickerBaseConfig {
   /**
    * 城市数据，可以参考示例中的数据格式
    */
-  data: any;
+  data: PickerCityData[];
   /**
    * 默认值，即城市编号
    */
   value?: string;
-  dataMap?: any;
+  /**
+   * 映射键值配置
+   */
+  dataMap?: PickerCityDataMap;
 }
 
 export interface PickerDateTimeConfig extends PickerBaseConfig {
   /**
-   * 类型，date-ym年月，date日期，datetime日期&时间（不包括秒），time时间（不包括秒）
+   * 类型
+   * + `date-ym` 年月
+   * + `date` 日期
+   * + `datetime` 日期&时间（不包括秒）
+   * + `time` 时间（不包括秒）
    */
-  type?: DatePickerType;
+  type?: PickerDateType;
   /**
    * 日期格式化代码，实际是采用 DatePipe，所有代码内容和它一样
    */
-  format?: FORMAT_TYPE;
+  format?: PickerDateFormatFullType;
   /**
    * 默认显示日期
    */
   value?: Date;
   /**
-   * 最小时间范围
+   * 最小时间范围，当前只限定年月日，暂不包括时间范围
    */
   min?: Date;
   /**
-   * 最大时间范围
+   * 最大时间范围，当前只限定年月日，暂不包括时间范围
    */
   max?: Date;
 }

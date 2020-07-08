@@ -1,5 +1,5 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { InputBoolean } from 'ngx-weui/core';
+import { ChangeDetectorRef, Component, EventEmitter, Injector, Input, Output } from '@angular/core';
+import { InputBoolean, NwSafeAny } from 'ngx-weui/core';
 import { PickerConfig } from './picker.config';
 import { PickerGroupChange, PickerOptions } from './picker.types';
 
@@ -20,7 +20,7 @@ export class PickerBaseComponent {
   /** 隐藏后回调 */
   @Output() readonly hide = new EventEmitter();
 
-  constructor(protected DEF: PickerConfig) {}
+  constructor(protected DEF: PickerConfig, protected injector: Injector, protected cdr: ChangeDetectorRef) {}
 
-  writeValue(_value: any): void {}
+  writeValue(_value: NwSafeAny): void {}
 }

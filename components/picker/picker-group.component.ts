@@ -11,12 +11,9 @@ import {
   SimpleChanges,
   ViewEncapsulation,
 } from '@angular/core';
-import { InputNumber } from 'ngx-weui/core';
+import { InputNumber, NwSafeAny } from 'ngx-weui/core';
 import { PickerData, PickerGroupChange } from './picker.types';
 
-/**
- * 多列选择器组
- */
 @Component({
   selector: 'weui-picker-group',
   exportAs: 'weuiPickerGroup',
@@ -56,7 +53,7 @@ export class PickerGroupComponent implements OnChanges {
   _animating: boolean = false;
   _distance = 0;
 
-  constructor(@Inject(DOCUMENT) private doc: any) {}
+  constructor(@Inject(DOCUMENT) private doc: NwSafeAny) {}
 
   private _getWin(): Window {
     return this.doc.defaultView || window;

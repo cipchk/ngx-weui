@@ -13,11 +13,25 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { InputBoolean } from 'ngx-weui/core';
 import { PickerBaseComponent } from './picker-base.component';
 import { PickerComponent } from './picker.component';
-import { PickerConfig } from './picker.config';
-import { DatePickerType, FORMAT, FORMAT_TYPE, PickerOptions } from './picker.types';
+import {
+  PickerData,
+  PickerDateChangeData,
+  PickerDateFormatFullType,
+  PickerDateFormatType,
+  PickerDateType,
+  PickerGroupChange,
+} from './picker.types';
+
+const FORMAT: PickerDateFormatType = {
+  format: null,
+  yu: '年',
+  Mu: '月',
+  du: '日',
+  hu: '时',
+  mu: '分',
+};
 
 /**
  * 日期时间选择器
@@ -35,8 +49,8 @@ import { DatePickerType, FORMAT, FORMAT_TYPE, PickerOptions } from './picker.typ
       [options]="options"
       (show)="_onShow()"
       (hide)="_onHide()"
-      (change)="_onCityChange($event)"
-      (groupChange)="_onCityGroupChange($event)"
+      (change)="_onChange($event)"
+      (groupChange)="_onGroupChange($event)"
       (cancel)="_onCityCancelChange()"
     ></weui-picker>
   `,
@@ -53,13 +67,26 @@ import { DatePickerType, FORMAT, FORMAT_TYPE, PickerOptions } from './picker.typ
   encapsulation: ViewEncapsulation.None,
 })
 export class DatePickerComponent extends PickerBaseComponent implements OnInit, ControlValueAccessor, OnDestroy, OnChanges {
-  private initFlag = false;
-  private onChange: any = Function.prototype;
-  private onTouched: any = Function.prototype;
-  @ViewChild(PickerComponent, { static: true }) _pickerInstance: PickerComponent;
+  /**
+   * 日期格式化代码，实际是采用 DatePipe，所有代码内容和它一样
+   */
+  @Input()
+  set format(v: PickerDateFormatFullType) {
+    if (typeof v === 'string') {
+      this._format = { ...FORMAT, format: v };
+    } else {
+      this._format = { ...FORMAT, ...v };
+    }
+  }
 
+  private get datePipe(): DatePipe {
+    return this.injector.get(DatePipe);
+  }
+  private initFlag = false;
+  private _format: PickerDateFormatType = { ...FORMAT };
+  @ViewChild(PickerComponent, { static: true }) private readonly _pickerInstance: PickerComponent;
   _value: Date;
-  _groups: any[] = [];
+  _groups: PickerData[][] = [];
   _selected: number[] = [];
 
   /**
@@ -81,33 +108,10 @@ export class DatePickerComponent extends PickerBaseComponent implements OnInit, 
    * + `datetime` 日期&时间（不包括秒）
    * + `time` 时间（不包括秒）
    */
-  @Input() type: DatePickerType = 'date';
-
-  private _format: any = { ...FORMAT };
-
-  /** 配置项 */
-  @Input() options: PickerOptions;
-  /** 当options.type=='form'时，占位符文本 */
-  @Input() placeholder: string;
-  @Input() title: string;
-  @Input() @InputBoolean() disabled: boolean;
-  /** 确认后回调 */
-  @Output() readonly change = new EventEmitter<any>();
-  /**
-   * 日期格式化代码，实际是采用 DatePipe，所有代码内容和它一样
-   */
-  @Input()
-  set format(v: FORMAT_TYPE) {
-    if (typeof v === 'string') {
-      this._format = { ...FORMAT, format: v };
-    } else {
-      this._format = { ...FORMAT, ...v };
-    }
-  }
-
-  constructor(protected DEF: PickerConfig, private datePipe: DatePipe) {
-    super(DEF);
-  }
+  @Input() type: PickerDateType = 'date';
+  @Output() readonly change = new EventEmitter<PickerDateChangeData>();
+  private onChange = (_: Date) => {};
+  private onTouched = () => {};
 
   // todo: 太粗暴，需要优化代码
   private genGroups(): void {
@@ -147,7 +151,7 @@ export class DatePickerComponent extends PickerBaseComponent implements OnInit, 
           if (val === year) {
             _selected = idx;
           }
-          return { label: val + this._format.yu, value: val };
+          return { label: val + this._format.yu!, value: val };
         }),
     );
     this._selected.push(_selected);
@@ -171,7 +175,7 @@ export class DatePickerComponent extends PickerBaseComponent implements OnInit, 
           if (val === month) {
             _selected = idx;
           }
-          return { label: val + this._format.Mu, value: val };
+          return { label: val + this._format.Mu!, value: val };
         }),
     );
     this._selected.push(_selected);
@@ -196,7 +200,7 @@ export class DatePickerComponent extends PickerBaseComponent implements OnInit, 
             if (val === day) {
               _selected = idx;
             }
-            return { label: val + this._format.du, value: val };
+            return { label: val + this._format.du!, value: val };
           }),
       );
       this._selected.push(_selected);
@@ -216,7 +220,7 @@ export class DatePickerComponent extends PickerBaseComponent implements OnInit, 
           if (val === hours) {
             _selected = idx;
           }
-          return { label: val + this._format.hu, value: val };
+          return { label: val + this._format.hu!, value: val };
         }),
     );
     this._selected.push(_selected);
@@ -231,7 +235,7 @@ export class DatePickerComponent extends PickerBaseComponent implements OnInit, 
           if (val === minutes) {
             _selected = idx;
           }
-          return { label: val + this._format.mu, value: val };
+          return { label: val + this._format.mu!, value: val };
         }),
     );
     this._selected.push(_selected);
@@ -271,7 +275,7 @@ export class DatePickerComponent extends PickerBaseComponent implements OnInit, 
     this._groups.length = 0;
   }
 
-  private getFormatDate(date: Date): string | null {
+  private getFormatDate(date: Date): string {
     let f = '';
     if (this._format && this._format.format) {
       f = this._format.format;
@@ -291,24 +295,23 @@ export class DatePickerComponent extends PickerBaseComponent implements OnInit, 
           break;
       }
     }
-    return this.datePipe.transform(date, f);
+    return this.datePipe.transform(date, f)!;
   }
 
-  _onCityChange(data: any): void {
+  _onChange(data: PickerDateChangeData): void {
     this.genValueBySelected();
     const retVal = new Date(this._value.getTime());
     this.onChange(retVal);
     this.onTouched();
 
     data.value = retVal;
-
     data.formatValue = this.getFormatDate(retVal);
     this._pickerInstance._text = data.formatValue;
 
     this.change.emit(data);
   }
 
-  _onCityGroupChange(res: any): void {
+  _onGroupChange(res: PickerGroupChange): void {
     this._selected[res.groupIndex] = res.index;
     if (res.groupIndex !== this._groups.length - 1) {
       this.genValueBySelected().genGroups();
@@ -353,7 +356,7 @@ export class DatePickerComponent extends PickerBaseComponent implements OnInit, 
     this._pickerInstance._text = value instanceof Date ? this.getFormatDate(value)! : '';
   }
 
-  registerOnChange(fn: (_: any) => {}): void {
+  registerOnChange(fn: (_: Date) => {}): void {
     this.onChange = fn;
   }
   registerOnTouched(fn: () => {}): void {

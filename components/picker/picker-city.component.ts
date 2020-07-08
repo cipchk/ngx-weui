@@ -12,7 +12,13 @@ import {
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { PickerBaseComponent } from './picker-base.component';
 import { PickerComponent } from './picker.component';
+import { PickerChangeData, PickerCityData, PickerCityDataMap, PickerGroupChange } from './picker.types';
 
+const DATA_MAP: PickerCityDataMap = {
+  label: 'name',
+  value: 'code',
+  items: 'sub',
+};
 /**
  * 城市选择器（并不包含城市数据，可以参考示例中的数据格式）
  */
@@ -29,8 +35,8 @@ import { PickerComponent } from './picker.component';
       [options]="options"
       (show)="_onShow()"
       (hide)="_onHide()"
-      (change)="_onCityChange($event)"
-      (groupChange)="_onCityGroupChange($event)"
+      (change)="_onChange($event)"
+      (groupChange)="_onGroupChange($event)"
       (cancel)="_onCityCancelChange()"
     ></weui-picker>
   `,
@@ -46,45 +52,41 @@ import { PickerComponent } from './picker.component';
   encapsulation: ViewEncapsulation.None,
 })
 export class CityPickerComponent extends PickerBaseComponent implements ControlValueAccessor, OnDestroy {
-  private _tmpData: any;
-  private onChange: any = Function.prototype;
-  private onTouched: any = Function.prototype;
-  _value: string;
-  _groups: any[] | null = [];
-  _selected: number[] = [];
-  @ViewChild(PickerComponent, { static: true }) _pickerInstance: PickerComponent;
-
   @Input()
-  dataMap: { label: string; value: string; items: string } = {
-    label: 'name',
-    value: 'code',
-    items: 'sub',
-  };
-  /**
-   * 确认后回调当前选择数据（包括已选面板所有数据）
-   *
-   * `{ value: '10000', items: [ {}, {}, {} ] }`
-   */
-  @Output() readonly change = new EventEmitter<any>();
-
-  /** 城市数据，可以参考示例中的数据格式 */
+  set dataMap(val: PickerCityDataMap) {
+    this._dataMap = {
+      ...DATA_MAP,
+      ...val,
+    };
+  }
   @Input()
-  set data(d: any) {
+  set data(d: PickerCityData[]) {
     this._tmpData = d;
-    this.parseData(this._tmpData, this.dataMap.items, this._selected);
+    this.parseData(this._tmpData, this._dataMap.items, this._selected);
   }
+  @ViewChild(PickerComponent, { static: true }) private readonly pickerComp: PickerComponent;
+  @Output() readonly change = new EventEmitter<PickerChangeData>();
 
-  ngOnDestroy(): void {
-    this._tmpData = null;
-    this._groups = null;
-  }
+  private _tmpData: PickerCityData[] | null = null;
+  private _dataMap = DATA_MAP;
+  _value: string;
+  _groups: PickerCityData[][] | null = [];
+  _selected: number[] = [];
+  private onChange = (_: string) => {};
+  private onTouched = () => {};
 
-  private parseData(data: any, subKey: any, selected: any[] = [], group: any[] = [], newselected: any[] = []): any {
+  private parseData(
+    data: PickerCityData[],
+    subKey: string,
+    selected: number[] = [],
+    group: PickerCityData[][] = [],
+    newSelected: number[] = [],
+  ): { groups: PickerCityData[][]; newSelected: number[] } {
     let _selected = 0;
 
     if (Array.isArray(selected) && selected.length > 0) {
       const _selectedClone = selected.slice(0);
-      _selected = _selectedClone.shift();
+      _selected = _selectedClone.shift()!;
       selected = _selectedClone;
     }
 
@@ -92,33 +94,34 @@ export class CityPickerComponent extends PickerBaseComponent implements ControlV
       _selected = 0;
     }
 
-    newselected.push(_selected);
+    newSelected.push(_selected);
 
     const item = data[_selected];
 
-    const _group = JSON.parse(JSON.stringify(data));
-    _group.forEach((g: any) => {
+    const _group = JSON.parse(JSON.stringify(data)) as PickerCityData[];
+    const map = this._dataMap;
+    _group.forEach((g: PickerCityData) => {
       delete g[subKey];
-      g.label = g[this.dataMap.label];
-      g.value = g[this.dataMap.value];
+      g.label = g[map.label];
+      g.value = g[map.value];
     });
     group.push(_group);
 
     if (typeof item[subKey] !== 'undefined' && Array.isArray(item[subKey])) {
-      return this.parseData(item[subKey], subKey, selected, group, newselected);
+      return this.parseData(item[subKey], subKey, selected, group, newSelected);
     } else {
       this._groups = group;
-      this._selected = newselected;
-      return { groups: group, newselected };
+      this._selected = newSelected;
+      return { groups: group, newSelected };
     }
   }
 
   /**
    * 将值转换成位置
    */
-  private valueToSelect(data: any, subKey: any, dept: number = 1, newSelected: any[] = []): any {
+  private valueToSelect(data: PickerCityData[], subKey: string, dept: number = 1, newSelected: number[] = []): number[] {
     const code = (this._value.substr(0, dept * 2) + '0000').substr(0, 6);
-    let _selected = data.findIndex((w: any) => w[this.dataMap.value] === code);
+    let _selected = data.findIndex((w: PickerCityData) => w[this._dataMap.value] === code);
     if (_selected <= -1) {
       _selected = 0;
     }
@@ -130,23 +133,23 @@ export class CityPickerComponent extends PickerBaseComponent implements ControlV
     } else {
       this._selected = newSelected;
       setTimeout(() => {
-        this._pickerInstance._setText();
+        this.pickerComp._setText();
       }, 100);
       return newSelected;
     }
   }
 
-  _onCityChange(data: any): void {
+  _onChange(data: PickerChangeData): void {
     this.onChange(data.value);
     this.onTouched();
 
     this.change.emit(data);
   }
 
-  _onCityGroupChange(res: any): void {
+  _onGroupChange(res: PickerGroupChange): void {
     this._selected[res.groupIndex] = res.index;
     if (res.groupIndex !== 2) {
-      this.parseData(this._tmpData, this.dataMap.items, this._selected);
+      this.parseData(this._tmpData!, this._dataMap.items, this._selected);
     }
 
     this.groupChange.emit(res);
@@ -158,7 +161,7 @@ export class CityPickerComponent extends PickerBaseComponent implements ControlV
 
   /** 服务于Service，并无实际意义 */
   _triggerShow(): void {
-    this._pickerInstance._onShow();
+    this.pickerComp._onShow();
   }
 
   _onShow(): void {
@@ -169,19 +172,20 @@ export class CityPickerComponent extends PickerBaseComponent implements ControlV
     this.hide.emit();
   }
 
-  writeValue(value: any): void {
+  writeValue(value: string): void {
     if (!value) {
-      this._pickerInstance._text = '';
+      this.pickerComp._text = '';
       return;
     }
     this._value = value;
     if (this._value && this._value.length === 6) {
-      this.valueToSelect(this._tmpData, this.dataMap.items, 1);
-      this.parseData(this._tmpData, this.dataMap.items, this._selected);
+      const items = this._dataMap.items;
+      this.valueToSelect(this._tmpData!, items, 1);
+      this.parseData(this._tmpData!, items, this._selected);
     }
   }
 
-  registerOnChange(fn: (_: any) => {}): void {
+  registerOnChange(fn: (_: string) => {}): void {
     this.onChange = fn;
   }
   registerOnTouched(fn: () => {}): void {
@@ -190,5 +194,10 @@ export class CityPickerComponent extends PickerBaseComponent implements ControlV
 
   setDisabledState(isDisabled: boolean): void {
     this.disabled = isDisabled;
+  }
+
+  ngOnDestroy(): void {
+    this._tmpData = null;
+    this._groups = null;
   }
 }

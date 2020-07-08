@@ -123,7 +123,7 @@ export class DemoPickerComponent implements OnDestroy {
         });
         break;
       case 'data':
-        this.srv.show(this.items, 'Item3').subscribe((res: any) => {
+        this.srv.create({ data: this.items, value: 'Item3' }).subscribe((res: any) => {
           this.srvRes = res.value;
         });
         break;
