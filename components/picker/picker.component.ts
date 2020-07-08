@@ -12,10 +12,8 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { InputBoolean } from 'ngx-weui/core';
-import { PickerOptions } from './options';
-import { PickerConfig } from './picker.config';
-import { PickerData } from './picker.types';
+import { PickerBaseComponent } from './picker-base.component';
+import { PickerData, PickerOptions } from './picker.types';
 
 @Component({
   selector: 'weui-picker',
@@ -32,12 +30,9 @@ import { PickerData } from './picker.types';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class PickerComponent implements ControlValueAccessor, OnInit, OnChanges {
+export class PickerComponent extends PickerBaseComponent implements ControlValueAccessor, OnInit, OnChanges {
   _showP: boolean = false;
   _shown: boolean = false;
-
-  /** 配置项 */
-  @Input() options: PickerOptions;
 
   _value: any;
   _selected: any[];
@@ -45,24 +40,12 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnChanges 
 
   _text: string = '';
 
-  /** 当 `options.type==='form'` 时，占位符文本 */
-  @Input() placeholder: string;
-  @Input() title: string;
-  @Input() @InputBoolean() disabled: boolean = false;
   /**
    * 确认后回调当前选择数据（包括已选面板所有数据）
    *
    * `{ value: '10000', items: [ {}, {}, {} ] }`
    */
   @Output() readonly change = new EventEmitter<any>();
-  /** 列变更时回调 */
-  @Output() readonly groupChange = new EventEmitter<any>();
-  /** 取消后回调 */
-  @Output() readonly cancel = new EventEmitter();
-  /** 显示时回调 */
-  @Output() readonly show = new EventEmitter();
-  /** 隐藏后回调 */
-  @Output() readonly hide = new EventEmitter();
 
   /**
    * 当前默认位置，数组的长度必须等同于 groups 长度
@@ -95,8 +78,6 @@ export class PickerComponent implements ControlValueAccessor, OnInit, OnChanges 
     this._groups = d as PickerData[][];
     this._selected = this._selected ? this._selected : Array(d.length).fill(0);
   }
-
-  constructor(private DEF: PickerConfig) {}
 
   private onChange = (_: any) => {};
   private onTouched = () => {};

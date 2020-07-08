@@ -10,8 +10,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { InputBoolean } from 'ngx-weui/core';
-import { PickerOptions } from './options';
+import { PickerBaseComponent } from './picker-base.component';
 import { PickerComponent } from './picker.component';
 
 /**
@@ -46,7 +45,7 @@ import { PickerComponent } from './picker.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
+export class CityPickerComponent extends PickerBaseComponent implements ControlValueAccessor, OnDestroy {
   private _tmpData: any;
   private onChange: any = Function.prototype;
   private onTouched: any = Function.prototype;
@@ -61,26 +60,12 @@ export class CityPickerComponent implements ControlValueAccessor, OnDestroy {
     value: 'code',
     items: 'sub',
   };
-  /** 配置项 */
-  @Input() options: PickerOptions;
-  /** 当options.type=='form'时，占位符文本 */
-  @Input() placeholder: string;
-  @Input() title: string;
-  @Input() @InputBoolean() disabled: boolean;
   /**
    * 确认后回调当前选择数据（包括已选面板所有数据）
    *
    * `{ value: '10000', items: [ {}, {}, {} ] }`
    */
   @Output() readonly change = new EventEmitter<any>();
-  /** 列变更时回调 */
-  @Output() readonly groupChange = new EventEmitter<any>();
-  /** 取消后回调 */
-  @Output() readonly cancel = new EventEmitter<any>();
-  /** 显示时回调 */
-  @Output() readonly show = new EventEmitter<any>();
-  /** 隐藏后回调 */
-  @Output() readonly hide = new EventEmitter<any>();
 
   /** 城市数据，可以参考示例中的数据格式 */
   @Input()

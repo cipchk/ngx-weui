@@ -14,30 +14,10 @@ import {
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { InputBoolean } from 'ngx-weui/core';
-import { PickerOptions } from './options';
+import { PickerBaseComponent } from './picker-base.component';
 import { PickerComponent } from './picker.component';
-
-export const FORMAT: any = {
-  format: null,
-  yu: '年',
-  Mu: '月',
-  du: '日',
-  hu: '时',
-  mu: '分',
-};
-
-export type DatePickerType = 'date-ym' | 'date' | 'datetime' | 'time';
-
-export type FORMAT_TYPE =
-  | string
-  | {
-      format: string;
-      yu?: string;
-      Mu?: string;
-      du?: string;
-      hu?: string;
-      mu?: string;
-    };
+import { PickerConfig } from './picker.config';
+import { DatePickerType, FORMAT, FORMAT_TYPE, PickerOptions } from './picker.types';
 
 /**
  * 日期时间选择器
@@ -72,7 +52,7 @@ export type FORMAT_TYPE =
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
 })
-export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDestroy, OnChanges {
+export class DatePickerComponent extends PickerBaseComponent implements OnInit, ControlValueAccessor, OnDestroy, OnChanges {
   private initFlag = false;
   private onChange: any = Function.prototype;
   private onTouched: any = Function.prototype;
@@ -113,14 +93,6 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
   @Input() @InputBoolean() disabled: boolean;
   /** 确认后回调 */
   @Output() readonly change = new EventEmitter<any>();
-  /** 列变更时回调 */
-  @Output() readonly groupChange = new EventEmitter<any>();
-  /** 取消后回调 */
-  @Output() readonly cancel = new EventEmitter<any>();
-  /** 显示时回调 */
-  @Output() readonly show = new EventEmitter<any>();
-  /** 隐藏后回调 */
-  @Output() readonly hide = new EventEmitter<any>();
   /**
    * 日期格式化代码，实际是采用 DatePipe，所有代码内容和它一样
    */
@@ -133,7 +105,9 @@ export class DatePickerComponent implements OnInit, ControlValueAccessor, OnDest
     }
   }
 
-  constructor(private datePipe: DatePipe) {}
+  constructor(protected DEF: PickerConfig, private datePipe: DatePipe) {
+    super(DEF);
+  }
 
   // todo: 太粗暴，需要优化代码
   private genGroups(): void {
