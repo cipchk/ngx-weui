@@ -1,6 +1,7 @@
 import { DOCUMENT } from '@angular/common';
-import { ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Inject, Injector } from '@angular/core';
+import { ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Inject, Injectable, Injector } from '@angular/core';
 
+@Injectable()
 export abstract class BaseService {
   protected list: Array<ComponentRef<any>> = [];
   constructor(

@@ -12,7 +12,9 @@
     "target": "es2015",
     "module": "es2020",
     "lib": ["es2018", "dom"],
+    "rootDir": ".",
     "paths": {
+      "ngx-weui": ["./components/ngx-weui.module"],
       "ngx-weui/*": ["./components/*"]
     },
     "emitDecoratorMetadata": true,
