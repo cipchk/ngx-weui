@@ -10,8 +10,8 @@ import { timer } from 'rxjs';
 })
 export class DemoTabbarComponent {
   time: number;
-  icon = `<img src=./assets/images/icon_tabbar.png>`;
-  activeIcon = `<img src=./assets/images/momentloader.png>`;
+  icon = './assets/images/icon_tabbar.png';
+  activeIcon = './assets/images/momentloader.png';
 
   onSelect(): void {
     this.time = new Date().getTime();
