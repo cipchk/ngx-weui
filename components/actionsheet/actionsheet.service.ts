@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ApplicationRef, ComponentFactoryResolver, Inject, Injectable, Injector } from '@angular/core';
 import { BaseService } from 'ngx-weui/core';
 import { Observable } from 'rxjs';
 import { ActionSheetComponent } from './actionsheet.component';
@@ -7,6 +8,15 @@ import { ActionSheetMenuItem } from './actionsheet.types';
 
 @Injectable({ providedIn: 'root' })
 export class ActionSheetService extends BaseService {
+  constructor(
+    protected readonly resolver: ComponentFactoryResolver,
+    protected readonly applicationRef: ApplicationRef,
+    protected readonly injector: Injector,
+    @Inject(DOCUMENT) protected readonly doc: any,
+  ) {
+    super();
+  }
+
   /**
    * 创建一个弹出式菜单并显示
    *

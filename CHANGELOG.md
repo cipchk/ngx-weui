@@ -1,3 +1,12 @@
+# [10.0.0](https://github.com/cipchk/ngx-weui/compare/9.0.0...10.0.0) (2020-07-09)
+
+
+### Features
+
+* **module:picker:** add `className` property of options ([#164](https://github.com/cipchk/ngx-weui/issues/164)) ([e4e6f0e](https://github.com/cipchk/ngx-weui/commit/e4e6f0e5490944b3a22d6fe8db6019ba22b74e0b))
+
+
+
 # [10.0.0-rc.1](https://github.com/cipchk/ngx-weui/compare/9.0.0...10.0.0-rc.1) (2020-07-08)
 
 

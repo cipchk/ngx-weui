@@ -1,9 +1,19 @@
-import { Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ApplicationRef, ComponentFactoryResolver, Inject, Injectable, Injector } from '@angular/core';
 import { BaseService } from 'ngx-weui/core';
 import { ToastComponent } from './toast.component';
 
 @Injectable({ providedIn: 'root' })
 export class ToastService extends BaseService {
+  constructor(
+    protected readonly resolver: ComponentFactoryResolver,
+    protected readonly applicationRef: ApplicationRef,
+    protected readonly injector: Injector,
+    @Inject(DOCUMENT) protected readonly doc: any,
+  ) {
+    super();
+  }
+
   /**
    * 构建toast并显示
    *

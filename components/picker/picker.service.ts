@@ -1,4 +1,5 @@
-import { ComponentRef, Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ApplicationRef, ComponentFactoryResolver, ComponentRef, Inject, Injectable, Injector } from '@angular/core';
 import { BaseService, NwSafeAny } from 'ngx-weui/core';
 import { Observable } from 'rxjs';
 import { PickerBaseComponent } from './picker-base.component';
@@ -25,6 +26,15 @@ import {
  */
 @Injectable({ providedIn: 'root' })
 export class PickerService extends BaseService {
+  constructor(
+    protected readonly resolver: ComponentFactoryResolver,
+    protected readonly applicationRef: ApplicationRef,
+    protected readonly injector: Injector,
+    @Inject(DOCUMENT) protected readonly doc: any,
+  ) {
+    super();
+  }
+
   private attachBase(ref: ComponentRef<PickerBaseComponent>, config: PickerBaseConfig): void {
     const instance = ref.instance;
     const { options, title, placeholder, disabled, value } = config;

@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ApplicationRef, ComponentFactoryResolver, Inject, Injectable, Injector } from '@angular/core';
 import { BaseService } from 'ngx-weui/core';
 import { Observable } from 'rxjs';
 import { DialogComponent } from './dialog.component';
@@ -6,6 +7,15 @@ import { DialogConfig } from './dialog.config';
 
 @Injectable({ providedIn: 'root' })
 export class DialogService extends BaseService {
+  constructor(
+    protected readonly resolver: ComponentFactoryResolver,
+    protected readonly applicationRef: ApplicationRef,
+    protected readonly injector: Injector,
+    @Inject(DOCUMENT) protected readonly doc: any,
+  ) {
+    super();
+  }
+
   /**
    * 创建一个对话框并显示
    *

@@ -1,6 +1,6 @@
 {
   "name": "ngx-weui",
-  "version": "10.0.0-rc.1",
+  "version": "10.0.0",
   "description": "WeUI for angular",
   "repository": {
     "type": "git",

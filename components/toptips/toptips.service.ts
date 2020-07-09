@@ -1,9 +1,19 @@
-import { Injectable } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { ApplicationRef, ComponentFactoryResolver, Inject, Injectable, Injector } from '@angular/core';
 import { BaseService } from 'ngx-weui/core';
 import { ToptipsComponent, ToptipsType } from './toptips.component';
 
 @Injectable({ providedIn: 'root' })
 export class ToptipsService extends BaseService {
+  constructor(
+    protected readonly resolver: ComponentFactoryResolver,
+    protected readonly applicationRef: ApplicationRef,
+    protected readonly injector: Injector,
+    @Inject(DOCUMENT) protected readonly doc: any,
+  ) {
+    super();
+  }
+
   /**
    * 构建一个Toptips并显示
    *

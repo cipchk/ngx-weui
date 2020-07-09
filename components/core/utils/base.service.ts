@@ -1,15 +1,12 @@
-import { DOCUMENT } from '@angular/common';
-import { ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Inject, Injectable, Injector } from '@angular/core';
+import { ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Injectable, Injector } from '@angular/core';
 
 @Injectable()
 export abstract class BaseService {
   protected list: Array<ComponentRef<any>> = [];
-  constructor(
-    private resolver: ComponentFactoryResolver,
-    private applicationRef: ApplicationRef,
-    private injector: Injector,
-    @Inject(DOCUMENT) private doc: any,
-  ) {}
+  protected abstract readonly resolver: ComponentFactoryResolver;
+  protected abstract readonly applicationRef: ApplicationRef;
+  protected abstract readonly injector: Injector;
+  protected abstract readonly doc: Document;
 
   /**
    * 销毁
