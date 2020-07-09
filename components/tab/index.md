@@ -11,8 +11,9 @@ module: TabModule
 ----|------|-----|------
 heading | 选项卡名称 | `string` | -
 disabled | 是否禁用 | `boolean` | -
-icon | icon图标，支持HTML | `string` | -
-activeIcon | 激活时icon图标，支持HTML | `string` | -
+iconClassName | Icon类名，一般用于雪碧图 | `string` | -
+icon | icon图标，支持HTML、支持有效图像资源结尾的扩展名URL地址 | `string` | -
+activeIcon | 激活时icon图标，支持HTML、支持有效图像资源结尾的扩展名URL地址 | `string` | -
 badge | 徽章内容，支持数字或圆点 | `number,'dot'` | -
 active | 是否激活 | `boolean` | -
 select | 当tab激活时触发 | `EventEmitter<TabDirective>` | -
