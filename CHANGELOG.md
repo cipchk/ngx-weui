@@ -1,3 +1,12 @@
+## [10.0.1](https://github.com/cipchk/ngx-weui/compare/10.0.0...10.0.1) (2020-07-09)
+
+
+### Features
+
+* **module:tab:** `icon` support valid image resoure url ([#168](https://github.com/cipchk/ngx-weui/issues/168)) ([c66bfc7](https://github.com/cipchk/ngx-weui/commit/c66bfc72b5a845621ae59b5447531b6e5aac4c21))
+
+
+
 # [10.0.0](https://github.com/cipchk/ngx-weui/compare/9.0.0...10.0.0) (2020-07-09)
 
 
