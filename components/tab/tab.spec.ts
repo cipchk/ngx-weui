@@ -2,18 +2,20 @@ import { Component } from '@angular/core';
 import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { TabModule } from './tab.module';
 
-const TABS: any[] = [
+const TABS = [
   {
     heading: 'tab1',
     content: 'tab1 content',
     active: true,
-    icon: '<img src="./assets/images/icon_tabbar.png">',
+    iconClassName: '',
+    icon: './assets/images/icon_tabbar.png',
     badge: 8,
   },
   {
     heading: 'tab2',
     content: 'tab2 content',
     active: false,
+    iconClassName: '',
     icon: '<img src="./assets/images/icon_tabbar.png">',
     badge: 'dot',
   },
@@ -26,6 +28,7 @@ const navbar_html = `
               [heading]="item.heading"
               [disabled]="item.disabled"
               [active]="item.active"
+              [iconClassName]="item.iconClassName"
               [icon]="item.icon"
               [badge]="item.badge"
               (select)="_select($event)"
@@ -39,6 +42,7 @@ const tabbar_html = `
               [heading]="item.heading"
               [disabled]="item.disabled"
               [active]="item.active"
+              [iconClassName]="item.iconClassName"
               [icon]="item.icon"
               [badge]="item.badge"
               (select)="_select($event)"
@@ -51,8 +55,8 @@ function getItems(nativeEl: HTMLElement): NodeListOf<Element> {
   return nativeEl.querySelectorAll('.weui-navbar__item');
 }
 
-function getItemsByTabbar(nativeEl: HTMLElement): NodeListOf<Element> {
-  return nativeEl.querySelectorAll('.weui-tabbar__item');
+function getItemsByTabbar(nativeEl: HTMLElement, index: number): HTMLElement {
+  return nativeEl.querySelectorAll('.weui-tabbar__item')[index] as HTMLElement;
 }
 
 function getContents(nativeEl: HTMLElement): NodeListOf<Element> {
@@ -79,7 +83,7 @@ function expectActiveTabs(nativeEl: HTMLElement, action: boolean[]): void {
 describe('Component: Tabs', () => {
   let fixture: ComponentFixture<TestTabComponent>;
   let context: TestTabComponent;
-  let el: any;
+  let el: HTMLElement;
 
   describe('[Navbar]', () => {
     beforeEach(fakeAsync(() => {
@@ -160,15 +164,27 @@ describe('Component: Tabs', () => {
     }));
 
     it('should set tab has icon', () => {
-      expect((getItemsByTabbar(el)[0] as HTMLElement).querySelector('.weui-tabbar__icon')).not.toBeNull();
+      expect(getItemsByTabbar(el, 0).querySelector('.weui-tabbar__icon')).not.toBeNull();
     });
 
     it('should set tab badge number value', () => {
-      expect((getItemsByTabbar(el)[0] as HTMLElement).querySelector('.weui-badge')!.innerHTML).toBe('8');
+      expect(getItemsByTabbar(el, 0).querySelector('.weui-badge')!.innerHTML).toBe('8');
     });
 
     it('should set tab badge dot value', () => {
-      expect((getItemsByTabbar(el)[1] as HTMLElement).querySelector('.weui-badge')!.classList).toContain('weui-badge_dot');
+      expect(getItemsByTabbar(el, 1).querySelector('.weui-badge')!.classList).toContain('weui-badge_dot');
+    });
+
+    it('should be support valid image url', () => {
+      context.tabs = [{ icon: '1.jpg' }];
+      fixture.detectChanges();
+      expect(getItemsByTabbar(el, 0).querySelector('.weui-tabbar__icon')).not.toBeNull();
+    });
+
+    it('#iconClassName', () => {
+      context.tabs = [{ iconClassName: 'aaa' }];
+      fixture.detectChanges();
+      expect(getItemsByTabbar(el, 0).querySelector('.weui-tabbar__icon')!.classList).toContain('aaa');
     });
   });
 });

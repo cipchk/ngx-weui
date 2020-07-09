@@ -10,13 +10,18 @@ import { BarComponent } from './bar.component';
   },
 })
 export class TabDirective implements OnDestroy, OnChanges {
+  iconUrl = false;
   /** 选项卡名称 */
   @Input() heading: string;
   /** 是否禁用 */
   @Input() @InputBoolean() disabled: boolean;
-  /** icon图标，支持HTML */
+  /**
+   * Icon类名，一般用于雪碧图
+   */
+  @Input() iconClassName: string;
+  /** icon图标，支持HTML、支持有效图像资源结尾的扩展名URL地址 */
   @Input() icon: string;
-  /** 激活时icon图标，支持HTML */
+  /** 激活时icon图标，支持HTML、支持有效图像资源结尾的扩展名URL地址 */
   @Input() activeIcon: string;
   /** 徽章内容，支持数字或圆点 */
   @Input() badge: number | 'dot';
@@ -59,6 +64,7 @@ export class TabDirective implements OnDestroy, OnChanges {
   }
 
   ngOnChanges(): void {
+    this.iconUrl = /(webp|svg|png|gif|jpg|jpeg|jfif|bmp|dpg)$/i.test(this.icon);
     if (!this.activeIcon) {
       this.activeIcon = this.icon;
     }
