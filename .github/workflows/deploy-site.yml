@@ -49,19 +49,21 @@ jobs:
           include: '\.html$'
 
       - name: deploy-to-surge
-        uses: yohix/deploy-surge@v1.0.0
+        uses: dswistowski/surge-sh-action@v1
         with:
-          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-          DOMAIN_NAME: 'https://preview-${{ steps.findPr.outputs.number }}-ngx-weui.surge.sh'
-          BUILD_DIRECTORY: ./dist
+          login: ${{ secrets.SURGE_LOGIN }}
+          token: ${{ secrets.SURGE_TOKEN }}
+          domain: 'https://preview-${{ steps.findPr.outputs.number }}-ngx-weui.surge.sh'
+          project: ./dist
 
       - name: deploy-to-surge-release
         if: "startsWith(github.event.commits[0].message, 'release')"
-        uses: yohix/deploy-surge@v1.0.0
+        uses: dswistowski/surge-sh-action@v1
         with:
-          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
-          DOMAIN_NAME: 'https://ngx-weui.surge.sh'
-          BUILD_DIRECTORY: ./dist
+          login: ${{ secrets.SURGE_LOGIN }}
+          token: ${{ secrets.SURGE_TOKEN }}
+          domain: 'https://ngx-weui.surge.sh'
+          project: ./dist
 
       - name: comment_on_github
         run: |
