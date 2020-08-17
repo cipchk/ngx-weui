@@ -123,7 +123,9 @@ export class PTRComponent implements OnInit {
       return;
     }
 
-    $event.preventDefault();
+    if ($event.cancelable) {
+      $event.preventDefault();
+    }
 
     // let diffY = Math.abs(this.ogY - pageY);
     this._pullPercent = diffY - this.initScrollTop > 100 ? 100 : diffY - this.initScrollTop;
