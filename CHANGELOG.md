@@ -1,3 +1,21 @@
+## [10.0.2](https://github.com/cipchk/ngx-weui/compare/10.0.1...10.0.2) (2020-08-20)
+
+
+### Bug Fixes
+
+* **module:ptr:** fix 取消滚动时报错 ([#171](https://github.com/cipchk/ngx-weui/issues/171)) ([2b2b37d](https://github.com/cipchk/ngx-weui/commit/2b2b37debc8e94a56ef17b8483669f1b8629e1ba))
+
+
+
+## [10.0.2](https://github.com/cipchk/ngx-weui/compare/10.0.1...10.0.2) (2020-08-20)
+
+
+### Bug Fixes
+
+* **module:ptr:** fix 取消滚动时报错 ([#171](https://github.com/cipchk/ngx-weui/issues/171)) ([2b2b37d](https://github.com/cipchk/ngx-weui/commit/2b2b37debc8e94a56ef17b8483669f1b8629e1ba))
+
+
+
 ## [10.0.1](https://github.com/cipchk/ngx-weui/compare/10.0.0...10.0.1) (2020-07-09)
 
 
